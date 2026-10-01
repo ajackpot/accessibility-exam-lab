@@ -1,6 +1,6 @@
-import {APP_VERSION,SUBJECTS,copy,validateBank,isPublishedQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js';
-import {openStore,updateBank,acquireEditor} from './storage.js';
-import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js';
+import {APP_VERSION,SUBJECTS,copy,validateBank,isPublishedQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.1.1';
+import {openStore,updateBank,acquireEditor} from './storage.js?v=0.1.1';
+import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.1.1';
 const $=id=>document.getElementById(id);
 const state={openGeneration:0,store:null,bank:null,bundle:null,sessions:[],session:null,editor:null,view:'home',queue:Promise.resolve(),storageFailed:false,unsaved:null,anchor:null,warningKeys:new Set(),settings:{timerWarnings:true}};
 const subjectName=id=>SUBJECTS.find(s=>s.id===id)?.name||'웹접근성 실기중급';

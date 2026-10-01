@@ -35,6 +35,8 @@
 
 수량은 목표이지 보장량이 아닙니다. 좋은 새 문항이 없으면 배포를 건너뜁니다. 후보 수·보기 조합 수를 공개 문항 수로 보고하지 않습니다.
 
+앱 코드를 고칠 때는 APP_VERSION과 package.json/lockfile의 버전을 함께 올리고, index.html의 app.js/CSS URL, src/app.js·storage.js·backup.js의 내부 모듈 import, QA harness/fixture/viewport의 진입·모듈 query 버전을 일치시킵니다. 버전 URL은 새 페이지가 오래된 캐시 모듈과 섞이는 것을 방지하기 위한 정상 릴리스 절차입니다. 바닥글의 실제 runtime 버전과 수정된 동작을 모두 확인해야 공개 검증 완료입니다.
+
 ## 3. 불변 릴리스 만들기
 
 `docs/DATA-CONTRACT.md`를 준수합니다. 기존 릴리스 파일을 덮어쓰지 않고 새 bankVersion을 부여합니다. 이전 모든 immutable release를 보존합니다.

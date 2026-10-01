@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>320px viewport-only QA preview</title><script type="module" src="./viewport.js?v=0.1.1"></script></head>
+<body><main>
+<h1>320px viewport-only QA preview</h1>
+<p>This is a narrow CSS viewport check. It is not a mobile-device, browser-zoom, or NVDA test.</p>
+<p>The button opens the same study app in a 320-CSS-pixel frame. It uses this browser's ordinary app storage. This page does not automatically answer, clear, import, or replace any study records.</p>
+<button id="load-preview">Open 320px app preview</button>
+<p id="preview-status" role="status">Preview not loaded</p>
+<iframe id="preview" title="Study app in a 320 CSS pixel viewport" width="320" height="900" hidden></iframe>
+</main></body></html>

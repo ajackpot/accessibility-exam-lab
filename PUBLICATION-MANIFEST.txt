@@ -33,3 +33,5 @@ qa/fixture.mjs
 qa/domain-boundary.test.mjs
 qa/backup-network.test.mjs
 qa/seed-content.test.mjs
+qa/viewport.html
+qa/viewport.js

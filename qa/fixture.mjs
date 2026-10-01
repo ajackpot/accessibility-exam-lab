@@ -1,4 +1,4 @@
-import * as d from '../src/domain.js';
+import * as d from '../src/domain.js?v=0.1.1';
 export function fixture(perSubject=2) {
  const bank={schemaVersion:1,bankVersion:'qa.1',releasedAt:'2026-10-01T00:00:00Z',syllabusVersion:'QA synthetic',changeSummary:'Synthetic QA only; do not publish',subjects:d.SUBJECTS,sources:[{id:'qa',title:'QA fixture, not learning material',url:'https://example.com/qa',version:'1',checkedAt:'2026-10-01',location:'fixture',evidence:'synthetic',rights:'Synthetic test fixture'}],options:[],questions:[]};
  for(const sub of d.SUBJECTS)for(let i=0;i<perSubject;i++) {
