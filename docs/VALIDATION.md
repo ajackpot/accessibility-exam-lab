@@ -5,7 +5,7 @@
 ## 실행한 검사
 
 - Node24.19.0: 구문 검사, UTF-8 은행 스키마, 실제 SHA-256 manifest, 시작 스냅샷, 텍스트 렌더링 보안 소스 검사 통과
-- 구현 단위 테스트27개 + 독립 QA31개 통과 (2026-10-01 UTC)
+- 구현 단위 테스트28개 + 독립 QA31개 통과 (2026-10-01 UTC)
 - 시드10필기/4실기,17출처: 원문 근거 검토, 정답을 가린 독립 풀이, 전용/공유 문맥, 실기13세부답 일치
 - 구현1000세션 난수 검사 및 독립20,000출제 사례, 실제 시드20,000출제 사례에서 중복/표시 정답 누락 없음. 의미 검토는 별도 수행
 - 합성100문항20개/과목,60정답이지만1과목40%미만 조건, 후보부족·복수정답후보 제외 검증
@@ -28,3 +28,7 @@
 AC01~04 출제/공유보기: domain 및 seed tests. AC05~08 시간/완료/과락: domain tests, 실제 브라우저 경합은 pending. AC09~10 실기/프롬프트: domain+source review, 실제 복사·키보드는 pending. AC11 통계/도움: domain tests. AC12~13 업데이트/복원: Node tests, 실제 IndexedDB harness pending. AC14 키보드: pending. AC15 NVDA: NOT RUN. AC16 텍스트 안전성: Node+source checks, 실제브라우저 pending. AC17 실패보존: mocked network/structure checks, 실제quota/트랜잭션 pending. AC18 마감/동결: 단위검사와 release guard, 최종 운영동결은 미래 작업.
 
 재현: `npm run verify`. 독립 브라우저 검사: Pages URL의 `qa/harness.html`을 열고 실행 버튼을 누른 뒤 결과 JSON을 확인합니다. 격리 QA 데이터베이스이며 실제 학습 기록을 수정하지 않습니다.
+
+## 배포 후 회귀 수정
+
+2026-10-01 Chrome151 실제 Pages 점검에서 선택 해제된 줄 번호 코드 보기가 CSS의 textarea display:block 때문에 보이는 문제(QA-14)를 발견했습니다. `[hidden] { display:none!important }`를 명시해 native hidden의 시각·접근성 숨김을 보장하도록 수정하고 정적 회귀 검사를 추가했습니다. 수정된 배포의 실제 DOM/접근성 트리 재확인은 별도 기록합니다.

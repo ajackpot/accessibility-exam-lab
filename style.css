@@ -5,3 +5,5 @@
 @media(forced-colors:active){button,.choice,input,select,textarea{border:1px solid ButtonText}.choice:has(input:checked){border:3px solid Highlight}.badge{border:1px solid CanvasText}}
 
 header :focus-visible{outline-color:#fff1ac;outline-width:3px}
+/* Author display rules must never reveal native hidden content to sight or AT. */
+[hidden]{display:none!important}
