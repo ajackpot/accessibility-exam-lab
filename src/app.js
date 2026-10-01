@@ -1,6 +1,6 @@
-import {APP_VERSION,SUBJECTS,copy,validateBank,isPublishedQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.1.1';
-import {openStore,updateBank,acquireEditor} from './storage.js?v=0.1.1';
-import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.1.1';
+import {APP_VERSION,SUBJECTS,copy,validateBank,isPublishedQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.1.2';
+import {openStore,updateBank,acquireEditor} from './storage.js?v=0.1.2';
+import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.1.2';
 const $=id=>document.getElementById(id);
 const state={openGeneration:0,store:null,bank:null,bundle:null,sessions:[],session:null,editor:null,view:'home',queue:Promise.resolve(),storageFailed:false,unsaved:null,anchor:null,warningKeys:new Set(),settings:{timerWarnings:true}};
 const subjectName=id=>SUBJECTS.find(s=>s.id===id)?.name||'웹접근성 실기중급';
@@ -20,7 +20,9 @@ function focusTitle(){queueMicrotask(()=>{$('view-title')?.focus();});}
 function screen(title,...children){state.openGeneration++;state.view=title;document.title=`${title} · 웹접근성 2급 연습실`;$('main').replaceChildren(node('h2',{id:'view-title',tabindex:'-1'},title),...children.filter(child=>child!==null&&child!==undefined));focusTitle();}
 function labelInput(label,input,help){const wrap=node('div',{},node('label',{for:input.id},label),input);if(help)wrap.append(node('p',{class:'muted',id:`${input.id}-help`},help));return wrap;}
 function select(id,values,value){const el=node('select',{id});for(const [v,t]of values)el.append(node('option',{value:v},t));el.value=value;return el;}
-function download(filename,text,type='text/plain;charset=utf-8'){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=node('a',{href:url,download:filename});document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);announce('파일 다운로드를 요청했습니다. 브라우저의 다운로드 목록을 확인하세요.');}
+// Keep download Blob URLs alive for this document; browsers release them on unload.
+// A timer cannot prove the browser has consumed the URL or completed the download.
+function download(filename,text,type='text/plain;charset=utf-8'){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=node('a',{href:url,download:filename});document.body.append(a);a.click();a.remove();announce('파일 다운로드를 요청했습니다. 브라우저의 다운로드 목록을 확인하세요.');}
 async function copyText(text,textarea=null){try{if(!navigator.clipboard?.writeText)throw new Error('clipboard unavailable');await navigator.clipboard.writeText(text);announce('클립보드에 복사했습니다.');}catch{announce('자동 복사가 되지 않았습니다. 텍스트를 선택한 뒤 Ctrl+C로 복사하거나 파일로 내려받으세요.');if(textarea){textarea.focus();textarea.select();}else showTextExport('수동 복사',text);}}
 function showTextExport(title,text){const area=node('textarea',{id:'export-text',readOnly:true,rows:14},text);screen(title,node('p',{},'선택 가능한 전체 원문입니다. 줄바꿈과 특수문자를 보존하며 코드를 실행하지 않습니다.'),labelInput('전체 텍스트',area),actions(button('전체 선택',()=>{area.focus();area.select();}),button('복사',()=>copyText(text,area)),button('UTF-8 텍스트 내려받기',()=>download('접근성-연습-자료.txt',text)),button('문제로 돌아가기',()=>renderSession(),{class:'secondary'})));}
 async function refreshSessions(){state.sessions=await state.store.sessions();return state.sessions;}
