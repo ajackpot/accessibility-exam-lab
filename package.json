@@ -1,0 +1,17 @@
+{
+  "name": "accessibility-exam-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs qa/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "serve": "python3 -m http.server 4173",
+    "release:check": "node scripts/release-guard.mjs",
+    "verify": "npm run check && npm test"
+  }
+}

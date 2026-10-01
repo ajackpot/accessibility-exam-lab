@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "counts": {
+    "written": 10,
+    "practical": 4,
+    "options": 45,
+    "sourceRecords": 17,
+    "allReviewedFourFiveChoiceSubsets": 50
+  },
+  "bankSha256": "baa4ee31c10022e5f1325b66b2adf32bc2ef49fdb88a316ddd89acefe1532101",
+  "testOnlyAll": true,
+  "sharedRoleSwitch": [
+    "shared-dns",
+    "shared-http"
+  ],
+  "practicalPoints": [
+    10,
+    10,
+    10,
+    10
+  ],
+  "checks": [
+    "unique question/template/option/part IDs",
+    "two questions per official written subject",
+    "two implementation and two inspection tasks",
+    "one correct option per every 4/5 subset",
+    "no duplicate displayed option strings",
+    "all sources referenced and metadata complete",
+    "exclusive ownership and derived reverse-index consistency",
+    "common and contextual explanations present",
+    "practical reference keys resolve; text normalization declared",
+    "code snippets are stored as strings; UI must render as text"
+  ],
+  "notEstablished": [
+    "Human/NVDA validation of the app",
+    "Official question prediction or official answer key",
+    "Coverage beyond first-day seed scope"
+  ]
+}

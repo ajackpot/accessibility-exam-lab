@@ -1,0 +1,35 @@
+# Allow-list for the public developer preview. Paths are relative to repository root.
+# No other workspace paths, uploaded files, backups, secrets, or raw QA logs may be published.
+.nojekyll
+.gitignore
+README.md
+PUBLICATION-MANIFEST.txt
+package.json
+package-lock.json
+index.html
+style.css
+src/app.js
+src/domain.js
+src/storage.js
+src/backup.js
+scripts/build.mjs
+scripts/check.mjs
+scripts/validate-bank.mjs
+scripts/release-guard.mjs
+data/manifest.json
+data/publication-state.json
+data/seed-bank.json
+data/releases/2026.10.02-seed.1/bank.json
+docs/DATA-CONTRACT.md
+docs/OPERATIONS.md
+docs/NVDA-CHECKLIST.md
+docs/VALIDATION.md
+docs/SOURCE-REVIEW.md
+docs/SEED-VALIDATION.json
+tests/domain.test.mjs
+qa/harness.html
+qa/browser-harness.js
+qa/fixture.mjs
+qa/domain-boundary.test.mjs
+qa/backup-network.test.mjs
+qa/seed-content.test.mjs

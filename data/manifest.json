@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "bankVersion": "2026.10.02-seed.1",
+  "releasedAt": "2026-10-01T14:01:00Z",
+  "file": "releases/2026.10.02-seed.1/bank.json",
+  "sha256": "baa4ee31c10022e5f1325b66b2adf32bc2ef49fdb88a316ddd89acefe1532101",
+  "changeSummary": "첫날 기능 검증용 자체 제작 필기 10문항과 실기 4문항. 공식 기출문제·공식 정답이 아니며 일반 학습 통계에서 제외합니다.",
+  "finalRelease": false
+}
