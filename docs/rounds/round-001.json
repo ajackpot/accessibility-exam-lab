@@ -120,7 +120,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "KWCAG 2.2 머리말은 원칙 4개, 지침 14개, 검사항목 33개 체계를 명시한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w02",
@@ -204,7 +204,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "적용범위는 모바일을 포함한 웹 콘텐츠의 구축·운영·개선·유지보수와 제3자 서비스를 포함한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w03",
@@ -288,7 +288,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "표준은 특정 구현 기술을 필수로 전제하지 않지만 새로운 기술에도 결과의 접근성 요구조건은 적용한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w04",
@@ -372,7 +372,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "핵심 시각정보가 음성에 포함된 조건에서 음성과 동등한 대본은 KWCAG의 대체수단이다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w05",
@@ -456,7 +456,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "실제 버튼의 텍스트 이름으로 지시하면 모양·색·위치만으로 대상을 식별할 필요가 없다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w06",
@@ -540,7 +540,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "18pt 일반 글꼴은 큰 글꼴 조건에 해당하므로 허용되는 최소 명도 대비는 3:1이다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w07",
@@ -624,7 +624,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "일시정지는 읽을 시간을 확보하고 이전·다음 조작은 지나간 제목의 재확인을 가능하게 한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w08",
@@ -708,7 +708,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "새 기능도 명칭·역할·상태·값을 접근성 인터페이스로 전달해야 보조기술이 이용할 수 있다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w09",
@@ -792,7 +792,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "기억·계산 과제에 의존하지 않는 보안키 인증 경로가 인지 기능 테스트 의존을 줄인다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s1-w10",
@@ -876,7 +876,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "같은 과정에서 이미 입력한 정보를 선택하여 채우면 재입력 부담을 제거한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w01",
@@ -960,7 +960,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "보조기술은 장애 사용자의 요구에 맞는 하드웨어와 소프트웨어를 모두 포괄한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w02",
@@ -1072,7 +1072,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "화면확대프로그램은 텍스트뿐 아니라 아이콘·메뉴 같은 화면 요소의 확대에 직접 대응한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w03",
@@ -1184,7 +1184,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "동적으로 핀을 올리고 내려 촉각 점자를 갱신하는 장치는 갱신형 점자 디스플레이다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w04",
@@ -1296,7 +1296,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "음성을 문자나 컴퓨터 명령으로 해석하는 것은 음성인식이다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w05",
@@ -1408,7 +1408,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "입력 필터는 떨림·경련 같은 비의도적 움직임의 영향을 보정한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w06",
@@ -1492,7 +1492,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "발화에 의존하지 않는 텍스트 문의 수단은 음성 전용 창구의 장벽을 직접 제거한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w07",
@@ -1576,7 +1576,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "간결한 문장·쉬운 단어·분명한 구조는 이해 부담을 줄인다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w08",
@@ -1660,7 +1660,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "제한된 참여자·과제·환경의 성공을 모든 사용자나 전체 기준 준수로 일반화할 수 없다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w09",
@@ -1758,7 +1758,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "제19조제1항의 국가기관등 보장 의무와 제2항의 사업자 노력 의무를 구별하는 키가 현행 조문과 일치한다. 모바일·무인정보단말기 및 설계·제작 단계도 포함된다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-s5-w10",
@@ -1856,7 +1856,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "제21조제2항의 5년은 분야별 인증기관 지정의 유효기간이다. 개별 인증·개인 자격·계약·보증으로 확대하지 않는다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-p01",
@@ -1954,7 +1954,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "장식 잎 이미지는 빈 대체 텍스트, 정보 이미지는 제한 사유와 정확한 시간의 동등한 텍스트가 필요하다. 처리 차이는 파일 형식이 아니라 정보·기능에 따른다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-standards-p02",
@@ -2052,7 +2052,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "코드의 일반 오류 문구는 참가 인원 오류와 1~5 범위를 알리지 않는다. 구체적 항목·이유를 안내하고 값 수정·재제출 및 안내 이해 여부를 확인해야 한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w01",
@@ -2217,7 +2217,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w02",
@@ -2334,7 +2334,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w03",
@@ -2475,7 +2475,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w04",
@@ -2592,7 +2592,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w05",
@@ -2733,7 +2733,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w06",
@@ -2828,7 +2828,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w07",
@@ -2910,7 +2910,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w08",
@@ -2992,7 +2992,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w09",
@@ -3074,7 +3074,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-w10",
@@ -3156,7 +3156,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-p01",
@@ -3310,7 +3310,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-p02",
@@ -3490,7 +3490,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-css-script-p03",
@@ -3633,7 +3633,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w01",
@@ -3728,7 +3728,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w02",
@@ -3823,7 +3823,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w03",
@@ -3918,7 +3918,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w04",
@@ -4013,7 +4013,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w05",
@@ -4119,7 +4119,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w06",
@@ -4214,7 +4214,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w07",
@@ -4309,7 +4309,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w08",
@@ -4417,7 +4417,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w09",
@@ -4512,7 +4512,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w10",
@@ -4659,7 +4659,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w11",
@@ -4806,7 +4806,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w12",
@@ -4914,7 +4914,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w13",
@@ -5022,7 +5022,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w14",
@@ -5117,7 +5117,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w15",
@@ -5212,7 +5212,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w16",
@@ -5320,7 +5320,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w17",
@@ -5441,7 +5441,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w18",
@@ -5549,7 +5549,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w19",
@@ -5644,7 +5644,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-w20",
@@ -5791,7 +5791,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-p01",
@@ -5910,7 +5910,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-p02",
@@ -6029,7 +6029,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     },
     {
       "candidateId": "r001-internet-html-p03",
@@ -6174,7 +6174,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "키 공개 전 독립 답이 모두 일치했고, 정답·오답별 1차 근거 및 범위·권리·모호성·접근성·구조 검사를 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-regular.1"
     }
   ],
   "counts": {
@@ -6183,32 +6183,32 @@
     "rejected": 0,
     "pending": 0,
     "publishedRegularWrittenBySubject": {
-      "s1": 0,
-      "s2": 0,
-      "s3": 0,
-      "s4": 0,
-      "s5": 0
+      "s1": 10,
+      "s2": 10,
+      "s3": 10,
+      "s4": 10,
+      "s5": 10
     },
-    "publishedRegularPractical": 0
+    "publishedRegularPractical": 8
   },
   "coverageAfter": {
     "regularWrittenBySubject": {
-      "s1": 0,
-      "s2": 0,
-      "s3": 0,
-      "s4": 0,
-      "s5": 0
+      "s1": 10,
+      "s2": 10,
+      "s3": 10,
+      "s4": 10,
+      "s5": 10
     },
-    "regularPractical": 0,
+    "regularPractical": 8,
     "mockEligible": false
   },
   "publication": {
-    "status": "not_attempted",
-    "commit": null,
+    "status": "verified",
+    "commit": "8066fafd4f54de24a6c0e5de75a20d600946df3d",
     "bankVersion": "2026.10.02-regular.1",
     "bankSha256": "3abb68de23d9b58755bd9c039df5c803775705c86df0256d59570fe3c3eea5e0",
-    "verifiedAt": null,
-    "url": null,
+    "verifiedAt": "2026-10-02T06:43:05Z",
+    "url": "https://ajackpot.github.io/accessibility-exam-lab/",
     "blockers": []
   },
   "validation": [
@@ -6238,8 +6238,14 @@
     },
     {
       "check": "호스팅 공개 확인",
-      "result": "not_run",
-      "summary": "로컬 통합 검증 완료. 승인된 원격 커밋과 실제 Pages 은행/자원 검증 후 publication과 실제 공개 수를 갱신한다.",
+      "result": "pass",
+      "summary": "2026-10-02T06:43:05Z: 승인 커밋8066fafd4f54de24a6c0e5de75a20d600946df3d의 GitHub Pages 작업36974747192 성공을 확인했다. 공개 트리66개 파일과 라이브 runtime/QA/manifest/기존·신규 은행20개 URL의 SHA-256이 승인 바이트와 일치한다. 라이브 학습 흐름 검증은 별도 기록한다.",
+      "reportPath": "docs/rounds/round-001.md"
+    },
+    {
+      "check": "라이브 핵심 학습 흐름",
+      "result": "pass",
+      "summary": "2026-10-02T06:47:08Z–06:53:16Z, 클라우드 Chrome154의 대표 라이브 흐름에서 런타임/58일반+14테스트/업데이트, 구판 전용·공유 시드 연속성 및 정확 범위 복습, 일반 필기·분리 통계, 실기22개 입력 제어의 재시작 보존과10/10 고정 채점·서술 미채점, 해설/독립AI 경계,10개 일반 범위에서11개 요청 차단 및 모의시험 잠금을 확인했다. 격리 저장소 harness9/9도06:52:56.596Z 통과했다. 전체58개 수동DOM·실제Windows/NVDA·모바일·이번 라이브의수동시간제AI는 미실시이며 공유모드는 기존 테스트로 검증했다.",
       "reportPath": "docs/rounds/round-001.md"
     }
   ],
