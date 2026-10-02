@@ -37,7 +37,7 @@ test('overlapping same-session route restoration preserves the latest lock and v
 
 test('finish confirmation waits for the current answer save and displays the submitted count',async()=>{
   const write=deferred(),screens=[];const state={openGeneration:0,queue:write.promise,session:{sessionId:'A',status:'active',config:{mode:'untimed'},items:[{instanceId:'q'}],answers:{},attempts:[]}};
-  const ctx={state,rememberRoute(){},isAnswered:(_item,answer)=>!!answer,node:(tag,attrs,...children)=>({tag,children}),actions:(...children)=>children,button:(label)=>label,helpDetails:(...children)=>children,renderQuestionList(){},renderSession(){},homeLink(){},screen:(...parts)=>screens.push(parts),showError(){}};
+  const ctx={state,rememberRoute(){},isAnswered:(_item,answer)=>!!answer,node:(tag,attrs,...children)=>({tag,children}),actions:(...children)=>children,button:(label)=>label,helpDetails:(...children)=>children,renderQuestionList(){},renderSession(){},homeLink(){},saveAndLeave(){},screen:(...parts)=>screens.push(parts),showError(){}};
   vm.createContext(ctx);vm.runInContext(extract('async function withSavedAnswers(','async function renderQuestionList(')+extract('async function renderFinish(','function renderExtend(')+'\nglobalThis.finish=renderFinish;',ctx);
   const pending=ctx.finish();assert.equal(screens.length,0);state.session.answers.q='selected';write.resolve();await pending;
   assert.match(JSON.stringify(screens),/답 입력 1개/);assert.match(JSON.stringify(screens),/이번에 채점할 답 1개/);assert.equal(state.transitioning,false);

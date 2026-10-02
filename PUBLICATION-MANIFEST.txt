@@ -33,6 +33,7 @@ docs/PRD.md
 docs/DATA-CONTRACT.md
 docs/OPERATIONS.md
 docs/NVDA-CHECKLIST.md
+docs/ANNOUNCEMENTS.md
 docs/VALIDATION.md
 docs/SOURCE-REVIEW.md
 docs/SEED-VALIDATION.json
@@ -42,6 +43,7 @@ tests/stimulus-layout.test.mjs
 tests/concise-format.test.mjs
 tests/workflows.test.mjs
 tests/ui-state.test.mjs
+tests/announcements.test.mjs
 qa/harness.html
 qa/browser-harness.js
 qa/fixture.mjs
