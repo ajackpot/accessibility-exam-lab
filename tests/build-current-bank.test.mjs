@@ -5,12 +5,18 @@ import os from 'node:os';
 import path from 'node:path';
 import {buildBank} from '../scripts/build.mjs';
 import {readBankInput} from '../scripts/bank-io.mjs';
+import {sha256} from '../src/domain.js';
 const seedRaw=await fs.readFile(new URL('../data/seed-bank-v4.json',import.meta.url),'utf8');
 async function fixture(t) {
   const root=await fs.mkdtemp(path.join(os.tmpdir(),'exam-bank-build-'));
   t.after(()=>fs.rm(root,{recursive:true,force:true}));
   await fs.mkdir(path.join(root,'data'),{recursive:true});
   await fs.writeFile(path.join(root,'data/seed-bank-v4.json'),seedRaw);
+  // Historical content is carried from an integrity-checked active release.
+  const bank=JSON.parse(seedRaw),file=`releases/${bank.bankVersion}/bank.json`;
+  await fs.mkdir(path.join(root,'data/releases',bank.bankVersion),{recursive:true});
+  await fs.writeFile(path.join(root,'data',file),seedRaw);
+  await fs.writeFile(path.join(root,'data/manifest.json'),JSON.stringify({schemaVersion:1,bankVersion:bank.bankVersion,releasedAt:bank.releasedAt,file,sha256:await sha256(seedRaw),changeSummary:bank.changeSummary,finalRelease:false}));
   return root;
 }
 test('default build preserves the manifest-selected cumulative release and all immutable bytes',async t=>{
@@ -28,7 +34,7 @@ test('default build preserves a final manifest marker without rewriting bank con
   assert.equal(await fs.readFile(path.join(root,'data',first.manifest.file),'utf8'),seedRaw);
 });
 test('missing, traversing or corrupted active manifest fails closed instead of reverting to seeds',async t=>{
-  const root=await fixture(t);await assert.rejects(buildBank(root),/ENOENT/);
+  const root=await fixture(t),original=await fs.readFile(path.join(root,'data/manifest.json'),'utf8');await fs.unlink(path.join(root,'data/manifest.json'));await assert.rejects(buildBank(root),/ENOENT/);await fs.writeFile(path.join(root,'data/manifest.json'),original);
   const {manifest}=await buildBank(root,path.join(root,'data/seed-bank-v4.json'));
   await fs.writeFile(path.join(root,'data/manifest.json'),JSON.stringify({...manifest,file:'../candidate.json'}));await assert.rejects(buildBank(root),/release path/);
   await fs.writeFile(path.join(root,'data/manifest.json'),JSON.stringify({...manifest,sha256:'0'.repeat(64)}));await assert.rejects(buildBank(root),/hash mismatch/);

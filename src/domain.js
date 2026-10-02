@@ -1,7 +1,8 @@
-import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.7';
-import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.7';
+import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.8';
+import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.8';
+import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.8';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
-export const APP_VERSION = '0.2.7';
+export const APP_VERSION = '0.2.8';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
 export const BANK_SCHEMA_VERSION = 3;
 export const GENERATOR_VERSION = '2'; // Practical single/multi choice permutations join the seeded snapshot.
@@ -60,7 +61,7 @@ export function validateBank(bank) {
       assert(q.subjectId!=='practical'&&['exclusive','shared'].includes(q.optionMode),'필기 선택지 유형 오류');
       assert(Array.isArray(q.supportedOptionCounts)&&q.supportedOptionCounts.length>0&&q.supportedOptionCounts.every(v=>[4,5].includes(v)),'선택지 수 정책 오류');
       assert(Array.isArray(q.links)&&q.links.length<=1000&&q.links.filter(l=>l.role==='correct').length<=64,'한 문항의 검토된 선택지 연결은 최대 1000개, 정답 후보는 최대 64개입니다.');
-      const seen=new Set();for(const l of q.links) {const o=options.get(l.optionId);assert(o&&!seen.has(l.optionId)&&l.optionRevision===o.revision&&['correct','distractor'].includes(l.role)&&text(l.contextExplanation)&&id(l.compatibilitySetId),'선택지 연결·문맥 해설·개정판 오류');seen.add(l.optionId);}
+      const seen=new Set();for(const l of q.links) {const o=options.get(l.optionId);assert(o&&!seen.has(l.optionId)&&l.optionRevision===o.revision&&['correct','distractor'].includes(l.role)&&(l.contextExplanation===undefined||(typeof l.contextExplanation==='string'&&l.contextExplanation.length<=100000))&&id(l.compatibilitySetId),'선택지 연결·문맥 해설·개정판 오류');seen.add(l.optionId);}
       if(q.verificationStatus==='published')for(const count of q.supportedOptionCounts) assert(choicePlans(q,options,count).length>0,`${q.questionId}: 정답 1개와 중복 없는 오답이 부족합니다.`);
     } else {
       assert(q.subjectId==='practical'&&['implementation','inspection'].includes(q.family),'실기 과제군 오류');
@@ -225,11 +226,78 @@ export function questionPresentation(item) {
   return {stem:rule?.display.stem??item.stem,notes:[...(rule?.display.notes??item.notes??[])]};
 }
 export function questionInstructionText(item) {const display=questionPresentation(item);return [display.stem,...(display.notes.length?['참고 사항',...display.notes]:[])].join('\n');}
-export function optionExplanationParagraphs(option) {
-  const common=typeof option.explanation==='string'?option.explanation.trim():'',context=typeof option.contextExplanation==='string'?option.contextExplanation.trim():'';
+// Only explicit, role-matching verdict boilerplate is removable. Never normalize
+// case, punctuation or Unicode compatibility characters in explanatory/code text.
+// Whitespace within quoted/code literals can be meaningful ("a  b" != "a b").
+// This is a conservative span scanner, not a language parser: an unmatched quote
+// keeps the rest verbatim; escape pairs cannot accidentally close a span.
+function explanationWhitespace(value,collapse=false) {
+  if(typeof value!=='string')return '';
+  const quotes={'\"':'\"',"'":"'",'`':'`','“':'”','‘':'’'};
+  let output='',pending='',closing=null;
+  for(let index=0;index<value.length;index++) {
+    const char=value[index];
+    if(closing) {
+      output+=char;
+      if(char==='\\'&&index+1<value.length)output+=value[++index];
+      else if(char===closing)closing=null;
+    } else if(/\s/.test(char))pending+=char;
+    else {
+      if(output&&pending)output+=collapse?' ':pending;
+      pending='';output+=char;closing=quotes[char]||null;
+    }
+  }
+  return output;
+}
+const explanationText=value=>explanationWhitespace(value);
+// A line break, tab or slash can be code (ASI, indentation, regex, path).
+// Preserve all interior whitespace in ambiguous text instead of guessing syntax.
+const explanationComparable=value=>/[\r\n\t/]/.test(value)?value:explanationWhitespace(value,true);
+function withoutOptionVerdict(value,role) {
+  const prefix=role==='correct'?/^(?:정답이다|정답입니다)\.(?:\s+|$)/:role==='distractor'?/^(?:오답이다|오답입니다)\.(?:\s+|$)/:null;
+  return prefix?explanationText(value.replace(prefix,'')):value;
+}
+function explanationParts(option) {
+  const common=withoutOptionVerdict(explanationText(option.explanation),option.role),context=withoutOptionVerdict(explanationText(option.contextExplanation),option.role);
+  const a=explanationComparable(common),b=explanationComparable(context);
+  // Keep the entire containing context, including every condition/negation.
+  // Only complete edge sentences qualify; no substring or fuzzy semantic match.
+  const unmatchedVerdict=/^(?:정답이다|정답입니다|오답이다|오답입니다)\.(?:\s+|$)/.test(context);
+  const containsCommon=!unmatchedVerdict&&!!a&&/[.!?]$/.test(a)&&(b.startsWith(a+' ')||(b.endsWith(' '+a)&&/[.!?] $/.test(b.slice(0,-a.length))));
+  return {common,context,equal:!!a&&a===b,containsCommon};
+}
+function reviewedOptionExplanation(option,item) {
+  if(!item)return null;
+  const generatedKeys=['instanceId','bankVersion','bankSchemaVersion','sources','options','correctOptionId','optionCount','snapshotHash','previouslyExposed'];
+  const rule=REVIEWED_OPTION_EXPLANATIONS.find(rule=>rule.bankSchemaVersion===item.bankSchemaVersion&&rule.correctOptionIds.includes(item.correctOptionId)&&Object.entries(rule.originalQuestion).every(([key,value])=>sameData(item[key],value))&&Object.keys(item).every(key=>Object.hasOwn(rule.originalQuestion,key)||generatedKeys.includes(key)));
+  const match=rule?.options.find(entry=>sameData(option,entry.original));
+  return match?option[match.displayField]:null;
+}
+export function optionExplanationParagraphs(option,item=null) {
+  const reviewed=reviewedOptionExplanation(option,item);
+  if(reviewed!==null)return [{label:null,text:reviewed}];
+  const {common,context,equal,containsCommon}=explanationParts(option);
   if(!common&&!context)return [];
-  if(!common||!context||common.replace(/\s+/g,' ')===context.replace(/\s+/g,' '))return [{label:null,text:common||context}];
+  if(!common||!context||equal)return [{label:null,text:common||context}];
+  if(containsCommon)return [{label:null,text:context}];
   return [{label:'공통 해설',text:common},{label:'이 문제에서',text:context}];
+}
+/** New/changed authored links must contain only genuinely additional context.
+ * An unchanged accepted question AND its linked options may retain legacy text.
+ * Callers must provide a verified immutable baseline, never a candidate as its own.
+ */
+export function validateExplanationAuthoring(bank,baseline=null) {
+  const options=new Map(bank.options.map(o=>[o.optionId,o])),oldQuestions=new Map((baseline?.questions||[]).map(q=>[q.questionId,q])),oldOptions=new Map((baseline?.options||[]).map(o=>[o.optionId,o]));
+  for(const q of bank.questions.filter(q=>q.type==='written')) {
+    const unchanged=sameData(q,oldQuestions.get(q.questionId))&&q.links.every(l=>sameData(options.get(l.optionId),oldOptions.get(l.optionId)));
+    if(unchanged)continue;
+    for(const link of q.links) {
+      const option=options.get(link.optionId),context=explanationText(link.contextExplanation),parts=explanationParts({...option,...link});
+      assert(parts.common,`${q.questionId}/${link.optionId}: 판정 문구 외에 비어 있지 않은 선택지 해설이 필요합니다.`);
+      assert(!context||(parts.context&&!parts.equal&&!parts.containsCommon),`${q.questionId}/${link.optionId}: 공통 해설을 문맥 해설에 반복하지 마세요. 추가 이유가 없으면 문맥 해설을 비워 두세요.`);
+    }
+  }
+  return bank;
 }
 export function itemJudgement(status) {return {correct:'정답입니다.',wrong:'오답입니다.',partial:'부분 정답입니다.',unanswered:'답을 제출하지 않았습니다.',unconfirmed:'아직 채점하지 않았습니다.'}[status]||'아직 채점하지 않았습니다.';}
 export function canShowExplanation(session,item) {

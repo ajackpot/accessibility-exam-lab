@@ -1,12 +1,21 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {validateBankForPublication,sha256} from '../src/domain.js';
+import {validateBankForPublication,validateExplanationAuthoring,sha256} from '../src/domain.js';
+import {readHistoricalExplanationBaseline} from './explanation-authoring.mjs';
 
 /** An ordinary build validates the currently selected release, never a seed fallback. */
 export async function readBankInput(root,input) {
   if(input) {
     const raw=await fs.readFile(path.resolve(input),'utf8');
-    return {raw,bank:validateBankForPublication(JSON.parse(raw)),manifest:null};
+    const bank=validateBankForPublication(JSON.parse(raw));
+    // Only the verified active release is a carry-forward baseline. Candidates
+    // cannot opt out using a bankVersion, testOnly flag or supplied metadata.
+    let hasBaseline=true;
+    try { await fs.access(path.join(root,'data/manifest.json')); }
+    catch(error) { if(error.code==='ENOENT')hasBaseline=false;else throw error; }
+    const baseline=hasBaseline?(await readBankInput(root)).bank:null;
+    validateExplanationAuthoring(bank,baseline);
+    return {raw,bank,manifest:null};
   }
   const manifest=JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'),'utf8'));
   if(manifest.schemaVersion!==1||typeof manifest.finalRelease!=='boolean'||typeof manifest.changeSummary!=='string'||!manifest.changeSummary.trim())throw new Error('Active manifest schema, summary or finalRelease field is invalid.');
@@ -16,5 +25,6 @@ export async function readBankInput(root,input) {
   const bank=validateBankForPublication(JSON.parse(raw));
   if(bank.changeSummary!==manifest.changeSummary)throw new Error('Active manifest change summary mismatch.');
   if(bank.bankVersion!==manifest.bankVersion||bank.releasedAt!==manifest.releasedAt)throw new Error('Active manifest version or release time mismatch.');
+  validateExplanationAuthoring(bank,await readHistoricalExplanationBaseline(root));
   return {raw,bank,manifest};
 }

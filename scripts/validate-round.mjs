@@ -4,7 +4,9 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
-import {FREEZE_AT, validateBank, validateBankForPublication, isPublishedQuestion, presentQuestion} from '../src/domain.js';
+import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion, presentQuestion} from '../src/domain.js';
+
+import {historicalExplanationBaseline} from './explanation-authoring.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 export const FINAL_DECISION_AT = Date.parse('2026-10-16T23:00:00+09:00');
@@ -374,6 +376,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map()} = {
   try { bank = validateBankForPublication(JSON.parse(active.raw.toString())); } catch (error) { return {ok: false, errors: [`release: invalid active bank: ${error.message}`]}; }
   if (bank.changeSummary !== manifest.changeSummary) fail('active manifest change summary does not match bank');
   if (bank.bankVersion !== manifest.bankVersion || bank.releasedAt !== manifest.releasedAt || digest(active.raw) !== manifest.sha256) fail('active manifest version/release/hash does not match bank bytes');
+  try { validateExplanationAuthoring(bank, historicalExplanationBaseline(banks)); } catch(error) { fail(`explanation authoring: ${error.message}`); }
   const regular = bank.questions.filter(q => q.testOnly === false && q.verificationStatus === 'published');
   // Historical seed-only releases do not invent a regular expansion round.
   if (!regular.length) return {ok: errors.length === 0, errors};

@@ -44,7 +44,7 @@ function publicationFixture() {
   bank.bankVersion = 'fixture-regular.1'; bank.releasedAt = '2026-10-02T05:46:00Z';
   const q = clone(seed.questions.find(q => q.type === 'written' && q.subjectId === 's1'));
   Object.assign(q, {questionId: c.questionId, templateId: c.templateId, revision: c.revision, testOnly: false, sourceRefs: [source.id]});
-  q.links = q.links.map(link => { const original = seed.options.find(o => o.optionId === link.optionId), optionId = `fixture-${link.optionId}`; bank.options.push({...clone(original), optionId}); return {...link, optionId}; });
+  q.links = q.links.map(link => { const original = seed.options.find(o => o.optionId === link.optionId), optionId = `fixture-${link.optionId}`; bank.options.push({...clone(original), optionId}); return {...link, optionId, contextExplanation:''}; });
   bank.questions.push(q);
   const raw = JSON.stringify(bank); const entries = banks(); entries.set(bank.bankVersion, {raw});
   r.publication = {status: 'verified', commit: 'b'.repeat(40), bankVersion: bank.bankVersion, bankSha256: hash(raw), verifiedAt: '2026-10-02T05:47:00Z', url: 'https://example.org/fixture/', blockers: []};

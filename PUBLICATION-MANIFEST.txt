@@ -69,3 +69,8 @@ docs/rounds/round-report.template.md
 tests/regular-practice.test.mjs
 tests/regular-bank.test.mjs
 data/releases/2026.10.02-regular.1/bank.json
+
+# 0.2.8 reviewed explanation presentation and authoring gate
+src/reviewed-option-explanations.js
+scripts/explanation-authoring.mjs
+tests/explanation-redundancy.test.mjs
