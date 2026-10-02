@@ -61,7 +61,7 @@ seed.1/seed.2/seed.3의 검토된 14개 문항은 `src/legacy-question-display.j
 - `supportedOptionCounts: [4,5]` 또는 출제 가능한 부분집합
 - `links: [{optionId,optionRevision,role:correct|distractor,contextExplanation?,compatibilitySetId}]`
 
-links가 소속 관계의 단일 원본입니다. 역방향 memberQuestionIds는 생성 결과이며 앱은 links에서 도출합니다. 전용 선택지는 하나의 문항에만 연결할 수 있습니다. question.explanation은 문항 전체의 풀이·정답 근거로 계속 필수입니다. option.explanation도 계속 필수이며, 전용이면 이 문항의 선택지 이유를 한 번 쓰고 공유이면 재사용할 정의·판단 이유의 정본을 씁니다. 새 스키마나 옵션 해설 삭제를 도입하지 않습니다.
+links가 소속 관계의 단일 원본입니다. 역방향 memberQuestionIds는 생성 결과이며 앱은 links에서 도출합니다. 누적 은행에서 새 문항이 이미 존재하는 공유 선택지를 재사용해도 이전 선택지 객체의 편의용 memberQuestionIds를 고쳐 쓰지 않습니다. 실제 소속·검증·출제는 현재 links에서 계산하며 오래된 역방향 캐시를 정본으로 삼지 않습니다. 새 선택지의 캐시는 처음 생성할 때 계산합니다. 전용 선택지는 하나의 문항에만 연결할 수 있습니다. question.explanation은 문항 전체의 풀이·정답 근거로 계속 필수입니다. option.explanation도 계속 필수이며, 전용이면 이 문항의 선택지 이유를 한 번 쓰고 공유이면 재사용할 정의·판단 이유의 정본을 씁니다. 새 스키마나 옵션 해설 삭제를 도입하지 않습니다.
 
 ### 선택지 해설 저작과 표시
 
@@ -97,6 +97,7 @@ contextExplanation은 기본 해설만으로 알 수 없는 문항별 적용·�
 - `parts`: `{partId,prompt,kind,points,explanation}`
 - single/multi: `choices:[{id,text}]`, `correct:[id]`. single은 한 개, multi는 집합 완전 일치
 - text: `accepted:[string]`, `normalization:trim|exact`. trim은 앞뒤 공백만 허용하며 대소문자와 내부 공백은 유지
+- text의 리터럴·인코딩·대소문자 등 허용 형식은 필요한 경우 풀이 전 notes/prompt에 명시합니다. 다른 미채점 part의 예문/선택지에 이 part의 유일한 완성 답을 직접 공개하지 않습니다. 전체 과제의 필수 조건·공통 용어·여러 후보의 단순 반복과 구별하는 독립 문안 검사가 필요하며 구조 검사가 의미를 대신하지 않습니다
 - `referenceAnswer`, `rubric:[{criterion,points,description}]`, `freeResponsePrompt`
 
 각 part는 독립 배점입니다. 자동 판정 기준과 외부 서술 평가용 rubric을 구분합니다. 자유 서술 전체를 문자열로 채점하지 않습니다. 신규 freeResponsePrompt에는 서술 과제 요구만 넣고 앱의 미채점·통계·외부 AI 사용 안내는 UI에 둡니다.
@@ -211,3 +212,9 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 6. 새/변경 문항에는 기존의 엄격한 해설 저작 검사가 적용됩니다. 0.2.8의 고정된 과거 정확 원문 예외를 변경된 객체로 확장하지 않습니다. 모든 선택지의 그럴듯함·평행성·표현 단서·조건 보존과 정답 유일성을 독립 의미 검토로 확인하며, 해시·JSON Schema·어휘 검사만으로 의미 품질을 증명했다고 주장하지 않습니다
 7. 새 bankVersion의 불변 파일만 만들고 저장 세션·선택지 순서·답안·점수·스냅샷 해시는 변하지 않아야 합니다. 앱 `corrections`의 invalid/key와 혼동하여 과거 점수를 소급 조정하지 않습니다. 실제 배포 확인과 동결 가드를 통과하기 전에는 공개 완료로 기록하지 않습니다
 8. 후속 확대의 baseline은 마지막 확대 대장의 은행이 아니라 최신 manifest와 해시가 일치하는 실제 활성 은행입니다. 최신 공개 확인된 편집 대장·보고서와 기존 확대의 다음 조사 계획을 함께 대조하여 수정 문구·revision·공유 선택지 연결을 보존합니다. 새 정규 수는 이 활성 기준본에 없는 검증된 고유 목표만 세며 이전 정정 문항을 신규 목표로 다시 등록하지 않습니다
+
+### 2회차의 일회성 일정 교체 기록
+
+확대 대장의 선택적 `scheduleSubstitution`은 round-002에 한하여 `supersededStart: 2026-10-02T11:00:00Z`, `effectiveStart: 2026-10-02T10:30:00Z`, 비어 있지 않은 `reason`을 기록합니다. 실제 startedAt은 effectiveStart와 같아야 합니다. 승인된 고정 조합 외의 교체와 발생분 중복 소비는 거부하며 다음 명목 시각은 원래 발생분 뒤의 2026-10-02T23:00:00Z로 계산합니다. 사용자가 제공한 임의 다음 시각으로 상한을 늘리지 않습니다. 최대 4시간·더 이른 실제 다음 회차·종결·동결·회차 중첩 조건은 그대로 적용합니다. 과거 대장은 이 필드 없이 유효합니다.
+
+공개 은행의 releasedAt은 해당 확대·편집 회차의 closedAt 이후이고 최종 동결 전이어야 합니다. 실제 시각이 제공되는 발행 검사에서는 미래 releasedAt을 거부하며, 호스팅 확인은 releasedAt 이후여야 합니다. 명시적 현재 시각이 없는 순수 과거 검증과 CLI의 실제 시각 검사를 구분합니다.

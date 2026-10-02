@@ -86,3 +86,11 @@ data/releases/2026.10.02-editorial.1/bank.json
 docs/corrections/evidence/editorial-001-cycle-1.json
 docs/corrections/evidence/editorial-001-cycle-2.json
 tests/editorial-bank.test.mjs
+
+tests/round-schedule-substitution.test.mjs
+
+# Second regular expansion
+tests/round-two-bank.test.mjs
+docs/rounds/round-002.json
+docs/rounds/round-002.md
+data/releases/2026.10.02-regular.2/bank.json

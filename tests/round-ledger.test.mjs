@@ -265,3 +265,19 @@ test('final-day candidate decisions must close by 23:00 KST before the 23:30 fin
   r.closedAt = '2026-10-16T14:15:00Z';
   fails(r, /final-day 23:00 KST decision cutoff/);
 });
+
+test('ordinary staged release cannot predate closed decisions or use a future actual timestamp',()=>{
+ for(const releasedAt of ['2026-10-02T05:44:59Z','2026-10-02T05:50:00Z']){
+  const f=publicationFixture();f.bank.releasedAt=releasedAt;replaceBank(f);
+  const result=validateReleaseLedger([f.r],{manifest:manifestFor(f),banks:f.entries,now:Date.parse('2026-10-02T05:49:00Z')});
+  assert.equal(result.ok,false);assert.match(result.errors.join('\n'),/after decision closure|current time/);
+ }
+ const f=publicationFixture();f.bank.releasedAt='2026-10-02T05:50:00Z';replaceBank(f);
+ const historical=validateReleaseLedger([f.r],{manifest:manifestFor(f),banks:f.entries});
+ assert.equal(historical.ok,true,historical.errors.join('\n'));
+});
+test('verified ordinary history requires its bank to follow final decision closure',()=>{
+ const f=publicationFixture();f.bank.releasedAt='2026-10-02T05:44:59Z';replaceBank(f);
+ const result=validateRoundLedger(f.r,{schema,banks:f.entries,now:Date.parse('2026-10-02T06:00:00Z')});
+ assert.equal(result.ok,false);assert.match(result.errors.join('\n'),/follow decision closure/);
+});

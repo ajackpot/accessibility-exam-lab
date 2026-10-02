@@ -304,6 +304,27 @@
     "summary": {
       "type": "string",
       "minLength": 1
+    },
+    "scheduleSubstitution": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "supersededStart": {
+          "const": "2026-10-02T11:00:00Z"
+        },
+        "effectiveStart": {
+          "const": "2026-10-02T10:30:00Z"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "supersededStart",
+        "effectiveStart",
+        "reason"
+      ]
     }
   },
   "$defs": {

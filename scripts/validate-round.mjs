@@ -202,11 +202,30 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
     if (records.reduce((sum, r) => sum + r.candidate.attemptCount, 0) > 6) fail(records[0].round, '/candidates', `learning goal ${id} exceeds six lineage cycles`);
     if (records.length > 1 && records.filter(r => r.candidate.reopenCount === 0).length !== 1) fail(records[0].round, '/candidates', `learning goal ${id} has duplicate originals or missing original`);
   }
+  const consumedOccurrences = new Set();
   const ordered = [...rounds].sort((a, b) => Date.parse(a.startedAt) - Date.parse(b.startedAt));
+  for (const replacement of ordered.filter(r => r.scheduleSubstitution)) {
+    const effective = Date.parse(replacement.scheduleSubstitution.effectiveStart);
+    const nextOccurrence = nextScheduledRoundAt(replacement.scheduleSubstitution.supersededStart);
+    for (const other of ordered) if (other !== replacement && Date.parse(other.startedAt) >= effective && Date.parse(other.startedAt) < nextOccurrence)
+      fail(other, '/startedAt', 'scheduled occurrence already consumed by schedule substitution');
+  }
   for (const [roundIndex, round] of ordered.entries()) {
     const start = Date.parse(round.startedAt), deadline = Date.parse(round.decisionDeadline), close = round.closedAt === null ? null : Date.parse(round.closedAt);
     const nextLoaded = ordered[roundIndex + 1];
-    const nextBound = Math.min(nextScheduledRoundAt(round.startedAt), nextLoaded ? Date.parse(nextLoaded.startedAt) : Infinity, nextRoundAt === null ? Infinity : Date.parse(nextRoundAt));
+    let scheduledBound = nextScheduledRoundAt(round.startedAt);
+    if (round.scheduleSubstitution) {
+      const substitution = round.scheduleSubstitution;
+      const valid = round.roundId === 'round-002' && round.campaignId === '2026-exam-final'
+        && round.startedAt === '2026-10-02T10:30:00Z'
+        && substitution.effectiveStart === round.startedAt
+        && substitution.supersededStart === '2026-10-02T11:00:00Z';
+      if (!valid) fail(round, '/scheduleSubstitution', 'not the authorized round-002 schedule replacement');
+      else scheduledBound = nextScheduledRoundAt(substitution.supersededStart);
+      if (consumedOccurrences.has(substitution.supersededStart)) fail(round, '/scheduleSubstitution', 'scheduled occurrence already consumed');
+      consumedOccurrences.add(substitution.supersededStart);
+    }
+    const nextBound = Math.min(scheduledBound, nextLoaded ? Date.parse(nextLoaded.startedAt) : Infinity, nextRoundAt === null ? Infinity : Date.parse(nextRoundAt));
     if (!Number.isFinite(nextBound)) fail(round, '/decisionDeadline', 'invalid next-round timestamp');
     if (deadline <= start || deadline > start + 4 * 3600000 || deadline > nextBound || deadline > FREEZE_AT || deadline > FINAL_DECISION_AT) fail(round, '/decisionDeadline', 'deadline must be after start and no later than four hours, next round, final freeze, or the final-day 23:00 KST decision cutoff');
     if (start >= FREEZE_AT) fail(round, '/startedAt', 'round begins at or after final freeze');
@@ -323,7 +342,7 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
       if (publication) {
         if (publication.hash !== round.publication.bankSha256) fail(round, '/publication/bankSha256', 'immutable published bank hash mismatch');
         if (publication.bank.bankVersion === round.baseline.bankVersion) fail(round, '/publication', 'new publication must use a new immutable bankVersion');
-        if (Date.parse(publication.bank.releasedAt) < start || Date.parse(publication.bank.releasedAt) > verified) fail(round, '/publication', 'bank release must be within round start and hosted verification');
+        if (Date.parse(publication.bank.releasedAt) < (close ?? start) || Date.parse(publication.bank.releasedAt) > verified) fail(round, '/publication', 'bank release must follow decision closure and precede hosted verification');
       }
       if (publication && baseline) {
         const currentQuestions = new Map(publication.bank.questions.map(q => [q.questionId, q]));
@@ -439,7 +458,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
     }
   }
   for (const c of round.candidates.filter(c => c.decision === 'accepted')) if (!currentQuestions.has(c.questionId)) fail(`accepted candidate is absent from staged release: ${c.candidateId}`);
-  if (bank.bankVersion === baseline.bankVersion || Date.parse(bank.releasedAt) < Date.parse(round.startedAt) || Date.parse(bank.releasedAt) >= FREEZE_AT) fail('staged release must be a new bank within the campaign publication window');
+  if (bank.bankVersion === baseline.bankVersion || Date.parse(bank.releasedAt) < Date.parse(round.closedAt ?? round.startedAt) || Date.parse(bank.releasedAt) >= FREEZE_AT || historyOptions.now !== null && historyOptions.now !== undefined && Date.parse(bank.releasedAt) > historyOptions.now) fail('staged release must be a new bank after decision closure and before campaign freeze/current time');
   return {ok: errors.length === 0, errors};
 }
 
