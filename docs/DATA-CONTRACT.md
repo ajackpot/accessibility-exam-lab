@@ -1,4 +1,4 @@
-# 데이터 계약 v3 (앱 0.2.6)
+# 데이터 계약 v3 (앱 0.2.7)
 
 기존 은행·스냅샷 읽기의 정식 검증기는 `src/domain.js`의 `validateBank` 및 `src/backup.js`의 `validateSession`입니다. 새 등록·공개 후보는 더 엄격한 `validateBankForPublication`을 추가 통과해야 합니다. `node scripts/validate-bank.mjs <bank.json>`과 build/check 명령은 새 공개 검사를 실행합니다. 이전 seed.1/seed.2/seed.3 백업을 새 저작 규칙으로 소급 거부하지 않습니다. 출제와 채점에 사용하지 않는 추가 메타데이터는 보존할 수 있습니다. 스키마 변경은 앱 호환성 검토 후 별도로 합니다.
 
@@ -17,7 +17,7 @@
 
 `questionId`, `revision`, `templateId`, `learningGoalRevision`, `type: written|practical`, `subjectId`, `topicIds`, `stem`, `notes`, `explanation`, `sourceRefs`, `verificationStatus: candidate|reviewed|published|retired|invalid`, `testOnly`, `standardVersion`, `difficulty`, `reviewNote`를 둡니다.
 
-published만 출제합니다. published에는 근거 검토·독립 풀이 기록이 필요합니다. 첫날의 모든 문항은 `testOnly: true`입니다. candidate와 reviewed를 개수 채우기 위해 공개하지 마세요. `materials`는 `{filename,content,purpose,instruction?,focusLine?}` 배열이며 실행 파일이 아닌 텍스트입니다.
+published만 출제합니다. published에는 근거 검토·독립 풀이 기록이 필요합니다. 기존 시드 문항은 계속 `testOnly: true`입니다. 2026-10-02부터 시작한 정규 확대 회차에서 독립 검증을 통과한 새 문항은 `testOnly: false`로 작성하며, 기존 시드를 조용히 재분류하지 않습니다. candidate와 reviewed를 개수 채우기 위해 공개하지 마세요. `materials`는 `{filename,content,purpose,instruction?,focusLine?}` 배열이며 실행 파일이 아닌 텍스트입니다.
 
 ### 핵심 지문과 참고 사항
 
@@ -40,7 +40,7 @@ published만 출제합니다. published에는 근거 검토·독립 풀이 기�
 - DOM과 시각적 순서는 **핵심 지문 1~2문장 → 필요한 참고 사항 → 박스형 보기 → 선택지/실기 답안**입니다. 보기 제목은 ‘보기’, 그 안에 ‘코드: 파일명 · 줄 수’를 표시합니다. 필기 legend는 ‘선택지’로 짧게 두고 지문 전체를 각 선택 때 반복하지 않습니다. 실기는 ‘실기 답안’ 다음 각 채점 항목과 ‘자유 서술 답안’을 구분합니다
 - 발행 검사는 비어 있지 않은 코드, 지문에 그대로 포함된 완전한 지시문, ‘다음 보기의’ 참조, ‘코드’ 자료 유형, 읽기/실행/검토/확인과 선택/답변/완성/설명/작성 동작을 요구합니다. 표준 문구에 맞추어 작성합니다. 지문이 코드를 참조하는데 문제 자료가 없거나 해설 자료뿐이면 거부합니다
 - 여러 필수 코드 파일은 서로 다른 파일명이어야 하고 각 지시문에 해당 파일명을 명시합니다. 문제 파일 선택기는 필수 보기 파일만 나열하고 전체 개수를 알립니다. 해설 파일 선택기는 따로 만들며 공개 시점을 따릅니다
-- 정규식은 의미를 증명하지 못합니다. 독립 검토자가 실제 자료와 지시문의 대상·행동이 맞는지, 불필요한 자료/유령 참조/정답 누출이 없는지 확인하고 reviewNote에 남깁니다. 실패 문항은 초안으로 보류하고 출제·공개 대상에 등록하지 않습니다. 현재 앱에 문제 등록 화면은 없습니다
+- 정규식은 의미를 증명하지 못합니다. 독립 검토자가 실제 자료와 지시문의 대상·행동이 맞는지, 불필요한 자료/유령 참조/정답 누출이 없는지 확인하고 reviewNote에 남깁니다. 실패 문항은 같은 회차의 최대 3회 검토 안에서만 수정하며, 3회 미통과 또는 판정 마감이면 탈락으로 종결합니다. 미통과 후보는 출제·공개 대상에 등록하지 않습니다. 현재 앱에 문제 등록 화면은 없습니다
 
 ### schema1·schema2 / 저장된 스냅샷 호환
 
@@ -94,6 +94,14 @@ links가 소속 관계의 단일 원본입니다. 역방향 memberQuestionIds는
 
 독립 모드는 참고 서술 답안·루브릭·정답 키·해설 코드를 넣지 않으며 임의 점수/기준을 만들지 않도록 요청합니다. 비교 모드는 공개 가능할 때만 정확한 참고 답안·루브릭/배점·고정 답안 키를 포함하고 동등하게 타당한 대안도 인정하도록 요청합니다. 서술형 배점과 앱 배점을 합치지 않으며 서술 미작성을 고정 답안만으로 채점하지 않습니다. 시간제 진행 중에는 모든 AI 내보내기를 차단합니다.
 
+## 정규 문항 전환과 연습 범위
+
+앱 0.2.7의 `practiceSelection`은 기존 `eligibleQuestions`로 유형·과목·과제군·선택지 수·pool·새 학습 목표 이력·published·유효 정정을 먼저 적용합니다. 그 결과에 testOnly=false 문항이 있으면 정규 문항만 사용하며 고유 templateId로 수량을 셉니다. 정규 문항이 0개일 때만 남은 출제 가능 시드로 테스트 전용 연습을 제공하고 이유를 표시합니다. 정규 문항이 있지만 수가 부족할 때 시드를 보충하지 않습니다. 직접 요청한 수가 선택된 고유 목표 수를 넘으면 INSUFFICIENT이며, UI는 입력을 보존하고 명시적인 수량 축소 행동을 제공합니다. 빠른 시작·같은 범위 새 연습의 기본값은 실제 가능한 수를 표시합니다.
+
+이 필터는 일반 새 연습의 workflow 계약입니다. 범용 eligibleQuestions·prepareSession의 의미와 은행 스키마를 바꾸지 않습니다. 명시적 오답 복습의 group bank는 정해진 원래 학습 목표를 유지하여 테스트 또는 혼합 문항도 복습할 수 있습니다. 기존 세션의 재개·가져오기·시간 모드 전환은 저장된 스냅샷을 그대로 사용합니다. 새 연습 필터로 과거 내용을 제거하거나 testOnly·점수·답안·순서·해시를 바꾸지 않습니다.
+
+`sessionContentSummary`는 저장된 문항의 testOnly별 실제 개수로 전체 테스트·전체 정규·혼합 세션을 구별합니다. 혼합 결과의 전체 점수는 세트의 모든 문항 기준이며 통계는 기존처럼 문항별 정규/테스트로 나눕니다. 홈·기록·시작 대기·결과의 구성 표시와 개별 문항 표시는 이 구분을 따르고, 단순히 테스트 문항이 하나 있다는 이유로 전체를 테스트로 설명하지 않습니다. 저장 구조와 출제기 버전 2는 유지합니다.
+
 ## 세션·통계
 
 준비 시 실제 본문·자료·선택지 내용/순서·정답·해설·출처·버전을 PresentedItem으로 복제합니다. 난수 seed만 저장하는 복원은 금지합니다. 상태는 prepared, active, submitted, expired, abandoned, converted입니다. revision을 사용한 트랜잭션 비교 후에만 저장 성공을 알립니다.
@@ -113,3 +121,38 @@ manifest: `{schemaVersion,bankVersion,releasedAt,file:'releases/<version>/bank.j
 `{format:'accessibility-exam-lab-backup',schemaVersion:1,exportedAt,sessions:[...]}`. JSON만 허용하며 10MB·1000세션 한도입니다. 스냅샷과 원래 점수의 재계산 일치, 답 ID, 필수 날짜/상태, 안전한 출처 URL을 검사합니다. `__proto__`, `constructor`, `prototype` 키는 거부합니다. 문자열을 HTML로 실행하지 않습니다. 중복 ID 내용이 다르면 합치기에서는 기존 세션을 유지하고 충돌 수를 알립니다. 교체는 확인 후 한 트랜잭션으로 합니다.
 
 내보내기는 세션 단위로 크기/개수 한도 내 파일을 나눕니다. 각 파일은 일반 가져오기에 독립적으로 사용할 수 있으며 안정 ID로 중복을 막습니다. 단일 세션이 한도를 초과하면 절대 잘라내지 않고 원문 보존 전용·현재 앱 복원 불가를 파일 이름과 화면에서 명시합니다. 원본 브라우저 기록을 삭제하지 말아야 합니다.
+
+
+## 회차 대장 계약 v1
+
+회차 대장은 앱 은행·manifest·세션·백업과 별도의 공개 운영 산출물입니다. 경로는 `docs/rounds/<roundId>.json`과 같은 이름의 `.md`입니다. `round-ledger.schema.json`은 JSON Schema Draft 2020-12이며 `round-ledger.template.json`·`round-report.template.md`는 실제 결과가 아닌 시작 틀입니다. 템플릿의 예시 날짜·0 해시·자리표시자를 실제 확인 값으로 바꿉니다. `accepted`·`rejected`는 이 대장의 판정이며 앱의 `verificationStatus` 열거값에 추가하지 않습니다. 탈락한 문항 본문이나 내부 원시 작업 로그는 공개 은행에 넣지 않습니다.
+
+### 필드와 판정
+
+- `campaignId: 2026-exam-final`, 고유 `roundId`, `prdVersion: 1.7`, `timezone: Asia/Seoul`, `status: running|closed`, 시작·판정 마감·판정 종료 ISO 시각
+- `policy`: maxCycles 3, maxReopeningsPerGoal 1, maxLineageCycles 6, maxRoundHours 4로 고정
+- `baseline`: 시작 시 확인한 원격 커밋, 은행 버전·SHA-256, 기존 정규 문항 수. `targets`는 후보 목표이며 통과량 아님
+- `candidates`: 고유 후보·학습 목표·계보·문항·template 식별자, 개정판·출제자 역할 ID, 근거 배열, 검토 횟수, 계보 누적 횟수, 재개방 횟수·이전 판정 링크·새 근거, 각 검토 결과, 최종 판정·사유, 실제 공개 은행 버전
+- 근거 항목: sourceId·제목·공식/1차 자료 URL·판/시행일·정확한 위치·실제 확인일·짧은 요약·권리 설명. 긴 원문 복사와 확인하지 않은 열람 주장 금지
+- `cycles`: 시작한 검토를 1부터 순서대로 기록. 개정판과 시작·종료, blindSolve·sourceCheck·ambiguityCheck·authoringAccessibility·structuralCheck의 `pass|fail|not_run`, 검토 역할 ID·짧은 결론·근거 참조. 실행 중 결과는 running과 finishedAt=null로 기록하고 끝난 검토 결과는 accepted·revise·rejected. 중간 종료 시 미실시를 not_run으로 기록
+- 최종 `decision`: pending·accepted·rejected. pending은 실행 중 회차의 최대 3회 한도 안에서만 허용. accepted는 같은 개정판의 모든 필수 검사 통과, rejected는 최종 사유 필수
+- 탈락 사유 코드는 source_conflict, insufficient_primary_evidence, answer_ambiguity, out_of_scope, rights_risk, authoring_invalid, accessibility_failure, structural_invalid, review_limit, round_deadline, infrastructure_incomplete, duplicate_learning_goal 중 실제 사유를 선택. 채택 사유는 accepted_all_gates
+- `counts`: 등록·채택·탈락·미결정, 이 회차에서 실제 새로 공개 확인한 정규 필기 과목별 수·실기 수. `coverageAfter`는 확인된 누적 정규 수와 실제 모의시험 가능 여부
+- `publication`: not_attempted·skipped·blocked·committed_unverified·verified, 공개 커밋·은행·해시·확인 시각·직접 URL·차단 원인. 채택과 공개는 별개. 실제 호스팅 확인 전에는 verified나 공개 수를 올리지 않음
+- `validation`: 실제 검사·pass/fail/not_run·결론·공개 가능한 보고서 경로. 실제 NVDA 실측은 구조 검사와 별도로 기재
+- `nextRoundGaps`: 분야·과목·학습 목표·후보 ID, 부족한 범위/근거/논리, 필요한 근거나 반례, 다음 행동·완료 조건·우선순위·재개방 가능 여부. 공백이 없으면 `noGapExplanation`에 확인 범위와 근거를 명시
+
+### JSON Schema 외 필수 교차 검증
+
+JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검증했다고 주장하지 않습니다. 운영 검증자는 다음 관계도 검사하고 결과를 남깁니다.
+
+1. 회차·후보 ID는 고유하고 학습 목표의 같은 의미를 다른 이름으로 등록하지 않습니다. `attemptCount === cycles.length`, cycle 번호는 1부터 빈틈 없이 증가, 최종 후보 revision은 마지막 cycle revision과 같습니다. 시작한 검사·실패 이력을 지우지 않습니다
+2. 마지막 cycle의 outcome은 최종 판정과 일치합니다. accepted 뒤 추가 검토를 붙이거나 rejected 뒤 같은 후보를 되살리지 않습니다. 수정은 앞선 cycle의 revise와 구체적 변경에 연결하며, 3번째 cycle은 끝나면 revise가 될 수 없습니다. 실행 중인 마지막 cycle은 running·finishedAt=null로만 남길 수 있고 후보는 pending이어야 합니다. accepted/rejected 후보나 closed 회차에는 running cycle이 없어야 합니다. accepted는 모든 다섯 gate가 pass이며 모든 근거 참조가 실제 evidence에 존재해야 합니다
+3. blindSolve의 reviewerId는 authorId 및 앞선 키 공개 검토자와 달라야 합니다. 해당 검토자가 실제 키를 보지 않은 자료를 받았는지 확인합니다. 역할 이름만 바꿔 같은 풀이를 독립 검토로 기록하지 않습니다
+4. 재개방 0회이면 이전 후보·새 근거 배열은 비어 있고 lineageAttemptCount는 attemptCount와 같습니다. 재개방 1회이면 같은 학습 목표의 이전 rejected 후보 1개와 전체 기존 검토 이력, 탈락 원인을 해결한 새 1차 근거를 참조합니다. 이전 실제 attemptCount와 이번 횟수의 합이 lineageAttemptCount이며 최대 6회입니다. campaign 전체 이전 대장을 조회해 2번째 재개방·위장 새 ID를 거부합니다
+5. 판정 마감은 시작 이후 최대 4시간이고 다음 예정 회차·최종 동결보다 늦지 않습니다. 2026-10-16 Asia/Seoul의 정규 회차는 추가로 decisionDeadline <= 2026-10-16T14:00:00Z(23:00 KST)를 만족해야 하며 그 뒤 후보 작업을 시작하지 않습니다. 더 이른 기존 한도를 유지합니다. 23:20 공개·반영 확인은 목표 시각이며, 23:30 최종 작업은 이미 accepted·공개 확인된 정상본의 재확인과 동결만 수행합니다. 최종 작업은 후보를 다루는 정규 회차가 아니며 미완료 후보를 가져오지 않습니다. 후보 검사·최종 판정은 판정 마감 이내에 종결합니다. 종료 대장의 `closedAt`은 판정 종료 시각입니다. publication.verifiedAt은 별도이며 판정 종료 뒤일 수 있으나 최종 동결 전이어야 합니다
+6. counts.registered는 후보 배열 길이, accepted/rejected/pending은 실제 판정별 개수와 같습니다. closed 회차의 pending은 0이고 registered = accepted + rejected입니다. 검토도 시작 못 한 후보는 attemptCount 0과 rejected·실제 중단 이유로 남길 수 있으나 채택할 수 없습니다
+7. 실제 공개량은 호스팅 확인된 새 은행의 새 accepted·published·testOnly=false 문항과 대조합니다. 기존 시드·중복 template·선택지 순열·보기 조합은 새 정규 수에서 제외합니다. 공개 전·차단 시 해당 공개 수는 0이며 accepted 후보의 publishedBankVersion도 null입니다. accepted 판정을 publication 실패 때문에 pending으로 되돌리지 않습니다
+8. coverageAfter와 100문항 모의시험 가능 여부는 실제 확인된 은행으로 다시 계산합니다. 5과목별 고유 정규 templateId 20개 이상과 5지선다 조건을 모두 충족해야 합니다. 없는 은행이나 목표 수로 계산하지 않습니다
+9. 종료 회차의 다음 조사 공백은 구체적인 근거·예외·반례·범위와 다음 행동·완료 조건이 있어야 합니다. 공백 기록은 탈락 후보의 자동 재개방이 아닙니다. noGapExplanation을 넣어야 하는 경우에도 빈칸·형식적 완료 문구를 허용하지 않습니다
+10. 공개 전 비공개 지시·내부 사고 과정·개인 원문·인증정보·원시 로그가 없는지 검사합니다. 원래 은행과 세션 해시는 변경하지 않고 공개 허용 목록에 승인된 산출물만 추가합니다

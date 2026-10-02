@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.02-seed.4",
-  "releasedAt": "2026-10-02T03:14:00Z",
-  "file": "releases/2026.10.02-seed.4/bank.json",
-  "sha256": "46c18e0ed3265a1de768f1d08bbeb4e6ada571293aae9c19c0766093df973d99",
-  "changeSummary": "기존 14개 테스트 시드 유지. 핵심 문제를 1~2문장으로 통합하고 조건을 참고 사항으로 분리. 코드·선택지·정답·배점·학습 목표는 유지.",
+  "bankVersion": "2026.10.02-regular.1",
+  "releasedAt": "2026-10-02T06:21:24.557Z",
+  "file": "releases/2026.10.02-regular.1/bank.json",
+  "sha256": "3abb68de23d9b58755bd9c039df5c803775705c86df0256d59570fe3c3eea5e0",
+  "changeSummary": "첫 정규 누적 문제 은행: 독립 검토를 통과한 일반 학습 필기 50문항·실기 8문항 추가. 기존 기능 검증용 14개 testOnly 시드·기존 불변 은행은 유지. 후보 58개 중 채택 58개, 탈락 0개. 과목별 20개 미충족 시 100문항 모의시험은 잠금.",
   "finalRelease": false
 }

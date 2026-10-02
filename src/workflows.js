@@ -1,11 +1,25 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {eligibleQuestions,isPublishedQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.6';
+import {eligibleQuestions,isPublishedQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.7';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
   return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:2,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides};
 }
+/** Fresh ordinary practice prefers eligible regular content, never topping up with seeds.
+ * Explicit review banks and stored snapshots continue through the original domain path. */
+export function practiceSelection(bank,config,history=[]) {
+  if(!bank)return {bank:null,count:0,testOnly:false};
+  const eligible=eligibleQuestions(bank,config,history),regular=eligible.filter(q=>!q.testOnly);
+  const questions=regular.length?regular:eligible;
+  return {bank:{...bank,questions},count:new Set(questions.map(q=>q.templateId)).size,testOnly:questions.length>0&&!regular.length};
+}
 export function availableCount(bank,config,history=[]) {
-  return bank?new Set(eligibleQuestions(bank,config,history).map(q=>q.templateId)).size:0;
+  return practiceSelection(bank,config,history).count;
+}
+export function sessionContentSummary(session) {
+  const tests=session.items.filter(q=>q.testOnly).length,regular=session.items.length-tests;
+  const label=[regular?`일반 학습 ${regular}문항`:null,tests?`체험용 테스트 ${tests}문항`:null].filter(Boolean).join(' · ')||'문항 없음';
+  const notice=tests?(regular?`${label}이 함께 포함된 결과입니다. 전체 점수는 이번 세트의 모든 문항 기준이며, 학습 기록에서는 일반 학습과 체험용 테스트를 문항별로 나누어 집계합니다.`:'체험용 테스트 문항의 결과입니다. 점수와 해설은 확인할 수 있으며 일반 학습 성과와 분리됩니다.'):null;
+  return {regular,tests,label,notice};
 }
 export function quickConfig(bank,type,history=[],overrides={}) {
   const config=practiceConfig(type,overrides);

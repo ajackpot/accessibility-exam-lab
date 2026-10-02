@@ -1,7 +1,7 @@
-import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.6';
-import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.6';
+import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.7';
+import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.7';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
-export const APP_VERSION = '0.2.6';
+export const APP_VERSION = '0.2.7';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
 export const BANK_SCHEMA_VERSION = 3;
 export const GENERATOR_VERSION = '2'; // Practical single/multi choice permutations join the seeded snapshot.

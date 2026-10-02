@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import {practiceSelection,sessionContentSummary} from '../src/workflows.js';
 const source=fs.readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
 const extract=(a,b)=>source.slice(source.indexOf(a),source.indexOf(b));
 const deferred=()=>{let resolve;const promise=new Promise(r=>resolve=r);return {promise,resolve};};
@@ -66,7 +67,7 @@ test('conversion keeps Cancel disabled until the committed conversion settles',a
 });
 
 test('late initial save never replaces a newer screen and start cancellation is guarded',async()=>{
-  const write=deferred();let opened=0,updates=0;const ctx={state:{openGeneration:1,store:{insert:()=>write.promise,update:async()=>{updates++;return{sessionId:'B'};}}},document:{querySelectorAll:()=>[]},clearError(){},refreshSessions:async()=>{},prepareSession:()=>({sessionId:'B'}),openSession:async()=>opened++,announce(){},showError(error){throw error;}};
+  const write=deferred();let opened=0,updates=0;const ctx={practiceSelection,state:{openGeneration:1,store:{insert:()=>write.promise,update:async()=>{updates++;return{sessionId:'B'};}}},document:{querySelectorAll:()=>[]},clearError(){},refreshSessions:async()=>{},prepareSession:()=>({sessionId:'B'}),openSession:async()=>opened++,announce(){},showError(error){throw error;}};
   vm.createContext(ctx);vm.runInContext(extract('async function startPractice(','async function renderWrong(')+'\nglobalThis.start=startPractice;',ctx);
   const pending=ctx.start({});await flush();ctx.state.openGeneration++;write.resolve();await pending;assert.equal(opened,0);assert.equal(updates,1);assert.equal(ctx.state.starting,false);assert.match(source,/data-cancel-start/);assert.match(source,/if\(!state.starting\)return renderHome/);
 });
@@ -79,7 +80,7 @@ test('already-visible history labels refresh when a background timed session exp
 });
 
 test('prepared timed home metadata shows configured minutes, never a null epoch deadline',()=>{
-  const ctx={typeLabel:()=> '필기',sessionNavigation:()=>({status:'prepared'}),date:()=> '1970-01-01'};
+  const ctx={sessionContentSummary,typeLabel:()=> '필기',sessionNavigation:()=>({status:'prepared'}),date:()=> '1970-01-01'};
   vm.createContext(ctx);vm.runInContext(extract('function sessionLabel(','function sessionLinkText(')+'\nglobalThis.label=sessionLabel;',ctx);
   const text=ctx.label({status:'prepared',config:{type:'written',mode:'timed',minutes:30},attempts:[],items:[{}],expiresAt:null,currentIndex:0});
   assert.match(text,/시간제 30분/);assert.match(text,/아직 시작하지 않음/);assert.doesNotMatch(text,/1970|까지/);

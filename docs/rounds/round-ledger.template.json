@@ -1,0 +1,79 @@
+{
+  "ledgerSchemaVersion": 1,
+  "campaignId": "2026-exam-final",
+  "roundId": "REPLACE-ROUND-ID",
+  "prdVersion": "1.7",
+  "timezone": "Asia/Seoul",
+  "status": "running",
+  "startedAt": "2026-10-02T05:40:00Z",
+  "decisionDeadline": "2026-10-02T09:40:00Z",
+  "closedAt": null,
+  "policy": {
+    "maxCycles": 3,
+    "maxReopeningsPerGoal": 1,
+    "maxLineageCycles": 6,
+    "maxRoundHours": 4
+  },
+  "baseline": {
+    "sourceCommit": "0000000000000000000000000000000000000000",
+    "bankVersion": "REPLACE-VERIFIED-BASELINE",
+    "bankSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "regularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "regularPractical": 0
+  },
+  "targets": {
+    "writtenBySubject": {
+      "s1": 10,
+      "s2": 10,
+      "s3": 10,
+      "s4": 10,
+      "s5": 10
+    },
+    "practical": 8
+  },
+  "candidates": [],
+  "counts": {
+    "registered": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "pending": 0,
+    "publishedRegularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "publishedRegularPractical": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "regularPractical": 0,
+    "mockEligible": false
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": null,
+    "bankSha256": null,
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [],
+  "nextRoundGaps": [],
+  "noGapExplanation": null,
+  "summary": "TEMPLATE ONLY. Replace all example dates, baseline values and placeholders with verified facts before registering a real round."
+}

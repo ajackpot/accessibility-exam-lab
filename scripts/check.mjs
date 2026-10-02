@@ -3,6 +3,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {validateBankForPublication,sha256,prepareSession} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..');
+execFileSync(process.execPath,[path.join(root,'scripts/validate-round.mjs')],{stdio:'inherit'});
 for(const file of ['domain.js','legacy-materials.js','legacy-question-display.js','storage.js','backup.js','workflows.js','app.js'])execFileSync(process.execPath,['--check',path.join(root,'src',file)],{stdio:'inherit'});
 const manifest=JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'),'utf8'));const raw=await fs.readFile(path.join(root,'data',manifest.file),'utf8');if(await sha256(raw)!==manifest.sha256)throw new Error('Manifest hash mismatch');const bank=validateBankForPublication(JSON.parse(raw));if(manifest.bankVersion!==bank.bankVersion)throw new Error('Manifest version mismatch');
 for(const type of ['written','practical'])prepareSession(bank,{type,mode:'untimed',kind:'practice',subjectId:type==='written'?'all':'practical',pool:'all',family:'all',count:type==='written'?10:4,minutes:150,optionCount:5,feedbackAfter:'confirm'},[],1,'smoke-session');

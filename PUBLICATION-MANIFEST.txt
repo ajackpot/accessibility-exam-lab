@@ -53,3 +53,19 @@ qa/backup-network.test.mjs
 qa/seed-content.test.mjs
 qa/viewport.html
 qa/viewport.js
+
+# Bounded regular content rounds
+AGENTS.md
+scripts/bank-io.mjs
+scripts/validate-round.mjs
+tests/build-current-bank.test.mjs
+tests/round-ledger.test.mjs
+docs/rounds/round-ledger.schema.json
+docs/rounds/round-ledger.template.json
+docs/rounds/round-001.json
+docs/rounds/round-001.md
+
+docs/rounds/round-report.template.md
+tests/regular-practice.test.mjs
+tests/regular-bank.test.mjs
+data/releases/2026.10.02-regular.1/bank.json

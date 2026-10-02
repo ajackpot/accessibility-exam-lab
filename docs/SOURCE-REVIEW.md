@@ -1,3 +1,9 @@
+# 정규 문제 은행 출처 검토
+
+`2026.10.02-regular.1`의 새 일반 문항 58개에는 71개 출처 레코드가 연결되어 있습니다. 1차 자료의 판·절·확인 시각과 후보별 독립 풀이·정답/오답 검토·채택 사유는 [1회차 구조화 대장](rounds/round-001.json), 범위·한계와 다음 조사는 [1회차 보고서](rounds/round-001.md)에 있습니다. 원문 공식 첨부·샘플 문제는 재배포하지 않습니다.
+
+이하 기존 14개 기능 검증용 시드의 과거 검토 기록은 보존합니다. 이 시드들은 일반 문항으로 재분류하지 않습니다.
+
 # First-day seed answer and evidence review
 
 Checked 2026-10-01. 14 independently written, nonofficial test-only questions. No official source files or sample questions are included in the bank. All 4/5-option subsets are structurally single-answer. Narrative answers are ungraded in the app; their rubric is for optional external evaluation only.
