@@ -375,7 +375,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "기기, 공급업체, 운영 단계, 삽입 방식으로 검토 대상을 제외하는 네 범위 오적용을 모두 검토했다. 검토 계획으로 바꾼 지문은 같은 적용범위 판단을 묻는다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q02",
@@ -553,7 +553,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "프레임워크 열거, 픽셀 일치, 제정 당시 버전, 기본 테마를 적합성의 대리 기준으로 삼는 혼동이다. 모두 결과의 접근성 충족을 입증하지 못한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q03",
@@ -730,7 +730,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "준비물·차례, 사진·이름, 목적·단계의 부분 정보와 음성 재생의 한계를 구분했다. 안전 정보와 시각정보 포함 조건은 유지되었다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q04",
@@ -906,7 +906,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "속도·크기·순환·새로고침은 일시정지와 원하는 항목 선택의 대체가 아니다. 순환이 일부 재확인을 돕는다는 약한 읽기는 있으나 표준의 제어 요구를 충족하는 답은 하나다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q05",
@@ -1083,7 +1083,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "콘솔·주석·설명 이미지·마우스 도움말의 존재로 조작 요소 의미가 접근성 API에 연결됐다고 볼 수 없다. 기능 정보의 프로그램적 전달이라는 원래 목표를 명료화했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q06",
@@ -1260,7 +1260,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "짧은 문자열, 덧셈, 도형 순서, 임의 문장 재현은 인지 과제를 남긴다. 물건 기반 경로의 존재를 묻는 범위를 실제 모든 보안키 제품의 접근성 보장으로 확대하지 않았다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q07",
@@ -1437,7 +1437,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "다시 타이핑, 입력칸 분할, 도움말, 사후 일치 검사는 이미 입력한 정보 재사용과 다르다. 같은 과정·보안 예외가 아닌 조건은 보존되었다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q08",
@@ -1615,7 +1615,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "하드웨어/소프트웨어의 일방 제외와 처방/시각장애 기준 분류를 배제했다. 각 오답은 정의의 범주 혼동이고 기능 중심 분류와 대조된다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q09",
@@ -1869,7 +1869,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "원래 음성 전용 채널과 발화 어려움 조건을 복원했다. 입력 경로·안내 수신·청취 속도·시각적 가독성·통화 진입을 구분하는 선택지에서 새 독립 풀이와 다섯 검사가 통과했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q10",
@@ -2045,7 +2045,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "긴 문장, 불일치 명칭, 비유, 단계와 무관한 안내 교대는 인지 부담을 늘리는 문안/제시 방식 혼동이다. 팝업 오답은 상대적으로 쉬우나 같은 목표의 안내 방식이다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q11",
@@ -2222,7 +2222,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "하나의 사용자 과제 결과를 전체 기능·다른 사용자·기준 준수·다른 AT 조합으로 일반화하는 서로 다른 표본/범위 오류를 검토했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q12",
@@ -2409,7 +2409,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "의무 주체 뒤바꿈, 모바일 제외, 제공 단계부터 시작, 단말기의 제1항 제외를 조문과 대조했다. 시행판과 시점 조건이 유지되었다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q13",
@@ -2597,7 +2597,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "네 서비스·제품의 개별 인증을 인증기관 지정과 혼동하는 동일 수준의 대안이다. 다른 개별 인증의 실제 기간을 추정하지 않고 제21조제2항의 대상만 판단했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q14",
@@ -2781,7 +2781,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "역할 반전, 양쪽 요청자, 양쪽 응답자, 메시지 수신 시 역할 변경을 해당 연결의 요청/응답 관계로 배제했다. 다른 연결의 역할 가능성은 부정하지 않는다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q15",
@@ -2980,7 +2980,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "저장 암호화, 권한 판정, 악성코드 검사, 비밀번호 저장 해시를 전송 계층 보호와 구분했다. 정상 인증서 검증과 연결 수립 조건이 유지된다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q16",
@@ -3224,7 +3224,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "장식의 빈 alt, 유일한 공지의 정확한 이유·시간, 의미/기능 기준을 각각 검토했다. 파일명·형식·크기·다운로드 성공은 의미 판정의 대리 기준이 아니다. 잘못된 시간의 설명은 자료와 직접 불일치한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q17",
@@ -3560,7 +3560,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "없는 disabled, 다른 type, 값 초기화, 잘못된 label 연결 진단을 실제 코드와 대조했다. 메시지의 항목·원인·범위, 유효값3과 무효값0/8의 재제출 기대를 구분했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q18",
@@ -3884,7 +3884,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "명시된 환경에서 양수1→2→3 순서, DOM 복원, 초점 표시가 일관된다. -1, hover, DOM 역배치, 시각 배치만의 통과 판정을 배제했다. UA 예외를 보편적으로 부정하지 않는다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q19",
@@ -4174,7 +4174,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "mixed와 전체 선택/해제 상태, 모든 활성화 경로와 시각/ARIA 동기화를 확인했다. focus만 변경하거나 상수를 대입하는 대안은 반례가 있다. mixed 활성화 결과는 ARIA 보편 규칙이 아니라 제시한 notes/코드에 따른다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q20",
@@ -4539,7 +4539,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "value·label·요소 조회 자체와 탐색 실행을 구분했다. focus/click 이전, 지연, change 유지의 실패 및 별도 버튼의 키보드/포인터 실행을 검토했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q21",
@@ -4743,7 +4743,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "공통 그룹 이름은 개별 레이블, name, value, required를 대체하지 않는다. 같은 폼·트리·name의 기존 라디오 관계를 유지한다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     },
     {
       "correctionId": "editorial-001-q22",
@@ -5122,7 +5122,7 @@
         "accepted_all_gates"
       ],
       "decisionSummary": "lang 상속, xml:lang, title, charset, 번역, 음성 제품/속도, 언어 협상의 혼동을 구분했다. 시각 표시·브라우저 UI 언어를 AT 점검으로 갈음하지 않으며 지원 음성 환경 조건을 보존했다.",
-      "publishedBankVersion": null
+      "publishedBankVersion": "2026.10.02-editorial.1"
     }
   ],
   "counts": {
@@ -5132,7 +5132,7 @@
     "pending": 0,
     "newRegular": 0,
     "revisedRegular": 22,
-    "publishedRevisedRegular": 0
+    "publishedRevisedRegular": 22
   },
   "coverageAfter": {
     "regularWrittenBySubject": {
@@ -5146,12 +5146,12 @@
     "mockEligible": false
   },
   "publication": {
-    "status": "not_attempted",
-    "commit": null,
+    "status": "verified",
+    "commit": "905ec8ecc7ed760a75b8e9205aabd3d3ab7fc161",
     "bankVersion": "2026.10.02-editorial.1",
     "bankSha256": "0d6f624cf75d6fed7fb95b4f2b0ce995df9b73b8475ebab805d42cb9fcad12f2",
-    "verifiedAt": null,
-    "url": null,
+    "verifiedAt": "2026-10-02T09:41:24Z",
+    "url": "https://ajackpot.github.io/accessibility-exam-lab/",
     "blockers": []
   },
   "validation": [
@@ -5176,14 +5176,20 @@
     {
       "check": "최종 통합·발행 검사",
       "result": "pass",
-      "summary": "활성 editorial.1의 npm run verify270/270, build, 은행/닫힌 대장/기준본·실제 보관 검토 입력·cycle별 component revision/hash·최신 누적본·마감 가드를 통과했다. 독립113개 부정·계보·발행 순서 검사를 통과했다. 실제 호스팅은 아직 별도 확인 대상이다.",
+      "summary": "활성 editorial.1의 npm run verify270/270, build, 은행/닫힌 대장/기준본·실제 보관 검토 입력·cycle별 component revision/hash·최신 누적본·마감 가드를 통과했다. 독립113개 부정·계보·발행 순서 검사를 통과했다. 호스팅 바이트와 대표 라이브 동작은 별도 검사로 확인했다.",
       "reportPath": "docs/corrections/editorial-001.md"
     },
     {
       "check": "호스팅 공개 확인",
-      "result": "not_run",
-      "summary": "로컬 채택과 실제 공개를 구분한다. 승인 커밋·Pages 결과·호스팅 바이트·실제 동작 확인 전에는 공개 수를 늘리지 않는다.",
+      "result": "pass",
+      "summary": "커밋 905ec8ecc7ed760a75b8e9205aabd3d3ab7fc161의 Pages 작업 36990471431 성공, 저장소 79개 파일 blob·크기 일치, 09:35:38 UTC에 앱·manifest·불변 은행 등 22개 라이브 URL의 SHA-256 일치를 확인했다. 수정 공개 22개, 신규 0개, 누적 일반 58개·시드 14개다.",
       "reportPath": "docs/corrections/editorial-001.md"
+    },
+    {
+      "check": "대표 라이브 업데이트·기록·문항 검사",
+      "result": "pass",
+      "summary": "09:36–09:41 UTC 전용 클라우드 Chrome에서 업데이트·새로고침·이어 풀기 후 구판 선택지 순서·문구·선택 답·채점을 보존했다. 새 발화 장벽 개정 3 문항은 표시 위치 3의 정답을 Space로 선택해 정상 채점했으며 채점 전 해설 비공개, 채점 버튼 초점·단일 해설·다음/이전 상태 유지와 모의시험 잠금을 확인했다. 대표 DOM·키보드 검사이며 Windows/NVDA 음성이나 전체 문항 수동 완주를 뜻하지 않는다.",
+      "reportPath": "docs/VALIDATION.md"
     },
     {
       "check": "Windows/NVDA 실측",
@@ -5193,5 +5199,5 @@
     }
   ],
   "nextAction": "기존 문항 정정 결과와 유지 사유를 확인한 뒤 부족한 새 학습 목표의 출처·범위 검토를 계속한다. 정정 수를 신규 문항 실적에 합산하지 않는다.",
-  "summary": "72문항·432개 선택지 전수 점검 후 일반22개 문안을 정정 채택했다. 21개 최초 검토,1개 조건 보존 실패 후 새 풀이자의 두 번째 검토 통과. 신규0개·누적 일반58개·테스트14개이며 실제 공개는 별도 확인한다."
+  "summary": "72문항·432개 선택지 전수 점검 후 일반 22개 문안을 정정 채택하고 실제 공개를 확인했다. 21개 최초 검토, 1개 조건 보존 실패 후 새 풀이자의 두 번째 검토 통과. 신규 0개·수정 공개 22개·누적 일반 58개·테스트 14개다."
 }
