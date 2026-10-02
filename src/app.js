@@ -1,7 +1,7 @@
-import {APP_VERSION,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.8';
-import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.8';
-import {practiceConfig,quickConfig,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.8';
-import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.8';
+import {APP_VERSION,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.9';
+import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.9';
+import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.9';
+import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.9';
 const $=id=>document.getElementById(id);
 const state={bankLoading:true,noticeGeneration:0,starting:false,section:'home',route:null,restoring:false,openGeneration:0,store:null,bank:null,bundle:null,sessions:[],session:null,editor:null,view:'home',queue:Promise.resolve(),storageFailed:false,unsaved:null,anchor:null,warningKeys:new Set(),settings:{timerWarnings:true}};
 const subjectName=id=>SUBJECTS.find(s=>s.id===id)?.name||'웹접근성 실기중급';
@@ -76,7 +76,7 @@ function rememberRoute(name,args={}){
 async function restoreRoute(route){
   const r=route||{name:'home',args:{}};const request=(state.routeRequest||0)+1;state.routeRequest=request;state.restoring=true;
   try{const sameSession=r.name==='session'&&state.session?.sessionId===r.args.id;const visit=async()=>{
-    if(r.name==='setup')renderSetup(r.args.type,r.args.config||{});
+    if(r.name==='setup')renderSetup(r.args.type,r.args.config||{},r.args.minutesEdited,r.args.minutesValue);
     else if(r.name==='review')await renderWrong(r.args.sessionId||null);
     else if(r.name==='history')await renderHistory();
     else if(r.name==='bank')renderBank();
@@ -122,13 +122,13 @@ async function renderWrong(sessionId=null){
   children.push(actions(...(source?[button('이번 결과로 돌아가기',()=>openSession(source.sessionId),{class:'secondary'}),button('전체 오답 목록',()=>renderWrong(),{class:'secondary'})]:[]),homeLink()));screen(source?'이번 세트 오답 복습':'오답 복습',...children);
 }
 async function openSavedReview(sessionId,instanceId){await openSession(sessionId);const s=state.session;if(!s||s.sessionId!==sessionId||(s.status==='active'&&!state.editor?.acquired))return;const item=s.items.find(q=>q.instanceId===instanceId);if(!item)throw new Error('문항을 찾을 수 없습니다.');state.section='review';await renderReview(s,item);}
-function renderSetup(type,overrides={}){
+function renderSetup(type,overrides={},minutesEdited=Object.hasOwn(overrides,'minutes'),minutesValue){
   if(!state.bank){showError(new Error('출제할 문제 은행이 없습니다. 문제 은행에서 다시 불러와 주세요.'));return;}
-  state.section='home';clearError();const practical=type==='practical',defaults=quickConfig(state.bank,type,state.sessions,overrides),mock=mockAvailability(state.bank);rememberRoute('setup',{type,config:defaults});
+  state.section='home';clearError();const practical=type==='practical',defaults=quickConfig(state.bank,type,state.sessions,overrides),mock=mockAvailability(state.bank);rememberRoute('setup',{type,config:defaults,minutesEdited,minutesValue:minutesValue??String(defaults.minutes)});
   const subject=select('subject',practical?[['practical','웹접근성 실기중급']]:[['all','전체 5과목 혼합'],...SUBJECTS.map(s=>[s.id,s.name])],defaults.subjectId);
   const kind=select('kind',[['practice','짧은 연습'],...(!practical&&mock.ready?[['mock','100문항 모의시험']]:[])],defaults.kind==='mock'&&!mock.ready?'practice':defaults.kind);
   const family=select('family',[['all','구현 + 점검 종합'],['implementation','웹페이지 구현'],['inspection','웹페이지 점검']],defaults.family),mode=select('mode',[['untimed','시간 제한 없음'],['timed','시간제 연습']],defaults.mode);
-  const count=node('input',{id:'count',type:'number',min:1,max:500,step:1,value:defaults.count||1,required:true,'aria-describedby':'setup-error availability'}),minutes=node('input',{id:'minutes',type:'number',min:1,max:1440,step:1,value:defaults.minutes,'aria-describedby':'setup-error'}),optionCount=select('option-count',[['5','5개'],['4','4개']],String(defaults.optionCount));
+  const count=node('input',{id:'count',type:'number',min:1,max:500,step:1,value:defaults.count||1,required:true,'aria-describedby':'setup-error availability'}),minutes=node('input',{id:'minutes',type:'number',min:1,max:1440,step:1,value:minutesValue??defaults.minutes,'aria-describedby':'setup-error'}),optionCount=select('option-count',[['5','5개'],['4','4개']],String(defaults.optionCount));
   const pool=select('pool',[['all','전체 문항'],['new','아직 확정하지 않은 학습 목표']],defaults.pool==='wrong'?'all':defaults.pool),feedback=select('feedback',[['confirm','답 확정 후 해설 열기'],['end','연습 종료 후 해설 열기']],defaults.feedbackAfter);
   const availability=node('p',{id:'availability'}),error=node('p',{id:'setup-error',class:'error-help',role:'status','aria-atomic':'true'}),summary=node('p',{id:'setup-summary',class:'task-summary'}),notice=node('p',{id:'mode-help'});
   const timeWrap=labelInput('제한 시간 (분)',minutes,'1~1440분. 필요한 추가 시간도 여기에 포함하세요.');let countEdited=false;
@@ -137,6 +137,9 @@ function renderSetup(type,overrides={}){
   const reduce=button('가능한 문항 수로 바꾸기',()=>{count.value=availableCount(state.bank,read(),state.sessions);countEdited=false;update();announce(`${count.value}문항으로 바꿨습니다.`);},{class:'secondary'});
   function update(adjustDefault=false){
     const isMock=kind.value==='mock';if(isMock){subject.value='all';count.value=100;optionCount.value='5';}subject.disabled=isMock||practical;count.disabled=isMock;optionCount.disabled=isMock;timeWrap.hidden=mode.value!=='timed';minutes.disabled=mode.value!=='timed';feedback.disabled=mode.value==='timed';
+    // Explicit input (including 30/150) wins across scopes and timed/untimed toggles.
+    // Intent lives only in this form and its route; existing session configs stay intact.
+    if(!minutesEdited)minutes.value=defaultSetupMinutes(read());
     const selection=practiceSelection(state.bank,read(),state.sessions),available=selection.count;if(adjustDefault&&!countEdited&&!isMock)count.value=Math.max(1,Math.min(type==='written'?5:2,available));
     const c=read();availability.textContent=available?(selection.testOnly?`선택한 범위에 일반 학습 문항이 없어 체험용 테스트 ${available}문항을 출제할 수 있습니다. 체험 결과는 일반 학습 통계와 분리됩니다.`:`선택한 범위에서 일반 학습 ${available}문항을 출제할 수 있습니다. 체험용 테스트 문항을 섞지 않습니다.`):'선택한 범위에서 출제할 수 있는 문항이 없습니다. 범위나 과목을 바꿔 주세요.';reduce.hidden=isMock||c.count<=available||!available;
     const invalid=!Number.isInteger(c.count)||c.count<1||c.count>available||(c.mode==='timed'&&(!Number.isInteger(c.minutes)||c.minutes<1||c.minutes>1440));topStart.disabled=bottomStart.disabled=invalid;
@@ -144,9 +147,9 @@ function renderSetup(type,overrides={}){
     summary.textContent=`${typeLabel(type)} · ${practical?family.selectedOptions[0].textContent:subject.selectedOptions[0].textContent} · ${c.count}문항 · ${selection.testOnly?'체험용 테스트':'일반 학습'} · ${c.mode==='timed'?`${c.minutes}분 시간제`:'시간 제한 없음'}${practical?'':` · ${c.optionCount}지선다`}`;
     notice.textContent=c.mode==='timed'?'시작 후에는 화면을 나가거나 브라우저를 닫아도 시간이 흐릅니다. 최종 제출 전에는 정답과 해설이 보이지 않습니다.':'답을 고르면 자동 저장됩니다. 답 확정 후에는 바꿀 수 없으며, 다시 풀기는 새 연습으로 시작합니다.';
     error.textContent=c.count>available&&available?`문항 수를 ${available} 이하로 입력하거나 가능한 문항 수로 바꿔 주세요.`:(!Number.isInteger(c.count)||c.count<1?'문항 수는 1 이상의 정수로 입력하세요.':(c.mode==='timed'&&(!Number.isInteger(c.minutes)||c.minutes<1||c.minutes>1440)?'시간은 1~1440분의 정수로 입력하세요.':''));
-    state.route={name:'setup',args:{type,config:c}};history.replaceState({examRoute:state.route},'', '#setup');
+    state.route={name:'setup',args:{type,config:c,minutesEdited,minutesValue:minutes.value}};history.replaceState({examRoute:state.route},'', '#setup');
   }
-  for(const el of [subject,kind,family,mode,optionCount,pool,feedback])el.addEventListener('change',()=>update(true));count.addEventListener('input',()=>{countEdited=true;update();});minutes.addEventListener('input',()=>update());
+  for(const el of [subject,kind,family,mode,optionCount,pool,feedback])el.addEventListener('change',()=>update(true));count.addEventListener('input',()=>{countEdited=true;update();});minutes.addEventListener('input',()=>{minutesEdited=true;update();});
   const form=node('form',{on:{submit:async event=>{event.preventDefault();if(topStart.disabled)return;await startPractice(read());}}},node('section',{class:'start-panel'},summary,notice,actions(topStart,button('취소하고 홈으로',()=>{if(!state.starting)return renderHome();},{class:'secondary','data-cancel-start':'setup'}))),node('div',{class:'grid setup-grid'},...(mock.ready&&!practical?[labelInput('연습 구성',kind)]:[]),...(!practical?[labelInput('과목',subject)]:[labelInput('실기 과제군',family)]),labelInput('문항 수',count),labelInput('시간 방식',mode),timeWrap),availability,reduce,error,helpDetails('선택지 수·출제 범위·해설 설정',...(!practical?[labelInput('선택지 수',optionCount)]:[]),labelInput('출제 범위',pool),labelInput('해설 공개 시점',feedback)),actions(bottomStart,button('취소하고 홈으로',()=>{if(!state.starting)return renderHome();},{class:'secondary','data-cancel-start':'setup'})));
   screen(`${typeLabel(type)} 연습 준비`,node('p',{},'기본값으로 바로 시작하거나 아래에서 바꾸세요. 별도의 안내 확인 단계는 없습니다.'),form,helpDetails('연습 자료와 채점 안내',node('p',{},'체험용 테스트 문항은 일반 학습 통계와 분리됩니다. 문항·선택지 순서·해설은 시작할 때 고정됩니다.'),node('p',{},practical?'자유 서술은 미채점이며, 고정 답안 항목만 자동 채점합니다.':'100문항 모의시험은 과목별 일반 학습 문항 20개가 준비되면 선택할 수 있습니다.')));update();
 }

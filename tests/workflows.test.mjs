@@ -9,6 +9,24 @@ const make=(overrides={},id='flow',seed=3)=>d.startSession(d.prepareSession(bank
 const correct=item=>item.type==='written'?item.correctOptionId:Object.fromEntries(item.parts.map(p=>[p.partId,p.kind==='text'?p.accepted[0]:p.kind==='single'?p.correct[0]:p.correct]));
 const wrong=item=>item.type==='written'?item.options.find(o=>o.optionId!==item.correctOptionId).optionId:{[item.parts[0].partId]:item.parts[0].kind==='text'?'definitely-wrong':item.parts[0].choices.find(o=>!item.parts[0].correct.includes(o.id))?.id};
 test('task quick starts are feasible and disclose small untimed defaults, without needing reduction',()=>{for(const type of ['written','practical']){const c=w.quickConfig(bank,type);assert.equal(c.count,type==='written'?5:2);assert.equal(c.mode,'untimed');assert.equal(d.prepareSession(bank,c).items.length,c.count);}assert.equal(w.quickConfig(null,'written').count,0);assert.equal(w.quickConfig(bank,'written',[],{subjectId:'s1'}).count,2);});
+test('setup timer defaults follow written scope, independent of count or timing mode',()=>{
+  for(const mode of ['timed','untimed'])for(const count of [1,5,20,100]){
+    for(const subjectId of ['all','s1','s2','s3','s4','s5']){
+      const config=w.practiceConfig('written',{subjectId,count,mode}),before=d.copy(config);
+      assert.equal(w.defaultSetupMinutes(config),subjectId==='all'?150:30);assert.deepEqual(config,before);
+    }
+    assert.equal(w.defaultSetupMinutes(w.practiceConfig('written',{kind:'mock',count,mode})),150);
+    for(const family of ['all','implementation','inspection'])assert.equal(w.defaultSetupMinutes(w.practiceConfig('practical',{family,count,mode})),30);
+  }
+});
+test('same-scope retries preserve supplied historical and custom minutes without changing sessions',()=>{
+  for(const mode of ['timed','untimed'])for(const subjectId of ['all','s1'])for(const minutes of [30,90,150]){
+    const saved=make({mode,subjectId,minutes}),before=d.copy(saved);
+    const retry=w.quickConfig(bank,saved.config.type,[saved],{...saved.config,pool:'all',kind:'practice'});
+    assert.equal(retry.minutes,minutes);assert.equal(retry.mode,mode);assert.equal(retry.subjectId,subjectId);
+    assert(!Object.hasOwn(retry,'minutesEdited'));assert.deepEqual(saved,before);
+  }
+});
 test('availability counts unique goals and excludes mock test seeds',()=>{assert.equal(w.availableCount(bank,w.practiceConfig('written')),10);assert.equal(w.mockAvailability(bank).ready,false);assert.ok(w.mockAvailability(bank).counts.every(c=>c.count===0));const dup=d.copy(bank);dup.questions.push({...dup.questions[0],questionId:'different-id'});assert.equal(w.availableCount(dup,w.practiceConfig('written')),10);});
 test('final submission grades selected untimed drafts once, preserves existing attempts and snapshots',()=>{let s=make();const [a,b]=s.items;s=d.setAnswer(s,a.instanceId,correct(a),100001);s=d.confirmAnswer(s,a.instanceId,100002);s=d.revealExplanation(s,a.instanceId,100003);s=d.setAnswer(s,b.instanceId,wrong(b),100004);const prior=d.copy(s.attempts[0]),items=d.copy(s.items);const end=w.submitSelectedAnswers(s,100005);assert.equal(end.status,'submitted');assert.equal(end.attempts.length,2);assert.deepEqual(end.attempts[0],prior);assert.deepEqual(end.items,items);assert.equal(end.result.correct,1);assert.equal(end.result.wrong,1);assert.deepEqual(w.submitSelectedAnswers(end,100006),end);assert.deepEqual(parseBackup(exportBackup([end])).sessions,[end]);});
 test('blank and free-response-only input stays ungraded on final submission',()=>{const blank=w.submitSelectedAnswers(make(),100004);assert.equal(blank.attempts.length,0);assert.equal(blank.result.unanswered,2);let s=make({type:'practical',subjectId:'practical',count:1});s=d.setAnswer(s,s.items[0].instanceId,{freeResponse:'My narrative only'},100001);const end=w.submitSelectedAnswers(s,100002);assert.equal(end.attempts.length,0);assert.equal(end.answers[s.items[0].instanceId].freeResponse,'My narrative only');assert.equal(w.reviewEntries([end]).length,0);});

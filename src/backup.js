@@ -1,4 +1,4 @@
-import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy} from './domain.js?v=0.2.8';
+import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy} from './domain.js?v=0.2.9';
 export const MAX_BACKUP_BYTES=10*1024*1024;
 function requireValue(test,message){if(!test)throw new DomainError(message,'IMPORT');}
 const ident=x=>typeof x==='string'&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(x);

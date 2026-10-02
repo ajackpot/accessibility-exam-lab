@@ -1,8 +1,12 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {eligibleQuestions,isPublishedQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.8';
+import {eligibleQuestions,isPublishedQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.9';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
   return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:2,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides};
+}
+/** Defaults for an unedited setup form, never a migration of saved/retry settings. */
+export function defaultSetupMinutes(config) {
+  return config.type==='written'&&(config.kind==='mock'||config.subjectId==='all')?150:30;
 }
 /** Fresh ordinary practice prefers eligible regular content, never topping up with seeds.
  * Explicit review banks and stored snapshots continue through the original domain path. */
