@@ -88,6 +88,7 @@ docs/corrections/evidence/editorial-001-cycle-2.json
 tests/editorial-bank.test.mjs
 
 tests/round-schedule-substitution.test.mjs
+tests/four-hour-cadence.test.mjs
 
 # Second regular expansion
 tests/round-two-bank.test.mjs

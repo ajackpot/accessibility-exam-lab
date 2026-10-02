@@ -114,7 +114,7 @@ export const MANUAL_CHECKS = [
   'Primary-source authority, source reading, licensing, scope, answer correctness, hidden semantic duplicate learning goals, concrete revisions and whether new evidence resolves the rejection require independent human/semantic review.',
   'Hash/count checks verify supplied local immutable bank bytes; they do not establish deployment, remote commit ancestry, hosted-byte identity, a complete untampered campaign history or preservation of learner sessions.',
   'Nonempty gap plans and exposure-safe public summaries still require semantic, privacy and secret review. Structural checks do not establish Windows/NVDA accessibility testing.',
-  'The documented flexible 08:00/20:00 Asia/Seoul schedule is a nominal bound; an earlier actual scheduled start must be supplied with --next-round-at. No live scheduler is queried.'
+  'The effective-dated campaign schedule is a fixed bound: legacy 08:00/20:00 Asia/Seoul before 2026-10-03 00:00 KST, then every four hours at 00/04/08/12/16/20 KST. An earlier actual scheduled start must be supplied with --next-round-at. No live scheduler is queried.'
 ];
 
 /** Actual published regular unique templates, with constructible five-choice mock eligibility. */
@@ -131,15 +131,26 @@ export function regularCoverage(bank, at = Date.parse(bank.releasedAt)) {
   return {regularWrittenBySubject: written, regularPractical: practical, mockEligible: SUBJECTS.every(id => fiveChoice[id] >= 20)};
 }
 
-/** Published campaign schedule in OPERATIONS.md; timestamps are fixed KST (UTC+09). */
-export function nextScheduledRoundAt(startedAt) {
-  const start = Date.parse(startedAt), candidates = [];
-  for (let day = 2; day <= 16; day++) for (const hour of [8, 20]) {
-    if (day === 2 && hour === 8) continue;
-    candidates.push(Date.parse(`2026-10-${String(day).padStart(2, '0')}T${String(hour).padStart(2, '0')}:00:00+09:00`));
+/** Occurrence versions are effective-dated; do not reinterpret immutable Oct 2 history. */
+export const FOUR_HOUR_CADENCE_AT = Date.parse('2026-10-03T00:00:00+09:00');
+export const CAMPAIGN_SCHEDULE_VERSIONS = Object.freeze([
+  Object.freeze({version: 'legacy-12h', effectiveFrom: Date.parse('2026-10-02T20:00:00+09:00'), effectiveUntil: FOUR_HOUR_CADENCE_AT, hours: Object.freeze([8, 20])}),
+  Object.freeze({version: 'four-hour-v2', effectiveFrom: FOUR_HOUR_CADENCE_AT, effectiveUntil: FREEZE_AT, hours: Object.freeze([0, 4, 8, 12, 16, 20])})
+]);
+const scheduledRoundStarts = CAMPAIGN_SCHEDULE_VERSIONS.flatMap(version => {
+  const starts = [];
+  for (let day = 2; day <= 16; day++) for (const hour of version.hours) {
+    const at = Date.parse(`2026-10-${String(day).padStart(2, '0')}T${String(hour).padStart(2, '0')}:00:00+09:00`);
+    if (at >= version.effectiveFrom && at < version.effectiveUntil) starts.push(at);
   }
-  candidates.push(Date.parse('2026-10-16T23:30:00+09:00'));
-  return candidates.find(at => at > start) ?? FREEZE_AT;
+  return starts;
+}).sort((a, b) => a - b);
+// The finalizer is a bound only, never another content-expansion occurrence.
+const campaignBounds = [...scheduledRoundStarts, Date.parse('2026-10-16T23:30:00+09:00')];
+export function nextScheduledRoundAt(startedAt) {
+  const start = Date.parse(startedAt);
+  if (!Number.isFinite(start)) return NaN;
+  return campaignBounds.find(at => at > start) ?? FREEZE_AT;
 }
 const evidenceIdentity = e => `${e.url.replace(/#.*$/, '')}|${e.version.trim()}|${e.location.trim()}`;
 function walkStrings(value, visit, at = '$') {
@@ -202,7 +213,7 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
     if (records.reduce((sum, r) => sum + r.candidate.attemptCount, 0) > 6) fail(records[0].round, '/candidates', `learning goal ${id} exceeds six lineage cycles`);
     if (records.length > 1 && records.filter(r => r.candidate.reopenCount === 0).length !== 1) fail(records[0].round, '/candidates', `learning goal ${id} has duplicate originals or missing original`);
   }
-  const consumedOccurrences = new Set();
+  const consumedOccurrences = new Set(), consumedFourHourSlots = new Set();
   const ordered = [...rounds].sort((a, b) => Date.parse(a.startedAt) - Date.parse(b.startedAt));
   for (const replacement of ordered.filter(r => r.scheduleSubstitution)) {
     const effective = Date.parse(replacement.scheduleSubstitution.effectiveStart);
@@ -212,6 +223,11 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
   }
   for (const [roundIndex, round] of ordered.entries()) {
     const start = Date.parse(round.startedAt), deadline = Date.parse(round.decisionDeadline), close = round.closedAt === null ? null : Date.parse(round.closedAt);
+    if (start >= FOUR_HOUR_CADENCE_AT && start < FREEZE_AT) {
+      const occurrence = FOUR_HOUR_CADENCE_AT + Math.floor((start - FOUR_HOUR_CADENCE_AT) / (4 * 3600000)) * 4 * 3600000;
+      if (consumedFourHourSlots.has(occurrence)) fail(round, '/startedAt', 'scheduled four-hour occurrence already consumed by another regular round; resume the existing round');
+      consumedFourHourSlots.add(occurrence);
+    }
     const nextLoaded = ordered[roundIndex + 1];
     let scheduledBound = nextScheduledRoundAt(round.startedAt);
     if (round.scheduleSubstitution) {

@@ -23,7 +23,7 @@ function subsequent(start){const r=round();delete r.scheduleSubstitution;Object.
 test('authorized single early occurrence retains four hours without skipping the following scheduled occurrence',()=>{
  pass([round()]);
  assert.equal(nextScheduledRoundAt('2026-10-02T10:30:00Z'),Date.parse('2026-10-02T11:00:00Z'));
- assert.equal(nextScheduledRoundAt('2026-10-02T11:00:00Z'),Date.parse('2026-10-02T23:00:00Z'));
+ assert.equal(nextScheduledRoundAt('2026-10-02T11:00:00Z'),Date.parse('2026-10-02T15:00:00Z'));
  const r=round();delete r.scheduleSubstitution;fail([r]);
 });
 test('substitution is limited to the exact campaign, round, occurrence and actual start',()=>{
@@ -37,10 +37,10 @@ test('early substitution cannot extend four-hour, actual-next, current-clock or 
  fail([round()],{publicationState:{finalized:true,finalizedAt:'2026-10-02T13:00:00Z'}});
 });
 test('omitting a substitution record cannot run the superseded occurrence again after early closure',()=>{
- for(const start of ['2026-10-02T11:00:00Z','2026-10-02T11:00:01Z','2026-10-02T11:15:00Z','2026-10-02T15:00:00Z','2026-10-02T22:59:59Z'])fail([closed(),subsequent(start)],{now:Date.parse(start)+1000});
+ for(const start of ['2026-10-02T11:00:00Z','2026-10-02T11:00:01Z','2026-10-02T11:15:00Z','2026-10-02T14:59:59Z'])fail([closed(),subsequent(start)],{now:Date.parse(start)+1000});
 });
 test('the next nominal occurrence is available while repeated substitution is rejected',()=>{
- const start='2026-10-02T23:00:00Z';pass([closed(),subsequent(start)],{now:Date.parse(start)+1000});
+ const start='2026-10-02T15:00:00Z';pass([closed(),subsequent(start)],{now:Date.parse(start)+1000});
  const duplicate=round();duplicate.roundId='round-forged';fail([round(),duplicate]);
 });
 test('historical unadjusted rounds keep their original next-occurrence bound and final-day cutoff',()=>{

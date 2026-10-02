@@ -157,7 +157,7 @@ manifest: `{schemaVersion,bankVersion,releasedAt,file:'releases/<version>/bank.j
 
 - `campaignId: 2026-exam-final`, 고유 `roundId`, `prdVersion: 1.7|1.8|1.9`, `timezone: Asia/Seoul`, `status: running|closed`, 시작·판정 마감·판정 종료 ISO 시각
 - `policy`: maxCycles 3, maxReopeningsPerGoal 1, maxLineageCycles 6, maxRoundHours 4로 고정
-- `baseline`: 시작 시 확인한 원격 커밋, 은행 버전·SHA-256, 기존 정규 문항 수. `targets`는 후보 목표이며 통과량 아님
+- `baseline`: 시작 시 확인한 원격 커밋, 은행 버전·SHA-256, 기존 정규 문항 수. `targets`는 후보 목표이며 통과량 아님. round-003부터도 매 회차 필기 과목별 최대 10개(총 최대 50개)·실기 최대 8개 안에서 직전 공백·근거·검토 여력에 맞춰 정하며 주기 단축으로 상한을 높이지 않음
 - `candidates`: 고유 후보·학습 목표·계보·문항·template 식별자, 개정판·출제자 역할 ID, 근거 배열, 검토 횟수, 계보 누적 횟수, 재개방 횟수·이전 판정 링크·새 근거, 각 검토 결과, 최종 판정·사유, 실제 공개 은행 버전
 - 근거 항목: sourceId·제목·공식/1차 자료 URL·판/시행일·정확한 위치·실제 확인일·짧은 요약·권리 설명. 긴 원문 복사와 확인하지 않은 열람 주장 금지
 - `cycles`: 시작한 검토를 1부터 순서대로 기록. 개정판과 시작·종료, blindSolve·sourceCheck·ambiguityCheck·authoringAccessibility·structuralCheck의 `pass|fail|not_run`, 검토 역할 ID·짧은 결론·근거 참조. 실행 중 결과는 running과 finishedAt=null로 기록하고 끝난 검토 결과는 accepted·revise·rejected. 중간 종료 시 미실시를 not_run으로 기록
@@ -172,11 +172,11 @@ manifest: `{schemaVersion,bankVersion,releasedAt,file:'releases/<version>/bank.j
 
 JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검증했다고 주장하지 않습니다. 운영 검증자는 다음 관계도 검사하고 결과를 남깁니다.
 
-1. 회차·후보 ID는 고유하고 학습 목표의 같은 의미를 다른 이름으로 등록하지 않습니다. `attemptCount === cycles.length`, cycle 번호는 1부터 빈틈 없이 증가, 최종 후보 revision은 마지막 cycle revision과 같습니다. 시작한 검사·실패 이력을 지우지 않습니다
+1. 회차·후보 ID는 고유하고 학습 목표의 같은 의미를 다른 이름으로 등록하지 않습니다. 응용 시나리오의 배경·기관명·표현 변경만으로 learningGoalId·templateId를 늘리지 않으며 기존 목표·계보와 독립적인 판단 목표인지 근거·조건을 대조합니다. 국내 맥락은 출제 범위와 관련 1차 출처를 확인한 경우에만 사용합니다. `attemptCount === cycles.length`, cycle 번호는 1부터 빈틈 없이 증가, 최종 후보 revision은 마지막 cycle revision과 같습니다. 시작한 검사·실패 이력을 지우지 않습니다
 2. 마지막 cycle의 outcome은 최종 판정과 일치합니다. accepted 뒤 추가 검토를 붙이거나 rejected 뒤 같은 후보를 되살리지 않습니다. 수정은 앞선 cycle의 revise와 구체적 변경에 연결하며, 3번째 cycle은 끝나면 revise가 될 수 없습니다. 실행 중인 마지막 cycle은 running·finishedAt=null로만 남길 수 있고 후보는 pending이어야 합니다. accepted/rejected 후보나 closed 회차에는 running cycle이 없어야 합니다. accepted는 모든 다섯 gate가 pass이며 모든 근거 참조가 실제 evidence에 존재해야 합니다
 3. blindSolve의 reviewerId는 authorId 및 앞선 키 공개 검토자와 달라야 합니다. 해당 검토자가 실제 키를 보지 않은 자료를 받았는지 확인합니다. 역할 이름만 바꿔 같은 풀이를 독립 검토로 기록하지 않습니다
 4. 재개방 0회이면 이전 후보·새 근거 배열은 비어 있고 lineageAttemptCount는 attemptCount와 같습니다. 재개방 1회이면 같은 학습 목표의 이전 rejected 후보 1개와 전체 기존 검토 이력, 탈락 원인을 해결한 새 1차 근거를 참조합니다. 이전 실제 attemptCount와 이번 횟수의 합이 lineageAttemptCount이며 최대 6회입니다. campaign 전체 이전 대장을 조회해 2번째 재개방·위장 새 ID를 거부합니다
-5. 판정 마감은 시작 이후 최대 4시간이고 다음 예정 회차·최종 동결보다 늦지 않습니다. 2026-10-16 Asia/Seoul의 정규 회차는 추가로 decisionDeadline <= 2026-10-16T14:00:00Z(23:00 KST)를 만족해야 하며 그 뒤 후보 작업을 시작하지 않습니다. 더 이른 기존 한도를 유지합니다. 23:20 공개·반영 확인은 목표 시각이며, 23:30 최종 작업은 이미 accepted·공개 확인된 정상본의 재확인과 동결만 수행합니다. 최종 작업은 후보를 다루는 정규 회차가 아니며 미완료 후보를 가져오지 않습니다. 후보 검사·최종 판정은 판정 마감 이내에 종결합니다. 종료 대장의 `closedAt`은 판정 종료 시각입니다. publication.verifiedAt은 별도이며 판정 종료 뒤일 수 있으나 최종 동결 전이어야 합니다
+5. 판정 마감은 시작 이후 최대 4시간이고 효력 시각별 일정에서 구한 다음 예정 회차·더 이른 실제 후속 회차 시작·최종 동결보다 늦지 않습니다. 통합·공개 확인 여유를 두려면 시작 전에 더 이른 판정 마감을 정하며 한도를 연장하지 않습니다. 2026-10-16 Asia/Seoul의 정규 회차는 추가로 decisionDeadline <= 2026-10-16T14:00:00Z(23:00 KST)를 만족해야 하며 그 뒤 후보 작업을 시작하지 않습니다. 더 이른 기존 한도를 유지합니다. 23:20 공개·반영 확인은 목표 시각이며, 23:30 최종 작업은 이미 accepted·공개 확인된 정상본의 재확인과 동결만 수행합니다. 최종 작업은 후보를 다루는 정규 회차가 아니며 미완료 후보를 가져오지 않습니다. 후보 검사·최종 판정은 판정 마감 이내에 종결합니다. 종료 대장의 `closedAt`은 판정 종료 시각입니다. publication.verifiedAt은 별도이며 판정 종료 뒤일 수 있으나 최종 동결 전이어야 합니다
 6. counts.registered는 후보 배열 길이, accepted/rejected/pending은 실제 판정별 개수와 같습니다. closed 회차의 pending은 0이고 registered = accepted + rejected입니다. 검토도 시작 못 한 후보는 attemptCount 0과 rejected·실제 중단 이유로 남길 수 있으나 채택할 수 없습니다
 7. 실제 공개량은 호스팅 확인된 새 은행의 새 accepted·published·testOnly=false 문항과 대조합니다. 기존 시드·중복 template·선택지 순열·보기 조합은 새 정규 수에서 제외합니다. 공개 전·차단 시 해당 공개 수는 0이며 accepted 후보의 publishedBankVersion도 null입니다. accepted 판정을 publication 실패 때문에 pending으로 되돌리지 않습니다
 8. coverageAfter와 100문항 모의시험 가능 여부는 실제 확인된 은행으로 다시 계산합니다. 5과목별 고유 정규 templateId 20개 이상과 5지선다 조건을 모두 충족해야 합니다. 없는 은행이나 목표 수로 계산하지 않습니다
@@ -213,9 +213,15 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 7. 새 bankVersion의 불변 파일만 만들고 저장 세션·선택지 순서·답안·점수·스냅샷 해시는 변하지 않아야 합니다. 앱 `corrections`의 invalid/key와 혼동하여 과거 점수를 소급 조정하지 않습니다. 실제 배포 확인과 동결 가드를 통과하기 전에는 공개 완료로 기록하지 않습니다
 8. 후속 확대의 baseline은 마지막 확대 대장의 은행이 아니라 최신 manifest와 해시가 일치하는 실제 활성 은행입니다. 최신 공개 확인된 편집 대장·보고서와 기존 확대의 다음 조사 계획을 함께 대조하여 수정 문구·revision·공유 선택지 연결을 보존합니다. 새 정규 수는 이 활성 기준본에 없는 검증된 고유 목표만 세며 이전 정정 문항을 신규 목표로 다시 등록하지 않습니다
 
+### 효력 시각별 회차 일정 계약
+
+일정 버전은 발생 시각을 기준으로 선택합니다. **2026-10-03 00:00 Asia/Seoul(2026-10-02T15:00:00Z)** 전에는 이전 08:00·20:00 KST의 12시간 주기를 역사적 발생분에 적용하고, 이 시각부터는 매일 **00:00·04:00·08:00·12:00·16:00·20:00 KST**의 4시간 주기를 적용합니다. 새 버전의 첫 회차는 round-003이며 마지막 예정 발생분은 2026-10-16 20:00 KST(2026-10-16T11:00:00Z)입니다. 새 주기의 예정 발생분 84개는 실행·채택·공개 수가 아닙니다. 마지막 발생분 뒤에는 새 정규 발생분을 만들지 않으며, 마지막 날 23:00 KST의 판정 상한·23:30 최종 재확인·10월 17일 00:00 동결은 별도로 유지합니다.
+
+`nextScheduledRoundAt`은 현재 회차에 선택된 이전 버전만 계속 사용하지 않고 효력 시각 경계 너머의 다음 발생분을 찾습니다. 명목 발생 시각의 지연 실행은 다음 명목 시각을 늦추지 않습니다. 효력 시각 이후 같은 4시간 발생분에 서로 다른 확대 roundId를 두 개 등록하는 것을 거부하고 재호출은 기존 회차를 확인·재개합니다. 짧은 마감·조기 종결도 한 발생분을 다시 소비할 권한이 아닙니다. 이 발생분 단일성 검사를 과거 10월 2일 대장이나 별도 편집 정정 대장의 발생분 규칙으로 소급하지 않습니다. 과거 확대·정정 대장과 은행의 내용·해시·판정 마감은 보존하고 최대 3회·최대 4시간·더 이른 실제 후속 시작·동결·중첩 검사는 유지합니다.
+
 ### 2회차의 일회성 일정 교체 기록
 
-확대 대장의 선택적 `scheduleSubstitution`은 round-002에 한하여 `supersededStart: 2026-10-02T11:00:00Z`, `effectiveStart: 2026-10-02T10:30:00Z`, 비어 있지 않은 `reason`을 기록합니다. 실제 startedAt은 effectiveStart와 같아야 합니다. 승인된 고정 조합 외의 교체와 발생분 중복 소비는 거부하며 다음 명목 시각은 원래 발생분 뒤의 2026-10-02T23:00:00Z로 계산합니다. 사용자가 제공한 임의 다음 시각으로 상한을 늘리지 않습니다. 최대 4시간·더 이른 실제 다음 회차·종결·동결·회차 중첩 조건은 그대로 적용합니다. 과거 대장은 이 필드 없이 유효합니다.
+확대 대장의 선택적 `scheduleSubstitution`은 round-002에 한하여 `supersededStart: 2026-10-02T11:00:00Z`, `effectiveStart: 2026-10-02T10:30:00Z`, 비어 있지 않은 `reason`을 기록합니다. 실제 startedAt은 effectiveStart와 같아야 합니다. 승인된 고정 조합 외의 교체와 발생분 중복 소비는 거부합니다. 다음 명목 시각은 원래 발생분 뒤에 이어지는 일정 버전을 함께 조회해 새 주기의 2026-10-02T15:00:00Z(10월 3일 00:00 KST)로 계산하며, 이전 주기의 2026-10-02T23:00:00Z(10월 3일 08:00 KST)를 그대로 반환하지 않습니다. 고정 교체 필드와 이미 종결된 round-002의 내용·해시·판정 마감은 변경하지 않습니다. 사용자가 제공한 임의 다음 시각으로 상한을 늘리지 않습니다. 최대 4시간·더 이른 실제 다음 회차·종결·동결·회차 중첩 조건은 그대로 적용합니다. 과거 대장은 이 필드 없이 유효합니다.
 
 공개 은행의 releasedAt은 해당 확대·편집 회차의 closedAt 이후이고 최종 동결 전이어야 합니다. 실제 시각이 제공되는 발행 검사에서는 미래 releasedAt을 거부하며, 호스팅 확인은 releasedAt 이후여야 합니다. 명시적 현재 시각이 없는 순수 과거 검증과 CLI의 실제 시각 검사를 구분합니다.
 
