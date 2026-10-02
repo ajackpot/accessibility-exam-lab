@@ -9,6 +9,7 @@ package-lock.json
 index.html
 style.css
 src/app.js
+src/workflows.js
 src/domain.js
 src/storage.js
 src/backup.js
@@ -27,6 +28,8 @@ docs/VALIDATION.md
 docs/SOURCE-REVIEW.md
 docs/SEED-VALIDATION.json
 tests/domain.test.mjs
+tests/workflows.test.mjs
+tests/ui-state.test.mjs
 qa/harness.html
 qa/browser-harness.js
 qa/fixture.mjs
