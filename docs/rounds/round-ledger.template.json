@@ -2,7 +2,7 @@
   "ledgerSchemaVersion": 1,
   "campaignId": "2026-exam-final",
   "roundId": "REPLACE-ROUND-ID",
-  "prdVersion": "1.7",
+  "prdVersion": "1.9",
   "timezone": "Asia/Seoul",
   "status": "running",
   "startedAt": "2026-10-02T05:40:00Z",

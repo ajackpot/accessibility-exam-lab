@@ -10,8 +10,10 @@ import {buildBank} from '../scripts/build.mjs';
 import {validateReleaseLedger,loadRoundContext} from '../scripts/validate-round.mjs';
 import {REVIEWED_OPTION_EXPLANATIONS} from '../src/reviewed-option-explanations.js';
 const root=path.resolve(import.meta.dirname,'..');
-const manifest=JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'),'utf8'));
-const raw=await fs.readFile(path.join(root,'data',manifest.file),'utf8'),bank=JSON.parse(raw);
+// Historical0.2.8 behavior and carry-forward exceptions are fixed to immutable regular.1.
+// Current editorial authoring/rendering is tested separately in editorial-bank.test.mjs.
+const raw=await fs.readFile(path.join(root,'data/releases/2026.10.02-regular.1/bank.json'),'utf8'),bank=JSON.parse(raw);
+const manifest={schemaVersion:1,bankVersion:bank.bankVersion,releasedAt:bank.releasedAt,file:`releases/${bank.bankVersion}/bank.json`,sha256:await d.sha256(raw),changeSummary:bank.changeSummary,finalRelease:false};
 const common='동등 비교 연산의 결과는 피연산자 자체가 아니라 Boolean 값이다.';
 const paragraphs=(context,role='distractor',explanation=common)=>d.optionExplanationParagraphs({explanation,contextExplanation:context,role});
 const clean=source=>{const b=d.copy(source);for(const q of b.questions.filter(q=>q.type==='written'))for(const l of q.links)delete l.contextExplanation;return b;};
@@ -41,7 +43,7 @@ test('distinct meanings, case, compatibility characters, punctuation and negatio
  assert.deepEqual(d.optionExplanationParagraphs({explanation:' Common  reason\n',contextExplanation:'Common reason'}),[{label:null,text:'Common  reason'}]);
  assert.deepEqual(d.optionExplanationParagraphs({explanation:' ',contextExplanation:'\n'}),[]);
 });
-test('all 300 active links are audited: 190 repeated reasons become one, 110 distinct pairs remain',()=>{
+test('all 300 immutable regular.1 links are audited: 190 repeated reasons become one, 110 distinct pairs remain',()=>{
  let singles=0,doubles=0,regularSingles=0,shared=0;
  for(const q of bank.questions.filter(q=>q.type==='written'))for(const l of q.links){const o={...bank.options.find(o=>o.optionId===l.optionId),...l},p=d.optionExplanationParagraphs(o);assert(p.every(p=>p.text.trim()));if(p.length===1){singles++;if(!q.testOnly)regularSingles++;}else{assert.equal(p.length,2);doubles++;}if(q.optionMode==='shared'){shared++;assert.equal(p.length,2);}}
  assert.deepEqual({singles,doubles,regularSingles,shared},{singles:190,doubles:110,regularSingles:150,shared:10});

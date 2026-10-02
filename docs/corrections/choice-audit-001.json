@@ -1,0 +1,4934 @@
+{
+  "baselineBankVersion": "2026.10.02-regular.1",
+  "baselineSha256": "3abb68de23d9b58755bd9c039df5c803775705c86df0256d59570fe3c3eea5e0",
+  "scope": {
+    "questions": 72,
+    "regularQuestions": 58,
+    "historicalTestOnlyQuestions": 14,
+    "writtenOptionRecords": 295,
+    "writtenChoiceAppearances": 300,
+    "practicalChoiceAppearances": 132,
+    "totalChoiceAppearances": 432,
+    "practicalSingleMultiParts": 29
+  },
+  "counts": {
+    "regularRevisionProposals": 22,
+    "regularRetain": 36,
+    "seedRetain": 9,
+    "seedHistoricalLimitations": 5
+  },
+  "method": "문항과 보기 코드·모든 선택지를 수동으로 읽고, 표현 단서와 기술 조건/실제 오개념을 구분했다. 단어 출현과 길이 정보는 탐지 신호이지 자동 합격/불합격 기준이 아니다.",
+  "status": "author_audit_complete",
+  "independentRevisionDecisions": "docs/corrections/editorial-001.json",
+  "limitations": "기존 문안 전수 감사 기록이며 개정 채택·실제 공개 여부는 별도 정정 대장을 따른다. 시드·과거 불변 은행·저장 답안은 수정하지 않는다. 실제 응시자 반응에 따른 난도·변별도 효과와 Windows/NVDA는 측정하지 않았다.",
+  "questions": [
+    {
+      "questionId": "seed-w01",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "원칙 이름의 동종 명사 목록이다. 다섯 번째 보안성은 관련 품질 개념이며 이를 배제하려면 KWCAG 원칙 지식이 필요하다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w01-o1",
+          "optionId": "seed-w01-o1",
+          "role": "distractor",
+          "contentReviewed": "인식의 용이성",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w01-o2",
+          "optionId": "seed-w01-o2",
+          "role": "correct",
+          "contentReviewed": "운용의 용이성",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w01-o3",
+          "optionId": "seed-w01-o3",
+          "role": "distractor",
+          "contentReviewed": "이해의 용이성",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w01-o4",
+          "optionId": "seed-w01-o4",
+          "role": "distractor",
+          "contentReviewed": "견고성",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w01-o5",
+          "optionId": "seed-w01-o5",
+          "role": "distractor",
+          "contentReviewed": "보안성",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w02",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "크기·색상 대체·동일 테두리·범례 복제는 실제로 시도할 수 있는 시각적 변경이다. 정답의 의미 있는 상태 텍스트와 다른 변경의 기능 차이가 학습 목표이며 단순 길이 균일화를 위해 기능 정보를 덜지 않는다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w02-o1",
+          "optionId": "seed-w02-o1",
+          "role": "correct",
+          "contentReviewed": "원 옆에 각각 “완료”, “미완료”라는 텍스트 상태를 함께 표시한다.",
+          "length": 38,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w02-o2",
+          "optionId": "seed-w02-o2",
+          "role": "distractor",
+          "contentReviewed": "두 원을 모두 두 배 크게 만든다.",
+          "length": 19,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w02-o3",
+          "optionId": "seed-w02-o3",
+          "role": "distractor",
+          "contentReviewed": "초록과 빨강을 파랑과 노랑으로 바꾼다.",
+          "length": 21,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w02-o4",
+          "optionId": "seed-w02-o4",
+          "role": "distractor",
+          "contentReviewed": "원 둘레에 두 상태 모두 같은 검은 테두리를 추가한다.",
+          "length": 30,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w02-o5",
+          "optionId": "seed-w02-o5",
+          "role": "distractor",
+          "contentReviewed": "상태 범례를 페이지 맨 위에 한 번 더 복사한다.",
+          "length": 27,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w03",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "공유 정의 선택지 DNS/HTTP/HTML/CSS/JavaScript의 짧은 명칭을 사용한다. 오답별 제한어·정오 문안 단서가 없다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/shared-dns",
+          "optionId": "shared-dns",
+          "role": "correct",
+          "contentReviewed": "DNS",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-http",
+          "optionId": "shared-http",
+          "role": "distractor",
+          "contentReviewed": "HTTP",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-html",
+          "optionId": "shared-html",
+          "role": "distractor",
+          "contentReviewed": "HTML",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-css",
+          "optionId": "shared-css",
+          "role": "distractor",
+          "contentReviewed": "CSS",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-js",
+          "optionId": "shared-js",
+          "role": "distractor",
+          "contentReviewed": "JavaScript",
+          "length": 10,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w04",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "seed-w03과 공유하는 다섯 기술 명칭은 이 문항에서 역할이 바뀐다. 공유 레코드 변경은 두 문항에 영향을 주므로 그대로 둔다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/shared-dns",
+          "optionId": "shared-dns",
+          "role": "distractor",
+          "contentReviewed": "DNS",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-http",
+          "optionId": "shared-http",
+          "role": "correct",
+          "contentReviewed": "HTTP",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-html",
+          "optionId": "shared-html",
+          "role": "distractor",
+          "contentReviewed": "HTML",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-css",
+          "optionId": "shared-css",
+          "role": "distractor",
+          "contentReviewed": "CSS",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/shared-js",
+          "optionId": "shared-js",
+          "role": "distractor",
+          "contentReviewed": "JavaScript",
+          "length": 10,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w05",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTML 속성 이름의 동종 목록이다. for/id와 name/type/value/placeholder의 혼동이 실제 기술 차이다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w05-o1",
+          "optionId": "seed-w05-o1",
+          "role": "correct",
+          "contentReviewed": "id",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w05-o2",
+          "optionId": "seed-w05-o2",
+          "role": "distractor",
+          "contentReviewed": "name",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w05-o3",
+          "optionId": "seed-w05-o3",
+          "role": "distractor",
+          "contentReviewed": "type",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w05-o4",
+          "optionId": "seed-w05-o4",
+          "role": "distractor",
+          "contentReviewed": "value",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w05-o5",
+          "optionId": "seed-w05-o5",
+          "role": "distractor",
+          "contentReviewed": "placeholder",
+          "length": 11,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w06",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "ARIA 상태·속성 이름의 동종 목록이다. 버튼 이름 고정 조건은 토글 해석의 전제이므로 보존한다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w06-o1",
+          "optionId": "seed-w06-o1",
+          "role": "correct",
+          "contentReviewed": "aria-pressed",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w06-o2",
+          "optionId": "seed-w06-o2",
+          "role": "distractor",
+          "contentReviewed": "aria-expanded",
+          "length": 13,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w06-o3",
+          "optionId": "seed-w06-o3",
+          "role": "distractor",
+          "contentReviewed": "aria-current",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w06-o4",
+          "optionId": "seed-w06-o4",
+          "role": "distractor",
+          "contentReviewed": "aria-required",
+          "length": 13,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w06-o5",
+          "optionId": "seed-w06-o5",
+          "role": "distractor",
+          "contentReviewed": "aria-disabled",
+          "length": 13,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w07",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "색 값 목록은 같은 형식이며 보기의 선택자 우선순위 계산을 요구한다. !important·출처·style 제외 조건은 CSS 정답을 고정하는 필수 조건이다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w07-o1",
+          "optionId": "seed-w07-o1",
+          "role": "distractor",
+          "contentReviewed": "black",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w07-o2",
+          "optionId": "seed-w07-o2",
+          "role": "distractor",
+          "contentReviewed": "green",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w07-o3",
+          "optionId": "seed-w07-o3",
+          "role": "correct",
+          "contentReviewed": "navy",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w07-o4",
+          "optionId": "seed-w07-o4",
+          "role": "distractor",
+          "contentReviewed": "red",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w07-o5",
+          "optionId": "seed-w07-o5",
+          "role": "distractor",
+          "contentReviewed": "orange",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w08",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "다섯 숫자가 같은 형식으로 제시된다. Number 전제는 문자열 덧셈을 배제하는 실제 실행 조건이다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w08-o1",
+          "optionId": "seed-w08-o1",
+          "role": "distractor",
+          "contentReviewed": "5",
+          "length": 1,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w08-o2",
+          "optionId": "seed-w08-o2",
+          "role": "distractor",
+          "contentReviewed": "7",
+          "length": 1,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w08-o3",
+          "optionId": "seed-w08-o3",
+          "role": "correct",
+          "contentReviewed": "8",
+          "length": 1,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w08-o4",
+          "optionId": "seed-w08-o4",
+          "role": "distractor",
+          "contentReviewed": "10",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w08-o5",
+          "optionId": "seed-w08-o5",
+          "role": "distractor",
+          "contentReviewed": "12",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w09",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "보조기술/설정 명칭의 기능 차이를 묻는다. 일부 오답의 일반 수식어와 범주 차이는 경미한 개선 여지가 있지만 뚜렷한 정답 추측 패턴은 아니다. immutable 시드이므로 그대로 둔다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w09-o1",
+          "optionId": "seed-w09-o1",
+          "role": "correct",
+          "contentReviewed": "화면 낭독기",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w09-o2",
+          "optionId": "seed-w09-o2",
+          "role": "distractor",
+          "contentReviewed": "화면 확대기",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w09-o3",
+          "optionId": "seed-w09-o3",
+          "role": "distractor",
+          "contentReviewed": "음성 인식 입력 도구",
+          "length": 11,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w09-o4",
+          "optionId": "seed-w09-o4",
+          "role": "distractor",
+          "contentReviewed": "일반 마우스 포인터 속도 설정",
+          "length": 16,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w09-o5",
+          "optionId": "seed-w09-o5",
+          "role": "distractor",
+          "contentReviewed": "일반 자막 표시 기능",
+          "length": 11,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-w10",
+      "classification": "historical_limitation",
+      "issueCodes": [
+        "wrong_only_absolute",
+        "correct_extra_rationale"
+      ],
+      "reason": "모든·영향 줄 수 없음·법적 인증서 효력 등 극단적 오답과 정답의 긴 균형 잡힌 설명이 대비된다. 역사적 문안 한계로 명시하고 현재 시드 원문은 보존한다.",
+      "testOnly": true,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/seed-w10-o1",
+          "optionId": "seed-w10-o1",
+          "role": "correct",
+          "contentReviewed": "자동으로 확인 가능한 항목의 결과를 검토하고, 사람의 판단이 필요한 항목과 실제 조작도 추가로 점검한다.",
+          "length": 58,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w10-o2",
+          "optionId": "seed-w10-o2",
+          "role": "distractor",
+          "contentReviewed": "모든 장애 유형의 사용자가 모든 기능을 이용할 수 있음이 증명되었다.",
+          "length": 38,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w10-o3",
+          "optionId": "seed-w10-o3",
+          "role": "distractor",
+          "contentReviewed": "화면 낭독기와 키보드 점검은 결과에 영향을 줄 수 없으므로 생략한다.",
+          "length": 38,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w10-o4",
+          "optionId": "seed-w10-o4",
+          "role": "distractor",
+          "contentReviewed": "모든 이미지의 대체 텍스트가 문맥에 적절하다는 뜻이다.",
+          "length": 30,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "links/seed-w10-o5",
+          "optionId": "seed-w10-o5",
+          "role": "distractor",
+          "contentReviewed": "해당 사이트가 법적 접근성 의무를 충족한다는 공식 인증서와 같은 효력이 있다.",
+          "length": 43,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-p01",
+      "classification": "historical_limitation",
+      "issueCodes": [
+        "implausible_distractors"
+      ],
+      "reason": "reason의 이메일 서버 확인·암호화·키보드 차단은 레이블 연결 이유와 동떨어진 오답이다. A/B 입력 및 for/id 코드의 정확성 조건은 보존한다.",
+      "testOnly": true,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/reason/choices/1",
+          "choiceId": "1",
+          "partId": "reason",
+          "role": "correct",
+          "contentReviewed": "레이블과 입력의 관계를 보조기술이 알 수 있도록 하기 위해서",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/2",
+          "choiceId": "2",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "이메일 서버의 존재를 자동 확인하기 위해서",
+          "length": 23,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/3",
+          "choiceId": "3",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "입력값을 자동으로 암호화하기 위해서",
+          "length": 19,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/4",
+          "choiceId": "4",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "키보드 입력을 차단하기 위해서",
+          "length": 16,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-p02",
+      "classification": "historical_limitation",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "correct_only_complete"
+      ],
+      "reason": "state의 true/false/mixed/undefined는 필요한 기술 값이다. update는 정답만 실제 상태와 ARIA 상태를 함께 고치고 오답에는 만·유지가 집중된다.",
+      "testOnly": true,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/state/choices/1",
+          "choiceId": "1",
+          "partId": "state",
+          "role": "correct",
+          "contentReviewed": "true",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/state/choices/2",
+          "choiceId": "2",
+          "partId": "state",
+          "role": "distractor",
+          "contentReviewed": "false",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/state/choices/3",
+          "choiceId": "3",
+          "partId": "state",
+          "role": "distractor",
+          "contentReviewed": "mixed",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/state/choices/4",
+          "choiceId": "4",
+          "partId": "state",
+          "role": "distractor",
+          "contentReviewed": "undefined",
+          "length": 9,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/update/choices/1",
+          "choiceId": "1",
+          "partId": "update",
+          "role": "correct",
+          "contentReviewed": "즐겨찾기를 실제로 해제하고 aria-pressed를 \"false\"로 갱신한다.",
+          "length": 43,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/update/choices/2",
+          "choiceId": "2",
+          "partId": "update",
+          "role": "distractor",
+          "contentReviewed": "화면 색만 바꾸고 aria-pressed는 \"true\"로 유지한다.",
+          "length": 37,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/update/choices/3",
+          "choiceId": "3",
+          "partId": "update",
+          "role": "distractor",
+          "contentReviewed": "aria-pressed를 삭제하고 즐겨찾기 상태는 그대로 둔다.",
+          "length": 35,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/update/choices/4",
+          "choiceId": "4",
+          "partId": "update",
+          "role": "distractor",
+          "contentReviewed": "버튼에 aria-disabled=\"true\"만 추가한다.",
+          "length": 31,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-p03",
+      "classification": "historical_limitation",
+      "issueCodes": [
+        "wrong_only_absolute",
+        "implausible_distractors"
+      ],
+      "reason": "violation/reason의 SVG 금지·주소 삭제·파일 크기 두 배 등은 비현실적 단서다. fix의 alt 내용·aria-hidden 차이는 실제 구현 오개념으로 구분한다.",
+      "testOnly": true,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/violation/choices/1",
+          "choiceId": "1",
+          "partId": "violation",
+          "role": "correct",
+          "contentReviewed": "링크의 기능을 전달할 대체 텍스트가 비어 있다.",
+          "length": 26,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/violation/choices/2",
+          "choiceId": "2",
+          "partId": "violation",
+          "role": "distractor",
+          "contentReviewed": "a 요소에는 img를 넣을 수 없다.",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/violation/choices/3",
+          "choiceId": "3",
+          "partId": "violation",
+          "role": "distractor",
+          "contentReviewed": "모든 SVG 파일은 접근성 기준에서 금지된다.",
+          "length": 25,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/violation/choices/4",
+          "choiceId": "4",
+          "partId": "violation",
+          "role": "distractor",
+          "contentReviewed": "링크는 언제나 새 창으로 열려야 한다.",
+          "length": 21,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/1",
+          "choiceId": "1",
+          "partId": "reason",
+          "role": "correct",
+          "contentReviewed": "화면 낭독기로 링크를 탐색할 때 교육 일정으로 이동한다는 목적을 알기 어렵다.",
+          "length": 43,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/2",
+          "choiceId": "2",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "키보드의 Tab 키가 모든 링크에서 반드시 멈춘다.",
+          "length": 28,
+          "signalTerms": [
+            "모든",
+            "반드시"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/3",
+          "choiceId": "3",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "모든 브라우저에서 링크의 주소가 자동 삭제된다.",
+          "length": 26,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/4",
+          "choiceId": "4",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "이미지의 파일 크기가 반드시 두 배가 된다.",
+          "length": 24,
+          "signalTerms": [
+            "반드시"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/1",
+          "choiceId": "1",
+          "partId": "fix",
+          "role": "correct",
+          "contentReviewed": "<a href=\"/education/schedule\"><img src=\"calendar-mark.svg\" alt=\"교육 일정\"></a>",
+          "length": 75,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/2",
+          "choiceId": "2",
+          "partId": "fix",
+          "role": "distractor",
+          "contentReviewed": "<a href=\"/education/schedule\"><img src=\"calendar-mark.svg\" alt=\"이미지\"></a>",
+          "length": 73,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/3",
+          "choiceId": "3",
+          "partId": "fix",
+          "role": "distractor",
+          "contentReviewed": "<a href=\"/education/schedule\"><img src=\"calendar-mark.svg\" alt=\"\" width=\"80\"></a>",
+          "length": 81,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/4",
+          "choiceId": "4",
+          "partId": "fix",
+          "role": "distractor",
+          "contentReviewed": "<a href=\"/education/schedule\" aria-hidden=\"true\"><img src=\"calendar-mark.svg\" alt=\"\"></a>",
+          "length": 89,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "seed-p04",
+      "classification": "historical_limitation",
+      "issueCodes": [
+        "wrong_only_absolute",
+        "implausible_distractors",
+        "correct_only_positive"
+      ],
+      "reason": "violation/reason의 텍스트 금지·도메인 변경 등과 verify의 생략 문구는 강한 단서다. fix의 네이티브 button/role/tabindex/title 비교는 실제 기술 차이다.",
+      "testOnly": true,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/violation/choices/1",
+          "choiceId": "1",
+          "partId": "violation",
+          "role": "correct",
+          "contentReviewed": "제시된 구현에는 키보드로 요약 열기를 실행하는 경로가 없다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/violation/choices/2",
+          "choiceId": "2",
+          "partId": "violation",
+          "role": "distractor",
+          "contentReviewed": "span에는 텍스트를 넣을 수 없다.",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/violation/choices/3",
+          "choiceId": "3",
+          "partId": "violation",
+          "role": "distractor",
+          "contentReviewed": "onclick 속성은 모든 요소에서 금지된다.",
+          "length": 25,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/violation/choices/4",
+          "choiceId": "4",
+          "partId": "violation",
+          "role": "distractor",
+          "contentReviewed": "마우스로도 함수가 절대로 실행되지 않는다.",
+          "length": 23,
+          "signalTerms": [
+            "절대"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/1",
+          "choiceId": "1",
+          "partId": "reason",
+          "role": "correct",
+          "contentReviewed": "키보드만 사용하는 사용자는 요약을 열지 못할 수 있다.",
+          "length": 30,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/2",
+          "choiceId": "2",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "키보드 사용자는 이미지의 색을 반드시 구별할 수 없다.",
+          "length": 30,
+          "signalTerms": [
+            "반드시"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/3",
+          "choiceId": "3",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "모든 사용자의 화면 확대 기능이 꺼진다.",
+          "length": 22,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/reason/choices/4",
+          "choiceId": "4",
+          "partId": "reason",
+          "role": "distractor",
+          "contentReviewed": "웹 주소의 도메인 이름이 바뀐다.",
+          "length": 18,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/1",
+          "choiceId": "1",
+          "partId": "fix",
+          "role": "correct",
+          "contentReviewed": "<button type=\"button\" onclick=\"openSummary()\">요약 열기</button>",
+          "length": 60,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/2",
+          "choiceId": "2",
+          "partId": "fix",
+          "role": "distractor",
+          "contentReviewed": "<span role=\"button\" onclick=\"openSummary()\">요약 열기</span>",
+          "length": 56,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/3",
+          "choiceId": "3",
+          "partId": "fix",
+          "role": "distractor",
+          "contentReviewed": "<span tabindex=\"0\" onclick=\"openSummary()\">요약 열기</span>",
+          "length": 55,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/fix/choices/4",
+          "choiceId": "4",
+          "partId": "fix",
+          "role": "distractor",
+          "contentReviewed": "<span title=\"요약 열기\" onclick=\"openSummary()\">요약 열기</span>",
+          "length": 56,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/verify/choices/1",
+          "choiceId": "1",
+          "partId": "verify",
+          "role": "correct",
+          "contentReviewed": "Tab 키로 조작 요소에 도달하고 초점 위치를 확인한다.",
+          "length": 31,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/verify/choices/2",
+          "choiceId": "2",
+          "partId": "verify",
+          "role": "correct",
+          "contentReviewed": "Enter와 Space로 각각 요약 열기 기능을 실행할 수 있는지 확인한다.",
+          "length": 42,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/verify/choices/3",
+          "choiceId": "3",
+          "partId": "verify",
+          "role": "distractor",
+          "contentReviewed": "글자색이 이전과 같으면 키보드 조작 점검을 생략한다.",
+          "length": 29,
+          "signalTerms": [],
+          "disposition": "immutable_seed_preserved"
+        },
+        {
+          "path": "parts/verify/choices/4",
+          "choiceId": "4",
+          "partId": "verify",
+          "role": "distractor",
+          "contentReviewed": "서버 운영체제를 교체했는지만 확인한다.",
+          "length": 21,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "immutable_seed_preserved"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w01",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "모든 선택지가 같은 단계·숫자 형식이다. 구판 수치 및 단계별 수치 뒤바꿈은 판/체계 지식을 묻는다. 쉬운 암기형이라는 이유로 난도를 인위적으로 높이지 않는다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w01-o1",
+          "optionId": "r001-standards-s1-w01-o1",
+          "role": "correct",
+          "contentReviewed": "원칙 4개 → 지침 14개 → 검사항목 33개",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w01-o2",
+          "optionId": "r001-standards-s1-w01-o2",
+          "role": "distractor",
+          "contentReviewed": "원칙 4개 → 지침 13개 → 검사항목 24개",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w01-o3",
+          "optionId": "r001-standards-s1-w01-o3",
+          "role": "distractor",
+          "contentReviewed": "원칙 14개 → 지침 4개 → 검사항목 33개",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w01-o4",
+          "optionId": "r001-standards-s1-w01-o4",
+          "role": "distractor",
+          "contentReviewed": "원칙 4개 → 지침 33개 → 검사항목 14개",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w01-o5",
+          "optionId": "r001-standards-s1-w01-o5",
+          "role": "distractor",
+          "contentReviewed": "원칙 33개 → 지침 14개 → 검사항목 4개",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w02",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "correct_only_complete"
+      ],
+      "reason": "오답에 제외·만 조건이 몰리고 정답만 포괄적이다. 적용범위의 실제 차이는 유지하되 검토 계획을 비교하는 평행 형식으로 바꾼다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w02-o1",
+          "optionId": "r001-standards-s1-w02-o1",
+          "role": "correct",
+          "contentReviewed": "모바일 웹 콘텐츠와 서비스에 포함된 외부 예약 위젯도 적용범위에 포함된다.",
+          "length": 41,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w02-o2",
+          "optionId": "r001-standards-s1-w02-o2",
+          "role": "distractor",
+          "contentReviewed": "모바일 기기에서 실행되므로 웹 콘텐츠라도 적용범위에서 제외된다.",
+          "length": 35,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w02-o3",
+          "optionId": "r001-standards-s1-w02-o3",
+          "role": "distractor",
+          "contentReviewed": "외부 업체가 만든 위젯은 서비스에 포함되어도 적용범위에서 제외된다.",
+          "length": 37,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w02-o4",
+          "optionId": "r001-standards-s1-w02-o4",
+          "role": "distractor",
+          "contentReviewed": "최초 구축 단계에만 적용되므로 운영 중인 사이트는 제외된다.",
+          "length": 33,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w02-o5",
+          "optionId": "r001-standards-s1-w02-o5",
+          "role": "distractor",
+          "contentReviewed": "PC용 화면을 별도로 만든 경우에만 모바일 예약 위젯에 적용된다.",
+          "length": 36,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w03",
+      "classification": "revise",
+      "issueCodes": [
+        "implausible_distractors",
+        "unbalanced_qualification"
+      ],
+      "reason": "오답의 원칙 폐기·동일 운영체제 강제는 기술 중립성의 실제 오개념보다 극단적이다. 기술의 이름·버전·기본 외형과 결과의 접근성 요구를 혼동하는 보기로 바꾼다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w03-o1",
+          "optionId": "r001-standards-s1-w03-o1",
+          "role": "correct",
+          "contentReviewed": "특정 구현 기술만을 전제하지 않지만 새 기술의 결과도 접근성 요구조건에 맞아야 한다.",
+          "length": 47,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w03-o2",
+          "optionId": "r001-standards-s1-w03-o2",
+          "role": "distractor",
+          "contentReviewed": "표준 제정 이후에 나온 기술을 쓰면 접근성 검토가 면제된다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w03-o3",
+          "optionId": "r001-standards-s1-w03-o3",
+          "role": "distractor",
+          "contentReviewed": "표준에 이름이 없는 프레임워크는 접근 가능한 결과를 만들더라도 사용할 수 없다.",
+          "length": 44,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w03-o4",
+          "optionId": "r001-standards-s1-w03-o4",
+          "role": "distractor",
+          "contentReviewed": "모든 웹 콘텐츠는 동일한 브라우저와 운영체제에서만 제작해야 한다.",
+          "length": 36,
+          "signalTerms": [
+            "만",
+            "모든"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w03-o5",
+          "optionId": "r001-standards-s1-w03-o5",
+          "role": "distractor",
+          "contentReviewed": "기술이 바뀔 때마다 네 가지 접근성 원칙을 모두 폐기해야 한다.",
+          "length": 35,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w04",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "correct_only_positive"
+      ],
+      "reason": "오답 네 개가 만·제공하지 않는다·안전사항 제외라는 노골적 결함을 선언한다. 정보가 부족한 학습 보조자료와 청각 의존 기능을 자연스러운 개선안으로 제시한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w04-o1",
+          "optionId": "r001-standards-s1-w04-o1",
+          "role": "correct",
+          "contentReviewed": "준비물과 안전 주의사항을 빠짐없이 전달하는 음성과 동등한 대본을 제공한다.",
+          "length": 41,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w04-o2",
+          "optionId": "r001-standards-s1-w04-o2",
+          "role": "distractor",
+          "contentReviewed": "동영상 제목과 총 재생시간만 별도 텍스트로 제공한다.",
+          "length": 29,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w04-o3",
+          "optionId": "r001-standards-s1-w04-o3",
+          "role": "distractor",
+          "contentReviewed": "음성의 크기를 더 높이고 텍스트 대체수단은 제공하지 않는다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w04-o4",
+          "optionId": "r001-standards-s1-w04-o4",
+          "role": "distractor",
+          "contentReviewed": "안전 주의사항은 빼고 준비물의 이름만 요약해 제공한다.",
+          "length": 30,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w04-o5",
+          "optionId": "r001-standards-s1-w04-o5",
+          "role": "distractor",
+          "contentReviewed": "음성 부분의 재생속도만 늦추고 별도 대체수단은 제공하지 않는다.",
+          "length": 35,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w05",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "다섯 문장 모두 누르세요라는 동일 지시 형식이다. 실제 이름과 위치·모양·크기·색에 의존한 지시를 구분하는 것이 목표이므로 기능 차이를 유지한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w05-o1",
+          "optionId": "r001-standards-s1-w05-o1",
+          "role": "correct",
+          "contentReviewed": "“신청서 제출” 버튼을 누르세요.",
+          "length": 18,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w05-o2",
+          "optionId": "r001-standards-s1-w05-o2",
+          "role": "distractor",
+          "contentReviewed": "가장 오른쪽에 있는 버튼을 누르세요.",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w05-o3",
+          "optionId": "r001-standards-s1-w05-o3",
+          "role": "distractor",
+          "contentReviewed": "테두리가 가장 둥근 버튼을 누르세요.",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w05-o4",
+          "optionId": "r001-standards-s1-w05-o4",
+          "role": "distractor",
+          "contentReviewed": "다른 버튼보다 넓은 버튼을 누르세요.",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w05-o5",
+          "optionId": "r001-standards-s1-w05-o5",
+          "role": "distractor",
+          "contentReviewed": "초록색으로 칠해진 버튼을 누르세요.",
+          "length": 19,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w06",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "대비 수치 목록이 평행하다. 최소라는 조건 때문에 높은 4.5:1/7:1도 오답이 되는 것이 명확하며 이 필수 조건을 삭제하지 않는다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w06-o1",
+          "optionId": "r001-standards-s1-w06-o1",
+          "role": "correct",
+          "contentReviewed": "3:1",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w06-o2",
+          "optionId": "r001-standards-s1-w06-o2",
+          "role": "distractor",
+          "contentReviewed": "1:1",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w06-o3",
+          "optionId": "r001-standards-s1-w06-o3",
+          "role": "distractor",
+          "contentReviewed": "2:1",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w06-o4",
+          "optionId": "r001-standards-s1-w06-o4",
+          "role": "distractor",
+          "contentReviewed": "4.5:1",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s1-w06-o5",
+          "optionId": "r001-standards-s1-w06-o5",
+          "role": "distractor",
+          "contentReviewed": "7:1",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w07",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "implausible_distractors"
+      ],
+      "reason": "오답들이 멈출 수 없음·제공하지 않음을 미리 선언한다. 속도·강조·순환·재시작을 실제 제안 가능한 움직임 관련 기능으로 맞춘다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w07-o1",
+          "optionId": "r001-standards-s1-w07-o1",
+          "role": "correct",
+          "contentReviewed": "일시정지와 이전·다음 제목을 선택하는 조작 수단을 제공한다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w07-o2",
+          "optionId": "r001-standards-s1-w07-o2",
+          "role": "distractor",
+          "contentReviewed": "흐르는 속도를 조금 낮추되 사용자가 멈출 수 없게 유지한다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w07-o3",
+          "optionId": "r001-standards-s1-w07-o3",
+          "role": "distractor",
+          "contentReviewed": "제목의 글자색만 진하게 바꾸고 움직임은 제어할 수 없게 유지한다.",
+          "length": 36,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w07-o4",
+          "optionId": "r001-standards-s1-w07-o4",
+          "role": "distractor",
+          "contentReviewed": "영역을 가리키면 소리가 나게 하고 일시정지 수단은 제공하지 않는다.",
+          "length": 37,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w07-o5",
+          "optionId": "r001-standards-s1-w07-o5",
+          "role": "distractor",
+          "contentReviewed": "새로고침할 때마다 다른 제목부터 흐르게 한다.",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w08",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "implausible_distractors"
+      ],
+      "reason": "서버 속도·포인터 모양·신기술 면제처럼 쉽게 배제되는 오답을 기능 정보의 전달 경로 혼동으로 바꾼다. 모든 보기를 같은 정보 묶음과 전달 행동으로 맞춘다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w08-o1",
+          "optionId": "r001-standards-s1-w08-o1",
+          "role": "correct",
+          "contentReviewed": "요소의 명칭·역할·상태·값을 플랫폼의 접근성 인터페이스로 전달한다.",
+          "length": 37,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w08-o2",
+          "optionId": "r001-standards-s1-w08-o2",
+          "role": "distractor",
+          "contentReviewed": "화면에 보이는 외형만 기존 요소와 같게 만들고 기능 정보는 전달하지 않는다.",
+          "length": 42,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w08-o3",
+          "optionId": "r001-standards-s1-w08-o3",
+          "role": "distractor",
+          "contentReviewed": "서버 응답속도만 높이면 보조기술용 기능 정보를 제공하지 않아도 된다.",
+          "length": 38,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w08-o4",
+          "optionId": "r001-standards-s1-w08-o4",
+          "role": "distractor",
+          "contentReviewed": "마우스 포인터 모양만 바꾸어 요소의 명칭과 상태를 대신한다.",
+          "length": 33,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w08-o5",
+          "optionId": "r001-standards-s1-w08-o5",
+          "role": "distractor",
+          "contentReviewed": "새로운 기술로 만든 요소는 보조기술과의 상호작용 대상에서 제외한다.",
+          "length": 37,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w09",
+      "classification": "revise",
+      "issueCodes": [
+        "correct_only_positive",
+        "implausible_distractors",
+        "correct_extra_rationale"
+      ],
+      "reason": "오답이 기억량 증가·시간 단축처럼 명백한 악화를 제시하고 정답 안에 원리까지 설명한다. 쉬워 보이는 인지 과제도 인지 기능 테스트라는 혼동을 평가한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w09-o1",
+          "optionId": "r001-standards-s1-w09-o1",
+          "role": "correct",
+          "contentReviewed": "등록된 보안키로 암기·계산 같은 인지 기능 테스트 없이 인증할 수 있는 경로를 제공한다.",
+          "length": 49,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w09-o2",
+          "optionId": "r001-standards-s1-w09-o2",
+          "role": "distractor",
+          "contentReviewed": "기억해야 하는 문자열을 더 길게 바꾸고 다른 경로는 제공하지 않는다.",
+          "length": 38,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w09-o3",
+          "optionId": "r001-standards-s1-w09-o3",
+          "role": "distractor",
+          "contentReviewed": "문자열 대신 암산 문제를 풀어야만 로그인할 수 있게 한다.",
+          "length": 32,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w09-o4",
+          "optionId": "r001-standards-s1-w09-o4",
+          "role": "distractor",
+          "contentReviewed": "문자열 대신 화면에 나타난 패턴을 기억해야만 인증되게 한다.",
+          "length": 33,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w09-o5",
+          "optionId": "r001-standards-s1-w09-o5",
+          "role": "distractor",
+          "contentReviewed": "문자열을 기억해서 입력할 수 있는 시간을 줄인다.",
+          "length": 27,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s1-w10",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "implausible_distractors"
+      ],
+      "reason": "입력 숨기기·붙여넣기 금지·시간 단축은 장애를 노골적으로 강화한다. 안내·재확인 같은 그럴듯한 보조 기능이 반복 입력 자체를 없애는지 구별하게 한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s1",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s1-w10-o1",
+          "optionId": "r001-standards-s1-w10-o1",
+          "role": "correct",
+          "contentReviewed": "이전 단계의 주소를 선택하여 해당 칸에 채울 수 있게 한다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w10-o2",
+          "optionId": "r001-standards-s1-w10-o2",
+          "role": "distractor",
+          "contentReviewed": "앞서 입력한 주소를 보여 주되 한 글자씩 다시 입력해야만 진행되게 한다.",
+          "length": 40,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w10-o3",
+          "optionId": "r001-standards-s1-w10-o3",
+          "role": "distractor",
+          "contentReviewed": "주소를 외운 뒤 다시 입력하도록 이전 단계의 내용을 숨긴다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w10-o4",
+          "optionId": "r001-standards-s1-w10-o4",
+          "role": "distractor",
+          "contentReviewed": "붙여넣기와 자동 입력을 모두 막고 직접 타이핑만 허용한다.",
+          "length": 32,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s1-w10-o5",
+          "optionId": "r001-standards-s1-w10-o5",
+          "role": "distractor",
+          "contentReviewed": "주소 입력 제한시간을 줄여 다음 단계로 빨리 진행하게 한다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w01",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "unbalanced_qualification"
+      ],
+      "reason": "네 오답에 만이 반복된다. 하드웨어·소프트웨어 범위와 처방·장애유형 한정이라는 원래 오개념을 유지하면서 직접 분류한 문장으로 바꾼다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w01-o1",
+          "optionId": "r001-standards-s5-w01-o1",
+          "role": "correct",
+          "contentReviewed": "특수 키보드 같은 하드웨어와 화면확대프로그램 같은 소프트웨어를 모두 포함한다.",
+          "length": 43,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w01-o2",
+          "optionId": "r001-standards-s5-w01-o2",
+          "role": "distractor",
+          "contentReviewed": "손으로 만질 수 있는 하드웨어만 포함하고 프로그램은 제외한다.",
+          "length": 34,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w01-o3",
+          "optionId": "r001-standards-s5-w01-o3",
+          "role": "distractor",
+          "contentReviewed": "화면 정보를 음성으로 바꾸는 프로그램만을 뜻한다.",
+          "length": 27,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w01-o4",
+          "optionId": "r001-standards-s5-w01-o4",
+          "role": "distractor",
+          "contentReviewed": "의료기관이 처방한 기기만 보조기술이라고 부를 수 있다.",
+          "length": 30,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w01-o5",
+          "optionId": "r001-standards-s5-w01-o5",
+          "role": "distractor",
+          "contentReviewed": "시각장애 사용자를 위한 도구만 포함한다.",
+          "length": 22,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w02",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "확대·음성입력·점자출력·입력장치·음성출력의 기술 명칭을 비교한다. 사용자 목표와 각 기술의 차이를 알아야 풀 수 있다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w02-o1",
+          "optionId": "r001-standards-s5-w02-o1",
+          "role": "correct",
+          "contentReviewed": "화면확대프로그램",
+          "length": 8,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w02-o2",
+          "optionId": "r001-standards-s5-w02-o2",
+          "role": "distractor",
+          "contentReviewed": "음성인식 프로그램",
+          "length": 9,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w02-o3",
+          "optionId": "r001-standards-s5-w02-o3",
+          "role": "distractor",
+          "contentReviewed": "갱신형 점자 디스플레이",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w02-o4",
+          "optionId": "r001-standards-s5-w02-o4",
+          "role": "distractor",
+          "contentReviewed": "대체 키보드",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w02-o5",
+          "optionId": "r001-standards-s5-w02-o5",
+          "role": "distractor",
+          "contentReviewed": "음성합성 프로그램",
+          "length": 9,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w03",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "다섯 기술 명칭의 기능이 다르다. 손끝·핀은 장치의 본질적 특성이지 정답만의 문법·절대어 단서가 아니다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w03-o1",
+          "optionId": "r001-standards-s5-w03-o1",
+          "role": "correct",
+          "contentReviewed": "갱신형 점자 디스플레이",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w03-o2",
+          "optionId": "r001-standards-s5-w03-o2",
+          "role": "distractor",
+          "contentReviewed": "화면확대프로그램",
+          "length": 8,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w03-o3",
+          "optionId": "r001-standards-s5-w03-o3",
+          "role": "distractor",
+          "contentReviewed": "음성합성 프로그램",
+          "length": 9,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w03-o4",
+          "optionId": "r001-standards-s5-w03-o4",
+          "role": "distractor",
+          "contentReviewed": "시선추적 입력 장치",
+          "length": 10,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w03-o5",
+          "optionId": "r001-standards-s5-w03-o5",
+          "role": "distractor",
+          "contentReviewed": "화상 키보드",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w04",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "기술별 입력/출력·표시 기능을 비교한다. 음성인식과 음성합성의 차이가 실제 오개념이며 선택지는 유사한 명사 형식이다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w04-o1",
+          "optionId": "r001-standards-s5-w04-o1",
+          "role": "correct",
+          "contentReviewed": "음성인식",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w04-o2",
+          "optionId": "r001-standards-s5-w04-o2",
+          "role": "distractor",
+          "contentReviewed": "음성합성",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w04-o3",
+          "optionId": "r001-standards-s5-w04-o3",
+          "role": "distractor",
+          "contentReviewed": "화면확대",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w04-o4",
+          "optionId": "r001-standards-s5-w04-o4",
+          "role": "distractor",
+          "contentReviewed": "갱신형 점자 출력",
+          "length": 9,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w04-o5",
+          "optionId": "r001-standards-s5-w04-o5",
+          "role": "distractor",
+          "contentReviewed": "화면 색상 사용자 지정",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w05",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "다섯 선택지가 기능+기술 명칭으로 구성된다. 정답의 비의도적 움직임 표현은 필터의 정의이며 오답의 출력·가독성 기능과 구별하는 목표에 필요하다. o5의 제목 구조만은 전체 오답에 몰린 패턴이 아니다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w05-o1",
+          "optionId": "r001-standards-s5-w05-o1",
+          "role": "correct",
+          "contentReviewed": "비의도적 움직임의 영향을 줄이는 키보드·마우스 필터",
+          "length": 28,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w05-o2",
+          "optionId": "r001-standards-s5-w05-o2",
+          "role": "distractor",
+          "contentReviewed": "글자를 소리로 변환하는 음성합성",
+          "length": 17,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w05-o3",
+          "optionId": "r001-standards-s5-w05-o3",
+          "role": "distractor",
+          "contentReviewed": "출력 문자를 촉각으로 표시하는 점자 디스플레이",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w05-o4",
+          "optionId": "r001-standards-s5-w05-o4",
+          "role": "distractor",
+          "contentReviewed": "문서 글꼴의 종류를 바꾸는 표시 설정",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-standards-s5-w05-o5",
+          "optionId": "r001-standards-s5-w05-o5",
+          "role": "distractor",
+          "contentReviewed": "화면의 제목 구조만 보여 주는 문서 개요",
+          "length": 22,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w06",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "correct_only_positive"
+      ],
+      "reason": "사용자가 지적한 사례. 원래 네 오답 모두 만을 포함하고 정답만 추가 수단을 제시한다. 모든 보기를 긍정형 서비스 개선으로 맞추고 어떤 장벽을 해소하는지 평가한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w06-o1",
+          "optionId": "r001-standards-s5-w06-o1",
+          "role": "correct",
+          "contentReviewed": "텍스트 채팅이나 문의 양식으로도 상담할 수 있게 한다.",
+          "length": 30,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w06-o2",
+          "optionId": "r001-standards-s5-w06-o2",
+          "role": "distractor",
+          "contentReviewed": "상담원이 들려주는 안내음의 크기만 높인다.",
+          "length": 23,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w06-o3",
+          "optionId": "r001-standards-s5-w06-o3",
+          "role": "distractor",
+          "contentReviewed": "음성 통화 연결 대기음의 음질만 높인다.",
+          "length": 22,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w06-o4",
+          "optionId": "r001-standards-s5-w06-o4",
+          "role": "distractor",
+          "contentReviewed": "음성인식으로 정확히 말한 사람만 상담원에게 연결한다.",
+          "length": 29,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w06-o5",
+          "optionId": "r001-standards-s5-w06-o5",
+          "role": "distractor",
+          "contentReviewed": "문의 전화번호의 글자 크기만 크게 표시한다.",
+          "length": 24,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w07",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "correct_only_positive"
+      ],
+      "reason": "오답에 모든·만·계속 등이 몰린다. 짧아 보임·표현 다양화·안내 노출이라는 그럴듯한 목적과 실제 이해 부담을 구분하는 문장으로 바꾼다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w07-o1",
+          "optionId": "r001-standards-s5-w07-o1",
+          "role": "correct",
+          "contentReviewed": "쉬운 단어와 짧은 문장을 사용하고 절차를 분명한 제목으로 나눈다.",
+          "length": 36,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w07-o2",
+          "optionId": "r001-standards-s5-w07-o2",
+          "role": "distractor",
+          "contentReviewed": "한 문장에 모든 조건을 이어 붙여 전체 글의 문장 수만 줄인다.",
+          "length": 35,
+          "signalTerms": [
+            "만",
+            "모든"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w07-o3",
+          "optionId": "r001-standards-s5-w07-o3",
+          "role": "distractor",
+          "contentReviewed": "단계마다 같은 기능에 서로 다른 이름을 붙여 표현을 다양하게 한다.",
+          "length": 37,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w07-o4",
+          "optionId": "r001-standards-s5-w07-o4",
+          "role": "distractor",
+          "contentReviewed": "뜻을 직접 말하지 않고 비유만으로 다음 행동을 안내한다.",
+          "length": 31,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w07-o5",
+          "optionId": "r001-standards-s5-w07-o5",
+          "role": "distractor",
+          "contentReviewed": "내용을 읽는 동안 안내창을 계속 자동으로 띄워 주의를 끈다.",
+          "length": 33,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w08",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_absolute",
+        "correct_extra_rationale"
+      ],
+      "reason": "모든·모두·무조건이 오답에 몰린다. 결과 보고의 범위를 조금씩 잘못 넓히는 실제적 오개념으로 바꾼다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w08-o1",
+          "optionId": "r001-standards-s5-w08-o1",
+          "role": "correct",
+          "contentReviewed": "참여자와 과제·환경을 밝히고 다른 사용자와 기준 항목까지 통과한 것으로 확대하지 않는다.",
+          "length": 49,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w08-o2",
+          "optionId": "r001-standards-s5-w08-o2",
+          "role": "distractor",
+          "contentReviewed": "모든 장애 사용자가 사이트 전체를 문제없이 이용한다고 결론 내린다.",
+          "length": 37,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w08-o3",
+          "optionId": "r001-standards-s5-w08-o3",
+          "role": "distractor",
+          "contentReviewed": "동일한 장애가 있는 사람의 사용 방식은 모두 같다고 가정한다.",
+          "length": 34,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w08-o4",
+          "optionId": "r001-standards-s5-w08-o4",
+          "role": "distractor",
+          "contentReviewed": "사용자 한 명이 성공했으므로 기준 준수 평가는 필요 없다고 기록한다.",
+          "length": 38,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w08-o5",
+          "optionId": "r001-standards-s5-w08-o5",
+          "role": "distractor",
+          "contentReviewed": "평가의 참여자와 수행 과제를 생략하고 무조건 적합이라고만 보고한다.",
+          "length": 37,
+          "signalTerms": [
+            "만",
+            "무조건"
+          ],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w09",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_exclusive",
+        "unbalanced_qualification"
+      ],
+      "reason": "노력만·사업자에게만·PC만·제공 단계만이라는 오답 단서가 반복된다. 원래의 주체/대상/단계 오개념은 유지하되 법적 책무를 평행한 서술로 비교한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w09-o1",
+          "optionId": "r001-standards-s5-w09-o1",
+          "role": "correct",
+          "contentReviewed": "국가기관등은 해당 서비스·제품의 접근성을 보장해야 하며, 지능정보사업자는 접근·이용이 쉽도록 노력해야 한다.",
+          "length": 60,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w09-o2",
+          "optionId": "r001-standards-s5-w09-o2",
+          "role": "distractor",
+          "contentReviewed": "국가기관등은 접근성 보장을 위해 노력만 하면 되고 지능정보사업자에게만 보장 의무가 있다.",
+          "length": 49,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w09-o3",
+          "optionId": "r001-standards-s5-w09-o3",
+          "role": "distractor",
+          "contentReviewed": "국가기관등의 접근성 보장 대상은 PC 웹사이트만이며 모바일 응용 소프트웨어는 제외된다.",
+          "length": 48,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w09-o4",
+          "optionId": "r001-standards-s5-w09-o4",
+          "role": "distractor",
+          "contentReviewed": "지능정보사업자는 제품의 제공 단계만 고려하고 설계·제작 단계는 고려하지 않아도 된다.",
+          "length": 47,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w09-o5",
+          "optionId": "r001-standards-s5-w09-o5",
+          "role": "distractor",
+          "contentReviewed": "국가기관등이 제공하는 무인정보단말기는 제19조제1항의 열거 대상이 아니다.",
+          "length": 41,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-s5-w10",
+      "classification": "revise",
+      "issueCodes": [
+        "implausible_distractors",
+        "heterogeneous_options"
+      ],
+      "reason": "개발 계약·보조기기 수리 보증은 품질인증 제도와 동떨어진 오답이다. 법에 열거된 제품·서비스 인증과 인증기관의 지정을 구별하게 한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s5",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-standards-s5-w10-o1",
+          "optionId": "r001-standards-s5-w10-o1",
+          "role": "correct",
+          "contentReviewed": "접근성 품질인증 분야별 인증기관의 지정",
+          "length": 21,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w10-o2",
+          "optionId": "r001-standards-s5-w10-o2",
+          "role": "distractor",
+          "contentReviewed": "개별 웹사이트가 받은 품질인증",
+          "length": 16,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w10-o3",
+          "optionId": "r001-standards-s5-w10-o3",
+          "role": "distractor",
+          "contentReviewed": "웹접근성전문가 개인 자격증",
+          "length": 14,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w10-o4",
+          "optionId": "r001-standards-s5-w10-o4",
+          "role": "distractor",
+          "contentReviewed": "웹사이트 개발 용역계약",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-standards-s5-w10-o5",
+          "optionId": "r001-standards-s5-w10-o5",
+          "role": "distractor",
+          "contentReviewed": "접근성 보조기기의 무상수리 보증",
+          "length": 17,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-p01",
+      "classification": "revise",
+      "issueCodes": [
+        "ABSOLUTE_WRONG_ONLY",
+        "IMPLAUSIBLE_DISTRACTOR",
+        "POSITIVE_KEY_ONLY"
+      ],
+      "reason": "정답은 역할 중심의 자연스러운 원칙이지만 오답에는 언제나가 반복되고, 장식에 더 긴 설명·alt로 크기 조절 같은 낮은 개연성 진술이 있다. 동등한 문법의 판단 기준들로 바꾼다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-standards-p01-part-1/choices/r001-standards-p01-p1-c1",
+          "partId": "r001-standards-p01-part-1",
+          "choiceId": "r001-standards-p01-p1-c1",
+          "role": "correct",
+          "contentReviewed": "alt=\"\"",
+          "finding": "빈 alt의 짧음은 필수 구문 차이이며 문안 단서로 보지 않는다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-1/choices/r001-standards-p01-p1-c2",
+          "partId": "r001-standards-p01-part-1",
+          "choiceId": "r001-standards-p01-p1-c2",
+          "role": "distractor",
+          "contentReviewed": "alt=\"잎 무늬 장식\"",
+          "finding": "그림 외형을 설명하는 흔한 장식 처리 오해를 평가한다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-1/choices/r001-standards-p01-p1-c3",
+          "partId": "r001-standards-p01-part-1",
+          "choiceId": "r001-standards-p01-p1-c3",
+          "role": "distractor",
+          "contentReviewed": "alt=\"실습실 이용 안내\"",
+          "finding": "페이지의 제목을 장식의 의미로 오인하는 선택지다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-1/choices/r001-standards-p01-p1-c4",
+          "partId": "r001-standards-p01-part-1",
+          "choiceId": "r001-standards-p01-p1-c4",
+          "role": "distractor",
+          "contentReviewed": "alt=\"leaf.svg\"",
+          "finding": "파일명을 대체 텍스트로 쓰는 실제 오용이다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-1/choices/r001-standards-p01-p1-c5",
+          "partId": "r001-standards-p01-part-1",
+          "choiceId": "r001-standards-p01-p1-c5",
+          "role": "distractor",
+          "contentReviewed": "alt=\"이미지를 볼 수 없습니다\"",
+          "finding": "alt를 이미지 오류 안내로만 이해하는 오용이며 문장 자체의 절대어 단서는 없다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-2/choices/r001-standards-p01-p2-c1",
+          "partId": "r001-standards-p01-part-2",
+          "choiceId": "r001-standards-p01-p2-c1",
+          "role": "correct",
+          "contentReviewed": "alt=\"실습실 점검으로 14:00~16:00 이용할 수 없습니다.\"",
+          "finding": "알림의 정확한 정보량에 필요한 길이이며 같은 길이의 시간 오답이 있다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-2/choices/r001-standards-p01-p2-c2",
+          "partId": "r001-standards-p01-part-2",
+          "choiceId": "r001-standards-p01-p2-c2",
+          "role": "distractor",
+          "contentReviewed": "alt=\"\"",
+          "finding": "장식 처리의 과잉 적용이라는 오개념이다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-2/choices/r001-standards-p01-p2-c3",
+          "partId": "r001-standards-p01-part-2",
+          "choiceId": "r001-standards-p01-p2-c3",
+          "role": "distractor",
+          "contentReviewed": "alt=\"안내 이미지\"",
+          "finding": "이미지 종류만 전달하는 불충분한 대체 텍스트다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-2/choices/r001-standards-p01-p2-c4",
+          "partId": "r001-standards-p01-part-2",
+          "choiceId": "r001-standards-p01-p2-c4",
+          "role": "distractor",
+          "contentReviewed": "alt=\"실습실 점검으로 12:00~14:00 이용할 수 없습니다.\"",
+          "finding": "정답과 비슷한 길이로 잘못된 시간을 제시하여 길이 단서를 상쇄한다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-2/choices/r001-standards-p01-p2-c5",
+          "partId": "r001-standards-p01-part-2",
+          "choiceId": "r001-standards-p01-p2-c5",
+          "role": "distractor",
+          "contentReviewed": "alt=\"notice.png\"",
+          "finding": "파일명과 의미 대체를 혼동하는 실제 오용이다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-3/choices/r001-standards-p01-p3-c1",
+          "partId": "r001-standards-p01-part-3",
+          "choiceId": "r001-standards-p01-p3-c1",
+          "role": "correct",
+          "contentReviewed": "이미지의 정보·기능에 따라 필요한 대체 내용이 달라지기 때문이다.",
+          "finding": "정답만 상황의 의미를 자연스럽게 설명하는 긍정적 원칙이다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-3/choices/r001-standards-p01-p3-c2",
+          "partId": "r001-standards-p01-part-3",
+          "choiceId": "r001-standards-p01-p3-c2",
+          "role": "distractor",
+          "contentReviewed": "SVG 형식의 이미지는 언제나 정보가 없기 때문이다.",
+          "finding": "언제나로 파일 형식과 정보 유무를 과도하게 연결한다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-3/choices/r001-standards-p01-p3-c3",
+          "partId": "r001-standards-p01-part-3",
+          "choiceId": "r001-standards-p01-p3-c3",
+          "role": "distractor",
+          "contentReviewed": "PNG 형식의 이미지는 언제나 파일명을 읽어 주어야 하기 때문이다.",
+          "finding": "언제나와 파일명 낭독이라는 이중 오류가 정답 제거 단서가 된다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-3/choices/r001-standards-p01-p3-c4",
+          "partId": "r001-standards-p01-part-3",
+          "choiceId": "r001-standards-p01-p3-c4",
+          "role": "distractor",
+          "contentReviewed": "장식 이미지는 의미 있는 알림보다 더 긴 설명이 필요하기 때문이다.",
+          "finding": "장식에 더 긴 설명이 필요하다는 주장은 유력한 오개념으로 보기 어렵다."
+        },
+        {
+          "path": "parts/r001-standards-p01-part-3/choices/r001-standards-p01-p3-c5",
+          "partId": "r001-standards-p01-part-3",
+          "choiceId": "r001-standards-p01-p3-c5",
+          "role": "distractor",
+          "contentReviewed": "대체 텍스트는 화면에 이미지를 크게 표시하기 위한 속성이기 때문이다.",
+          "finding": "alt를 이미지 크기 조절로 설명하는 오답은 목표 개념과 멀다."
+        }
+      ]
+    },
+    {
+      "questionId": "r001-standards-p02",
+      "classification": "revise",
+      "issueCodes": [
+        "ABSOLUTE_WRONG_ONLY",
+        "EXCLUSIVE_WRONG_ONLY",
+        "IMPLAUSIBLE_DISTRACTOR",
+        "POSITIVE_KEY_ONLY",
+        "UNEQUAL_DETAIL_LENGTH"
+      ],
+      "reason": "전혀·반드시와 금지/강제 진술이 오답에 집중되어 코드 진단 전에 배제하기 쉽다. 실제 폼에서 가능한 레이블 연결·입력 보존·수정 가능성·제출 방식의 결함과 제시 코드를 대조하도록 바꾼다. / 정답은 긴 두 문장으로 항목·범위·수정 방법을 설명하지만 대부분 오답은 한 줄의 일반적 문구이거나 8명을 요구하는 노골적 모순이다. 비슷한 길이의 안내문에 누락/잘못된 항목/잘못된 범위를 각각 심는다. / 오답은 글자색만·무조건·제거되었는지만과 점검 생략을 사용하고 정답만 건설적인 검사다. 모든 보기를 구체적인 점검과 기대 결과로 만들고 잘못된 통과 기준을 판별하게 한다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-standards-p02-part-1/choices/r001-standards-p02-p1-c1",
+          "partId": "r001-standards-p02-part-1",
+          "choiceId": "r001-standards-p02-p1-c1",
+          "role": "correct",
+          "contentReviewed": "오류가 발생한 항목과 오류 원인이 메시지에 구체적으로 드러나지 않는다.",
+          "finding": "정답의 내용은 타당하지만 다른 보기와 진단 구체성이 맞지 않는다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-1/choices/r001-standards-p02-p1-c2",
+          "partId": "r001-standards-p02-part-1",
+          "choiceId": "r001-standards-p02-p1-c2",
+          "role": "distractor",
+          "contentReviewed": "참가자 이름에 대응하는 레이블이 전혀 없다.",
+          "finding": "전혀 없다는 표현이 실제 label 코드와 즉시 대비된다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-1/choices/r001-standards-p02-p1-c3",
+          "partId": "r001-standards-p02-part-1",
+          "choiceId": "r001-standards-p02-p1-c3",
+          "role": "distractor",
+          "contentReviewed": "현재 입력값이 화면에 남아 있어 반드시 삭제해야 한다.",
+          "finding": "반드시 삭제는 정정 학습 목표와 무관한 극단화다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-1/choices/r001-standards-p02-p1-c4",
+          "partId": "r001-standards-p02-part-1",
+          "choiceId": "r001-standards-p02-p1-c4",
+          "role": "distractor",
+          "contentReviewed": "입력 오류 메시지는 텍스트로 제공하면 안 된다.",
+          "finding": "텍스트 오류 메시지 금지는 개연성이 낮다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-1/choices/r001-standards-p02-p1-c5",
+          "partId": "r001-standards-p02-part-1",
+          "choiceId": "r001-standards-p02-p1-c5",
+          "role": "distractor",
+          "contentReviewed": "오류가 있어도 입력값을 고치기 전에 등록을 완료해야 한다.",
+          "finding": "오류 수정 전 등록 강제는 오류 정정과 정면으로 모순된다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-2/choices/r001-standards-p02-p2-c1",
+          "partId": "r001-standards-p02-part-2",
+          "choiceId": "r001-standards-p02-p2-c1",
+          "role": "correct",
+          "contentReviewed": "참가 인원은 1명부터 5명까지 입력할 수 있습니다. 현재 입력한 8명을 허용 범위의 인원으로 수정해 주세요.",
+          "finding": "정답만 유난히 길고 완결된 수정 안내를 제공한다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-2/choices/r001-standards-p02-p2-c2",
+          "partId": "r001-standards-p02-part-2",
+          "choiceId": "r001-standards-p02-p2-c2",
+          "role": "distractor",
+          "contentReviewed": "오류가 발생했습니다.",
+          "finding": "짧은 일반 문구여서 상세한 정답과 외형 차이가 크다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-2/choices/r001-standards-p02-p2-c3",
+          "partId": "r001-standards-p02-part-2",
+          "choiceId": "r001-standards-p02-p2-c3",
+          "role": "distractor",
+          "contentReviewed": "입력값을 다시 확인하세요.",
+          "finding": "원문 오류 메시지와 거의 같은 문구로 약한 오답이다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-2/choices/r001-standards-p02-p2-c4",
+          "partId": "r001-standards-p02-part-2",
+          "choiceId": "r001-standards-p02-p2-c4",
+          "role": "distractor",
+          "contentReviewed": "참가자 이름을 삭제하고 다시 입력하세요.",
+          "finding": "정상 이름 삭제는 과제와 멀고 길이도 정답보다 짧다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-2/choices/r001-standards-p02-p2-c5",
+          "partId": "r001-standards-p02-part-2",
+          "choiceId": "r001-standards-p02-p2-c5",
+          "role": "distractor",
+          "contentReviewed": "참가 인원은 정확히 8명으로 입력해 주세요.",
+          "finding": "정확히 8명은 참고 사항의 범위와 노골적으로 충돌한다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-3/choices/r001-standards-p02-p3-c1",
+          "partId": "r001-standards-p02-part-3",
+          "choiceId": "r001-standards-p02-p3-c1",
+          "role": "correct",
+          "contentReviewed": "안내만 읽어도 잘못된 항목과 수정할 조건을 알 수 있는지 확인한다.",
+          "finding": "직접적인 오류 식별 확인으로 적절하지만 오답 문체와 대비된다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-3/choices/r001-standards-p02-p3-c2",
+          "partId": "r001-standards-p02-part-3",
+          "choiceId": "r001-standards-p02-p3-c2",
+          "role": "correct",
+          "contentReviewed": "허용 범위의 인원으로 수정하여 다시 제출할 수 있는지 확인한다.",
+          "finding": "실제 수정·재제출 점검으로 적절하다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-3/choices/r001-standards-p02-p3-c3",
+          "partId": "r001-standards-p02-part-3",
+          "choiceId": "r001-standards-p02-p3-c3",
+          "role": "distractor",
+          "contentReviewed": "메시지의 글자색만 바뀌었으면 오류 안내의 내용을 확인하지 않는다.",
+          "finding": "색만/내용 확인 안 함이라는 잘못된 태도를 읽고 쉽게 제거된다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-3/choices/r001-standards-p02-p3-c4",
+          "partId": "r001-standards-p02-part-3",
+          "choiceId": "r001-standards-p02-p3-c4",
+          "role": "distractor",
+          "contentReviewed": "잘못된 인원으로 재제출해도 무조건 성공으로 표시되는지 확인한다.",
+          "finding": "무조건 성공이라는 극단어가 오답을 드러낸다."
+        },
+        {
+          "path": "parts/r001-standards-p02-part-3/choices/r001-standards-p02-p3-c5",
+          "partId": "r001-standards-p02-part-3",
+          "choiceId": "r001-standards-p02-p3-c5",
+          "role": "distractor",
+          "contentReviewed": "이름 입력칸이 제거되었는지만 확인한다.",
+          "finding": "이름 입력칸 제거만 확인하는 것은 현재 목표와 너무 멀다."
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w01",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "상속되는 color와 상속되지 않는 margin-left의 값 조합을 비교한다. 투명한 색은 color/background 혼동으로 이해 가능한 오답이다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w01-option-1",
+          "optionId": "r001-css-script-w01-option-1",
+          "role": "distractor",
+          "contentReviewed": "navy에 해당하는 색, 24px",
+          "length": 18,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w01-option-2",
+          "optionId": "r001-css-script-w01-option-2",
+          "role": "correct",
+          "contentReviewed": "navy에 해당하는 색, 0px",
+          "length": 17,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w01-option-3",
+          "optionId": "r001-css-script-w01-option-3",
+          "role": "distractor",
+          "contentReviewed": "black에 해당하는 색, 24px",
+          "length": 19,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w01-option-4",
+          "optionId": "r001-css-script-w01-option-4",
+          "role": "distractor",
+          "contentReviewed": "black에 해당하는 색, 0px",
+          "length": 18,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w01-option-5",
+          "optionId": "r001-css-script-w01-option-5",
+          "role": "distractor",
+          "contentReviewed": "투명한 색, 0px",
+          "length": 10,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w02",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "사용자/저작자 중요 선언의 우선순위·기본값·합산·결정불가를 비교한다. 코드의 !important는 논리 조건이며 제거 대상이 아니다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w02-option-1",
+          "optionId": "r001-css-script-w02-option-1",
+          "role": "distractor",
+          "contentReviewed": "18px",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w02-option-2",
+          "optionId": "r001-css-script-w02-option-2",
+          "role": "distractor",
+          "contentReviewed": "브라우저의 기본 글자 크기",
+          "length": 14,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w02-option-3",
+          "optionId": "r001-css-script-w02-option-3",
+          "role": "correct",
+          "contentReviewed": "24px",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w02-option-4",
+          "optionId": "r001-css-script-w02-option-4",
+          "role": "distractor",
+          "contentReviewed": "42px",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w02-option-5",
+          "optionId": "r001-css-script-w02-option-5",
+          "role": "distractor",
+          "contentReviewed": "두 중요 선언이 충돌하므로 크기를 결정할 수 없다",
+          "length": 27,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w03",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "모든 보기가 px 수치다. padding·border·margin 포함 여부의 계산 착오를 평가한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w03-option-1",
+          "optionId": "r001-css-script-w03-option-1",
+          "role": "distractor",
+          "contentReviewed": "180px",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w03-option-2",
+          "optionId": "r001-css-script-w03-option-2",
+          "role": "distractor",
+          "contentReviewed": "210px",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w03-option-3",
+          "optionId": "r001-css-script-w03-option-3",
+          "role": "distractor",
+          "contentReviewed": "232px",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w03-option-4",
+          "optionId": "r001-css-script-w03-option-4",
+          "role": "correct",
+          "contentReviewed": "214px",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w03-option-5",
+          "optionId": "r001-css-script-w03-option-5",
+          "role": "distractor",
+          "contentReviewed": "204px",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w04",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "만은 오답의 수사적 제한이 아니라 선택자가 매치하는 정확한 집합의 원소를 정의한다. 직접 자식과 후손, 한 형제 누락을 구분해야 하므로 보존한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w04-option-1",
+          "optionId": "r001-css-script-w04-option-1",
+          "role": "correct",
+          "contentReviewed": "morning과 afternoon",
+          "length": 18,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w04-option-2",
+          "optionId": "r001-css-script-w04-option-2",
+          "role": "distractor",
+          "contentReviewed": "morning, workshop, afternoon",
+          "length": 28,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w04-option-3",
+          "optionId": "r001-css-script-w04-option-3",
+          "role": "distractor",
+          "contentReviewed": "workshop만",
+          "length": 9,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w04-option-4",
+          "optionId": "r001-css-script-w04-option-4",
+          "role": "distractor",
+          "contentReviewed": "morning만",
+          "length": 8,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w04-option-5",
+          "optionId": "r001-css-script-w04-option-5",
+          "role": "distractor",
+          "contentReviewed": "afternoon만",
+          "length": 10,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w05",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "display:none/visibility:hidden의 레이아웃 효과 조합이다. 양쪽 공간 유지·제거·뒤바꿈과 크기 지정 오개념을 비교하며 첫 번째·두 번째는 코드 ID를 가리킨다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w05-option-1",
+          "optionId": "r001-css-script-w05-option-1",
+          "role": "distractor",
+          "contentReviewed": "두 요소 모두 상자를 만들지 않는다",
+          "length": 19,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w05-option-2",
+          "optionId": "r001-css-script-w05-option-2",
+          "role": "distractor",
+          "contentReviewed": "first만 공간을 남기고 second는 공간을 없앤다",
+          "length": 30,
+          "signalTerms": [
+            "만"
+          ],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w05-option-3",
+          "optionId": "r001-css-script-w05-option-3",
+          "role": "distractor",
+          "contentReviewed": "두 요소 모두 공간을 남긴다",
+          "length": 15,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w05-option-4",
+          "optionId": "r001-css-script-w05-option-4",
+          "role": "correct",
+          "contentReviewed": "first는 공간을 없애고 second는 공간을 남긴다",
+          "length": 30,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w05-option-5",
+          "optionId": "r001-css-script-w05-option-5",
+          "role": "distractor",
+          "contentReviewed": "너비와 높이를 정했으므로 두 요소 모두 보인다",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w06",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "블록 스코프의 값 조합 및 재선언 오류 오개념을 비교한다. SyntaxError 보기는 같은 이름 재선언에 대한 개념 혼동으로 그럴듯하다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w06-option-1",
+          "optionId": "r001-css-script-w06-option-1",
+          "role": "distractor",
+          "contentReviewed": "[\"임시\", \"임시\"]",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w06-option-2",
+          "optionId": "r001-css-script-w06-option-2",
+          "role": "distractor",
+          "contentReviewed": "[\"기본\", \"기본\"]",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w06-option-3",
+          "optionId": "r001-css-script-w06-option-3",
+          "role": "correct",
+          "contentReviewed": "[\"임시\", \"기본\"]",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w06-option-4",
+          "optionId": "r001-css-script-w06-option-4",
+          "role": "distractor",
+          "contentReviewed": "[\"기본\", \"임시\"]",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w06-option-5",
+          "optionId": "r001-css-script-w06-option-5",
+          "role": "distractor",
+          "contentReviewed": "같은 이름을 선언했으므로 SyntaxError가 발생한다",
+          "length": 31,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w07",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "배열 원본 변경과 slice의 끝 인덱스 포함 여부를 비교한다. 정답보다 긴 오답도 있어 정답 길이 단서가 없고 문자열·코드 공백은 보존한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w07-option-1",
+          "optionId": "r001-css-script-w07-option-1",
+          "role": "distractor",
+          "contentReviewed": "items는 [\"봄\", \"겨울\"], chosen은 [\"여름\", \"가을\"]",
+          "length": 40,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w07-option-2",
+          "optionId": "r001-css-script-w07-option-2",
+          "role": "correct",
+          "contentReviewed": "items는 [\"봄\", \"여름\", \"가을\", \"겨울\"], chosen은 [\"여름\", \"가을\"]",
+          "length": 52,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w07-option-3",
+          "optionId": "r001-css-script-w07-option-3",
+          "role": "distractor",
+          "contentReviewed": "items는 [\"봄\", \"여름\", \"가을\", \"겨울\"], chosen은 [\"여름\", \"가을\", \"겨울\"]",
+          "length": 58,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w07-option-4",
+          "optionId": "r001-css-script-w07-option-4",
+          "role": "distractor",
+          "contentReviewed": "items는 [\"봄\", \"여름\", \"가을\", \"겨울\"], chosen은 [\"봄\", \"여름\", \"가을\"]",
+          "length": 57,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w07-option-5",
+          "optionId": "r001-css-script-w07-option-5",
+          "role": "distractor",
+          "contentReviewed": "items와 chosen은 모두 [\"여름\", \"가을\"]",
+          "length": 30,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w08",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "빈 문자열의 단락 평가 결과와 함수 호출 횟수를 동일 조합 형식으로 비교한다. &&의 실행 조건은 기술 내용이다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w08-option-1",
+          "optionId": "r001-css-script-w08-option-1",
+          "role": "distractor",
+          "contentReviewed": "result는 false, calls는 0",
+          "length": 23,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w08-option-2",
+          "optionId": "r001-css-script-w08-option-2",
+          "role": "distractor",
+          "contentReviewed": "result는 \"완료\", calls는 1",
+          "length": 22,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w08-option-3",
+          "optionId": "r001-css-script-w08-option-3",
+          "role": "distractor",
+          "contentReviewed": "result는 \"\", calls는 1",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w08-option-4",
+          "optionId": "r001-css-script-w08-option-4",
+          "role": "distractor",
+          "contentReviewed": "result는 undefined, calls는 0",
+          "length": 27,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w08-option-5",
+          "optionId": "r001-css-script-w08-option-5",
+          "role": "correct",
+          "contentReviewed": "result는 \"\", calls는 0",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w09",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "느슨한/엄격한 비교 결과를 비교한다. 4개 Boolean 조합 외 값 반환 오답은 비교연산자의 반환형에 관한 실제 오개념이다. 이를 제거하려면 JavaScript 지식이 필요하므로 일반 문안의 논리 단서로 간주하지 않는다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w09-option-1",
+          "optionId": "r001-css-script-w09-option-1",
+          "role": "correct",
+          "contentReviewed": "loose는 true, strict는 false",
+          "length": 26,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w09-option-2",
+          "optionId": "r001-css-script-w09-option-2",
+          "role": "distractor",
+          "contentReviewed": "loose와 strict는 모두 true",
+          "length": 22,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w09-option-3",
+          "optionId": "r001-css-script-w09-option-3",
+          "role": "distractor",
+          "contentReviewed": "loose와 strict는 모두 false",
+          "length": 23,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w09-option-4",
+          "optionId": "r001-css-script-w09-option-4",
+          "role": "distractor",
+          "contentReviewed": "loose는 false, strict는 true",
+          "length": 26,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w09-option-5",
+          "optionId": "r001-css-script-w09-option-5",
+          "role": "distractor",
+          "contentReviewed": "loose는 문자열 \"7\", strict는 숫자 7",
+          "length": 28,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-w10",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "취소 가능한 이벤트의 dispatchEvent 반환값과 defaultPrevented를 비교한다. 분리된 DOM 노드 예외설은 DOM API 오개념이며 조건 자체가 정답을 결정한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s4",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-css-script-w10-option-1",
+          "optionId": "r001-css-script-w10-option-1",
+          "role": "distractor",
+          "contentReviewed": "allowed는 true, defaultPrevented는 false",
+          "length": 38,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w10-option-2",
+          "optionId": "r001-css-script-w10-option-2",
+          "role": "distractor",
+          "contentReviewed": "allowed와 defaultPrevented는 모두 true",
+          "length": 34,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w10-option-3",
+          "optionId": "r001-css-script-w10-option-3",
+          "role": "distractor",
+          "contentReviewed": "allowed와 defaultPrevented는 모두 false",
+          "length": 35,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w10-option-4",
+          "optionId": "r001-css-script-w10-option-4",
+          "role": "correct",
+          "contentReviewed": "allowed는 false, defaultPrevented는 true",
+          "length": 38,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-css-script-w10-option-5",
+          "optionId": "r001-css-script-w10-option-5",
+          "role": "distractor",
+          "contentReviewed": "이벤트 대상이 문서에 연결되지 않았으므로 dispatchEvent가 예외를 던진다",
+          "length": 45,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-p01",
+      "classification": "revise",
+      "issueCodes": [
+        "EXCLUSIVE_WRONG_ONLY",
+        "POSITIVE_KEY_ONLY",
+        "UNEQUAL_DETAIL_LENGTH"
+      ],
+      "reason": "코드형 -1 오답은 유지할 가치가 있지만 글자색만·마우스로만은 답의 극단성 단서다. 작업 순서·순차 접근·hover와 focus 혼동을 구별하는 구체적 변경안으로 바꾼다. / 정답은 실제 점검을 제안하고 오답은 문법 검사만·점검 생략·결과 개수만이라는 부정적 태도다. 모든 보기를 검증 절차와 통과 기준으로 작성하여 시각 배치/hover/잘못된 순서라는 실제 오판을 평가한다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-css-script-p01-order/choices/r001-css-script-p01-order-a",
+          "partId": "r001-css-script-p01-order",
+          "choiceId": "r001-css-script-p01-order-a",
+          "role": "distractor",
+          "contentReviewed": "검색어 → 분류 → 검색",
+          "finding": "DOM 순서 우선 오해를 평가하는 순열이다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-order/choices/r001-css-script-p01-order-b",
+          "partId": "r001-css-script-p01-order",
+          "choiceId": "r001-css-script-p01-order-b",
+          "role": "correct",
+          "contentReviewed": "검색 → 검색어 → 분류",
+          "finding": "tabindex 1→2→3을 정확히 적용한 순열이며 형태 단서가 없다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-order/choices/r001-css-script-p01-order-c",
+          "partId": "r001-css-script-p01-order",
+          "choiceId": "r001-css-script-p01-order-c",
+          "role": "distractor",
+          "contentReviewed": "분류 → 검색어 → 검색",
+          "finding": "tabindex 역순 오해를 평가하는 순열이다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-order/choices/r001-css-script-p01-order-d",
+          "partId": "r001-css-script-p01-order",
+          "choiceId": "r001-css-script-p01-order-d",
+          "role": "distractor",
+          "contentReviewed": "검색 → 분류 → 검색어",
+          "finding": "첫 이동은 맞지만 나머지의 숫자 순서를 바꾼 순열이다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-repair/choices/r001-css-script-p01-repair-a",
+          "partId": "r001-css-script-p01-repair",
+          "choiceId": "r001-css-script-p01-repair-a",
+          "role": "correct",
+          "contentReviewed": "세 컨트롤의 양수 tabindex를 제거한다",
+          "finding": "자연스러운 DOM 순서 복원으로 타당하다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-repair/choices/r001-css-script-p01-repair-b",
+          "partId": "r001-css-script-p01-repair",
+          "choiceId": "r001-css-script-p01-repair-b",
+          "role": "correct",
+          "contentReviewed": "초점 외곽선을 복원하거나 뚜렷한 대체 초점 표시를 제공한다",
+          "finding": "구체적이고 긍정적인 접근성 개선안이어서 나머지와 대비된다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-repair/choices/r001-css-script-p01-repair-c",
+          "partId": "r001-css-script-p01-repair",
+          "choiceId": "r001-css-script-p01-repair-c",
+          "role": "distractor",
+          "contentReviewed": "모든 컨트롤을 tabindex=\"-1\"로 바꾼다",
+          "finding": "음수 tabindex의 실제 효과를 평가하는 타당한 코드형 오답이다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-repair/choices/r001-css-script-p01-repair-d",
+          "partId": "r001-css-script-p01-repair",
+          "choiceId": "r001-css-script-p01-repair-d",
+          "role": "distractor",
+          "contentReviewed": "DOM은 그대로 두고 세 컨트롤의 글자색만 바꾼다",
+          "finding": "글자색만이라는 제한이 오답을 쉽게 드러낸다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-repair/choices/r001-css-script-p01-repair-e",
+          "partId": "r001-css-script-p01-repair",
+          "choiceId": "r001-css-script-p01-repair-e",
+          "role": "distractor",
+          "contentReviewed": "검색 버튼을 마우스로만 누르도록 안내한다",
+          "finding": "마우스로만이라는 키보드 배제가 노골적이다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-retest/choices/r001-css-script-p01-retest-a",
+          "partId": "r001-css-script-p01-retest",
+          "choiceId": "r001-css-script-p01-retest-a",
+          "role": "correct",
+          "contentReviewed": "Tab과 Shift+Tab으로 작업 순서와 현재 초점 표시를 함께 확인한다",
+          "finding": "전진·역방향과 표시를 모두 다루는 자세한 정답이다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-retest/choices/r001-css-script-p01-retest-b",
+          "partId": "r001-css-script-p01-retest",
+          "choiceId": "r001-css-script-p01-retest-b",
+          "role": "distractor",
+          "contentReviewed": "CSS 문법 검사만 통과하면 초점 점검을 끝낸다",
+          "finding": "검사만과 끝낸다는 표현이 부족한 검증을 직접 드러낸다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-retest/choices/r001-css-script-p01-retest-c",
+          "partId": "r001-css-script-p01-retest",
+          "choiceId": "r001-css-script-p01-retest-c",
+          "role": "distractor",
+          "contentReviewed": "포인터로 각 컨트롤을 클릭해 보고 키보드 점검은 생략한다",
+          "finding": "키보드 점검 생략을 명시하여 개념 지식 없이 제거하기 쉽다."
+        },
+        {
+          "path": "parts/r001-css-script-p01-retest/choices/r001-css-script-p01-retest-d",
+          "partId": "r001-css-script-p01-retest",
+          "choiceId": "r001-css-script-p01-retest-d",
+          "role": "distractor",
+          "contentReviewed": "검색 결과 개수만 확인한다",
+          "finding": "검색 결과 개수만은 초점 과제와 멀고 유난히 짧다."
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-p02",
+      "classification": "revise",
+      "issueCodes": [
+        "EXCLUSIVE_WRONG_ONLY",
+        "POSITIVE_KEY_ONLY"
+      ],
+      "reason": "정답 세 개는 확인한다, 오답 두 개는 점검 생략/대체 선언이다. 모두 조건부 조작의 기대 결과로 바꾸고 선택 수·혼합 상태 토글의 실제 오개념을 평가한다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-css-script-p02-sync/choices/r001-css-script-p02-sync-a",
+          "partId": "r001-css-script-p02-sync",
+          "choiceId": "r001-css-script-p02-sync-a",
+          "role": "correct",
+          "contentReviewed": "syncAll();",
+          "finding": "상태 재계산 함수 호출로 두 토글 방향과 표시를 함께 동기화한다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-sync/choices/r001-css-script-p02-sync-b",
+          "partId": "r001-css-script-p02-sync",
+          "choiceId": "r001-css-script-p02-sync-b",
+          "role": "distractor",
+          "contentReviewed": "all.focus();",
+          "finding": "초점 이동을 상태 갱신과 혼동하는 구현 오답이다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-sync/choices/r001-css-script-p02-sync-c",
+          "partId": "r001-css-script-p02-sync",
+          "choiceId": "r001-css-script-p02-sync-c",
+          "role": "distractor",
+          "contentReviewed": "all.setAttribute(\"aria-checked\", \"mixed\");",
+          "finding": "mixed라는 상수의 실제 오용을 평가한다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-sync/choices/r001-css-script-p02-sync-d",
+          "partId": "r001-css-script-p02-sync",
+          "choiceId": "r001-css-script-p02-sync-d",
+          "role": "distractor",
+          "contentReviewed": "all.setAttribute(\"aria-checked\", \"true\");",
+          "finding": "true 상수는 해제 경로의 실패를 평가한다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-sync/choices/r001-css-script-p02-sync-e",
+          "partId": "r001-css-script-p02-sync",
+          "choiceId": "r001-css-script-p02-sync-e",
+          "role": "distractor",
+          "contentReviewed": "all.setAttribute(\"aria-checked\", \"false\");",
+          "finding": "false 상수는 선택 경로의 실패를 평가한다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-test/choices/r001-css-script-p02-test-a",
+          "partId": "r001-css-script-p02-test",
+          "choiceId": "r001-css-script-p02-test-a",
+          "role": "correct",
+          "contentReviewed": "자식 하나만 선택하면 전체 알림이 혼합 상태로 전달되는지 확인한다",
+          "finding": "하나만은 실제 혼합 상태 조건이므로 제거 대상 단서가 아니다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-test/choices/r001-css-script-p02-test-b",
+          "partId": "r001-css-script-p02-test",
+          "choiceId": "r001-css-script-p02-test-b",
+          "role": "correct",
+          "contentReviewed": "전체 알림을 키보드로 활성화했을 때 자식 상태와 전체 상태가 함께 갱신되는지 확인한다",
+          "finding": "동기화의 실제 조작 검증이다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-test/choices/r001-css-script-p02-test-c",
+          "partId": "r001-css-script-p02-test",
+          "choiceId": "r001-css-script-p02-test-c",
+          "role": "correct",
+          "contentReviewed": "Tab과 Shift+Tab으로 전체 알림과 자식 체크박스를 오갈 수 있는지 확인한다",
+          "finding": "키보드 순차 탐색의 실제 검증이다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-test/choices/r001-css-script-p02-test-d",
+          "partId": "r001-css-script-p02-test",
+          "choiceId": "r001-css-script-p02-test-d",
+          "role": "distractor",
+          "contentReviewed": "aria-checked만 추가했으므로 키보드 동작 점검은 생략한다",
+          "finding": "aria-checked만/점검 생략이라는 형식으로 오답이 드러난다."
+        },
+        {
+          "path": "parts/r001-css-script-p02-test/choices/r001-css-script-p02-test-e",
+          "partId": "r001-css-script-p02-test",
+          "choiceId": "r001-css-script-p02-test-e",
+          "role": "distractor",
+          "contentReviewed": "눈으로 체크 표시만 확인하면 접근성 상태 전달도 확인한 것으로 처리한다",
+          "finding": "눈으로/표시만 확인하면이라는 대체 검증 문체로 정답과 구분된다."
+        }
+      ]
+    },
+    {
+      "questionId": "r001-css-script-p03",
+      "classification": "revise",
+      "issueCodes": [
+        "EXCLUSIVE_WRONG_ONLY",
+        "IMPLAUSIBLE_DISTRACTOR",
+        "POSITIVE_KEY_ONLY",
+        "UNEQUAL_DETAIL_LENGTH",
+        "WORD_ECHO"
+      ],
+      "reason": "정답만 이벤트·대입 동작을 설명하고 오답은 정상 레이블·선택지 존재·키보드 가능이라는 짧은 상태 진술이다. 각 보기를 코드 동작에 관한 인과 설명으로 맞춘다. / 정답은 상세한 대체 설계이고 오답 일부는 짧은 기능 제거·키보드만 배제다. 비슷한 길이의 실제 이벤트 처리 변경안으로 맞추고 자동 실행을 남기는 흔한 오류를 포함한다. / 정답은 확인한다로 끝나고 오답은 원래 문제를 성공으로 선언하거나 초점 이동을 요구한다. 같은 점검·기대 결과 문체로 통일한다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-css-script-p03-cause/choices/r001-css-script-p03-cause-a",
+          "partId": "r001-css-script-p03-cause",
+          "choiceId": "r001-css-script-p03-cause-a",
+          "role": "correct",
+          "contentReviewed": "선택값을 바꾸는 change 처리기에서 location.href를 대입한다",
+          "finding": "정답만 실제 자동 이동 연산을 언급하여 구체성과 지문 이동 표현이 집중된다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-cause/choices/r001-css-script-p03-cause-b",
+          "partId": "r001-css-script-p03-cause",
+          "choiceId": "r001-css-script-p03-cause-b",
+          "role": "distractor",
+          "contentReviewed": "label의 for와 select의 id가 일치한다",
+          "finding": "정상 for/id 연결을 그대로 문제라고 하는 약한 오답이다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-cause/choices/r001-css-script-p03-cause-c",
+          "partId": "r001-css-script-p03-cause",
+          "choiceId": "r001-css-script-p03-cause-c",
+          "role": "distractor",
+          "contentReviewed": "select에 서로 다른 두 option이 있다",
+          "finding": "option 둘의 존재는 원인으로서 개연성이 낮다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-cause/choices/r001-css-script-p03-cause-d",
+          "partId": "r001-css-script-p03-cause",
+          "choiceId": "r001-css-script-p03-cause-d",
+          "role": "distractor",
+          "contentReviewed": "select를 키보드로 조작할 수 있다",
+          "finding": "키보드로 조작 가능 자체를 문제라고 하여 쉽게 제거된다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-repair/choices/r001-css-script-p03-repair-a",
+          "partId": "r001-css-script-p03-repair",
+          "choiceId": "r001-css-script-p03-repair-a",
+          "role": "correct",
+          "contentReviewed": "change에서 이동하는 처리를 제거하고, 별도 이동 버튼을 활성화할 때 선택값으로 이동한다",
+          "finding": "정답만 원인 제거와 대체 실행 경로를 모두 설명하여 길이 차이가 크다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-repair/choices/r001-css-script-p03-repair-b",
+          "partId": "r001-css-script-p03-repair",
+          "choiceId": "r001-css-script-p03-repair-b",
+          "role": "distractor",
+          "contentReviewed": "change 대신 focus에서 즉시 이동한다",
+          "finding": "focus로 바꾸는 잘못된 실행 시점은 유효한 오개념이므로 보강한다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-repair/choices/r001-css-script-p03-repair-c",
+          "partId": "r001-css-script-p03-repair",
+          "choiceId": "r001-css-script-p03-repair-c",
+          "role": "distractor",
+          "contentReviewed": "select를 disabled로 바꾸어 선택을 막는다",
+          "finding": "disabled로 기능을 없애는 방법은 개선안으로서 낮은 개연성이다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-repair/choices/r001-css-script-p03-repair-d",
+          "partId": "r001-css-script-p03-repair",
+          "choiceId": "r001-css-script-p03-repair-d",
+          "role": "distractor",
+          "contentReviewed": "키보드 change만 무시하고 포인터 선택 때는 즉시 이동한다",
+          "finding": "키보드 change만 무시는 입력 방식 차별을 쉽게 드러낸다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-repair/choices/r001-css-script-p03-repair-e",
+          "partId": "r001-css-script-p03-repair",
+          "choiceId": "r001-css-script-p03-repair-e",
+          "role": "distractor",
+          "contentReviewed": "이동을 1초 늦추고 자동 이동 방식은 유지한다",
+          "finding": "지연 실행은 선택과 실행 분리를 혼동하는 유효한 오개념이다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-retest/choices/r001-css-script-p03-retest-a",
+          "partId": "r001-css-script-p03-retest",
+          "choiceId": "r001-css-script-p03-retest-a",
+          "role": "correct",
+          "contentReviewed": "선택값만 바꿨을 때 현재 페이지와 조작 초점이 유지되는지 확인한다",
+          "finding": "선택값만은 실행과 구별해야 하는 실제 조건이므로 의미를 보존한다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-retest/choices/r001-css-script-p03-retest-b",
+          "partId": "r001-css-script-p03-retest",
+          "choiceId": "r001-css-script-p03-retest-b",
+          "role": "correct",
+          "contentReviewed": "별도 이동 버튼을 키보드로 활성화하면 현재 선택한 교육장으로 이동하는지 확인한다",
+          "finding": "키보드 활성화의 타당한 검사다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-retest/choices/r001-css-script-p03-retest-c",
+          "partId": "r001-css-script-p03-retest",
+          "choiceId": "r001-css-script-p03-retest-c",
+          "role": "correct",
+          "contentReviewed": "버튼을 포인터로 활성화해도 현재 선택한 교육장으로 이동하는지 확인한다",
+          "finding": "포인터 활성화의 타당한 검사다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-retest/choices/r001-css-script-p03-retest-d",
+          "partId": "r001-css-script-p03-retest",
+          "choiceId": "r001-css-script-p03-retest-d",
+          "role": "distractor",
+          "contentReviewed": "선택과 동시에 페이지가 이동하면 개선이 성공한 것으로 본다",
+          "finding": "원래 문제를 개선 성공이라고 부르는 문구 자체가 제거 단서다."
+        },
+        {
+          "path": "parts/r001-css-script-p03-retest/choices/r001-css-script-p03-retest-e",
+          "partId": "r001-css-script-p03-retest",
+          "choiceId": "r001-css-script-p03-retest-e",
+          "role": "distractor",
+          "contentReviewed": "이동 버튼에 초점만 도달해도 페이지가 이동하도록 요구한다",
+          "finding": "초점만 도달해도라는 부적절 요구 문체가 정답과 대비된다."
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w01",
+      "classification": "revise",
+      "issueCodes": [
+        "implausible_distractor"
+      ],
+      "reason": "하드웨어 크기로 역할을 정한다는 오답을 메시지를 받을 때 서버가 된다는 역할 혼동으로 교체한다. 다른 네 선택지의 개념과 표현은 유지한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w01-o01",
+          "optionId": "r001-internet-html-w01-o01",
+          "role": "correct",
+          "contentReviewed": "브라우저가 클라이언트이고 웹 서버 프로그램이 서버이다.",
+          "length": 30,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w01-o02",
+          "optionId": "r001-internet-html-w01-o02",
+          "role": "distractor",
+          "contentReviewed": "브라우저가 서버이고 웹 서버 프로그램이 클라이언트이다.",
+          "length": 30,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w01-o03",
+          "optionId": "r001-internet-html-w01-o03",
+          "role": "distractor",
+          "contentReviewed": "두 프로그램 모두 요청을 보내는 클라이언트 역할이다.",
+          "length": 29,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w01-o04",
+          "optionId": "r001-internet-html-w01-o04",
+          "role": "distractor",
+          "contentReviewed": "두 프로그램 모두 응답을 보내는 서버 역할이다.",
+          "length": 26,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w01-o05",
+          "optionId": "r001-internet-html-w01-o05",
+          "role": "distractor",
+          "contentReviewed": "프로그램의 역할은 요청과 응답이 아니라 컴퓨터의 크기로 정한다.",
+          "length": 35,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w02",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "URL의 구성 요소를 그대로 비교하는 동종 짧은 목록이다. ?와 #는 실제 구문 경계다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w02-o01",
+          "optionId": "r001-internet-html-w02-o01",
+          "role": "distractor",
+          "contentReviewed": "catalog.example.org",
+          "length": 19,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w02-o02",
+          "optionId": "r001-internet-html-w02-o02",
+          "role": "correct",
+          "contentReviewed": "tag=history",
+          "length": 11,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w02-o03",
+          "optionId": "r001-internet-html-w02-o03",
+          "role": "distractor",
+          "contentReviewed": "/books",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w02-o04",
+          "optionId": "r001-internet-html-w02-o04",
+          "role": "distractor",
+          "contentReviewed": "reading",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w02-o05",
+          "optionId": "r001-internet-html-w02-o05",
+          "role": "distractor",
+          "contentReviewed": "https",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w03",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "같은 DNS 이름 계층의 서로 다른 수준을 비교한다. 끝의 점과 바로 상위라는 조건이 정답을 고정하므로 보존한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w03-o01",
+          "optionId": "r001-internet-html-w03-o01",
+          "role": "distractor",
+          "contentReviewed": "guide.library.example.org.",
+          "length": 26,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w03-o02",
+          "optionId": "r001-internet-html-w03-o02",
+          "role": "distractor",
+          "contentReviewed": "example.org.",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w03-o03",
+          "optionId": "r001-internet-html-w03-o03",
+          "role": "distractor",
+          "contentReviewed": "org.",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w03-o04",
+          "optionId": "r001-internet-html-w03-o04",
+          "role": "correct",
+          "contentReviewed": "library.example.org.",
+          "length": 20,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w03-o05",
+          "optionId": "r001-internet-html-w03-o05",
+          "role": "distractor",
+          "contentReviewed": ".",
+          "length": 1,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w04",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "캐시 수명과 등록 기간·페이지 시간·IP TTL 등을 혼동하는 정의형 보기다. IP TTL이라는 가까운 개념도 포함하고 정답만의 절대어·장문 패턴이 없다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w04-o01",
+          "optionId": "r001-internet-html-w04-o01",
+          "role": "distractor",
+          "contentReviewed": "도메인 등록 계약의 남은 기간",
+          "length": 16,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w04-o02",
+          "optionId": "r001-internet-html-w04-o02",
+          "role": "distractor",
+          "contentReviewed": "DNS 서버에 연결할 수 있는 최대 사용자 수",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w04-o03",
+          "optionId": "r001-internet-html-w04-o03",
+          "role": "correct",
+          "contentReviewed": "해당 자원 레코드를 캐시에 보관할 수 있는 수명",
+          "length": 26,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w04-o04",
+          "optionId": "r001-internet-html-w04-o04",
+          "role": "distractor",
+          "contentReviewed": "웹 페이지를 화면에 표시하는 데 걸린 시간",
+          "length": 23,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w04-o05",
+          "optionId": "r001-internet-html-w04-o05",
+          "role": "distractor",
+          "contentReviewed": "한 IP 패킷이 통과할 수 있는 라우터 수",
+          "length": 23,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w05",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "주소 길이의 다섯 비트 수가 평행하다. 축약 표기 여부 전제는 길이와 표시를 구별하는 내용이다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w05-o01",
+          "optionId": "r001-internet-html-w05-o01",
+          "role": "distractor",
+          "contentReviewed": "16비트",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w05-o02",
+          "optionId": "r001-internet-html-w05-o02",
+          "role": "distractor",
+          "contentReviewed": "32비트",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w05-o03",
+          "optionId": "r001-internet-html-w05-o03",
+          "role": "distractor",
+          "contentReviewed": "64비트",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w05-o04",
+          "optionId": "r001-internet-html-w05-o04",
+          "role": "distractor",
+          "contentReviewed": "256비트",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w05-o05",
+          "optionId": "r001-internet-html-w05-o05",
+          "role": "correct",
+          "contentReviewed": "128비트",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w06",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTTP 메서드 이름의 동종 목록이다. 응답 콘텐츠 및 정의된 요청 의미라는 조건으로 HEAD나 구현 부수효과의 반례를 막는다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w06-o01",
+          "optionId": "r001-internet-html-w06-o01",
+          "role": "distractor",
+          "contentReviewed": "HEAD",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w06-o02",
+          "optionId": "r001-internet-html-w06-o02",
+          "role": "distractor",
+          "contentReviewed": "POST",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w06-o03",
+          "optionId": "r001-internet-html-w06-o03",
+          "role": "correct",
+          "contentReviewed": "GET",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w06-o04",
+          "optionId": "r001-internet-html-w06-o04",
+          "role": "distractor",
+          "contentReviewed": "PUT",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w06-o05",
+          "optionId": "r001-internet-html-w06-o05",
+          "role": "distractor",
+          "contentReviewed": "DELETE",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w07",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTTP 상태 의미 다섯 개가 같은 서술형이며 각각 다른 실제 코드의 의미다. 404의 존재 비공개 가능성을 포함한 정답의 길이는 필수 사실이므로 삭제하지 않는다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w07-o01",
+          "optionId": "r001-internet-html-w07-o01",
+          "role": "distractor",
+          "contentReviewed": "요청이 성공적으로 처리되었다.",
+          "length": 16,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w07-o02",
+          "optionId": "r001-internet-html-w07-o02",
+          "role": "correct",
+          "contentReviewed": "대상 자원의 현재 표현을 찾지 못했거나 그 존재를 공개하지 않으려 한다.",
+          "length": 40,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w07-o03",
+          "optionId": "r001-internet-html-w07-o03",
+          "role": "distractor",
+          "contentReviewed": "대상 자원에 새로운 영구 URI가 부여되었다.",
+          "length": 25,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w07-o04",
+          "optionId": "r001-internet-html-w07-o04",
+          "role": "distractor",
+          "contentReviewed": "유효한 인증 자격 증명이 없어 요청이 적용되지 않았다.",
+          "length": 30,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w07-o05",
+          "optionId": "r001-internet-html-w07-o05",
+          "role": "distractor",
+          "contentReviewed": "서버에 예상하지 못한 상황이 발생하여 요청을 이행하지 못했다.",
+          "length": 34,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w08",
+      "classification": "revise",
+      "issueCodes": [
+        "wrong_only_absolute",
+        "implausible_distractors"
+      ],
+      "reason": "콘텐츠 진실성 보장·기기 악성코드 제거 같은 만능 보안 오답을 실제 보안 기능의 계층 혼동으로 바꾼다. 모든 보기를 보안 조치의 효과라는 긍정형으로 맞춘다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w08-o01",
+          "optionId": "r001-internet-html-w08-o01",
+          "role": "correct",
+          "contentReviewed": "브라우저와 통신 상대 사이에 전달되는 HTTP 데이터의 기밀성과 무결성을 보호한다.",
+          "length": 46,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w08-o02",
+          "optionId": "r001-internet-html-w08-o02",
+          "role": "distractor",
+          "contentReviewed": "해당 웹 페이지에 실린 모든 정보가 사실임을 보증한다.",
+          "length": 30,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w08-o03",
+          "optionId": "r001-internet-html-w08-o03",
+          "role": "distractor",
+          "contentReviewed": "서버가 수신한 개인정보를 저장할 수 없게 한다.",
+          "length": 26,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w08-o04",
+          "optionId": "r001-internet-html-w08-o04",
+          "role": "distractor",
+          "contentReviewed": "사용자 기기에 설치된 모든 악성 프로그램을 제거한다.",
+          "length": 29,
+          "signalTerms": [
+            "모든"
+          ],
+          "disposition": "candidate_revision"
+        },
+        {
+          "path": "links/r001-internet-html-w08-o05",
+          "optionId": "r001-internet-html-w08-o05",
+          "role": "distractor",
+          "contentReviewed": "이용자가 선택한 비밀번호가 다른 서비스에서 재사용되는 것을 막는다.",
+          "length": 37,
+          "signalTerms": [],
+          "disposition": "candidate_revision"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w09",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTTP 헤더 필드 이름의 동종 목록이다. 유형/길이/인코딩/위치/호스트의 혼동을 평가한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w09-o01",
+          "optionId": "r001-internet-html-w09-o01",
+          "role": "distractor",
+          "contentReviewed": "Content-Length",
+          "length": 14,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w09-o02",
+          "optionId": "r001-internet-html-w09-o02",
+          "role": "distractor",
+          "contentReviewed": "Location",
+          "length": 8,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w09-o03",
+          "optionId": "r001-internet-html-w09-o03",
+          "role": "distractor",
+          "contentReviewed": "Content-Encoding",
+          "length": 16,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w09-o04",
+          "optionId": "r001-internet-html-w09-o04",
+          "role": "correct",
+          "contentReviewed": "Content-Type",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w09-o05",
+          "optionId": "r001-internet-html-w09-o05",
+          "role": "distractor",
+          "contentReviewed": "Host",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w10",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "메일 전송/메일함 조회/파일 전송/웹/DNS의 프로토콜 명칭을 비교한다. 모든 보기가 짧은 약어로 평행하다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s2",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w10-o01",
+          "optionId": "r001-internet-html-w10-o01",
+          "role": "distractor",
+          "contentReviewed": "IMAP",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w10-o02",
+          "optionId": "r001-internet-html-w10-o02",
+          "role": "distractor",
+          "contentReviewed": "FTP",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w10-o03",
+          "optionId": "r001-internet-html-w10-o03",
+          "role": "correct",
+          "contentReviewed": "SMTP",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w10-o04",
+          "optionId": "r001-internet-html-w10-o04",
+          "role": "distractor",
+          "contentReviewed": "HTTP",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w10-o05",
+          "optionId": "r001-internet-html-w10-o05",
+          "role": "distractor",
+          "contentReviewed": "DNS",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w11",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "제목과 관련된 HTML 요소 명칭을 비교한다. head·기록·북마크라는 실제 의미 조건이 title을 구별한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w11-o01",
+          "optionId": "r001-internet-html-w11-o01",
+          "role": "distractor",
+          "contentReviewed": "h1",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w11-o02",
+          "optionId": "r001-internet-html-w11-o02",
+          "role": "distractor",
+          "contentReviewed": "caption",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w11-o03",
+          "optionId": "r001-internet-html-w11-o03",
+          "role": "distractor",
+          "contentReviewed": "legend",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w11-o04",
+          "optionId": "r001-internet-html-w11-o04",
+          "role": "correct",
+          "contentReviewed": "title",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w11-o05",
+          "optionId": "r001-internet-html-w11-o05",
+          "role": "distractor",
+          "contentReviewed": "summary",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w12",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTML 속성 이름을 비교한다. 1024바이트·UTF-8 저장 조건은 문자 인코딩 선언을 유효하게 해주는 기술 전제이다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w12-o01",
+          "optionId": "r001-internet-html-w12-o01",
+          "role": "correct",
+          "contentReviewed": "charset",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w12-o02",
+          "optionId": "r001-internet-html-w12-o02",
+          "role": "distractor",
+          "contentReviewed": "lang",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w12-o03",
+          "optionId": "r001-internet-html-w12-o03",
+          "role": "distractor",
+          "contentReviewed": "name",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w12-o04",
+          "optionId": "r001-internet-html-w12-o04",
+          "role": "distractor",
+          "contentReviewed": "id",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w12-o05",
+          "optionId": "r001-internet-html-w12-o05",
+          "role": "distractor",
+          "contentReviewed": "class",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w13",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTML 섹션 요소의 동종 목록이다. 독립적 완결 글이라는 의미와 기능이 핵심이고 div 가능성을 의미 요구로 배제한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w13-o01",
+          "optionId": "r001-internet-html-w13-o01",
+          "role": "distractor",
+          "contentReviewed": "nav",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w13-o02",
+          "optionId": "r001-internet-html-w13-o02",
+          "role": "correct",
+          "contentReviewed": "article",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w13-o03",
+          "optionId": "r001-internet-html-w13-o03",
+          "role": "distractor",
+          "contentReviewed": "aside",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w13-o04",
+          "optionId": "r001-internet-html-w13-o04",
+          "role": "distractor",
+          "contentReviewed": "main",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w13-o05",
+          "optionId": "r001-internet-html-w13-o05",
+          "role": "distractor",
+          "contentReviewed": "div",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w14",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "목록·문단·컨테이너 요소 이름을 비교한다. 순서 변경 시 의미가 바뀐다는 조건이 ol/ul/dl을 구별한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w14-o01",
+          "optionId": "r001-internet-html-w14-o01",
+          "role": "distractor",
+          "contentReviewed": "ul",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w14-o02",
+          "optionId": "r001-internet-html-w14-o02",
+          "role": "distractor",
+          "contentReviewed": "dl",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w14-o03",
+          "optionId": "r001-internet-html-w14-o03",
+          "role": "distractor",
+          "contentReviewed": "div",
+          "length": 3,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w14-o04",
+          "optionId": "r001-internet-html-w14-o04",
+          "role": "distractor",
+          "contentReviewed": "p",
+          "length": 1,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w14-o05",
+          "optionId": "r001-internet-html-w14-o05",
+          "role": "correct",
+          "contentReviewed": "ol",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w15",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "강조·중요성·참조·부가 설명의 HTML 의미를 비교한다. 경고문 안의 반드시를 지우면 원문의 경고 의미가 달라지므로 유지한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w15-o01",
+          "optionId": "r001-internet-html-w15-o01",
+          "role": "distractor",
+          "contentReviewed": "b",
+          "length": 1,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w15-o02",
+          "optionId": "r001-internet-html-w15-o02",
+          "role": "distractor",
+          "contentReviewed": "em",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w15-o03",
+          "optionId": "r001-internet-html-w15-o03",
+          "role": "correct",
+          "contentReviewed": "strong",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w15-o04",
+          "optionId": "r001-internet-html-w15-o04",
+          "role": "distractor",
+          "contentReviewed": "small",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w15-o05",
+          "optionId": "r001-internet-html-w15-o05",
+          "role": "distractor",
+          "contentReviewed": "mark",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w16",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTML 속성 이름 목록이며 href 외 보기는 이름·식별자·언어·스타일 대상 혼동이다. 스크립트 없음 조건은 네이티브 링크 의미에 필요하다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w16-o01",
+          "optionId": "r001-internet-html-w16-o01",
+          "role": "distractor",
+          "contentReviewed": "title",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w16-o02",
+          "optionId": "r001-internet-html-w16-o02",
+          "role": "distractor",
+          "contentReviewed": "class",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w16-o03",
+          "optionId": "r001-internet-html-w16-o03",
+          "role": "distractor",
+          "contentReviewed": "id",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w16-o04",
+          "optionId": "r001-internet-html-w16-o04",
+          "role": "correct",
+          "contentReviewed": "href",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w16-o05",
+          "optionId": "r001-internet-html-w16-o05",
+          "role": "distractor",
+          "contentReviewed": "lang",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w17",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "표와 캡션·제목에 관련된 HTML 요소 이름을 비교한다. caption/thead/th/figcaption/legend가 실제 의미 혼동을 평가한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w17-o01",
+          "optionId": "r001-internet-html-w17-o01",
+          "role": "distractor",
+          "contentReviewed": "thead",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w17-o02",
+          "optionId": "r001-internet-html-w17-o02",
+          "role": "correct",
+          "contentReviewed": "caption",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w17-o03",
+          "optionId": "r001-internet-html-w17-o03",
+          "role": "distractor",
+          "contentReviewed": "th",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w17-o04",
+          "optionId": "r001-internet-html-w17-o04",
+          "role": "distractor",
+          "contentReviewed": "figcaption",
+          "length": 10,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w17-o05",
+          "optionId": "r001-internet-html-w17-o05",
+          "role": "distractor",
+          "contentReviewed": "legend",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w18",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTML 속성 이름 목록이다. 같은 form/문서 트리 조건은 name으로 라디오 그룹이 형성되는 기술 전제이므로 보존한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w18-o01",
+          "optionId": "r001-internet-html-w18-o01",
+          "role": "distractor",
+          "contentReviewed": "id",
+          "length": 2,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w18-o02",
+          "optionId": "r001-internet-html-w18-o02",
+          "role": "distractor",
+          "contentReviewed": "class",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w18-o03",
+          "optionId": "r001-internet-html-w18-o03",
+          "role": "correct",
+          "contentReviewed": "name",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w18-o04",
+          "optionId": "r001-internet-html-w18-o04",
+          "role": "distractor",
+          "contentReviewed": "title",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w18-o05",
+          "optionId": "r001-internet-html-w18-o05",
+          "role": "distractor",
+          "contentReviewed": "lang",
+          "length": 4,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w19",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "track kind의 실제 값 목록이다. 대사 외 소리 정보를 포함한다는 조건은 captions/subtitles를 구별하므로 보존한다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w19-o01",
+          "optionId": "r001-internet-html-w19-o01",
+          "role": "distractor",
+          "contentReviewed": "subtitles",
+          "length": 9,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w19-o02",
+          "optionId": "r001-internet-html-w19-o02",
+          "role": "distractor",
+          "contentReviewed": "chapters",
+          "length": 8,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w19-o03",
+          "optionId": "r001-internet-html-w19-o03",
+          "role": "distractor",
+          "contentReviewed": "metadata",
+          "length": 8,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w19-o04",
+          "optionId": "r001-internet-html-w19-o04",
+          "role": "distractor",
+          "contentReviewed": "descriptions",
+          "length": 12,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w19-o05",
+          "optionId": "r001-internet-html-w19-o05",
+          "role": "correct",
+          "contentReviewed": "captions",
+          "length": 8,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-w20",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "HTML 제목·요약 관련 요소 이름이다. details의 첫 summary 의미를 알아야 고를 수 있으며 평행한 짧은 명칭이다.",
+      "testOnly": false,
+      "type": "written",
+      "subjectId": "s3",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "links/r001-internet-html-w20-o01",
+          "optionId": "r001-internet-html-w20-o01",
+          "role": "correct",
+          "contentReviewed": "summary",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w20-o02",
+          "optionId": "r001-internet-html-w20-o02",
+          "role": "distractor",
+          "contentReviewed": "legend",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w20-o03",
+          "optionId": "r001-internet-html-w20-o03",
+          "role": "distractor",
+          "contentReviewed": "caption",
+          "length": 7,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w20-o04",
+          "optionId": "r001-internet-html-w20-o04",
+          "role": "distractor",
+          "contentReviewed": "title",
+          "length": 5,
+          "signalTerms": [],
+          "disposition": "retain"
+        },
+        {
+          "path": "links/r001-internet-html-w20-o05",
+          "optionId": "r001-internet-html-w20-o05",
+          "role": "distractor",
+          "contentReviewed": "footer",
+          "length": 6,
+          "signalTerms": [],
+          "disposition": "retain"
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-p01",
+      "classification": "revise",
+      "issueCodes": [
+        "IMPLAUSIBLE_DISTRACTOR",
+        "POSITIVE_KEY_ONLY"
+      ],
+      "reason": "동시 선택·서버 값 자동 변경·암호화처럼 문맥과 먼 결과가 섞여 있다. 그룹 이름/개별 이름/라디오 그룹 동작/제출 값/필수 검증의 역할 혼동으로 범위를 맞춘다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-internet-html-p01-part03/choices/r001-internet-html-p01-part03-c01",
+          "partId": "r001-internet-html-p01-part03",
+          "choiceId": "r001-internet-html-p01-part03-c01",
+          "role": "correct",
+          "contentReviewed": "현장·온라인이라는 선택지에 공통 질문인 참여 방식의 맥락을 연결한다.",
+          "finding": "공통 맥락 제공이라는 자연스러운 유익이 정답에 집중된다."
+        },
+        {
+          "path": "parts/r001-internet-html-p01-part03/choices/r001-internet-html-p01-part03-c02",
+          "partId": "r001-internet-html-p01-part03",
+          "choiceId": "r001-internet-html-p01-part03-c02",
+          "role": "distractor",
+          "contentReviewed": "그룹 이름 하나로 두 라디오의 개별 레이블을 제거할 수 있게 한다.",
+          "finding": "개별 레이블 대체 혼동은 실제 오개념이어서 더 병렬적으로 다듬는다."
+        },
+        {
+          "path": "parts/r001-internet-html-p01-part03/choices/r001-internet-html-p01-part03-c03",
+          "partId": "r001-internet-html-p01-part03",
+          "choiceId": "r001-internet-html-p01-part03-c03",
+          "role": "distractor",
+          "contentReviewed": "fieldset이 두 라디오를 동시에 선택된 상태로 바꾼다.",
+          "finding": "라디오의 동시 선택 강제는 name 보존 조건과 노골적으로 충돌한다."
+        },
+        {
+          "path": "parts/r001-internet-html-p01-part03/choices/r001-internet-html-p01-part03-c04",
+          "partId": "r001-internet-html-p01-part03",
+          "choiceId": "r001-internet-html-p01-part03-c04",
+          "role": "distractor",
+          "contentReviewed": "legend가 라디오의 서버 제출 값을 자동으로 변경한다.",
+          "finding": "그룹 이름과 제출 값 혼동은 유효한 오개념이지만 자동이라는 수사에 의존한다."
+        },
+        {
+          "path": "parts/r001-internet-html-p01-part03/choices/r001-internet-html-p01-part03-c05",
+          "partId": "r001-internet-html-p01-part03",
+          "choiceId": "r001-internet-html-p01-part03-c05",
+          "role": "distractor",
+          "contentReviewed": "입력 내용을 암호화하여 서버에 전달한다.",
+          "finding": "입력 암호화는 이 HTML 그룹 학습 목표와 너무 멀다."
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-p02",
+      "classification": "retain",
+      "issueCodes": [],
+      "reason": "실기 세 항목을 전수 검토했다. scope 단답형 및 행·열·caption 조합 객관식은 실제 개념 구별을 평가하고 수사적 정답 단서가 두드러지지 않아 유지한다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-internet-html-p02-part03/choices/r001-internet-html-p02-part03-c01",
+          "partId": "r001-internet-html-p02-part03",
+          "choiceId": "r001-internet-html-p02-part03-c01",
+          "role": "distractor",
+          "contentReviewed": "남구 / 신청 수",
+          "finding": "맞는 열 제목과 다른 행 제목을 섞은 실제 표 탐색 오류다."
+        },
+        {
+          "path": "parts/r001-internet-html-p02-part03/choices/r001-internet-html-p02-part03-c02",
+          "partId": "r001-internet-html-p02-part03",
+          "choiceId": "r001-internet-html-p02-part03-c02",
+          "role": "distractor",
+          "contentReviewed": "북구 / 지역",
+          "finding": "맞는 행 제목과 다른 열 제목을 섞은 실제 표 탐색 오류다."
+        },
+        {
+          "path": "parts/r001-internet-html-p02-part03/choices/r001-internet-html-p02-part03-c03",
+          "partId": "r001-internet-html-p02-part03",
+          "choiceId": "r001-internet-html-p02-part03-c03",
+          "role": "correct",
+          "contentReviewed": "북구 / 신청 수",
+          "finding": "정답도 다른 조합과 같은 명사/슬래시 형식이다."
+        },
+        {
+          "path": "parts/r001-internet-html-p02-part03/choices/r001-internet-html-p02-part03-c04",
+          "partId": "r001-internet-html-p02-part03",
+          "choiceId": "r001-internet-html-p02-part03-c04",
+          "role": "distractor",
+          "contentReviewed": "남구 / 지역",
+          "finding": "다른 행과 다른 열 제목의 조합으로 공간 관계를 평가한다."
+        },
+        {
+          "path": "parts/r001-internet-html-p02-part03/choices/r001-internet-html-p02-part03-c05",
+          "partId": "r001-internet-html-p02-part03",
+          "choiceId": "r001-internet-html-p02-part03-c05",
+          "role": "distractor",
+          "contentReviewed": "지역별 프로그램 신청 수 / 남구",
+          "finding": "caption/행/열 역할 혼동을 평가한다. 길이가 길지만 오답 한 개의 길이 차이이며 정답만의 단서가 아니다."
+        }
+      ]
+    },
+    {
+      "questionId": "r001-internet-html-p03",
+      "classification": "revise",
+      "issueCodes": [
+        "ABSOLUTE_WRONG_ONLY",
+        "EXCLUSIVE_WRONG_ONLY",
+        "IMPLAUSIBLE_DISTRACTOR",
+        "POSITIVE_KEY_ONLY",
+        "UNEQUAL_DETAIL_LENGTH"
+      ],
+      "reason": "UTF-8의 한국어 금지·p의 한국어 금지·doctype의 영어 고정 등 실제 언어 선언 오개념과 먼 강한 부정이 집중된다. 인코딩/자동 언어 추정/상속/XML 선언과 자연 언어 선언을 혼동하는 근접 오답으로 교체한다. / 대체 텍스트 불필요·모든 음성 강제·한국 IP 변경은 학습 목표와 먼 결과여서 정답이 드러난다. 번역 요청/문자 디코딩/음성 설정/HTTP 언어 협상이라는 실제로 혼동하기 쉬운 역할을 구별한다. / 정답 두 개는 직접 확인이고 오답은 lang을 읽지 않기·글자색으로 통과·음성 강제처럼 낮은 개연성의 생략/강제다. 인코딩·브라우저 표시 언어·문자 렌더링을 근거로 언어 선언을 추정하는 현실적인 오판으로 교체한다.",
+      "testOnly": false,
+      "type": "practical",
+      "subjectId": "practical",
+      "allChoicesInspected": true,
+      "choiceReviews": [
+        {
+          "path": "parts/r001-internet-html-p03-part01/choices/r001-internet-html-p03-part01-c01",
+          "partId": "r001-internet-html-p03-part01",
+          "choiceId": "r001-internet-html-p03-part01-c01",
+          "role": "distractor",
+          "contentReviewed": "meta의 charset=\"utf-8\"이 한국어 사용을 금지한다.",
+          "finding": "UTF-8이 한국어를 금지한다는 오답은 기술적으로 터무니없고 금지 어조가 강하다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part01/choices/r001-internet-html-p03-part01-c02",
+          "partId": "r001-internet-html-p03-part01",
+          "choiceId": "r001-internet-html-p03-part01-c02",
+          "role": "correct",
+          "contentReviewed": "html의 lang=\"en\"이 실제 한국어 콘텐츠와 다른 기본 언어를 지정한다.",
+          "finding": "정답만 실제 속성값과 내용 불일치를 자연스럽게 설명한다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part01/choices/r001-internet-html-p03-part01-c03",
+          "partId": "r001-internet-html-p03-part01",
+          "choiceId": "r001-internet-html-p03-part01-c03",
+          "role": "distractor",
+          "contentReviewed": "title과 h1의 텍스트가 같으면 언어를 지정할 수 없다.",
+          "finding": "title/h1 동일 텍스트가 언어 지정을 막는다는 인과 관계는 개연성이 낮다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part01/choices/r001-internet-html-p03-part01-c04",
+          "partId": "r001-internet-html-p03-part01",
+          "choiceId": "r001-internet-html-p03-part01-c04",
+          "role": "distractor",
+          "contentReviewed": "p 요소에는 한국어 텍스트를 넣을 수 없다.",
+          "finding": "p에 한국어를 넣지 못한다는 오답은 문제 자료 자체와 즉시 충돌한다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part01/choices/r001-internet-html-p03-part01-c05",
+          "partId": "r001-internet-html-p03-part01",
+          "choiceId": "r001-internet-html-p03-part01-c05",
+          "role": "distractor",
+          "contentReviewed": "doctype 선언이 문서의 기본 언어를 영어로 고정한다.",
+          "finding": "doctype의 영어 고정은 과도한 절대화다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part03/choices/r001-internet-html-p03-part03-c01",
+          "partId": "r001-internet-html-p03-part03",
+          "choiceId": "r001-internet-html-p03-part03-c01",
+          "role": "distractor",
+          "contentReviewed": "브라우저가 한국어 본문을 자동으로 영어로 번역하게 한다.",
+          "finding": "자동 번역 실행 혼동은 근접 오개념으로 유지하되 문체를 맞춘다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part03/choices/r001-internet-html-p03-part03-c02",
+          "partId": "r001-internet-html-p03-part03",
+          "choiceId": "r001-internet-html-p03-part03-c02",
+          "role": "distractor",
+          "contentReviewed": "한국어 페이지에서는 모든 이미지의 대체 텍스트가 필요 없어지게 한다.",
+          "finding": "모든 이미지 대체 텍스트 불필요는 직접 관계가 없고 절대어가 강하다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part03/choices/r001-internet-html-p03-part03-c03",
+          "partId": "r001-internet-html-p03-part03",
+          "choiceId": "r001-internet-html-p03-part03-c03",
+          "role": "distractor",
+          "contentReviewed": "모든 화면낭독프로그램에서 동일한 목소리와 속도를 강제한다.",
+          "finding": "모든 화면낭독프로그램 동일 목소리·속도 강제는 과도한 절대어로 오답이 드러난다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part03/choices/r001-internet-html-p03-part03-c04",
+          "partId": "r001-internet-html-p03-part03",
+          "choiceId": "r001-internet-html-p03-part03-c04",
+          "role": "correct",
+          "contentReviewed": "화면낭독프로그램 등이 한국어에 맞는 발음이나 언어 처리를 선택할 정보를 제공한다.",
+          "finding": "정답만 부드러운 지원/정보 제공의 긍정 문장이다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part03/choices/r001-internet-html-p03-part03-c05",
+          "partId": "r001-internet-html-p03-part03",
+          "choiceId": "r001-internet-html-p03-part03-c05",
+          "role": "distractor",
+          "contentReviewed": "웹 서버의 인터넷 주소를 한국의 IP 주소로 변경한다.",
+          "finding": "서버 IP의 한국 주소 변경은 lang 학습 목표에서 너무 멀다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part04/choices/r001-internet-html-p03-part04-c01",
+          "partId": "r001-internet-html-p03-part04",
+          "choiceId": "r001-internet-html-p03-part04-c01",
+          "role": "correct",
+          "contentReviewed": "최종 문서의 html lang 값이 한국어 콘텐츠와 일치하는지 확인한다.",
+          "finding": "실제 언어와 최종 선언의 직접 대조로 타당하다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part04/choices/r001-internet-html-p03-part04-c02",
+          "partId": "r001-internet-html-p03-part04",
+          "choiceId": "r001-internet-html-p03-part04-c02",
+          "role": "distractor",
+          "contentReviewed": "글자가 깨지지 않으면 lang 값을 읽지 않고 점검을 끝낸다.",
+          "finding": "lang을 읽지 않고 끝낸다는 생략 문체가 오답을 드러낸다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part04/choices/r001-internet-html-p03-part04-c03",
+          "partId": "r001-internet-html-p03-part04",
+          "choiceId": "r001-internet-html-p03-part04-c03",
+          "role": "distractor",
+          "contentReviewed": "영어인 en을 유지해도 글자색이 같으면 통과시킨다.",
+          "finding": "글자색과 기본 언어의 관계는 너무 멀다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part04/choices/r001-internet-html-p03-part04-c04",
+          "partId": "r001-internet-html-p03-part04",
+          "choiceId": "r001-internet-html-p03-part04-c04",
+          "role": "distractor",
+          "contentReviewed": "lang과 관계없이 모든 사용자에게 같은 음성을 강제로 지정한다.",
+          "finding": "모든 사용자에게 같은 음성 강제는 과제와 무관한 극단화다."
+        },
+        {
+          "path": "parts/r001-internet-html-p03-part04/choices/r001-internet-html-p03-part04-c05",
+          "partId": "r001-internet-html-p03-part04",
+          "choiceId": "r001-internet-html-p03-part04-c05",
+          "role": "correct",
+          "contentReviewed": "한국어 음성이 준비된 화면낭독 환경에서 언어별 처리가 적절한지 확인한다.",
+          "finding": "준비된 보조기술 환경의 실제 확인으로 타당하다."
+        }
+      ]
+    }
+  ]
+}

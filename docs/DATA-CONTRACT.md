@@ -6,6 +6,7 @@
 
 - 신규 은행은 `schemaVersion: 3`; 호환성 읽기는 `1`, `2`도 허용합니다. 세션·백업·manifest 외피 버전은 계속 `1`입니다
 - `bankVersion`: ASCII 안정 버전 ID, `releasedAt`: ISO 시각
+- 편집 정정 릴리스의 `editorialRoundId`는 해당 공개 운영 대장을 가리키는 메타데이터입니다. 앱 정답·채점 상태나 점수 정정 배열이 아니며 신규 정규 문항 수를 늘리지 않습니다
 - `syllabusVersion`, `changeSummary`
 - `subjects`: `{id,name}`. 필기 `s1` 표준, `s2` 인터넷, `s3` HTML, `s4` CSS/스크립트, `s5` 정보접근성
 - `sources`: `{id,title,url,version,checkedAt,location,evidence,rights}`. 원문 기관·주소·판/시행일·확인일·절/쪽·근거와 재사용 설명
@@ -82,6 +83,14 @@ contextExplanation은 기본 해설만으로 알 수 없는 문항별 적용·�
 
 한 문항 연결은 최대 1000개, 정답 후보는 최대 64개입니다. 대형 풀은 문항/호환 그룹으로 나누세요. 하나의 거대한 조합표를 펼치지 않습니다. 단일정답 구조 검사는 의미적 정답성의 증명이 아닙니다.
 
+### 선택지의 그럴듯함·평행성·표현 단서 계약 (PRD 1.9)
+
+필기 전용·공유 `options`와 실기 single/multi `choices`를 정답까지 포함해 전체 검토합니다. 각 오답은 같은 학습 목표의 그럴듯한 개념 혼동·조건 적용 오류여야 하며, 지문·notes·보기 조건에서 틀리는 근거가 있어야 합니다. 문법·관점·구체성·정보량을 평행하게 맞추고 정답만 길거나 온건한 긍정문, 오답에만 제한·절대 표현을 집중하는 패턴, 무관하거나 터무니없는 오답을 문안 gate에서 거부합니다. 내용상 필요한 길이·범위 차이는 허용합니다.
+
+‘만·항상·절대·반드시’ 등은 금지어가 아닙니다. 필요한 예외·수량·집합·표준 요구·부정과 코드 연산자를 유지하며, 단어 검색은 의미 검토 후보를 표시할 뿐 결함이나 통과를 증명하지 않습니다. 같은 단어를 정답에 인위적으로 더하거나 일괄 삭제하지 않습니다. 표현 변경 뒤 모든 선택지의 판정·반례를 다시 확인하여 복수 정답·답 없음·조건 손실을 막습니다.
+
+이 계약은 새 앱 정오 상태나 자연어 판정 필드를 추가하는 스키마 변경이 아닙니다. 공개 운영 대장의 `authoringAccessibility`에 오개념 타당성·평행성·단서·조건 보존의 짧은 결론을 기록하고 독립 맹검·출처·유일성·구조 gate와 함께 검증합니다. 기계적 구조·어휘 검사 통과를 독립 의미 검토로 기록하지 않습니다. 기존 저장 은행·세션은 그대로 읽으며 신규·변경 문항의 저작 검사를 과거 데이터에 소급 적용하지 않습니다.
+
 ## 실기
 
 - `subjectId: practical`, `family: implementation|inspection`
@@ -141,11 +150,11 @@ manifest: `{schemaVersion,bankVersion,releasedAt,file:'releases/<version>/bank.j
 
 ## 회차 대장 계약 v1
 
-회차 대장은 앱 은행·manifest·세션·백업과 별도의 공개 운영 산출물입니다. 경로는 `docs/rounds/<roundId>.json`과 같은 이름의 `.md`입니다. `round-ledger.schema.json`은 JSON Schema Draft 2020-12이며 `round-ledger.template.json`·`round-report.template.md`는 실제 결과가 아닌 시작 틀입니다. 템플릿의 예시 날짜·0 해시·자리표시자를 실제 확인 값으로 바꿉니다. `accepted`·`rejected`는 이 대장의 판정이며 앱의 `verificationStatus` 열거값에 추가하지 않습니다. 탈락한 문항 본문이나 내부 원시 작업 로그는 공개 은행에 넣지 않습니다.
+회차 대장은 앱 은행·manifest·세션·백업과 별도의 공개 운영 산출물입니다. 경로는 `docs/rounds/<roundId>.json`과 같은 이름의 `.md`입니다. `round-ledger.schema.json`은 JSON Schema Draft 2020-12이며 `round-ledger.template.json`·`round-report.template.md`는 실제 결과가 아닌 시작 틀입니다. 새 확대 회차 템플릿은 `prdVersion: 1.9`를 사용하고 검증기는 1.7·1.8·1.9를 허용합니다. 종결된 기존 회차의 prdVersion과 내용·해시는 그대로 보존합니다. 템플릿의 예시 날짜·0 해시·자리표시자를 실제 확인 값으로 바꿉니다. `accepted`·`rejected`는 이 대장의 판정이며 앱의 `verificationStatus` 열거값에 추가하지 않습니다. 탈락한 문항 본문이나 내부 원시 작업 로그는 공개 은행에 넣지 않습니다.
 
 ### 필드와 판정
 
-- `campaignId: 2026-exam-final`, 고유 `roundId`, `prdVersion: 1.7`, `timezone: Asia/Seoul`, `status: running|closed`, 시작·판정 마감·판정 종료 ISO 시각
+- `campaignId: 2026-exam-final`, 고유 `roundId`, `prdVersion: 1.7|1.8|1.9`, `timezone: Asia/Seoul`, `status: running|closed`, 시작·판정 마감·판정 종료 ISO 시각
 - `policy`: maxCycles 3, maxReopeningsPerGoal 1, maxLineageCycles 6, maxRoundHours 4로 고정
 - `baseline`: 시작 시 확인한 원격 커밋, 은행 버전·SHA-256, 기존 정규 문항 수. `targets`는 후보 목표이며 통과량 아님
 - `candidates`: 고유 후보·학습 목표·계보·문항·template 식별자, 개정판·출제자 역할 ID, 근거 배열, 검토 횟수, 계보 누적 횟수, 재개방 횟수·이전 판정 링크·새 근거, 각 검토 결과, 최종 판정·사유, 실제 공개 은행 버전
@@ -172,3 +181,33 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 8. coverageAfter와 100문항 모의시험 가능 여부는 실제 확인된 은행으로 다시 계산합니다. 5과목별 고유 정규 templateId 20개 이상과 5지선다 조건을 모두 충족해야 합니다. 없는 은행이나 목표 수로 계산하지 않습니다
 9. 종료 회차의 다음 조사 공백은 구체적인 근거·예외·반례·범위와 다음 행동·완료 조건이 있어야 합니다. 공백 기록은 탈락 후보의 자동 재개방이 아닙니다. noGapExplanation을 넣어야 하는 경우에도 빈칸·형식적 완료 문구를 허용하지 않습니다
 10. 공개 전 비공개 지시·내부 사고 과정·개인 원문·인증정보·원시 로그가 없는지 검사합니다. 원래 은행과 세션 해시는 변경하지 않고 공개 허용 목록에 승인된 산출물만 추가합니다
+
+
+## 기존 채택 문항 편집 정정 대장 v1 (PRD 1.9)
+
+앱 은행의 `corrections` 점수 조정 배열 및 기존 `docs/rounds/` 확대 대장과 별개입니다. 경로는 `docs/corrections/<correctionRoundId>.json`·동명 `.md`, JSON Schema는 `docs/corrections/editorial-ledger.schema.json`입니다. 확대의 `round-ledger.schema.json`은 편집 정정과 별도 계약으로 유지하며 prdVersion 1.7·1.8·1.9를 허용합니다. 종결된 과거 확대 대장의 버전·내용·해시는 새 계약에 맞춰 고쳐 쓰지 않습니다. 한 새 은행에는 확대 대장 또는 편집 정정 대장 한 종류만 공개 근거로 선택합니다.
+
+### 필드
+
+- `ledgerSchemaVersion: 1`, `kind: accepted_content_editorial`, `campaignId: 2026-exam-final`, 고유 `correctionRoundId`, `prdVersion: 1.9`, `timezone: Asia/Seoul`, `status: running|closed`, `startedAt`·`decisionDeadline`·`closedAt`
+- `policy`: `maxCycles: 3`, `maxRoundHours: 4`, `newKnowledgeItems: 0`. `baseline`에는 실제 시작 커밋·bankVersion·bankSha256와 과목별 기존 정규 수·정규 실기 수를 기록합니다
+- `changedQuestionIds`, `changedOptionIds`, `changedPracticalChoiceIds`: 실제 변경 객체의 정확한 허용 목록. 없는 변경을 기재하거나 실제 변경을 누락하지 않습니다
+- `corrections[]`: correctionId·stable issueId·questionId·templateId·learningGoalId·learningGoalRevision·type·subjectId, priorAcceptedRef, 구체적인 defect와 targetPaths, revision·authorId·evidence, optionChanges·practicalChoiceChanges, attemptCount·cycles, decision·reasonCodes·decisionSummary·publishedBankVersion
+- `priorAcceptedRef`: 직전 공개 확인된 accepted의 roundId·candidateId·ledgerPath·bankVersion·bankSha256·questionRevision·contentSha256. 최초 확대 선행자는 `docs/rounds/<roundId>.json`의 candidateId를, 편집 선행자는 `docs/corrections/<correctionRoundId>.json`의 correctionRoundId/correctionId를 같은 roundId/candidateId 필드에 기록합니다. 실제 기존 대장·공개된 불변 은행·직전 선행 개정판을 대조합니다
+- `targetPaths`: `/questions/<questionId>/...` 또는 `/options/<optionId>/...`의 실제 변경 저작 필드 경로와 정확히 일치하는 목록입니다. revision·optionRevision·reviewNote만 바뀐 경로는 제외하며, 이 관리 필드만 바꿔 새 편집 정정을 만들지 않습니다
+- `optionChanges`·`practicalChoiceChanges`: 각 변경 객체의 id·beforeRevision·afterRevision·beforeSha256·afterSha256. 실기 choice의 이전 revision 부재는 기존 형식의 암묵적 1로 취급하고 변경한 choice에는 증가한 revision을 명시합니다. 변경하지 않은 choice에 revision을 덧써 원문을 바꾸지 않습니다
+- `cycles[]`: cycle·revision·startedAt·finishedAt, blindSolve·sourceCheck·ambiguityCheck·authoringAccessibility·structuralCheck의 결과/검토자/짧은 근거/근거 참조, outcome·summary, 정확한 검토 내용의 contentSha256와 정답을 가린 패키지의 blindPackageSha256, reviewPackagePath·reviewPackageSha256·componentStates. 다섯 gate는 확대 대장과 같은 pass/fail/not_run 의미를 사용합니다
+- `reviewPackagePath`: `docs/corrections/evidence/<correctionRoundId>-cycle-<cycle>.json`의 해당 검토 불변 입력 파일. `reviewPackageSha256`는 이 파일의 실제 바이트 SHA-256입니다. 파일은 `{evidenceSchemaVersion: 1, purpose: immutable_editorial_review_input, correctionRoundId, cycle, items}`이며 각 items 항목은 `{correctionId, question, options}`입니다. question 전체와 links에 연결된 options 전체를 정확히 보관하며 실기는 question 안에 parts/choices를 포함합니다. 이 원문에서 contentSha256·blindPackageSha256·componentStates를 다시 계산하여 대장의 검토와 실제 입력을 연결합니다. 맹검 풀이자에게는 정답·해설을 뺀 별도 풀이 패키지만 제공합니다
+- `componentStates`: 각 검토에 포함된 모든 필기 option/실기 choice의 `{kind: written_option|practical_choice, id, revision, contentSha256}` 배열이며 kind/id 순으로 정렬합니다. contentSha256는 해당 객체에서 revision 필드만 제외한 내용의 해시입니다. 변경하지 않은 선택지도 포함하고 검토 사이에 ID를 추가/삭제하지 않습니다
+- `counts`: registered·accepted·rejected·pending, `newRegular: 0`, revisedRegular·publishedRevisedRegular. `coverageAfter`는 실제 누적 정규 수와 mockEligible, `publication`은 공개 상태·커밋·은행·해시·확인 시각·URL·차단 원인입니다. `validation`·`nextAction`·`summary`에는 실제 검사 결과·제한·다음 행동을 기록합니다
+
+### 필수 교차 검증과 의미 검토
+
+1. 원 대상은 이전 accepted 근거가 확인된 published·testOnly=false 문항입니다. 이전 은행 파일·기존 출처 레코드·testOnly 시드·원 확대 대장은 그대로 보존합니다. 새 출처는 실제 독립 검증한 근거만 추가하고 해당 문항의 sourceRefs를 늘릴 수 있습니다. 안정 ID·templateId·learningGoalRevision·type·subjectId·정답 역할/집합·배점을 유지하며 문항·선택지의 추가/삭제와 학습 목표·정답 판단 변경을 이 경로로 허용하지 않습니다
+2. 문항 revision은 기준 revision에 시작한 검토 횟수를 더한 값이며 매 cycle 1씩 증가합니다. 필기 option과 실기 choice는 첫 cycle에서 기준본, 이후에는 바로 앞 cycle의 보관 원문·componentStates와 비교합니다. revision을 제외한 내용이 달라진 객체는 해당 cycle마다 revision을 정확히 1 올리고, 같으면 그대로 유지합니다. 최종 revision을 무조건 기준본+1로 제한하거나 매번 기준본에서 다시 계산하지 않습니다. 예를 들어 공개 문항 revision 1에서 cycle 1의 revision 2가 revise이고 cycle 2의 revision 3이 accepted일 수 있으며 검토 횟수는 2회로 이어집니다. 이때 두 cycle에서 모두 바뀐 선택지는 1→2→3, 첫 cycle에서만 바뀐 선택지는 1→2→2입니다. optionChanges·practicalChoiceChanges의 전후 개정판과 전체 객체 해시는 기준본과 최종본에 각각 일치해야 하고, 중간 변경은 각 cycle의 보관 원문·componentStates로 검증합니다. 공유 선택지 변경으로 영향을 받는 모든 문항은 변경 목록·정정·검토에 포함합니다. 필기 선택지의 content/explanation·문항별 필요한 해설·실기 choice 문안과 함께 stem·notes·part prompt·보기 instruction을 정리할 수 있습니다. 조건·범위·지식의 의미가 동등해야 하며 실제 자료 내용·코드·참고 답안·루브릭·정답을 바꾸지 않습니다. 실제 허용 필드·경로는 발행 검증기와 맞아야 하며 단순히 이 대장에 이름을 적었다고 임의 필드 변경이 허용되지 않습니다
+3. 같은 직전 공개 확인된 accepted 문항의 questionId·revision·contentSha256를 선행자로 삼는 모든 정정 대장/ID의 시작 검토를 합쳐 최대 3회입니다. 같은 선행자에 대한 하나의 정정 기록 안에서 검토를 이어가며 다른 대장/ID에 별도 검토 단위를 만들지 않습니다. attemptCount는 실제 시작한 cycles 수와 같습니다. 검토 후 변경은 다음 개정판·다음 cycle로 이어지며 reviewPackagePath의 불변 파일 바이트와 reviewPackageSha256, 그 안의 실제 문항/선택지에서 계산한 contentSha256·blindPackageSha256·componentStates를 함께 재확인합니다. 해시 필드만 새 값으로 고치거나 같은 해시 선언 아래 다른 원문을 쓰면 통과할 수 없습니다. 마지막 판정과 최종 decision은 일치하고 accepted에는 같은 개정판의 다섯 gate 통과가 필요합니다. 원 출제자와 원 채택/앞선 정정의 키 노출 검토자는 새 맹검에서 제외합니다. 역할 ID만 바꾼 같은 풀이를 독립 검토로 기록하지 않습니다
+4. 기존 판정 마감의 최대 4시간·다음 예정 회차·최종 동결·2026-10-16 23:00 KST 한도를 적용합니다. closed 대장에 running cycle·pending·revise를 남기지 않습니다. 3회 미통과·기한 미완료·해소 불가 사유는 rejected로 종결하며 같은 rejected 선행자를 새 ID·대장·버전·결함명으로 재개방하지 않습니다. 다른 issueId로 쓴 같은 결함도 의미상 동일 계보로 검토합니다. 한 선행자는 최대 하나의 accepted·공개 확인된 후속 개정판만 가지며 분기·오래된 선행자 재사용을 금지합니다. 실제 성공 공개 뒤 새 결함은 그 새 개정판·해시를 직전 선행자로 연결한 새 유한 검토를 허용합니다. 이 계약은 rejected 신규 후보의 한 번뿐인 근거 기반 재개방을 확대하거나 대체하지 않습니다
+5. 신규 정규 문항은 0이고 revisedRegular는 채택된 수정 문항, publishedRevisedRegular는 실제 새 은행에서 공개 확인된 수정 문항과 대조합니다. 공개 차단·미확인 상태는 publishedRevisedRegular 0, publishedBankVersion null입니다. 원래 누적 고유 문항 수·시드 수·모의시험 자격은 편집으로 증가하지 않습니다. counts 합계·실제 변경 집합·누적 수를 실제 은행과 대조합니다
+6. 새/변경 문항에는 기존의 엄격한 해설 저작 검사가 적용됩니다. 0.2.8의 고정된 과거 정확 원문 예외를 변경된 객체로 확장하지 않습니다. 모든 선택지의 그럴듯함·평행성·표현 단서·조건 보존과 정답 유일성을 독립 의미 검토로 확인하며, 해시·JSON Schema·어휘 검사만으로 의미 품질을 증명했다고 주장하지 않습니다
+7. 새 bankVersion의 불변 파일만 만들고 저장 세션·선택지 순서·답안·점수·스냅샷 해시는 변하지 않아야 합니다. 앱 `corrections`의 invalid/key와 혼동하여 과거 점수를 소급 조정하지 않습니다. 실제 배포 확인과 동결 가드를 통과하기 전에는 공개 완료로 기록하지 않습니다
+8. 후속 확대의 baseline은 마지막 확대 대장의 은행이 아니라 최신 manifest와 해시가 일치하는 실제 활성 은행입니다. 최신 공개 확인된 편집 대장·보고서와 기존 확대의 다음 조사 계획을 함께 대조하여 수정 문구·revision·공유 선택지 연결을 보존합니다. 새 정규 수는 이 활성 기준본에 없는 검증된 고유 목표만 세며 이전 정정 문항을 신규 목표로 다시 등록하지 않습니다

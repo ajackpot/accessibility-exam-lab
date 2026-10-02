@@ -74,3 +74,15 @@ data/releases/2026.10.02-regular.1/bank.json
 src/reviewed-option-explanations.js
 scripts/explanation-authoring.mjs
 tests/explanation-redundancy.test.mjs
+
+# Bounded accepted-content editorial corrections (no new knowledge quota)
+scripts/editorial-ledger.mjs
+tests/editorial-ledger.test.mjs
+docs/corrections/editorial-ledger.schema.json
+docs/corrections/editorial-001.json
+docs/corrections/editorial-001.md
+docs/corrections/choice-audit-001.json
+data/releases/2026.10.02-editorial.1/bank.json
+docs/corrections/evidence/editorial-001-cycle-1.json
+docs/corrections/evidence/editorial-001-cycle-2.json
+tests/editorial-bank.test.mjs

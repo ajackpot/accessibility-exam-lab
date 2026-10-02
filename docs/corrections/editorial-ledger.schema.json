@@ -1,26 +1,25 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Bounded question bank round ledger",
-  "description": "Public outcome/evidence ledger. No private reasoning or raw work logs. Cross-field invariants in DATA-CONTRACT.md are mandatory in addition to JSON Schema.",
+  "title": "Bounded accepted-content editorial correction ledger",
+  "description": "Separate from expansion and rejected-candidate reopening. Strict semantic/hash invariants in validate-round.mjs and editorial-ledger.mjs are mandatory.",
   "type": "object",
   "additionalProperties": false,
   "properties": {
     "ledgerSchemaVersion": {
       "const": 1
     },
+    "kind": {
+      "const": "accepted_content_editorial"
+    },
     "campaignId": {
       "const": "2026-exam-final"
     },
-    "roundId": {
+    "correctionRoundId": {
       "type": "string",
       "minLength": 1
     },
     "prdVersion": {
-      "enum": [
-        "1.7",
-        "1.8",
-        "1.9"
-      ]
+      "const": "1.9"
     },
     "timezone": {
       "const": "Asia/Seoul"
@@ -37,8 +36,7 @@
     },
     "decisionDeadline": {
       "type": "string",
-      "format": "date-time",
-      "description": "Hard decision deadline: at most 4 hours after start, before the next round and final cutoff. On 2026-10-16 Asia/Seoul, regular rounds must close by 2026-10-16T14:00:00Z (23:00 KST). Cross-field/date bounds are enforced by validate-round.mjs; the 23:30 finalizer does not review candidates."
+      "format": "date-time"
     },
     "closedAt": {
       "type": [
@@ -54,21 +52,17 @@
         "maxCycles": {
           "const": 3
         },
-        "maxReopeningsPerGoal": {
-          "const": 1
-        },
-        "maxLineageCycles": {
-          "const": 6
-        },
         "maxRoundHours": {
           "const": 4
+        },
+        "newKnowledgeItems": {
+          "const": 0
         }
       },
       "required": [
         "maxCycles",
-        "maxReopeningsPerGoal",
-        "maxLineageCycles",
-        "maxRoundHours"
+        "maxRoundHours",
+        "newKnowledgeItems"
       ]
     },
     "baseline": {
@@ -103,27 +97,34 @@
         "regularPractical"
       ]
     },
-    "targets": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "writtenBySubject": {
-          "$ref": "#/$defs/subjectCounts"
-        },
-        "practical": {
-          "type": "integer",
-          "minimum": 0
-        }
-      },
-      "required": [
-        "writtenBySubject",
-        "practical"
-      ]
-    },
-    "candidates": {
+    "changedQuestionIds": {
       "type": "array",
       "items": {
-        "$ref": "#/$defs/candidate"
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "changedOptionIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "changedPracticalChoiceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "corrections": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/correction"
       }
     },
     "counts": {
@@ -146,10 +147,14 @@
           "type": "integer",
           "minimum": 0
         },
-        "publishedRegularWrittenBySubject": {
-          "$ref": "#/$defs/subjectCounts"
+        "newRegular": {
+          "const": 0
         },
-        "publishedRegularPractical": {
+        "revisedRegular": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "publishedRevisedRegular": {
           "type": "integer",
           "minimum": 0
         }
@@ -159,8 +164,9 @@
         "accepted",
         "rejected",
         "pending",
-        "publishedRegularWrittenBySubject",
-        "publishedRegularPractical"
+        "newRegular",
+        "revisedRegular",
+        "publishedRevisedRegular"
       ]
     },
     "coverageAfter": {
@@ -288,17 +294,8 @@
         ]
       }
     },
-    "nextRoundGaps": {
-      "type": "array",
-      "items": {
-        "$ref": "#/$defs/gap"
-      }
-    },
-    "noGapExplanation": {
-      "type": [
-        "string",
-        "null"
-      ],
+    "nextAction": {
+      "type": "string",
       "minLength": 1
     },
     "summary": {
@@ -306,6 +303,30 @@
       "minLength": 1
     }
   },
+  "required": [
+    "ledgerSchemaVersion",
+    "kind",
+    "campaignId",
+    "correctionRoundId",
+    "prdVersion",
+    "timezone",
+    "status",
+    "startedAt",
+    "decisionDeadline",
+    "closedAt",
+    "policy",
+    "baseline",
+    "changedQuestionIds",
+    "changedOptionIds",
+    "changedPracticalChoiceIds",
+    "corrections",
+    "counts",
+    "coverageAfter",
+    "publication",
+    "validation",
+    "nextAction",
+    "summary"
+  ],
   "$defs": {
     "subjectCounts": {
       "type": "object",
@@ -490,6 +511,55 @@
         "summary": {
           "type": "string",
           "minLength": 1
+        },
+        "contentSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "blindPackageSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reviewPackagePath": {
+          "type": "string",
+          "pattern": "^docs/corrections/evidence/[^/]+-cycle-[123]\\.json$"
+        },
+        "reviewPackageSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "componentStates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "kind": {
+                "enum": [
+                  "written_option",
+                  "practical_choice"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "contentSha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "kind",
+              "id",
+              "revision",
+              "contentSha256"
+            ]
+          }
         }
       },
       "required": [
@@ -499,7 +569,12 @@
         "finishedAt",
         "gates",
         "outcome",
-        "summary"
+        "summary",
+        "contentSha256",
+        "blindPackageSha256",
+        "reviewPackagePath",
+        "reviewPackageSha256",
+        "componentStates"
       ],
       "allOf": [
         {
@@ -620,7 +695,40 @@
         }
       ]
     },
-    "prior": {
+    "revisionChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "beforeRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "afterRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "beforeSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "afterSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "id",
+        "beforeRevision",
+        "afterRevision",
+        "beforeSha256",
+        "afterSha256"
+      ]
+    },
+    "acceptedRef": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -636,66 +744,66 @@
           "type": "string",
           "minLength": 1
         },
-        "attemptCount": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 3
-        },
-        "decision": {
-          "const": "rejected"
-        },
-        "reasonCodes": {
-          "type": "array",
-          "items": {
-            "enum": [
-              "source_conflict",
-              "insufficient_primary_evidence",
-              "answer_ambiguity",
-              "out_of_scope",
-              "rights_risk",
-              "authoring_invalid",
-              "accessibility_failure",
-              "structural_invalid",
-              "review_limit",
-              "round_deadline",
-              "infrastructure_incomplete",
-              "duplicate_learning_goal",
-              "accepted_all_gates"
-            ]
-          },
-          "minItems": 1,
-          "uniqueItems": true
-        },
-        "summary": {
+        "bankVersion": {
           "type": "string",
           "minLength": 1
+        },
+        "bankSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "questionRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "contentSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
         }
       },
       "required": [
         "roundId",
         "candidateId",
         "ledgerPath",
-        "attemptCount",
-        "decision",
-        "reasonCodes",
-        "summary"
+        "bankVersion",
+        "bankSha256",
+        "questionRevision",
+        "contentSha256"
       ]
     },
-    "candidate": {
+    "correction": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "candidateId": {
+        "correctionId": {
           "type": "string",
           "minLength": 1
         },
-        "lineageId": {
+        "issueId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
           "type": "string",
           "minLength": 1
         },
         "learningGoalId": {
           "type": "string",
           "minLength": 1
+        },
+        "learningGoalRevision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "type": {
+          "enum": [
+            "written",
+            "practical"
+          ]
         },
         "subjectId": {
           "enum": [
@@ -707,29 +815,16 @@
             "practical"
           ]
         },
-        "type": {
-          "enum": [
-            "written",
-            "practical"
-          ]
+        "priorAcceptedRef": {
+          "$ref": "#/$defs/acceptedRef"
         },
-        "questionId": {
-          "type": [
-            "string",
-            "null"
-          ],
+        "defect": {
+          "type": "string",
           "minLength": 1
         },
         "revision": {
           "type": "integer",
           "minimum": 1
-        },
-        "templateId": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "minLength": 1
         },
         "authorId": {
           "type": "string",
@@ -741,33 +836,22 @@
             "$ref": "#/$defs/evidence"
           }
         },
+        "optionChanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/revisionChange"
+          }
+        },
+        "practicalChoiceChanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/revisionChange"
+          }
+        },
         "attemptCount": {
           "type": "integer",
           "minimum": 0,
           "maximum": 3
-        },
-        "lineageAttemptCount": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 6
-        },
-        "reopenCount": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "priorCandidateRefs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/prior"
-          },
-          "maxItems": 1
-        },
-        "reopeningEvidence": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/evidence"
-          }
         },
         "cycles": {
           "type": "array",
@@ -786,21 +870,8 @@
         "reasonCodes": {
           "type": "array",
           "items": {
-            "enum": [
-              "source_conflict",
-              "insufficient_primary_evidence",
-              "answer_ambiguity",
-              "out_of_scope",
-              "rights_risk",
-              "authoring_invalid",
-              "accessibility_failure",
-              "structural_invalid",
-              "review_limit",
-              "round_deadline",
-              "infrastructure_incomplete",
-              "duplicate_learning_goal",
-              "accepted_all_gates"
-            ]
+            "type": "string",
+            "minLength": 1
           },
           "uniqueItems": true
         },
@@ -814,433 +885,42 @@
             "null"
           ],
           "minLength": 1
+        },
+        "targetPaths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^/(questions|options)/",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       },
       "required": [
-        "candidateId",
-        "lineageId",
-        "learningGoalId",
-        "subjectId",
-        "type",
+        "correctionId",
+        "issueId",
         "questionId",
-        "revision",
         "templateId",
+        "learningGoalId",
+        "learningGoalRevision",
+        "type",
+        "subjectId",
+        "priorAcceptedRef",
+        "defect",
+        "revision",
         "authorId",
         "evidence",
+        "optionChanges",
+        "practicalChoiceChanges",
         "attemptCount",
-        "lineageAttemptCount",
-        "reopenCount",
-        "priorCandidateRefs",
-        "reopeningEvidence",
         "cycles",
         "decision",
         "reasonCodes",
         "decisionSummary",
-        "publishedBankVersion"
-      ],
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "type": {
-                "const": "practical"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "subjectId": {
-                "const": "practical"
-              }
-            }
-          },
-          "else": {
-            "properties": {
-              "subjectId": {
-                "enum": [
-                  "s1",
-                  "s2",
-                  "s3",
-                  "s4",
-                  "s5"
-                ]
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "attemptCount": {
-                "const": 3
-              },
-              "decision": {
-                "const": "pending"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "cycles": {
-                "contains": {
-                  "properties": {
-                    "cycle": {
-                      "const": 3
-                    },
-                    "outcome": {
-                      "const": "running"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "reopenCount": {
-                "const": 0
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "priorCandidateRefs": {
-                "maxItems": 0
-              },
-              "reopeningEvidence": {
-                "maxItems": 0
-              }
-            }
-          },
-          "else": {
-            "properties": {
-              "priorCandidateRefs": {
-                "minItems": 1
-              },
-              "reopeningEvidence": {
-                "minItems": 1
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "decision": {
-                "const": "accepted"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "questionId": {
-                "type": "string",
-                "minLength": 1
-              },
-              "templateId": {
-                "type": "string",
-                "minLength": 1
-              },
-              "evidence": {
-                "minItems": 1
-              },
-              "attemptCount": {
-                "minimum": 1
-              },
-              "cycles": {
-                "minItems": 1,
-                "contains": {
-                  "properties": {
-                    "outcome": {
-                      "const": "accepted"
-                    }
-                  }
-                },
-                "items": {
-                  "properties": {
-                    "outcome": {
-                      "enum": [
-                        "accepted",
-                        "revise",
-                        "rejected"
-                      ]
-                    }
-                  }
-                }
-              },
-              "reasonCodes": {
-                "type": "array",
-                "items": {
-                  "const": "accepted_all_gates"
-                },
-                "minItems": 1,
-                "maxItems": 1
-              },
-              "decisionSummary": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "decision": {
-                "const": "rejected"
-              }
-            }
-          },
-          "then": {
-            "properties": {
-              "reasonCodes": {
-                "type": "array",
-                "minItems": 1,
-                "items": {
-                  "enum": [
-                    "source_conflict",
-                    "insufficient_primary_evidence",
-                    "answer_ambiguity",
-                    "out_of_scope",
-                    "rights_risk",
-                    "authoring_invalid",
-                    "accessibility_failure",
-                    "structural_invalid",
-                    "review_limit",
-                    "round_deadline",
-                    "infrastructure_incomplete",
-                    "duplicate_learning_goal"
-                  ]
-                },
-                "uniqueItems": true
-              },
-              "publishedBankVersion": {
-                "type": "null"
-              },
-              "cycles": {
-                "items": {
-                  "properties": {
-                    "outcome": {
-                      "enum": [
-                        "accepted",
-                        "revise",
-                        "rejected"
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "gap": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "gapId": {
-          "type": "string",
-          "minLength": 1
-        },
-        "category": {
-          "enum": [
-            "coverage",
-            "primary_evidence",
-            "logical_ambiguity",
-            "authoring",
-            "validation",
-            "publication"
-          ]
-        },
-        "subjectIds": {
-          "type": "array",
-          "items": {
-            "enum": [
-              "s1",
-              "s2",
-              "s3",
-              "s4",
-              "s5",
-              "practical"
-            ]
-          },
-          "minItems": 1,
-          "uniqueItems": true
-        },
-        "learningGoalIds": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          },
-          "uniqueItems": true
-        },
-        "candidateIds": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          },
-          "uniqueItems": true
-        },
-        "finding": {
-          "type": "string",
-          "minLength": 1
-        },
-        "neededEvidenceOrCounterexample": {
-          "type": "string",
-          "minLength": 1
-        },
-        "nextAction": {
-          "type": "string",
-          "minLength": 1
-        },
-        "completionCriterion": {
-          "type": "string",
-          "minLength": 1
-        },
-        "priority": {
-          "enum": [
-            "high",
-            "medium",
-            "low"
-          ]
-        },
-        "reopenEligible": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "gapId",
-        "category",
-        "subjectIds",
-        "learningGoalIds",
-        "candidateIds",
-        "finding",
-        "neededEvidenceOrCounterexample",
-        "nextAction",
-        "completionCriterion",
-        "priority",
-        "reopenEligible"
+        "publishedBankVersion",
+        "targetPaths"
       ]
     }
-  },
-  "required": [
-    "ledgerSchemaVersion",
-    "campaignId",
-    "roundId",
-    "prdVersion",
-    "timezone",
-    "status",
-    "startedAt",
-    "decisionDeadline",
-    "closedAt",
-    "policy",
-    "baseline",
-    "targets",
-    "candidates",
-    "counts",
-    "coverageAfter",
-    "publication",
-    "validation",
-    "nextRoundGaps",
-    "noGapExplanation",
-    "summary"
-  ],
-  "allOf": [
-    {
-      "if": {
-        "properties": {
-          "status": {
-            "const": "closed"
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "closedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "candidates": {
-            "items": {
-              "properties": {
-                "decision": {
-                  "enum": [
-                    "accepted",
-                    "rejected"
-                  ]
-                }
-              }
-            }
-          },
-          "counts": {
-            "properties": {
-              "pending": {
-                "const": 0
-              }
-            }
-          }
-        },
-        "anyOf": [
-          {
-            "properties": {
-              "nextRoundGaps": {
-                "minItems": 1
-              }
-            }
-          },
-          {
-            "properties": {
-              "noGapExplanation": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
-      "if": {
-        "properties": {
-          "publication": {
-            "properties": {
-              "status": {
-                "const": "verified"
-              }
-            }
-          }
-        }
-      },
-      "then": {
-        "properties": {
-          "publication": {
-            "properties": {
-              "commit": {
-                "type": "string"
-              },
-              "bankVersion": {
-                "type": "string",
-                "minLength": 1
-              },
-              "bankSha256": {
-                "type": "string"
-              },
-              "verifiedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "url": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    }
-  ]
+  }
 }

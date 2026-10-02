@@ -7,10 +7,13 @@ import {isDeepStrictEqual} from 'node:util';
 import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion, presentQuestion} from '../src/domain.js';
 
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
+import {validateEditorialHistory, validateEditorialTransition, validateCampaignBaselines} from './editorial-ledger.mjs';
+export {editorialHash, editorialContent, editorialContentHash, editorialBlindPackage, editorialChangedPaths, editorialComponentStates} from './editorial-ledger.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
 export const FINAL_DECISION_AT = Date.parse('2026-10-16T23:00:00+09:00');
 const DEFAULT_SCHEMA = JSON.parse(readFileSync(path.join(ROOT, 'docs/rounds/round-ledger.schema.json'), 'utf8'));
+const EDITORIAL_SCHEMA = JSON.parse(readFileSync(path.join(ROOT, 'docs/corrections/editorial-ledger.schema.json'), 'utf8'));
 const SUBJECTS = ['s1', 's2', 's3', 's4', 's5'];
 const GATES = ['blindSolve', 'sourceCheck', 'ambiguityCheck', 'authoringAccessibility', 'structuralCheck'];
 const emptySubjects = () => Object.fromEntries(SUBJECTS.map(id => [id, 0]));
@@ -149,7 +152,7 @@ function walkStrings(value, visit, at = '$') {
  * Pass ALL campaign ledgers, not only a reopened candidate's selected ancestors.
  * now is optional for reproducible historical validation; the CLI always supplies the real current clock.
  */
-export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null} = {}) {
+export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null, editorials = []} = {}) {
   const errors = [], rounds = [], warnings = [...MANUAL_CHECKS];
   const fail = (round, at, message) => errors.push(`${round?.roundId || '<unknown-round>'}${at}: ${message}`);
   if (!Array.isArray(ledgers)) return {ok: false, errors: ['ledgers must be an array'], warnings, rounds};
@@ -358,6 +361,7 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
       if (!isDeepStrictEqual(round.coverageAfter, coverage)) fail(round, '/coverageAfter', 'coverage/mock eligibility differs from actual verified bank');
     }
   }
+  errors.push(...validateCampaignBaselines(rounds,{editorials,now}).errors);
   return {ok: errors.length === 0, errors, warnings, rounds: rounds.map(r => ({roundId: r.roundId, status: r.status, candidates: r.candidates.length, publication: r.publication.status}))};
 }
 export function validateRoundLedger(ledger, options = {}) {
@@ -365,7 +369,11 @@ export function validateRoundLedger(ledger, options = {}) {
 }
 
 /** Pre-publication gate: no hosted-verification claim is manufactured for a staged release. */
-export function validateReleaseLedger(ledgers, {manifest, banks = new Map()} = {}) {
+export function validateEditorialLedgers(editorials, options = {}) {
+  const result = validateEditorialHistory(editorials, {...options, schema: options.editorialSchema || EDITORIAL_SCHEMA}, {validateJsonSchema, regularCoverage, nextScheduledRoundAt, FINAL_DECISION_AT});
+  result.errors.push(...validateCampaignBaselines(options.ledgers||[],{editorials,now:options.now??null}).errors); result.ok=result.errors.length===0; return result;
+}
+export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), editorials = [], editorialSchema = EDITORIAL_SCHEMA, ...historyOptions} = {}) {
   const errors = [], fail = message => errors.push(`release: ${message}`);
   const get = version => banks instanceof Map ? banks.get(version) : banks[version];
   if (!manifest || manifest.schemaVersion !== 1 || typeof manifest.finalRelease !== 'boolean' || !meaningful(manifest.changeSummary)) return {ok: false, errors: ['release: invalid active manifest schema, summary or finalRelease']};
@@ -377,10 +385,30 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map()} = {
   if (bank.changeSummary !== manifest.changeSummary) fail('active manifest change summary does not match bank');
   if (bank.bankVersion !== manifest.bankVersion || bank.releasedAt !== manifest.releasedAt || digest(active.raw) !== manifest.sha256) fail('active manifest version/release/hash does not match bank bytes');
   try { validateExplanationAuthoring(bank, historicalExplanationBaseline(banks)); } catch(error) { fail(`explanation authoring: ${error.message}`); }
+  errors.push(...validateCampaignBaselines(ledgers,{editorials,now:historyOptions.now??null,activeBankVersion:bank.bankVersion}).errors);
   const regular = bank.questions.filter(q => q.testOnly === false && q.verificationStatus === 'published');
   // Historical seed-only releases do not invent a regular expansion round.
-  if (!regular.length) return {ok: errors.length === 0, errors};
+  if (!regular.length) {
+    if ([...ledgers,...editorials].some(r=>r.publication?.status==='verified')) fail('seed-only active bank cannot replace verified regular campaign content');
+    return {ok: errors.length === 0, errors};
+  }
   const matching = ledgers.filter(r => r.publication?.bankVersion === bank.bankVersion);
+  const matchingEditorials = editorials.filter(r => r.publication?.bankVersion === bank.bankVersion);
+  if (matchingEditorials.length) {
+    if (matching.length || matchingEditorials.length !== 1) return {ok:false, errors:[...errors, 'release: exactly one expansion OR editorial ledger must identify an active bank']};
+    const history = validateEditorialLedgers(editorials, {ledgers, banks, editorialSchema, ...historyOptions});
+    errors.push(...history.errors);
+    const e = matchingEditorials[0];
+    if (['blocked','skipped'].includes(e.publication.status) || e.publication.blockers.length) fail('editorial release has publication blockers');
+    if (e.publication.bankSha256 !== manifest.sha256) fail('editorial ledger publication hash must match manifest');
+    const baselineRaw = get(e.baseline.bankVersion)?.raw;
+    if (!baselineRaw) fail('editorial baseline is missing');
+    else {
+      try { const baseline = validateBank(JSON.parse(baselineRaw.toString())); validateEditorialTransition(e, baseline, bank, {banks, regularCoverage, now:historyOptions.now}, fail); }
+      catch(error) { fail(`editorial baseline/transition: ${error.message}`); }
+    }
+    return {ok: errors.length === 0, errors};
+  }
   if (matching.length !== 1) return {ok: false, errors: [...errors, 'release: active regular bank requires exactly one explicit publication.bankVersion ledger reference']};
   const round = matching[0];
   if (round.status !== 'closed' || round.candidates.some(c => c.decision === 'pending')) fail('active regular bank requires a closed ledger with no pending decisions');
@@ -418,28 +446,45 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map()} = {
 export async function loadRoundContext(root = ROOT, input = null, {release = false} = {}) {
   const directory = path.join(root, 'docs/rounds');
   const paths = (await fs.readdir(directory)).filter(name => /^round-.*\.json$/.test(name) && !['round-ledger.schema.json', 'round-ledger.template.json'].includes(name)).map(name => path.join(directory, name));
-  if (input && !paths.includes(path.resolve(input))) paths.push(path.resolve(input));
-  const ledgers = [];
+  const editorialDirectory = path.join(root, 'docs/corrections');
+  let editorialPaths=[];
+  try { editorialPaths=(await fs.readdir(editorialDirectory)).filter(name=>/^editorial-.*\.json$/.test(name) && !['editorial-ledger.schema.json','editorial-ledger.template.json'].includes(name)).map(name=>path.join(editorialDirectory,name)); }
+  catch(error) { if(error.code!=='ENOENT')throw error; }
+  if (input && !paths.includes(path.resolve(input)) && !editorialPaths.includes(path.resolve(input))) {
+    const data=JSON.parse(await fs.readFile(path.resolve(input),'utf8'));
+    (data.kind==='accepted_content_editorial'?editorialPaths:paths).push(path.resolve(input));
+  }
+  const ledgers = [], editorials=[];
   for (const file of paths.sort()) {
     const round = JSON.parse(await fs.readFile(file, 'utf8'));
     if (path.dirname(file) === directory && path.basename(file) !== `${round.roundId}.json`) throw new Error(`Ledger filename does not match roundId: ${file}`);
     ledgers.push(round);
   }
+  for (const file of editorialPaths.sort()) {
+    const e=JSON.parse(await fs.readFile(file,'utf8'));
+    if(path.dirname(file)===editorialDirectory && path.basename(file)!==`${e.correctionRoundId}.json`)throw new Error(`Editorial filename does not match correctionRoundId: ${file}`);
+    editorials.push(e);
+  }
   const schema = JSON.parse(await fs.readFile(path.join(directory, 'round-ledger.schema.json'), 'utf8'));
   const manifest = release ? JSON.parse(await fs.readFile(path.join(root, 'data/manifest.json'), 'utf8')) : null;
   const banks = new Map();
-  for (const version of new Set([...ledgers.flatMap(r => [r.baseline?.bankVersion, r.publication?.bankVersion]), manifest?.bankVersion].filter(Boolean))) {
+  for (const version of new Set([...[...ledgers,...editorials].flatMap(r => [r.baseline?.bankVersion, r.publication?.bankVersion]), ...editorials.flatMap(e=>e.corrections.map(c=>c.priorAcceptedRef.bankVersion)), manifest?.bankVersion].filter(Boolean))) {
     if (!/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(version)) throw new Error(`Invalid immutable bank version ${version}`);
     const file = path.join(root, 'data/releases', version, 'bank.json');
     try { banks.set(version, {raw: await fs.readFile(file)}); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
+  const reviewPackages=new Map();
+  for(const file of new Set(editorials.flatMap(e=>e.corrections.flatMap(c=>c.cycles.map(cycle=>cycle.reviewPackagePath))).filter(Boolean))) {
+    if(!safeRelative(file)||!/^docs\/corrections\/evidence\/[^/]+-cycle-[123]\.json$/.test(file))throw new Error(`Unsafe editorial review package path: ${file}`);
+    try{reviewPackages.set(file,{raw:await fs.readFile(path.join(root,file))});}catch(error){if(error.code!=='ENOENT')throw error;}
+  }
   const availableFiles = new Set();
-  for (const file of new Set(ledgers.flatMap(r => [`docs/rounds/${r.roundId}.md`, ...((r.validation || []).map(v => v.reportPath).filter(Boolean))]))) {
+  for (const file of new Set([...ledgers.flatMap(r => [`docs/rounds/${r.roundId}.md`, ...((r.validation || []).map(v => v.reportPath).filter(Boolean))]), ...editorials.flatMap(e=>[`docs/corrections/${e.correctionRoundId}.md`, ...((e.validation||[]).map(v=>v.reportPath).filter(Boolean))])])) {
     if (!safeRelative(file)) continue;
     try { if ((await fs.stat(path.join(root, file))).isFile()) availableFiles.add(file); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
   const publicationState = JSON.parse(await fs.readFile(path.join(root, 'data/publication-state.json'), 'utf8'));
-  return {ledgers, schema, banks, availableFiles, publicationState, manifest};
+  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest};
 }
 export async function main(args = process.argv.slice(2)) {
   let input = null, nextRoundAt = null, release = false;
@@ -451,7 +496,10 @@ export async function main(args = process.argv.slice(2)) {
   }
   const {ledgers, ...context} = await loadRoundContext(ROOT, input, {release});
   const result = validateRoundLedgers(ledgers, {...context, now: Date.now(), nextRoundAt});
-  if (release && result.ok) { const gate = validateReleaseLedger(ledgers, context); result.errors.push(...gate.errors); result.ok = gate.ok; }
+  const editorialResult = validateEditorialLedgers(context.editorials, {...context, ledgers, now: Date.now(), nextRoundAt});
+  result.errors.push(...editorialResult.errors); result.ok = result.ok && editorialResult.ok;
+  result.editorials = context.editorials.map(e=>({correctionRoundId:e.correctionRoundId,status:e.status,corrections:e.corrections.length,publication:e.publication.status}));
+  if (release && result.ok) { const gate = validateReleaseLedger(ledgers, {...context, now:Date.now(), nextRoundAt}); result.errors.push(...gate.errors); result.ok = gate.ok; }
   console.log(JSON.stringify({status: result.ok ? (ledgers.length ? 'PASS' : 'NO_ROUNDS') : 'FAIL', ...result}, null, 2));
   if (!result.ok) process.exitCode = 1;
   return result;

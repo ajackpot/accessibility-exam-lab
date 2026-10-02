@@ -1,0 +1,118 @@
+{
+  "evidenceSchemaVersion": 1,
+  "purpose": "immutable_editorial_review_input",
+  "correctionRoundId": "editorial-001",
+  "cycle": 2,
+  "items": [
+    {
+      "correctionId": "editorial-001-q09",
+      "question": {
+        "questionId": "r001-standards-s5-w06",
+        "revision": 3,
+        "templateId": "r001-standards-template-nonvoice-service-access",
+        "learningGoalRevision": 1,
+        "type": "written",
+        "subjectId": "s5",
+        "topicIds": [
+          "r001-standards-topic-nonvoice-service-access"
+        ],
+        "stem": "고객 지원 창구가 음성 통화로만 문의를 받는다. 발화에 어려움이 있는 사용자의 접근을 직접 개선하는 방법을 고르시오.",
+        "notes": [],
+        "explanation": "발화와 청취는 서로 다른 상호작용 요구이다. 사용자가 정보를 받는 방식뿐 아니라 문의를 전달하는 방식에도 대안을 제공해야 한다.",
+        "sourceRefs": [
+          "r001-standards-src-wai-speech"
+        ],
+        "verificationStatus": "published",
+        "testOnly": false,
+        "contentStage": "regular",
+        "standardVersion": "W3C WAI 장애·보조기술 교육자료, 2024-06-25 개정판",
+        "difficulty": "이해",
+        "optionMode": "exclusive",
+        "supportedOptionCounts": [
+          4,
+          5
+        ],
+        "links": [
+          {
+            "optionId": "r001-standards-s5-w06-o1",
+            "optionRevision": 3,
+            "role": "correct",
+            "compatibilitySetId": "r001-standards-s5-w06-set"
+          },
+          {
+            "optionId": "r001-standards-s5-w06-o2",
+            "optionRevision": 2,
+            "role": "distractor",
+            "compatibilitySetId": "r001-standards-s5-w06-set"
+          },
+          {
+            "optionId": "r001-standards-s5-w06-o3",
+            "optionRevision": 2,
+            "role": "distractor",
+            "compatibilitySetId": "r001-standards-s5-w06-set"
+          },
+          {
+            "optionId": "r001-standards-s5-w06-o4",
+            "optionRevision": 3,
+            "role": "distractor",
+            "compatibilitySetId": "r001-standards-s5-w06-set"
+          },
+          {
+            "optionId": "r001-standards-s5-w06-o5",
+            "optionRevision": 2,
+            "role": "distractor",
+            "compatibilitySetId": "r001-standards-s5-w06-set"
+          }
+        ],
+        "reviewNote": "자체 제작 비공식 일반 학습 문항. 원 채택 기록: docs/rounds/round-001.json. 문안 정정 검토 기록: docs/corrections/editorial-001.json (r001-standards-s5-w06, 개정 3)."
+      },
+      "options": [
+        {
+          "optionId": "r001-standards-s5-w06-o1",
+          "revision": 3,
+          "content": "텍스트 채팅이나 문의 양식으로도 상담할 수 있게 한다.",
+          "explanation": "글로 문의하고 답변을 받을 수 있으므로 발화에 어려움이 있는 사용자에게 음성에 의존하지 않는 대체 상호작용 경로가 된다.",
+          "memberQuestionIds": [
+            "r001-standards-s5-w06"
+          ]
+        },
+        {
+          "optionId": "r001-standards-s5-w06-o2",
+          "revision": 2,
+          "content": "상담원 연결 전에 들려주는 이용 안내를 자막으로도 제공한다.",
+          "explanation": "안내를 읽을 수 있게 해도 사용자가 자신의 문의를 전달하는 방식은 여전히 음성 통화이다.",
+          "memberQuestionIds": [
+            "r001-standards-s5-w06"
+          ]
+        },
+        {
+          "optionId": "r001-standards-s5-w06-o3",
+          "revision": 2,
+          "content": "상담원이 말하는 속도를 사용자가 선택할 수 있게 한다.",
+          "explanation": "상담원의 말하기 속도를 조절하는 것은 들려오는 정보의 문제이며 사용자의 발화 요구를 없애지 않는다.",
+          "memberQuestionIds": [
+            "r001-standards-s5-w06"
+          ]
+        },
+        {
+          "optionId": "r001-standards-s5-w06-o4",
+          "revision": 3,
+          "content": "상담 안내문의 글자 크기와 명도 대비를 사용자가 조절하게 한다.",
+          "explanation": "상담 안내문의 가독성을 조절하는 기능이며 문의를 말로 전달해야 하는 요구는 남는다.",
+          "memberQuestionIds": [
+            "r001-standards-s5-w06"
+          ]
+        },
+        {
+          "optionId": "r001-standards-s5-w06-o5",
+          "revision": 2,
+          "content": "전화번호를 누르면 음성 상담으로 연결되는 링크를 제공한다.",
+          "explanation": "통화 연결을 간편하게 하더라도 연결 후 문의를 말로 전달해야 하는 장벽은 남는다.",
+          "memberQuestionIds": [
+            "r001-standards-s5-w06"
+          ]
+        }
+      ]
+    }
+  ]
+}
