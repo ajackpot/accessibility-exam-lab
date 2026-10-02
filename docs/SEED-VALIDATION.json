@@ -35,5 +35,38 @@
     "Human/NVDA validation of the app",
     "Official question prediction or official answer key",
     "Coverage beyond first-day seed scope"
-  ]
+  ],
+  "originalBankVersion": "2026.10.02-seed.1",
+  "stimulusFormatCorrection": {
+    "bankVersion": "2026.10.02-seed.3",
+    "bankSha256": "92b98f94a82451b80cb75008d2ca688a205b60c4f0df3930e788542efc85acee",
+    "appVersion": "0.2.3",
+    "scope": "All 14 seeds audited; six required-code stems and practical free-response instructions explicitly refer to 보기; w05 made self-contained. No new questions or changed keys.",
+    "revisedQuestionIds": [
+      "seed-w05",
+      "seed-w07",
+      "seed-w08",
+      "seed-p01",
+      "seed-p02",
+      "seed-p03",
+      "seed-p04"
+    ],
+    "preserved": [
+      "question IDs",
+      "testOnly",
+      "templateId and learningGoalRevision",
+      "code content",
+      "options and links",
+      "parts and fixed keys",
+      "referenceAnswer and rubric",
+      "source references and standards",
+      "immutable seed.1 and seed.2 bytes"
+    ],
+    "nodeTests": {
+      "passed": 111,
+      "total": 111
+    },
+    "manualNvda": "NOT RUN",
+    "liveBrowser": "Not run for candidate at this record; see VALIDATION.md for subsequent publication evidence."
+  }
 }

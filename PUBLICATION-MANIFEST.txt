@@ -22,8 +22,10 @@ data/manifest.json
 data/publication-state.json
 data/seed-bank.json
 data/seed-bank-v2.json
+data/seed-bank-v3.json
 data/releases/2026.10.02-seed.1/bank.json
 data/releases/2026.10.02-seed.2/bank.json
+data/releases/2026.10.02-seed.3/bank.json
 docs/PRD.md
 docs/DATA-CONTRACT.md
 docs/OPERATIONS.md
@@ -33,6 +35,7 @@ docs/SOURCE-REVIEW.md
 docs/SEED-VALIDATION.json
 tests/domain.test.mjs
 tests/feedback-policy.test.mjs
+tests/stimulus-layout.test.mjs
 tests/workflows.test.mjs
 tests/ui-state.test.mjs
 qa/harness.html

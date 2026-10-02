@@ -1,9 +1,9 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {validateBank,sha256} from '../src/domain.js';
+import {validateBankForPublication,sha256} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..');
-const input=process.argv[2]?path.resolve(process.argv[2]):path.join(root,'data/seed-bank-v2.json');
-const raw=await fs.readFile(input,'utf8');const bank=validateBank(JSON.parse(raw));
+const input=process.argv[2]?path.resolve(process.argv[2]):path.join(root,'data/seed-bank-v3.json');
+const raw=await fs.readFile(input,'utf8');const bank=validateBankForPublication(JSON.parse(raw));
 const dir=path.join(root,'data/releases',bank.bankVersion);await fs.mkdir(dir,{recursive:true});
 const file=path.join(dir,'bank.json');
 try{const previous=await fs.readFile(file,'utf8');if(previous!==raw)throw new Error('Immutable release collision. Change bankVersion before changing published bytes.');}catch(e){if(e.code!=='ENOENT')throw e;await fs.writeFile(file,raw);}
