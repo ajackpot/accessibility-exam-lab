@@ -70,3 +70,17 @@ test('late initial save never replaces a newer screen and start cancellation is 
   vm.createContext(ctx);vm.runInContext(extract('async function startPractice(','async function renderWrong(')+'\nglobalThis.start=startPractice;',ctx);
   const pending=ctx.start({});await flush();ctx.state.openGeneration++;write.resolve();await pending;assert.equal(opened,0);assert.equal(updates,1);assert.equal(ctx.state.starting,false);assert.match(source,/data-cancel-start/);assert.match(source,/if\(!state.starting\)return renderHome/);
 });
+
+test('already-visible history labels refresh when a background timed session expires',()=>{
+  let expired=false;const link={textContent:'이어서 풀기',getAttribute:name=>name==='data-session-link'?'A':'false'};
+  const ctx={state:{sessions:[{sessionId:'A'}]},document:{querySelectorAll:()=>[link]},sessionLinkText:()=>expired?'만료 결과 보기':'이어서 풀기'};
+  vm.createContext(ctx);vm.runInContext(extract('function refreshSessionLinkLabels(','async function renderHome(')+'\nglobalThis.refresh=refreshSessionLinkLabels;',ctx);
+  ctx.refresh();assert.equal(link.textContent,'이어서 풀기');expired=true;ctx.refresh();assert.equal(link.textContent,'만료 결과 보기');
+});
+
+test('prepared timed home metadata shows configured minutes, never a null epoch deadline',()=>{
+  const ctx={typeLabel:()=> '필기',sessionNavigation:()=>({status:'prepared'}),date:()=> '1970-01-01'};
+  vm.createContext(ctx);vm.runInContext(extract('function sessionLabel(','function sessionLinkText(')+'\nglobalThis.label=sessionLabel;',ctx);
+  const text=ctx.label({status:'prepared',config:{type:'written',mode:'timed',minutes:30},attempts:[],items:[{}],expiresAt:null,currentIndex:0});
+  assert.match(text,/시간제 30분/);assert.match(text,/아직 시작하지 않음/);assert.doesNotMatch(text,/1970|까지/);
+});

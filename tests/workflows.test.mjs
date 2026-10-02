@@ -27,3 +27,13 @@ test('mixed four-only and five-only wrong goals each have a non-overlapping retr
   const history=[a,b].map((q,index)=>{let s=d.startSession(d.prepareSession({...mixed,questions:[q]},w.practiceConfig('written',{count:1,optionCount:q.supportedOptionCounts[0]}),[],1,`mixed-${index}`),100000);s=d.setAnswer(s,s.items[0].instanceId,wrong(s.items[0]),100001);return w.submitSelectedAnswers(s,100002);});
   const plan=w.reviewPlan(mixed,history,'written');assert.equal(plan.available,2);assert.equal(plan.unavailable.length,0);assert.equal(plan.groups.length,2);const ids=plan.groups.flatMap(g=>d.prepareSession(g.bank,g.config,history).items.map(q=>q.questionId));assert.equal(new Set(ids).size,2);assert.deepEqual(new Set(ids),new Set([a.questionId,b.questionId]));
 });
+
+test('saved-session links expose expired destinations at the exact deadline without mutating records',()=>{
+  const timed=make({mode:'timed',minutes:1}),before=d.copy(timed);
+  assert.deepEqual(w.sessionNavigation(timed,159999),{action:'이어서 풀기',status:'active'});
+  assert.deepEqual(w.sessionNavigation(timed,160000),{action:'만료 결과 보기',status:'expired'});
+  assert.deepEqual(w.sessionNavigation(timed,160001),{action:'만료 결과 보기',status:'expired'});assert.deepEqual(timed,before);
+  assert.equal(w.sessionNavigation(make(),99999999).action,'이어서 풀기');
+  assert.deepEqual(w.sessionNavigation({...timed,status:'prepared',expiresAt:null},99999999),{action:'시작 대기 확인',status:'prepared'});
+  assert.equal(w.sessionNavigation(d.finalize(timed,'submitted',100010),100011).action,'결과·답안 보기');
+});

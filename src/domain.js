@@ -1,5 +1,5 @@
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
-export const APP_VERSION = '0.2.0';
+export const APP_VERSION = '0.2.1';
 export const SCHEMA_VERSION = 1;
 export const GENERATOR_VERSION = '1';
 export const FREEZE_AT = Date.parse('2026-10-17T00:00:00+09:00');

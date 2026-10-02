@@ -1,5 +1,5 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {eligibleQuestions,isPublishedQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered} from './domain.js?v=0.2.0';
+import {eligibleQuestions,isPublishedQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.1';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
   return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:2,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides};
@@ -63,4 +63,11 @@ export function submitSelectedAnswers(session,now=Date.now()) {
     if(!next.attempts.some(a=>a.instanceId===item.instanceId)&&isAnswered(item,next.answers[item.instanceId]))next=confirmAnswer(next,item.instanceId,now);
   }
   return finalize(next,'submitted',now);
+}
+
+/** Display the destination before opening; do not mutate/finalize stored history here. */
+export function sessionNavigation(session,now=Date.now()) {
+  if(session.status==='prepared')return {action:'시작 대기 확인',status:'prepared'};
+  if(session.status==='active')return session.config.mode==='timed'&&timeState(session,now).expired?{action:'만료 결과 보기',status:'expired'}:{action:'이어서 풀기',status:'active'};
+  return {action:'결과·답안 보기',status:session.status};
 }
