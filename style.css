@@ -14,3 +14,9 @@ header :focus-visible{outline-color:#fff1ac;outline-width:3px}
 
 /* Required stimulus: stem → boxed 보기 → response controls in the same DOM order. */
 .question-stem{margin:1.2rem 0 .8rem}.question-stem .answer-text{font-weight:650}.stimulus-instruction{font-weight:650}.question-stimulus{min-width:0;max-width:100%;padding:clamp(.7rem,2vw,1.2rem);margin:.8rem 0 1.4rem;border:2px solid #607b70;border-radius:.4rem;background:#f7faf8;overflow-wrap:anywhere}.question-stimulus>h3{margin:0 0 .7rem}.question-stimulus h4,.explanation-material h5{font-size:1rem;margin:.6rem 0}.question-stimulus .actions{margin:.8rem 0}.question-stimulus select,.question-stimulus textarea{max-width:100%;min-width:0}.answer-options{min-width:0}.explanation-material{margin:1rem 0}.explanation-material>h4{margin:.5rem 0}@media(forced-colors:active){.question-stimulus{border-color:CanvasText}}
+
+/* Conditions remain visible but separate from the concise task sentence. */
+.question-notes { margin: 1rem 0; padding: .75rem 1rem; border-left: 3px solid var(--line); }
+.question-notes h3 { margin: 0 0 .5rem; font-size: 1rem; }
+.question-notes ul { margin: 0; padding-left: 1.4rem; }
+.question-notes li + li { margin-top: .4rem; }

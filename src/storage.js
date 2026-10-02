@@ -1,4 +1,4 @@
-import {DomainError,copy,validateBank,sha256,SCHEMA_VERSION} from './domain.js?v=0.2.3';
+import {DomainError,copy,validateBank,sha256,SCHEMA_VERSION} from './domain.js?v=0.2.4';
 const DB_NAME='accessibility-exam-lab';
 export class StorageError extends Error {constructor(message,code='STORAGE'){super(message);this.name='StorageError';this.code=code;}}
 export async function openStore(factory=globalThis.indexedDB) {

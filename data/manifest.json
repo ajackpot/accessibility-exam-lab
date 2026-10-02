@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.02-seed.3",
-  "releasedAt": "2026-10-02T02:12:00Z",
-  "file": "releases/2026.10.02-seed.3/bank.json",
-  "sha256": "92b98f94a82451b80cb75008d2ca688a205b60c4f0df3930e788542efc85acee",
-  "changeSummary": "기존 14개 테스트 시드 유지. 6개 필수 코드 문항의 보기 참조·풀이 지시와 실기 서술 지시를 명확히 하고 독립형 label 문항의 위치 지칭을 정정. 코드·정답·배점·학습 목표는 유지.",
+  "bankVersion": "2026.10.02-seed.4",
+  "releasedAt": "2026-10-02T03:14:00Z",
+  "file": "releases/2026.10.02-seed.4/bank.json",
+  "sha256": "46c18e0ed3265a1de768f1d08bbeb4e6ada571293aae9c19c0766093df973d99",
+  "changeSummary": "기존 14개 테스트 시드 유지. 핵심 문제를 1~2문장으로 통합하고 조건을 참고 사항으로 분리. 코드·선택지·정답·배점·학습 목표는 유지.",
   "finalRelease": false
 }

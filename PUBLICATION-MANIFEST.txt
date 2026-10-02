@@ -12,6 +12,7 @@ src/app.js
 src/workflows.js
 src/domain.js
 src/legacy-materials.js
+src/legacy-question-display.js
 src/storage.js
 src/backup.js
 scripts/build.mjs
@@ -23,9 +24,11 @@ data/publication-state.json
 data/seed-bank.json
 data/seed-bank-v2.json
 data/seed-bank-v3.json
+data/seed-bank-v4.json
 data/releases/2026.10.02-seed.1/bank.json
 data/releases/2026.10.02-seed.2/bank.json
 data/releases/2026.10.02-seed.3/bank.json
+data/releases/2026.10.02-seed.4/bank.json
 docs/PRD.md
 docs/DATA-CONTRACT.md
 docs/OPERATIONS.md
@@ -36,6 +39,7 @@ docs/SEED-VALIDATION.json
 tests/domain.test.mjs
 tests/feedback-policy.test.mjs
 tests/stimulus-layout.test.mjs
+tests/concise-format.test.mjs
 tests/workflows.test.mjs
 tests/ui-state.test.mjs
 qa/harness.html

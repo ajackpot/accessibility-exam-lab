@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {validateBankForPublication,sha256} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..');
-const input=process.argv[2]?path.resolve(process.argv[2]):path.join(root,'data/seed-bank-v3.json');
+const input=process.argv[2]?path.resolve(process.argv[2]):path.join(root,'data/seed-bank-v4.json');
 const raw=await fs.readFile(input,'utf8');const bank=validateBankForPublication(JSON.parse(raw));
 const dir=path.join(root,'data/releases',bank.bankVersion);await fs.mkdir(dir,{recursive:true});
 const file=path.join(dir,'bank.json');

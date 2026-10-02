@@ -68,5 +68,19 @@
     },
     "manualNvda": "NOT RUN",
     "liveBrowser": "Not run for candidate at this record; see VALIDATION.md for subsequent publication evidence."
+  },
+  "conciseFormatCorrection": {
+    "bankVersion": "2026.10.02-seed.4",
+    "bankSha256": "46c18e0ed3265a1de768f1d08bbeb4e6ada571293aae9c19c0766093df973d99",
+    "appVersion": "0.2.4",
+    "bankSchemaVersion": 3,
+    "scope": "All 14 existing testOnly seeds use concise core tasks; seven have separate notes. Six required code stimuli, all choices, keys, scoring and source content are preserved. Practical task copy excludes app-use notices.",
+    "questionCount": 14,
+    "itemsWithNotes": 7,
+    "requiredCodeStimuli": 6,
+    "sourceResearchRepeated": false,
+    "localRegressionTests": 125,
+    "localRegressionFailures": 0,
+    "liveVerification": "Not performed for this candidate yet; see VALIDATION.md for later results."
   }
 }
