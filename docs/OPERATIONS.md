@@ -35,7 +35,7 @@
 
 수량은 목표이지 보장량이 아닙니다. 좋은 새 문항이 없으면 배포를 건너뜁니다. 후보 수·보기 조합 수를 공개 문항 수로 보고하지 않습니다.
 
-앱 코드를 고칠 때는 APP_VERSION과 package.json/lockfile의 버전을 함께 올리고, index.html의 app.js/CSS URL, src/app.js·storage.js·backup.js의 내부 모듈 import, QA harness/fixture/viewport의 진입·모듈 query 버전을 일치시킵니다. 버전 URL은 새 페이지가 오래된 캐시 모듈과 섞이는 것을 방지하기 위한 정상 릴리스 절차입니다. 바닥글의 실제 runtime 버전과 수정된 동작을 모두 확인해야 공개 검증 완료입니다.
+앱 코드를 고칠 때는 APP_VERSION과 package.json/lockfile의 버전을 함께 올리고, index.html의 app.js/CSS URL, src/app.js·domain.js·legacy-materials.js·workflows.js·storage.js·backup.js의 내부 모듈 import, QA harness/fixture/viewport의 진입·모듈 query 버전을 일치시킵니다. 버전 URL은 새 페이지가 오래된 캐시 모듈과 섞이는 것을 방지하기 위한 정상 릴리스 절차입니다. 바닥글의 실제 runtime 버전과 수정된 동작을 모두 확인해야 공개 검증 완료입니다.
 
 ## 3. 불변 릴리스 만들기
 
@@ -49,7 +49,7 @@ npm run check
 npm test
 ```
 
-처음 시드는 `npm run build`로 재생성할 수 있습니다. 후속 릴리스에서는 새 파일 경로를 build에 명시하세요. scripts/check는 현재 manifest의 실제 릴리스를 검사하며, seed 회귀는 기존 시드 파일을 별도로 유지합니다. 빌드는 불변 버전 경로가 이미 다른 바이트로 존재하면 거부합니다.
+`npm run build`는 현재 정정 시드 `data/seed-bank-v2.json`을 빌드합니다. 최초 `data/seed-bank.json`과 `seed.1` 불변 릴리스는 보존합니다. 후속 릴리스에서는 새 파일 경로를 build에 명시하세요. scripts/check는 현재 manifest의 실제 릴리스를 검사하며, seed 회귀는 기존 시드 파일을 별도로 유지합니다. 빌드는 불변 버전 경로가 이미 다른 바이트로 존재하면 거부합니다.
 
 반드시 확인할 자동 경계: 단일 정답, 중복·동의어, 복수 정답 후보 제외, 후보 부족 거절, 실제 1000회 이상 난수 사례, 합성100문항 배분/과락, 실기 허용답·정규화, 만료 경합, 스냅샷/복원, JSON 왕복/악성 입력, 업데이트 해시/구조/네트워크 실패, 테스트 통계 분리.
 

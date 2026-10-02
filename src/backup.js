@@ -1,4 +1,4 @@
-import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy} from './domain.js?v=0.2.1';
+import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy} from './domain.js?v=0.2.2';
 export const MAX_BACKUP_BYTES=10*1024*1024;
 function requireValue(test,message){if(!test)throw new DomainError(message,'IMPORT');}
 const ident=x=>typeof x==='string'&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(x);
@@ -16,7 +16,7 @@ export function validateSession(s) {
     requireValue(ident(item.instanceId)&&!ids.has(item.instanceId)&&item.bankVersion===s.bankVersion&&item.type===c.type,'스냅샷 식별자 또는 버전 오류입니다.');ids.add(item.instanceId);
     const q=copy(item),options=item.options||[];
     if(item.type==='written') {requireValue([4,5].includes(options.length)&&new Set(options.map(o=>o.optionId)).size===options.length&&options.filter(o=>o.role==='correct').length===1&&options.some(o=>o.optionId===item.correctOptionId&&o.role==='correct'),'스냅샷 정답이 유일하지 않습니다.');q.links=options.map(o=>({optionId:o.optionId,optionRevision:o.revision,role:o.role,contextExplanation:o.contextExplanation,compatibilitySetId:'snapshot'}));q.supportedOptionCounts=[options.length];}
-    validateBank({schemaVersion:1,bankVersion:s.bankVersion,releasedAt:new Date(s.createdAt).toISOString(),syllabusVersion:'snapshot',changeSummary:'backup snapshot',subjects:SUBJECTS,sources:item.sources,options,questions:[q],corrections:[]});
+    validateBank({schemaVersion:item.bankSchemaVersion??1,bankVersion:s.bankVersion,releasedAt:new Date(s.createdAt).toISOString(),syllabusVersion:'snapshot',changeSummary:'backup snapshot',subjects:SUBJECTS,sources:item.sources,options,questions:[q],corrections:[]});
   }
   requireValue(s.answers&&typeof s.answers==='object'&&!Array.isArray(s.answers),'답안 객체 오류입니다.');
   for(const [key,answer] of Object.entries(s.answers)) {

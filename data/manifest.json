@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.02-seed.1",
-  "releasedAt": "2026-10-01T14:01:00Z",
-  "file": "releases/2026.10.02-seed.1/bank.json",
-  "sha256": "baa4ee31c10022e5f1325b66b2adf32bc2ef49fdb88a316ddd89acefe1532101",
-  "changeSummary": "첫날 기능 검증용 자체 제작 필기 10문항과 실기 4문항. 공식 기출문제·공식 정답이 아니며 일반 학습 통계에서 제외합니다.",
+  "bankVersion": "2026.10.02-seed.2",
+  "releasedAt": "2026-10-02T01:27:45Z",
+  "file": "releases/2026.10.02-seed.2/bank.json",
+  "sha256": "5b6b3506888af368cc591e1c751651d16f154c43dde460a0ccbcc916e2b78eac",
+  "changeSummary": "기존 테스트 시드 14개 유지. 코드 자료의 문제용·해설용 목적을 명시하고 label 완성 예시는 채점 후 해설에서만 공개. 새 학습 문항 없음.",
   "finalRelease": false
 }

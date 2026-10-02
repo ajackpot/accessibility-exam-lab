@@ -42,3 +42,9 @@ Checked 2026-10-01. 14 independently written, nonofficial test-only questions. N
 ## Independent review
 
 Independent app QA solved questions-only.json before reading the canonical answer bank. All 10 written keys and all 13 practical subpart keys matched exactly. No multiple-correct or no-correct ambiguity was detected. Primary-source spot-checks also supported the answers. The independent reviewer caught one source-location typo, corrected from ARIA section 6.6 to 6.7; no answer keys changed. App integration review is separate.
+
+## 0.2.2 material-purpose correction (2026-10-02)
+
+No question, answer key, source evidence or learning goal was added or changed. New bank `2026.10.02-seed.2` preserves all 14 test-only seeds and increments the revision of seven questions whose material metadata changed. Its bank schema2 classifies seed-w05's completed label/input example as explanation-only. The stem already states the relevant for value and asks for the input attribute, so the complete example is unnecessary before grading and reveals the answer. CSS specificity (w07), JavaScript calculation (w08), and all four practical tasks require their supplied code; these remain question materials with exact stem-instruction excerpts. Human review of those roles is distinct from validating the new fields.
+
+The original `seed.1` bytes and old session snapshots remain unchanged. A read-only exact-content legacy catalogue applies these reviewed roles to known original snapshots; unknown material defaults to explanation. Existing first-day source/answer review above remains historical evidence, not a claim of new primary-source research or manual NVDA testing.

@@ -10,7 +10,7 @@ test('late completed explanation does not replace newer navigation',async()=>{
   const write=deferred(),screens=[];
   const s={sessionId:'old-result',status:'submitted',revision:1,config:{mode:'untimed'},revealed:{},answers:{q:'a'},bankVersion:'qa',items:[]};
   const item={instanceId:'q',questionId:'q',revision:1,type:'written',stem:'old'};
-  const ctx={state:{session:s,store:{update:()=>write.promise},openGeneration:1},rememberRoute(){},refreshSessions:async()=>{},node:()=>({}),button:()=>({}),actions:()=>({}),answerSummary:()=>'',renderMaterials:()=>({}),renderExplanation:()=>({}),screen:title=>screens.push(title)};
+  const ctx={state:{session:s,store:{update:()=>write.promise},openGeneration:1},rememberRoute(){},canShowExplanation:()=>true,refreshSessions:async()=>{},node:()=>({}),button:()=>({}),actions:()=>({}),answerSummary:()=>'',renderMaterials:()=>({}),renderExplanation:()=>({}),screen:title=>screens.push(title)};
   vm.createContext(ctx);vm.runInContext(extract('async function renderReview(','async function renderPrompt(')+'\nglobalThis.review=renderReview;',ctx);
   const pending=ctx.review(s,item);ctx.state.openGeneration++;ctx.state.session=null;screens.push('HOME');write.resolve({...s,revealed:{q:true},revision:2});await pending;
   assert.deepEqual(screens,['HOME']);assert.equal(ctx.state.session,null);
