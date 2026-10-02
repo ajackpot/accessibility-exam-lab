@@ -47,7 +47,7 @@ test('reference prompts retain scoring separation, alternative valid answers and
  const s=session();for(const q of s.items){const prompt=d.createPrompt(confirm(s,q),q);assert(prompt.includes('서술형 평가 기준 시작: 합계 10점'));assert(prompt.includes('서술형 10점과 앱 고정 답안 10점은 합산하지 말아줘'));assert(prompt.includes('표현이 달라도 동등하게 타당하면 인정해줘'));assert(prompt.includes('고정 답안만으로 서술 점수를 매기지 말아줘'));for(const p of q.parts)assert(prompt.includes(p.explanation));}
 });
 test('blank prompt excludes all current answer data and contains no user-directed placeholder instruction',()=>{
- const s=session(),q=s.items[0],graded=confirm(s,q),prompt=d.createPrompt(graded,q,{blank:true});assert(prompt.includes('[미작성]'));assert(!prompt.includes(answers(q).freeResponse));assert(!prompt.includes('사용자 고정 답안 (JSON)'));assert(!prompt.includes('여기에 답안을 작성'));
+ const s=session(),q=s.items[0],graded=confirm(s,q),prompt=d.createPrompt(graded,q,{blank:true});assert(prompt.includes('[미작성]'));assert(!prompt.includes(answers(q).freeResponse));assert(!prompt.includes('사용자 고정 답안'));assert(!prompt.includes('여기에 답안을 작성'));
 });
 test('timed and deferred-feedback policy remains enforced through direct prompt calls',()=>{
  for(const b of banks){const timed=session(b,{mode:'timed'});for(const includeReference of [true,false])assert.throws(()=>d.createPrompt(timed,timed.items[0],{includeReference}));const s=session(b,{feedbackAfter:'end'}),q=s.items[0],graded=confirm(s,q);assert.throws(()=>d.createPrompt(graded,q));assert.doesNotThrow(()=>d.createPrompt(graded,q,{includeReference:false}));assert.doesNotThrow(()=>d.createPrompt(d.finalize(graded,'submitted',100003),q));}

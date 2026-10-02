@@ -1,10 +1,10 @@
-import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.5';
-import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.5';
+import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.6';
+import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.6';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
-export const APP_VERSION = '0.2.5';
+export const APP_VERSION = '0.2.6';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
 export const BANK_SCHEMA_VERSION = 3;
-export const GENERATOR_VERSION = '1';
+export const GENERATOR_VERSION = '2'; // Practical single/multi choice permutations join the seeded snapshot.
 export const FREEZE_AT = Date.parse('2026-10-17T00:00:00+09:00');
 export const SUBJECTS = [
   {id:'s1',name:'웹접근성 표준 개론'}, {id:'s2',name:'인터넷 개론'},
@@ -127,6 +127,10 @@ export function presentQuestion(bank,q,count=5,random=Math.random,instanceId=q.q
     const p=plans[Math.floor(random()*plans.length)];const links=shuffled([p.correct,...shuffled(p.candidates,random).slice(0,count-1)],random);
     snapshot.options=links.map(l=>({...copy(omap.get(l.optionId)),contextExplanation:l.contextExplanation,role:l.role}));snapshot.correctOptionId=p.correct.optionId;
     delete snapshot.links;snapshot.optionCount=count;
+  } else {
+    // Shuffle the copied choices once at generation. Parts, stable IDs, keys and
+    // authored bank data keep their meaning; render/resume use this stored order.
+    for(const part of snapshot.parts)if(part.kind==='single'||part.kind==='multi')part.choices=shuffled(part.choices,random);
   }
   return snapshot;
 }
@@ -165,6 +169,11 @@ export function timeState(session,wallNow=Date.now(),anchor=null) {
   return {remaining:Math.max(0,session.expiresAt-now),expired:now>=session.expiresAt,trusted,now};
 }
 export function isAnswered(item,answer) {if(item.type==='written')return typeof answer==='string'&&item.options.some(o=>o.optionId===answer);return item.parts.some(p=>p.kind==='multi'?Array.isArray(answer?.[p.partId])&&answer[p.partId].length>0:typeof answer?.[p.partId]==='string'&&answer[p.partId].trim()!=='');}
+/** Learner-facing answers use displayed text/order, never internal choice IDs. */
+export function selectedChoiceTexts(part,value) {
+  const selected=Array.isArray(value)?value:[value];
+  return part.choices.filter(choice=>selected.includes(choice.id)).map(choice=>choice.text);
+}
 export function grade(item,answer) {
   if(item.type==='written'){const answered=isAnswered(item,answer);const correct=answered&&answer===item.correctOptionId;return {status:!answered?'unanswered':correct?'correct':'wrong',points:correct?1:0,maxPoints:1,answered};}
   const parts=item.parts.map(p=>{const value=answer?.[p.partId];let correct=false,answered=false;
@@ -201,8 +210,18 @@ export function hasUnclassifiedMaterials(item) {return (item.materials||[]).some
 export function materialsFor(item,purpose) {return (item.materials||[]).filter(material=>materialPurpose(item,material)===purpose);}
 /** Exact authored data only. Rendering never mutates the stored question or its hash. */
 const sameData=(a,b)=>a===b||(a&&b&&typeof a==='object'&&typeof b==='object'&&Array.isArray(a)===Array.isArray(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(key=>Object.hasOwn(b,key)&&sameData(a[key],b[key])));
+// Exact legacy content matching allows only a permutation of MCQ choices.
+// Part order, choice IDs/text/metadata, keys and all other fields still match.
+function samePresentedParts(actual,expected) {
+  return Array.isArray(actual)&&actual.length===expected.length&&actual.every((part,index)=>{
+    const original=expected[index];if(!['single','multi'].includes(original.kind))return sameData(part,original);
+    const choices=part.choices;
+    return Array.isArray(choices)&&choices.length===original.choices.length&&new Set(choices.map(c=>c.id)).size===choices.length&&
+      choices.every(c=>original.choices.some(o=>sameData(c,o)))&&sameData({...part,choices:original.choices},original);
+  });
+}
 export function questionPresentation(item) {
-  const rule=LEGACY_QUESTION_DISPLAYS.find(rule=>rule.bankVersion===item.bankVersion&&(item.bankSchemaVersion??1)===rule.bankSchemaVersion&&Object.entries(rule.original).every(([key,value])=>sameData(key==='materials'?(item.materials||[]):item[key],value))&&item.notes===undefined);
+  const rule=LEGACY_QUESTION_DISPLAYS.find(rule=>rule.bankVersion===item.bankVersion&&(item.bankSchemaVersion??1)===rule.bankSchemaVersion&&Object.entries(rule.original).every(([key,value])=>key==='parts'?samePresentedParts(item.parts,value):sameData(key==='materials'?(item.materials||[]):item[key],value))&&item.notes===undefined);
   return {stem:rule?.display.stem??item.stem,notes:[...(rule?.display.notes??item.notes??[])]};
 }
 export function questionInstructionText(item) {const display=questionPresentation(item);return [display.stem,...(display.notes.length?['참고 사항',...display.notes]:[])].join('\n');}
@@ -269,12 +288,12 @@ export function createPrompt(session,item,{includeReference=true,blank=false}={}
     '서술 과제 원문 시작',item.freeResponsePrompt,'서술 과제 원문 끝',
     '사용자 서술 답안 원문 시작',answer,'사용자 서술 답안 원문 끝',
   ];
-  if(!blank){const fixed=Object.fromEntries(Object.entries(session.answers[item.instanceId]||{}).filter(([key])=>key!=='freeResponse'));lines.push(`사용자 고정 답안 (JSON): ${JSON.stringify(fixed,null,2)}`);}
+  if(!blank){const saved=session.answers[item.instanceId]||{};const fixed=item.parts.filter(p=>Object.hasOwn(saved,p.partId)).map(p=>({항목:p.prompt,답안:p.kind==='text'?saved[p.partId]:selectedChoiceTexts(p,saved[p.partId])}));lines.push(`사용자 고정 답안 (항목·선택 내용, 표시 순서): ${JSON.stringify(fixed,null,2)}`);}
   if(includeReference)lines.push(
     ...materialsFor(item,'explanation').flatMap(m=>[`해설 파일: ${m.filename}`,m.content]),
     '참고 서술 답안 시작',item.referenceAnswer,'참고 서술 답안 끝',
     `서술형 평가 기준 시작: 합계 ${rubricTotal}점`,...item.rubric.map(r=>`${r.criterion}: ${r.points}점. ${r.description}`),'서술형 평가 기준 끝',
-    '고정 답안 참고 키 시작: 앱 자동 채점용 별도 기준',...item.parts.map(p=>`${p.prompt} (앱 고정 답안 ${p.points}점): ${p.kind==='text'?p.accepted.join(' 또는 '):p.correct.map(id=>p.choices.find(c=>c.id===id).text).join(' / ')}. ${p.explanation}`),'고정 답안 참고 키 끝',
+    '고정 답안 참고 키 시작: 앱 자동 채점용 별도 기준',...item.parts.map(p=>`${p.prompt} (앱 고정 답안 ${p.points}점): ${p.kind==='text'?p.accepted.join(' 또는 '):selectedChoiceTexts(p,p.correct).join(' / ')}. ${p.explanation}`),'고정 답안 참고 키 끝',
     ...item.sources.map(s=>`근거: ${s.title} ${s.version}, ${s.location} ${s.url}`),
   );
   return lines.join('\n\n');

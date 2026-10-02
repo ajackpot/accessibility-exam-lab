@@ -102,3 +102,29 @@ test('notes are a named list after the single stem, before stimulus or choices, 
 test('unknown legacy display remains verbatim, including added notes and self-contained added material',()=>{
  for(const old of [oldBank,previous,bank]){for(const id of ['seed-w01','seed-p01']){const item=presented(id,old);item.materials=[...(item.materials||[]),{filename:'extra.txt',content:'Unknown',purpose:'question'}];assert.equal(d.questionPresentation(item).stem,item.stem);}const item=presented('seed-w07',old);item.notes=['extra condition'];const rendered=ui(item),wrapper=walk(rendered).find(n=>n.attrs.class==='question-stem');assert.equal(wrapper.children[0].textContent,item.stem);assert.deepEqual(byTag(wrapper,'li').map(n=>n.textContent),item.notes);}
 });
+
+
+test('written and practical DOM choice labels/controls follow saved permutations without spoken IDs or answer hints',()=>{
+ for(const type of ['written','practical'])for(const mode of ['untimed','timed']){
+  const s=d.startSession(d.prepareSession(current,w.practiceConfig(type,{count:type==='written'?10:4,mode}),[],17,'ui-choice-order'),100000);
+  for(const item of s.items){const before=JSON.stringify(item),ctx=renderContext(item,{mode});for(let repeat=0;repeat<3;repeat++){
+   ctx.renderSession();const groups=walk(ctx.root).filter(n=>n.attrs.class===(type==='written'?'answer-options':'answer-part'));
+   if(type==='written'){assert.deepEqual(byTag(groups[0],'label').map(n=>n.textContent),item.options.map((o,i)=>`${i+1}. ${o.content}`));assert.deepEqual(byTag(groups[0],'input').map(n=>n.value),item.options.map(o=>o.optionId));}
+   else for(const [index,part]of item.parts.entries())if(part.kind!=='text'){const group=groups[index],inputs=byTag(group,'input'),labels=byTag(group,'label');assert.deepEqual(labels.map(n=>n.textContent),part.choices.map((c,i)=>`${i+1}. ${c.text}`));assert.deepEqual(inputs.map(n=>n.value),part.choices.map(c=>c.id));assert(inputs.every(n=>n.type===(part.kind==='multi'?'checkbox':'radio')));assert(labels.every((n,i)=>n.attrs.for===inputs[i].id));assert(!inputs.some(n=>n.attrs['aria-label']||n.attrs['aria-description']));}
+   assert(!walk(ctx.root).some(n=>n.attrs.class==='feedback'));assert.equal(JSON.stringify(item),before);
+  }}
+ }
+});
+test('practical DOM changes save stable IDs then hydration retains checked options and exact order',async()=>{
+ const item=d.presentQuestion(current,current.questions.find(q=>q.questionId==='seed-p04'),5,d.rng(77)),ctx=renderContext(item),before=JSON.stringify(item);
+ ctx.edit=fn=>{ctx.state.session=fn(ctx.state.session,100001);return Promise.resolve(ctx.state.session);};ctx.state.session.startedAt=100000;ctx.state.session.lastWallAt=100000;
+ for(const part of item.parts){ctx.renderSession();const group=walk(ctx.root).find(n=>n.attrs.class==='answer-part'&&byTag(n,'legend')[0].textContent.startsWith(part.prompt));const inputs=byTag(group,'input');group.querySelectorAll=()=>inputs.filter(n=>n.checked);
+  const chosen=part.kind==='multi'?inputs.filter(n=>part.correct.includes(n.value)):inputs.filter(n=>n.value===part.correct[0]);for(const input of chosen){input.checked=true;input.handlers.change();await Promise.resolve();}assert.deepEqual(ctx.state.session.answers[item.instanceId][part.partId],part.kind==='multi'?chosen.map(n=>n.value):chosen[0].value);
+ }
+ ctx.state.session=JSON.parse(JSON.stringify(ctx.state.session));ctx.renderSession();for(const part of item.parts){const group=walk(ctx.root).find(n=>n.attrs.class==='answer-part'&&byTag(n,'legend')[0].textContent.startsWith(part.prompt));assert.deepEqual(byTag(group,'input').filter(n=>n.checked).map(n=>n.value),part.choices.filter(c=>part.correct.includes(c.id)).map(c=>c.id));}assert.equal(d.grade(item,ctx.state.session.answers[item.instanceId]).status,'correct');assert.equal(JSON.stringify(item),before);
+});
+test('saved-answer review and revealed practical keys use display order while preserving selected IDs',()=>{
+ const item=d.presentQuestion(current,current.questions.find(q=>q.questionId==='seed-p04'),5,d.rng(61)),part=item.parts.find(p=>p.kind==='multi'),selected=[...part.correct].reverse(),answer={[part.partId]:selected},ctx=renderContext(item,{answer,confirmed:true,revealed:true}),before=JSON.stringify(answer);
+ vm.runInContext(extract('function answerSummary(','async function renderResult(')+'\nglobalThis.summary=answerSummary;',ctx);
+ assert(ctx.summary(item,answer).includes(d.selectedChoiceTexts(part,selected).join(' / ')));const shown=ctx.renderExplanation(item,answer);assert(shown.textContent.includes(`허용 답: ${d.selectedChoiceTexts(part,part.correct).join(' / ')}`));assert.equal(JSON.stringify(answer),before);
+});

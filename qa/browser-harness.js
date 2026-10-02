@@ -1,5 +1,5 @@
 async function run(){
- const d=await import('../src/domain.js?v=0.2.5'),b=await import('../src/backup.js?v=0.2.5'),st=await import('../src/storage.js?v=0.2.5'),{fixture}=await import('./fixture.mjs?v=0.2.5');
+ const d=await import('../src/domain.js?v=0.2.6'),b=await import('../src/backup.js?v=0.2.6'),st=await import('../src/storage.js?v=0.2.6'),{fixture}=await import('./fixture.mjs?v=0.2.6');
  const results=[];const eq=(a,b,msg)=>{if(JSON.stringify(a)!==JSON.stringify(b))throw Error(`${msg}: ${JSON.stringify(a)} != ${JSON.stringify(b)}`);};
  const check=async(name,fn)=>{try{await fn();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e.message,stack:e.stack});}};
  const bank=fixture(), config={type:'written',subjectId:'all',kind:'practice',mode:'timed',count:2,minutes:1,optionCount:5,pool:'all'};
