@@ -66,3 +66,10 @@ Bank `2026.10.02-seed.3` increments those seven question revisions; all IDs, tes
 All 14 existing seeds were reviewed again for one integrated one-to-two-sentence task, with assumptions and entry conditions separated into notes where needed (seven items; seven with no notes). All six required code stimuli remain, and the completed w05 example remains explanation-only. Practical free-response prompts now retain only the task requirements; app-use notices stay in UI. The p04 warning against invented observations remains a task requirement.
 
 Bank `2026.10.02-seed.4` uses schema3 and increments all question revisions. Stable IDs, testOnly, learning goals, source content, code, choices, fixed answers, reference answers and scoring remain unchanged. This is editorial review using the previously reviewed evidence, not fresh source research or new questions. Exact-known seed.1–seed.3 display projections do not change stored originals, hashes, or AI exports. Historical exports deliberately retain any original app-use wording.
+
+
+## 3회차 정규 추가 근거
+
+2026.10.03-regular.3의 신규58개는 지정 판의1차 원문과 공식 출제기준에 대조한 독자 문항이다. 후보당 최대3회, 키 비공개 풀이와 모든 선택지·빈칸·조건·단일정답·범위·권리·문안을 같은 개정판에서 검토했다. 앞선 일반115개·테스트14개·출처 객체는 변경하지 않는다. 공유 검색 표현, WAI 지침의 적용 대상, CSS2.2초안/ECMAScript2015/DOM·HTML5.2/ARIA1.2, 고정AccName1.1, 현행 법령과 평가 절차를 다뤘다.
+
+불확실한 표준 절 위치와 조건 누락·오답 품질은 실패를 기록한 뒤 새 개정판·새 독립 풀이로 재검토했다. 새 근거로 재개방하지 않은 이전 탈락 목표를 문구 변경으로 재등록하지 않았다. 세부 근거·한계·다음 조사 계획은 [3회차 대장](rounds/round-003.json)과 [보고서](rounds/round-003.md)를 따른다. 실제 공개 확인은 별도 검증이다.

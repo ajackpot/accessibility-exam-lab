@@ -95,3 +95,9 @@ tests/round-two-bank.test.mjs
 docs/rounds/round-002.json
 docs/rounds/round-002.md
 data/releases/2026.10.02-regular.2/bank.json
+
+# Third regular expansion
+tests/round-three-bank.test.mjs
+docs/rounds/round-003.json
+docs/rounds/round-003.md
+data/releases/2026.10.03-regular.3/bank.json
