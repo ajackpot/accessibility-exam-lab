@@ -107,3 +107,9 @@ tests/round-four-bank.test.mjs
 docs/rounds/round-004.json
 docs/rounds/round-004.md
 data/releases/2026.10.03-regular.4/bank.json
+
+# Fifth regular expansion
+tests/round-five-bank.test.mjs
+docs/rounds/round-005.json
+docs/rounds/round-005.md
+data/releases/2026.10.04-regular.5/bank.json
