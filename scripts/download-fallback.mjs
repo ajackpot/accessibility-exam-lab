@@ -4,10 +4,13 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {isDeepStrictEqual} from 'node:util';
-import {releaseAllowed, FREEZE_AT} from '../src/domain.js';
+import {deflateRawSync} from 'node:zlib';
+import {releaseAllowed, FREEZE_AT, validateBankForPublication, validateExplanationAuthoring} from '../src/domain.js';
+import {historicalExplanationBaseline} from './explanation-authoring.mjs';
 
 export const GIT_PERMISSION_TIMEOUT_MS = 10 * 60 * 1000;
 export const MAX_PERMISSION_POLL_MS = 1000;
+export const GIT_RECONCILIATION_TIMEOUT_MS = 10 * 60 * 1000;
 const hex = /^[a-f0-9]{64}$/;
 const commit = /^[a-f0-9]{40}$/;
 const id = /^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$/;
@@ -65,6 +68,34 @@ export function reconcileGitOutcome({baseCommit, observedHead = null, expectedCo
   return {refStatus, observedHead, expectedCommit, observedAt, refWrite, objects, cancellation};
 }
 
+/** Persist by artifact identity, not execution/slot. Old observations cannot reset the clock. */
+export function startReconciliationWait({artifactSha256, firstUnresolvedAt, previous = []}) {
+  if (!hex.test(artifactSha256) || !Array.isArray(previous)) fail('Invalid reconciliation identity/history');
+  const at = instant(firstUnresolvedAt);
+  const history = previous.filter(entry => entry.artifactSha256 === artifactSha256);
+  for (const entry of history) checkReconciliationWait(entry);
+  const earliest = Math.min(at, ...history.map(entry => instant(entry.firstUnresolvedAt)));
+  const skipped = history.filter(entry => entry.state === 'skip_git_step').sort((a,b) => instant(a.skippedAt) - instant(b.skippedAt))[0];
+  return {artifactSha256, firstUnresolvedAt: new Date(earliest).toISOString(), deadlineAt: new Date(earliest + GIT_RECONCILIATION_TIMEOUT_MS).toISOString(), state: skipped ? 'skip_git_step' : 'reconciliation_wait', skippedAt: skipped?.skippedAt ?? null};
+}
+function checkReconciliationWait(wait) {
+  exactKeys(wait, ['artifactSha256', 'firstUnresolvedAt', 'deadlineAt', 'state', 'skippedAt'], 'reconciliation wait');
+  if (!hex.test(wait.artifactSha256) || instant(wait.deadlineAt) !== instant(wait.firstUnresolvedAt) + GIT_RECONCILIATION_TIMEOUT_MS || !['reconciliation_wait', 'skip_git_step'].includes(wait.state)) fail('Invalid reconciliation clock/state');
+  if (wait.state === 'skip_git_step' ? instant(wait.skippedAt) < instant(wait.deadlineAt) : wait.skippedAt !== null) fail('Invalid reconciliation skip timestamp');
+}
+/** Skip is permanent. A late result is evidence for a fresh plan, never permission to retry. */
+export function advanceReconciliationWait(wait, {now = Date.now()} = {}) {
+  checkReconciliationWait(wait); nowValue(now);
+  if (now < instant(wait.firstUnresolvedAt) || wait.skippedAt && now < instant(wait.skippedAt)) fail('Reconciliation observation precedes persisted history');
+  if (wait.state === 'skip_git_step') return {...wait};
+  return now >= instant(wait.deadlineAt) ? {...wait, state: 'skip_git_step', skippedAt: new Date(now).toISOString()} : {...wait};
+}
+function waitForManifest(receipt, manifest, previous, now) {
+  const start = manifest.schemaVersion === 2 ? manifest.reconciliation.firstUnresolvedAt : manifest.gitOutcome.observedAt;
+  const identity = manifest.schemaVersion === 2 ? manifest.reconciliation.artifactSha256 : receipt.artifactSha256;
+  return advanceReconciliationWait(startReconciliationWait({artifactSha256: identity, firstUnresolvedAt: start, previous}), {now});
+}
+
 export function safePublicPath(value) {
   if (typeof value !== 'string' || value.length > 240 || !value || /[^A-Za-z0-9._/-]/.test(value) || value.startsWith('/') || value.includes('\\')) return false;
   const parts = value.split('/');
@@ -104,14 +135,24 @@ const protectedBank = p => /^data\/(?:releases\/|seed-bank(?:-v\d+)?\.json$)/.te
  * baseInventory comes from that exact remote commit, not from the candidate tree.
  * Reviewed hashes are an operator attestation; semantic/privacy review remains required.
  */
-export async function freezePublicDelta({baseRoot, workRoot, baseCommit, baseVerifiedAt, baseInventory, reviewedSha256, wait, gitOutcome, parentDeliverySha256 = null, parentManifest = null, now = Date.now()}) {
+export async function freezePublicDelta({baseRoot, workRoot, baseCommit, baseVerifiedAt, baseInventory, reviewedSha256, wait, gitOutcome, parentDeliverySha256 = null, parentManifest = null, continuation = null, roundId = null, executionId = null, now = Date.now()}) {
   requireCommit(baseCommit);
   if (instant(baseVerifiedAt) > nowValue(now)) fail('Base verification is in the future');
   if (now >= FREEZE_AT) fail('Final cutoff blocks creating a new fallback package');
-  const state = advanceGitPermissionWait(wait, {now});
-  if (state.state !== 'download_only' || instant(state.stoppedAt) < instant(state.deadlineAt)) fail('Download fallback requires a persisted expired wait');
+  let state, offline = null;
+  if (continuation) {
+    offline = validateOfflineContinuation(continuation.receipts, {...continuation, now});
+    if (!offline.canStartNewContent || !id.test(roundId) || !id.test(executionId)) fail(`Verified offline continuation required: ${offline.errors.join('; ')}`);
+    if (parentDeliverySha256 !== continuation.receipts.at(-1)?.artifactSha256 || baseCommit !== continuation.receipts[0]?.baseCommit) fail('Offline delta must extend the exact delivered tip and retain its actual remote anchor');
+    const folded = foldDeliveryInventory(continuation.remoteInventory, continuation.receipts, continuation.manifests);
+    if (!isDeepStrictEqual([...folded].sort(), baseInventory.map(f => [f.path, f.sha256]).sort())) fail('Offline base inventory differs from exact delivered cumulative tree');
+    state = {roundId, executionId};
+  } else {
+    state = advanceGitPermissionWait(wait, {now});
+    if (state.state !== 'download_only' || instant(state.stoppedAt) < instant(state.deadlineAt)) fail('Download fallback requires a persisted expired wait');
+  }
   if (parentDeliverySha256 !== null && !hex.test(parentDeliverySha256)) fail('Invalid parent delivery hash');
-  if (!gitOutcome || instant(gitOutcome.observedAt) < instant(state.stoppedAt) || instant(gitOutcome.observedAt) > now) fail('Read-only Git reconciliation after timeout is required');
+  if (!gitOutcome || !offline && instant(gitOutcome.observedAt) < instant(state.stoppedAt) || gitOutcome && instant(gitOutcome.observedAt) > now) fail('Read-only Git reconciliation after timeout is required');
   const observed = reconcileGitOutcome({baseCommit, observedHead: gitOutcome.observedHead, expectedCommit: gitOutcome.expectedCommit, observedAt: gitOutcome.observedAt, refWrite: gitOutcome.refWrite, objects: gitOutcome.objects, cancellation: gitOutcome.cancellation});
   if (observed.refStatus !== gitOutcome.refStatus) fail('Git outcome claim is unsupported by its evidence');
   if (!Array.isArray(baseInventory)) fail('Verified base inventory is required');
@@ -148,7 +189,13 @@ export async function freezePublicDelta({baseRoot, workRoot, baseCommit, baseVer
   const changedPaths = [...files, ...deletions].map(f => f.path).sort();
   if (Object.keys(reviewedSha256 || {}).sort().join('\n') !== changedPaths.join('\n')) fail('Review allowlist must exactly match the changed/added/deleted paths');
   const {deliveryScope, reportingEvidence} = classifyDelta(files, baseline, state.roundId);
-  const manifest = {schemaVersion: 1, kind: 'developer_patch_not_learner_import', deliveryMode: 'download_only', deliveryScope, reportingEvidence, roundId: state.roundId, executionId: state.executionId, baseCommit, baseVerifiedAt, parentDeliverySha256, permissionNotifiedAt: state.notifiedAt, permissionDeadlineAt: state.deadlineAt, gitStoppedAt: state.stoppedAt, gitOutcome: observed, newlyPublishedRegular: 0, files: files.map(({raw, ...f}) => f), deletions};
+  const manifest = {schemaVersion: offline ? 2 : 1, kind: 'developer_patch_not_learner_import', deliveryMode: 'download_only', deliveryScope, reportingEvidence, roundId: state.roundId, executionId: state.executionId, baseCommit, baseVerifiedAt, parentDeliverySha256, permissionNotifiedAt: state.notifiedAt, permissionDeadlineAt: state.deadlineAt, gitStoppedAt: state.stoppedAt, gitOutcome: observed, newlyPublishedRegular: 0, files: files.map(({raw, ...f}) => f), deletions};
+  if (offline) {
+    delete manifest.permissionNotifiedAt; delete manifest.permissionDeadlineAt; delete manifest.gitStoppedAt;
+    manifest.baseKind = 'offline_delivery';
+    manifest.offlineBase = Object.fromEntries(['artifactSha256','roundId','bankVersion','bankSha256'].map(key => [key, offline.offlineBase[key]]));
+    manifest.reconciliation = offline.reconciliation.find(entry => entry.state === 'skip_git_step');
+  }
   if (parentDeliverySha256 !== null) {
     if (!parentManifest) fail('A prior frozen manifest is required to avoid duplicate delivery');
     if (samePublicDelta(manifest, parentManifest)) fail('No new changed bytes: reuse the existing artifact without duplicate attachment');
@@ -193,12 +240,23 @@ function classifyDelta(files, baseline, roundId) {
   return {deliveryScope: 'reporting_only', reportingEvidence: {ledgerPath: file.path, baselineLedgerSha256: hash(beforeRaw), bankVersion: publication.bankVersion, bankSha256: publication.bankSha256, publicationCommit: publication.commit, verifiedAt: publication.verifiedAt, decisionSha256: decisionDigest(after)}};
 }
 function checkManifest(manifest) {
-  exactKeys(manifest, ['schemaVersion', 'kind', 'deliveryMode', 'deliveryScope', 'reportingEvidence', 'roundId', 'executionId', 'baseCommit', 'baseVerifiedAt', 'parentDeliverySha256', 'permissionNotifiedAt', 'permissionDeadlineAt', 'gitStoppedAt', 'gitOutcome', 'newlyPublishedRegular', 'files', 'deletions'], 'manifest');
-  if (manifest.schemaVersion !== 1 || manifest.kind !== 'developer_patch_not_learner_import' || manifest.deliveryMode !== 'download_only' || manifest.newlyPublishedRegular !== 0 || !id.test(manifest.roundId) || !id.test(manifest.executionId) || manifest.parentDeliverySha256 !== null && !hex.test(manifest.parentDeliverySha256)) fail('Invalid download-only manifest');
+  const timingKeys = manifest?.schemaVersion === 2 ? ['baseKind', 'offlineBase', 'reconciliation'] : ['permissionNotifiedAt', 'permissionDeadlineAt', 'gitStoppedAt'];
+  exactKeys(manifest, ['schemaVersion', 'kind', 'deliveryMode', 'deliveryScope', 'reportingEvidence', 'roundId', 'executionId', 'baseCommit', 'baseVerifiedAt', 'parentDeliverySha256', ...timingKeys, 'gitOutcome', 'newlyPublishedRegular', 'files', 'deletions'], 'manifest');
+  if (![1, 2].includes(manifest.schemaVersion) || manifest.kind !== 'developer_patch_not_learner_import' || manifest.deliveryMode !== 'download_only' || manifest.newlyPublishedRegular !== 0 || !id.test(manifest.roundId) || !id.test(manifest.executionId) || manifest.parentDeliverySha256 !== null && !hex.test(manifest.parentDeliverySha256)) fail('Invalid download-only manifest');
   requireCommit(manifest.baseCommit); instant(manifest.baseVerifiedAt);
   if (!['supporting_files', 'content', 'reporting_only'].includes(manifest.deliveryScope)) fail('Invalid delivery scope');
-  const begin = instant(manifest.permissionNotifiedAt), deadline = instant(manifest.permissionDeadlineAt), stopped = instant(manifest.gitStoppedAt);
-  if (deadline !== begin + GIT_PERMISSION_TIMEOUT_MS || stopped < deadline) fail('Invalid manifest permission timing');
+  let stopped;
+  if (manifest.schemaVersion === 2) {
+    checkReconciliationWait(manifest.reconciliation);
+    exactKeys(manifest.offlineBase, ['artifactSha256','roundId','bankVersion','bankSha256'], 'offline base');
+    if (!hex.test(manifest.offlineBase.artifactSha256) || !hex.test(manifest.offlineBase.bankSha256) || !id.test(manifest.offlineBase.roundId) || !id.test(manifest.offlineBase.bankVersion)) fail('Invalid offline predecessor identity');
+    if (manifest.baseKind !== 'offline_delivery' || !hex.test(manifest.parentDeliverySha256) || manifest.reconciliation.state !== 'skip_git_step') fail('Invalid offline continuation manifest');
+    stopped = instant(manifest.reconciliation.firstUnresolvedAt);
+  } else {
+    const begin = instant(manifest.permissionNotifiedAt), deadline = instant(manifest.permissionDeadlineAt);
+    stopped = instant(manifest.gitStoppedAt);
+    if (deadline !== begin + GIT_PERMISSION_TIMEOUT_MS || stopped < deadline) fail('Invalid manifest permission timing');
+  }
   exactKeys(manifest.gitOutcome, ['refStatus', 'observedHead', 'expectedCommit', 'observedAt', 'refWrite', 'objects', 'cancellation'], 'Git outcome');
   const outcome = reconcileGitOutcome({baseCommit: manifest.baseCommit, ...manifest.gitOutcome});
   if (outcome.refStatus !== manifest.gitOutcome.refStatus || instant(outcome.observedAt) < stopped) fail('Unsupported manifest Git outcome');
@@ -256,23 +314,24 @@ function contentProvenance(snapshot) {
 
 const crcTable = Array.from({length: 256}, (_, n) => { for (let k = 0; k < 8; k++) n = n & 1 ? 0xedb88320 ^ n >>> 1 : n >>> 1; return n >>> 0; });
 function crc32(bytes) { let n = 0xffffffff; for (const b of bytes) n = crcTable[(n ^ b) & 255] ^ n >>> 8; return (n ^ 0xffffffff) >>> 0; }
-function zipStored(entries) {
+export function zipStored(entries, {compress = false} = {}) {
   const local = [], central = []; let offset = 0;
   if (entries.length > 65535) fail('ZIP32 entry limit exceeded');
   for (const {name, raw} of entries) {
-    const filename = Buffer.from(name), crc = crc32(raw);
+    const filename = Buffer.from(name), crc = crc32(raw), payload = compress ? deflateRawSync(raw) : raw;
     if (raw.length > 0xffffffff || offset + raw.length > 0xffffffff) fail('ZIP32 size limit exceeded');
-    const head = Buffer.alloc(30); head.writeUInt32LE(0x04034b50); head.writeUInt16LE(20, 4); head.writeUInt16LE(0x800, 6); head.writeUInt16LE(33, 12); head.writeUInt32LE(crc, 14); head.writeUInt32LE(raw.length, 18); head.writeUInt32LE(raw.length, 22); head.writeUInt16LE(filename.length, 26);
-    local.push(head, filename, raw);
-    const dir = Buffer.alloc(46); dir.writeUInt32LE(0x02014b50); dir.writeUInt16LE(20, 4); dir.writeUInt16LE(20, 6); dir.writeUInt16LE(0x800, 8); dir.writeUInt16LE(33, 14); dir.writeUInt32LE(crc, 16); dir.writeUInt32LE(raw.length, 20); dir.writeUInt32LE(raw.length, 24); dir.writeUInt16LE(filename.length, 28); dir.writeUInt32LE(offset, 42);
-    central.push(dir, filename); offset += head.length + filename.length + raw.length;
+    const head = Buffer.alloc(30); head.writeUInt32LE(0x04034b50); head.writeUInt16LE(20, 4); head.writeUInt16LE(0x800, 6); head.writeUInt16LE(compress ? 8 : 0, 8); head.writeUInt16LE(33, 12); head.writeUInt32LE(crc, 14); head.writeUInt32LE(payload.length, 18); head.writeUInt32LE(raw.length, 22); head.writeUInt16LE(filename.length, 26);
+    local.push(head, filename, payload);
+    const dir = Buffer.alloc(46); dir.writeUInt32LE(0x02014b50); dir.writeUInt16LE(20, 4); dir.writeUInt16LE(20, 6); dir.writeUInt16LE(0x800, 8); dir.writeUInt16LE(compress ? 8 : 0, 10); dir.writeUInt16LE(33, 14); dir.writeUInt32LE(crc, 16); dir.writeUInt32LE(payload.length, 20); dir.writeUInt32LE(raw.length, 24); dir.writeUInt16LE(filename.length, 28); dir.writeUInt32LE(offset, 42);
+    central.push(dir, filename); offset += head.length + filename.length + payload.length;
   }
   const directory = Buffer.concat(central), end = Buffer.alloc(22);
   end.writeUInt32LE(0x06054b50); end.writeUInt16LE(entries.length, 8); end.writeUInt16LE(entries.length, 10); end.writeUInt32LE(directory.length, 12); end.writeUInt32LE(offset, 16);
   return Buffer.concat([...local, directory, end]);
 }
 function koreanInstructions(manifest) {
-  return `개발자용 변경 파일 묶음 / 다운로드 전용\n\n이 ZIP은 학습 기록 백업이나 앱 가져오기 파일이 아닙니다. Git 공개 완료를 뜻하지 않으며 신규 공개 문항 수는 0입니다.\n기준 Git 커밋: ${manifest.baseCommit}\n콘텐츠 회차: ${manifest.roundId}\n실행: ${manifest.executionId}\n확인된 Git ref 상태: ${manifest.gitOutcome.refStatus} (unknown이면 반영 여부 미확정)\n\n1. 기준 커밋의 별도 로컬 작업 복사본을 준비하고 기존 기록을 보존합니다. 실제 Git 상태가 unknown/applied/changed_other이면 먼저 읽기 전용으로 반영 여부를 확인하며 재전송하지 않습니다.\n2. manifest.json의 경로·beforeSha256를 현재 파일과 대조합니다. 다르면 덮어쓰지 않습니다. parentDeliverySha256가 있으면 선행 묶음과 이력을 먼저 확인합니다.\n3. files/ 아래 변경·추가 파일만 같은 상대 경로로 복사합니다. 기존 파일을 백업하고 각 sha256를 대조합니다. deletions는 명시된 파일과 기존 해시를 확인한 뒤에만 수동 삭제합니다.\n4. npm run check 및 npm test를 실행합니다. 앱의 학습 기록 가져오기 기능에 ZIP/manifest를 넣거나 브라우저 저장 기록을 지우지 않습니다.\n5. 자동 Git 작업은 하지 않습니다. 추후 허용된 정상 회차나 사용자 재시도에서 현재 원격 head·동결·전체 이력과 release:check를 다시 확인합니다. 최종 동결 이후 신규 누적본을 공개하지 않습니다.\n\nLibrary 업로드·첨부 실패는 전달 실패로 별도 보고합니다. 서명된 비공개 다운로드 URL을 대신 보내지 않습니다.\n`;
+  const prerequisite = manifest.schemaVersion === 2 ? `필수 선행 적용: ${manifest.offlineBase.roundId}, 은행 ${manifest.offlineBase.bankVersion}\n선행 은행 SHA-256: ${manifest.offlineBase.bankSha256}\n선행 콘텐츠 ZIP SHA-256: ${manifest.offlineBase.artifactSha256}\n직전 전달 ZIP SHA-256: ${manifest.parentDeliverySha256}\n원격 기준 커밋만 준비해서는 이 묶음을 적용할 수 없습니다. 위 선행 ZIP 및 그 앞 전달 사슬을 해시 확인 후 먼저 적용한 누적 로컬 트리가 반드시 필요합니다. 이미 적용했다면 각 선행 파일 해시를 확인하고 중복 적용하지 않습니다.\n\n` : '';
+  return `개발자용 변경 파일 묶음 / 다운로드 전용\n\n이 ZIP은 학습 기록 백업이나 앱 가져오기 파일이 아닙니다. Git 공개 완료를 뜻하지 않으며 신규 공개 문항 수는 0입니다.\n실제 원격 기준 Git 커밋: ${manifest.baseCommit}\n적용 기준: ${manifest.schemaVersion === 2 ? `검증된 선행 전달 ${manifest.parentDeliverySha256}의 누적 로컬 트리` : '위 원격 커밋의 파일 트리'}\n콘텐츠 회차: ${manifest.roundId}\n실행: ${manifest.executionId}\n확인된 Git ref 상태: ${manifest.gitOutcome.refStatus} (unknown이면 반영 여부 미확정)\n\n${prerequisite}1. 기준 커밋의 별도 로컬 작업 복사본을 준비하고 기존 기록을 보존합니다. 실제 Git 상태가 unknown/applied/changed_other이면 먼저 읽기 전용으로 반영 여부를 확인하며 재전송하지 않습니다.\n2. manifest.json의 경로·beforeSha256를 현재 파일과 대조합니다. 다르면 덮어쓰지 않습니다. parentDeliverySha256가 있으면 선행 묶음 전체를 순서대로 검증한 로컬 트리에 적용합니다. 원격 반영 미확정 대기는 최초 기록부터 최대 10분이며, 이후 Git 단계는 건너뛰고 검증된 오프라인 후속 작업만 진행합니다.\n3. files/ 아래 변경·추가 파일만 같은 상대 경로로 복사합니다. 기존 파일을 백업하고 각 sha256를 대조합니다. deletions는 명시된 파일과 기존 해시를 확인한 뒤에만 수동 삭제합니다.\n4. npm run check 및 npm test를 실행합니다. 앱의 학습 기록 가져오기 기능에 ZIP/manifest를 넣거나 브라우저 저장 기록을 지우지 않습니다.\n5. 자동 Git 작업은 하지 않습니다. 추후 허용된 정상 회차나 사용자 재시도에서 현재 원격 head·동결·전체 이력과 release:check를 다시 확인합니다. 최종 동결 이후 신규 누적본을 공개하지 않습니다.\n\nLibrary 업로드·첨부 실패는 전달 실패로 별도 보고합니다. 서명된 비공개 다운로드 URL을 대신 보내지 않습니다.\n`;
 }
 export async function writeDownloadZip(snapshot, outputPath, {now = Date.now()} = {}) {
   if (nowValue(now) >= FREEZE_AT) fail('Final cutoff blocks creating a new ZIP; reuse only an already fixed artifact');
@@ -295,9 +354,9 @@ export function createDeliveryReceipt({snapshot, artifact, status = 'prepared', 
 }
 
 /** Receipts reserve accepted goals even after upload failure; they never count as published.
- * Missing content/history, forks, or an unresolved ref outcome block later expansion.
+ * Missing content/history or forks block expansion. Git uncertainty has a bounded local-only continuation gate.
  */
-export function validateDeliveryChain(receipts, {manifests = new Map(), ledgers = new Map(), banks = new Map(), resolvedArtifacts = new Set()} = {}) {
+export function validateDeliveryChain(receipts, {manifests = new Map(), ledgers = new Map(), banks = new Map(), resolvedArtifacts = new Set(), now = null, publicationState = null, reconciliationHistory = [], _basicOnly = false} = {}) {
   const errors = [], seen = new Set(), goals = new Map(); let previous = null;
   const unresolved = [];
   for (const receipt of receipts) {
@@ -343,17 +402,149 @@ export function validateDeliveryChain(receipts, {manifests = new Map(), ledgers 
   for (const value of resolvedArtifacts) if (!seen.has(value)) errors.push('Unknown resolved artifact');
   const resolvedOrder = receipts.map(r => resolvedArtifacts.has(r.artifactSha256));
   if (resolvedOrder.some((resolved, i) => resolved && resolvedOrder.slice(0, i).includes(false))) errors.push('Pending deliveries must reconcile oldest-first');
-  return {ok: !errors.length, errors, unresolvedArtifacts: unresolved, reservedLearningGoalIds: [...goals].filter(([, reservation]) => !resolvedArtifacts.has(reservation.artifactSha256)).map(([goal]) => goal).sort(), canStartNewContent: !errors.length && !unresolved.length};
+  const result = {ok: !errors.length, errors, unresolvedArtifacts: unresolved, reservedLearningGoalIds: [...goals].filter(([, reservation]) => !resolvedArtifacts.has(reservation.artifactSha256)).map(([goal]) => goal).sort(), canStartNewContent: !errors.length && !unresolved.length};
+  if (!_basicOnly && now !== null && unresolved.length && result.ok) {
+    const offline = validateOfflineContinuation(receipts, {manifests, ledgers, banks, resolvedArtifacts, now, publicationState, reconciliationHistory});
+    result.canStartNewContent = offline.canStartNewContent;
+    result.continuationErrors = offline.errors;
+    result.reconciliation = offline.reconciliation;
+    result.offlineBase = offline.offlineBase;
+  }
+  if (now !== null && (nowValue(now) >= FREEZE_AT || publicationState?.finalized)) result.canStartNewContent = false;
+  return result;
+}
+
+/** Verify a delivered local chain independently of remote publication. Full campaign validators
+ * must also pass with offlineBases; this helper never marks anything published or resolves a ref. */
+export function validateOfflineContinuation(receipts, {manifests = new Map(), ledgers = new Map(), banks = new Map(), resolvedArtifacts = new Set(), now = Date.now(), publicationState = null, reconciliationHistory = []} = {}) {
+  const basic = validateDeliveryChain(receipts, {manifests, ledgers, banks, resolvedArtifacts, _basicOnly: true});
+  const errors = [...basic.errors], continuationBlockers = [], offlineBases = new Map(), reconciliation = [];
+  let previousContent = null, previousEligibility = null;
+  if (!Number.isFinite(now)) errors.push('Invalid current time');
+  if (now >= FREEZE_AT || publicationState?.finalized) continuationBlockers.push('Final cutoff or persistent freeze blocks offline advancement');
+  for (const receipt of receipts) {
+    const manifest = manifests.get(receipt.artifactSha256);
+    if (!manifest || basic.errors.length) continue;
+    try {
+      let eligibleAt = instant(receipt.recordedAt);
+      if (instant(receipt.recordedAt) > now) fail('Delivery record is in the future');
+      if (manifest.schemaVersion === 2) {
+        const predecessor = receipts.slice(0, receipts.indexOf(receipt)).filter(entry => entry.content).at(-1);
+        if (!predecessor || manifest.offlineBase.artifactSha256 !== predecessor.artifactSha256 || ['roundId','bankVersion','bankSha256'].some(key => manifest.offlineBase[key] !== predecessor.content[key])) fail('Offline manifest does not identify its exact cumulative predecessor');
+        const origin = receipts.find(entry => entry.artifactSha256 === manifest.reconciliation.artifactSha256);
+        const originManifest = origin && manifests.get(origin.artifactSha256);
+        if (!originManifest || originManifest.schemaVersion !== 1 || instant(manifest.reconciliation.firstUnresolvedAt) !== instant(originManifest.gitOutcome.observedAt) || instant(manifest.reconciliation.skippedAt) > instant(receipt.recordedAt)) fail('Offline manifest changed its original reconciliation clock or predates the recorded skip');
+      }
+      if (!resolvedArtifacts.has(receipt.artifactSha256)) {
+        if (receipt.status !== 'delivered') fail('Offline advancement requires verified delivered files, not prepared/failed delivery');
+        const wait = waitForManifest(receipt, manifest, reconciliationHistory, now);
+        reconciliation.push(wait);
+        eligibleAt = Math.max(eligibleAt, instant(wait.deadlineAt));
+        if (wait.state !== 'skip_git_step') continuationBlockers.push('Reconciliation window has not reached its fixed ten-minute cap');
+      }
+      if (!receipt.content) continue;
+      const c = receipt.content, raw = ledgers.get(c.roundId), bankRaw = banks.get(c.bankVersion);
+      const ledger = JSON.parse(raw), bank = validateBankForPublication(JSON.parse(bankRaw));
+      validateExplanationAuthoring(bank, historicalExplanationBaseline(new Map([...banks].map(([version, raw]) => [version, {raw}]))));
+      if (ledger.kind === 'accepted_content_editorial') {
+        // Unpublished accepted revisions cannot silently supersede each other offline.
+        if (!resolvedArtifacts.has(receipt.artifactSha256)) fail('Offline advancement requires a regular cumulative expansion, not an unpublished editorial successor');
+        previousContent = c; continue;
+      }
+      if (instant(bank.releasedAt) < instant(ledger.closedAt) || instant(bank.releasedAt) > instant(receipt.recordedAt) || instant(bank.releasedAt) >= FREEZE_AT) fail('Offline release must follow closure and precede delivery/final cutoff');
+      if (previousEligibility !== null && instant(ledger.startedAt) < previousEligibility) fail('Offline successor started before its delivered predecessor was eligible');
+      const baselineRaw = banks.get(ledger.baseline?.bankVersion);
+      if (!baselineRaw || hash(baselineRaw) !== ledger.baseline.bankSha256) fail('Missing exact cumulative baseline bank');
+      const baseline = validateBankForPublication(JSON.parse(baselineRaw));
+      if (previousContent && (ledger.baseline.bankVersion !== previousContent.bankVersion || ledger.baseline.bankSha256 !== previousContent.bankSha256)) fail('Offline content chain skips or forks its immediate accepted predecessor');
+      for (const [kind, before, after, key] of [['question',baseline.questions,bank.questions,'questionId'], ['option',baseline.options,bank.options,'optionId'], ['source',baseline.sources,bank.sources,'id']]) {
+        const current = new Map(after.map(entry => [entry[key], entry]));
+        for (const entry of before) if (!isDeepStrictEqual(entry, current.get(entry[key]))) fail(`Offline cumulative ${kind} changed or removed: ${entry[key]}`);
+      }
+      const oldQuestions = new Set(baseline.questions.map(q => q.questionId)), oldTemplates = new Set(baseline.questions.map(q => q.templateId));
+      const additions = bank.questions.filter(q => !oldQuestions.has(q.questionId));
+      const accepted = ledger.candidates.filter(candidate => candidate.decision === 'accepted');
+      if (additions.length !== accepted.length) fail('Offline bank additions differ from exact accepted decisions');
+      for (const question of additions) {
+        const record = accepted.find(candidate => candidate.questionId === question.questionId);
+        const last = record?.cycles?.at(-1);
+        if (!record || record.revision !== question.revision || record.templateId !== question.templateId || record.type !== question.type || record.subjectId !== question.subjectId || question.learningGoalId !== undefined && record.learningGoalId !== question.learningGoalId || question.testOnly !== false || question.verificationStatus !== 'published' || oldTemplates.has(question.templateId) || last?.outcome !== 'accepted' || last.revision !== question.revision || ['blindSolve','sourceCheck','ambiguityCheck','authoringAccessibility','structuralCheck'].some(gate => last.gates?.[gate]?.result !== 'pass')) fail('Offline addition duplicates a reserved template or lacks its exact all-gates accepted decision');
+        for (const sourceId of question.sourceRefs) {
+          const source = bank.sources.find(entry => entry.id === sourceId), reviewed = record.evidence?.find(entry => entry.sourceId === sourceId);
+          if (!source || !reviewed || ['url','version','location'].some(key => source[key] !== reviewed[key])) fail('Offline addition lacks exact reviewed primary source evidence');
+        }
+      }
+      offlineBases.set(receipt.artifactSha256, {roundId: c.roundId, bankVersion: c.bankVersion, bankSha256: c.bankSha256, ledgerSha256: c.ledgerSha256, manifestSha256: receipt.manifestSha256, baseCommit: receipt.baseCommit, recordedAt: receipt.recordedAt, eligibleAt: new Date(eligibleAt).toISOString()});
+      previousContent = c; previousEligibility = eligibleAt;
+    } catch (error) { errors.push(`${receipt.roundId}: ${error.message}`); }
+  }
+  const tip = receipts.filter(r => r.content).at(-1);
+  const offlineBase = tip && offlineBases.get(tip.artifactSha256) ? {artifactSha256: tip.artifactSha256, ...offlineBases.get(tip.artifactSha256)} : null;
+  if (!offlineBase) errors.push('No verified cumulative content delivery is available');
+  return {ok: errors.length === 0, errors, continuationBlockers, canStartNewContent: errors.length === 0 && continuationBlockers.length === 0, canPublish: false, newlyPublishedRegular: 0, offlineBases, offlineBase, reconciliation, reservedLearningGoalIds: basic.reservedLearningGoalIds};
+}
+
+/** Apply only manifest hashes to an exact verified remote inventory; never touch disk or Git. */
+export function foldDeliveryInventory(remoteInventory, receipts, manifests) {
+  if (!Array.isArray(remoteInventory)) fail('Verified remote inventory is required');
+  checkPaths(remoteInventory.map(entry => entry.path));
+  const inventory = new Map(remoteInventory.map(entry => {
+    if (!hex.test(entry.sha256)) fail('Invalid remote inventory hash');
+    return [entry.path, entry.sha256];
+  }));
+  let previous = null;
+  for (const receipt of receipts) {
+    const manifest = manifests.get(receipt.artifactSha256);
+    if (!manifest || hash(json(manifest)) !== receipt.manifestSha256 || receipt.parentDeliverySha256 !== previous || manifest.parentDeliverySha256 !== previous) fail('Missing, reordered or changed inventory chain');
+    checkManifest(manifest);
+    for (const entry of [...manifest.files, ...manifest.deletions]) {
+      const before = inventory.get(entry.path) ?? null;
+      if (before !== entry.beforeSha256) fail(`Delivered path collides with its predecessor: ${entry.path}`);
+      if (before !== null && protectedBank(entry.path) && before !== entry.sha256) fail(`Immutable historical bank changed: ${entry.path}`);
+      if (entry.sha256 === null) inventory.delete(entry.path); else inventory.set(entry.path, entry.sha256);
+    }
+    previous = receipt.artifactSha256;
+  }
+  return inventory;
+}
+
+/** Read-only catch-up assessment, not write authorization. Preserve foreign paths and require
+ * fresh ancestry/head plus every complete release guard again immediately before any ref move. */
+export function assessGitSyncPlan({baseCommit, observedHead, baseIsAncestor, observedAt, currentInventory, remoteInventory, receipts, manifests, refWrite = 'unknown', unresolvedObjectPaths = [], now = Date.now(), publicationState = null}) {
+  const errors = [], writes = [], deletions = [], alreadyApplied = [];
+  try {
+    requireCommit(baseCommit); requireCommit(observedHead);
+    if (instant(observedAt) > nowValue(now) || now - instant(observedAt) > 60000) fail('Fresh read-only head/inventory observation required');
+    if (now >= FREEZE_AT || publicationState?.finalized) fail('Final cutoff or persistent freeze blocks synchronization');
+    if (baseIsAncestor !== true || receipts.some(receipt => receipt.baseCommit !== baseCommit)) fail('Verified remote anchor ancestry is required');
+    if (!['not_submitted', 'settled_failed', 'settled_success'].includes(refWrite)) fail('Unsettled ref write blocks conflicting publication; offline authoring may continue');
+    checkPaths(currentInventory.map(entry => entry.path));
+    const current = new Map(currentInventory.map(entry => { if (!hex.test(entry.sha256)) fail('Invalid current inventory hash'); return [entry.path, entry.sha256]; }));
+    const baseline = new Map(remoteInventory.map(entry => [entry.path, entry.sha256]));
+    const desired = foldDeliveryInventory(remoteInventory, receipts, manifests);
+    const touched = new Set(receipts.flatMap(receipt => [...manifests.get(receipt.artifactSha256).files, ...manifests.get(receipt.artifactSha256).deletions].map(entry => entry.path)));
+    const historical = new Map([...touched].map(name => [name, new Set([baseline.get(name) ?? null]) ]));
+    for (const receipt of receipts) for (const entry of [...manifests.get(receipt.artifactSha256).files, ...manifests.get(receipt.artifactSha256).deletions]) historical.get(entry.path).add(entry.sha256);
+    for (const name of touched) {
+      const actual = current.get(name) ?? null, target = desired.get(name) ?? null;
+      if (!historical.get(name).has(actual)) { errors.push(`External change/path collision requires reconciliation: ${name}`); continue; }
+      if (actual === target) { alreadyApplied.push(name); continue; }
+      if (unresolvedObjectPaths.includes(name)) { errors.push(`Do not duplicate uncertain object write: ${name}`); continue; }
+      (target === null ? deletions : writes).push({path: name, beforeSha256: actual, sha256: target});
+    }
+  } catch (error) { errors.push(error.message); }
+  return {ok: errors.length === 0, errors, observedHead, writes, deletions, alreadyApplied, canPublish: false, requiresFreshHeadAndFullReleaseValidation: true};
 }
 
 // Pure helpers intentionally do not poll, cancel prompts, publish, upload or change status.
 // CLI packages only a private plan with actual wall-clock expiry and exclusive output.
 export async function main(args = process.argv.slice(2)) {
-  if (args.length !== 2) fail('Usage: node scripts/download-fallback.mjs PRIVATE-PLAN.json OUTPUT.zip');
+  if (args.length !== 3) fail('Usage: node scripts/download-fallback.mjs PRIVATE-PLAN.json DELTA.zip COMPLETE.zip (both required)');
   const plan = JSON.parse(await fs.readFile(args[0], 'utf8'));
   delete plan.now;
   const snapshot = await freezePublicDelta({...plan, now: Date.now()});
-  const artifact = await writeDownloadZip(snapshot, args[1]);
-  console.log(JSON.stringify({status: 'prepared_not_delivered', ...artifact, manifest: snapshot.manifest}, null, 2));
+  const {writeOfflineDeliveryPair} = await import('./complete-bundle.mjs');
+  const artifacts = await writeOfflineDeliveryPair({deltaSnapshot: snapshot, workRoot: plan.workRoot, reviewedInventory: plan.reviewedFullInventory, deltaOutputPath: args[1], completeOutputPath: args[2]});
+  console.log(JSON.stringify({...artifacts, manifest: snapshot.manifest}, null, 2));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch(error => { console.error(error.message); process.exitCode = 1; });

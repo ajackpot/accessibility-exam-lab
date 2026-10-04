@@ -157,7 +157,7 @@ manifest: `{schemaVersion,bankVersion,releasedAt,file:'releases/<version>/bank.j
 
 - `campaignId: 2026-exam-final`, 고유 `roundId`, `prdVersion: 1.7|1.8|1.9`, `timezone: Asia/Seoul`, `status: running|closed`, 시작·판정 마감·판정 종료 ISO 시각
 - `policy`: maxCycles 3, maxReopeningsPerGoal 1, maxLineageCycles 6, maxRoundHours 4로 고정
-- `baseline`: 시작 시 확인한 원격 커밋, 은행 버전·SHA-256, 기존 정규 문항 수. `targets`는 후보 목표이며 통과량 아님. round-003부터도 매 회차 필기 과목별 최대 10개(총 최대 50개)·실기 최대 8개 안에서 직전 공백·근거·검토 여력에 맞춰 정하며 주기 단축으로 상한을 높이지 않음
+- `baseline`: 시작 시 확인한 실제 원격 커밋, 은행 버전·SHA-256, 기존 정규 문항 수. 정상 원격 회차는 활성 원격 은행을 사용합니다. 다운로드 전달 계약의 오프라인 후속 회차는 sourceCommit에 실제 원격 anchor를 유지하고 bankVersion·bankSha256·기존 수에는 검증된 정확한 전달 선행 은행을 사용하며, 선택적 `offlinePredecessor:{artifactSha256,manifestSha256,ledgerSha256,roundId}`를 함께 기록합니다. 이 연결은 로컬 전용 검증 문맥이며 원격 공개 증거가 아닙니다. `targets`는 후보 목표이며 통과량 아님. round-003부터도 매 회차 필기 과목별 최대 10개(총 최대 50개)·실기 최대 8개 안에서 직전 공백·근거·검토 여력에 맞춰 정하며 주기 단축으로 상한을 높이지 않음
 - `candidates`: 고유 후보·학습 목표·계보·문항·template 식별자, 개정판·출제자 역할 ID, 근거 배열, 검토 횟수, 계보 누적 횟수, 재개방 횟수·이전 판정 링크·새 근거, 각 검토 결과, 최종 판정·사유, 실제 공개 은행 버전
 - 근거 항목: sourceId·제목·공식/1차 자료 URL·판/시행일·정확한 위치·실제 확인일·짧은 요약·권리 설명. 긴 원문 복사와 확인하지 않은 열람 주장 금지
 - `cycles`: 시작한 검토를 1부터 순서대로 기록. 개정판과 시작·종료, blindSolve·sourceCheck·ambiguityCheck·authoringAccessibility·structuralCheck의 `pass|fail|not_run`, 검토 역할 ID·짧은 결론·근거 참조. 실행 중 결과는 running과 finishedAt=null로 기록하고 끝난 검토 결과는 accepted·revise·rejected. 중간 종료 시 미실시를 not_run으로 기록
@@ -211,7 +211,7 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 5. 신규 정규 문항은 0이고 revisedRegular는 채택된 수정 문항, publishedRevisedRegular는 실제 새 은행에서 공개 확인된 수정 문항과 대조합니다. 공개 차단·미확인 상태는 publishedRevisedRegular 0, publishedBankVersion null입니다. 원래 누적 고유 문항 수·시드 수·모의시험 자격은 편집으로 증가하지 않습니다. counts 합계·실제 변경 집합·누적 수를 실제 은행과 대조합니다
 6. 새/변경 문항에는 기존의 엄격한 해설 저작 검사가 적용됩니다. 0.2.8의 고정된 과거 정확 원문 예외를 변경된 객체로 확장하지 않습니다. 모든 선택지의 그럴듯함·평행성·표현 단서·조건 보존과 정답 유일성을 독립 의미 검토로 확인하며, 해시·JSON Schema·어휘 검사만으로 의미 품질을 증명했다고 주장하지 않습니다
 7. 새 bankVersion의 불변 파일만 만들고 저장 세션·선택지 순서·답안·점수·스냅샷 해시는 변하지 않아야 합니다. 앱 `corrections`의 invalid/key와 혼동하여 과거 점수를 소급 조정하지 않습니다. 실제 배포 확인과 동결 가드를 통과하기 전에는 공개 완료로 기록하지 않습니다
-8. 후속 확대의 baseline은 마지막 확대 대장의 은행이 아니라 최신 manifest와 해시가 일치하는 실제 활성 은행입니다. 최신 공개 확인된 편집 대장·보고서와 기존 확대의 다음 조사 계획을 함께 대조하여 수정 문구·revision·공유 선택지 연결을 보존합니다. 새 정규 수는 이 활성 기준본에 없는 검증된 고유 목표만 세며 이전 정정 문항을 신규 목표로 다시 등록하지 않습니다
+8. 정상 원격 후속 확대의 baseline은 마지막 확대 대장의 은행이 아니라 최신 manifest와 해시가 일치하는 실제 활성 은행입니다. 유한 재대조 뒤 허용된 오프라인 확대에서는 아래 계약의 정확한 최신 전달 선행 은행과 실제 원격 anchor를 별도로 연결합니다. 최신 공개 확인된 편집 대장·보고서와 기존 확대의 다음 조사 계획을 함께 대조하여 수정 문구·revision·공유 선택지 연결을 보존합니다. 새 정규 수는 해당 검증 기준본에 없는 검증된 고유 목표만 세며 이전 정정 문항을 신규 목표로 다시 등록하지 않습니다. 오프라인 새 채택 수를 실제 공개 수에 합치지 않습니다
 
 ### 효력 시각별 회차 일정 계약
 
@@ -231,16 +231,53 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 
 `minutesEdited`와 원래 입력 문자열인 `minutesValue`는 설정 화면 및 브라우저 경로 복원에만 사용합니다. 세션 config·은행·백업 스키마에 추가하지 않습니다. 실제 시작할 때 config.minutes는 기존처럼 숫자로 검증합니다. 전달된 기존 config.minutes는 과거 편집 의도를 알 수 없으므로 보호하며, 이미 시작/저장된 세션의 시간·마감·답안·스냅샷·점수를 마이그레이션하지 않습니다.
 
-## 다운로드 전용 전달 계약 (운영 부가 형식 v1)
+## 다운로드 전용 전달 계약 (운영 부가 형식 v1/v2)
 
-이 형식은 앱 bank schemaVersion 3, manifest/학습 기록 백업 v1 또는 후보 대장 스키마가 아닙니다. 앱의 가져오기로 읽지 않습니다. `scripts/download-fallback.mjs`는 Git/Library/사용자 기록에 쓰지 않는 운영 도우미이며 기존 `validate-round.mjs`·`release-guard.mjs`의 최종 시각·누적 이력·최대 3회 검사를 변경하지 않습니다.
+이 형식은 앱 bank schemaVersion 3, manifest/학습 기록 백업 v1 또는 후보 대장 스키마가 아닙니다. 앱의 가져오기로 읽지 않습니다. `scripts/download-fallback.mjs`는 Git/Library/사용자 기록에 쓰지 않는 로컬 운영 도우미입니다. 전달 선행자의 명시적 로컬 전용 검증 문맥을 사용하더라도 기존 `validate-round.mjs`·`release-guard.mjs`의 최종 시각·누적 이력·최대 3회 등 데이터 검사는 완화하지 않으며 오프라인 증거를 원격 공개 증거로 대체하지 않습니다.
 
 - 권한 상태는 Git 실제 알림 시각 기준 600,000ms입니다. `permission_wait`에서 기한 전 확인된 승인만 `git_ready`, 명시적 거부는 `permission_denied`, 기한 도달/초과는 `download_only`입니다. timeout은 종결 상태이며 뒤늦은 승인으로 바뀌지 않습니다. 라이브 작업의 상태/시각은 실행자가 실제 증거로 기록해야 하며 도우미의 문자열만으로 알림 도착을 증명하지 않습니다
-- Git `refStatus`는 `unchanged|applied|changed_other|unknown`, 객체 결과는 `none|created|unknown`으로 구별합니다. ref가 진행/불명인 경우 같은 head 관찰이나 요청 취소로 `unchanged`라 하지 않습니다. 이 관찰과 cutoff/영구 freeze를 재확인하지 않고 쓰기 작업을 재개하지 않습니다
+- 재대조 대기는 권한 시계와 별도입니다. artifactSha256를 안정 키로 `firstUnresolvedAt`에 해당 묶음의 최초 지속 기록된 읽기 전용 미확정 관찰 시각을 넣고 `deadlineAt === firstUnresolvedAt + 600000ms`를 검증합니다. 기존 관찰/상태보다 늦은 시각으로 덮어쓰거나 새 executionId·roundId·head 관찰·재호출로 초기화하지 않습니다. `startReconciliationWait`/`advanceReconciliationWait`의 반환 상태는 다음 행동 전에 지속 기록하며 실제 시간을 사용합니다. 기한 도달 뒤에는 해당 Git 단계를 건너뛰지만 미확정 근거와 accepted 예약은 남깁니다. 건너뜀은 resolvedArtifacts 추가·권한 승인·ref 미변경의 증거가 아닙니다
+- Git `refStatus`는 `unchanged|applied|changed_other|unknown`, 객체 결과는 `none|created|unknown`으로 구별합니다. ref가 진행/불명인 경우 같은 head 관찰이나 요청 취소로 `unchanged`라 하지 않습니다. 제출되지 않은 ref와 결과 불명인 unattached blob을 구별하며 후자는 해당 blob 쓰기의 중복 재시도만 막습니다. ref 불명은 충돌할 동기화/공개를 막지만 검증 가능한 오프라인 조사·저작을 막지 않습니다. 미확정 쓰기를 맹목적으로 재전송하지 않으며 실제 원격 관찰·cutoff/영구 freeze·허용된 권한을 재확인하지 않고 쓰기 작업을 재개하지 않습니다
 - ZIP manifest의 `schemaVersion:1`, `kind:developer_patch_not_learner_import`, `deliveryMode:download_only`, `deliveryScope:content|reporting_only|supporting_files`, `reportingEvidence`(해당 없음은 null), `roundId`, 별도 `executionId`, 실제 `baseCommit`(40자 SHA), `baseVerifiedAt`, `parentDeliverySha256`(첫 전달 null), 실제 권한/중단 시각, `gitOutcome`, `newlyPublishedRegular:0`, `files`, `deletions`를 사용합니다. 파일 항목은 `{path,beforeSha256,sha256,bytes}`이며 새 파일의 before는 null, 삭제 항목은 sha256=null·bytes=0입니다. SHA는 64자 소문자 SHA-256입니다. 변경·추가 바이트만 `files/<path>`에 저장하고 해시 확인된 삭제는 지시만 제공합니다. ZIP 엔트리는 경로 안전 검사와 case-collision 검사를 통과해야 합니다
-- 기준 inventory는 확인된 원격 커밋의 전체 공개 허용 목록과 정확히 같아야 합니다. 후보 delta는 정확한 검토 해시 목록과 같아야 하며 허용 목록에서 항목을 빼서 삭제/유출을 숨기지 못합니다. 바이트를 읽은 뒤 별도로 고정해 ZIP을 만들고, 고정 후 변경과 기존 ZIP 덮어쓰기를 거부합니다. 이전 불변 release/seed 파일 수정·삭제를 금지합니다. 공개 보고서의 개인정보/비밀 제거는 별도 의미 검토가 필요합니다
+- 권한 timeout에서 만든 기존 ZIP manifest는 v1을 그대로 보존합니다. 후속 오프라인 delta는 `schemaVersion:2`, `baseKind:offline_delivery`, 정확한 누적 선행자 `offlineBase:{artifactSha256,roundId,bankVersion,bankSha256}`, 원래 artifact의 `reconciliation:{artifactSha256,firstUnresolvedAt,deadlineAt,state:skip_git_step,skippedAt}`를 사용하고 권한 알림/마감/중단 필드는 넣지 않습니다. 새 권한 요청이 있었다고 꾸미지 않으며 root v1의 최초 미확정 시각과 정확히 대조합니다. 두 버전 모두 동일한 실제 원격 anchor와 전달 선행자 해시를 보존합니다. v2 한국어 적용 안내는 선행 회차·은행·은행 해시·콘텐츠 ZIP/직전 ZIP 해시를 명시하고, 원격 커밋만으로는 부족하며 변경분만 사용하는 경우 검증된 선행 ZIP 사슬을 먼저 적용해야 함을 알립니다. 함께 제공하는 전체본에는 이 설치 전제조건을 적용하지 않습니다
+- 기준 inventory는 v1에서 확인된 원격 커밋의 전체 공개 허용 목록과 정확히 같아야 하며 v2에서는 그 inventory에 순서대로 검증한 전달 delta를 적용한 정확한 누적 파일 트리와 같아야 합니다. 후보 delta는 정확한 검토 해시 목록과 같아야 하며 허용 목록에서 항목을 빼서 삭제/유출을 숨기지 못합니다. 바이트를 읽은 뒤 별도로 고정해 ZIP을 만들고, 고정 후 변경과 기존 ZIP 덮어쓰기를 거부합니다. 이전 불변 release/seed 파일 수정·삭제를 금지합니다. 공개 보고서의 개인정보/비밀 제거는 별도 의미 검토가 필요합니다
 - 별도 영수증의 `receiptSchemaVersion:1`, `artifactSha256`, `parentDeliverySha256`, `roundId`, `executionId`, `baseCommit`, `status:prepared|delivered|delivery_failed`, `recordedAt`, `manifestSha256`, `newlyPublishedRegular:0`, 선택적 `content:{roundId,ledgerPath,ledgerSha256,bankVersion,bankSha256,acceptedGoalIds}`를 보존합니다. status 사건은 append-only로 기록하고 검사에는 artifact당 최신 사건 하나를 사용합니다. 외부 업로드·사용자 첨부 성공 증거 없이 delivered를 쓰지 않습니다. 영수증에는 Library 접근 ID·개인 URL·실행자 원시 로그를 넣지 않습니다
 - 새 은행과 확대·편집 대장이 들어 있는 content delta는 content를 생략할 수 없습니다. 영수증 생성기는 정확한 ZIP 파일 바이트에서 ledgerPath·은행·accepted 목표를 도출하며 전달 사슬 검사도 필수 provenance 누락을 거부합니다. 문서/보조 파일 전용과 이미 원격에 있는 은행의 reporting_only 마감 delta는 content=null입니다. 보고 전용은 새 은행을 포함하지 않으며 기존 후보의 판정·내용·검토를 바꿀 수 없습니다. reportingEvidence는 ledgerPath·baselineLedgerSha256·bankVersion·bankSha256·publicationCommit·verifiedAt·decisionSha256를 고정하고 원래 실제 공개 수는 유지합니다. ZIP 직렬화 경계는 manifest·Git 관찰·파일/삭제 항목의 알려진 필드만 허용하며 알 수 없는 비공개 메타데이터를 거부합니다
-- content의 해시는 timeout 시점의 종결 후보 대장·accepted 은행 원문을 가리킵니다. 이 원문을 공개 확인 상태로 덮어쓰지 말고 별도 불변 사본을 보존합니다. 원래 공개 운영 대장을 실제 공개 확인으로 갱신하는 기존 절차와 별개입니다. accepted 목표는 미전달인 경우에도 예약된 것으로 취급하고 중복 생성·다시 검토·횟수 초기화하지 않습니다. 이전 전달이 실제 해결된 뒤 새 편집 회차가 그 정확한 선행 roundId·은행/해시·questionId/revision을 참조하는 경우만 같은 목표의 더 높은 revision을 허용하며, 원래 전체 편집 guard를 다시 통과해야 합니다. 미해결 목표·오래된 선행자·분기/리셋은 거부합니다
-- 전달 사슬의 앞 항목을 생략/변경하거나 분기하지 않습니다. 미해결 은행을 버리지 않고 원래 원격 검증 기준을 보존합니다. 다음 허용된 정상 실행에서 가장 오래된 미해결 항목의 원격 ancestry·정확한 바이트·Pages·전체 캠페인 검사를 확인한 뒤 해결 처리합니다. 그 전에는 새 콘텐츠를 시작하지 않습니다. 원격 검증 이력과 다운로드 사슬은 별개이며 후자의 accepted 수를 신규 공개 수나 모의시험 공개 coverage로 더하지 않습니다
+- content의 해시는 timeout 시점의 종결 후보 대장·accepted 은행 원문을 가리킵니다. 이 원문을 공개 확인 상태로 덮어쓰지 말고 별도 불변 사본을 보존합니다. 원래 공개 운영 대장을 실제 공개 확인으로 갱신하는 기존 절차와 별개입니다. accepted 목표·시작한 검토 횟수·bankVersion은 미전달인 경우에도 예약된 것으로 취급하고 중복 생성·다시 검토·횟수 초기화하지 않습니다. 이전 전달이 실제 해결된 뒤 새 편집 회차가 그 정확한 선행 roundId·은행/해시·questionId/revision을 참조하는 경우만 같은 목표의 더 높은 revision을 허용하며, 원래 전체 편집 guard를 다시 통과해야 합니다. 새 독립 목표의 누적 확대와 미해결 기존 목표의 수정/재검토를 구별하고, 후자의 오래된 선행자·분기/리셋은 거부합니다
+- 전달 사슬의 앞 항목을 생략/변경하거나 분기하지 않습니다. 미해결 은행을 버리지 않고 원래 원격 검증 기준을 보존합니다. 재대조 상한 이후 새 콘텐츠 진행 여부는 미해결 항목 수만으로 결정하지 않으며 `validateOfflineContinuation`과 전체 캠페인 검증에 필요한 아래 조건을 확인합니다. `validateDeliveryChain`의 canStartNewContent는 기한과 정확한 전달/누적 증거를 반영해야 하며 단순히 unknown을 resolved로 바꿔 허용하지 않습니다. 원격 검증 이력과 다운로드 사슬은 별개이며 후자의 accepted 수를 신규 공개 수나 모의시험 공개 coverage로 더하지 않습니다
 - 동일 ZIP은 동일 bytes/hash로 재사용하고 실제 변경이 없으면 중복 첨부를 생략합니다. helper는 준비만 하고 Library 권한·업로드·첨부를 해결하지 않습니다. 전송 실패는 미전달이며 비공개 서명 URL로 우회하지 않습니다. 최종 cutoff/영구 freeze 뒤 새 fallback 묶음을 만들거나 늦은 누적본을 공개하는 예외를 제공하지 않습니다
+
+### 재대조 상한 뒤 오프라인 누적 검사
+
+1. 최초 선행자는 정확히 전달 검증한 round-006이며 이후에는 최신 검증 전달 선행자를 사용합니다. `docs/deliveries/offline-chain.json`은 공개용 receipts·manifests·불변 원본 ledgerPaths를 연결하고, 각 artifact의 실제 ZIP/manifest/종결 대장/은행 바이트와 해시를 확인할 수 있어야 합니다. prepared 또는 delivery_failed를 delivered로 바꾸어 선행자를 만들지 않습니다. 오래된 기준·앞 항목 누락·분기·변경 원문·같은 bankVersion의 다른 바이트는 거부합니다
+2. baseline.sourceCommit은 실제 검증된 원격 커밋을 가리킵니다. baseline.offlinePredecessor의 `{artifactSha256,manifestSha256,ledgerSha256,roundId}`는 정확한 영수증/manifest/종결 대장을 연결하며 baseline.bankVersion·bankSha256·누적 수는 그 대장의 accepted 은행과 일치해야 합니다. 선행자의 `recordedAt`과 `eligibleAt=max(recordedAt, 최초 재대조 deadlineAt)`는 후속 회차 시작보다 늦을 수 없습니다. 오프라인 은행의 가짜 원격 commit·공개 manifest·verified 상태를 만들지 않습니다
+3. 전달 선행자 검증으로 얻은 `offlineBases` Map을 명시적 로컬 전용 문맥으로 전체 캠페인 검증기에 제공합니다. 검증 입력에는 원래 closed 확대/편집 대장 전체와 은행 원문을 넣으며 publication.status·공개 수·판정·cycle·검토 시각을 바꾼 합성 대장을 쓰지 않습니다. 기존 계보·재개방·목표/template/ID 중복·최대 3회/계보 6회·검토 독립성·다섯 gate·일정 단일성·판정 마감·종결·동결 조건을 확인합니다. 인자가 명시되지 않은 정상 원격 검증에 오프라인 예외를 적용하지 않습니다
+4. 모든 누적 은행은 검증된 바로 전 선행 은행의 시드·기존 문항/선택지·출처·정정된 개정판을 정확히 보존해야 합니다. 추가된 정규 문항은 해당 회차에서 accepted인 실제 집합과 일치하고, accepted 목표·은행 버전의 예약이나 탈락 이력은 사라지지 않아야 합니다. 엄격한 은행/해설 발행 검사와 허용 목록·개인정보 검토도 별도로 수행합니다. 사슬 해시 일치만으로 내용·문안·정답 의미 또는 전체 캠페인 검증을 통과했다고 주장하지 않습니다
+5. 각 원본 종결 대장·불변 bank·영수증/manifest·선행 해시를 체크포인트로 보존합니다. 오프라인 신규 공개 수는 0이며 verifiedAt과 accepted 후보의 publishedBankVersion은 null입니다. 기존 원격 공개 coverage와 실제 전달한 오프라인 채택량을 별도로 기록합니다. 4시간 일정·후보 상한·판정 마감·마지막 날 23:00 종결·23:30 재확인·최종 동결은 변경하지 않습니다
+
+### 최신 사슬의 후속 동기화 검사
+
+`assessGitSyncPlan`은 Git 쓰기를 수행하지 않는 계획 검사입니다. 최신 검증 누적본을 새로 확인한 원격 head에 적용하되 사슬의 모든 원래 종결 대장·불변 은행 버전·전달 기록을 보존해야 합니다. 오래된 중간본을 먼저 공개할 필요는 없으며 사슬 전체의 검증은 생략할 수 없습니다.
+
+- 실제 원격 anchor와 fresh head의 ancestry를 확인하고 public allowlist 전체의 현재 해시를 읽습니다. 각 추가/변경/삭제의 before/after 해시와 대조해 아직 적용되지 않은 변경, 이미 정확히 적용된 바이트, 외부 변경/경로 충돌을 구분합니다. 같은 immutable 버전의 다른 바이트나 허용되지 않은 삭제는 거부하며 원격 변경을 강제로 덮어쓰지 않습니다
+- unsettled 객체 쓰기를 중복하지 않습니다. 미확정 ref가 계획한 publication과 충돌할 수 있으면 해당 Git 단계를 보류/건너뛰고 오프라인 사슬은 보존합니다. 계획이 안전하다는 결과는 권한이나 미확정 쓰기 완료 증거가 아닙니다. 실제 쓰기 직전에 fresh head·freeze·전체 release 검사를 다시 하고 head가 바뀌면 계획을 재검증합니다
+- `resolvedArtifacts`는 실제 원격 ancestry·각 보존 산출물의 정확한 바이트·최신 누적본의 Pages 반영과 전체 캠페인 검사를 확인한 후에만 기록합니다. 최초 원문과 영수증은 계속 보존하고 실제 공개 확인 기록은 별도 절차로 갱신합니다. 기한 도달·건너뜀·로컬 검사만으로 해결 또는 공개했다고 기록하지 않습니다. 최종 cutoff 또는 영구 freeze 뒤 동기화로 새 누적본을 공개할 수 없습니다
+
+검증기의 `ok`는 기존 전달 증거의 유효성이고 `canStartNewContent`는 현재 진행 허용 여부입니다. 최종 동결 뒤에도 기존 정상 증거의 역사적 검사는 가능하지만 새 오프라인 확대·ZIP 생성·Git 동기화는 허용하지 않습니다.
+
+### 독립 전체 프로젝트 묶음 (complete v1, packaging-policy-001)
+
+- 매 다운로드 전달은 delta와 전체본 두 artifact를 준비하며 정확히 같은 프로젝트/은행을 가리켜야 합니다. CLI는 DELTA.zip과 COMPLETE.zip 두 출력 경로와 reviewedFullInventory를 요구합니다. 전체본은 공개 허용 목록 전체를 `project/<path>`에 담습니다. 다른 디렉터리의 파일, symlink, 비공개 자료·학습 기록·비밀·서비스 접근 ID는 포함하지 않습니다
+- 전체 manifest는 `schemaVersion:1`, `kind:complete_project_not_learner_import`, `deliveryMode:download_only`, `newlyPublishedRegular:0`, `projectDirectory:project`, `prerequisiteArtifacts:[]`, `sourceRelease`, `frozenSourceInventory`, `packagingRevision`, `files`만 허용합니다. 파일 inventory는 `{path,sha256,bytes}`이며 경로 안전·대소문자 중복과 모든 원문 해시를 검증합니다
+- `sourceRelease:{roundId,deltaArtifactSha256,deltaManifestSha256,baseCommit,bankVersion,bankSha256,ledgerPath,ledgerSha256}`는 실제 출처를 보존합니다. 이 선행 delta는 설치에 필요하지 않습니다. 활성 data/manifest와 은행·closed 대장이 정확히 일치해야 하며 알려지지 않은 필드는 거부합니다
+- `frozenSourceInventory`는 원래 검토된 전체 공개 목록입니다. 포장 변경 없는 다음 회차 전체본은 files와 같고 packagingRevision은 null입니다. 별도 포장 개정은 `{revisionId,files:[{path,beforeSha256,sha256,bytes}]}`로 원본과 다른 지원 파일만 정확히 기록합니다. 기존 runtime/data/원 대장/전달 이력의 변경·삭제를 이 예외로 허용하지 않습니다
+- full 영수증은 `receiptSchemaVersion:1`, `kind:complete_project_delivery`, artifact/manifest/sourceDeltaArtifact SHA-256, roundId·bankVersion·bankSha256·status·recordedAt·newlyPublishedRegular:0을 갖습니다. 기존 delta chain에 full을 끼워 넣거나 원 delta 영수증/종결 대장을 수정하지 않습니다. prepared/delivered/delivery_failed 사건을 따로 보존하며 실제 첨부 확인 전 delivered를 쓰지 않습니다
+- 빈 폴더 재구성 후 build/check/test·발행 검사·CRC/전체 해시·privacy 검증을 통과해야 합니다. full과 delta를 둘 다 적용할 필요는 없습니다. 전체본은 learner import 파일이 아니고 브라우저 기록 삭제를 요구하지 않습니다. 포장 작업은 새 문항 생성·공개/동결 우회 권한을 주지 않습니다
+
+### 새 명시 요청에 따른 단일 blob 재제출의 좁은 예외
+
+미확정 쓰기의 자동 재시도 금지는 기본값이다. 다만 이전 실행이 영구 `download_only`로 끝났고 tree/commit/ref를 전혀 제출하지 않은 분리된 `create_blob`만, **종료 뒤 사용자가 새로 명시한 요청**에 대해 새 executionId로 독립 검토한다. 기존 로컬 실행의 종료와 대기 중인 후속 Git 쓰기가 없음도 독립 확인한다. 원래 저장소·도구·인코딩·해독 바이트·바이트 수·SHA-256·Git blob SHA가 모두 같아야 한다. 60초 이내의 실제 원격 head와 로컬/원격 영구 동결 상태, 별도 신규 권한 대기의 10분 상한·현재 실제 시각·최종 cutoff·전체 발행 검사를 확인한다.
+
+`scripts/blob-retry.mjs`의 `initializeBlobRetryJournal`/`reserveBlobRetry`로 원래 작업당 하나의 고정된 비공개 지속 기록에 요청/객체당 한 번을 **제출 전에** 배타 생성·동기화한다. 실패·불명·중단도 한 번을 소비하며 기록의 이동·삭제·재초기화로 횟수를 되찾지 않는다. 기존 unknown·최초 10분 시계·종결 상태는 그대로 둔다. 증거/지속 기록 누락이나 손상은 차단한다. 자동/예약/늦은 승인·인코딩 변경·tree-inline 우회·tree/commit/ref 재시도는 허용하지 않으며 이 검사는 공개 승인이나 배포 완료를 뜻하지 않는다.
+
+운영자 증거·사용자 요청 식별자·journal 경로/원시 기록은 공개 ZIP에 넣지 않습니다. guard가 반환한 정확한 operation만 별도 새 실행에서 한 번 제출할 수 있으며, 원래 미확정 결과를 성공·실패·미변경으로 재분류하지 않습니다. 후속 tree/commit/ref는 별도 공개 권한·원격 상태·전체 검사에 따라 평가합니다.

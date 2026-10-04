@@ -117,3 +117,38 @@ data/releases/2026.10.04-regular.5/bank.json
 # Local-only permission-timeout delivery policy and regression tests
 scripts/download-fallback.mjs
 tests/download-fallback.test.mjs
+
+# Sixth regular expansion
+tests/round-six-bank.test.mjs
+docs/rounds/round-006.json
+docs/rounds/round-006.md
+data/releases/2026.10.04-regular.6/bank.json
+
+# Bounded reconciliation and verified offline cumulative continuation
+tests/bounded-reconciliation.test.mjs
+tests/offline-campaign-baselines.test.mjs
+docs/deliveries/offline-chain.json
+docs/deliveries/14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a/ledger.json
+
+# Seventh offline cumulative expansion
+data/releases/2026.10.04-regular.7/bank.json
+docs/rounds/round-007.json
+docs/rounds/round-007.md
+tests/round-seven-bank.test.mjs
+
+# Delivered seventh-round offline checkpoint
+docs/deliveries/6a7c6e7488003917dc6e85d962787f4392c5248f71238c28d2defbc94c526449/ledger.json
+
+# Eighth offline cumulative expansion
+data/releases/2026.10.04-regular.8/bank.json
+docs/rounds/round-008.json
+docs/rounds/round-008.md
+tests/round-eight-bank.test.mjs
+
+# Standalone cumulative project delivery (packaging-policy-001)
+scripts/complete-bundle.mjs
+tests/complete-bundle.test.mjs
+
+# Explicit one-shot content-addressed blob retry guard
+scripts/blob-retry.mjs
+tests/blob-retry.test.mjs

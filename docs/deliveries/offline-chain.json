@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "receipts": [
+    {
+      "receiptSchemaVersion": 1,
+      "artifactSha256": "14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a",
+      "parentDeliverySha256": null,
+      "roundId": "round-006",
+      "executionId": "round-006-publish-20261004T011236Z",
+      "baseCommit": "d8ee1c0dc1c04145d5a6752242b74b003f0e59c5",
+      "status": "delivered",
+      "recordedAt": "2026-10-04T01:30:40.988Z",
+      "newlyPublishedRegular": 0,
+      "content": {
+        "roundId": "round-006",
+        "ledgerPath": "docs/rounds/round-006.json",
+        "ledgerSha256": "3189388a549bc8d87259a58a32aa094b1688556b8d4477047dca8319b49d16af",
+        "bankVersion": "2026.10.04-regular.6",
+        "bankSha256": "14058752f728e9653aa5df025134953fafba50795213784ea27deafc295f9437",
+        "acceptedGoalIds": [
+          "r006-css-script-template-automatic-update-timer-cancel-resume-guard",
+          "r006-css-script-template-css-background-shorthand-omitted-reset",
+          "r006-css-script-template-css-counters-ancestor-stack",
+          "r006-css-script-template-css-inline-versus-inlineblock-width-applicability",
+          "r006-css-script-template-css-percent-height-content-dependent-container",
+          "r006-css-script-template-css-text-decoration-propagation-color",
+          "r006-css-script-template-dom-remove-listener-capture-identity",
+          "r006-css-script-template-js-bound-receiver-prefixed-arguments",
+          "r006-css-script-template-js-function-declaration-versus-var-initialization",
+          "r006-css-script-template-js-global-regexp-lastindex-state",
+          "r006-css-script-template-js-object-assign-shallow-nested-sharing",
+          "r006-css-script-template-native-button-redundant-key-click-activation",
+          "r006-internet-html-t-dns-authoritative-name-error",
+          "r006-internet-html-t-dns-recursion-request-versus-capability",
+          "r006-internet-html-t-html52-address-contact-information",
+          "r006-internet-html-t-html52-cite-author-reference-permitted",
+          "r006-internet-html-t-http-202-asynchronous-acceptance",
+          "r006-internet-html-t-http-content-coding-media-type-preservation",
+          "r006-internet-html-t-http-suffix-byte-range-bounds",
+          "r006-internet-html-t-iframe-sandbox-selective-forms-permission",
+          "r006-internet-html-t-listbox-owned-active-descendant-implementation",
+          "r006-internet-html-t-mark-contextual-relevance",
+          "r006-internet-html-t-mime-base64-reversible-transfer-encoding",
+          "r006-internet-html-t-output-calculation-association-not-submitted",
+          "r006-internet-html-t-q-cite-source-metadata-visible-link-boundary",
+          "r006-internet-html-t-retry-after-delay-receipt-time",
+          "r006-internet-html-t-roledescription-underlying-role-preservation",
+          "r006-internet-html-t-tcp-port-flow-demultiplexing",
+          "r006-internet-html-t-uri-fragment-origin-request-exclusion",
+          "r006-internet-html-t-vary-selected-request-field-match",
+          "r006-standards-template-additional-evaluation-deliverables-agreement",
+          "r006-standards-template-changing-live-content-purpose-alternative",
+          "r006-standards-template-empty-content-block-heading-inspection",
+          "r006-standards-template-native-message-dialog-new-window-exclusion",
+          "r006-standards-template-page-map-viewport-orientation",
+          "r006-standards-template-progressive-disclosure-information-load",
+          "r006-standards-template-recommended-nonreactive-inner-margin",
+          "r006-standards-template-reevaluation-sample-retention-replacement",
+          "r006-standards-template-responsive-layout-evaluation-states",
+          "r006-standards-template-saved-navigation-memory-support",
+          "r006-standards-template-standard-conformance-individual-access-limit"
+        ]
+      },
+      "manifestSha256": "c9ef5a3f15ae19d2410b3c92ca8959039795570c4e70dfe56988023018fc1fa1"
+    },
+    {
+      "receiptSchemaVersion": 1,
+      "artifactSha256": "6a7c6e7488003917dc6e85d962787f4392c5248f71238c28d2defbc94c526449",
+      "parentDeliverySha256": "14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a",
+      "roundId": "round-007",
+      "executionId": "round-007-offline-cumulative-20261004",
+      "baseCommit": "d8ee1c0dc1c04145d5a6752242b74b003f0e59c5",
+      "status": "delivered",
+      "recordedAt": "2026-10-04T04:35:00.369581Z",
+      "newlyPublishedRegular": 0,
+      "content": {
+        "roundId": "round-007",
+        "ledgerPath": "docs/rounds/round-007.json",
+        "ledgerSha256": "6fda864ed8df49a9adecbb6def072dbc075fae17e834b5af451b0d2d1a89a66d",
+        "bankVersion": "2026.10.04-regular.7",
+        "bankSha256": "1b27d3e201cdaf177d1b1d353adc4e9b89b9d3f45596ee810037efd66bd00421",
+        "acceptedGoalIds": [
+          "r007-css-script-template-css-bolder-relative-weight-table",
+          "r007-css-script-template-css-empty-cells-separated-paint",
+          "r007-css-script-template-css-fixed-background-viewport-reference",
+          "r007-css-script-template-css-unspecified-border-own-color",
+          "r007-css-script-template-js-addition-left-associative-string-transition",
+          "r007-css-script-template-js-array-default-iterator-values",
+          "r007-css-script-template-js-array-length-truncation-not-restoration",
+          "r007-css-script-template-js-split-limit-result-count",
+          "r007-css-script-template-js-substring-clamp-and-swap",
+          "r007-internet-html-t-anchor-transparent-content-interactive-exclusion",
+          "r007-internet-html-t-cookie-omitted-domain-host-only-match",
+          "r007-internet-html-t-dhcp-post-ack-address-conflict-notification",
+          "r007-internet-html-t-dns-truncated-udp-tcp-retry",
+          "r007-internet-html-t-file-accept-type-hint-validation-boundary",
+          "r007-internet-html-t-html-parser-implicit-paragraph-close-before-div",
+          "r007-internet-html-t-http-origin-authentication-challenge-field",
+          "r007-internet-html-t-ipv6-hop-limit-forwarding-discard-node",
+          "r007-internet-html-t-live-relevant-descendant-override-inspection",
+          "r007-internet-html-t-noscript-enabled-script-load-failure-boundary",
+          "r007-internet-html-t-responsive-img-width-descriptor-density-normalization",
+          "r007-internet-html-t-select-required-first-empty-placeholder",
+          "r007-internet-html-t-smtp-envelope-versus-message-recipient",
+          "r007-internet-html-t-smtp-transient-negative-completion",
+          "r007-internet-html-t-structured-extended-description-relation-implementation",
+          "r007-internet-html-t-submitter-action-override-preserves-form-method",
+          "r007-internet-html-t-uri-case-normalization-component-boundary",
+          "r007-standards-template-aggregated-portal-combined-state-evaluation",
+          "r007-standards-template-certification-publicity-scope-and-validity",
+          "r007-standards-template-consensus-abstention-not-unanimity",
+          "r007-standards-template-earl-evaluation-result-interchange-purpose",
+          "r007-standards-template-eu2016-public-sector-web-app-scope",
+          "r007-standards-template-evaluation-relied-upon-technology-test",
+          "r007-standards-template-fraudulent-certification-mandatory-revocation",
+          "r007-standards-template-preexisting-certification-remaining-term-transition",
+          "r007-standards-template-royalty-free-patent-policy-boundary",
+          "r007-standards-template-same-destination-image-text-link-consolidation",
+          "r007-standards-template-section508-nonpublic-official-training-scope",
+          "r007-standards-template-tactile-alert-without-hearing-or-viewing",
+          "r007-standards-template-wcag21-to20-same-level-compatibility"
+        ]
+      },
+      "manifestSha256": "0eef4cd0cf3a6eef9213fbfbc9b4f41cdd2e703662ead0f2ea64b22afa281ce6"
+    }
+  ],
+  "manifests": [
+    {
+      "schemaVersion": 1,
+      "kind": "developer_patch_not_learner_import",
+      "deliveryMode": "download_only",
+      "deliveryScope": "content",
+      "reportingEvidence": null,
+      "roundId": "round-006",
+      "executionId": "round-006-publish-20261004T011236Z",
+      "baseCommit": "d8ee1c0dc1c04145d5a6752242b74b003f0e59c5",
+      "baseVerifiedAt": "2026-10-04T00:50:38.843Z",
+      "parentDeliverySha256": null,
+      "permissionNotifiedAt": "2026-10-04T01:12:36Z",
+      "permissionDeadlineAt": "2026-10-04T01:22:36.000Z",
+      "gitStoppedAt": "2026-10-04T01:22:36.000Z",
+      "gitOutcome": {
+        "refStatus": "unchanged",
+        "observedHead": "d8ee1c0dc1c04145d5a6752242b74b003f0e59c5",
+        "expectedCommit": null,
+        "observedAt": "2026-10-04T01:27:54.486Z",
+        "refWrite": "not_submitted",
+        "objects": "unknown",
+        "cancellation": "uncertain"
+      },
+      "newlyPublishedRegular": 0,
+      "files": [
+        {
+          "path": "PUBLICATION-MANIFEST.txt",
+          "beforeSha256": "8da84ce4742e004b1ade9388b7eafaf8164cd146c5afd6ef73e1ad72aab3914a",
+          "sha256": "febe446e898cfe4f8e6979f9dc926cf8fa96d5a4a87619d83934a22a839786c0",
+          "bytes": 3411
+        },
+        {
+          "path": "README.md",
+          "beforeSha256": "44ab6bf25638eac3af4a891180db1fd4892675179cf374b546e4d3e4a15acd37",
+          "sha256": "fded57da116a47a74df672d8b52ac67744ef97f11a9d02de593689668ad894d0",
+          "bytes": 24903
+        },
+        {
+          "path": "data/manifest.json",
+          "beforeSha256": "b058865b3df14514e78754481caf43cbc1776b2474874f96d9415295d1edf349",
+          "sha256": "6e3a68e1165eba84fbc8179235beb520ec08cebb06a661db82bf5b53d6816854",
+          "bytes": 641
+        },
+        {
+          "path": "data/releases/2026.10.04-regular.6/bank.json",
+          "beforeSha256": null,
+          "sha256": "14058752f728e9653aa5df025134953fafba50795213784ea27deafc295f9437",
+          "bytes": 2090682
+        },
+        {
+          "path": "docs/SOURCE-REVIEW.md",
+          "beforeSha256": "45c15ddbf01d266b4fa74f035274181d093d0276f915c242607314232fe23fc7",
+          "sha256": "b9ea449246d215511ea20b73103cfcaf5b31ed965ba45ca533ab3a177ba9a58d",
+          "bytes": 15850
+        },
+        {
+          "path": "docs/VALIDATION.md",
+          "beforeSha256": "9136a8758fd5bb45ce29de6c30424fc9985d857b0174d85839d7a2e9653d8991",
+          "sha256": "11e59b26973afd2b825947e99c096f8810a1fe74e514d0c0493e9439d582a8a8",
+          "bytes": 99376
+        },
+        {
+          "path": "docs/rounds/round-006.json",
+          "beforeSha256": null,
+          "sha256": "3189388a549bc8d87259a58a32aa094b1688556b8d4477047dca8319b49d16af",
+          "bytes": 282759
+        },
+        {
+          "path": "docs/rounds/round-006.md",
+          "beforeSha256": null,
+          "sha256": "d0f2a96e402cce799a119c6a21661d4c611c408913200b2c6bff22e797fff39a",
+          "bytes": 10061
+        },
+        {
+          "path": "tests/round-six-bank.test.mjs",
+          "beforeSha256": null,
+          "sha256": "aed5a78e7c5daefaf6d0dde88707a9713319a857d69b8c472d6a36778ca3b5d2",
+          "bytes": 7405
+        }
+      ],
+      "deletions": []
+    },
+    {
+      "schemaVersion": 2,
+      "kind": "developer_patch_not_learner_import",
+      "deliveryMode": "download_only",
+      "deliveryScope": "content",
+      "reportingEvidence": null,
+      "roundId": "round-007",
+      "executionId": "round-007-offline-cumulative-20261004",
+      "baseCommit": "d8ee1c0dc1c04145d5a6752242b74b003f0e59c5",
+      "baseVerifiedAt": "2026-10-04T04:29:43.253Z",
+      "parentDeliverySha256": "14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a",
+      "gitOutcome": {
+        "refStatus": "unchanged",
+        "observedHead": "d8ee1c0dc1c04145d5a6752242b74b003f0e59c5",
+        "expectedCommit": null,
+        "observedAt": "2026-10-04T03:13:01.061Z",
+        "refWrite": "not_submitted",
+        "objects": "unknown",
+        "cancellation": "uncertain"
+      },
+      "newlyPublishedRegular": 0,
+      "files": [
+        {
+          "path": "AGENTS.md",
+          "beforeSha256": "97667e2bb1942964f44d1553ee95863492aa082487e59210b68cfd81f470f691",
+          "sha256": "1addf1e0622546b516c0cc39a19a5788bf1476d2f7cf9cc2f1753027fed98fdd",
+          "bytes": 19917
+        },
+        {
+          "path": "PUBLICATION-MANIFEST.txt",
+          "beforeSha256": "febe446e898cfe4f8e6979f9dc926cf8fa96d5a4a87619d83934a22a839786c0",
+          "sha256": "7bc48cbebd578cfbef5c743f038db529fa01583b3d5d5c54811af770752bdd3b",
+          "bytes": 3859
+        },
+        {
+          "path": "README.md",
+          "beforeSha256": "fded57da116a47a74df672d8b52ac67744ef97f11a9d02de593689668ad894d0",
+          "sha256": "2fda20ce721014e7a968b7f834502775f771cb4ada533426827ae6256ee010e6",
+          "bytes": 24931
+        },
+        {
+          "path": "data/manifest.json",
+          "beforeSha256": "6e3a68e1165eba84fbc8179235beb520ec08cebb06a661db82bf5b53d6816854",
+          "sha256": "2feaac6faeb1c0e80494b0ccca89438f2fc39b709ed1ef8a9ef2c7c10a5750c3",
+          "bytes": 641
+        },
+        {
+          "path": "data/releases/2026.10.04-regular.7/bank.json",
+          "beforeSha256": null,
+          "sha256": "1b27d3e201cdaf177d1b1d353adc4e9b89b9d3f45596ee810037efd66bd00421",
+          "bytes": 2321772
+        },
+        {
+          "path": "docs/DATA-CONTRACT.md",
+          "beforeSha256": "8161552005542f525f0bc10ca68516e99326e2fdb7ec406a0c26ce0a3d9a86ae",
+          "sha256": "090cc40f026a84e08088b62d3c08a202b3c62d700c2059d3789cf391dd824514",
+          "bytes": 67126
+        },
+        {
+          "path": "docs/OPERATIONS.md",
+          "beforeSha256": "2cfe1938de1a0b175f717395682c0bcb759fb187e7ee52f1d376f480810830d4",
+          "sha256": "dea261356378a68eac633b7cb6d14b4c92407e54a8c6cade813f7664ac32cbe7",
+          "bytes": 55931
+        },
+        {
+          "path": "docs/PRD.md",
+          "beforeSha256": "6073e3e3fce76568a20c0d2ffc0e57bdeee2f00da8d42a9bde173398667eb045",
+          "sha256": "92859df302ebcc9275b2115fd4860bee3cebda519616c35cdb5c68dbbd0840a9",
+          "bytes": 206776
+        },
+        {
+          "path": "docs/SOURCE-REVIEW.md",
+          "beforeSha256": "b9ea449246d215511ea20b73103cfcaf5b31ed965ba45ca533ab3a177ba9a58d",
+          "sha256": "f1424d1b5dab724ff1ee5e0293780263539ae4b54c1a624dce823b6f55b5b549",
+          "bytes": 16729
+        },
+        {
+          "path": "docs/VALIDATION.md",
+          "beforeSha256": "11e59b26973afd2b825947e99c096f8810a1fe74e514d0c0493e9439d582a8a8",
+          "sha256": "a6a139c7ad4ab958114fff6da18fa004c281169b8f2d1c18700040afe989b2aa",
+          "bytes": 103920
+        },
+        {
+          "path": "docs/deliveries/14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a/ledger.json",
+          "beforeSha256": null,
+          "sha256": "3189388a549bc8d87259a58a32aa094b1688556b8d4477047dca8319b49d16af",
+          "bytes": 282759
+        },
+        {
+          "path": "docs/deliveries/offline-chain.json",
+          "beforeSha256": null,
+          "sha256": "835ebca55696e1175bf7de91d4f3be2b8efbdb3c49509c99ed05050c77b5fbf2",
+          "bytes": 7376
+        },
+        {
+          "path": "docs/rounds/round-007.json",
+          "beforeSha256": null,
+          "sha256": "6fda864ed8df49a9adecbb6def072dbc075fae17e834b5af451b0d2d1a89a66d",
+          "bytes": 277053
+        },
+        {
+          "path": "docs/rounds/round-007.md",
+          "beforeSha256": null,
+          "sha256": "9539951dcfd5af971a96f16904b38c2c22dc10398affad59c5659eaa4a27c8d3",
+          "bytes": 9800
+        },
+        {
+          "path": "docs/rounds/round-ledger.schema.json",
+          "beforeSha256": "d0c1a64d806b5df5cfac3dea0bb95cf146bef3805c916897af6d377608380725",
+          "sha256": "6f219c804159d380cb6b7921211712c1d21fc2f16b659a863b7665afa55f014d",
+          "bytes": 29633
+        },
+        {
+          "path": "scripts/download-fallback.mjs",
+          "beforeSha256": "fa48276559bbd6a23e21b7813f81f59608fa3b9ea08716cbdb0d8244be833f81",
+          "sha256": "117567fa4d42ceca01077b7f05d44fb8ded8d81180ff1bda34a9847082a60729",
+          "bytes": 53073
+        },
+        {
+          "path": "scripts/editorial-ledger.mjs",
+          "beforeSha256": "488ff52df43504d790914bc265bf22919bdf4ba157b3a7165b568d742403f1f4",
+          "sha256": "50c97457d906a0792b7a552d088c5993965115396d6326c39c0835cc16a0223f",
+          "bytes": 37998
+        },
+        {
+          "path": "scripts/validate-round.mjs",
+          "beforeSha256": "a1ae87aa1a4ccef385ad3acbb3db5e528c0df9409d55fd15fd723af929f92a93",
+          "sha256": "bb148fbdaa7b2bdccac2a05e99998f735d4c3c879e8d6fd6d76fee20d2f8ad25",
+          "bytes": 55694
+        },
+        {
+          "path": "tests/bounded-reconciliation.test.mjs",
+          "beforeSha256": null,
+          "sha256": "a8bd1ae6b8d7c4b07ea799406e63593177001244c558cd366d0b68058b8b772f",
+          "bytes": 15039
+        },
+        {
+          "path": "tests/offline-campaign-baselines.test.mjs",
+          "beforeSha256": null,
+          "sha256": "826744f9e03da77e6f3abb515d3f1c98b3cb0bdfd6e6cf86749a838a27fa626a",
+          "bytes": 13720
+        },
+        {
+          "path": "tests/round-seven-bank.test.mjs",
+          "beforeSha256": null,
+          "sha256": "1e4013efd0506ce4d739c9fecc4214eeff3a2c683f0c5e68229046f325b4cb70",
+          "bytes": 8120
+        }
+      ],
+      "deletions": [],
+      "baseKind": "offline_delivery",
+      "offlineBase": {
+        "artifactSha256": "14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a",
+        "roundId": "round-006",
+        "bankVersion": "2026.10.04-regular.6",
+        "bankSha256": "14058752f728e9653aa5df025134953fafba50795213784ea27deafc295f9437"
+      },
+      "reconciliation": {
+        "artifactSha256": "14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a",
+        "firstUnresolvedAt": "2026-10-04T01:27:54.486Z",
+        "deadlineAt": "2026-10-04T01:37:54.486Z",
+        "state": "skip_git_step",
+        "skippedAt": "2026-10-04T03:23:45.000Z"
+      }
+    }
+  ],
+  "ledgerPaths": [
+    "docs/deliveries/14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a/ledger.json",
+    "docs/deliveries/6a7c6e7488003917dc6e85d962787f4392c5248f71238c28d2defbc94c526449/ledger.json"
+  ]
+}

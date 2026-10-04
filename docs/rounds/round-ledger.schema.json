@@ -93,6 +93,35 @@
         "regularPractical": {
           "type": "integer",
           "minimum": 0
+        },
+        "offlinePredecessor": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Exact delivered cumulative predecessor; sourceCommit remains the verified Git anchor, never a claim that this offline bank was remote.",
+          "properties": {
+            "artifactSha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "manifestSha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "ledgerSha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "roundId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+            }
+          },
+          "required": [
+            "artifactSha256",
+            "manifestSha256",
+            "ledgerSha256",
+            "roundId"
+          ]
         }
       },
       "required": [
