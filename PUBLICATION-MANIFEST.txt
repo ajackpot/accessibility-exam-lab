@@ -113,3 +113,7 @@ tests/round-five-bank.test.mjs
 docs/rounds/round-005.json
 docs/rounds/round-005.md
 data/releases/2026.10.04-regular.5/bank.json
+
+# Local-only permission-timeout delivery policy and regression tests
+scripts/download-fallback.mjs
+tests/download-fallback.test.mjs
