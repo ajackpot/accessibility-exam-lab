@@ -281,3 +281,13 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 `scripts/blob-retry.mjs`의 `initializeBlobRetryJournal`/`reserveBlobRetry`로 원래 작업당 하나의 고정된 비공개 지속 기록에 요청/객체당 한 번을 **제출 전에** 배타 생성·동기화한다. 실패·불명·중단도 한 번을 소비하며 기록의 이동·삭제·재초기화로 횟수를 되찾지 않는다. 기존 unknown·최초 10분 시계·종결 상태는 그대로 둔다. 증거/지속 기록 누락이나 손상은 차단한다. 자동/예약/늦은 승인·인코딩 변경·tree-inline 우회·tree/commit/ref 재시도는 허용하지 않으며 이 검사는 공개 승인이나 배포 완료를 뜻하지 않는다.
 
 운영자 증거·사용자 요청 식별자·journal 경로/원시 기록은 공개 ZIP에 넣지 않습니다. guard가 반환한 정확한 operation만 별도 새 실행에서 한 번 제출할 수 있으며, 원래 미확정 결과를 성공·실패·미변경으로 재분류하지 않습니다. 후속 tree/commit/ref는 별도 공개 권한·원격 상태·전체 검사에 따라 평가합니다.
+
+### 별도 검증 누적 공개 이벤트
+
+`docs/publications/cumulative-006-008.json`은 원래 immutable ledger와 별도의 `verified_cumulative_publication` 이벤트다. 공개 검증 시각, 실제 payload commit/parent/tree, 동일 commit의 Pages 성공, 정확한 remote/live 파일 inventory, 공개 manifest, 원래 각 회차 ledger/bank 및 전달 artifact/manifest/receipt SHA-256을 연결한다. 120개 신규 공개와 총403개 정규 문항을 구별한다. 후속 지원 커밋의 자기 참조나 원래 미확정 객체 요청의 성공을 주장하지 않는다.
+
+`scripts/publication-sync.mjs`의 독립 검토된 고정 해시 목록 밖 증거는 허용하지 않는다. 정상 loader는 필요한 증거 파일이 없거나 변조되면 실패한다. 소비자는 원래 대장 바이트와 로드한 대장 전체의 동일성, 은행 해시, 종결/전달 뒤 검증 시각과 최종 동결을 확인한다. 검증 이전의 과거 감사에는 이벤트가 효력을 갖지 않으며,006–008의 역사적 기준은 자신의 사후 이벤트와 비교하지 않는다. 이후 새 회차의 기준은 최신 검증 누적본이어야 하고 더 새 공개 정정/확대를 롤백하지 않는다. 현재 active manifest 역시 이미 동기화한6/7 같은 중간본으로 되돌릴 수 없다.
+
+`synchronizations`는 원본 증거 배열이며 임의로 검증 완료 처리한 Map이 아니다. `resolveSynchronizedArtifacts`는 고정 증거·전체 원본 문맥·정확한 receipt 해시로 현재 해결 집합을 만든다. `validateSynchronizedDeliveryChain`은 전체 확대/편집 검증 후 그 집합을 전달 사슬 검증에 제공한다. 과거 영수증/대장/오프라인 canPublish는 그대로이며, 최종 cutoff/영구 freeze 뒤에는 새 콘텐츠를 시작할 수 없다. 같은 증거로 후속 편집의 accepted 선행자를 확인해도 stable ID·해시·원래 revision·최대 검토와 분기 금지 검사는 유지한다.
+
+이 파일은 사전에 독립 확인된 외부 사실의 검토 기록이지 GitHub 서명 검증기나 실시간 원격 관찰이 아니다. 코드와 고정 해시를 함께 바꾸는 것은 별도 검토가 필요한 새 신뢰 결정이다. sourceCommit은 최신 검증 payload의 실제 원격 후손이어야 하며 실행자의 fresh head/ancestry 확인으로 입증한다. 로컬 검사만으로 임의 commit을 검증된 후손이라고 선언하지 않는다.

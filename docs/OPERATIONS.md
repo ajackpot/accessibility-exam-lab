@@ -245,3 +245,9 @@ node scripts/release-guard.mjs --finalize
 - 필기 전용/공유와 실기 single/multi 모두 임의의 표시 순서에서 뜻과 정답이 유지되어야 합니다. ‘위의 모두’, ‘1번이 정답’, 표시 선택지 번호 조합처럼 순서에 의존하거나 답 위치를 암시하는 문구를 독립 의미 검토에서 걸러냅니다. 구조 검증만으로 자연어 암시를 전부 찾았다고 기록하지 않습니다
 - 새 세션 생성 시 한 번만 섞고, 안정 ID·정답 집합·부분 배점·실기 part 순서를 보존합니다. 여러 seed에서 위치 변화를 확인하되 연속 세션의 같은 순열을 결함으로 단정하지 않습니다
 - 배포 전에는 구판/신판 저장 세션의 이동·재개·새로고침·백업·시간제 전환 순서 보존과 AI/해설에서의 실제 선택 내용 연결을 확인합니다. 은행 수정 없이 앱 출제기만 변경한 경우 기존 은행 파일 해시를 그대로 유지합니다
+
+## 006–008 공개 후 현재 기준 복원
+
+[별도 공개 확인 보고서](publications/cumulative-006-008.md)와 JSON 증거를 확인한다. 원래 closed 대장이나 offline-chain/전달 영수증의 공개 수·상태를 고치지 않는다. 정상 `loadRoundContext`는 고정 SHA-256 증거를 읽은 뒤 원래 전체 대장/은행을 검증하며, 확인 시각 이후의 새 회차에 regular.8을 최신 공개 기준으로 제공한다. 검증 payload와 그 후손의 지원 기록 커밋을 구별하고, baseline.sourceCommit에는 실제 새로 확인한 head를 쓴다. 원격 ancestry 및 외부 변경/동결/권한 확인은 생략하지 않는다.
+
+전달 사슬의 현재 해결 여부는 `validateSynchronizedDeliveryChain(receipts, {synchronizations, campaignContext, manifests, ledgers, banks, now, publicationState})`로 확인한다. manifests와 ledgers/banks는 원래 전달 검증 자료이며 campaignContext는 `loadRoundContext`의 전체 문맥이다. 반환 resolvedArtifacts는 입력한 정확한 원본 영수증 중 공개가 입증된 항목만 포함한다. 원래 offline-chain은006–007의 역사적 선행 체크포인트이고,008의 전달 artifact 역시 별도 공개 증거에 연결돼 있다. 전체006–008 사슬을 검사할 때008의 원래 영수증/manifest까지 제공한다. 현재 상태를 읽는 것으로 Git 쓰기를 재개하거나 과거 unknown을 성공으로 바꾸지 않는다.

@@ -95,6 +95,7 @@ test('offline context rejects untrusted index shape and traversal before consult
   const temp=await fs.mkdtemp(path.join(os.tmpdir(),'offline-context-'));
   try {
     await fs.mkdir(path.join(temp,'docs/rounds'),{recursive:true});await fs.mkdir(path.join(temp,'docs/deliveries'),{recursive:true});await fs.mkdir(path.join(temp,'data'),{recursive:true});
+    await fs.cp(path.join(root,'docs/publications'),path.join(temp,'docs/publications'),{recursive:true});
     await fs.copyFile(path.join(root,'docs/rounds/round-ledger.schema.json'),path.join(temp,'docs/rounds/round-ledger.schema.json'));
     await fs.writeFile(path.join(temp,'data/publication-state.json'),'{}');
     await fs.writeFile(path.join(temp,'docs/deliveries/offline-chain.json'),json({schemaVersion:1,receipts:[],manifests:[],ledgerPaths:[],extra:true}));

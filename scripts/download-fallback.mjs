@@ -7,6 +7,7 @@ import {isDeepStrictEqual} from 'node:util';
 import {deflateRawSync} from 'node:zlib';
 import {releaseAllowed, FREEZE_AT, validateBankForPublication, validateExplanationAuthoring} from '../src/domain.js';
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
+import {resolveSynchronizedArtifacts} from './publication-sync.mjs';
 
 export const GIT_PERMISSION_TIMEOUT_MS = 10 * 60 * 1000;
 export const MAX_PERMISSION_POLL_MS = 1000;
@@ -548,3 +549,17 @@ export async function main(args = process.argv.slice(2)) {
   console.log(JSON.stringify({...artifacts, manifest: snapshot.manifest}, null, 2));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main().catch(error => { console.error(error.message); process.exitCode = 1; });
+
+/** Current publication state from pinned synchronization evidence plus original chain.
+ * Historical receipts and validateOfflineContinuation.canPublish remain unchanged. */
+export async function validateSynchronizedDeliveryChain(receipts, {synchronizations = [], campaignContext, ...options} = {}) {
+  if (!campaignContext) return {ok:false, errors:['Full original campaign context is required'], canStartNewContent:false};
+  const {validateRoundLedgers,validateEditorialLedgers}=await import('./validate-round.mjs');
+  const context={...campaignContext,synchronizations,now:options.now??Date.now(),publicationState:options.publicationState??campaignContext.publicationState};
+  const full=validateRoundLedgers(context.ledgers,{...context});
+  const editorials=validateEditorialLedgers(context.editorials||[],context);
+  if(!full.ok||!editorials.ok)return {ok:false,errors:[...full.errors,...editorials.errors],canStartNewContent:false};
+  const proof=resolveSynchronizedArtifacts(receipts,context);
+  if(!proof.ok)return {...proof,canStartNewContent:false};
+  return {...validateDeliveryChain(receipts,{...options,resolvedArtifacts:proof.resolvedArtifacts}),resolvedArtifacts:proof.resolvedArtifacts};
+}

@@ -7,6 +7,7 @@ import {isDeepStrictEqual} from 'node:util';
 import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion, presentQuestion} from '../src/domain.js';
 
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
+import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts} from './publication-sync.mjs';
 import {validateEditorialHistory, validateEditorialTransition, validateCampaignBaselines} from './editorial-ledger.mjs';
 export {editorialHash, editorialContent, editorialContentHash, editorialBlindPackage, editorialChangedPaths, editorialComponentStates} from './editorial-ledger.mjs';
 
@@ -163,7 +164,7 @@ function walkStrings(value, visit, at = '$') {
  * Pass ALL campaign ledgers, not only a reopened candidate's selected ancestors.
  * now is optional for reproducible historical validation; the CLI always supplies the real current clock.
  */
-export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null, editorials = [], offlineBases = new Map(), ledgerSources = new Map()} = {}) {
+export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null, editorials = [], offlineBases = new Map(), ledgerSources = new Map(), synchronizations = []} = {}) {
   const errors = [], rounds = [], warnings = [...MANUAL_CHECKS];
   const fail = (round, at, message) => errors.push(`${round?.roundId || '<unknown-round>'}${at}: ${message}`);
   if (!Array.isArray(ledgers)) return {ok: false, errors: ['ledgers must be an array'], warnings, rounds};
@@ -408,7 +409,7 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
       if (!isDeepStrictEqual(round.coverageAfter, coverage)) fail(round, '/coverageAfter', 'coverage/mock eligibility differs from actual verified bank');
     }
   }
-  errors.push(...validateCampaignBaselines(rounds,{editorials,now,offlineBases,ledgerSources}).errors);
+  errors.push(...validateCampaignBaselines(rounds,{editorials,now,offlineBases,ledgerSources,synchronizations,banks,publicationState}).errors);
   return {ok: errors.length === 0, errors, warnings, rounds: rounds.map(r => ({roundId: r.roundId, status: r.status, candidates: r.candidates.length, publication: r.publication.status}))};
 }
 export function validateRoundLedger(ledger, options = {}) {
@@ -418,7 +419,7 @@ export function validateRoundLedger(ledger, options = {}) {
 /** Pre-publication gate: no hosted-verification claim is manufactured for a staged release. */
 export function validateEditorialLedgers(editorials, options = {}) {
   const result = validateEditorialHistory(editorials, {...options, schema: options.editorialSchema || EDITORIAL_SCHEMA}, {validateJsonSchema, regularCoverage, nextScheduledRoundAt, FINAL_DECISION_AT});
-  result.errors.push(...validateCampaignBaselines(options.ledgers||[],{editorials,now:options.now??null,offlineBases:options.offlineBases,ledgerSources:options.ledgerSources}).errors); result.ok=result.errors.length===0; return result;
+  result.errors.push(...validateCampaignBaselines(options.ledgers||[],{editorials,now:options.now??null,offlineBases:options.offlineBases,ledgerSources:options.ledgerSources,synchronizations:options.synchronizations,banks:options.banks,publicationState:options.publicationState}).errors); result.ok=result.errors.length===0; return result;
 }
 export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), editorials = [], editorialSchema = EDITORIAL_SCHEMA, ...historyOptions} = {}) {
   const errors = [], fail = message => errors.push(`release: ${message}`);
@@ -432,7 +433,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   if (bank.changeSummary !== manifest.changeSummary) fail('active manifest change summary does not match bank');
   if (bank.bankVersion !== manifest.bankVersion || bank.releasedAt !== manifest.releasedAt || digest(active.raw) !== manifest.sha256) fail('active manifest version/release/hash does not match bank bytes');
   try { validateExplanationAuthoring(bank, historicalExplanationBaseline(banks)); } catch(error) { fail(`explanation authoring: ${error.message}`); }
-  errors.push(...validateCampaignBaselines(ledgers,{editorials,now:historyOptions.now??null,activeBankVersion:bank.bankVersion,offlineBases:historyOptions.offlineBases,ledgerSources:historyOptions.ledgerSources}).errors);
+  errors.push(...validateCampaignBaselines(ledgers,{editorials,now:historyOptions.now??null,activeBankVersion:bank.bankVersion,offlineBases:historyOptions.offlineBases,ledgerSources:historyOptions.ledgerSources,synchronizations:historyOptions.synchronizations,banks,publicationState:historyOptions.publicationState}).errors);
   const regular = bank.questions.filter(q => q.testOnly === false && q.verificationStatus === 'published');
   // Historical seed-only releases do not invent a regular expansion round.
   if (!regular.length) {
@@ -458,13 +459,16 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   }
   if (matching.length !== 1) return {ok: false, errors: [...errors, 'release: active regular bank requires exactly one explicit publication.bankVersion ledger reference']};
   const round = matching[0];
-  if(round.baseline?.offlinePredecessor) {
+  if(round.baseline?.offlinePredecessor || historyOptions.synchronizations?.length) {
     // The offline staging entry point is also a full-history gate. A caller must
     // not bypass review counters/lineages by invoking only validateReleaseLedger.
     errors.push(...validateRoundLedgers(ledgers,{banks,editorials,...historyOptions}).errors);
   }
   if (round.status !== 'closed' || round.candidates.some(c => c.decision === 'pending')) fail('active regular bank requires a closed ledger with no pending decisions');
-  if (['blocked', 'skipped'].includes(round.publication.status) || round.publication.blockers.length) fail('active regular bank has unresolved publication blockers');
+  const sync=validatePublicationSynchronizations(historyOptions.synchronizations,{ledgers,banks,...historyOptions,activeBankVersion:bank.bankVersion});
+  errors.push(...sync.errors);
+  const synchronized=sync.history.some(h=>h.publication.bankVersion===bank.bankVersion&&h.publication.bankSha256===manifest.sha256&&h.synchronizedRoundIds.includes(round.roundId));
+  if (!synchronized && (['blocked', 'skipped'].includes(round.publication.status) || round.publication.blockers.length)) fail('active regular bank has unresolved publication blockers');
   if (round.publication.bankSha256 !== manifest.sha256) fail('ledger publication.bankSha256 must match the active staged bank');
   const baselineRaw = get(round.baseline.bankVersion)?.raw;
   if (!baselineRaw) return {ok: false, errors: [...errors, 'release: missing immutable baseline bank bytes']};
@@ -550,7 +554,13 @@ export async function loadRoundContext(root = ROOT, input = null, {release = fal
     try { if ((await fs.stat(path.join(root, file))).isFile()) availableFiles.add(file); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
   const publicationState = JSON.parse(await fs.readFile(path.join(root, 'data/publication-state.json'), 'utf8'));
-  let offlineBases=new Map(),indexRaw;
+  const synchronizations=[];
+  for(const pin of PUBLICATION_SYNCHRONIZATIONS) {
+    const raw=await readOfflinePublicFile(root,pin.path);
+    if(digest(raw)!==pin.sha256)throw new Error('Publication synchronization proof hash mismatch');
+    synchronizations.push(JSON.parse(raw.toString()));
+  }
+  let offlineBases=new Map(),indexRaw,resolvedArtifacts=new Set();
   try {indexRaw=await readOfflinePublicFile(root,'docs/deliveries/offline-chain.json');}catch(error){if(error.code!=='ENOENT')throw error;}
   if(indexRaw) {
     const index=JSON.parse(indexRaw.toString()),keys=['schemaVersion','receipts','manifests','ledgerPaths'];
@@ -574,11 +584,14 @@ export async function loadRoundContext(root = ROOT, input = null, {release = fal
     const offline=validateOfflineContinuation(index.receipts,{manifests,ledgers:frozenLedgers,banks:new Map([...banks].map(([version,entry])=>[version,entry.raw])),now,publicationState});
     if(!offline.ok||!(offline.offlineBases instanceof Map))throw new Error(`Invalid offline delivery evidence: ${(offline.errors||[]).join('; ')}`);
     offlineBases=offline.offlineBases;
-    const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources});
-    const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources});
+    const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources,synchronizations});
+    const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations});
     if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
+    const resolution=resolveSynchronizedArtifacts(index.receipts,{synchronizations,ledgers,banks,ledgerSources,now,publicationState});
+    if(!resolution.ok)throw new Error(resolution.errors.join('; '));
+    resolvedArtifacts=resolution.resolvedArtifacts;
   }
-  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources};
+  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts};
 }
 export async function main(args = process.argv.slice(2)) {
   let input = null, nextRoundAt = null, release = false;

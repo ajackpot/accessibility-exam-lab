@@ -94,3 +94,9 @@
 미확정 쓰기의 자동 재시도 금지는 기본값이다. 다만 이전 실행이 영구 `download_only`로 끝났고 tree/commit/ref를 전혀 제출하지 않은 분리된 `create_blob`만, **종료 뒤 사용자가 새로 명시한 요청**에 대해 새 executionId로 독립 검토한다. 기존 로컬 실행의 종료와 대기 중인 후속 Git 쓰기가 없음도 독립 확인한다. 원래 저장소·도구·인코딩·해독 바이트·바이트 수·SHA-256·Git blob SHA가 모두 같아야 한다. 60초 이내의 실제 원격 head와 로컬/원격 영구 동결 상태, 별도 신규 권한 대기의 10분 상한·현재 실제 시각·최종 cutoff·전체 발행 검사를 확인한다.
 
 `scripts/blob-retry.mjs`의 `initializeBlobRetryJournal`/`reserveBlobRetry`로 원래 작업당 하나의 고정된 비공개 지속 기록에 요청/객체당 한 번을 **제출 전에** 배타 생성·동기화한다. 실패·불명·중단도 한 번을 소비하며 기록의 이동·삭제·재초기화로 횟수를 되찾지 않는다. 기존 unknown·최초 10분 시계·종결 상태는 그대로 둔다. 증거/지속 기록 누락이나 손상은 차단한다. 자동/예약/늦은 승인·인코딩 변경·tree-inline 우회·tree/commit/ref 재시도는 허용하지 않으며 이 검사는 공개 승인이나 배포 완료를 뜻하지 않는다.
+
+## 별도 누적 공개 확인 기록
+
+- 006–008은 `docs/publications/cumulative-006-008.json`의 검증된 payload/Pages 증거로 공개된 현재 상태를 읽는다. 원래 종결 대장·영수증·오프라인 사슬·은행은 수정하지 않는다. `loadRoundContext`의 `synchronizations`를 전체 캠페인/발행 검증에 전달하고, 공개 확인 시각 이후 새 회차만 최신 검증 누적 은행을 정상 원격 기준으로 쓴다
+- `scripts/publication-sync.mjs`의 고정 증거 해시와 원본 바이트 검사를 생략하거나 새 Boolean/Map으로 대체하지 않는다. 전달 사슬은 `validateSynchronizedDeliveryChain`에서 정확한 원본 영수증과 전체 이력을 함께 검증한다. 역사적 canPublish=false/unknown을 고쳐 현재 상태를 만들지 않는다
+- 새 회차의 sourceCommit은 새로 확인한 원격 head다. 검증 payload의 후손 관계·외부 변경·동결·Git 권한은 실제 공개 직전에 별도 확인한다. 이 증거는 새 공개 승인이나 예정 회차/최대 검토/마감 규칙의 예외가 아니다

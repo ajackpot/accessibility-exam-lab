@@ -152,3 +152,9 @@ tests/complete-bundle.test.mjs
 # Explicit one-shot content-addressed blob retry guard
 scripts/blob-retry.mjs
 tests/blob-retry.test.mjs
+
+# Verified cumulative publication event; original ledgers and receipts stay unchanged
+scripts/publication-sync.mjs
+tests/publication-sync.test.mjs
+docs/publications/cumulative-006-008.json
+docs/publications/cumulative-006-008.md
