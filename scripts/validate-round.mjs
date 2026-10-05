@@ -164,7 +164,7 @@ function walkStrings(value, visit, at = '$') {
  * Pass ALL campaign ledgers, not only a reopened candidate's selected ancestors.
  * now is optional for reproducible historical validation; the CLI always supplies the real current clock.
  */
-export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null, editorials = [], offlineBases = new Map(), ledgerSources = new Map(), synchronizations = []} = {}) {
+export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null, editorials = [], offlineBases = new Map(), ledgerSources = new Map(), synchronizations = [], deliveryCheckpointSources = new Map()} = {}) {
   const errors = [], rounds = [], warnings = [...MANUAL_CHECKS];
   const fail = (round, at, message) => errors.push(`${round?.roundId || '<unknown-round>'}${at}: ${message}`);
   if (!Array.isArray(ledgers)) return {ok: false, errors: ['ledgers must be an array'], warnings, rounds};
@@ -222,9 +222,62 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
     for (const other of ordered) if (other !== replacement && Date.parse(other.startedAt) >= effective && Date.parse(other.startedAt) < nextOccurrence)
       fail(other, '/startedAt', 'scheduled occurrence already consumed by schedule substitution');
   }
+  // Historical009 and manual011 have separate exact authorizations. Neither
+  // consumes or renames a scheduled occurrence, nor changes a closed ledger.
+  const authorizedManualNine = round => {
+    const e=round?.manualStartException, prior=ordered.find(r=>r.roundId==='round-008');
+    const raw=ledgerSources instanceof Map?ledgerSources.get('round-008'):null;
+    return !!e && round.roundId==='round-009' && round.campaignId==='2026-exam-final'
+      && round.startedAt==='2026-10-04T08:54:06Z' && e.requestedAt===round.startedAt
+      && e.kind==='explicit_user_requested_next_round' && e.previousRoundId==='round-008'
+      && e.previousClosedAt==='2026-10-04T07:56:30.743478+00:00'
+      && e.nextScheduledStart==='2026-10-04T11:00:00Z'
+      && round.decisionDeadline==='2026-10-04T10:30:00Z' && !round.scheduleSubstitution
+      && prior?.status==='closed' && prior.closedAt===e.previousClosedAt
+      && raw && digest(raw)==='65e117b3c940ace648ac152b56ecedbdb90c5593b12306f0d449f829ab11d128'
+      && round.baseline.bankVersion==='2026.10.04-regular.8'
+      && round.baseline.bankSha256==='ee533f5e4a546d14b7f2624700fb8d0dd0a47601290f9de9147f769ebf93feab'
+      && round.baseline.sourceCommit==='50fd2807a0ff8fc2c10cbf2628f65d0ca53065c2';
+  };
+  const authorizedManualEleven = round => {
+    const e=round?.manualStartException, prior=ordered.find(r=>r.roundId==='round-010');
+    const raw=ledgerSources instanceof Map?ledgerSources.get('round-010'):null;
+    const proofRaw=deliveryCheckpointSources instanceof Map?deliveryCheckpointSources.get('round-010'):null;
+    const artifact='2adda630c19c950165a1000fd7c55e38363f6be4d022edecd1644ab4e865ff8b';
+    const delivered=offlineBases instanceof Map?offlineBases.get(artifact):null;
+    const ledgerHash='d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b';
+    const proofHash='a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917';
+    const bankHash='50b6131f1ffb174bf4a459b0a91a2498465c0dccea0e4aee30259f195086b214';
+    const manifestHash='409830ea355d2a546926be79e15dea07a44400ae0241dbd183a711b3e88ca7c0';
+    const sourceCommit='500811b7ee226f33cfb598df42c6cb347b935d28';
+    // Hash the original local evidence; a Boolean, fabricated map entry or altered
+    // loaded predecessor cannot substitute for the independently reviewed bytes.
+    if(!raw||!(typeof raw==='string'||Buffer.isBuffer(raw))||digest(raw)!==ledgerHash
+      ||!proofRaw||!(typeof proofRaw==='string'||Buffer.isBuffer(proofRaw))||digest(proofRaw)!==proofHash)return false;
+    return !!e && round.roundId==='round-011' && round.campaignId==='2026-exam-final'
+      && e.requestedAt==='2026-10-04T12:41:51Z'
+      && round.startedAt==='2026-10-04T13:08:49Z' && e.manualStartedAt===round.startedAt
+      && e.kind==='explicit_user_requested_next_round' && e.previousRoundId==='round-010'
+      && e.previousClosedAt==='2026-10-04T11:44:42+00:00'
+      && e.previousLedgerSha256===ledgerHash && e.previousDeliveryCheckpointSha256===proofHash
+      && e.previousDeliveryVerifiedAt==='2026-10-04T12:27:05.849Z'
+      && e.nextScheduledStart==='2026-10-04T15:00:00Z'
+      && round.decisionDeadline==='2026-10-04T14:30:00Z' && !round.scheduleSubstitution
+      && prior?.status==='closed' && prior.closedAt===e.previousClosedAt
+      && isDeepStrictEqual(JSON.parse(raw.toString()),prior)
+      && round.baseline.bankVersion==='2026.10.04-regular.10'
+      && round.baseline.bankSha256===bankHash && round.baseline.sourceCommit===sourceCommit
+      && isDeepStrictEqual(round.baseline.offlinePredecessor,{artifactSha256:artifact,manifestSha256:manifestHash,ledgerSha256:ledgerHash,roundId:'round-010'})
+      && isDeepStrictEqual(delivered,{roundId:'round-010',manifestSha256:manifestHash,ledgerSha256:ledgerHash,bankVersion:'2026.10.04-regular.10',bankSha256:bankHash,baseCommit:sourceCommit,recordedAt:'2026-10-04T12:25:19.586507+00:00',eligibleAt:e.previousDeliveryVerifiedAt})
+      && Date.parse(e.requestedAt)<=Date.parse(round.startedAt)
+      && Date.parse(e.previousDeliveryVerifiedAt)<=Date.parse(round.startedAt);
+  };
+  const authorizedManual = round => authorizedManualNine(round)||authorizedManualEleven(round);
+  for (const r of ordered) if(r.manualStartException&&!authorizedManual(r))
+    fail(r,'/manualStartException','not an authorized exact round-009 or round-011 manual start');
   for (const [roundIndex, round] of ordered.entries()) {
     const start = Date.parse(round.startedAt), deadline = Date.parse(round.decisionDeadline), close = round.closedAt === null ? null : Date.parse(round.closedAt);
-    if (start >= FOUR_HOUR_CADENCE_AT && start < FREEZE_AT) {
+    if (start >= FOUR_HOUR_CADENCE_AT && start < FREEZE_AT && !authorizedManual(round)) {
       const occurrence = FOUR_HOUR_CADENCE_AT + Math.floor((start - FOUR_HOUR_CADENCE_AT) / (4 * 3600000)) * 4 * 3600000;
       if (consumedFourHourSlots.has(occurrence)) fail(round, '/startedAt', 'scheduled four-hour occurrence already consumed by another regular round; resume the existing round');
       consumedFourHourSlots.add(occurrence);
@@ -242,11 +295,15 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
       if (consumedOccurrences.has(substitution.supersededStart)) fail(round, '/scheduleSubstitution', 'scheduled occurrence already consumed');
       consumedOccurrences.add(substitution.supersededStart);
     }
-    const nextBound = Math.min(scheduledBound, nextLoaded ? Date.parse(nextLoaded.startedAt) : Infinity, nextRoundAt === null ? Infinity : Date.parse(nextRoundAt));
+    // A newly requested manual successor cannot rewrite an already-closed
+    // predecessor's historical planned deadline. Its exact actual closure is
+    // checked above; every other successor retains the ordinary deadline bound.
+    const nextIsAuthorizedManual=nextLoaded&&authorizedManual(nextLoaded)&&nextLoaded.manualStartException.previousRoundId===round.roundId;
+    const nextBound = Math.min(scheduledBound, nextLoaded&&!nextIsAuthorizedManual ? Date.parse(nextLoaded.startedAt) : Infinity, nextRoundAt === null ? Infinity : Date.parse(nextRoundAt));
     if (!Number.isFinite(nextBound)) fail(round, '/decisionDeadline', 'invalid next-round timestamp');
     if (deadline <= start || deadline > start + 4 * 3600000 || deadline > nextBound || deadline > FREEZE_AT || deadline > FINAL_DECISION_AT) fail(round, '/decisionDeadline', 'deadline must be after start and no later than four hours, next round, final freeze, or the final-day 23:00 KST decision cutoff');
     if (start >= FREEZE_AT) fail(round, '/startedAt', 'round begins at or after final freeze');
-    if (nextLoaded && Date.parse(nextLoaded.startedAt) < deadline) fail(round, '/decisionDeadline', 'overlapping campaign rounds');
+    if (nextLoaded && !nextIsAuthorizedManual && Date.parse(nextLoaded.startedAt) < deadline) fail(round, '/decisionDeadline', 'overlapping campaign rounds');
     if (round.status === 'running' && close !== null) fail(round, '/closedAt', 'running round must not claim a closedAt');
     if (close !== null && (close < start || close > deadline)) fail(round, '/closedAt', 'closure must be inside the decision window');
     if (now !== null && (start > now || (close !== null && close > now))) fail(round, '/startedAt', 'recorded round execution is in the future');
@@ -393,7 +450,8 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
     if (!isDeepStrictEqual(actualNew.written, round.counts.publishedRegularWrittenBySubject) || actualNew.practical !== round.counts.publishedRegularPractical) fail(round, '/counts', 'new public counts differ from verified accepted regular unique templates');
     let actualBank = publication || (!published ? baseline : null);
     if (!published && round.baseline.offlinePredecessor) {
-      const latestVerified = [...rounds,...editorials].filter(r=>r.publication?.status==='verified'&&Date.parse(r.publication.verifiedAt)<=(close??start)).sort((a,b)=>Date.parse(b.publication.verifiedAt)-Date.parse(a.publication.verifiedAt))[0];
+      const synchronizedHistory=validatePublicationSynchronizations(synchronizations,{ledgers:rounds,banks,ledgerSources,now:close??start,publicationState}).history;
+      const latestVerified = [...rounds,...editorials,...synchronizedHistory].filter(r=>r.publication?.status==='verified'&&Date.parse(r.publication.verifiedAt)<=(close??start)).sort((a,b)=>Date.parse(b.publication.verifiedAt)-Date.parse(a.publication.verifiedAt))[0];
       if (latestVerified) actualBank=bankRecord(latestVerified.publication.bankVersion,round,'/coverageAfter');
       else {
         // The first offline source retains its real remote baseline. Walk that
@@ -560,7 +618,7 @@ export async function loadRoundContext(root = ROOT, input = null, {release = fal
     if(digest(raw)!==pin.sha256)throw new Error('Publication synchronization proof hash mismatch');
     synchronizations.push(JSON.parse(raw.toString()));
   }
-  let offlineBases=new Map(),indexRaw,resolvedArtifacts=new Set();
+  let offlineBases=new Map(),deliveryCheckpointSources=new Map(),indexRaw,resolvedArtifacts=new Set();
   try {indexRaw=await readOfflinePublicFile(root,'docs/deliveries/offline-chain.json');}catch(error){if(error.code!=='ENOENT')throw error;}
   if(indexRaw) {
     const index=JSON.parse(indexRaw.toString()),keys=['schemaVersion','receipts','manifests','ledgerPaths'];
@@ -584,14 +642,34 @@ export async function loadRoundContext(root = ROOT, input = null, {release = fal
     const offline=validateOfflineContinuation(index.receipts,{manifests,ledgers:frozenLedgers,banks:new Map([...banks].map(([version,entry])=>[version,entry.raw])),now,publicationState});
     if(!offline.ok||!(offline.offlineBases instanceof Map))throw new Error(`Invalid offline delivery evidence: ${(offline.errors||[]).join('; ')}`);
     offlineBases=offline.offlineBases;
-    const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources,synchronizations});
-    const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations});
-    if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
     const resolution=resolveSynchronizedArtifacts(index.receipts,{synchronizations,ledgers,banks,ledgerSources,now,publicationState});
     if(!resolution.ok)throw new Error(resolution.errors.join('; '));
     resolvedArtifacts=resolution.resolvedArtifacts;
   }
-  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts};
+  // A delivered normal backup keeps its original manifests and chain. A separate
+  // pinned terminal event may add its exact predecessor before full-history gates.
+  const {NORMAL_BACKUP_PATH,NORMAL_BACKUP_PROOF_SHA256,NORMAL_BACKUP_PINS,parseNormalBackupProof,validateNormalBackupContinuation,loadReleaseBackupContinuations,validateReleaseBackupDependencies}=await import('./release-backup-continuation.mjs');
+  const modernContinuation=await validateReleaseBackupDependencies(root);
+  let normalRaw;
+  try {normalRaw=await readOfflinePublicFile(root,NORMAL_BACKUP_PATH);}catch(error){if(error.code!=='ENOENT')throw error;}
+  if(!normalRaw&&NORMAL_BACKUP_PROOF_SHA256&&ledgers.some(r=>Date.parse(r.startedAt)>Date.parse('2026-10-04T09:51:07.219995Z')))throw new Error('Missing exact normal-backup offline predecessor proof for successor');
+  if(normalRaw) {
+    // Ordinary ledger loads also need the real current manifest freeze marker.
+    // Do not confuse release:false (output selection) with permission to ignore it.
+    const continuationManifest=manifest??JSON.parse(await readOfflinePublicFile(root,'data/manifest.json'));
+    const normal=validateNormalBackupContinuation(parseNormalBackupProof(normalRaw),{now,publicationState,manifest:continuationManifest,ledgers,ledgerSources,banks,offlineBases});
+    if(normal.offlineBase)offlineBases.set(normal.artifactSha256,normal.offlineBase);
+    if(modernContinuation) {
+      const continuation=await loadReleaseBackupContinuations(root,{now,publicationState,manifest:continuationManifest,ledgers,ledgerSources,banks,offlineBases,schema,availableFiles,editorials,reviewPackages,synchronizations});
+      offlineBases=continuation.offlineBases;deliveryCheckpointSources=continuation.deliveryCheckpointSources;
+    }
+  }
+  if(indexRaw||normalRaw) {
+    const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources});
+    const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations});
+    if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
+  }
+  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources};
 }
 export async function main(args = process.argv.slice(2)) {
   let input = null, nextRoundAt = null, release = false;

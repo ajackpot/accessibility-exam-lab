@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "rootProofSha256": "09d3204e96048f6d8ff57dd4616caa8c95d161690e2a4592e3fa090142604f9e",
+  "checkpoints": [
+    {
+      "roundId": "round-010",
+      "path": "docs/deliveries/checkpoints/round-010.json",
+      "sha256": "a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917",
+      "predecessorProofSha256": "09d3204e96048f6d8ff57dd4616caa8c95d161690e2a4592e3fa090142604f9e",
+      "verifiedAt": "2026-10-04T12:27:05.849Z"
+    },
+    {
+      "roundId": "round-011",
+      "path": "docs/deliveries/checkpoints/round-011.json",
+      "sha256": "7eae43bdc8b68b43d76264a14a19ca16e27e180b4f3a0d99afc9776e43f24714",
+      "predecessorProofSha256": "a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917",
+      "verifiedAt": "2026-10-04T14:02:52.326Z"
+    },
+    {
+      "roundId": "round-012",
+      "path": "docs/deliveries/checkpoints/round-012.json",
+      "sha256": "9f8746a287d6970110f6931d8d689eb04f35b8616076148eaa4cfff0c4b7f1cd",
+      "predecessorProofSha256": "7eae43bdc8b68b43d76264a14a19ca16e27e180b4f3a0d99afc9776e43f24714",
+      "verifiedAt": "2026-10-04T16:14:24.012Z"
+    },
+    {
+      "roundId": "round-013",
+      "path": "docs/deliveries/checkpoints/round-013.json",
+      "sha256": "47ffa61415346b88943a1cbc7ca2ad97a851ab3b102c21a90f0af74510500e1b",
+      "predecessorProofSha256": "9f8746a287d6970110f6931d8d689eb04f35b8616076148eaa4cfff0c4b7f1cd",
+      "verifiedAt": "2026-10-04T20:02:59.892Z"
+    },
+    {
+      "roundId": "round-014",
+      "path": "docs/deliveries/checkpoints/round-014.json",
+      "sha256": "6dd039b325a7d278a69d5c78ec094f79fd16261e5fbaad905921bc74849e6370",
+      "predecessorProofSha256": "47ffa61415346b88943a1cbc7ca2ad97a851ab3b102c21a90f0af74510500e1b",
+      "verifiedAt": "2026-10-05T01:44:49.485Z"
+    },
+    {
+      "roundId": "round-015",
+      "path": "docs/deliveries/checkpoints/round-015.json",
+      "sha256": "ef00037df738a4e07762094859c4275d0a2a7253543ce72dc4cbc195ab1eb484",
+      "predecessorProofSha256": "6dd039b325a7d278a69d5c78ec094f79fd16261e5fbaad905921bc74849e6370",
+      "verifiedAt": "2026-10-05T04:42:35.790Z"
+    },
+    {
+      "roundId": "round-016",
+      "path": "docs/deliveries/checkpoints/round-016.json",
+      "sha256": "addf91482f01962534b7303aae4eb17b5a695715354314fdfc04659677f5e5b3",
+      "predecessorProofSha256": "ef00037df738a4e07762094859c4275d0a2a7253543ce72dc4cbc195ab1eb484",
+      "verifiedAt": "2026-10-05T08:56:46.822Z"
+    },
+    {
+      "roundId": "round-017",
+      "path": "docs/deliveries/checkpoints/round-017.json",
+      "sha256": "fee82929ab9abcb310dbc5eaae9c57d715ad77197837984b15782fe17cb98eb1",
+      "predecessorProofSha256": "addf91482f01962534b7303aae4eb17b5a695715354314fdfc04659677f5e5b3",
+      "verifiedAt": "2026-10-05T12:53:36.721Z"
+    }
+  ]
+}

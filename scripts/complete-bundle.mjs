@@ -55,7 +55,7 @@ function checkComplete(snapshot) {
   keys(snapshot, ['manifest','files'], 'complete snapshot');
   const {manifest:m,files} = snapshot;
   keys(m, ['schemaVersion','kind','deliveryMode','newlyPublishedRegular','projectDirectory','prerequisiteArtifacts','sourceRelease','frozenSourceInventory','packagingRevision','files'], 'complete manifest');
-  if (m.schemaVersion !== 1 || m.kind !== 'complete_project_not_learner_import' || m.deliveryMode !== 'download_only' || m.newlyPublishedRegular !== 0 || m.projectDirectory !== 'project' || !equal(m.prerequisiteArtifacts,[])) fail('Invalid standalone delivery contract');
+  if (m.schemaVersion !== 1 || m.kind !== 'complete_project_not_learner_import' || !['download_only','release_backup'].includes(m.deliveryMode) || m.newlyPublishedRegular !== 0 || m.projectDirectory !== 'project' || !equal(m.prerequisiteArtifacts,[])) fail('Invalid standalone delivery contract');
   checkSource(m.sourceRelease); const base = inventory(m.frozenSourceInventory), entries = inventory(m.files);
   if (!equal(entries,m.files) || !equal(base,m.frozenSourceInventory) || !Array.isArray(files) || files.length !== entries.length) fail('Complete inventory ordering mismatch');
   checkOverlay(base,entries,m.packagingRevision);
@@ -75,7 +75,7 @@ function checkComplete(snapshot) {
   if (b.bankVersion !== release.bankVersion || (l.roundId || l.correctionRoundId) !== release.roundId || l.status !== 'closed' || l.publication.bankVersion !== release.bankVersion || l.publication.bankSha256 !== release.bankSha256) fail('Complete release has no matching closed ledger');
   if (manifest.finalRelease || JSON.parse(byPath.get('data/publication-state.json')?.raw || 'null')?.finalized) fail('Persistent freeze blocks new complete packaging');
 }
-export async function freezeCompleteProject({workRoot, reviewedInventory, sourceRelease, frozenSourceInventory = reviewedInventory, packagingRevision = null, now = Date.now()}) {
+export async function freezeCompleteProject({workRoot, reviewedInventory, sourceRelease, frozenSourceInventory = reviewedInventory, packagingRevision = null, deliveryMode = 'download_only', now = Date.now()}) {
   if (!Number.isFinite(now) || now >= FREEZE_AT) fail('Final cutoff blocks new complete packaging');
   const entries=inventory(reviewedInventory), files=[];
   for (const e of entries) {
@@ -83,7 +83,7 @@ export async function freezeCompleteProject({workRoot, reviewedInventory, source
     if (sha(raw)!==e.sha256 || raw.length!==e.bytes) fail(`Reviewed complete bytes mismatch: ${e.path}`);
     files.push({...e,raw:Buffer.from(raw)});
   }
-  const snapshot={manifest:{schemaVersion:1,kind:'complete_project_not_learner_import',deliveryMode:'download_only',newlyPublishedRegular:0,projectDirectory:'project',prerequisiteArtifacts:[],sourceRelease:{...sourceRelease},frozenSourceInventory:inventory(frozenSourceInventory),packagingRevision:structuredClone(packagingRevision),files:entries},files};
+  const snapshot={manifest:{schemaVersion:1,kind:'complete_project_not_learner_import',deliveryMode,newlyPublishedRegular:0,projectDirectory:'project',prerequisiteArtifacts:[],sourceRelease:{...sourceRelease},frozenSourceInventory:inventory(frozenSourceInventory),packagingRevision:structuredClone(packagingRevision),files:entries},files};
   checkComplete(snapshot); return snapshot;
 }
 export function completeInstructions(m) {

@@ -8,9 +8,11 @@ import {validateCampaignBaselines} from '../scripts/editorial-ledger.mjs';
 import {validatePublicationSynchronizations, resolveSynchronizedArtifacts} from '../scripts/publication-sync.mjs';
 import {validateSynchronizedDeliveryChain, validateOfflineContinuation} from '../scripts/download-fallback.mjs';
 import {FREEZE_AT} from '../src/domain.js';
-const root=path.resolve(import.meta.dirname,'..'), now=Date.parse('2026-10-04T12:00:00Z');
-const context=await loadRoundContext(root,null,{release:true,now});
-const proof=context.synchronizations[0], clone=structuredClone;
+const root=path.resolve(import.meta.dirname,'..'), now=Math.max(Date.now(),Date.parse('2026-10-04T12:00:00Z'));
+const loaded=await loadRoundContext(root,null,{release:true,now});
+const proof=loaded.synchronizations[0], clone=structuredClone;
+// This is the immutable006–008 synchronization fixture, not a moving latest release.
+const context={...loaded,offlineBases:new Map([...loaded.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:loaded.ledgers.filter(r=>Number(r.roundId.slice(6))<=8),manifest:proof.manifest};
 const index=JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/offline-chain.json')));
 function successor(start='2026-10-04T11:00:00Z') {
   const bank=JSON.parse(context.banks.get(proof.manifest.bankVersion).raw),coverage=regularCoverage(bank);

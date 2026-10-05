@@ -354,6 +354,92 @@
         "effectiveStart",
         "reason"
       ]
+    },
+    "manualStartException": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "explicit_user_requested_next_round"
+            },
+            "requestedAt": {
+              "const": "2026-10-04T08:54:06Z"
+            },
+            "previousRoundId": {
+              "const": "round-008"
+            },
+            "previousClosedAt": {
+              "const": "2026-10-04T07:56:30.743478+00:00"
+            },
+            "nextScheduledStart": {
+              "const": "2026-10-04T11:00:00Z"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "requestedAt",
+            "previousRoundId",
+            "previousClosedAt",
+            "nextScheduledStart",
+            "reason"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "explicit_user_requested_next_round"
+            },
+            "requestedAt": {
+              "const": "2026-10-04T12:41:51Z"
+            },
+            "previousRoundId": {
+              "const": "round-010"
+            },
+            "previousClosedAt": {
+              "const": "2026-10-04T11:44:42+00:00"
+            },
+            "nextScheduledStart": {
+              "const": "2026-10-04T15:00:00Z"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "manualStartedAt": {
+              "const": "2026-10-04T13:08:49Z"
+            },
+            "previousLedgerSha256": {
+              "const": "d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b"
+            },
+            "previousDeliveryCheckpointSha256": {
+              "const": "a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917"
+            },
+            "previousDeliveryVerifiedAt": {
+              "const": "2026-10-04T12:27:05.849Z"
+            }
+          },
+          "required": [
+            "kind",
+            "requestedAt",
+            "previousRoundId",
+            "previousClosedAt",
+            "nextScheduledStart",
+            "reason",
+            "manualStartedAt",
+            "previousLedgerSha256",
+            "previousDeliveryCheckpointSha256",
+            "previousDeliveryVerifiedAt"
+          ]
+        }
+      ]
     }
   },
   "$defs": {

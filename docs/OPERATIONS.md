@@ -251,3 +251,42 @@ node scripts/release-guard.mjs --finalize
 [별도 공개 확인 보고서](publications/cumulative-006-008.md)와 JSON 증거를 확인한다. 원래 closed 대장이나 offline-chain/전달 영수증의 공개 수·상태를 고치지 않는다. 정상 `loadRoundContext`는 고정 SHA-256 증거를 읽은 뒤 원래 전체 대장/은행을 검증하며, 확인 시각 이후의 새 회차에 regular.8을 최신 공개 기준으로 제공한다. 검증 payload와 그 후손의 지원 기록 커밋을 구별하고, baseline.sourceCommit에는 실제 새로 확인한 head를 쓴다. 원격 ancestry 및 외부 변경/동결/권한 확인은 생략하지 않는다.
 
 전달 사슬의 현재 해결 여부는 `validateSynchronizedDeliveryChain(receipts, {synchronizations, campaignContext, manifests, ledgers, banks, now, publicationState})`로 확인한다. manifests와 ledgers/banks는 원래 전달 검증 자료이며 campaignContext는 `loadRoundContext`의 전체 문맥이다. 반환 resolvedArtifacts는 입력한 정확한 원본 영수증 중 공개가 입증된 항목만 포함한다. 원래 offline-chain은006–007의 역사적 선행 체크포인트이고,008의 전달 artifact 역시 별도 공개 증거에 연결돼 있다. 전체006–008 사슬을 검사할 때008의 원래 영수증/manifest까지 제공한다. 현재 상태를 읽는 것으로 Git 쓰기를 재개하거나 과거 unknown을 성공으로 바꾸지 않는다.
+
+
+## 9회차의 명시적 수동 시작과 정규 릴리스 백업
+
+사용자가 검증된 누적 8회차 공개 뒤 즉시 다음 회차를 새로 요청한 2026-10-04T08:54:06Z 시작은 `round-009.manualStartException`에 한 번만 기록한다. 8회차의 실제 종결·원문 SHA-256, public008 기준·검증 시각, 9회차 ID·실제 시작·10:30 UTC 판정 마감을 정확히 검사한다. 07:00 발생분을 재소비하거나 11:00 예정 시작으로 꾸미지 않으며, 이미 종결된 8회차의 역사적 계획 마감을 고쳐 쓰지 않는다. 일반 회차의 4시간/다음 예정 경계·3회 한도·동결은 그대로이며 11:00 호출은 활성 회차 유무를 확인하고 중복 작업하지 않는다. 다른 날짜·ID·시각의 수동 확대를 자동 허용하지 않는다.
+
+정상 릴리스에서도 변경분과 이전 ZIP이 필요 없는 전체 적용본을 함께 준비한다. 실제 권한 시간 초과나 오프라인 선행 조건이 없으면 `scripts/release-bundle.mjs`의 `writeReleaseDeliveryPair`를 사용하며 `release_backup`으로 표시한다. 권한 알림·마감·download_only 기록을 만들어 내지 않는다. 변경분에는 실제 확인한 기준 커밋·변경 전후 해시·전체 삭제 목록과 준비 당시 원 대장의 공개 상태를 기록하고, 전체본은 `project/` 아래 검토된 전체 허용 목록·해시와 `prerequisiteArtifacts: []`를 담는다. 두 ZIP 생성 자체의 공개 증가는 0이며 이후 Git/Pages 확인은 별도 증거다. 실제 만료가 발생한 다운로드 전용 경로의 기존 API·영수증·10분 시계는 유지한다.
+
+### 정규 백업의 실제 시간 초과 후 로컬 선행자 (round-009)
+
+이미 전달된 `release_backup` ZIP/manifest/첨부 영수증은 이름·바이트·해시·공개 상태를 바꾸지 않는다. `scripts/release-backup-continuation.mjs`는 정확한 두 ZIP, 전체 132개 원본 inventory, Library/첨부 증거와 원래 009 종결 대장·은행 및 전체 캠페인을 검증한다. 실제 publisher 시간 초과/읽기 전용 결과와 최초 미확정 시각을 별도 증거로 연결한다. 권한 알림 09:51:07 UTC의 마감은 10:01:07 UTC이며, 최초 지속된 객체 결과 불명 10:02:05.215 UTC의 재대조 마감은 10:12:05.215 UTC다. 두 시계를 합치거나 재시작하지 않는다.
+
+`docs/deliveries/normal-backup-009.json`의 검토·고정된 원문 해시와 실제 마감 이후 지속된 `skip_git_step`이 모두 맞아야 `loadRoundContext`가 별도 로컬 선행자를 추가한다. 전체 검증이 실제 끝난 `verifiedAt`도 별도 시작 하한에 포함하여, 나중에 작성한 증거로 더 이른 후속 회차를 소급 승인하지 않는다. 더 이른 시각의 현재 009 검증은 미래 선행자를 만들지 않는다. 11:00 UTC의 다음 예정 010은 기존 일정·중복 실행·후보/계보·최대 3회·마감·동결 검사를 그대로 통과하고 정확한 regular9을 `offlinePredecessor`로 연결한다. 실제 공개 coverage는 확인된 regular8이며 새 Git/Pages 공개 수는 0이다.
+
+원래 blob 결과는 unknown이고 tree/commit/ref는 제출되지 않았다. 취소와 현재 객체 404는 원 요청 실패나 미실행의 증거가 아니다. 이 어댑터는 Git 쓰기·재시도·새 권한 요청·ZIP 재생성·업로드·중복 첨부를 하지 않으며 정상 공개 승인도 아니다. 원격 기준 커밋·원래 006–008 사슬·모든 종결 이력은 그대로 보존한다.
+
+다음 회차의 ZIP은 `writeReleaseDeliveryPair`에 실제 확인된 원격 기준 트리(현재 500811b7)와 새 누적 작업본을 전달하여 만들 수 있다. 이 경우 변경분은 원격 regular8에서 새 regular10까지 009·010의 모든 추가분을 포함하고, 전체본은 독립 실행 가능해야 한다. 저작 대장은 여전히 exact009를 오프라인 선행자로 사용하며, 원격에 regular9이 있다고 꾸미거나 정상 009 manifest를 download_only로 바꾸지 않는다. 새 회차의 실제 권한 대기는 실제 요청이 있을 때 별도로 관리한다.
+
+
+### 후속 전달 체크포인트: 회차별 코드 예외 없이 다음 저작 연결
+
+`prepareReleaseBackupContinuation`은 검토된 009 부트스트랩 뒤의 **정상 `release_backup` 두 ZIP**만 처리한다. 새 Git 요청·권한 timeout·공개 확인·unknown 해결을 만들지 않는다. 현재의 좁은 경로는 원래 실제 원격 anchor를 유지하며, 다른 원격 head를 임의로 승인하지 않는다. 다른 head/공개 상태로 전환하려면 별도 실제 ancestry·공개 확인 절차를 먼저 수행한다.
+
+1. 현재 회차를 정확한 전달 선행자에서 저작·종결하고 전체 캠페인/발행 검사를 수행한다. `writeReleaseDeliveryPair`에는 실제 확인한 원격 기준 트리·현재 회차 시작 이후 확인한 `baseVerifiedAt`·정확한 검토 inventory를 제공한다. 기본 원격 coverage와 로컬 accepted 누적량을 구분한다. Git 쓰기 직전의 fresh head/양쪽 동결/권한 검사는 별도이며, 포장 manifest의 시각만으로 실제 원격 관찰을 증명하지 않는다
+2. 고정한 변경분과 전체 ZIP의 실제 Library 저장 성공 및 각 artifact의 실제 native 첨부 수락을 확인한다. 비공개 저장 영수증은 `schemaVersion:1`, `roundId`, `status:library_saved_attachment_pending`, 실제 `savedAt`(ZIP 준비 이후·각 native 수락 이전), `newlyPublishedByDelivery:0`, 두 `artifacts`를 보존한다. 각 artifact에는 kind(delta/complete), 실제 `library_file_id`, 정확한 ZIP `sha256`·`bytes`와 원래 저장 결과를 연결한다. 비공개 첨부 영수증은 같은 artifact 배열에 `status:native_attachments_accepted`, `deliveryMode:release_backup`, `publicationAtPreparation:not_attempted`, `publicationCountsChangedByDelivery:false`, `userOpenOrDownloadObserved:false`를 기록한다. `attachments` 배열에는 두 artifact 각각의 `{kind,library_file_id,messageId,acceptedAt}`를 실제 성공 결과에서 복사하고, `attachmentAcceptedAt`은 그 두 수락 시각 중 늦은 실제 시각이다. 한 메시지에 두 파일이 실제 포함된 경우만 같은 messageId를 쓸 수 있다. 준비·실패·한 파일만 성공한 결과로 두 파일 전달을 만들지 않는다
+3. 신뢰하는 검증기에서 `prepareReleaseBackupContinuation({deltaZip,completeZip,libraryReceiptRaw,attachmentReceiptRaw})`에 위의 원본 Buffer들을 제공한다. 운영에서는 `now`를 지정하지 않는다. 함수는 정확한 ZIP CRC/중앙 디렉터리/경로/전 파일 해시와 지원 writer metadata(ASCII 경로·UTF-8 flag·일반 파일·extras/comments 없음), 두 manifest와 실제 runtime manifest, 전체 허용 목록, 원래 모든 대장·은행·시드·검토 횟수 및 선행 proof/registry를 검증한다. 변경분 전체는 고정009 manifest에서 복원한 실제 원격 anchor의 모든 before 해시와 현재 전체본의 after 해시 차이와 정확히 같아야 한다. 009 추가분을 누락하거나 원격에 이미 있다고 꾸미지 않는다. 현재 검증기 작업본과 전달 snapshot의 두 동결 표시가 모두 false이고 최종 cutoff 전이어야 한다. 검증이 실제 끝난 벽시계를 `verifiedAt`으로 기록한다
+4. 반환 상태 `proposed_requires_independent_receipt_review`는 아직 신뢰 등록이 아니다. 독립 검토자가 원래 Library 저장·native 첨부 도구 결과와 비공개 영수증, 두 ZIP·manifest·대장·은행 해시, 기존 trust prefix를 대조한다. 영수증 JSON이나 SHA-256만으로 외부 서비스 이벤트의 진위를 증명할 수 없다. 검토가 끝난 뒤 **새 후속 작업본**에 `proofRaw`를 `trustRecord.path`로 배타 생성하고, `docs/deliveries/release-backup-trust.json`에 반환한 단일 trustRecord만 append한다. 기존 항목·순서·해시는 바꾸지 않는다. 공개 허용 목록에는 새 proof 경로를 추가한다. 실제 전달 proof가 없는 동안 빈 registry를 유지하며 미래 회차 영수증을 미리 작성하지 않는다
+5. 별도 새 프로세스에서 전체 check/test/build/발행 검사를 다시 한다. 검증기는 자기 모듈과 함께 검토된 registry를 신뢰하며 후보 workRoot의 자가 등록, caller Boolean/Map, 변경·누락·재정렬·분기를 거부한다. 새 registry는 새 프로세스에서만 읽는다. 후속 회차는 새 proof의 실제 `verifiedAt` 이후에만 정확한 `offlinePredecessor`로 시작할 수 있다. 010을 전달했다면 이 절차로 얻은010 proof는011 작업본에,011 proof는012 작업본에 포함한다. 코드를 회차별로 추가하거나 새 timeout을 요구하지 않는다
+
+이미 전달한 ZIP과 그 source tree에는 자기 전달 proof를 덧붙이지 않는다. 새 proof는 ZIP 밖의 별도 불변 후속 이벤트이고 다음 회차 전체본에 처음 포함된다. private Library/message ID는 비공개 영수증에만 두며 공개 proof에는 그 원문 해시만 남긴다. native 첨부 수락은 사용자의 열람/다운로드 확인이나 Git/Pages 공개가 아니다. 원래009의 만료된 권한 시계·최초 unknown blob 재대조 시계·skip 기록은 모든 후속 proof에 정확히 보존하며 새로 시작하지 않는다.
+
+
+## 11회차의 한정된 명시적 수동 시작
+
+2026-10-04T12:41:51Z의 명시 요청과 실제 수동 시작 2026-10-04T13:08:49Z를 구분하여 `round-011.manualStartException`의 `requestedAt`·`manualStartedAt`에 기록한다. 미확정 Git 단계의 유한 대기 종료는 성공·실패·공개 확인이나 쓰기 재시도 허가를 뜻하지 않는다. 11회차는 정확히 전달 검증한 regular.10(일반477개·시드14개)을 선행자로 하며 실제 원격 regular.8(일반403개)과 구분한다.
+
+예외는 010의 원래 종결 시각 `2026-10-04T11:44:42+00:00`·원문 SHA-256 `d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b`, 은행 SHA-256 `50b6131f1ffb174bf4a459b0a91a2498465c0dccea0e4aee30259f195086b214`, 전달 checkpoint 원문 SHA-256 `a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917` 및 검증 완료 `2026-10-04T12:27:05.849Z`에 한정한다. `previousLedgerSha256`·`previousDeliveryCheckpointSha256`·`previousDeliveryVerifiedAt`을 원문 및 검증된 오프라인 선행 연결과 대조하며, 선언이나 임의 Map만으로 증거를 대신하지 않는다.
+
+011의 판정 마감은 `2026-10-04T14:30:00Z`, 다음 예정 시작은 `2026-10-04T15:00:00Z`다. 실제 시작을 15:00으로 꾸미거나 이미 소비한 11:00 발생분을 다시 쓰지 않는다. 이미 닫힌010의 원래14:30 계획 마감·모든 은행·종결 대장·전달 proof 바이트는 보존한다. 009의 기존 예외는 그대로이며 다른 ID·날짜·시각으로 확대하지 않는다. 후보당3회·계보6회·더 이른 실제 후속 회차·영구/최종 동결·공개 수0·실제 Git/Pages 확인 경계는 유지한다.

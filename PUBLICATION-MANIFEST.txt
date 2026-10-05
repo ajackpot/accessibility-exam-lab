@@ -158,3 +158,84 @@ scripts/publication-sync.mjs
 tests/publication-sync.test.mjs
 docs/publications/cumulative-006-008.json
 docs/publications/cumulative-006-008.md
+
+# Exact manual009 start and normal-release dual backups
+tests/manual-round-eleven.test.mjs
+tests/manual-round-nine.test.mjs
+scripts/release-bundle.mjs
+tests/release-bundle.test.mjs
+
+tests/release-bundle-closure.test.mjs
+
+# Ninth explicitly requested regular expansion
+data/releases/2026.10.04-regular.9/bank.json
+docs/rounds/round-009.json
+docs/rounds/round-009.md
+tests/round-nine-bank.test.mjs
+scripts/release-backup-continuation.mjs
+tests/normal-backup-continuation.test.mjs
+docs/deliveries/normal-backup-009.json
+
+# Tenth scheduled cumulative expansion from exact delivered009
+data/releases/2026.10.04-regular.10/bank.json
+docs/rounds/round-010.json
+docs/rounds/round-010.md
+tests/round-ten-bank.test.mjs
+
+# Reviewed generic post-attachment successor checkpoints
+docs/deliveries/release-backup-trust.json
+tests/release-backup-successors.test.mjs
+docs/deliveries/checkpoints/round-010.json
+
+# Eleventh exact manual cumulative expansion from delivered010
+data/releases/2026.10.04-regular.11/bank.json
+docs/rounds/round-011.json
+docs/rounds/round-011.md
+tests/round-eleven-bank.test.mjs
+docs/deliveries/checkpoints/round-011.json
+
+# Twelfth scheduled cumulative expansion from exact delivered011
+data/releases/2026.10.05-regular.12/bank.json
+docs/rounds/round-012.json
+docs/rounds/round-012.md
+tests/round-twelve-bank.test.mjs
+docs/deliveries/checkpoints/round-012.json
+
+# Thirteenth scheduled expansion from exact delivered012
+data/releases/2026.10.05-regular.13/bank.json
+docs/rounds/round-013.json
+docs/rounds/round-013.md
+tests/round-thirteen-bank.test.mjs
+docs/deliveries/checkpoints/round-013.json
+
+# Fourteenth scheduled expansion from exact delivered013
+data/releases/2026.10.05-regular.14/bank.json
+docs/rounds/round-014.json
+docs/rounds/round-014.md
+tests/round-fourteen-bank.test.mjs
+
+docs/deliveries/checkpoints/round-014.json
+
+# Fifteenth scheduled expansion from exact delivered014
+data/releases/2026.10.05-regular.15/bank.json
+docs/rounds/round-015.json
+docs/rounds/round-015.md
+tests/round-fifteen-bank.test.mjs
+
+docs/deliveries/checkpoints/round-015.json
+
+# Sixteenth scheduled expansion from exact delivered015
+data/releases/2026.10.05-regular.16/bank.json
+docs/rounds/round-016.json
+docs/rounds/round-016.md
+tests/round-sixteen-bank.test.mjs
+
+docs/deliveries/checkpoints/round-016.json
+
+# Seventeenth scheduled expansion from exact delivered016
+data/releases/2026.10.05-regular.17/bank.json
+docs/rounds/round-017.json
+docs/rounds/round-017.md
+tests/round-seventeen-bank.test.mjs
+
+docs/deliveries/checkpoints/round-017.json

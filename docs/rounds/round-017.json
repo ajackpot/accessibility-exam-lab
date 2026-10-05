@@ -1,0 +1,3520 @@
+{
+  "ledgerSchemaVersion": 1,
+  "campaignId": "2026-exam-final",
+  "roundId": "round-017",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-05T11:04:36Z",
+  "decisionDeadline": "2026-10-05T14:30:00Z",
+  "closedAt": "2026-10-05T12:01:09.379Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxReopeningsPerGoal": 1,
+    "maxLineageCycles": 6,
+    "maxRoundHours": 4
+  },
+  "baseline": {
+    "sourceCommit": "500811b7ee226f33cfb598df42c6cb347b935d28",
+    "bankVersion": "2026.10.05-regular.16",
+    "bankSha256": "882dc4987352e03c117b481c582ffb4e5e1e73630e5c61a004085076285b31df",
+    "regularWrittenBySubject": {
+      "s1": 92,
+      "s2": 141,
+      "s3": 122,
+      "s4": 132,
+      "s5": 100
+    },
+    "regularPractical": 67,
+    "offlinePredecessor": {
+      "artifactSha256": "4c3d374c21f51380974aeee6b9804104c984c4f10a1fed4a5c213a7531601b53",
+      "manifestSha256": "ff4e55451b91ff0b7fb8f8dbb379b86f7b331ceb729bb53a6bc48b59a177dcc3",
+      "ledgerSha256": "875ceb65d58a322c4219335311c9957ba10168a09fd2110548bbb5acee7d5cce",
+      "roundId": "round-016"
+    }
+  },
+  "targets": {
+    "writtenBySubject": {
+      "s1": 10,
+      "s2": 10,
+      "s3": 10,
+      "s4": 10,
+      "s5": 10
+    },
+    "practical": 8
+  },
+  "candidates": [
+    {
+      "candidateId": "r017-policy-accessibility-s1-w01",
+      "lineageId": "r017-policy-accessibility-template-eaa-fundamental-alteration-basic-nature-not-ui-redesign",
+      "learningGoalId": "r017-policy-accessibility-template-eaa-fundamental-alteration-basic-nature-not-ui-redesign",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s1-w01",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-eaa-fundamental-alteration-basic-nature-not-ui-redesign",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-fundamental-alteration",
+          "title": "Directive (EU) 2019/882 on accessibility requirements for products and services",
+          "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+          "version": "2019-04-17 지침 / OJ L 151, 2019-06-07 고정 본문",
+          "location": "Article 14(1)(a), 14(2); OJ L151/91, PDF 22쪽",
+          "checkedAt": "2026-10-05T11:10:29.457304+00:00",
+          "summary": "근본적 변경은 제품·서비스의 기본 성격을 바꾸는 중대한 변경이 필요한 경우다. 화면·구현·비용의 변화 자체와 동일한 판단이 아니며 사업자가 이를 평가한다. EUR-Lex 직접 열람은 이번 요청에서 봇 확인 화면/빈 202 응답이었으므로 룩셈부르크 정부가 제공하는 같은 EU 관보 영어 PDF를 직접 수신·확인했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-current-application",
+          "title": "Accessibility to products and services for people with a disability and older people",
+          "url": "https://www.consilium.europa.eu/en/policies/accessibility-goods-services/",
+          "version": "EU 이사회 공식 안내 / Last review 2026-07-16 / 2026-10-05 직접 확인",
+          "location": "Making the rules work; Accessibility of products and services",
+          "checkedAt": "2026-10-05T11:11:26Z",
+          "summary": "EU 이사회 공식 현행 안내에서 Directive 2019/882의 2025-06-28 적용과 전자상거래·제품/서비스 범위를 확인했다. 각 문항의 세부 판정은 요약 안내가 아니라 EU 관보 제14조 본문에 근거한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C007의 B가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s1 국제 접근성 정책의 적용·예외·관리 의무를 묻고 국제 기술 성공기준을 묻지 않는다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-fundamental-alteration",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "기본 성격을 바꾸는 중대한 변경을 묻는 핵심 기준은 하나다. 예산·교육·메뉴·코드가 달라지는 일이 동시에 일어날 수 있어도 그것만으로 근본적 변경이 성립하지 않는다. 부담 예외를 별도로 본다는 조건이 비용 관련 반례를 배제한다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-fundamental-alteration",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "다섯 보기가 모두 확인할 사항을 묻는 “~인지” 단위다. 구현 변화·교육·비용과 기본 성격의 혼동이 관련 오개념이며, 정답만 장황하거나 긍정적인 패턴은 없다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-fundamental-alteration",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s1-w02",
+      "lineageId": "r017-policy-accessibility-template-eaa-assessment-results-retention-last-service-not-assessment-date",
+      "learningGoalId": "r017-policy-accessibility-template-eaa-assessment-results-retention-last-service-not-assessment-date",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s1-w02",
+      "revision": 2,
+      "templateId": "r017-policy-accessibility-template-eaa-assessment-results-retention-last-service-not-assessment-date",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-assessment-retention",
+          "title": "Directive (EU) 2019/882 on accessibility requirements for products and services",
+          "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+          "version": "2019-04-17 지침 / OJ L 151, 2019-06-07 고정 본문",
+          "location": "Article 14(3); OJ L151/92, PDF 23쪽",
+          "checkedAt": "2026-10-05T11:10:29.457304+00:00",
+          "summary": "평가 관련 결과는 제품의 마지막 시장 제공 또는 서비스의 마지막 제공부터 5년간 보관한다. 평가 작성일이나 첫 제공일로 기산하지 않는다. EUR-Lex 직접 열람은 이번 요청에서 봇 확인 화면/빈 202 응답이었으므로 룩셈부르크 정부가 제공하는 같은 EU 관보 영어 PDF를 직접 수신·확인했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-current-application",
+          "title": "Accessibility to products and services for people with a disability and older people",
+          "url": "https://www.consilium.europa.eu/en/policies/accessibility-goods-services/",
+          "version": "EU 이사회 공식 안내 / Last review 2026-07-16 / 2026-10-05 직접 확인",
+          "location": "Making the rules work; Accessibility of products and services",
+          "checkedAt": "2026-10-05T11:11:26Z",
+          "summary": "EU 이사회 공식 현행 안내에서 Directive 2019/882의 2025-06-28 적용과 전자상거래·제품/서비스 범위를 확인했다. 각 문항의 세부 판정은 요약 안내가 아니라 EU 관보 제14조 본문에 근거한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 2,
+      "lineageAttemptCount": 2,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C002의 A가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s1 국제 접근성 정책의 적용·예외·관리 의무를 묻고 국제 기술 성공기준을 묻지 않는다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-assessment-retention",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "서비스가 계속 제공된다는 조건과 제14조제3항의 명시된 기산 사건에 따라 마지막 제공일만 맞다. 최근 평가일과 향후 마지막 제공일이 우연히 같은 날일 수 있는 가정은 법정 기산 사건의 동일성을 뜻하지 않는다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-assessment-retention",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "선택지는 모두 날짜 사건을 명사구로 제시하여 평행하고 키 위치 단서가 없다. 다만 o03의 해설 “이 조문의 보관기간 기산점을 마지막 제공일 대신할 수 없다”는 대체하는 대상·기준의 관계를 문법적으로 완성하지 않아 의미를 다시 추정하게 한다. 해당 해설만 명확히 고쳐 새 개정판으로 재검토해야 한다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-assessment-retention",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "revise",
+          "summary": "“기산점을 마지막 제공일 대신할 수 없다”는 목적어와 대체 기준의 결합이 불완전하다. 갱신일이 마지막 제공일이라는 법정 기산점을 대체하지 못한다는 의미를 명확히 써야 한다."
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-05T11:33:28.957Z",
+          "finishedAt": "2026-10-05T11:42:10.175229Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle2",
+              "summary": "새 독립 검토자가 키·해설·저자·매핑·이전 검토를 읽기 전에 2026-10-05T11:34:23.376849Z에 C를 잠갔다. 잠금과 키 접근 승인이 지속 기록된 뒤 대조한 결과 C는 o04이며 정확한 revision 2의 유일한 키와 일치했다. 파일 해시와 잠금 선후 관계를 재검증했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle2",
+              "summary": "제14조제3항의 고정 EU 관보 원문을 룩셈부르크 정부 PDF에서 새로 수신·추출하고 23쪽을 시각 확인했다. 2026-07-16 최종검토 EU 이사회 안내의 전자상거래 범위와 2025-06-28 적용을 새로 확인했다. 공식 HWP의 s1 국제 접근성 정책·각국 수용범위를 독립 재추출했으며 국제 기술 성공기준 세부 문항으로 취급하지 않았다. 모든 sourceId의 판·위치·권리와 5개 선택지의 근거를 대조했고 전체 누적은행·종결 대장·같은 회차의 실제 채점 지식을 비교하여 신규성을 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-assessment-retention",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle2",
+              "summary": "질문은 실제 특정 날짜의 산출이 아니라 법정 기산 사건의 선택이다. 계속 제공 중인 적용 대상 서비스이며 초소기업 면제·경과조치·회원국 추가 의무는 명시 제외되어 서비스의 마지막 제공만 해당한다. 작성·갱신·최초 제공·사본 요청이 우연히 같은 날짜일 가능성은 법이 지정한 사건을 바꾸지 않는다. 재평가 주기와 결과 보관기간을 혼동하지 않았다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-assessment-retention",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle2",
+              "summary": "두 문장의 핵심 지문과 필요한 notes가 분리되며 유령 보기·사전 해설 노출·시각 또는 위치 의존이 없다. 다섯 선택지는 같은 판단 축의 날짜 사건 명사구이며 각각 시작/작성/갱신/요청/마지막 제공 혼동을 나타낸다. 정답만 길거나 온건한 말투, 오답에 절대어가 몰리는 단서가 없다. o03 revision 2 해설은 갱신일이 서비스 마지막 제공일이라는 기산점을 바꾸지 않는다는 관계를 명확하게 고쳤다. 공통 문항 해설과 대안별 해설의 역할이 구별되고 중복 contextExplanation이나 선택지 이유의 전체 재복제가 없다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-assessment-retention",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle2",
+              "summary": "정확한 revision 2의 비공개 published projection으로 validateBank·validateBankForPublication·validateExplanationAuthoring(bank,null)을 실제 실행하여 통과했다. 4/5지 각각 1,000 seed, 총 2,000 표시·13,000 채점 검증에서 단일 정답·모든 오답·미응답·저장/복원 순서·스냅샷 해시를 확인했다. 4지의 모든 4개 부분집합과 96개 순서, 5지 120개 순서를 관찰했고 정답이 모든 위치에 나타났다. 실제 세션 backup export/import 2건에서도 답·점수·순서가 같았다. 원 저작 파일의 상태·바이트는 변경하지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s1-w03",
+      "lineageId": "r017-policy-accessibility-template-eaa-product-microenterprise-documentation-exemption-not-facts-request",
+      "learningGoalId": "r017-policy-accessibility-template-eaa-product-microenterprise-documentation-exemption-not-facts-request",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s1-w03",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-eaa-product-microenterprise-documentation-exemption-not-facts-request",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-microenterprise-assessment-facts",
+          "title": "Directive (EU) 2019/882 on accessibility requirements for products and services",
+          "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+          "version": "2019-04-17 지침 / OJ L 151, 2019-06-07 고정 본문",
+          "location": "Article 14(2)–(4); OJ L151/91–92, PDF 22–23쪽",
+          "checkedAt": "2026-10-05T11:10:29.457304+00:00",
+          "summary": "제품을 취급하는 초소기업은 평가 문서화 요구에서 면제되지만, 제14조제1항에 의존하면 시장감시당국의 요청에 평가 관련 사실을 제공해야 한다. 평가 자체의 의무를 문서화 예외와 혼동하지 않는다. EUR-Lex 직접 열람은 이번 요청에서 봇 확인 화면/빈 202 응답이었으므로 룩셈부르크 정부가 제공하는 같은 EU 관보 영어 PDF를 직접 수신·확인했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-current-application",
+          "title": "Accessibility to products and services for people with a disability and older people",
+          "url": "https://www.consilium.europa.eu/en/policies/accessibility-goods-services/",
+          "version": "EU 이사회 공식 안내 / Last review 2026-07-16 / 2026-10-05 직접 확인",
+          "location": "Making the rules work; Accessibility of products and services",
+          "checkedAt": "2026-10-05T11:11:26Z",
+          "summary": "EU 이사회 공식 현행 안내에서 Directive 2019/882의 2025-06-28 적용과 전자상거래·제품/서비스 범위를 확인했다. 각 문항의 세부 판정은 요약 안내가 아니라 EU 관보 제14조 본문에 근거한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C009의 C가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s1 국제 접근성 정책의 적용·예외·관리 의무를 묻고 국제 기술 성공기준을 묻지 않는다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-microenterprise-assessment-facts",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "법정 제품 초소기업, 수행된 평가, 제14조 의존, 시장감시당국의 요청이 모두 주어져 사실 제공 의무가 성립한다. 서비스 면제나 문서 작성 면제를 사실 응답 면제로 확대할 수 없다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-microenterprise-assessment-facts",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "다섯 보기 모두 당국 요청에 대한 대응이다. 면제의 범위·대체 증빙·처리 시점·서비스/제품 혼동이 구체적인 오개념이며 문서화와 사실 제공의 필수 구분이 보존되어 있다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-microenterprise-assessment-facts",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s1-w04",
+      "lineageId": "r017-policy-accessibility-template-eaa-service-change-renews-burden-assessment-before-five-years",
+      "learningGoalId": "r017-policy-accessibility-template-eaa-service-change-renews-burden-assessment-before-five-years",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s1-w04",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-eaa-service-change-renews-burden-assessment-before-five-years",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-service-assessment-renewal",
+          "title": "Directive (EU) 2019/882 on accessibility requirements for products and services",
+          "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+          "version": "2019-04-17 지침 / OJ L 151, 2019-06-07 고정 본문",
+          "location": "Article 14(5); OJ L151/92, PDF 23쪽",
+          "checkedAt": "2026-10-05T11:10:29.457304+00:00",
+          "summary": "과도한 부담에 의존하는 서비스 제공자는 서비스 변경 시, 관할당국 요청 시, 그리고 어떠한 경우에도 최소 5년마다 서비스 범주·유형별 부담 평가를 갱신한다. 5년은 중간 사건을 무시해도 되는 유예기간이 아니다. EUR-Lex 직접 열람은 이번 요청에서 봇 확인 화면/빈 202 응답이었으므로 룩셈부르크 정부가 제공하는 같은 EU 관보 영어 PDF를 직접 수신·확인했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-current-application",
+          "title": "Accessibility to products and services for people with a disability and older people",
+          "url": "https://www.consilium.europa.eu/en/policies/accessibility-goods-services/",
+          "version": "EU 이사회 공식 안내 / Last review 2026-07-16 / 2026-10-05 직접 확인",
+          "location": "Making the rules work; Accessibility of products and services",
+          "checkedAt": "2026-10-05T11:11:26Z",
+          "summary": "EU 이사회 공식 현행 안내에서 Directive 2019/882의 2025-06-28 적용과 전자상거래·제품/서비스 범위를 확인했다. 각 문항의 세부 판정은 요약 안내가 아니라 EU 관보 제14조 본문에 근거한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C001의 E가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s1 국제 접근성 정책의 적용·예외·관리 의무를 묻고 국제 기술 성공기준을 묻지 않는다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-service-assessment-renewal",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "제14조제1항(b)에 실제 의존하고, 제공 서비스 변경에 해당하며, 요청이 없다는 조건을 모두 확인했다. 1년 경과는 갱신을 유예하지 않는다. 변경 즉시 예외가 영구 박탈된다는 결과도 법에 없다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-service-assessment-renewal",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "다섯 보기 모두 기존 평가 관리 조치이며 주기·계기·갱신 의미·예외 결과를 혼동하는 선택지다. “영구적으로”는 과장 자체를 장식한 말이 아니라 예외 박탈 오개념의 핵심이며, 다른 오답에 절대표현을 반복하는 세트는 아니다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-service-assessment-renewal",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s1-w05",
+      "lineageId": "r017-policy-accessibility-template-eaa-private-accessibility-funding-bars-disproportionate-burden",
+      "learningGoalId": "r017-policy-accessibility-template-eaa-private-accessibility-funding-bars-disproportionate-burden",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s1-w05",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-eaa-private-accessibility-funding-bars-disproportionate-burden",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-external-accessibility-funding",
+          "title": "Directive (EU) 2019/882 on accessibility requirements for products and services",
+          "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+          "version": "2019-04-17 지침 / OJ L 151, 2019-06-07 고정 본문",
+          "location": "Article 14(6), read with 14(1)(b); OJ L151/92, PDF 23쪽",
+          "checkedAt": "2026-10-05T11:10:29.457304+00:00",
+          "summary": "자기 재원 외의 공적 또는 사적 재정지원을 접근성 개선 목적으로 받으면 제14조제1항(b)의 과도한 부담에 의존할 자격이 없다. 공공지원으로 한정하지 않으며 사업자가 작성한 부담 평가가 이 금지를 해제하지 않는다. EUR-Lex 직접 열람은 이번 요청에서 봇 확인 화면/빈 202 응답이었으므로 룩셈부르크 정부가 제공하는 같은 EU 관보 영어 PDF를 직접 수신·확인했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-current-application",
+          "title": "Accessibility to products and services for people with a disability and older people",
+          "url": "https://www.consilium.europa.eu/en/policies/accessibility-goods-services/",
+          "version": "EU 이사회 공식 안내 / Last review 2026-07-16 / 2026-10-05 직접 확인",
+          "location": "Making the rules work; Accessibility of products and services",
+          "checkedAt": "2026-10-05T11:11:26Z",
+          "summary": "EU 이사회 공식 현행 안내에서 Directive 2019/882의 2025-06-28 적용과 전자상거래·제품/서비스 범위를 확인했다. 각 문항의 세부 판정은 요약 안내가 아니라 EU 관보 제14조 본문에 근거한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C006의 B가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s1 국제 접근성 정책의 적용·예외·관리 의무를 묻고 국제 기술 성공기준을 묻지 않는다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-external-accessibility-funding",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "자기 재원과 구분되는 외부 지원, 접근성 개선 목적, 동일 서비스, 근본적 변경을 주장하지 않는다는 조건을 명시했다. 공공성·금액·제공자의 동의·지원 공제 순비용은 제14조제6항의 금지를 없애지 않는다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-external-accessibility-funding",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "다섯 보기 모두 외부 지원과 부담 예외의 관계에 답한다. 금액·순비용·동의·공공성은 관련 혼동이며, 금지 결론은 필요한 법적 부정문으로 유지된다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-external-accessibility-funding",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s1-w06",
+      "lineageId": "r017-policy-accessibility-template-eaa-exemption-notification-active-versus-assessment-copy-on-request",
+      "learningGoalId": "r017-policy-accessibility-template-eaa-exemption-notification-active-versus-assessment-copy-on-request",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s1-w06",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-eaa-exemption-notification-active-versus-assessment-copy-on-request",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-notify-exemption-versus-assessment-copy",
+          "title": "Directive (EU) 2019/882 on accessibility requirements for products and services",
+          "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+          "version": "2019-04-17 지침 / OJ L 151, 2019-06-07 고정 본문",
+          "location": "Article 14(3), 14(8); Recital 68; OJ L151/78, 92, PDF 9·23쪽",
+          "checkedAt": "2026-10-05T11:10:29.457304+00:00",
+          "summary": "초소기업이 아닌 사업자가 특정 제품·서비스에 제14조제1항을 적용하면 그 사실을 해당 제품 출시·서비스 제공 회원국의 관할당국에 알린다. 평가 사본의 요청 시 제공과 적용 사실의 통지를 구별한다. EUR-Lex 직접 열람은 이번 요청에서 봇 확인 화면/빈 202 응답이었으므로 룩셈부르크 정부가 제공하는 같은 EU 관보 영어 PDF를 직접 수신·확인했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-eaa-current-application",
+          "title": "Accessibility to products and services for people with a disability and older people",
+          "url": "https://www.consilium.europa.eu/en/policies/accessibility-goods-services/",
+          "version": "EU 이사회 공식 안내 / Last review 2026-07-16 / 2026-10-05 직접 확인",
+          "location": "Making the rules work; Accessibility of products and services",
+          "checkedAt": "2026-10-05T11:11:26Z",
+          "summary": "EU 이사회 공식 현행 안내에서 Directive 2019/882의 2025-06-28 적용과 전자상거래·제품/서비스 범위를 확인했다. 각 문항의 세부 판정은 요약 안내가 아니라 EU 관보 제14조 본문에 근거한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C003의 B가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s1 국제 접근성 정책의 적용·예외·관리 의무를 묻고 국제 기술 성공기준을 묻지 않는다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-notify-exemption-versus-assessment-copy",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "초소기업 면제와 회원국 추가 의무를 제외하고 관련 회원국 당국을 확인했다. 적용 사실 통지는 요청을 기다리지 않지만 사본은 요청 조건에 따라 제공한다. 이용자 제공·사이트 공개·회원국 정기 보고가 수신 대상이나 계기를 대체하지 않는다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-notify-exemption-versus-assessment-copy",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "다섯 보기 모두 정보 종류·수신 대상·제공 시점의 조합이며 정답과 오답의 길이·서술 구조가 유사하다. 사본과 적용 사실이라는 두 정보 유형이 분리되어 있다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-eaa-notify-exemption-versus-assessment-copy",
+                "r017-policy-accessibility-src-eaa-current-application",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s5-w01",
+      "lineageId": "r017-policy-accessibility-template-user-evaluation-recruitment-target-experience-not-expert-workarounds",
+      "learningGoalId": "r017-policy-accessibility-template-user-evaluation-recruitment-target-experience-not-expert-workarounds",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s5-w01",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-user-evaluation-recruitment-target-experience-not-expert-workarounds",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-wai-user-recruitment-experience",
+          "title": "Involving Users in Evaluating Web Accessibility; Involving Users in Web Projects",
+          "url": "https://www.w3.org/WAI/test-evaluate/involving-users/",
+          "version": "W3C WAI 교육자료, 본문 2021-06-01 / 링크 2024-04-30 갱신",
+          "location": "Basics; 연결 문서 Users’ Experience Interacting with the Web",
+          "checkedAt": "2026-10-05T11:10:32.478556+00:00",
+          "summary": "평가 참여자의 초급·평균·고급 숙련도 구성은 목표 이용자에 맞춘다. 숙련자는 드문 우회방법으로 문제를 넘을 수 있고 초보자의 보조기술 경험 부족은 별도 원인이 될 수 있다. 장애 유형만 맞춘 전문가 표본으로 초보 이용자의 장벽을 갈음하지 않는다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-wai-project-user-experience",
+          "title": "Involving Users in Web Projects for Better, Easier Accessibility",
+          "url": "https://www.w3.org/WAI/planning/involving-users/",
+          "version": "W3C WAI 교육자료, 본문 2019-01-05 / 영상 2020-05-05 갱신",
+          "location": "Users’ Experience Interacting with the Web",
+          "checkedAt": "2026-10-05T11:10:37.552872+00:00",
+          "summary": "숙련된 보조기술 사용자는 일반 사용자가 알지 못하는 우회방법으로 웹사이트 문제를 넘을 수 있다. 개발 초기의 이용방식 학습과 대상 이용자의 실제 과제 평가에는 같은 모집 기준이 항상 맞지 않는다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C004의 C가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s5 보조공학의 역할·이용환경 또는 웹 접근성 점검 방식에 해당하며 의료 처방이나 국제 기술 성공기준의 상세 판정이 아니다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-wai-user-recruitment-experience",
+                "r017-policy-accessibility-src-wai-project-user-experience",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "목표 이용자가 초보이고 실제 과제 평가 단계임을 명시했다. 초기 AT 이용방식 시연에는 숙련자가 유리할 수 있다는 공식 문서의 반례는 notes가 제외한다. 표본 크기·브랜드 다양성·전문가 지식은 경험 수준 대표성을 대신하지 않는다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-wai-user-recruitment-experience",
+                "r017-policy-accessibility-src-wai-project-user-experience",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "모집할 사람과 관찰 활동으로 선택지 관점을 맞췄다. 평가 전문가와 참여자, 인원·도구 다양성과 경험 대표성의 차이는 관련 오개념이다. 실제 오답 빈도나 실증 난도를 주장하지 않는다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-wai-user-recruitment-experience",
+                "r017-policy-accessibility-src-wai-project-user-experience",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s5-w02",
+      "lineageId": "r017-policy-accessibility-template-screen-reader-user-test-facilitator-does-not-overlap-speech",
+      "learningGoalId": "r017-policy-accessibility-template-screen-reader-user-test-facilitator-does-not-overlap-speech",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s5-w02",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-screen-reader-user-test-facilitator-does-not-overlap-speech",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-gsa-screen-reader-test-facilitation",
+          "title": "Tips for Usability Testing with People with Disabilities",
+          "url": "https://www.section508.gov/test/usability-testing-with-people-with-disabilities/",
+          "version": "미국 GSA Section508.gov 공식 평가 안내, 2023-09 갱신",
+          "location": "Notes on Observations and Findings: screen-reader facilitation",
+          "checkedAt": "2026-10-05T11:10:45.705784+00:00",
+          "summary": "화면낭독기를 쓰는 참여자를 평가할 때 진행자가 낭독 소리 위에 겹쳐 말하지 않도록 한다. 참여자의 보조기술과 버전을 미리 확인하고 필요에 맞는 시험 환경을 준비한다. 이는 평가 진행 방법이며 사이트의 특정 기준 위반을 자동 판정하는 규정이 아니다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C005의 D가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s5 보조공학의 역할·이용환경 또는 웹 접근성 점검 방식에 해당하며 의료 처방이나 국제 기술 성공기준의 상세 판정이 아니다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-gsa-screen-reader-test-facilitation",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "평소 화면낭독기 음성 사용과 참여자의 독립 조작이 관찰 조건이다. 더 크게 말하거나 반복하면 중첩은 남고, 읽기·조작을 대신하면 관찰 대상이 달라진다. 발화 시점을 나누는 한 보기가 모두 충족한다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-gsa-screen-reader-test-facilitation",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "각 보기는 진행자의 개선 행동 한 가지로 서술한다. 음량·반복·대리 읽기·대리 조작은 청취나 수행을 돕겠다는 잘못된 개입 가설이며, 일반적으로 무조건 해로운 행동으로 과장하지 않는다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-gsa-screen-reader-test-facilitation",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-policy-accessibility-s5-w03",
+      "lineageId": "r017-policy-accessibility-template-infrared-listening-competing-light-environment-limit",
+      "learningGoalId": "r017-policy-accessibility-template-infrared-listening-competing-light-environment-limit",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r017-policy-accessibility-s5-w03",
+      "revision": 1,
+      "templateId": "r017-policy-accessibility-template-infrared-listening-competing-light-environment-limit",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r017-policy-accessibility-src-nidcd-infrared-light-environment",
+          "title": "Assistive Devices for People with Hearing, Voice, Speech, or Language Disorders",
+          "url": "https://www.nidcd.nih.gov/health/assistive-devices-people-hearing-voice-speech-or-language-disorders",
+          "version": "NIH NIDCD 공식 정보자료, 2019-11-12 갱신 / 2026-10-05 확인",
+          "location": "What types of assistive listening devices are available? Infrared systems; FM systems; Personal amplifiers",
+          "checkedAt": "2026-10-05T11:10:41.188012+00:00",
+          "summary": "적외선 방식은 신호가 벽을 통과하지 않는 장점이 있지만 야외나 매우 밝은 실내처럼 경쟁 광원이 많은 환경에는 사용할 수 없다. FM의 벽 투과·채널 간섭, 루프의 공간 전선, 개인 증폭기의 근거리 마이크와 구별한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r017-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책·각국 수용범위; 정보접근성 개론: 보조공학 서비스 종류·역할·이용방식, 웹 접근성 점검 방식·도구·결과의 한계",
+          "checkedAt": "2026-10-05T11:08:10.955534+00:00",
+          "summary": "이번 회차에 공식 HWP 원본을 새로 내려받아 본문을 추출했다. s1의 국제표준 상세 내용 제외와 정책·수용범위, s5의 보조공학 이용방식과 평가 방법 범위를 확인했다. SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:21:21.951Z",
+          "finishedAt": "2026-10-05T11:30:41.796418Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "키 공개 전 2026-10-05T11:23:08.106265Z에 고정한 policy-accessibility-cycle1-C008의 D가 이 정확한 revision의 키와 일치한다. 맹검 원본 해시를 다시 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "s5 보조공학의 역할·이용환경 또는 웹 접근성 점검 방식에 해당하며 의료 처방이나 국제 기술 성공기준의 상세 판정이 아니다. 각 sourceId의 지정판·위치·권리와 적용 조건을 원문으로 대조했다. 누적은행·모든 종결 대장·편집 정정과 실제 채점 지식의 신규성도 대조했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-nidcd-infrared-light-environment",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "공식 NIDCD가 설명한 일반 적외선 방식과 강한 햇빛의 야외를 고정하고 제품별 예외·광차폐를 배제했다. 광원 간섭 가능성을 검토하는 선택지는 맞으며 특정 제품의 고장이나 모든 밝기의 절대 실패를 단정하지 않는다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-nidcd-infrared-light-environment",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "모든 보기는 전송·수신·설치상의 제약으로 답한다. 필수 설치나 수신 경로라는 한정은 해당 오개념을 정확히 표현하며 임의의 절대표현 추가가 아니다. 햇빛 단서에 대응하는 광원 선택은 평가하려는 매체 특성 자체다. 지문 1~2문장과 notes 분리, 텍스트 단독 풀이, 위치·색상·이미지 의존 없음, 전용 선택지 해설과 공통 문항 해설의 역할 및 중복 contextExplanation 없음도 확인했다.",
+              "evidenceRefs": [
+                "r017-policy-accessibility-src-nidcd-infrared-light-environment",
+                "r017-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-policy-accessibility-cycle1",
+              "summary": "변경하지 않은 원 저작의 비공개 published projection에서 validateBank·validateBankForPublication·validateExplanationAuthoring(null)을 통과했다. 각 4/5지 1,000 seed에서 정답 포함·정오 전체 채점·순서/스냅샷 보존, 선택지 위치·부분집합 분산을 확인하고 실제 backup export/import 왕복 2건을 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-internet-browser-s2-w01",
+      "lineageId": "r017-internet-browser-template-firefox-offline-translation-requires-translation-language-files-not-interface-or-dictionaries",
+      "learningGoalId": "r017-internet-browser-template-firefox-offline-translation-requires-translation-language-files-not-interface-or-dictionaries",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r017-internet-browser-s2-w01",
+      "revision": 1,
+      "templateId": "r017-internet-browser-template-firefox-offline-translation-requires-translation-language-files-not-interface-or-dictionaries",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r017-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP; 2026-10-05 새 수신본 확인",
+          "location": "인터넷 개론(20문항) > 웹 브라우저 / 인터넷 활용 / 인터넷 검색엔진",
+          "checkedAt": "2026-10-05T11:09:16.796610+00:00",
+          "summary": "이번 회차에 공식 HWP를 새로 받아 직접 추출했다. 브라우저 기능·활용, 이메일 응용서비스, 검색엔진과 연산자가 범위에 포함된다. 80,896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-firefox-translation",
+          "title": "Firefox Translations",
+          "url": "https://support.mozilla.org/en-US/kb/website-translation",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "도입부; Configure installed languages; Why do I need to install languages?",
+          "checkedAt": "2026-10-05T11:10:10Z",
+          "summary": "번역은 기기 안에서 수행되며 필요한 언어 파일을 설치한 뒤에는 지원하는 콘텐츠를 인터넷 연결 없이 번역할 수 있다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-firefox-interface",
+          "title": "Use Firefox in another language",
+          "url": "https://support.mozilla.org/en-US/kb/use-firefox-another-language",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "도입부; Switch Firefox to another language",
+          "checkedAt": "2026-10-05T11:12:31Z",
+          "summary": "브라우저 언어 설정은 메뉴·알림·메시지 등 Firefox 인터페이스의 표시 언어를 바꾼다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-firefox-content-languages",
+          "title": "Choose display languages for multilingual web pages",
+          "url": "https://support.mozilla.org/en-US/kb/choose-display-languages-multilingual-web-pages",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "Choosing preferred languages for web pages",
+          "checkedAt": "2026-10-05T11:19:32Z",
+          "summary": "콘텐츠 선호 언어는 여러 언어판을 제공하는 사이트에 요청할 언어의 선호도를 정하는 설정이다. 브라우저 안에서 문장을 번역할 언어 파일을 설치하는 절차가 아니다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-firefox-spell-checker",
+          "title": "How do I use the Firefox spell checker?",
+          "url": "https://support.mozilla.org/en-US/kb/how-do-i-use-firefox-spell-checker",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "도입부; Add dictionaries; Switch dictionaries",
+          "checkedAt": "2026-10-05T11:12:31Z",
+          "summary": "설치한 사전은 입력한 단어의 철자를 검사하는 데 사용한다. 여러 사전을 선택할 수도 있으며 페이지 번역에 필요한 파일과는 용도가 다르다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-firefox-save-page",
+          "title": "How to save a web page",
+          "url": "https://support.mozilla.org/en-US/kb/how-save-web-page",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "Saving a web page > Web page, complete",
+          "checkedAt": "2026-10-05T11:19:32Z",
+          "summary": "전체 웹페이지 저장은 HTML과 그림 등 관련 파일을 보관하는 방식이다. 저장된 웹 자원과 브라우저 번역 파일은 다른 대상이다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:23:26.610Z",
+          "finishedAt": "2026-10-05T11:36:38.219348Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "키 공개 전에 internet-browser-cycle1-C001의 E를 독립 선택해 잠갔으며 r017-internet-browser-s2-w01-o03와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "고정 2026-05-07 출제 범위와 현재 제조사·서비스 공식 문서의 관련 절, 메타데이터, 조건과 권리를 독립 대조했다. 확인된 근거 충돌이나 범위 이탈이 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-firefox-translation",
+                "r017-internet-browser-src-firefox-interface",
+                "r017-internet-browser-src-firefox-content-languages",
+                "r017-internet-browser-src-firefox-spell-checker",
+                "r017-internet-browser-src-firefox-save-page"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "처음 사용하고 언어 자료를 받지 않았으며 번역 방향이 지원된다. 이미 표시된 문서의 번역 준비를 묻고 추가 웹 자원 취득을 제외하므로 필요한 번역 파일을 설치하는 답이 유일하다. 자동 설치는 온라인에서 최초 번역 시 일어나는 또 다른 설치 경로일 뿐 다른 선택지를 정답으로 만들지 않는다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-firefox-translation",
+                "r017-internet-browser-src-firefox-interface",
+                "r017-internet-browser-src-firefox-content-languages",
+                "r017-internet-browser-src-firefox-spell-checker",
+                "r017-internet-browser-src-firefox-save-page"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "다섯 답 모두 연결을 끊기 전 할 브라우저 준비 작업으로 평행하다. 메뉴 언어·콘텐츠 선호·번역 언어 자료·철자 사전·페이지 보관은 가까운 기능 혼동이다. 정답의 길이·정오 말투·표시 위치 단서가 없고, 지문·notes·해설의 역할이 분리되어 있다. 선택지 이유는 전용 option.explanation에 한 번만 있고 불필요한 contextExplanation이나 문제 해설의 전체 선택지 복제는 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-firefox-translation",
+                "r017-internet-browser-src-firefox-interface",
+                "r017-internet-browser-src-firefox-content-languages",
+                "r017-internet-browser-src-firefox-spell-checker",
+                "r017-internet-browser-src-firefox-save-page"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "원본 candidate 구조, 사적 published 투영, 누적 투영 및 엄격 해설 검사가 통과했다. 4·5지 각각 1,000 seed에서 유일 키·모든 위치·안정 ID 채점·동일 seed 재현·JSON 백업 왕복을 검증했고 입력 바이트를 보존했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-internet-browser-s2-w02",
+      "lineageId": "r017-internet-browser-template-firefox-multiple-bookmark-tags-cross-classification-without-moving-or-copying",
+      "learningGoalId": "r017-internet-browser-template-firefox-multiple-bookmark-tags-cross-classification-without-moving-or-copying",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r017-internet-browser-s2-w02",
+      "revision": 1,
+      "templateId": "r017-internet-browser-template-firefox-multiple-bookmark-tags-cross-classification-without-moving-or-copying",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r017-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP; 2026-10-05 새 수신본 확인",
+          "location": "인터넷 개론(20문항) > 웹 브라우저 / 인터넷 활용 / 인터넷 검색엔진",
+          "checkedAt": "2026-10-05T11:09:16.796610+00:00",
+          "summary": "이번 회차에 공식 HWP를 새로 받아 직접 추출했다. 브라우저 기능·활용, 이메일 응용서비스, 검색엔진과 연산자가 범위에 포함된다. 80,896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-firefox-tags",
+          "title": "Bookmark Tags - Categorize bookmarks to make them easy to find",
+          "url": "https://support.mozilla.org/en-US/kb/categorizing-bookmarks-make-them-easy-to-find",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "Tagging existing bookmarks; Reuse your tags; Using tags to organize your Library",
+          "checkedAt": "2026-10-05T11:10:10Z",
+          "summary": "북마크에 여러 태그를 붙일 수 있고 라이브러리에서 태그를 선택하면 해당 태그가 연결된 북마크를 볼 수 있다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-firefox-bookmarks",
+          "title": "Bookmarks in Firefox",
+          "url": "https://support.mozilla.org/en-US/kb/bookmarks-firefox",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "How do I change the name or location of a bookmark?; How to use keywords with bookmarks",
+          "checkedAt": "2026-10-05T11:14:33Z",
+          "summary": "이름은 메뉴의 표시명을, 위치는 보관 폴더를 정한다. 키워드는 주소창에서 북마크를 여는 바로가기이며 태그를 이용한 주제별 목록과 다르다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:23:26.610Z",
+          "finishedAt": "2026-10-05T11:36:38.219348Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "키 공개 전에 internet-browser-cycle1-C006의 C를 독립 선택해 잠갔으며 r017-internet-browser-s2-w02-o02와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "고정 2026-05-07 출제 범위와 현재 제조사·서비스 공식 문서의 관련 절, 메타데이터, 조건과 권리를 독립 대조했다. 확인된 근거 충돌이나 범위 이탈이 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-firefox-tags",
+                "r017-internet-browser-src-firefox-bookmarks"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "동일 북마크의 다중 주제 분류라는 목표와 이름·주소·폴더 보존 조건이 분명하다. 키워드로 주소창 바로가기를 만드는 것과 태그별 목록은 다르며, 복사·이동·개명은 조건을 충족하지 못한다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-firefox-tags",
+                "r017-internet-browser-src-firefox-bookmarks"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "모든 답은 같은 북마크를 관리하는 단일 작업이다. 폴더·이름·키워드·태그·복사를 혼동하는 가설은 타당하며 터무니없는 기능을 넣지 않았다. 보존 조건으로 일부 오답을 쉽게 제거할 수 있지만 태그와 키워드의 기능 구별은 여전히 필요하다. 독립 문안 검토는 통과하며 실제 변별도 측정으로 주장하지 않는다. 선택지 이유는 전용 option.explanation에 한 번만 있고 불필요한 contextExplanation이나 문제 해설의 전체 선택지 복제는 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-firefox-tags",
+                "r017-internet-browser-src-firefox-bookmarks"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "원본 candidate 구조, 사적 published 투영, 누적 투영 및 엄격 해설 검사가 통과했다. 4·5지 각각 1,000 seed에서 유일 키·모든 위치·안정 ID 채점·동일 seed 재현·JSON 백업 왕복을 검증했고 입력 바이트를 보존했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-internet-browser-s2-w03",
+      "lineageId": "r017-internet-browser-template-chrome-memory-saver-site-exclusion-preserves-other-tabs-policy",
+      "learningGoalId": "r017-internet-browser-template-chrome-memory-saver-site-exclusion-preserves-other-tabs-policy",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r017-internet-browser-s2-w03",
+      "revision": 1,
+      "templateId": "r017-internet-browser-template-chrome-memory-saver-site-exclusion-preserves-other-tabs-policy",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r017-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP; 2026-10-05 새 수신본 확인",
+          "location": "인터넷 개론(20문항) > 웹 브라우저 / 인터넷 활용 / 인터넷 검색엔진",
+          "checkedAt": "2026-10-05T11:09:16.796610+00:00",
+          "summary": "이번 회차에 공식 HWP를 새로 받아 직접 추출했다. 브라우저 기능·활용, 이메일 응용서비스, 검색엔진과 연산자가 범위에 포함된다. 80,896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-chrome-performance",
+          "title": "Personalize Chrome performance",
+          "url": "https://support.google.com/chrome/answer/12929150?hl=en",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "Turn Memory Saver on or off; Keep specific sites active; Turn tab memory usage on or off; Turn Energy Saver on or off",
+          "checkedAt": "2026-10-05T11:09:24.599325+00:00",
+          "summary": "메모리 절약은 사용하지 않는 탭을 비활성화한다. 특정 사이트를 제외 목록에 넣어 계속 활성 상태로 둘 수 있다. 비활성 표시·메모리 수치 표시는 시각적 표시이며 에너지 절약은 전력 사용을 위한 별도 기능이다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:23:26.610Z",
+          "finishedAt": "2026-10-05T11:36:38.219348Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "키 공개 전에 internet-browser-cycle1-C007의 A를 독립 선택해 잠갔으며 r017-internet-browser-s2-w03-o04와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "고정 2026-05-07 출제 범위와 현재 제조사·서비스 공식 문서의 관련 절, 메타데이터, 조건과 권리를 독립 대조했다. 확인된 근거 충돌이나 범위 이탈이 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-chrome-performance"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "다른 사이트의 메모리 절약을 유지하는 요구 때문에 전역 끄기를 배제한다. 표시 제어는 비활성화 정책을 바꾸지 않고 에너지 절약은 명시적으로 별도 범위다. 모든 종류의 탭 정지나 충돌을 막는다는 과장으로 읽지 않는다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-chrome-performance"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "모든 답은 Chrome의 실제 관련 설정을 고르는 작업이다. 전역 정책·상태 표시·사이트별 예외·전력 절약을 혼동하는 대안이다. 정답이 더 긴 것은 예외 목록의 실제 이름과 대상을 명시하기 위한 차이이며 답에만 추가 예외나 온건한 단서를 붙이지 않았다. 필수 범위를 유지했다. 선택지 이유는 전용 option.explanation에 한 번만 있고 불필요한 contextExplanation이나 문제 해설의 전체 선택지 복제는 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-chrome-performance"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "원본 candidate 구조, 사적 published 투영, 누적 투영 및 엄격 해설 검사가 통과했다. 4·5지 각각 1,000 seed에서 유일 키·모든 위치·안정 ID 채점·동일 seed 재현·JSON 백업 왕복을 검증했고 입력 바이트를 보존했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-internet-browser-s2-w04",
+      "lineageId": "r017-internet-browser-template-chrome-on-select-extension-site-access-ends-with-tab-closure",
+      "learningGoalId": "r017-internet-browser-template-chrome-on-select-extension-site-access-ends-with-tab-closure",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r017-internet-browser-s2-w04",
+      "revision": 1,
+      "templateId": "r017-internet-browser-template-chrome-on-select-extension-site-access-ends-with-tab-closure",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r017-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP; 2026-10-05 새 수신본 확인",
+          "location": "인터넷 개론(20문항) > 웹 브라우저 / 인터넷 활용 / 인터넷 검색엔진",
+          "checkedAt": "2026-10-05T11:09:16.796610+00:00",
+          "summary": "이번 회차에 공식 HWP를 새로 받아 직접 추출했다. 브라우저 기능·활용, 이메일 응용서비스, 검색엔진과 연산자가 범위에 포함된다. 80,896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-chrome-extensions",
+          "title": "Install and manage extensions",
+          "url": "https://support.google.com/chrome/answer/2664769?hl=en",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "Let extensions read and change site data",
+          "checkedAt": "2026-10-05T11:09:24.575185+00:00",
+          "summary": "확장 프로그램을 선택할 때만 허용하는 설정은 열린 탭·창의 현재 사이트에 적용된다. 그 탭·창을 닫으면 다시 선택해야 한다. 호스트 권한에 맞는 사이트 접근에 대한 설명이며 VPN·프록시의 하위 네트워크 접근은 예외다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:23:26.610Z",
+          "finishedAt": "2026-10-05T11:36:38.219348Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "키 공개 전에 internet-browser-cycle1-C003의 A를 독립 선택해 잠갔으며 r017-internet-browser-s2-w04-o01와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "고정 2026-05-07 출제 범위와 현재 제조사·서비스 공식 문서의 관련 절, 메타데이터, 조건과 권리를 독립 대조했다. 확인된 근거 충돌이나 범위 이탈이 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-chrome-extensions"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "접근 허용 여부를 물으므로 확장 코드의 실행 완료·페이지 재로드 필요와 혼동하지 않는다. 호스트 권한 일치와 탭 폐쇄, 새 탭에서 미선택, 별도 승인 부재가 고정되어 A 허용·B 미허용이 유일하다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-chrome-extensions"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "A·B의 동일한 두 시점 형식으로 네 허용 조합과 자동 질문 오개념을 비교한다. 선택지 속 A·B는 표시 번호가 아니라 고정된 시점이다. 정답은 두 짧은 상태의 조합이며 길이·말투 단서가 없다. 선택지 이유는 전용 option.explanation에 한 번만 있고 불필요한 contextExplanation이나 문제 해설의 전체 선택지 복제는 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-chrome-extensions"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "원본 candidate 구조, 사적 published 투영, 누적 투영 및 엄격 해설 검사가 통과했다. 4·5지 각각 1,000 seed에서 유일 키·모든 위치·안정 ID 채점·동일 seed 재현·JSON 백업 왕복을 검증했고 입력 바이트를 보존했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-internet-browser-s2-w05",
+      "lineageId": "r017-internet-browser-template-gmail-bcc-recipient-visibility-to-cc-visible-other-bcc-hidden",
+      "learningGoalId": "r017-internet-browser-template-gmail-bcc-recipient-visibility-to-cc-visible-other-bcc-hidden",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r017-internet-browser-s2-w05",
+      "revision": 1,
+      "templateId": "r017-internet-browser-template-gmail-bcc-recipient-visibility-to-cc-visible-other-bcc-hidden",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r017-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP; 2026-10-05 새 수신본 확인",
+          "location": "인터넷 개론(20문항) > 웹 브라우저 / 인터넷 활용 / 인터넷 검색엔진",
+          "checkedAt": "2026-10-05T11:09:16.796610+00:00",
+          "summary": "이번 회차에 공식 HWP를 새로 받아 직접 추출했다. 브라우저 기능·활용, 이메일 응용서비스, 검색엔진과 연산자가 범위에 포함된다. 80,896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-gmail-send",
+          "title": "Send or unsend Gmail messages",
+          "url": "https://support.google.com/mail/answer/2819488?co=GENIE.Platform%3DDesktop&hl=en",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "Options for adding message recipients > Hide recipients (Bcc)",
+          "checkedAt": "2026-10-05T11:09:24.657224+00:00",
+          "summary": "숨은참조 수신자는 받는사람·참조 수신자를 볼 수 있지만 다른 숨은참조 수신자의 이름·주소는 볼 수 없다. 본인이 숨은참조로 추가되었다는 표시는 Gmail에서 확인한다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:23:26.610Z",
+          "finishedAt": "2026-10-05T11:36:38.219348Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "키 공개 전에 internet-browser-cycle1-C002의 A를 독립 선택해 잠갔으며 r017-internet-browser-s2-w05-o05와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "고정 2026-05-07 출제 범위와 현재 제조사·서비스 공식 문서의 관련 절, 메타데이터, 조건과 권리를 독립 대조했다. 확인된 근거 충돌이나 범위 이탈이 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-gmail-send"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "보낸 사람·C 자신을 제외한 수신자 정보의 공개 범위다. 본문·회신·전달·그룹을 통한 별도 노출이 제외되어 A와 B만 남는다. 다른 Bcc D를 표시하는 선택지는 성립하지 않는다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-gmail-send"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "선택지는 주소 집합만 나타내며 정답·오답의 문법과 정보 종류가 같다. 참조 누락, 다른 숨은참조 노출, 받는사람 누락을 비교하는 집합 오류이며 정답 위치를 전제로 하지 않는다. 선택지 이유는 전용 option.explanation에 한 번만 있고 불필요한 contextExplanation이나 문제 해설의 전체 선택지 복제는 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-gmail-send"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "원본 candidate 구조, 사적 published 투영, 누적 투영 및 엄격 해설 검사가 통과했다. 4·5지 각각 1,000 seed에서 유일 키·모든 위치·안정 ID 채점·동일 seed 재현·JSON 백업 왕복을 검증했고 입력 바이트를 보존했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-internet-browser-s2-w06",
+      "lineageId": "r017-internet-browser-template-gmail-archive-versus-mute-new-reply-inbox-behavior",
+      "learningGoalId": "r017-internet-browser-template-gmail-archive-versus-mute-new-reply-inbox-behavior",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r017-internet-browser-s2-w06",
+      "revision": 1,
+      "templateId": "r017-internet-browser-template-gmail-archive-versus-mute-new-reply-inbox-behavior",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r017-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP; 2026-10-05 새 수신본 확인",
+          "location": "인터넷 개론(20문항) > 웹 브라우저 / 인터넷 활용 / 인터넷 검색엔진",
+          "checkedAt": "2026-10-05T11:09:16.796610+00:00",
+          "summary": "이번 회차에 공식 HWP를 새로 받아 직접 추출했다. 브라우저 기능·활용, 이메일 응용서비스, 검색엔진과 연산자가 범위에 포함된다. 80,896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-gmail-archive",
+          "title": "Archive Gmail messages",
+          "url": "https://support.google.com/mail/answer/6576?co=GENIE.Platform%3DDesktop&hl=en",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "도입부; Archive a message",
+          "checkedAt": "2026-10-05T11:20:18.589782+00:00",
+          "summary": "보관한 메일은 전체보관함에 남고 받은편지함에서는 사라진다. 누군가 답장하면 받은편지함으로 돌아온다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-gmail-mute",
+          "title": "Mute Gmail messages",
+          "url": "https://support.google.com/mail/answer/16594169?co=GENIE.Platform%3DDesktop&hl=en",
+          "version": "제조사·서비스 제공자 공식 데스크톱 도움말, 2026-10-05 확인판",
+          "location": "도입부; After you mute a message",
+          "checkedAt": "2026-10-05T11:20:18.565271+00:00",
+          "summary": "숨긴 대화의 후속 답장은 받은편지함을 건너뛰어 보관된다. 나에게만 보낸 답장, 내가 속한 Google 그룹 수신, 받는사람·참조에 나를 추가한 경우에는 예외가 있다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:23:26.610Z",
+          "finishedAt": "2026-10-05T11:36:38.219348Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "키 공개 전에 internet-browser-cycle1-C004의 D를 독립 선택해 잠갔으며 r017-internet-browser-s2-w06-o03와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "고정 2026-05-07 출제 범위와 현재 제조사·서비스 공식 문서의 관련 절, 메타데이터, 조건과 권리를 독립 대조했다. 확인된 근거 충돌이나 범위 이탈이 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-gmail-archive",
+                "r017-internet-browser-src-gmail-mute"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "새 메시지는 해당 기존 대화로 묶이고 정상 배달된다. 숨기기 예외 세 가지와 필터·스팸·차단·다시 알림을 제외했으므로 A 복귀·B 건너뛰기가 유일하다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-gmail-archive",
+                "r017-internet-browser-src-gmail-mute"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "모든 답은 대화 A·B의 후속 메시지 처리 결과다. 초기 제거를 지속 처리와 혼동하거나 두 기능을 뒤바꾸고 보관을 삭제로 보는 대안이다. 문법·관점이 평행하고 정답만 장황하지 않다. 선택지 이유는 전용 option.explanation에 한 번만 있고 불필요한 contextExplanation이나 문제 해설의 전체 선택지 복제는 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-gmail-archive",
+                "r017-internet-browser-src-gmail-mute"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "원본 candidate 구조, 사적 published 투영, 누적 투영 및 엄격 해설 검사가 통과했다. 4·5지 각각 1,000 seed에서 유일 키·모든 위치·안정 ID 채점·동일 seed 재현·JSON 백업 왕복을 검증했고 입력 바이트를 보존했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-internet-browser-s2-w07",
+      "lineageId": "r017-internet-browser-template-google-site-search-result-list-not-exhaustive-index-audit",
+      "learningGoalId": "r017-internet-browser-template-google-site-search-result-list-not-exhaustive-index-audit",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r017-internet-browser-s2-w07",
+      "revision": 1,
+      "templateId": "r017-internet-browser-template-google-site-search-result-list-not-exhaustive-index-audit",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r017-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP; 2026-10-05 새 수신본 확인",
+          "location": "인터넷 개론(20문항) > 웹 브라우저 / 인터넷 활용 / 인터넷 검색엔진",
+          "checkedAt": "2026-10-05T11:09:16.796610+00:00",
+          "summary": "이번 회차에 공식 HWP를 새로 받아 직접 추출했다. 브라우저 기능·활용, 이메일 응용서비스, 검색엔진과 연산자가 범위에 포함된다. 80,896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r017-internet-browser-src-search-site",
+          "title": "site: search operator",
+          "url": "https://developers.google.com/search/docs/monitor-debug/search-operators/all-search-site?hl=en",
+          "version": "Google Search Central, 2025-12-10 갱신 표기; 2026-10-05 확인",
+          "location": "도입부; Uses for site owners; Limitations",
+          "checkedAt": "2026-10-05T11:20:18.110311+00:00",
+          "summary": "site: 결과는 색인 URL의 완전한 목록이 아니며 누락된 URL은 URL 검사로 확인한다. 검색어 없는 결과의 순서는 순위가 아니고 더 좁은 접두부가 더 많은 결과를 반환할 수도 있다. www 포함 여부도 질의 범위에 영향을 준다.",
+          "rights": "공식 1차 자료의 동작·조건을 짧게 요약했다. 가상 상황·지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·문서의 예제나 전문을 복제하지 않았다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:23:26.610Z",
+          "finishedAt": "2026-10-05T11:36:38.219348Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "키 공개 전에 internet-browser-cycle1-C005의 C를 독립 선택해 잠갔으며 r017-internet-browser-s2-w07-o04와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "고정 2026-05-07 출제 범위와 현재 제조사·서비스 공식 문서의 관련 절, 메타데이터, 조건과 권리를 독립 대조했다. 확인된 근거 충돌이나 범위 이탈이 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-search-site"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "문법이 올바른 site: 검색을 사용한다는 전제 아래 결과 해석의 한계를 묻는다. 누락만으로 미색인을 단정할 수 없고 검사를 추가하는 답이 유일하다. 결과 개수·접두부·순위에 대한 다른 네 전제는 공식 한계와 충돌한다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-search-site"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "모든 답은 같은 색인 조사에서 수행할 해석·검사 작업이다. 단순 site: 문법 재인식을 요구하지 않으며 모든 오답에 절대어를 붙이는 방식도 아니다. URL 검사 가용성은 수행 조건이고 정답 내용을 미리 공개하지 않는다. 선택지 이유는 전용 option.explanation에 한 번만 있고 불필요한 contextExplanation이나 문제 해설의 전체 선택지 복제는 없다.",
+              "evidenceRefs": [
+                "r017-internet-browser-src-scope-written",
+                "r017-internet-browser-src-search-site"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-internet-browser-cycle1",
+              "summary": "원본 candidate 구조, 사적 published 투영, 누적 투영 및 엄격 해설 검사가 통과했다. 4·5지 각각 1,000 seed에서 유일 키·모든 위치·안정 ID 채점·동일 seed 재현·JSON 백업 왕복을 검증했고 입력 바이트를 보존했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s3-w01",
+      "lineageId": "r017-dom-html-template-invalid-pattern-compilation-removes-pattern-constraint-not-value",
+      "learningGoalId": "r017-dom-html-template-invalid-pattern-compilation-removes-pattern-constraint-not-value",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r017-dom-html-s3-w01",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-invalid-pattern-compilation-removes-pattern-constraint-not-value",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-pattern-invalid",
+          "title": "HTML 5.2: pattern compilation and constraint validation",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#the-pattern-attribute",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.10.5.3.6 The pattern attribute; §4.10.20.3 The constraint validation API",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "pattern이 정규식으로 컴파일되지 않으면 compiled pattern regular expression이 없다. 패턴 불일치는 컴파일된 패턴이 있는 경우에 성립한다. 잘못된 pattern이 입력값을 삭제하거나 검사 호출에서 SyntaxError를 던지도록 규정하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. [A-Z is an invalid regular expression, leaving no compiled pattern. It does not produce patternMismatch; nonempty value 17 satisfies required and there are no other failing constraints.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존 실제 정답·오답은 유효한 pattern의 전체 일치, customError 유지, readonly의 검증 제외를 구분한다. 컴파일에 실패하여 pattern 제약 자체가 생기지 않는 분기는 기존 채점 지식에 없다. 코드의 값이 비어 있지 않아 required 판단으로 우회하지 못한다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-pattern-invalid"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "비어 있지 않은 text 값, 추가 제약/스크립트 없음과 잘못된 문자 클래스가 명시되어 있다. required 실패·입력 삭제·호출자 예외라는 대안을 배제했다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-pattern-invalid"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-pattern-invalid"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s3-w02",
+      "lineageId": "r017-dom-html-template-empty-table-insertrow-creates-tbody-before-returning-row",
+      "learningGoalId": "r017-dom-html-template-empty-table-insertrow-creates-tbody-before-returning-row",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r017-dom-html-s3-w02",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-empty-table-insertrow-creates-tbody-before-returning-row",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-insert-empty-row",
+          "title": "HTML 5.2: table.insertRow on an empty table",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/tabular-data.html#dom-htmltableelement-insertrow",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.9.1 The table element: insertRow(index)",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "rows가 비어 있고 tbody도 없으면 tbody와 tr를 만들고 tr를 tbody에, tbody를 table에 붙여 tr를 반환한다. tbody가 있지만 rows가 비어 있으면 마지막 tbody에 새 행을 붙이는 별도 분기이다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. For an empty rows collection and no tbody, insertRow creates a tbody, appends a new tr to it, and appends tbody to the table. Both collection lengths are then 1.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존은 표 행 컬렉션의 그룹 순서, createTHead/createTBody의 기존 구역 재사용 차이, appendChild 노드 이동을 채점한다. 빈 표의 insertRow가 tbody를 먼저 생성하는 별도 분기는 이 지식만으로 결정되지 않는다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-insert-empty-row"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "caption만 존재하여 행과 tbody가 모두 없다는 초기 조건이 확정된다. 기존 tbody 재사용이나 첫 thead 생성 분기를 섞을 여지가 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-insert-empty-row"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-insert-empty-row"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s3-w03",
+      "lineageId": "r017-dom-html-template-pre-parser-strips-only-first-immediate-linefeed",
+      "learningGoalId": "r017-dom-html-template-pre-parser-strips-only-first-immediate-linefeed",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r017-dom-html-s3-w03",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-pre-parser-strips-only-first-immediate-linefeed",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-pre-newline",
+          "title": "HTML 5.2: initial newline in pre",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/grouping-content.html#the-pre-element",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.4.4 The pre element",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "HTML 문법에서 pre 시작 태그 바로 뒤의 선행 newline 한 문자는 제거된다. pre의 일반 공백 보존을 HTML 파싱 이전 원문 전체의 문자 보존으로 해석하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. HTML parsing strips exactly the first immediately following LF after the pre start tag. The second leading LF and the trailing LF remain.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. textarea 자식 텍스트 초기값, 문자참조 비재파싱, white-space 렌더링, hard-wrap 제출 줄바꿈을 실제 답으로 확인했다. pre 시작 태그 직후 첫 LF 한 글자만 제거하는 파싱 예외는 채점하지 않았다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-pre-newline"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "text/html 및 두 선행 LF/한 후행 LF와 선택지의 이스케이프 표기가 명시되어 있다. XML 파싱·공백 렌더링·trim 반례를 배제했다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-pre-newline"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-pre-newline"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s3-w04",
+      "lineageId": "r017-dom-html-template-filename-value-nonempty-assignment-throws-does-not-select-file",
+      "learningGoalId": "r017-dom-html-template-filename-value-nonempty-assignment-throws-does-not-select-file",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r017-dom-html-s3-w04",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-filename-value-nonempty-assignment-throws-does-not-select-file",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-file-value-setter",
+          "title": "HTML 5.2: filename-mode value setter",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#common-input-element-apis",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.10.5.4 Common input element APIs: value in filename mode",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "filename 모드에서 value를 빈 문자열로 설정하면 선택한 파일 목록을 비운다. 그 밖의 문자열로 설정하면 InvalidStateError DOMException을 던진다. 파일 이름 문자열을 지정하여 새 선택을 만들지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. A nonempty value assignment in filename mode throws InvalidStateError. No file is selected, so files.length remains 0 and value is empty.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존 파일 value 문항은 파일을 이미 선택한 후 getter의 가짜 경로를 물었다. accept의 안내 한계와 multipart 인코딩도 setter의 비어 있지 않은 대입 금지·예외 이름·무변경을 제공하지 않는다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-file-value-setter"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "초기 파일 없음·비어 있지 않은 대입·예외 catch가 명시되어 있다. 사용자 선택이나 FileList 변경 경로가 없고 예외 후 상태를 확인한다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-file-value-setter"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-file-value-setter"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s3-w05",
+      "lineageId": "r017-dom-html-template-number-input-text-selection-method-invalidstate",
+      "learningGoalId": "r017-dom-html-template-number-input-text-selection-method-invalidstate",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r017-dom-html-s3-w05",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-number-input-text-selection-method-invalidstate",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-selection-type-applicability",
+          "title": "HTML 5.2: text-selection API applicability",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#apis-for-the-text-field-selections",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.10.5.1.12 Number state; §4.10.19 APIs for text field selections",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "Number 상태에는 setSelectionRange가 적용되지 않는다. 지정 HTML 5.2판은 적용되지 않는 input에 해당 선택 메서드를 호출하면 InvalidStateError를 던지도록 규정한다. 최신판의 getter 동작을 이 문항에 혼입하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. Number-state input does not support setSelectionRange; the call throws InvalidStateError before changing the valid value 12345.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 지원되는 text/textarea의 경계·방향·교체와 number의 잘못된 값 정제는 기존 실제 채점 내용이다. 유효한 값과 경계에서도 number에는 선택 메서드가 적용되지 않는다는 타입별 적용 조건은 새로 필요하다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-selection-type-applicability"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "유효한 숫자 값과 경계, Number 상태 및 고정 HTML 5.2가 명시되어 있어 오류 이름은 적용 여부로 하나로 정해진다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-selection-type-applicability"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-selection-type-applicability"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s3-w06",
+      "lineageId": "r017-dom-html-template-form-data-includes-only-activated-named-submit-button-value",
+      "learningGoalId": "r017-dom-html-template-form-data-includes-only-activated-named-submit-button-value",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r017-dom-html-s3-w06",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-form-data-includes-only-activated-named-submit-button-value",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-submitter-form-data",
+          "title": "HTML 5.2: submitter and form data construction",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#constructing-the-form-data-set",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.10.21.4 Constructing the form data set; §4.10.6 The button element",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "폼 데이터 구성 시 submitter가 아닌 버튼은 제외된다. submitter인 이름 있는 버튼은 name과 value 속성의 값을 제공하며, 사용자에게 보이는 버튼 자식 텍스트는 value를 대신하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. Form data includes the title control and the activated publish submitter name/value. The other submit button is skipped, and button text is not its value.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존은 readonly/disabled/hidden의 데이터 포함, 버튼별 검증 생략·action 재정의, 다중 select, image 좌표, datalist 조상 제외를 채점한다. 같은 name의 일반 submit 버튼 둘 중 실제 submitter의 명시 value만 포함하는 규칙은 기존 답·오답에서 채점하지 않았다. 저자 지도 중 r005-w11의 실제 내용은 disabled가 아니라 formnovalidate라는 점도 직접 확인했다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-submitter-form-data"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "publish가 실제 submitter이고 별도 컨트롤·스크립트가 없다. 버튼의 name·value·자식 텍스트가 구분되어 있다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-submitter-form-data"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-submitter-form-data"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s4-w01",
+      "lineageId": "r017-dom-html-template-invalid-grouped-selector-discards-valid-branch-and-whole-block",
+      "learningGoalId": "r017-dom-html-template-invalid-grouped-selector-discards-valid-branch-and-whole-block",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r017-dom-html-s4-w01",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-invalid-grouped-selector-discards-valid-branch-and-whole-block",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-css-status",
+          "title": "CSS 2.2 fixed draft status",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "Status of this document",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "2016-04-12판은 W3C First Public Working Draft이며 확정 권고안으로 표시하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-grouped-selector-invalid",
+          "title": "CSS 2.2: invalid grouped selector discards its rule",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/syndata.html#rule-sets",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "§4.1.7 Rule sets, declaration blocks, and selectors",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "선택자를 파싱할 수 없으면 선택자와 뒤 선언 블록을 무시한다. 쉼표로 묶인 선택자에서도 어느 부분에 오류가 있으면 전체 statement를 무시하므로 유효해 보이는 앞 선택자만 구조하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. The malformed selector in the selector list invalidates that entire red/bold rule. The last valid color declaration wins, while font-weight stays normal.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존 유효하지 않은 선언값 문항은 오류 선언 하나만 버리고 같은 블록의 다른 선언을 살린다. 신규는 선택자 목록 오류로 유효한 앞 선택자와 전체 블록까지 버리는 다른 복구 단위를 요구한다. 종결된 late @import 후보도 이 목록 오류를 채점하지 않았다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-grouped-selector-invalid"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "사용자/UA 선언을 포함한 다른 영향이 배제되며 malformed selector를 회복하는 forgiving 목록 문법도 쓰지 않았다. 뒤 green의 정상 규칙은 유지된다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-grouped-selector-invalid"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-grouped-selector-invalid"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s4-w02",
+      "lineageId": "r017-dom-html-template-canvas-background-switches-from-body-to-nontransparent-root",
+      "learningGoalId": "r017-dom-html-template-canvas-background-switches-from-body-to-nontransparent-root",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r017-dom-html-s4-w02",
+      "revision": 2,
+      "templateId": "r017-dom-html-template-canvas-background-switches-from-body-to-nontransparent-root",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-css-status",
+          "title": "CSS 2.2 fixed draft status",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "Status of this document",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "2016-04-12판은 W3C First Public Working Draft이며 확정 권고안으로 표시하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-canvas-background",
+          "title": "CSS 2.2: root and HTML body background propagation",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/colors.html#background",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "§14.2 The background",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "html 루트의 계산된 background-color가 transparent이고 background-image가 none이면 첫 body의 배경 속성을 canvas에 사용한다. 그 조건이 아니면 루트의 배경이 canvas에 사용된다. 전파된 body 배경을 body 자체에 다시 그리지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-css22-color-keywords",
+          "title": "CSS 2.2: fixed color keywords",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/syndata.html#color-units",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "§4.3.6 Colors",
+          "checkedAt": "2026-10-05T11:46:28.095223+00:00",
+          "summary": "지정된 CSS 2.2 2016-04-12판의 17개 색상 키워드 목록에 silver가 포함되어 있으며 값은 #c0c0c0이다. 이번 개정은 이 허용 리터럴을 사용하고 지정하지 않은 CSS Color 3 색상 키워드 범위를 추가하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 2,
+      "lineageAttemptCount": 2,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "fail",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "최초 맹검 답 A(o2)는 지정 CSS 2.2의 무효 lightgray 선언을 적용한 결과이며 저자 키 B(o1)와 불일치한다. 잠근 독립 답을 키에 맞게 고치지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "고정판의 background 원리는 맞지만 lightgray 유효성을 포함한 현재 키/해설을 연결 출처가 지원하지 못한다. 시험범위 전체의 제외나 해결되지 않은 표준 간 충돌이 아니라 수정 가능한 개별 문항의 고정판/리터럴 불일치이다. 기존은 표 내부의 배경층, background 축약 초기화, fixed 배경 좌표 기준을 묻고 루트/body 중 캔버스 배경 제공자를 전환하는 조건은 없다. 의도한 독립 목표는 새롭다. 다만 r1에서는 잘못 선택한 lightgray 리터럴 때문에 기존의 무효 선언 복구 지식이 개입하고 키가 틀리므로 현재 개정판을 승인하지 않는다. 허용 리터럴로 같은 목표를 복원하는 수정을 요구한다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-canvas-background"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "fail",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "선언된 CSS 2.2만 적용하면 lightgray 무효 때문에 A가 되고, 선언하지 않은 CSS Color 3까지 보태면 B가 된다. 이는 일반적인 브라우저 시각 결과를 고정판 문제에 섞은 반례이며 키/해설을 그대로 인정할 수 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-canvas-background"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다. 그러나 r1의 허용되지 않은 색상 리터럴 때문에 키 o1과 o2 오답 해설이 부정확하며 authoring gate를 실패 처리한다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-canvas-background"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "revise",
+          "summary": "r017-dom-html-s4-w02 r1은 CSS 2.2 고정판에 없는 lightgray를 사용하여 o1/B 키가 성립하지 않고, o2/A를 오답이라고 한 해설도 부정확하다. broad syllabus out_of_scope나 unresolved source_conflict로 기록하지 않는다."
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-05T11:48:14.478Z",
+          "finishedAt": "2026-10-05T11:57:09.893384Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle2",
+              "summary": "새 독립 검토자는 지정 맹검 파일만 읽은 뒤 C(silver, white)를 11:49:09.028905Z에 잠갔다. 11:49:31.842Z 키 접근 승인 후 C가 o1인 것을 확인했다. 초기 실패 답이나 잠금은 수정하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle2",
+              "summary": "공식 시험범위 HWP와 고정 CSS 2.2 문서 세 개를 새로 직접 취득했다. 추가 color-units 원문이 silver/white를 허용하고 §14.2의 root/body canvas 규칙이 두 단계와 모든 오답 판정을 지지한다. 독자 사실 기반 문안·코드로 권리 위험이 없고, 전체 regular.16/종결·정정 이력 대조에서 독립 목표가 확인된다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-canvas-background",
+                "r017-dom-html-src-css22-color-keywords"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle2",
+              "summary": "자료의 root transparent/none, 첫 BODY, 생성되는 두 상자, screen 매체, 600px viewport와 40px body, 추가 이미지/배경/가리는 요소·경쟁 선언 배제 조건을 함께 적용했다. 초기 silver와 변경 후 white가 유일하며 4개 오답 어느 것도 두 단계 모두 맞지 않는다. body 자체의 계산값·상자 안의 silver와 canvas 밖의 white를 혼동하지 않았고, UA 흰 바탕·CSS Color 3 추가·display:none·배경 이미지 반례는 조건 또는 고정판에 의해 배제된다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-canvas-background",
+                "r017-dom-html-src-css22-color-keywords"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle2",
+              "summary": "지문 한 문장에서 보기와 판정 대상/순서를 명확히 연결하고 필수 전제는 notes에 분리했다. 코드와 색상 이름을 텍스트로 제공하므로 실제 색 구별이나 화면 이미지에 의존하지 않는다. 정답 포함 다섯 선택지는 모두 같은 before/after 색상 쌍 형식이며 길이·어조·절대어·표시 위치 단서가 없다. 네 오답은 같은 전파 조건의 누락·지속·기본 바탕 혼동·조건 역전이다. 문항 해설은 일반 원리, 선택지 해설은 개별 판단 이유를 맡고 contextExplanation/의미상 중복이나 교차 답 노출이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-canvas-background",
+                "r017-dom-html-src-css22-color-keywords"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle2",
+              "summary": "정확한 r2 해시로 독립 실행한 후보 스키마·엄격 발행 투영·기준본 없는 단독 해설 검사·기준본을 보존한 누적 해설 검사·명시 파일 CLI가 통과했다. 4/5개 각각 1,024 seeds(총2,048), 모든216 표시 순열, 10,200 선택지 stable-ID 채점, 2,264 JSON reload와 timed/untimed×4/5의 4개 session backup 왕복을 확인했다. 모든 선택지가 모든 위치에 도달하며 author/baseline 원문 및 기존 객체는 보존됐다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s4-w03",
+      "lineageId": "r017-dom-html-template-nonreplaced-inline-vertical-margins-no-effect-horizontal-still-applies",
+      "learningGoalId": "r017-dom-html-template-nonreplaced-inline-vertical-margins-no-effect-horizontal-still-applies",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r017-dom-html-s4-w03",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-nonreplaced-inline-vertical-margins-no-effect-horizontal-still-applies",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-css-status",
+          "title": "CSS 2.2 fixed draft status",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "Status of this document",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "2016-04-12판은 W3C First Public Working Draft이며 확정 권고안으로 표시하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-inline-margins",
+          "title": "CSS 2.2: margin applicability on non-replaced inline elements",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/box.html#margin-properties",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "§8.3 Margin properties",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "비대체 inline 요소에서 위·아래 margin은 효과가 없다. 좌우 margin은 이 예외의 대상이 아니며 가로 배치에 반영된다. 이 규칙은 값이 문법 오류라는 뜻이나 block의 수직 마진 병합 규칙이 아니다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. Vertical margins do not affect non-replaced inline layout; horizontal margin-left does apply. No line wrapping or other excluded effects alter the comparison.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존 비대체 inline 문항의 margin은 0으로 고정되고 width/가로 padding만 채점한다. 줄 분할 테두리, block 마진 병합, vertical-align 이동도 margin-top의 무효과와 margin-left 적용의 축별 차이를 채점하지 않는다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-inline-margins"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "비대체 inline, 줄바꿈 없음, float/position/border/padding 없음이 명시되어 축별 margin 효과만 남는다. 값이 계산되지 않는다는 주장과 배치 효과가 없다는 주장을 구별했다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-inline-margins"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-inline-margins"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s4-w04",
+      "lineageId": "r017-dom-html-template-progress-cursor-indicates-processing-with-interaction-still-available",
+      "learningGoalId": "r017-dom-html-template-progress-cursor-indicates-processing-with-interaction-still-available",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r017-dom-html-s4-w04",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-progress-cursor-indicates-processing-with-interaction-still-available",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-css-status",
+          "title": "CSS 2.2 fixed draft status",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "Status of this document",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "2016-04-12판은 W3C First Public Working Draft이며 확정 권고안으로 표시하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-cursor-progress",
+          "title": "CSS 2.2: progress and wait cursor semantics",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/ui.html#cursor-props",
+          "version": "CSS 2.2, W3C First Public Working Draft, 2016-04-12 (초안)",
+          "location": "§18.1 Cursors: the cursor property",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "progress는 프로그램이 처리 중이지만 사용자가 계속 상호작용할 수 있음을 나타낸다. wait는 프로그램이 바쁘므로 사용자가 기다려야 함을 나타낸다. 키워드는 의미를 지정하며 운영체제별 정확한 그림을 고정하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. CSS 2.2 progress describes processing while the user may still interact. wait asks the user to wait; pointer, move, and help describe other contexts.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. progress 요소의 진행률 및 불확정 상태와 ARIA progressbar 수치 상태는 기존에 있다. 그러나 커서 progress/wait가 구분하는 처리 중 상호작용 가능성은 전체 실제 지문·자료·선택지에서 채점되지 않았다. UI 커서 의미라는 새 판단이다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-cursor-progress"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "작업이 진행 중이면서 버튼들이 사용 가능하다는 사실이 progress/wait 의미 구분을 고정한다. 커서 모양이나 CSS가 실제 기능을 활성화한다는 주장을 하지 않는다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-cursor-progress"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-css-status",
+                "r017-dom-html-src-cursor-progress"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s4-w05",
+      "lineageId": "r017-dom-html-template-range-extractcontents-copies-selected-text-removes-original-slice",
+      "learningGoalId": "r017-dom-html-template-range-extractcontents-copies-selected-text-removes-original-slice",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r017-dom-html-s4-w05",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-range-extractcontents-copies-selected-text-removes-original-slice",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-range-extract",
+          "title": "DOM4: extractContents within a single Text node",
+          "url": "https://www.w3.org/TR/2015/REC-dom-20151119/#concept-range-extract",
+          "version": "DOM4, W3C Recommendation, 2015-11-19",
+          "location": "§5.2 Interface Range: extract a range; §4.9 replace data",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "동일 Text 노드 안의 범위를 추출하면 해당 구간 데이터를 가진 복제 Text를 새 DocumentFragment에 붙이고 원본에서는 그 구간 데이터를 제거한다. 원본 Text 노드를 통째로 옮기는 경우가 아니며 변경 알고리즘으로 범위의 두 끝은 시작 위치로 모인다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. Offsets 2 through 5 select CDE. extractContents clones the partial text into the fragment and deletes it from the original, yielding ABFG; live range endpoints collapse at offset 2.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존 Range 문항은 selectNode/selectNodeContents의 경계, splitText는 원본 접두와 새 접미 노드, DocumentFragment는 삽입 시 자식 이동, substring은 문자열 구간을 채점한다. extractContents의 부분 복제·원본 삭제·살아 있는 범위 경계 축소를 함께 판단하는 알고리즘은 기존 답으로 제공되지 않았다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-range-extract"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "같은 Text 안의 두 경계이므로 부분 노드 분기가 유일하다. 끝 경계 비포함, 객체 동일성, 자동 범위 갱신을 독립 확인했다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-range-extract"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-range-extract"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-s4-w06",
+      "lineageId": "r017-dom-html-template-treewalker-skip-keeps-descendant-traversal-reject-prunes-subtree",
+      "learningGoalId": "r017-dom-html-template-treewalker-skip-keeps-descendant-traversal-reject-prunes-subtree",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r017-dom-html-s4-w06",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-treewalker-skip-keeps-descendant-traversal-reject-prunes-subtree",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. HTML 요소·그룹 콘텐츠·표·서식·상호작용·ARIA 및 CSS 문법·박스·색상과 배경·사용자 인터페이스, JavaScript 객체·함수를 적용한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-treewalker-filter",
+          "title": "DOM4: TreeWalker nextNode and filter rejection",
+          "url": "https://www.w3.org/TR/2015/REC-dom-20151119/#dom-treewalker-nextnode",
+          "version": "DOM4, W3C Recommendation, 2015-11-19",
+          "location": "§6.2 Interface TreeWalker: nextNode(); §6.3 Interface NodeFilter",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "TreeWalker.nextNode는 FILTER_REJECT 노드의 자식으로 내려가지 않는다. FILTER_SKIP은 그 노드를 반환하지 않지만 자식 순회를 막지 않는다. currentNode는 생성 시 root이며 첫 nextNode 호출은 root 자신을 반환하지 않는다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. TreeWalker starts at root but nextNode does not return it. FILTER_SKIP omits skip and visits its child; FILTER_REJECT prunes reject and its subtree, then tail is returned.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 정적/live 컬렉션, contains의 자기 포함·비대칭, removeChild의 직접 부모 요건을 실제 선택지까지 비교했다. 이들은 TreeWalker의 SKIP 후손 탐색과 REJECT 하위 트리 차단 차이를 판단하게 하지 않는다. NodeFilter/TreeWalker를 실제 채점하는 선행 문항도 없다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-treewalker-filter"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "SHOW_ELEMENT로 공백 Text가 걸러지고, root부터 시작한 nextNode를 누적한다. SKIP/REJECT/초기 root 포함의 각 반례를 배제했다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-treewalker-filter"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "지문은 코드와 수행할 일을 연결하고 전제는 notes로 분리했다. 모든 선택지를 함께 읽어 정답만 장황한 문체·정답 위치·절대어 같은 단서가 없고 동일한 결과/속성 판단 축의 오개념임을 확인했다. 문항 해설은 공통 원리, 선택지 해설은 개별 이유를 맡으며 불필요한 contextExplanation 반복이 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-written",
+                "r017-dom-html-src-treewalker-filter"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 2048개 seed 출제, 216개 전 표시 순열, 10200개 ID 채점, 2264개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-p01",
+      "lineageId": "r017-dom-html-template-switch-mixed-normalizes-off-and-must-match-actual-on",
+      "learningGoalId": "r017-dom-html-template-switch-mixed-normalizes-off-and-must-match-actual-on",
+      "subjectId": "practical",
+      "type": "practical",
+      "questionId": "r017-dom-html-p01",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-switch-mixed-normalizes-off-and-must-match-actual-on",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-practical",
+          "title": "2026년 웹접근성전문가 2급(실기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%EC%8B%A4%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "웹페이지 구현 및 웹페이지 점검: 수행준거와 참고자료",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. 화면 정보와 소스의 구현 또는 위반 지적·설명·개선을 KWCAG 2.2 네 원칙에 따라 수행하는 범위이다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-kw-api",
+          "title": "한국형 웹 콘텐츠 접근성 지침 2.2",
+          "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+          "version": "KWCAG 2.2 (KS X OT0003:2022)",
+          "location": "§8.2.1 웹 애플리케이션 접근성 준수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "웹 애플리케이션은 콘텐츠 접근성을 보장해야 한다. 보조기술이 역할·상태·관계를 이용할 수 있도록 실제 구조와 동작에 맞는 정보를 제공하는 코드 점검에 적용한다. 특정 브라우저·화면낭독기 발화는 별도 실측 대상이다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-switch-mixed",
+          "title": "WAI-ARIA 1.2: switch and aria-checked mixed",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#switch",
+          "version": "WAI-ARIA 1.2, W3C Recommendation, 2023-06-06",
+          "location": "§5.4 switch; §6.7 aria-checked",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "switch의 aria-checked는 on(true) 또는 off(false)를 나타낸다. mixed는 switch에서 유효하지 않으며 사용자 에이전트는 false와 동등하게 취급해야 한다. checkbox의 mixed 지원을 switch에 그대로 확장할 수 없다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. ARIA 1.2 explicitly maps mixed on switch to false. The supplied actual on-state requires true; deleting the required state or setting false does not meet the task.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존은 checkbox의 mixed, toggle button의 실제 true/false 동기화, 네이티브 checkbox indeterminate의 제출, spinbutton 상태를 채점한다. 이번 선택지는 수정 true만 알아서는 c1/c2/c3을 구분할 수 없고 switch에서 mixed를 false로 취급하는 역할별 규칙이 정답의 필수 부분이다. 역할 이름만 바꾼 재탕이 아니다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-practical",
+                "r017-dom-html-src-kw-api",
+                "r017-dom-html-src-switch-mixed"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "실제 기능 켜짐 및 키보드/초점 로직 정상 제공이 전제로 분리되고 ARIA 규범상 상태만 묻는다. 특정 스크린리더 발화를 가정하지 않아 단일 조합이 성립한다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-practical",
+                "r017-dom-html-src-kw-api",
+                "r017-dom-html-src-switch-mixed"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "전체 notes·필수 코드·P1의 다섯 보기·freeResponsePrompt를 한꺼번에 읽었다. 실제 기능/배치 전제는 필요한 입력 데이터이고 자유 서술 요청에 정답 토큰/값을 추가 노출하지 않는다. single 입력 형식은 완전하며 문자 입력 정규화 항목은 없다. 참조 답과 루브릭은 채점 후 자료로 분리되고 AT의 정확한 발화나 실제 지원을 가정하지 않는다. 파트 해설에 대안별 이유를 한 번 두고 choice에는 반복 해설을 넣지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-practical",
+                "r017-dom-html-src-kw-api",
+                "r017-dom-html-src-switch-mixed"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 1024개 seed 출제, 120개 전 표시 순열, 5720개 ID 채점, 1144개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r017-dom-html-p02",
+      "lineageId": "r017-dom-html-template-nonnative-cell-colspan-corrects-overlap-with-next-cell",
+      "learningGoalId": "r017-dom-html-template-nonnative-cell-colspan-corrects-overlap-with-next-cell",
+      "subjectId": "practical",
+      "type": "practical",
+      "questionId": "r017-dom-html-p02",
+      "revision": 1,
+      "templateId": "r017-dom-html-template-nonnative-cell-colspan-corrects-overlap-with-next-cell",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r017-dom-html-src-scope-practical",
+          "title": "2026년 웹접근성전문가 2급(실기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%EC%8B%A4%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "웹페이지 구현 및 웹페이지 점검: 수행준거와 참고자료",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "이번 회차에 공식 2026-05-07 HWP 원본을 새로 취득하고 본문을 추출하여 지정 판과 세부 범위를 확인했다. 화면 정보와 소스의 구현 또는 위반 지적·설명·개선을 KWCAG 2.2 네 원칙에 따라 수행하는 범위이다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-kw-api",
+          "title": "한국형 웹 콘텐츠 접근성 지침 2.2",
+          "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+          "version": "KWCAG 2.2 (KS X OT0003:2022)",
+          "location": "§8.2.1 웹 애플리케이션 접근성 준수",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "웹 애플리케이션은 콘텐츠 접근성을 보장해야 한다. 보조기술이 역할·상태·관계를 이용할 수 있도록 실제 구조와 동작에 맞는 정보를 제공하는 코드 점검에 적용한다. 특정 브라우저·화면낭독기 발화는 별도 실측 대상이다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r017-dom-html-src-aria-colspan",
+          "title": "WAI-ARIA 1.2: cell column span and overlap restriction",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-colspan",
+          "version": "WAI-ARIA 1.2, W3C Recommendation, 2023-06-06",
+          "location": "§6.7 aria-colspan",
+          "checkedAt": "2026-10-05T11:26:29.687427+00:00",
+          "summary": "aria-colspan은 비네이티브 표의 셀이 걸치는 열 개수다. 1 이상의 정수여야 하며 같은 행의 다음 셀과 겹치게 하는 값을 지정해서는 안 된다. 전체 열 수나 셀 시작 열 위치를 바꾸는 속성과 구별한다.",
+          "rights": "공식 시험 샘플·표준 예제·유료 문제를 복제하지 않고 규범상 사실에 근거하여 한국어 지문·코드·선택지·해설을 독자 작성했다. 원문 전문과 비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-05T11:28:28.713Z",
+          "finishedAt": "2026-10-05T11:43:08.676931Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "키 접근 전 잠근 독립 답이 정확한 개정판의 키와 일치한다. The span is a count, not an ending column. Starting at 2 and spanning two columns ends at 3. Zero is invalid; deletion/one loses the stated two-column merge; four spans too far.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "공식 원문·고정판·절·조건·예외 및 출제범위를 새 수신 바이트로 독립 확인했다. 기존 ARIA 표는 병합 없음 조건에서 비연속 열의 시작 인덱스를 복구한다. headers 연결이나 rowspan=0의 행 그룹 경계도 가로 span 길이와 다음 셀 겹침 금지를 채점하지 않는다. 시작 인덱스를 유지하면서 실제 두 열 병합 길이를 고치는 판단은 독립적이다. 사실을 적용한 독자 한국어 지문·선택지·짧은 코드이고 공식 시험 샘플·유료 문항·표준의 긴 표현을 복제하지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-practical",
+                "r017-dom-html-src-kw-api",
+                "r017-dom-html-src-aria-colspan"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "실제 merge 범위 2·3열, 다음 셀 4열 및 유지할 속성들이 명시된다. span=1은 겹침만 없애도 실제 병합을 잃으므로 최소 수정 답이 될 수 없다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-practical",
+                "r017-dom-html-src-kw-api",
+                "r017-dom-html-src-aria-colspan"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "전체 notes·필수 코드·P1의 다섯 보기·freeResponsePrompt를 한꺼번에 읽었다. 실제 기능/배치 전제는 필요한 입력 데이터이고 자유 서술 요청에 정답 토큰/값을 추가 노출하지 않는다. single 입력 형식은 완전하며 문자 입력 정규화 항목은 없다. 참조 답과 루브릭은 채점 후 자료로 분리되고 AT의 정확한 발화나 실제 지원을 가정하지 않는다. 파트 해설에 대안별 이유를 한 번 두고 choice에는 반복 해설을 넣지 않았다.",
+              "evidenceRefs": [
+                "r017-dom-html-src-scope-practical",
+                "r017-dom-html-src-kw-api",
+                "r017-dom-html-src-aria-colspan"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-dom-html-cycle1",
+              "summary": "정확한 regular.16 기준 비공개 투영의 엄격 발행·해설 검사와 파일 입력 CLI가 통과했다. 이 문항은 1024개 seed 출제, 120개 전 표시 순열, 5720개 ID 채점, 1144개 JSON 재로딩 검사를 통과했다. 모든 선택지는 모든 표시 위치에 도달하고 기존 은행·저자 원본은 보존했다. 구조 통과는 키의 내용적 정오를 승인하는 뜻이 아니다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    }
+  ],
+  "counts": {
+    "registered": 30,
+    "accepted": 30,
+    "rejected": 0,
+    "pending": 0,
+    "publishedRegularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "publishedRegularPractical": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 61,
+      "s2": 76,
+      "s3": 72,
+      "s4": 78,
+      "s5": 69
+    },
+    "regularPractical": 47,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.05-regular.17",
+    "bankSha256": "3197db32a0268b01dddbd2f2cb75b02dfa101204ce3f132db034f5abba46fca3",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [
+    {
+      "check": "정확한 개정판 독립 콘텐츠·계보 검토",
+      "result": "pass",
+      "summary": "후보 30개·시작 검토 32회에서 30개 채택·0개 탈락·미결정 0개다. 최초 채택 28개·수정 후 채택 2개이며, 채택 최종 선택지/허용답 150개, 전체 후보 최종판 150개, 전체 cycle 160개를 원문·맹검·잠금답·보고서 해시에 연결했다.",
+      "reportPath": "docs/rounds/round-017.md"
+    },
+    {
+      "check": "전체 자동·발행·스키마 검사",
+      "result": "pass",
+      "summary": "같은 최종 콘텐츠·앱의 607/607 테스트, npm ci, 기본/명시 은행·check·build·캠페인·발행 검사와 18개 확대/편집 대장의 JSON Schema를 통과했다. 실패·취소·건너뜀 0개다.",
+      "reportPath": "docs/rounds/round-017.md"
+    },
+    {
+      "check": "무작위 채점·스냅샷·백업·AI 공개 경계",
+      "result": "pass",
+      "summary": "필기 1250000회·실기 73000회·모의 6400문항, 실기 복수답안 부분집합 368개, 구판 668개·신판 698개 및 21개 역사적 릴리스의 6680개 스냅샷, 3836개 실기 AI 프롬프트를 검사했다. 실제 사용자 기록은 읽거나 변경하지 않았다.",
+      "reportPath": "docs/rounds/round-017.md"
+    },
+    {
+      "check": "보존·유한 이력·동결 가드",
+      "result": "pass",
+      "summary": "기존 668문항·2921선택지·887출처, 22개 편집 정정과 모든 기존 은행/종결 대장/전달 증거·런타임을 보존했다. 현재 양쪽 동결 표시 10개 조합과 2개 cutoff 문맥, 원격/동결 source의 16개 포장 표시 음성 사례와 cutoff 차단을 확인했다. 기존 미확정 시계와 모든 시작 검토를 유지했다.",
+      "reportPath": "docs/rounds/round-017.md"
+    },
+    {
+      "check": "초기 실패와 수정 이력 보존",
+      "result": "pass",
+      "summary": "기산일 설명의 문법적 모호성과 문항에 명시한 CSS 2.2 고정판에 없는 색상 리터럴을 각각 개정 2에서 고쳤다. 두 수정본 모두 키를 본 적 없는 새 풀이자와 다섯 검사를 통과했다. CSS Color 3가 전체 시험 참고범위에 있다는 사실과 개별 문항의 고정판 불일치를 구별했으며, 원래 독립 답·실패 gate·시작 검토 횟수는 그대로 보존했다.",
+      "reportPath": "docs/rounds/round-017.md"
+    },
+    {
+      "check": "실제 브라우저·Windows/NVDA·학습자 관찰",
+      "result": "not_run",
+      "summary": "문제 코드와 브라우저 기능의 실제 실행, Windows/NVDA·모바일 보조기술 발화/조작 및 실제 학습자 기록 관찰은 미실시다. 규범·자동 검사를 실측으로 확대하지 않는다.",
+      "reportPath": "docs/NVDA-CHECKLIST.md"
+    }
+  ],
+  "nextRoundGaps": [
+    {
+      "category": "validation",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [
+        "r017-internet-browser-template-firefox-offline-translation-requires-translation-language-files-not-interface-or-dictionaries",
+        "r017-internet-browser-template-firefox-multiple-bookmark-tags-cross-classification-without-moving-or-copying",
+        "r017-internet-browser-template-chrome-memory-saver-site-exclusion-preserves-other-tabs-policy",
+        "r017-internet-browser-template-chrome-on-select-extension-site-access-ends-with-tab-closure",
+        "r017-internet-browser-template-gmail-bcc-recipient-visibility-to-cc-visible-other-bcc-hidden",
+        "r017-internet-browser-template-gmail-archive-versus-mute-new-reply-inbox-behavior",
+        "r017-internet-browser-template-google-site-search-result-list-not-exhaustive-index-audit"
+      ],
+      "candidateIds": [
+        "r017-internet-browser-s2-w01",
+        "r017-internet-browser-s2-w02",
+        "r017-internet-browser-s2-w03",
+        "r017-internet-browser-s2-w04",
+        "r017-internet-browser-s2-w05",
+        "r017-internet-browser-s2-w06",
+        "r017-internet-browser-s2-w07"
+      ],
+      "finding": "브라우저·웹메일·검색서비스의 제조사 공식 문서로 저작했으며 실제 Windows 11 브라우저·Gmail 계정·Windows/NVDA 조작은 하지 않았다.",
+      "neededEvidenceOrCounterexample": "명시된 제품·버전과 개인정보 없는 테스트 환경에서 번역 파일 준비, 다중 태그 조회, 메모리 예외, 탭 종료 후 확장 권한, Bcc 표시, 새 답장 처리 관측",
+      "nextAction": "별도 QA에서 문서 근거와 실제 관측을 구별하여 기록한다. 같은 조작 목표를 새 후보로 재등록하지 않는다.",
+      "completionCriterion": "관측한 조건·동작·미실시를 기록하고 차이가 발견되면 이미 채택된 문항에는 정해진 정정 절차를 적용한다.",
+      "priority": "medium",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-01"
+    },
+    {
+      "category": "coverage",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "직전 인쇄 공백에서 독립성이 확인되지 않은 옵션 변형은 추가하지 않았다. 컨테이너·사전 설정도 기존 프로필/쿠키 분할·언어/입력 지원과 겹칠 가능성 때문에 후보 수를 줄였다.",
+      "neededEvidenceOrCounterexample": "전체 최신 은행의 실제 정답·오답 지식으로 풀 수 없는 별도 판단과 현행 제조사 1차 근거",
+      "nextAction": "브라우저 기능별 미세 설정을 계속 분할하기 전에 공식 범위의 인터넷 응용서비스·신기술 기본 개념을 넓게 조사한다. 플랫폼의 깊은 관리자 설정으로 범위를 임의 확장하지 않는다.",
+      "completionCriterion": "새 지식을 실제로 요구하는 목표, 명확한 조건과 다섯 그럴듯한 선택지를 확보한 경우에만 다음 후보를 계획한다.",
+      "priority": "medium",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-02"
+    },
+    {
+      "category": "coverage",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [
+        "r017-internet-browser-template-google-site-search-result-list-not-exhaustive-index-audit"
+      ],
+      "candidateIds": [
+        "r017-internet-browser-s2-w07"
+      ],
+      "finding": "site:의 불완전한 결과 목록·순위/개수 해석과 URL 검사 활용을 한 조사 목표로 묶었다. 같은 문서의 한계 조항을 각각 다른 새 목표로 나누지 않았다.",
+      "neededEvidenceOrCounterexample": "추가 검색 기능이 기존 검색 연산자 식별 및 이번 조사 판단과 다른 학습 목표임을 입증하는 실제 선택지 대조",
+      "nextAction": "새 검색 후보를 작성할 때 연산자 문자열·검색어 변경 또는 이번 오답의 정답화만으로 문항을 늘리지 않는다.",
+      "completionCriterion": "독립 범위·지식·적용 판단을 먼저 확인하고 독립 검토에서 같은 개정판의 모든 게이트를 통과한다.",
+      "priority": "low",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-03"
+    },
+    {
+      "category": "coverage",
+      "subjectIds": [
+        "s3"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "HTML 폼의 built-in 메서드 이름과 이름 있는 컨트롤의 충돌은 이번에 등록하지 않았다. 이전 named getter·past-name cache 목표와 실제 채점 지식이 다른지 및 OverrideBuiltins의 고정판 근거를 더 확인해야 한다.",
+      "neededEvidenceOrCounterexample": "HTML 5.2의 HTMLFormElement named getter와 연결된 당시 WebIDL 규칙, 기존 r011-dom-form-s3-w02/w04의 실제 선택지 대조",
+      "nextAction": "메서드 이름 충돌을 단순 named lookup 재포장으로 해결하는 후보는 만들지 않는다. 독립 결과와 1차 근거를 확보한 경우에만 새 후보를 설계한다.",
+      "completionCriterion": "기존 이름 조회 지식만으로 풀 수 없는 별도 판단 및 고정판의 명시적 동작을 입증한다.",
+      "priority": "low",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-04"
+    },
+    {
+      "category": "coverage",
+      "subjectIds": [
+        "s4"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "커서 자원 실패 대안은 기존 list-style-image fallback과 같은 판단으로 환원될 여지가 있어 등록 전 제외했다. 대신 처리 중 조작 가능성에 따른 progress/wait 의미 구분을 등록했다.",
+      "neededEvidenceOrCounterexample": "CSS 2.2 커서 목록의 지원·권장 동작과 기존 r005-css-script-w04의 실제 정답·오답",
+      "nextAction": "속성명·파일명만 바꾼 fallback 시나리오를 신규로 세지 않는다. 다음 후보는 선언 내부에서 별도로 평가할 실제 판단을 먼저 확인한다.",
+      "completionCriterion": "기존 fallback 규칙과 다른 독립 채점 지식을 입증하고 다섯 평행한 선택지를 확보한다.",
+      "priority": "low",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-05"
+    },
+    {
+      "category": "validation",
+      "subjectIds": [
+        "practical"
+      ],
+      "learningGoalIds": [
+        "r017-dom-html-template-switch-mixed-normalizes-off-and-must-match-actual-on",
+        "r017-dom-html-template-nonnative-cell-colspan-corrects-overlap-with-next-cell"
+      ],
+      "candidateIds": [
+        "r017-dom-html-p01",
+        "r017-dom-html-p02"
+      ],
+      "finding": "switch 상태와 병합 셀의 접근성 API 노출을 실제 브라우저·Windows/NVDA에서 관찰하지 않았다. 현재 근거는 고정 ARIA 규범과 KWCAG 원문이다.",
+      "neededEvidenceOrCounterexample": "동일한 개인정보 없는 코드와 명시된 OS·브라우저·NVDA 버전, switch 조작·상태 및 표 셀 열 위치·걸침 관측",
+      "nextAction": "별도 QA에서 규범 판단과 실측을 구별하여 기록하며 같은 목표를 새 문제로 다시 세지 않는다.",
+      "completionCriterion": "실측 조건·결과·미실시를 명확히 남기고 차이가 있으면 승인된 정정 경로로 처리한다.",
+      "priority": "medium",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-06"
+    },
+    {
+      "category": "coverage",
+      "subjectIds": [
+        "s1"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "EAA Article 14의 부분적 적용 범위와 잔여 준수 요구는 후보로 만들지 않았다. 기존 WAD·Section508 예외 제한 판단의 반복이 될 가능성을 먼저 확인해야 한다.",
+      "neededEvidenceOrCounterexample": "현행 공식 지침의 조문·조건 및 기존 예외 문항 전체의 정답·오답과 신규 판단 비교",
+      "nextAction": "새 사건명·사업자명 또는 이미 다룬 의무의 역문항만으로 목표를 늘리지 않는다. 갱신 사유·5년 주기와 외부 재정지원 조건의 단순 분할도 제외한다.",
+      "completionCriterion": "기존 채점 지식으로 도출되지 않는 독립 정책 판단과 다섯 그럴듯한 대안을 입증하고 같은 개정판의 모든 검사를 통과한다.",
+      "priority": "medium",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-07"
+    },
+    {
+      "category": "coverage",
+      "subjectIds": [
+        "s5"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "입력·출력 보조수단의 조합은 이번에도 기존 구성요소 정의를 다시 고르는 문제로 확대하지 않았다. 평가 도구의 역할 비교 또한 자동검사 한계·표본·ACT·EARL 반복을 피해야 한다.",
+      "neededEvidenceOrCounterexample": "최신 제조사 및 W3C WAI 1차 자료가 명시하는 실제 상호작용 제약과 전체 은행의 실제 선택지 비교",
+      "nextAction": "이름을 바꾼 장치 조합이나 이미 평가한 일반 원칙을 제외하고 별도 판단을 요구하는 적용 제약을 조사한다.",
+      "completionCriterion": "새 제약·조건·범위의 1차 근거와 독립 학습 목표를 확보한 경우만 다음 후보를 계획한다.",
+      "priority": "medium",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-08"
+    },
+    {
+      "category": "validation",
+      "subjectIds": [
+        "s1",
+        "s5"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "법령 문서, 평가 참여자·진행 방식과 청취 보조장치의 조건은 문서로 검토했으며 실제 법 집행·사용자 평가·장치 조작을 관찰하지 않았다.",
+      "neededEvidenceOrCounterexample": "명시된 평가 환경·사용자 동의·제품 조건과 개인정보 없는 실측 기록, 현행 공식 법령의 후속 개정 확인",
+      "nextAction": "후속 문서 확인과 실제 관측을 분리하고 이미 채택한 지식을 새 문항 수로 다시 세지 않는다.",
+      "completionCriterion": "실제 수행 범위·확인일·관측·미실시를 기록하고 충돌 발견 시 정해진 정정 절차를 따른다.",
+      "priority": "medium",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-09"
+    },
+    {
+      "category": "publication",
+      "subjectIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "practical"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "최신 오프라인 누적본과 실제 공개 regular.8 일반403개 사이의 차이가 남아 있다. 원래 Git 객체의 미확정 결과와 종결 시계는 유지한다.",
+      "neededEvidenceOrCounterexample": "새로 확인한 원격 head·ancestry·경로별 해시·양쪽 동결, 전체 불변 전달 사슬, 명시적으로 허용된 새 동기화 범위",
+      "nextAction": "추후 새 동기화 요청 때 최신 사슬과 실제 원격 상태를 다시 대조한다. 기존 미확정 쓰기 재시도나 강제 덮어쓰기는 하지 않는다.",
+      "completionCriterion": "허용된 일관된 반영과 실제 Pages 바이트를 확인하기 전에는 신규 공개 수나 미확정 결과를 바꾸지 않는다.",
+      "priority": "high",
+      "reopenEligible": false,
+      "gapId": "round-017-gap-10"
+    }
+  ],
+  "noGapExplanation": null,
+  "summary": "정규17회차 후보30개 중30개 채택·0개 탈락·미결정0개. 누적 일반684개·시드14개이며 실제 공개008의403개와 구별한다. 정확히 전달·검증된016의 전체 이력·문항·시드·편집 정정·전달 증거를 보존하고 예정11UTC 발생분에서 독립 목표를 유한 검토했다. Git 쓰기0회이며 기존 미확정 결과와 시계를 유지한다."
+}

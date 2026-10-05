@@ -1,0 +1,3110 @@
+{
+  "ledgerSchemaVersion": 1,
+  "campaignId": "2026-exam-final",
+  "roundId": "round-013",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-04T19:04:56Z",
+  "decisionDeadline": "2026-10-04T22:30:00Z",
+  "closedAt": "2026-10-04T19:43:31+00:00",
+  "policy": {
+    "maxCycles": 3,
+    "maxReopeningsPerGoal": 1,
+    "maxLineageCycles": 6,
+    "maxRoundHours": 4
+  },
+  "baseline": {
+    "sourceCommit": "500811b7ee226f33cfb598df42c6cb347b935d28",
+    "bankVersion": "2026.10.05-regular.12",
+    "bankSha256": "97058b787f6ed8a9b42bf3d55d681efc8482c32fb98270dbac7f7537a420bd4f",
+    "regularWrittenBySubject": {
+      "s1": 77,
+      "s2": 108,
+      "s3": 99,
+      "s4": 105,
+      "s5": 85
+    },
+    "regularPractical": 59,
+    "offlinePredecessor": {
+      "artifactSha256": "f5f54f6a0631c55422c40c6ced02c0b469a0910780c6e58cc882ee2b2b327843",
+      "manifestSha256": "83de99e56af4ec96db2c436f0692f0203ed463a95bb961fae6530daf10287184",
+      "ledgerSha256": "b4d6aaa4e901b1f058edcc49a6dc9b062fe70262dcca9e049ca76dcc2172e59e",
+      "roundId": "round-012"
+    }
+  },
+  "targets": {
+    "writtenBySubject": {
+      "s1": 3,
+      "s2": 10,
+      "s3": 5,
+      "s4": 5,
+      "s5": 3
+    },
+    "practical": 2
+  },
+  "candidates": [
+    {
+      "candidateId": "r013-policy-accessibility-s1-w01",
+      "lineageId": "r013-policy-accessibility-template-section508-best-meets-market-research-records",
+      "learningGoalId": "r013-policy-accessibility-template-section508-best-meets-market-research-records",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r013-policy-accessibility-s1-w01",
+      "revision": 1,
+      "templateId": "r013-policy-accessibility-template-section508-best-meets-market-research-records",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r013-policy-accessibility-src-508-best-meets-record",
+          "title": "Revised 508 Standards and 255 Guidelines",
+          "url": "https://www.access-board.gov/ict/#E202.7.1",
+          "version": "Revised 508 Standards / 2017-01-18 최종 규칙, 2018-01-22 정정 반영본",
+          "location": "Appendix A, E202.7 Best Meets; E202.7.1 Required Documentation",
+          "checkedAt": "2026-10-04T19:12:51Z",
+          "summary": "적합한 ICT가 상용으로 제공되지 않을 때 업무 필요에 부합하면서 기준을 가장 잘 충족하는 ICT를 조달한다. 책임자는 시장조사와 충족할 수 없는 조항을 포함한 미출시 사실, 그리고 최선 충족 제품이라고 판단한 근거를 서면으로 기록한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책과 각국 수용범위; 정보접근성 개론: 보조공학 서비스·국내 법률·품질인증",
+          "checkedAt": "2026-10-04T19:11:22Z",
+          "summary": "공식 HWP를 직접 내려받아 80,896바이트와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원문의 추출 본문을 읽었다. 국제표준 세부 성공기준은 제외하지만 국가별 수용 정책은 포함한다. 보조기기의 종류·역할·이용방식과 최신 국내 법령도 범위다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:17.000Z",
+          "finishedAt": "2026-10-04T19:32:13Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "policy-accessibility-C005의 독립 답 B를 2026-10-04T19:20:57Z에 잠근 뒤 19:21:47Z 키 공개 허가를 받았다. 동결 키와 일치한다. 잠근 근거·유보 기록은 수정하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "E202.7.1의 세 기록 요소를 원문과 대조했다. 국가별 조달 정책으로 필기 범위 안이다. 기존 508 공식 교육자료 범위(r007-s1-w04)·동등 설계(r008-s1-w03), EU 부담 평가(r009-s1-w04)와 달리 상용 적합 제품 부재를 증명하고 선정한 근거를 기록하는 판단이다. 독자 상황과 짧은 법규 요약이며 비교 자료의 문제 원문 복제는 발견하지 않았다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-best-meets-record",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "B 하나가 E202.7.1의 필수 기록을 갖춘다. 맹검에서 유보한 “일부 요구”는 E202.7의 one or more requirements와 대응하고 Best Meets 적용이 지문에 전제되어 있어 별도의 대체 정답을 만들지 않는다. 가격·거래 이력·예산·미래 약속은 필수 기록을 대신하지 못한다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-best-meets-record",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "다섯 선택지는 모두 기록 세 항목의 조합이며 동일 관점이다. 비용·기존 공급자·부담 예산·미래 개선을 실제 접근성 가용성 조사로 혼동하는 오개념 가설이 있다. 정답의 조건이 조금 길지만 세 법정 요소를 보존하기 위해 필요하다. 선택지 해설은 각각 한 번이며 문항 해설은 전체 이유 목록을 복제하지 않는다. 보기 불필요, 위치·교차 part 단서 없음.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-best-meets-record",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "동결 SHA와 regular.12 SHA를 먼저 대조했다. private structural-only 투영의 explicit readBankInput/buildBank, strict publication/explanation 검사를 통과했다. 이 문항은 각 4·5선다 1,000 seed(총 2,000회), 모든 키 위치·4선다 부분집합·표시 ID별 정오/점수·재현/JSON 저장 순서가 보존됐다. 누적 원본 547문항·2356선택지·690출처와 corrections가 정확히 같으며 기존 실기 1008회에서 part 순서·키·배점을 보존했다. 실제 공개 상태는 바꾸지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-policy-accessibility-s1-w02",
+      "lineageId": "r013-policy-accessibility-template-section508-undue-burden-residual-alternative-access",
+      "learningGoalId": "r013-policy-accessibility-template-section508-undue-burden-residual-alternative-access",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r013-policy-accessibility-s1-w02",
+      "revision": 1,
+      "templateId": "r013-policy-accessibility-template-section508-undue-burden-residual-alternative-access",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r013-policy-accessibility-src-508-undue-burden-alternative-access",
+          "title": "Revised 508 Standards and 255 Guidelines",
+          "url": "https://www.access-board.gov/ict/#E202.6.3",
+          "version": "Revised 508 Standards / 2017-01-18 최종 규칙, 2018-01-22 정정 반영본",
+          "location": "Appendix A, E202.6; E202.6.1–E202.6.3; E203.1",
+          "checkedAt": "2026-10-04T19:12:51Z",
+          "summary": "과도한 부담이나 본질적 변경 예외는 그 부담·변경이 생기는 범위에 한정된다. 기관은 확인된 필요에 맞는 대체수단으로 장애인의 정보·데이터 접근 및 이용을 보장해야 한다. 직원과 일반 이용자 모두의 접근을 다루며 하나의 의사소통 매체로 고정하지 않는다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책과 각국 수용범위; 정보접근성 개론: 보조공학 서비스·국내 법률·품질인증",
+          "checkedAt": "2026-10-04T19:11:22Z",
+          "summary": "공식 HWP를 직접 내려받아 80,896바이트와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원문의 추출 본문을 읽었다. 국제표준 세부 성공기준은 제외하지만 국가별 수용 정책은 포함한다. 보조기기의 종류·역할·이용방식과 최신 국내 법령도 범위다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:17.000Z",
+          "finishedAt": "2026-10-04T19:32:13Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "policy-accessibility-C003의 독립 답 B를 2026-10-04T19:20:57Z에 잠근 뒤 19:21:47Z 키 공개 허가를 받았다. 동결 키와 일치한다. 잠근 근거·유보 기록은 수정하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "E202.6~6.3 및 E203.1~2를 대조하여 적법한 부담 예외 뒤에도 남는 이용자별 대체 접근 의무를 확인했다. 국제 기술 성공기준이 아닌 미국 적용 정책이다. 기존 EU 부담의 정당성 평가, 국내 비디지털 동등 대안 의무, 508 동등한 기술적 설계 판단과 조건·대체수단 판정 기준이 다르다. 원문·시험 문항 복제가 아닌 독자 요약이다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-undue-burden-alternative-access",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "B만 확인된 필요를 충족하는 대체 접근을 보장한다. 장애인 일반 이용자를 제외할 근거가 없으며 공개·유예만으로 의무가 이행되지 않는다. 음성전화 자체가 금지되는 것은 아니지만 필요 확인을 생략한 공통 수단 지정은 필요한 보장을 제공하지 않는다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-undue-burden-alternative-access",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "모든 선택지는 기관이 취할 접근 지원 조치를 비슷한 길이의 동사문으로 제시한다. 공개로 갈음, 직원 범위 오인, 단일 채널의 일괄 대체, 기술 면제와 이용 지원 유예 혼동을 각각 검사한다. 제한적 문구는 그 오개념을 특정하는 데 필요하며 단순 금지어 첨가가 아니다. 기본 해설은 각 조건을 구별하고 중복 문맥 해설은 없다. 보기·실기 part가 없어 유령 참조나 교차 고정답 공개가 없다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-undue-burden-alternative-access",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "동결 SHA와 regular.12 SHA를 먼저 대조했다. private structural-only 투영의 explicit readBankInput/buildBank, strict publication/explanation 검사를 통과했다. 이 문항은 각 4·5선다 1,000 seed(총 2,000회), 모든 키 위치·4선다 부분집합·표시 ID별 정오/점수·재현/JSON 저장 순서가 보존됐다. 누적 원본 547문항·2356선택지·690출처와 corrections가 정확히 같으며 기존 실기 1008회에서 part 순서·키·배점을 보존했다. 실제 공개 상태는 바꾸지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-policy-accessibility-s1-w03",
+      "lineageId": "r013-policy-accessibility-template-section508-legacy-safe-harbor-altered-component-boundary",
+      "learningGoalId": "r013-policy-accessibility-template-section508-legacy-safe-harbor-altered-component-boundary",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r013-policy-accessibility-s1-w03",
+      "revision": 1,
+      "templateId": "r013-policy-accessibility-template-section508-legacy-safe-harbor-altered-component-boundary",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r013-policy-accessibility-src-508-legacy-component-alteration",
+          "title": "Revised 508 Standards and 255 Guidelines",
+          "url": "https://www.access-board.gov/ict/#E202.2",
+          "version": "Revised 508 Standards / 2017-01-18 최종 규칙, 2018-01-22 정정 반영본",
+          "location": "Appendix A, E103.4 Alteration·Existing ICT; E202.2 Legacy ICT; E201.1",
+          "checkedAt": "2026-10-04T19:12:51Z",
+          "summary": "2018-01-18 이전 또는 당일 도입·유지·사용된 ICT의 구성요소나 부분이 종전 표준에 적합하고 그 날짜 이후 변경되지 않았다면 새 표준에 맞춰 수정할 필요가 없다. 변경은 상호운용성·사용자 인터페이스·정보나 데이터 접근에 영향을 주는 변화를 뜻하므로 과거 도입일만으로 변경된 부분을 보호하지 않는다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책과 각국 수용범위; 정보접근성 개론: 보조공학 서비스·국내 법률·품질인증",
+          "checkedAt": "2026-10-04T19:11:22Z",
+          "summary": "공식 HWP를 직접 내려받아 80,896바이트와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원문의 추출 본문을 읽었다. 국제표준 세부 성공기준은 제외하지만 국가별 수용 정책은 포함한다. 보조기기의 종류·역할·이용방식과 최신 국내 법령도 범위다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:17.000Z",
+          "finishedAt": "2026-10-04T19:32:13Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "policy-accessibility-C001의 독립 답 A를 2026-10-04T19:20:57Z에 잠근 뒤 19:21:47Z 키 공개 허가를 받았다. 동결 키와 일치한다. 잠근 근거·유보 기록은 수정하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "공식 E103.4·E201.1·E202.2의 구성요소 단위 보호, 날짜 및 alteration 정의를 대조했다. 기술 성공기준이 아닌 기존 ICT의 법적 적용 정책이다. EU 기존 인트라넷 실질 개편(r012-s1-w02)과는 변경 정의와 구성요소 단위의 보호 범위가 다르므로 국가명만 치환한 목표가 아니다. 가상 변경 사례와 원문 사실의 독자 요약이다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-legacy-component-alteration",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "A만 변경 검색 부분과 미변경 적합 부분을 구별한다. 2017 도입, 2026 변경, 다른 부분의 기준일 이후 미변경 및 다른 예외 배제가 충분하다. 악화 여부나 신기능 추가만으로 변경을 정의할 수 없고 시스템 전체로 예외 상실을 확대할 수 없다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-legacy-component-alteration",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "도입일·보호 단위·신기능 여부·악화 입증이라는 서로 다른 동일 목표의 적용 착오를 담는다. 정답과 오답 모두 구성요소의 예외 여부를 문장으로 답한다. correct의 “유지할 수 있다”는 미변경 적합 부분의 법적 보호를 보존한 표현이고 필요한 한정을 삭제하지 않았다. notes가 조건을 명시하며 자료 없이 완결된다. 해설 필드 역할·순서 독립성·고정답 비노출을 확인했다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-508-legacy-component-alteration",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "동결 SHA와 regular.12 SHA를 먼저 대조했다. private structural-only 투영의 explicit readBankInput/buildBank, strict publication/explanation 검사를 통과했다. 이 문항은 각 4·5선다 1,000 seed(총 2,000회), 모든 키 위치·4선다 부분집합·표시 ID별 정오/점수·재현/JSON 저장 순서가 보존됐다. 누적 원본 547문항·2356선택지·690출처와 corrections가 정확히 같으며 기존 실기 1008회에서 part 순서·키·배점을 보존했다. 실제 공개 상태는 바꾸지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-policy-accessibility-s5-w01",
+      "lineageId": "r013-policy-accessibility-template-priority-purchase-testing-body-performance-remit",
+      "learningGoalId": "r013-policy-accessibility-template-priority-purchase-testing-body-performance-remit",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r013-policy-accessibility-s5-w01",
+      "revision": 1,
+      "templateId": "r013-policy-accessibility-template-priority-purchase-testing-body-performance-remit",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r013-policy-accessibility-src-digital-testing-versus-certification-roles",
+          "title": "디지털포용법",
+          "url": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=268533&efYd=20260122&chrClsCd=010202",
+          "version": "법률 제20672호, 2025-01-21 제정, 2026-01-22 시행",
+          "location": "제21조제2항·제5항; 제22조제1항; 제23조제3항–제5항",
+          "checkedAt": "2026-10-04T19:13:46Z",
+          "summary": "품질인증의 분야별 인증기관과 우선구매 대상 제품 검증을 돕는 접근성 시험평가기관을 별도로 규정한다. 우선구매 대상 제품 종류의 지정·고시와 제품 검증은 과학기술정보통신부장관의 권한이다. 인증기관 지정취소도 장관이 한다. 국가법령정보센터의 해당 시행판 본문을 직접 조회했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-digital-testing-remit",
+          "title": "디지털포용법 시행령",
+          "url": "https://www.law.go.kr/LSW/lsInfoR.do?lsiSeq=282439&efYd=20260122&chrClsCd=010202",
+          "version": "대통령령 제36005호, 2025-12-31 제정, 2026-01-22 시행",
+          "location": "제20조제2항; 제24조제1항·제3항; 제25조제1항",
+          "checkedAt": "2026-10-04T19:13:46Z",
+          "summary": "접근성 시험평가기관은 지능정보제품의 접근성 성능을 시험평가한다. 검증 신청은 장관에게 하고 기준 충족 시 장관이 검증서를 발급한다. 접근성 품질인증의 서면·기술 심사는 인증기관의 업무이다. 국가법령정보센터의 해당 시행판 본문을 직접 조회했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-digital-effective-edition",
+          "title": "디지털포용법 제정·개정문",
+          "url": "https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010202&lsId=014819&lsRvsGubun=all",
+          "version": "법률 제20672호 2026-01-22 시행; 법률 제21496호 2027-04-01 시행",
+          "location": "각 법률 표제와 부칙 제1조",
+          "checkedAt": "2026-10-04T19:09:35Z",
+          "summary": "2026-03-31 공포된 개정법은 2027-04-01 시행이므로 확인일인 2026-10-04에는 2026-01-22 시행판을 적용한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책과 각국 수용범위; 정보접근성 개론: 보조공학 서비스·국내 법률·품질인증",
+          "checkedAt": "2026-10-04T19:11:22Z",
+          "summary": "공식 HWP를 직접 내려받아 80,896바이트와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원문의 추출 본문을 읽었다. 국제표준 세부 성공기준은 제외하지만 국가별 수용 정책은 포함한다. 보조기기의 종류·역할·이용방식과 최신 국내 법령도 범위다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:17.000Z",
+          "finishedAt": "2026-10-04T19:32:13Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "policy-accessibility-C002의 독립 답 A를 2026-10-04T19:20:57Z에 잠근 뒤 19:21:47Z 키 공개 허가를 받았다. 동결 키와 일치한다. 잠근 근거·유보 기록은 수정하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "현행 제20672호·제36005호의 정확한 시행판과 관련 제정·개정문을 직접 확보했다. 법 제21~23·35조, 영 제20·24~25·33조의 주체·업무·위탁 경계를 대조했다. 최신 국내 법령·품질인증 범위에 속한다. 기존 인증 신청처, 기관 제재, 검증 간주, 구매계획과 달리 제품 성능 시험평가기관의 독립 역할을 구분한다. 법령 사실을 독자 상황에 적용했다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-digital-testing-versus-certification-roles",
+                "r013-policy-accessibility-src-digital-testing-remit",
+                "r013-policy-accessibility-src-digital-effective-edition",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "A만 시험평가기관 지정 자체에서 나오는 성능 평가 업무이다. 다른 지정을 겸하지 않는 notes 및 지정에 근거한 업무라는 지문이 별도 품질인증 업무를 배제한다. 제35조 위임·위탁 가능성과 영 제33조의 실제 위탁 내용도 다른 정답을 만들지 않는다. 맹검의 권한 배분 확인 유보는 원문으로 해소했다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-digital-testing-versus-certification-roles",
+                "r013-policy-accessibility-src-digital-testing-remit",
+                "r013-policy-accessibility-src-digital-effective-edition",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "다섯 보기 모두 기관이 수행하는 하나의 법적 업무를 같은 현재형으로 제시한다. 시험평가·검증·품질인증 및 장관의 감독을 혼동하는 그럴듯한 대안이고, 정답만 과도하게 길거나 온건하지 않다. 겸업 제외 notes는 실제 중첩 가능성을 정직하게 좁힌 필수 조건이다. 자료·위치 의존 없음, 기본 이유 5개와 전체 해설의 역할 분리가 적절하다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-digital-testing-versus-certification-roles",
+                "r013-policy-accessibility-src-digital-testing-remit",
+                "r013-policy-accessibility-src-digital-effective-edition",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "동결 SHA와 regular.12 SHA를 먼저 대조했다. private structural-only 투영의 explicit readBankInput/buildBank, strict publication/explanation 검사를 통과했다. 이 문항은 각 4·5선다 1,000 seed(총 2,000회), 모든 키 위치·4선다 부분집합·표시 ID별 정오/점수·재현/JSON 저장 순서가 보존됐다. 누적 원본 547문항·2356선택지·690출처와 corrections가 정확히 같으며 기존 실기 1008회에서 part 순서·키·배점을 보존했다. 실제 공개 상태는 바꾸지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-policy-accessibility-s5-w02",
+      "lineageId": "r013-policy-accessibility-template-camera-head-movement-pointer-input",
+      "learningGoalId": "r013-policy-accessibility-template-camera-head-movement-pointer-input",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r013-policy-accessibility-s5-w02",
+      "revision": 1,
+      "templateId": "r013-policy-accessibility-template-camera-head-movement-pointer-input",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r013-policy-accessibility-src-head-pointer-camera-input",
+          "title": "Move the pointer using head pointer on Mac",
+          "url": "https://support.apple.com/en-ke/guide/mac-help/mchlb2d4782b/mac",
+          "version": "Apple Mac User Guide / 2026-10-04 확인",
+          "location": "도입부; Use head pointer",
+          "checkedAt": "2026-10-04T19:12:51Z",
+          "summary": "머리 포인터는 내장 또는 연결 카메라가 감지한 얼굴·머리 움직임으로 화면 포인터를 이동시킨다. 클릭에는 별도의 스위치나 다른 지원 입력을 함께 사용할 수 있으므로 포인터 이동과 클릭을 같은 감지 동작으로 단정하지 않는다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-input-tool-roles",
+          "title": "Input - typing, writing, and clicking",
+          "url": "https://www.w3.org/WAI/people-use-web/tools-techniques/input/",
+          "version": "W3C WAI 교육자료 / 2026-10-04 확인",
+          "location": "Examples of assistive technologies and adaptive strategies",
+          "checkedAt": "2026-10-04T19:14:55Z",
+          "summary": "시선 추적은 눈 움직임으로 포인터를 제어한다. 음성인식은 사람의 음성을 입력과 명령에 이용한다. 키보드·마우스 필터는 비의도적 움직임을 보완하며 화면 키보드는 화면에 표시한 가상 자판을 여러 포인팅 장치로 사용하게 한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책과 각국 수용범위; 정보접근성 개론: 보조공학 서비스·국내 법률·품질인증",
+          "checkedAt": "2026-10-04T19:11:22Z",
+          "summary": "공식 HWP를 직접 내려받아 80,896바이트와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원문의 추출 본문을 읽었다. 국제표준 세부 성공기준은 제외하지만 국가별 수용 정책은 포함한다. 보조기기의 종류·역할·이용방식과 최신 국내 법령도 범위다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:17.000Z",
+          "finishedAt": "2026-10-04T19:32:13Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "policy-accessibility-C004의 독립 답 E를 2026-10-04T19:20:57Z에 잠근 뒤 19:21:47Z 키 공개 허가를 받았다. 동결 키와 일치한다. 잠근 근거·유보 기록은 수정하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "Apple 도입부와 실제 사용 설명에서 카메라 입력 및 별도 스위치 클릭을 확인했고 WAI 입력 도구 설명으로 네 오답의 역할을 대조했다. 정보접근성 보조공학 역할 범위다. 기존 시선 추적·순차 스캐닝·포인터 감도 조절과 감지 신체부위 및 제어 원리가 다르다. 장치 실측을 주장하지 않는 독자 상황이며 공식 예제·시험 원문 복제는 발견하지 않았다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-head-pointer-camera-input",
+                "r013-policy-accessibility-src-input-tool-roles",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "E의 머리 포인터만 명시된 얼굴·머리 움직임 입력을 설명한다. 클릭용 스위치는 이동 입력 기술과 구분되어 있어 스캐닝·시선 추적을 중복 정답으로 만들지 않는다. 가상 자판·발화·떨림 보정도 해당 움직임의 직접 변환 명칭이 아니다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-head-pointer-camera-input",
+                "r013-policy-accessibility-src-input-tool-roles",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "다섯 답은 동일 수준의 보조 입력 기능명이다. 시선, 가상 자판, 음성, 입력 필터는 손 사용을 줄이는 관련 대안으로서 입력원·역할 혼동을 검사한다. “머리”의 반복은 감지 부위를 구별하는 필수 의미 단서이며 내부 키 노출이 아니다. 개별 기본 이유와 전체 해설은 구분되어 있고, 보기나 실행 결과 없이도 자체 완결된다. 순서 독립·교차 part 비노출 통과.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-head-pointer-camera-input",
+                "r013-policy-accessibility-src-input-tool-roles",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "동결 SHA와 regular.12 SHA를 먼저 대조했다. private structural-only 투영의 explicit readBankInput/buildBank, strict publication/explanation 검사를 통과했다. 이 문항은 각 4·5선다 1,000 seed(총 2,000회), 모든 키 위치·4선다 부분집합·표시 ID별 정오/점수·재현/JSON 저장 순서가 보존됐다. 누적 원본 547문항·2356선택지·690출처와 corrections가 정확히 같으며 기존 실기 1008회에서 part 순서·키·배점을 보존했다. 실제 공개 상태는 바꾸지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-policy-accessibility-s5-w03",
+      "lineageId": "r013-policy-accessibility-template-line-focus-limited-row-reading-window",
+      "learningGoalId": "r013-policy-accessibility-template-line-focus-limited-row-reading-window",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r013-policy-accessibility-s5-w03",
+      "revision": 1,
+      "templateId": "r013-policy-accessibility-template-line-focus-limited-row-reading-window",
+      "authorId": "policy-accessibility",
+      "evidence": [
+        {
+          "sourceId": "r013-policy-accessibility-src-line-focus-reading-support",
+          "title": "Use Immersive Reader and reading mode in Microsoft Edge",
+          "url": "https://support.microsoft.com/en-us/education/learning-accelerators/use-immersive-reader-in-microsoft-edge-1",
+          "version": "Microsoft Support / Windows 10·11 및 Microsoft Edge / 2026-10-04 확인",
+          "location": "Read Aloud; Text preferences; Reading preferences, Line focus",
+          "checkedAt": "2026-10-04T19:12:51Z",
+          "summary": "줄 집중은 한 줄·세 줄·다섯 줄로 읽기 초점의 범위를 좁히고 위아래로 이동할 수 있게 한다. 소리 내어 읽기는 음성 재생, 텍스트 간격은 간격 확대, 그림 사전은 단어의 시각적 풀이, 번역은 언어 변환을 제공하므로 기능 역할을 구분한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-policy-accessibility-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국제표준 정책과 각국 수용범위; 정보접근성 개론: 보조공학 서비스·국내 법률·품질인증",
+          "checkedAt": "2026-10-04T19:11:22Z",
+          "summary": "공식 HWP를 직접 내려받아 80,896바이트와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원문의 추출 본문을 읽었다. 국제표준 세부 성공기준은 제외하지만 국가별 수용 정책은 포함한다. 보조기기의 종류·역할·이용방식과 최신 국내 법령도 범위다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았다. 원문의 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:17.000Z",
+          "finishedAt": "2026-10-04T19:32:13Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "policy-accessibility-C006의 독립 답 D를 2026-10-04T19:20:57Z에 잠근 뒤 19:21:47Z 키 공개 허가를 받았다. 동결 키와 일치한다. 잠근 근거·유보 기록은 수정하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "Microsoft의 정확한 도움말 제목·적용 대상과 세 설정 구역을 대조했다. 줄 집중의 1·3·5줄 제한과 위아래 이동이 요구와 대응하며 다른 네 기능의 설명도 일치한다. 보조공학의 읽기 지원 역할 범위다. 기존 음성과 동기화한 강조(r004-s5-w10), 문서 개요·용어 풀이(r012-s5-w06/07)와 달리 제한된 시각적 읽기 창의 이동을 판단한다. 독자 목적 상황으로 작성되었다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-line-focus-reading-support",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "D만 현재 소수 줄의 시각적 범위를 줄이고 그 범위를 옮기는 기능이다. Read Aloud가 음성과 함께 강조를 제공할 수 있어도 지문은 음성 동기화가 아니라 줄 수를 제한한 이동을 특정한다. 번역·그림 사전·간격 조정과 중복 정답이 없다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-line-focus-reading-support",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "같은 제품의 읽기 지원 기능명 다섯 개가 평행하게 제시된다. 언어 변환·음성 읽기·어휘 풀이·줄 간격과 주의 범위 조절을 구별하는 관련 오개념이다. 정답의 길이·절대 표현·작성 위치 단서가 없고 필요한 시각 범위와 이동 조건을 보존한다. 옵션 이유는 각각의 기능 차이를 밝히며 문항 해설은 선택지 설명 전체를 복사하지 않는다. 외부 보기 및 실기 parts가 없어 비해당 누출도 없다.",
+              "evidenceRefs": [
+                "r013-policy-accessibility-src-line-focus-reading-support",
+                "r013-policy-accessibility-src-scope-written"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-policy-a",
+              "summary": "동결 SHA와 regular.12 SHA를 먼저 대조했다. private structural-only 투영의 explicit readBankInput/buildBank, strict publication/explanation 검사를 통과했다. 이 문항은 각 4·5선다 1,000 seed(총 2,000회), 모든 키 위치·4선다 부분집합·표시 ID별 정오/점수·재현/JSON 저장 순서가 보존됐다. 누적 원본 547문항·2356선택지·690출처와 corrections가 정확히 같으며 기존 실기 1008회에서 part 순서·키·배점을 보존했다. 실제 공개 상태는 바꾸지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w01",
+      "lineageId": "r013-internet-browser-template-icann-contractual-complaint-scope-generic-domain-transfer",
+      "learningGoalId": "r013-internet-browser-template-icann-contractual-complaint-scope-generic-domain-transfer",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w01",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-icann-contractual-complaint-scope-generic-domain-transfer",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-icann-complaint",
+          "title": "Submitting a Complaint to ICANN Contractual Compliance",
+          "url": "https://www.icann.org/compliance/complaint",
+          "version": "ICANN 공식 계약 준수 안내, 2026-10-04 확인판",
+          "location": "계약상 권한 설명; ccTLD 제외; Issue 표의 Transfer",
+          "checkedAt": "2026-10-04T19:14:11Z",
+          "summary": "신고 권한은 등록대행자·레지스트리 계약과 합의정책 의무에 한정된다. 일반 최상위 도메인의 등록대행자 이전은 신고 분류에 포함되며 ccTLD 계약 준수는 이 권한 밖이다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-icann-role",
+          "title": "What Does ICANN Do?",
+          "url": "https://www.icann.org/resources/pages/what-2012-02-25-en",
+          "version": "ICANN 공식 역할 안내, 2026-10-04 확인판",
+          "location": "서두의 고유 식별자 조정·콘텐츠 및 접속 범위; What is the domain name system?",
+          "checkedAt": "2026-10-04T19:10:37Z",
+          "summary": "ICANN은 전역 고유 식별자를 조정하고 등록대행자 인증 체계를 운영한다. 인터넷 콘텐츠를 통제하거나 인터넷 접속 서비스를 관리하는 역할과 구분한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C001에서 B를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "정확한 제목, 계약상 권한 문단, ccTLD 제외 및 Transfer 행을 확인했다. gTLD 등록대행자 이전 정책 의무가 해당한다. ICANN이 분실 도메인을 직접 반환할 권한은 없다는 한계도 읽었다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 DNS 계층·레코드 판단과 달리 ICANN 계약 집행의 gTLD/ccTLD·일반 분쟁 경계를 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-icann-complaint",
+                "r013-internet-browser-src-icann-role"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "일반 최상위 도메인·인증 등록대행자·ICANN 이전 정책을 모두 명시하므로 계약 준수 대상이 하나다. ccTLD를 gTLD 계약 체계로 일반화할 수 없다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-icann-complaint",
+                "r013-internet-browser-src-icann-role"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "인터넷 분쟁 처리 권한의 과잉 일반화·ccTLD/gTLD 혼동이라는 같은 목표의 선택지다. 모두 문제 사례 형식이며 길이·태도·고정 위치 단서가 없다. 별도 보기 불필요; 옵션 이유와 전체 판단 기준이 분리된다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-icann-complaint",
+                "r013-internet-browser-src-icann-role"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w02",
+      "lineageId": "r013-internet-browser-template-ietf-specification-iana-parameter-registry-distinction",
+      "learningGoalId": "r013-internet-browser-template-ietf-specification-iana-parameter-registry-distinction",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w02",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-ietf-specification-iana-parameter-registry-distinction",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-ietf-iana",
+          "title": "Internet Assigned Numbers Authority (IANA) functions",
+          "url": "https://www.ietf.org/process/iana/",
+          "version": "IETF 공식 안내, 2026-10-04 확인판",
+          "location": "Protocol registries (IANA): 기능 개요와 세 범주",
+          "checkedAt": "2026-10-04T19:08:49Z",
+          "summary": "IANA는 IETF 기술 표준의 고유 코드·번호를 배정하고 유지한다. 전역 IP·AS 번호 풀 조정과 프로토콜 매개변수 등록은 구분되며 IANA 서비스는 ICANN 관계 조직 PTI가 수행한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-ietf-introduction",
+          "title": "Introduction to the IETF",
+          "url": "https://www.ietf.org/about/introduction/",
+          "version": "IETF 공식 소개, 2026-10-04 확인판",
+          "location": "About the IETF; Participants; Principles; The Work",
+          "checkedAt": "2026-10-04T19:10:07Z",
+          "summary": "IETF는 기술 표준을 개발하며 회원제가 없다. 관심 있는 사람은 작업반 메일링 리스트 등에 참여할 수 있고 개인 자격으로 활동한다. 회의 등록비와 메일링 리스트 참여 조건은 구분한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-iana-numbers",
+          "title": "Number Resources",
+          "url": "https://www.iana.org/numbers",
+          "version": "IANA 공식 안내, 2026-10-04 확인판",
+          "location": "주소 할당 계층; IANA의 주요 배분 역할과 직접 배정 예외",
+          "checkedAt": "2026-10-04T19:08:49Z",
+          "summary": "IANA는 전역 주소 풀을 RIR에 배분하고, 이용자는 일반적으로 ISP에서 주소를 받는다. ISP는 LIR·NIR·RIR에서 주소를 얻는다. 멀티캐스트 등 특정 프로토콜 용도의 직접 배정 예외가 있다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-isoc-ietf",
+          "title": "About the Internet Engineering Task Force (IETF)",
+          "url": "https://www.internetsociety.org/about-the-ietf/",
+          "version": "Internet Society 공식 안내, 2026-10-04 확인판",
+          "location": "IETF and the Internet Society",
+          "checkedAt": "2026-10-04T19:09:05Z",
+          "summary": "ISOC는 IETF의 행정 법인 기반과 재정 기여 등으로 IETF를 지원한다. 이러한 기관 간 지원 관계를 개인의 IETF 참여에 ISOC 회원 자격이 필요하다는 의미로 해석하지 않는다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-icann-role",
+          "title": "What Does ICANN Do?",
+          "url": "https://www.icann.org/resources/pages/what-2012-02-25-en",
+          "version": "ICANN 공식 역할 안내, 2026-10-04 확인판",
+          "location": "서두의 고유 식별자 조정·콘텐츠 및 접속 범위; What is the domain name system?",
+          "checkedAt": "2026-10-04T19:10:37Z",
+          "summary": "ICANN은 전역 고유 식별자를 조정하고 등록대행자 인증 체계를 운영한다. 인터넷 콘텐츠를 통제하거나 인터넷 접속 서비스를 관리하는 역할과 구분한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C002에서 A를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "문서 제목은 Internet Assigned Numbers Authority (IANA) functions, 본문 제목은 Protocol registries (IANA)이다. IETF 규격의 코드·번호 유지, DNS·번호 자원·프로토콜 등록의 세 범주와 PTI 역할을 확인했다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 프로토콜 자체의 기능 문제와 달리 규격 개발과 IANA 코드값 등록 기능을 분리한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-iana",
+                "r013-internet-browser-src-ietf-introduction",
+                "r013-internet-browser-src-iana-numbers",
+                "r013-internet-browser-src-isoc-ietf",
+                "r013-internet-browser-src-icann-role"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "질문은 새 규격 작성이 아닌 배정 결과의 공용 등록부 기록이다. 기관 간 연계가 있어도 직접 기능은 IANA로 유일하다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-iana",
+                "r013-internet-browser-src-ietf-introduction",
+                "r013-internet-browser-src-iana-numbers",
+                "r013-internet-browser-src-isoc-ietf",
+                "r013-internet-browser-src-icann-role"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "다섯 선택지는 기관+직접 기능의 명사구로 평행하다. 규격 작성·등록부·자원 배분·재정 지원·인증 혼동을 겨냥한다. 기능 명칭의 기술적 차이가 필요한 정도이며 추가 보기나 중복 문맥 해설이 없다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-iana",
+                "r013-internet-browser-src-ietf-introduction",
+                "r013-internet-browser-src-iana-numbers",
+                "r013-internet-browser-src-isoc-ietf",
+                "r013-internet-browser-src-icann-role"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w03",
+      "lineageId": "r013-internet-browser-template-iana-rir-hierarchical-address-pool-allocation",
+      "learningGoalId": "r013-internet-browser-template-iana-rir-hierarchical-address-pool-allocation",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w03",
+      "revision": 2,
+      "templateId": "r013-internet-browser-template-iana-rir-hierarchical-address-pool-allocation",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-iana-numbers",
+          "title": "Number Resources",
+          "url": "https://www.iana.org/numbers",
+          "version": "IANA 공식 안내, 2026-10-04 확인판",
+          "location": "주소 할당 계층; IANA의 주요 배분 역할과 직접 배정 예외",
+          "checkedAt": "2026-10-04T19:08:49Z",
+          "summary": "IANA는 전역 주소 풀을 RIR에 배분하고, 이용자는 일반적으로 ISP에서 주소를 받는다. ISP는 LIR·NIR·RIR에서 주소를 얻는다. 멀티캐스트 등 특정 프로토콜 용도의 직접 배정 예외가 있다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 2,
+      "lineageAttemptCount": 2,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C003에서 B를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "Number Resources 본문은 IANA→RIR 풀 배분, ISP→이용자 일반 배정과 특정 프로토콜 직접 배정 예외를 명시한다. 추가 배분은 전역 정책을 따른다. 무제한 잔여 주소 공급을 보증하는 것으로 읽지 않았다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 IPv4 사설 주소·루프백·라우팅 문제와 달리 주소 자원 배정 기관의 계층을 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-iana-numbers"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "일반 유니캐스트 및 특별 배정 제외, 이용자 일반적 ISP 수령 조건에서 계층 설명 하나만 참이다. 실제 IPv4 잔여량이나 즉시 추가 공급 가능성을 묻지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-iana-numbers"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "review-internet-a",
+              "summary": "o03은 주소 배분 방향 오류에 뜬금없는 중복 주소 승인까지 결합하고 해설은 방향 오류만 설명한다. o04의 선반납 후 개인 재신청은 추가 풀 확보 과제에서 설득력 없는 절차다. 정답만 일반적 계층 설명으로 두는 단서를 줄이도록 두 오답과 이유를 재작성해야 한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-iana-numbers"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "revise",
+          "summary": "o03의 중복 주소 승인과 o04의 선반납·개인 재신청 절차는 추가 풀 확보의 타당한 혼동으로 보기 어렵다. o03 기본 해설은 중복 승인이라는 별도 오류를 설명하지 않는다."
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-04T19:35:31.000Z",
+          "finishedAt": "2026-10-04T19:42:05Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-b",
+              "summary": "새 검토자가 키 노출 전 19:36:13Z에 C를 잠갔고, 19:36:44Z 승인 뒤 정확한 revision2의 o01 키와 일치함을 확인했다. 잠근 파일은 변경하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-b",
+              "summary": "공식 IANA 원문과 2026-05-07 시험 범위를 다시 읽었다. 출처 제목·위치·판이 맞고 독자적인 기관 역할 문항이며 공식 샘플의 복제가 아니다. 110개 s2 선행 목표와 전체 탈락 계보를 대조해 기존 주소 표기·라우팅·사설 주소·DNS 목표의 위장 반복이 아님을 확인했다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-iana-numbers"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-b",
+              "summary": "일반 유니캐스트와 특별 배정 제외 조건에서 o01만 맞는다. RIR의 일부 직접 이용자 배정 사례는 ISP를 배제하는 o04의 일반화나 IANA 직접 배정을 정당화하지 않는다. 실제 IPv4 신규 풀의 즉시 공급 가능성을 묻는 문항은 아니다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-iana-numbers"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-b",
+              "summary": "다섯 선택지는 모두 두 기관 단계의 설명이며 중앙 배정 창구·RIR 역할·도메인 등록 혼동으로 구분된다. 수정된 o03/o04는 작위적 중복 승인·선반납 절차를 제거했다. 정답만 길거나 오답만 절대어를 반복하는 단서는 없고, 일반적으로와 특별 배정 제외는 필요한 범위 제한이다. 기본 해설은 각각의 이유를 담고 contextExplanation은 불필요하여 없다. 문항 해설은 전체 단계 구분만 설명한다. 텍스트만으로 풀이 가능하며 자료·실기 part·위치 의존 참조가 없다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-iana-numbers"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-b",
+              "summary": "정확한 regular.12에 frozen revision2만 더한 비공개 구조 전용 투영을 명시 경로 readBankInput으로 검사했다. 발행·엄격 해설 검사를 통과했고 기존 547문항/2356선택지/690출처는 전부 동일하다. 4/5지 각각 256 seed, 총512 출제와3328 채점 단언에서 모든 옵션의 모든 표시 위치, 가능한4지 부분집합4개, 키·내용·재현·스냅샷 해시·원본 불변을 확인했다. 실제 세션의 저장/백업 왕복을 확인했고 관련 기존 회귀24개도 통과했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w04",
+      "lineageId": "r013-internet-browser-template-ietf-open-individual-participation-not-isoc-membership",
+      "learningGoalId": "r013-internet-browser-template-ietf-open-individual-participation-not-isoc-membership",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w04",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-ietf-open-individual-participation-not-isoc-membership",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-ietf-introduction",
+          "title": "Introduction to the IETF",
+          "url": "https://www.ietf.org/about/introduction/",
+          "version": "IETF 공식 소개, 2026-10-04 확인판",
+          "location": "About the IETF; Participants; Principles; The Work",
+          "checkedAt": "2026-10-04T19:10:07Z",
+          "summary": "IETF는 기술 표준을 개발하며 회원제가 없다. 관심 있는 사람은 작업반 메일링 리스트 등에 참여할 수 있고 개인 자격으로 활동한다. 회의 등록비와 메일링 리스트 참여 조건은 구분한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-isoc-ietf",
+          "title": "About the Internet Engineering Task Force (IETF)",
+          "url": "https://www.internetsociety.org/about-the-ietf/",
+          "version": "Internet Society 공식 안내, 2026-10-04 확인판",
+          "location": "IETF and the Internet Society",
+          "checkedAt": "2026-10-04T19:09:05Z",
+          "summary": "ISOC는 IETF의 행정 법인 기반과 재정 기여 등으로 IETF를 지원한다. 이러한 기관 간 지원 관계를 개인의 IETF 참여에 ISOC 회원 자격이 필요하다는 의미로 해석하지 않는다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C009에서 E를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "Introduction to the IETF의 Participants·Principles·The Work를 읽었다. 회원제 없이 개인이 작업반 메일링 리스트로 참여하며, 회의 등록비는 별개다. 공개 참여도 행동·지식재산 정책을 면제하지 않는다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 W3C 조직·절차 문제와 달리 IETF 메일링 리스트의 개인 참여 요건을 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-introduction",
+                "r013-internet-browser-src-isoc-ietf"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "ISOC 미가입 개인의 온라인 참여를 묻고 있어 회원·국가·법인·회의 요금 선행 요건은 해당하지 않는다. 일반 행동 규범 준수는 다른 선택지를 정답으로 만들지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-introduction",
+                "r013-internet-browser-src-isoc-ietf"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "모두 참여 자격을 얻는 경로 형식이다. 회원 단체·국가 대표·법인 대표·회의 등록 혼동은 같은 참여 목표의 가설이며 정답에만 장황한 예외를 싣지 않았다. 자료 없이 읽을 수 있고 필수 메일링 리스트 조건이 살아 있다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-introduction",
+                "r013-internet-browser-src-isoc-ietf"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w05",
+      "lineageId": "r013-internet-browser-template-rfc-series-number-not-internet-standard-status",
+      "learningGoalId": "r013-internet-browser-template-rfc-series-number-not-internet-standard-status",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w05",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-rfc-series-number-not-internet-standard-status",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-ietf-rfcs",
+          "title": "RFCs",
+          "url": "https://www.ietf.org/process/rfcs/",
+          "version": "IETF 공식 RFC 안내, 2026-10-04 확인판",
+          "location": "Structure of the series; Statuses; Publication streams",
+          "checkedAt": "2026-10-04T19:11:15.427933Z",
+          "summary": "RFC는 발행 번호가 있는 문서 계열이며 여러 상태를 가진다. Informational·Experimental과 표준 계열의 Proposed Standard·Internet Standard는 구별된다. RFC 번호·무료 공개·발행 주체만으로 Internet Standard 등급을 확정할 수 없다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C006에서 C를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "페이지 제목 RFCs 및 본문 About RFCs를 확인했다. 순차 번호, STD 하위 계열, 상태 변경, Proposed Standard·Internet Standard와 비표준 상태, IETF 발행 계열의 조건을 대조했다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 HTTP/SMTP 등의 RFC 내용 판단과 달리 RFC 계열 식별자와 Internet Standard 지위를 분리한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-rfcs"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "Internet Standard라는 특정 등급을 명시했다. Proposed Standard도 표준 계열이라는 사실은 현재 상태 확인의 필요성을 바꾸지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-rfcs"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "RFC의 번호·공개 여부·발행 계열을 지위와 혼동하는 같은 분류 목표이다. 각 선택지의 분류/확인 행동과 구체성이 대응하며 더 큰 번호 등 필요한 오개념을 유지했다. 옵션별 이유를 전체 해설에 모두 복사하지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-ietf-rfcs"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w06",
+      "lineageId": "r013-internet-browser-template-firefox-troubleshoot-open-temporary-restoration",
+      "learningGoalId": "r013-internet-browser-template-firefox-troubleshoot-open-temporary-restoration",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w06",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-firefox-troubleshoot-open-temporary-restoration",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-firefox-troubleshoot",
+          "title": "Use Troubleshoot Mode in Firefox",
+          "url": "https://support.mozilla.org/en-US/kb/diagnose-firefox-issues-using-troubleshoot-mode",
+          "version": "Mozilla 데스크톱 Firefox 도움말, 2026-10-04 확인판",
+          "location": "Troubleshoot Mode window; Exit Troubleshoot Mode; What does Troubleshoot Mode disable?",
+          "checkedAt": "2026-10-04T19:09:05Z",
+          "summary": "열기(Open)는 확장 기능과 일부 설정을 임시로 끈다. 문제 해결 모드를 끝내고 정상 시작하면 이전 상태가 복원된다. Firefox 새로 설정(Refresh)의 영구 초기화와 구별한다.",
+          "rights": "Mozilla 공식 도움말의 사실을 독자적인 한국어 문항으로 요약했다. 본문·화면을 복제하지 않았으며 원문은 Mozilla 기여자 저작물이고 페이지 하단에 Creative Commons 이용허락이 안내되어 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C010에서 A를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "Use Troubleshoot Mode in Firefox의 시작 창·종료·비활성 기능 절을 읽었다. Open 변경은 정상 재시작 때 복원되며 Refresh와 수동 preference 변경은 구분된다. 질문은 특정 메뉴 경로를 가정하지 않는다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 Firefox 사생활 보호 창의 보존 대상과 달리 진단 모드 종료 시 설정 복원을 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-troubleshoot"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "Open, 완전 종료, 정상 재실행과 수동 변경·Refresh 제외가 복원을 고정한다. 원래 비활성 확장 기능도 원상태로 돌아온다는 일반 규칙에 포함된다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-troubleshoot"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "복원·비활성 유지·제거·공장 초기화를 확장 기능/설정 두 대상에 연결한 평행한 결과형 선택지다. Open과 Refresh 구분에 필요한 notes가 있으며 영어 명령으로 번역 차이를 보완한다. 그림을 전제로 하지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-troubleshoot"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w07",
+      "lineageId": "r013-internet-browser-template-firefox-complete-save-html-and-resource-directory",
+      "learningGoalId": "r013-internet-browser-template-firefox-complete-save-html-and-resource-directory",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w07",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-firefox-complete-save-html-and-resource-directory",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-firefox-save",
+          "title": "How to save a web page",
+          "url": "https://support.mozilla.org/en-US/kb/how-save-web-page",
+          "version": "Mozilla 데스크톱 Firefox 도움말, 2023-08-11 수정·2026-10-04 확인",
+          "location": "Saving a web page: Web page, complete; HTML only; Text files; All files",
+          "checkedAt": "2026-10-04T19:09:05Z",
+          "summary": "웹페이지, 전체는 HTML과 그림 등 필요한 파일을 위한 폴더를 함께 저장한다. 원래 HTML 링크 구조를 보존하지 않을 수 있다. HTML만은 그림을 제외하고 원래 링크 구조를 보존하며 텍스트 저장은 별도 형식이다.",
+          "rights": "Mozilla 공식 도움말의 사실을 독자적인 한국어 문항으로 요약했다. 본문·화면을 복제하지 않았으며 원문은 Mozilla 기여자 저작물이고 페이지 하단에 Creative Commons 이용허락이 안내되어 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C008에서 E를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "How to save a web page의 2023-08-11 수정 표시와 네 형식을 확인했다. complete는 HTML 및 자원 폴더, HTML only는 그림 제외 단일 파일이다. 링크 구조·동적 서비스의 완전 복제는 보증하지 않는다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 HTML download 속성의 파일명 제안과 달리 Firefox 전체 페이지 저장의 파일 구조를 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-save"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "정적 HTML·그림과 정상 자원 수집을 명시해 저장 실패·동적 서비스 문제를 배제했다. 단일 압축 보관·HTML만·텍스트·바로가기와 결과가 중복되지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-save"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "파일 내용과 묶음 구조라는 같은 관점에서 다섯 결과를 비교한다. HTML만·일반 텍스트·단일 보관 파일·바로가기 혼동이 타당하다. 보기 없이 충분하고 자원 수집 한계와 보조 폴더가 명확하다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-save"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w08",
+      "lineageId": "r013-internet-browser-template-firefox-single-download-history-removal-preserves-file",
+      "learningGoalId": "r013-internet-browser-template-firefox-single-download-history-removal-preserves-file",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w08",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-firefox-single-download-history-removal-preserves-file",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-firefox-downloads",
+          "title": "Where to find and manage downloaded files in Firefox",
+          "url": "https://support.mozilla.org/en-US/kb/where-find-and-manage-downloaded-files-firefox",
+          "version": "Mozilla 데스크톱 Firefox 도움말, 2026-10-04 확인판",
+          "location": "How can I manage my downloaded files?",
+          "checkedAt": "2026-10-04T19:09:46Z",
+          "summary": "Remove From History는 해당 기록을 지우되 파일은 보존한다. Clear Downloads는 전체 다운로드 기록을 지우고 Delete는 디스크 파일을 지운다. Show in Folder와 Go to Download Page는 각각 폴더와 출처 페이지를 연다.",
+          "rights": "Mozilla 공식 도움말의 사실을 독자적인 한국어 문항으로 요약했다. 본문·화면을 복제하지 않았으며 원문은 Mozilla 기여자 저작물이고 페이지 하단에 Creative Commons 이용허락이 안내되어 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C005에서 D를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "Where to find and manage downloaded files in Firefox의 관리 절에서 다섯 명령을 각각 대조했다. 단일 기록 제거·전체 기록 제거·파일 삭제의 범위가 다르다. 완료 항목 조건으로 진행 중·위험 파일 경고와 구분된다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 사생활 보호 종료 후 다운로드 파일 보존과 달리 일반 다운로드 목록의 단일 기록 삭제 범위를 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-downloads"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "완료된 항목 하나, 실제 파일과 다른 기록 보존이라는 세 조건이 Remove From History를 유일하게 정한다. Clear Downloads는 항목별 명령이 아니라 전체 목록 버튼임도 공식 근거로 확인했다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-downloads"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "다섯 선택지는 실제 다운로드 관리 명령의 한영 이름이다. 기록/파일·단일/전체 대상 혼동에 맞고, 폴더/출처 페이지 이동은 기록 제거와 혼동하는 관리 기능 가설로 해석 가능하다. 불필요한 그림·위치 지시·중복 문맥 해설이 없다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-downloads"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w09",
+      "lineageId": "r013-internet-browser-template-firefox-site-camera-permission-block-specific-device",
+      "learningGoalId": "r013-internet-browser-template-firefox-site-camera-permission-block-specific-device",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w09",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-firefox-site-camera-permission-block-specific-device",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-firefox-pageinfo",
+          "title": "View site information with Page Info",
+          "url": "https://support.mozilla.org/en-US/kb/firefox-page-info-window",
+          "version": "Mozilla 데스크톱 Firefox 도움말, 2026-10-04 확인판",
+          "location": "What you can and can’t change from Page Info; Permissions",
+          "checkedAt": "2026-10-04T19:10:50Z",
+          "summary": "페이지 정보의 권한 설정은 방문 중인 사이트에 적용된다. 카메라·마이크 권한을 별도로 설정할 수 있고, 기본 설정 사용을 해제하여 허용·차단·항상 묻기를 선택한다.",
+          "rights": "Mozilla 공식 도움말의 사실을 독자적인 한국어 문항으로 요약했다. 본문·화면을 복제하지 않았으며 원문은 Mozilla 기여자 저작물이고 페이지 하단에 Creative Commons 이용허락이 안내되어 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C004에서 C를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "View site information with Page Info의 변경 가능 표와 Permissions 절을 확인했다. Use Default 해제 후 장치별 Allow/Block/Always Ask 설정은 현재 도메인에 적용된다. 인증서 제한을 우회하는 기능은 아니다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 웹사이트 접근성·장치 지원 문제와 달리 Firefox 도메인별 카메라 권한의 명시적 차단을 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-pageinfo"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "기존 사이트별 허용과 기본 Always Ask를 고정했다. 요청을 계속 차단하는 정책은 Block이고, Ask에서 사용자가 매번 거절하는 추가 행동은 제시된 설정 자체의 효과가 아니다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-pageinfo"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "장치와 권한값을 달리하는 같은 문법의 선택지로, 카메라/마이크와 차단/질문/기본/허용의 혼동을 평가한다. 기본값과 초기값을 notes에서 고정하며 금지·허용을 말투 단서로 쓰지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-pageinfo"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-internet-browser-s2-w10",
+      "lineageId": "r013-internet-browser-template-firefox-proxy-pac-url-versus-auto-detect-system-manual",
+      "learningGoalId": "r013-internet-browser-template-firefox-proxy-pac-url-versus-auto-detect-system-manual",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r013-internet-browser-s2-w10",
+      "revision": 1,
+      "templateId": "r013-internet-browser-template-firefox-proxy-pac-url-versus-auto-detect-system-manual",
+      "authorId": "internet-browser",
+      "evidence": [
+        {
+          "sourceId": "r013-internet-browser-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "인터넷 개론: 인터넷 이해의 인터넷 관련 주요 기관; 인터넷 접속; 웹 브라우저 기능과 활용",
+          "checkedAt": "2026-10-04T19:09:43.962056Z",
+          "summary": "공식 파일을 새로 가져와 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 확인하고 동일 원본의 추출문을 읽었다. 주요 인터넷 기관, IP 주소체계, 브라우저 종류별 기능과 활용이 범위에 포함된다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약하였다. 문항과 선택지는 독자 작성했으며 공식 시험 샘플·문서 예제·전문을 복제하지 않았다. 원문의 권리는 각 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-internet-browser-src-firefox-proxy",
+          "title": "Connection settings in Firefox",
+          "url": "https://support.mozilla.org/en-US/kb/connection-settings-firefox",
+          "version": "Mozilla 데스크톱 Firefox 도움말, 2026-10-04 확인판",
+          "location": "Connection Settings dialog: 다섯 프록시 구성 방식",
+          "checkedAt": "2026-10-04T19:09:46Z",
+          "summary": "자동 프록시 설정 URL은 PAC 파일 URL을 입력하는 방식이다. 네트워크 자동 감지, 운영체제 설정 사용, 호스트·포트를 적는 수동 구성, 프록시 없음은 각각 다른 방식이다.",
+          "rights": "Mozilla 공식 도움말의 사실을 독자적인 한국어 문항으로 요약했다. 본문·화면을 복제하지 않았으며 원문은 Mozilla 기여자 저작물이고 페이지 하단에 Creative Commons 이용허락이 안내되어 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:20:49.000Z",
+          "finishedAt": "2026-10-04T19:32:37Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "internet-browser-C007에서 C를 19:21:31Z에 잠갔으며 19:22:24Z 키 접근 승인 후 frozen key와 일치함을 확인했다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "Connection settings in Firefox의 다섯 구성 방식과 확장 기능 통제 주석을 확인했다. PAC URL 직접 입력은 Automatic proxy configuration URL이다. file/data URL 예시도 있으나 이번 선택에는 URL scheme 제한이 없다. 공식 시험 범위에 맞는 독자 요약·시나리오다. 기존 HTTP CONNECT·프록시 인증 필드와 달리 Firefox PAC URL의 구성 방식 선택을 평가한다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-proxy"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "제공된 PAC URL 직접 입력, OS 미등록, 확장/조직 강제 없음이라는 조건 때문에 자동 감지나 OS 상속을 대안 답으로 볼 수 없다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-proxy"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "공식 다섯 프록시 방식의 한영 이름을 균등한 관점으로 제시한다. 자동 감지와 URL 지정이라는 유사 명칭의 실제 차이를 평가하며 길이 차이는 공식 명칭 때문이다. 특정 설정 화면 위치를 외우게 하지 않는다.",
+              "evidenceRefs": [
+                "r013-internet-browser-src-scope-written",
+                "r013-internet-browser-src-firefox-proxy"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-internet-a",
+              "summary": "regular.12의 547개 기존 문항과 모든 기존 옵션·출처를 정확히 보존한 별도 구조 전용 투영에서 명시적 입력 발행·엄격 해설 검사를 통과했다. 이 문항의 4/5지 각각 128 seed에서 모든 선택지의 모든 위치 출현, 키/채점·내용·복구·원본 불변을 확인했다. 실기 part 순서는 해당 없음.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s3-w01",
+      "lineageId": "r013-dom-html-template-setrangetext-explicit-replacement-selects-new-range",
+      "learningGoalId": "r013-dom-html-template-setrangetext-explicit-replacement-selects-new-range",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r013-dom-html-s3-w01",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-setrangetext-explicit-replacement-selects-new-range",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-text-range-replacement",
+          "title": "HTML 5.2",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#dom-selectionapielements-setrangetext",
+          "version": "HTML 5.2 (W3C Recommendation, 2017-12-14)",
+          "location": "§4.10.19 APIs for text field selections; setRangeText 알고리즘",
+          "checkedAt": "2026-10-04T19:10:56.466249+00:00",
+          "summary": "시작·끝 인수를 주면 현재 선택 대신 그 반열린 구간을 바꾼다. select 모드는 교체 시작부터 새 문자열 길이만큼의 구간을 선택한다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice B matches frozen key under mapped stable option IDs. Explicit range [2,5) replaces cde with XY, giving abXYfg. select mode selects the replacement from 2 to 4, independently of the prior [0,1) selection. Exactly one option; no execution claimed.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "HTML 5.2 Recommendation date and 4.10.19 heading verified. Full selection API section read, including input-type applicability, textarea raw-value use, explicit start/end overriding current selection, start>end exception, clamping, end-exclusive deletion, all four modes and final selection assignment. Valid ASCII indices and select mode give abXYfg and [2,4). Compared r012-dom-html-s3-w04: that goal normalizes reversed selection endpoints, while this one performs explicit text replacement and selects the replacement range. It is not a numeric or wording variant of the earlier reversal question. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-text-range-replacement"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only B matches the explicit half-open replacement and select mode. The prior [0,1) selection is intentionally irrelevant because start/end are supplied; ASCII text avoids code-unit or newline interpretation differences.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-text-range-replacement"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "All five arrays are parallel value/start/end results. Distractors isolate old selection use, inclusive end, pre-replacement end retention, and end mode. The material is necessary and explicitly introduced as code; one concise overall explanation does not duplicate all option reasons, and no context copies or positional cues occur.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-text-range-replacement"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s3-w02",
+      "lineageId": "r013-dom-html-template-reset-event-cancellation-precedes-control-restoration",
+      "learningGoalId": "r013-dom-html-template-reset-event-cancellation-precedes-control-restoration",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r013-dom-html-s3-w02",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-reset-event-cancellation-precedes-control-restoration",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-cancelable-form-reset",
+          "title": "HTML 5.2",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#resetting-a-form",
+          "version": "HTML 5.2 (W3C Recommendation, 2017-12-14)",
+          "location": "§4.10.22 Resetting a form; §4.10.3 reset()",
+          "checkedAt": "2026-10-04T19:10:56.466249+00:00",
+          "summary": "폼 초기화는 먼저 취소 가능한 reset 이벤트를 발생시킨다. 취소되지 않은 경우에만 소속된 초기화 가능 요소의 초기화 알고리즘을 실행한다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice E matches frozen key under mapped stable option IDs. Reset is dispatched before resettable controls are restored, so seen records the modified value. preventDefault cancels the restoration, leaving box.value modified too. The sole result is [\"수정\",\"수정\"]; no runtime execution claimed.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "HTML 5.2 4.10.3 reset() lock/unlock steps and 4.10.22 read. A cancelable bubbling reset event precedes invoking each resettable element algorithm. Method initiation is untrusted but still fires the event. No recursive reset or named reset control exists, and cancellation prevents restoration. Compared r008-internet-html-w11 and r001-css-script-w10: earlier questions concern current default values on an uncanceled reset and a generic event cancellation return value. This scenario adds the form-specific event-before-restoration ordering and its observable cancellation consequence. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-cancelable-form-reset"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only E matches both observed and final values. The event is synchronous within reset(), prevention is allowed, and the supplied no-other-code condition plus distinct element IDs excludes method shadowing or a later handler altering the result.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-cancelable-form-reset"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "All five two-value arrays match the same observation task. Distractors correspond to reset timing, omitted cancellation, rollback and skipped event assumptions. Initial/current Korean values are distinguishable without visual cues; notes and material link are necessary and explanations remain option-specific.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-cancelable-form-reset"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s3-w03",
+      "lineageId": "r013-dom-html-template-range-missing-value-midpoint-sanitization",
+      "learningGoalId": "r013-dom-html-template-range-missing-value-midpoint-sanitization",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r013-dom-html-s3-w03",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-range-missing-value-midpoint-sanitization",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-range-default-midpoint",
+          "title": "HTML 5.2",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#range-state-typerange",
+          "version": "HTML 5.2 (W3C Recommendation, 2017-12-14)",
+          "location": "§4.10.5.1.13 Range state; value sanitization algorithm",
+          "checkedAt": "2026-10-04T19:10:56.466249+00:00",
+          "summary": "range의 유효하지 않은 값은 기본값으로 정제된다. 정상적인 최소·최대 범위에서 기본값은 최소값에 범위 차이의 절반을 더한 값이며 이후 범위·단계 제약을 적용한다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice A matches frozen key under mapped stable option IDs. The missing range value defaults to the midpoint 10+(70-10)/2=40. It is within bounds and aligned to the step base 10 with step 10, so no adjustment is needed; the IDL string is \"40\". All other choices contradict that calculation.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "HTML 5.2 4.10.5.1.13 and the creation/value-IDL rules read. Creation invokes sanitization; missing/invalid numeric value uses the midpoint unless max<min. Underflow, overflow, step mismatch and positive-infinity tie rules were checked. 40 lies on the 10-based step lattice, so none of those exception branches changes it. UI rendering discretion does not change this IDL result. Compared r003-internet-html-w14 and r010-network-html-s3-w04: number step-base validity and invalid number-to-empty sanitization do not test range missing-value midpoint construction. The new control state has a distinct nonempty default algorithm. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-range-default-midpoint"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only A is the sanitized value. Missing value is not empty in range state; midpoint 40 is valid and step aligned. No max<min or midpoint tie case is involved, and the requested output is the IDL string rather than UI styling.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-range-default-midpoint"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "The five quoted-string alternatives are parallel. Empty, endpoints and unoffset half-span each represent a plausible default/sanitization misconception. The code supplies bounds and step without giving the default; explanation separates the general rule from the numerical option reason.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-range-default-midpoint"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s3-w04",
+      "lineageId": "r013-dom-html-template-empty-title-stops-ancestor-advisory-information",
+      "learningGoalId": "r013-dom-html-template-empty-title-stops-ancestor-advisory-information",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r013-dom-html-s3-w04",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-empty-title-stops-ancestor-advisory-information",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-title-empty-override",
+          "title": "HTML 5.2",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/dom.html#the-title-attribute",
+          "version": "HTML 5.2 (W3C Recommendation, 2017-12-14)",
+          "location": "§3.2.5.1 The title attribute; advisory information 알고리즘",
+          "checkedAt": "2026-10-04T19:12:13.844594+00:00",
+          "summary": "일반 요소에서 title을 생략하면 조상의 부가 설명 정보가 적용된다. 빈 title을 명시하면 해당 요소에 부가 설명 정보가 없음을 뜻한다. 이는 실제 도구의 툴팁·발화 보장이 아니다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice A matches frozen key under mapped stable option IDs. An absent title on first allows the parent title advisory information to apply. Explicit empty title on second means no advisory information and blocks that ancestor fallback. The question appropriately excludes specific tooltip or screen-reader behavior; A alone follows the stated standard semantics.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "HTML 5.2 3.2.5.1 verified, including the full advisory-information algorithm and the separate handling for link/style/dfn/abbr. The ordinary spans do not trigger those element exceptions. Omission recurses to parent, explicit empty title returns empty; tooltip/AT presentation is expressly excluded from the question. Compared document-title, abbr expansion, and name/description goals. None tests ordinary-element advisory-information ancestor recursion and explicit-empty override. The question avoids conflating this with accessible-name or tooltip behavior. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-title-empty-override"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only A follows the full ordinary-element algorithm. Empty is an explicit override, not absence. Both targets are spans, so special element advisory semantics do not apply; actual tooltip and speech behavior are outside the claim.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-title-empty-override"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Each alternative names first and second in the same order; these are fixed code IDs, not shuffled option positions. Inheritance, empty override, reversal and text-content substitution distractors are plausible. The note properly preserves the distinction from tooltip/AT output; options and explanations do not expose position cues.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-title-empty-override"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s3-w05",
+      "lineageId": "r013-dom-html-template-presentation-role-focusable-native-control-exception",
+      "learningGoalId": "r013-dom-html-template-presentation-role-focusable-native-control-exception",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r013-dom-html-s3-w05",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-presentation-role-focusable-native-control-exception",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-presentation-focusable-exception",
+          "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#conflict_resolution_presentation_none",
+          "version": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06)",
+          "location": "§5.4 presentation role; Presentational Roles Conflict Resolution",
+          "checkedAt": "2026-10-04T19:11:17.233004+00:00",
+          "summary": "presentation은 요소의 암시적 의미를 없애며 자손의 텍스트까지 숨기는 속성이 아니다. 초점 가능한 요소에서는 사용자 에이전트가 presentation을 무시하고 암시적 역할로 노출해야 한다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice B matches frozen key under mapped stable option IDs. A focusable button triggers presentational-role conflict resolution, preserving its native button semantics. A nonfocusable h2 without global ARIA properties can be presentational, removing its heading semantics while retaining content. Both texts remain. The explicit error-handling framing avoids treating the markup as recommended authoring.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "WAI-ARIA 1.2 Recommendation 06 June 2023 and 5.4 presentation/conflict-resolution sections verified. Nonfocusable presentational elements lose native semantics but retain ordinary content. Focusable/interactive elements must ignore presentation; global ARIA, explicit required-owned roles, and required-child inheritance exceptions were read. The given sibling elements have no conflicting global ARIA or hidden content. Compared r004-internet-html-p02, r012-policy-accessibility-p01 and r002-internet-html-w19 in the full baseline: table presentational inheritance, button presentational descendants, and host state/property conflicts differ from the present focusable-element exception to an explicit presentation role. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-presentation-focusable-exception"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only B applies the mandatory focusable-control exception while preserving content. The h2 is nonfocusable with no other ARIA properties, so neither global-state nor interaction exceptions rescue heading semantics. The task diagnoses erroneous role markup rather than endorsing it.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-presentation-focusable-exception"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "All alternatives discuss button semantics, heading semantics and retained text in parallel. Retaining both, removing both, reversed exception and hiding contents are genuine role-confusion distractors. Explicit focusability/no-global-ARIA conditions and error-handling framing are necessary, not redundant verbosity.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-presentation-focusable-exception"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s4-w01",
+      "lineageId": "r013-dom-html-template-getattribute-empty-value-distinct-from-absence",
+      "learningGoalId": "r013-dom-html-template-getattribute-empty-value-distinct-from-absence",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r013-dom-html-s4-w01",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-getattribute-empty-value-distinct-from-absence",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-attribute-presence-empty-versus-absent",
+          "title": "W3C DOM4",
+          "url": "https://www.w3.org/TR/2015/REC-dom-20151119/#dom-element-getattribute",
+          "version": "W3C DOM4 (W3C Recommendation, 2015-11-19)",
+          "location": "§4.8 Interface Element; getAttribute 및 hasAttribute",
+          "checkedAt": "2026-10-04T19:11:11.354399+00:00",
+          "summary": "getAttribute는 존재하는 속성의 문자열 값을 반환하고 없으면 null을 반환한다. hasAttribute는 그 값의 참·거짓 변환이 아니라 속성의 존재 여부를 반환한다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice B matches frozen key under mapped stable option IDs. An existing empty-valued attribute returns the empty string and hasAttribute true. A missing attribute returns null and hasAttribute false. Empty value and absence remain distinct, uniquely matching B.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "DOM4 Recommendation 19 November 2015 and 4.8 verified. getAttribute lowercases an HTML-namespace name in an HTML document then returns matching value or null; hasAttribute tests presence. The two lowercase data-* names raise no casing/namespace ambiguity. Empty string remains an existing attribute value. Compared r002-internet-html-w11 and r009-web-tech-s3-w02: HTML boolean disabled presence and dataset key conversion do not test getAttribute null versus present-empty plus hasAttribute. This is a separate API return contract. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-attribute-presence-empty-versus-absent"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only B separates a present empty value from an absent attribute. Neither general JavaScript property lookup nor truthiness conversion defines these DOM methods; names are exact lowercase and no mutation interleaves.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-attribute-presence-empty-versus-absent"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "All four-entry arrays have matched viewpoint/detail. Each wrong array distinguishes missing/null/undefined, present-empty or truthiness errors. getAttribute and hasAttribute remain explicit in the material; necessary string quotes/operators are preserved and the overall explanation does not re-copy every option.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-attribute-presence-empty-versus-absent"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s4-w02",
+      "lineageId": "r013-dom-html-template-domtokenlist-toggle-force-final-presence-return",
+      "learningGoalId": "r013-dom-html-template-domtokenlist-toggle-force-final-presence-return",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r013-dom-html-s4-w02",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-domtokenlist-toggle-force-final-presence-return",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-token-toggle-force-result",
+          "title": "W3C DOM4",
+          "url": "https://www.w3.org/TR/2015/REC-dom-20151119/#dom-domtokenlist-toggle",
+          "version": "W3C DOM4 (W3C Recommendation, 2015-11-19)",
+          "location": "§7.1 Interface DOMTokenList; toggle(token, force)",
+          "checkedAt": "2026-10-04T19:11:11.354399+00:00",
+          "summary": "force가 true이면 토큰을 존재하게 하고 false이면 없게 한다. 반환값은 토큰이 최종적으로 존재하는지에 대응하며 실제 변경이 있었는지와는 다르다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice C matches frozen key under mapped stable option IDs. toggle(active,true) preserves active and returns true; toggle(muted,false) keeps muted absent and returns false; toggle(active,false) removes active and returns false. The final class string is empty. Exactly one option; no execution claimed.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "DOM4 7.1 toggle and associated-attribute update steps read. The empty-token/ASCII-whitespace exceptions do not apply. Existing token with force=true returns true without removal; absent token with false returns false; existing token with false removes and returns false. Ordered-set serialization updates class to empty. Compared r012-dom-html-s4-w01: multi-token add validation-before-mutation is separate from toggle force being desired state and its return being final membership. Tokens and force inputs require no earlier candidate rejection reopening. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-token-toggle-force-result"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only C follows final membership returns and final class serialization. Presence before the call, whether a mutation occurred, and unforced toggling each explain distinct distractors but do not create another correct answer.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-token-toggle-force-result"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Five four-entry arrays parallel three return values and a final class string. Force omission, change-indicator, stale class and pre-call membership misconceptions are all plausible. No correct-choice length/tone cue or context duplication appears.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-token-toggle-force-result"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s4-w03",
+      "lineageId": "r013-dom-html-template-importnode-deep-copy-uses-target-document-keeps-original",
+      "learningGoalId": "r013-dom-html-template-importnode-deep-copy-uses-target-document-keeps-original",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r013-dom-html-s4-w03",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-importnode-deep-copy-uses-target-document-keeps-original",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-import-node-copy-document",
+          "title": "W3C DOM4",
+          "url": "https://www.w3.org/TR/2015/REC-dom-20151119/#dom-document-importnode",
+          "version": "W3C DOM4 (W3C Recommendation, 2015-11-19)",
+          "location": "§4.5 Interface Document: importNode; §4.4 Node: clone 알고리즘",
+          "checkedAt": "2026-10-04T19:11:11.354399+00:00",
+          "summary": "importNode는 호출 대상 문서를 노드 문서로 하는 복제본을 반환하며 원본을 이동하지 않는다. deep=true이면 자손도 새 문서의 노드로 복제한다. adoptNode는 원본을 이전 부모에서 분리하는 별도 연산이다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice C matches frozen key under mapped stable option IDs. Deep importNode creates a distinct copy owned by the target document, preserves the original attachment in other.body, and copies the text child. Thus false,true,true,\"초안\". Every choice is self-contained; no execution claimed.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "DOM4 4.5 importNode and 4.4 full cloning algorithm verified. The Document-node rejection does not apply to p. Import passes the receiving document to clone, deep copies descendants and returns a new node without adopting/removing the source; node document and parent relationships therefore support the key. Compared r009-web-tech-s4-w08 and r011-dom-form-s4-w01: clone listener omission and appending an existing node test different boundaries. This goal is cross-document import ownership, deep copy, object identity and retaining the source parent. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-import-node-copy-document"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only C has a new target-document node and unchanged source parent with copied text. Original is an Element, not the rejected Document type; deep is explicitly true. Import is not adopt or same-document clone.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-import-node-copy-document"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "The five result arrays parallel object identity, document identity, source attachment and text. Adopt, clone document, shallow copy and aliasing interpretations are meaningful wrong branches. No unrelated distractor, order reference or redundant context field occurs.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-import-node-copy-document"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s4-w04",
+      "lineageId": "r013-dom-html-template-external-stylesheet-relative-url-base",
+      "learningGoalId": "r013-dom-html-template-external-stylesheet-relative-url-base",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r013-dom-html-s4-w04",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-external-stylesheet-relative-url-base",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-css-draft-status",
+          "title": "Cascading Style Sheets Level 2 Revision 2 (CSS 2.2) Specification",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/",
+          "version": "CSS 2.2 (W3C First Public Working Draft, 2016-04-12, 초안)",
+          "location": "표제; Status of this document",
+          "checkedAt": "2026-10-04T19:19:57.143647+00:00",
+          "summary": "선택한 2016-04-12 고정판은 First Public Working Draft이며 확정 W3C 권고안이 아니다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-stylesheet-relative-url-base",
+          "title": "Cascading Style Sheets Level 2 Revision 2 (CSS 2.2) Specification",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/syndata.html#uri",
+          "version": "CSS 2.2 (W3C First Public Working Draft, 2016-04-12, 초안)",
+          "location": "§4.3.4 URLs and URIs",
+          "checkedAt": "2026-10-04T19:12:20.174338+00:00",
+          "summary": "외부 CSS의 상대 URI는 그 스타일시트의 URI를 기준으로 해석한다. 스타일시트를 사용하는 원본 HTML 문서의 URI가 기준이 되는 것은 아니다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice A matches frozen key under mapped stable option IDs. Resolve ../img/paper.png relative to the external sheet at /assets/css/theme.css, giving /assets/img/paper.png on static.example. The redirect and request-policy notes remove extraneous issues. Exactly one choice matches; labels have no semantic positional dependence.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "CSS 2.2 4.3.4 verified, including quoted URL syntax, RFC3986 base resolution and invalid/unavailable-resource handling. The sheet URI is the base rather than the HTML URI. ../ removes css/ once. The URL is syntactically valid and the question excludes request success and redirects. Compared r002-internet-html-w01 and r008-internet-html-w15: generic relative-path resolution and first HTML base selection do not establish an external CSS sheet as the resource URL base. Competing host URLs make this new CSS-specific base choice consequential. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-css-draft-status",
+                "r013-dom-html-src-stylesheet-relative-url-base"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only A resolves against the redirect-free external stylesheet URL. The request-permission note removes CORS/network questions. Correct sheet selection and one parent-path step jointly exclude all four alternatives.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-css-draft-status",
+                "r013-dom-html-src-stylesheet-relative-url-base"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Five fully specified URL alternatives share grammar and detail. Wrong base host, wrong parent-depth and ignored dot-segment are same-goal mistakes. The stylesheet filename is necessary rather than a hidden answer cue, and the stem explicitly connects to its code.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-css-draft-status",
+                "r013-dom-html-src-stylesheet-relative-url-base"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-s4-w05",
+      "lineageId": "r013-dom-html-template-normal-flow-block-two-auto-margins-share-free-space",
+      "learningGoalId": "r013-dom-html-template-normal-flow-block-two-auto-margins-share-free-space",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r013-dom-html-s4-w05",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-normal-flow-block-two-auto-margins-share-free-space",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 구현·WAI-ARIA; CSS/스크립트 개론: CSS 구현·스크립트 개요",
+          "checkedAt": "2026-10-04T19:10:13.712746+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. HTML 서식·메타데이터·상호작용과 WAI-ARIA 역할·상태·속성, CSS 문법·레이아웃 및 JavaScript 기초 구현이 범위에 포함된다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-css-draft-status",
+          "title": "Cascading Style Sheets Level 2 Revision 2 (CSS 2.2) Specification",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/",
+          "version": "CSS 2.2 (W3C First Public Working Draft, 2016-04-12, 초안)",
+          "location": "표제; Status of this document",
+          "checkedAt": "2026-10-04T19:19:57.143647+00:00",
+          "summary": "선택한 2016-04-12 고정판은 First Public Working Draft이며 확정 W3C 권고안이 아니다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-normal-block-auto-margins",
+          "title": "Cascading Style Sheets Level 2 Revision 2 (CSS 2.2) Specification",
+          "url": "https://www.w3.org/TR/2016/WD-CSS22-20160412/visudet.html#blockwidth",
+          "version": "CSS 2.2 (W3C First Public Working Draft, 2016-04-12, 초안)",
+          "location": "§10.3.3 Block-level, non-replaced elements in normal flow",
+          "checkedAt": "2026-10-04T19:12:26.415722+00:00",
+          "summary": "정상 흐름 비대체 블록은 양쪽 마진·테두리·패딩·내용 너비 합이 포함 블록 너비와 같아야 한다. 고정 너비가 들어맞고 양쪽 가로 마진이 auto이면 남은 공간을 같은 값으로 나눈다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked choice B matches frozen key under mapped stable option IDs. The card occupies 200+20+20+5+5=250px before horizontal margins. The 400px containing block leaves 150px shared equally by two auto margins, hence 75px/75px. Display, positioning, float, box-model and conflicting-style conditions sufficiently constrain the rule.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "CSS 2.2 10.3.3 full normal-flow non-replaced-block equation reviewed, including oversized contents, overconstraint/direction, one-auto, auto-width and both-auto branches. Here content+padding+border is 250 within a 400px block, width is fixed and both horizontal margins auto, giving 75px each; no competing branch applies. Compared r001-css-script-w03, r003-css-script-w01 and r012-dom-html-s4-w05: border-box addition, width min/max constraints and absolute overconstraint differ from allocating normal-flow free space equally to two auto margins. The arithmetic reuses foundations but the branch decision is new. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-css-draft-status",
+                "r013-dom-html-src-normal-block-auto-margins"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Only B satisfies the used-value equation with two auto margins. Normal-flow/static/nonfloat/nonreplaced/block conditions and all-origin final declarations exclude the float, inline-block, absolute and overwritten-style branches.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-css-draft-status",
+                "r013-dom-html-src-normal-block-auto-margins"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "The five left/right numeric pairs are parallel. Ignoring padding/borders, asymmetric allocation and zero-auto treatment are coherent mistakes. Detailed CSS conditions are necessary to avoid cascade/formatting ambiguity and remain in code/notes. The correct option is not distinguished by prose length.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-written",
+                "r013-dom-html-src-css-draft-status",
+                "r013-dom-html-src-normal-block-auto-margins"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation and private-copy build pass on regular.12 plus the frozen fragment. 1,000 seeds for each 4/5-option configuration retain one correct stable key, distinct options and option content; all correct positions occur. Correct/wrong grading and serialized snapshot preservation pass; original objects remain exact.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-p01",
+      "lineageId": "r013-dom-html-template-multiline-textbox-semantics-match-newline-editing",
+      "learningGoalId": "r013-dom-html-template-multiline-textbox-semantics-match-newline-editing",
+      "subjectId": "practical",
+      "type": "practical",
+      "questionId": "r013-dom-html-p01",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-multiline-textbox-semantics-match-newline-editing",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-practical",
+          "title": "2026년 웹접근성전문가 2급(실기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%EC%8B%A4%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "웹페이지 구현·웹페이지 점검의 수행준거; 참고자료",
+          "checkedAt": "2026-10-04T19:10:13.515476+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. KWCAG 2.2에 따라 미완성 코드를 완성하거나 구현된 코드의 위반을 설명·개선하는 과제를 다룬다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-kwcag-webapp-api",
+          "title": "한국형 웹 콘텐츠 접근성 지침 2.2",
+          "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+          "version": "KS X OT0003:2022, 2022-12-28 개정",
+          "location": "§8.2.1 웹 애플리케이션 접근성 준수; 접근성 프로그래밍 인터페이스 대체수단 제공",
+          "checkedAt": "2026-10-04T19:12:40.912431+00:00",
+          "summary": "공식 DOCX 첨부를 다시 받아 기존 추출 원본과 일치함을 확인했다. 웹 애플리케이션의 명칭·역할·상태·값을 접근성 프로그래밍 인터페이스로 제공하여 보조기술이 이용하도록 구현해야 한다. 첨부: https://www.rra.go.kr/FileDownSvl?file_parentseq=5247&file_seq=1&file_type=notice",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-textbox-multiline",
+          "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-multiline",
+          "version": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06)",
+          "location": "§6.7 aria-multiline; textbox",
+          "checkedAt": "2026-10-04T19:12:32.635021+00:00",
+          "summary": "aria-multiline은 텍스트 상자가 한 줄 또는 여러 줄 입력을 받아들이는지를 전달한다. true는 여러 줄 입력, 기본값 false는 한 줄 입력이며 textbox에서 사용한다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked literal aria-multiline matches the frozen accepted set. Whole learner-facing practical package was inspected without keys.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "WAI-ARIA 1.2 6.7 aria-multiline and 5.4 textbox read. It is supported on textbox and inherited into searchbox; true conveys multiline input and default false means single-line. The note about usual Enter behavior is not a normative automatic-handler requirement. The stem independently supplies existing multiline behavior and asks only to expose its semantics. Compared r002-internet-html-w16, r011-protocol-policy-p01 and r012-dom-html-p01: editability inheritance, autocomplete behavior and shortcut metadata do not express textbox multiline capability. This bounded semantic completion is a distinct API state/behavior relationship. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-practical",
+                "r013-dom-html-src-kwcag-webapp-api",
+                "r013-dom-html-src-textbox-multiline"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "The sole lowercase ASCII name is aria-multiline; full attribute markup, values, camelcase and Unicode hyphens are intentionally outside the explicit answer format. trim admits harmless surrounding whitespace. No second attribute name expresses the specified textbox capability while retaining the code.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-practical",
+                "r013-dom-html-src-kwcag-webapp-api",
+                "r013-dom-html-src-textbox-multiline"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Inspected stem, notes, editor.html filename/code, P1 and ungraded free-response prompt together before key exposure and again after. None reveals aria-multiline. Existing edit/name/focus behavior is supplied so the task stays semantic; literal case/ASCII/name-only boundaries are explicit. Reference answer and rubric are post-answer only.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-practical",
+                "r013-dom-html-src-kwcag-webapp-api",
+                "r013-dom-html-src-textbox-multiline"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation/private-copy build pass. 1,000 generated practical snapshots preserve part order, stable IDs, 10-point value, accepted set and normalization. Nine literal-boundary trials, free-response-only non-grading, independent/pregrade prompt key exclusion, postgrade reference availability and timed prompt blocking pass; original objects remain exact. No single/multi choices are present.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r013-dom-html-p02",
+      "lineageId": "r013-dom-html-template-grid-row-selection-uses-selected-not-checked",
+      "learningGoalId": "r013-dom-html-template-grid-row-selection-uses-selected-not-checked",
+      "subjectId": "practical",
+      "type": "practical",
+      "questionId": "r013-dom-html-p02",
+      "revision": 1,
+      "templateId": "r013-dom-html-template-grid-row-selection-uses-selected-not-checked",
+      "authorId": "dom-html",
+      "evidence": [
+        {
+          "sourceId": "r013-dom-html-src-scope-practical",
+          "title": "2026년 웹접근성전문가 2급(실기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%EC%8B%A4%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "웹페이지 구현·웹페이지 점검의 수행준거; 참고자료",
+          "checkedAt": "2026-10-04T19:10:13.515476+00:00",
+          "summary": "공식 HWP를 직접 다시 받아 기존 추출에 사용한 원본과 바이트가 같음을 확인했다. KWCAG 2.2에 따라 미완성 코드를 완성하거나 구현된 코드의 위반을 설명·개선하는 과제를 다룬다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-kwcag-webapp-api",
+          "title": "한국형 웹 콘텐츠 접근성 지침 2.2",
+          "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+          "version": "KS X OT0003:2022, 2022-12-28 개정",
+          "location": "§8.2.1 웹 애플리케이션 접근성 준수; 접근성 프로그래밍 인터페이스 대체수단 제공",
+          "checkedAt": "2026-10-04T19:12:40.912431+00:00",
+          "summary": "공식 DOCX 첨부를 다시 받아 기존 추출 원본과 일치함을 확인했다. 웹 애플리케이션의 명칭·역할·상태·값을 접근성 프로그래밍 인터페이스로 제공하여 보조기술이 이용하도록 구현해야 한다. 첨부: https://www.rra.go.kr/FileDownSvl?file_parentseq=5247&file_seq=1&file_type=notice",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r013-dom-html-src-row-selected-state",
+          "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-selected",
+          "version": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06)",
+          "location": "§6.7 aria-selected 및 aria-checked; §5.4 row",
+          "checkedAt": "2026-10-04T19:12:32.635021+00:00",
+          "summary": "aria-selected는 row의 선택 상태를 전달할 수 있다. true는 선택됨, false는 선택 가능하지만 미선택 상태다. aria-checked의 지원 역할 목록에는 row가 포함되지 않는다.",
+          "rights": "표준의 사실을 독자적으로 요약했으며 지문·선택지·보기 코드는 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-04T19:21:16.000Z",
+          "finishedAt": "2026-10-04T19:37:32Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Locked literal aria-selected matches the frozen accepted set. Whole learner-facing practical package was inspected without keys.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "WAI-ARIA 1.2 6.7 aria-selected/aria-checked and 5.4 row read. Row supports aria-selected and not aria-checked; false means selectable but unselected, true means selected, undefined means not selectable. Explicit selection takes precedence over implicit focus selection. Grid containment and gridcell ownership are present; treegrid-only row properties are irrelevant. Compared r009-standards-p01 in full: listbox container multiselect capability, whose options already have aria-selected, differs from repairing unsupported checked state on a grid row. Existing selection behavior is supplied, so the new goal is role-supported row selection semantics. Original scenario/code and short independent explanations do not reproduce an official test item or a substantial standard passage.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-practical",
+                "r013-dom-html-src-kwcag-webapp-api",
+                "r013-dom-html-src-row-selected-state"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "The sole lowercase ASCII replacement name is aria-selected. aria-current describes current location/item rather than selectable row state, and aria-pressed is not supported on row. Keeping false/true values and the fixed grid/row structure removes alternative redesign answers.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-practical",
+                "r013-dom-html-src-kwcag-webapp-api",
+                "r013-dom-html-src-row-selected-state"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Inspected stem, notes, listing.html filename/code, P1 and ungraded prompt together. aria-checked is the defect, not the target key; aria-selected occurs only in post-answer fields. The current states and functional-selection assumptions are necessary. Name-only lowercase-ASCII limits match the trim-only grader.",
+              "evidenceRefs": [
+                "r013-dom-html-src-scope-practical",
+                "r013-dom-html-src-kwcag-webapp-api",
+                "r013-dom-html-src-row-selected-state"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "review-dom-a",
+              "summary": "Explicit-input validation/private-copy build pass. 1,000 generated practical snapshots preserve part order, stable IDs, 10-point value, accepted set and normalization. Nine literal-boundary trials, free-response-only non-grading, independent/pregrade prompt key exclusion, postgrade reference availability and timed prompt blocking pass; original objects remain exact. No single/multi choices are present.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    }
+  ],
+  "counts": {
+    "registered": 28,
+    "accepted": 28,
+    "rejected": 0,
+    "pending": 0,
+    "publishedRegularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "publishedRegularPractical": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 61,
+      "s2": 76,
+      "s3": 72,
+      "s4": 78,
+      "s5": 69
+    },
+    "regularPractical": 47,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.05-regular.13",
+    "bankSha256": "e4ce0f0c47fe71715caaf154ceab90407882b8a4ed4468a9f374927d1f95bbdc",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [
+    {
+      "check": "유한 독립 콘텐츠 검토",
+      "result": "pass",
+      "summary": "28후보·29시작검토에서28채택·0탈락·0미결정. 최초27개·수정1개 채택. 모든 시작한 검토·실패·독립 풀이 잠금 답을 보존했고 채택본은 같은 개정판의 다섯 gate를 통과했다. 최종132개 선택지/허용답 경계, 재검토 포함137개 확인을 연결했다.",
+      "reportPath": "docs/rounds/round-013.md"
+    },
+    {
+      "check": "전체 통합·구조·해설·계보·발행 검사",
+      "result": "pass",
+      "summary": "전체564/564테스트와 기본/명시 입력의 bank·check·build·캠페인·발행 가드를 통과했다. 확대/편집 대장14개의 독립 JSON Schema검사와 정확한 신규 채택·누적 은행을 검증했다. 기존 모든 은행·대장·정정·영수증·런타임 바이트를 보존했으며 실제 공개403정규와 구별한다.",
+      "reportPath": "docs/rounds/round-013.md"
+    },
+    {
+      "check": "독립 출제·채점·저장·AI 회귀",
+      "result": "pass",
+      "summary": "필기130560·실기8320회 무작위 표시와6400모의문항, 구판547·신판575스냅샷에서 안정키·점수·순서·백업·시간·AI공개 계약을 검사했다. 18개 불변 릴리스의4768시험용 스냅샷과606실기프롬프트도 대조했다. 실제 사용자 기록 접근은 하지 않았다.",
+      "reportPath": "docs/rounds/round-013.md"
+    },
+    {
+      "check": "예정 발생분·실제 시각·동결 반례",
+      "result": "pass",
+      "summary": "예정19:00과 실제 알림19:04:10·시작19:04:56·등록19:05:38을 구분하고22:30판정 마감·23시 다음 발생분을 보존했다. 정확한012전달 체크포인트 뒤의 일반013 경로를 검증했다.10개 양쪽 동결 표시/누락 사례 및 최종cutoff를 검사했으며 새 회차별 코드 예외나 시계 초기화는 없다.",
+      "reportPath": "docs/rounds/round-013.md"
+    },
+    {
+      "check": "브라우저 코드 실행·Windows/NVDA·실제 사용자 기록 실측",
+      "result": "not_run",
+      "summary": "이번 코드의 실제 브라우저 실행과 Windows/NVDA·모바일보조기술·실제 사용자 기록 관찰은 수행하지 않았다. 정적 규범·독립 풀이·자동 검사와 실제 발화·조작 관찰을 구별한다.",
+      "reportPath": "docs/NVDA-CHECKLIST.md"
+    },
+    {
+      "check": "Git/Pages 신규 공개 확인",
+      "result": "not_run",
+      "summary": "이번013에서는 Git쓰기를 시도하지 않았다. 새 오프라인 누적본과 실제 공개008의403정규를 구별한다. 파일 포장·전달로 공개 수나 이전 미확정 결과를 변경하지 않는다.",
+      "reportPath": "docs/rounds/round-013.md"
+    }
+  ],
+  "nextRoundGaps": [
+    {
+      "gapId": "round-013-gap-01",
+      "category": "coverage",
+      "subjectIds": [
+        "s1"
+      ],
+      "learningGoalIds": [
+        "유지보수·모니터링 전용 공간의 접근성 예외 적용 단위"
+      ],
+      "candidateIds": [],
+      "finding": "기존 ICT 변경과 과도한 부담은 추가되지만 E202.5에서 공간의 출입자 및 상태표시·조작부 범위를 함께 적용하는 목표는 이 묶음에 없다.",
+      "neededEvidenceOrCounterexample": "Revised 508 E202.5 전체와 관련 operable part 정의 및 실제 적용 예외 경계의 공식 근거",
+      "nextAction": "유지보수 전용 공간의 상태표시·조작부와 일반 이용자 기능을 구분하는 새 목표를 기존 전체 계보와 대조한다.",
+      "completionCriterion": "공간·이용자·기능 단위를 분명히 한 독자 사례의 유일성, 모든 오답 조건, 범위·권리 및 다섯 gate를 새 회차 한도 내에서 검증한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-013-gap-02",
+      "category": "coverage",
+      "subjectIds": [
+        "s5"
+      ],
+      "learningGoalIds": [
+        "포인터 정지 유지에 의한 dwell 활성화와 이동 입력의 구분"
+      ],
+      "candidateIds": [],
+      "finding": "머리로 포인터를 옮기는 입력원은 보완되었으나 포인터를 일정 시간 유지해 클릭을 수행하는 활성화 방식은 독립적으로 검증하지 않았다.",
+      "neededEvidenceOrCounterexample": "제조사의 Dwell 공식 문서 전체, 지연시간·취소·대상 활성화 조건 및 WAI 보조입력 역할 설명",
+      "nextAction": "공식 사용 조건을 직접 확인하고 스위치 스캐닝·머리 포인터와 목표 중복이 아닌지 대조하여 신규 후보 가능성을 조사한다.",
+      "completionCriterion": "카메라나 시선 입력에 종속되지 않는 활성화 원리를 명확히 하는 단일 답 사례와 그럴듯한 대안을 출처·맹검·저작·구조 검토로 검증한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-013-gap-03",
+      "category": "coverage",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [
+        "Firefox 북마크 복원과 HTML 가져오기의 기존 데이터 처리 차이"
+      ],
+      "candidateIds": [],
+      "finding": "이번 브라우저 문항은 진단·저장·다운로드·권한·프록시이며 북마크 복원/가져오기 결과 차이는 기존 목표에도 없다. 신규 조사 후보일 뿐 현재 검증 완료 목표는 아니다.",
+      "neededEvidenceOrCounterexample": "Mozilla 공식 북마크 JSON 복원 및 HTML 가져오기 도움말의 현재 Windows 조건과 기존 북마크 대체/병합 예외",
+      "nextAction": "두 공식 기능의 결과 범위를 직접 읽고 기존 목표와 재대조한 뒤 데이터 손실을 실제 수행하지 않는 독자 상황을 작성한다.",
+      "completionCriterion": "서로 다른 기능의 데이터 보존 결과와 조건을 하나로 고정하고 신규 맹검·모든 옵션·다섯 gate를 통과한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-013-gap-04",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s4"
+      ],
+      "learningGoalIds": [
+        "DOM compareDocumentPosition 연결 노드의 포함·순서 플래그"
+      ],
+      "candidateIds": [],
+      "finding": "기존 목표와 이번 추가본은 연결된 노드의 포함 관계·문서 순서 플래그 조합을 다루지 않는다. 분리된 노드의 구현 의존 순서를 고정 정답으로 만들지 않아야 한다.",
+      "neededEvidenceOrCounterexample": "고정 DOM4 2015 제4.4절 compareDocumentPosition 알고리즘·비트 상수·분리된 노드 예외 및 전체 캠페인의 기존 목표 대조.",
+      "nextAction": "연결된 노드의 결정 가능한 관계를 다루는 독립 목표를 조사하고 분리된 노드의 사용자 에이전트 재량을 명시적으로 배제한다. 탈락 목표는 재개방하지 않는다.",
+      "completionCriterion": "공식 범위의 새 목표와 모든 플래그·오답을 고정판에서 도출하고 구현 재량에 정답이 의존하지 않음을 독립 검토한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-013-gap-05",
+      "category": "validation",
+      "subjectIds": [
+        "practical",
+        "s3",
+        "s4"
+      ],
+      "learningGoalIds": [
+        "고정판 규범과 실제 브라우저·보조기술 결과 분리"
+      ],
+      "candidateIds": [],
+      "finding": "HTML/DOM 코드와 ARIA 상태는 규범·독립 풀이·앱 채점기로 검증했으며 실제 브라우저 실행 및 Windows/NVDA·모바일 보조기술 실측은 미실시다.",
+      "neededEvidenceOrCounterexample": "동결된 같은 코드·입력과 운영체제·브라우저·보조기술 버전별 실제 동작·접근성 트리·발화 관찰.",
+      "nextAction": "허용된 환경에서 실제 코드 실행과 접근성 API 노출을 별도로 검사하고 규범상 정답과 구현 지원 차이를 구분한다. 같은 목표를 신규 문항으로 다시 세지 않는다.",
+      "completionCriterion": "각 환경의 실제 통과·실패·미실시 근거가 구별되고 범용 발화·지원 보장으로 과장되지 않는다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-013-gap-06",
+      "category": "coverage",
+      "subjectIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "learningGoalIds": [
+        "reusable-shared-choice-pools"
+      ],
+      "candidateIds": [],
+      "finding": "이번 신규 필기는 문항별 전용 선택지를 사용하고 과거 공유 객체는 그대로 보존했다. 재사용할 의미가 없는 결과값을 공유하여 수량을 늘리지 않았다.",
+      "neededEvidenceOrCounterexample": "여러 독립 목표에 실제 재사용할 정의·조건과 모든 연결의 정오·동의어·호환집합에 관한 1차 근거.",
+      "nextAction": "재사용이 유용한 경우만 공유 정의와 문항별 추가 문맥을 조사하며 기본·문맥 해설의 의미 중복을 확인한다.",
+      "completionCriterion": "공유 정의와 모든 허용 조합을 독립 검토하고 선택지 조합을 신규 목표로 부풀리지 않는다.",
+      "priority": "medium",
+      "reopenEligible": false
+    }
+  ],
+  "noGapExplanation": null,
+  "summary": "정규13회차 후보28개 중28개 채택·0개 탈락·미결정0개. 필기26개·실기2개를 추가한 오프라인 누적 일반561개·테스트14개다. 19:00 UTC 예정 발생분과 실제 시작19:04:56,22:30 판정 마감을 구분한다. 정확히 전달된012 일반533개와 모든 원래 은행·종결 대장·정정·시드·앱을 유지한다. 실제 공개008 일반403개와 구별하며 이번 신규 실제 공개는0개다."
+}

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.04-regular.8",
-  "releasedAt": "2026-10-04T07:56:30.849Z",
-  "file": "releases/2026.10.04-regular.8/bank.json",
-  "sha256": "ee533f5e4a546d14b7f2624700fb8d0dd0a47601290f9de9147f769ebf93feab",
-  "changeSummary": "8회차 정규 누적 문제 은행: 독립 검토를 통과한 일반 학습 필기 38문항·실기 2문항 추가. 기존 기능 검증용 14개 testOnly 시드·기존 불변 은행은 유지. 후보 41개 중 채택 40개, 탈락 1개. 누적 일반 403개·테스트14개. 과목별20개 조건 충족으로100문항 모의시험 사용 가능.",
+  "bankVersion": "2026.10.05-regular.17",
+  "releasedAt": "2026-10-05T12:01:09.379Z",
+  "file": "releases/2026.10.05-regular.17/bank.json",
+  "sha256": "3197db32a0268b01dddbd2f2cb75b02dfa101204ce3f132db034f5abba46fca3",
+  "changeSummary": "17회차 정규 누적 문제 은행: 독립 검토를 통과한 일반 학습 필기 28문항·실기 2문항 추가. 기존 기능 검증용 14개 testOnly 시드·기존 불변 은행은 유지. 후보 30개 중 채택 30개, 탈락 0개. 누적 일반 684개·테스트14개. 과목별20개 조건 충족으로100문항 모의시험 사용 가능.",
   "finalRelease": false
 }
