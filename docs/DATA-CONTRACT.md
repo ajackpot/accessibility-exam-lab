@@ -319,3 +319,12 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 예외는 010의 원래 종결 시각 `2026-10-04T11:44:42+00:00`·원문 SHA-256 `d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b`, 은행 SHA-256 `50b6131f1ffb174bf4a459b0a91a2498465c0dccea0e4aee30259f195086b214`, 전달 checkpoint 원문 SHA-256 `a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917` 및 검증 완료 `2026-10-04T12:27:05.849Z`에 한정한다. `previousLedgerSha256`·`previousDeliveryCheckpointSha256`·`previousDeliveryVerifiedAt`을 원문 및 검증된 오프라인 선행 연결과 대조하며, 선언이나 임의 Map만으로 증거를 대신하지 않는다.
 
 011의 판정 마감은 `2026-10-04T14:30:00Z`, 다음 예정 시작은 `2026-10-04T15:00:00Z`다. 실제 시작을 15:00으로 꾸미거나 이미 소비한 11:00 발생분을 다시 쓰지 않는다. 이미 닫힌010의 원래14:30 계획 마감·모든 은행·종결 대장·전달 proof 바이트는 보존한다. 009의 기존 예외는 그대로이며 다른 ID·날짜·시각으로 확대하지 않는다. 후보당3회·계보6회·더 이른 실제 후속 회차·영구/최종 동결·공개 수0·실제 Git/Pages 확인 경계는 유지한다.
+
+
+## 후속 누적 공개 이벤트와 역사적 읽기 전용 감사
+
+후속 `verified_cumulative_publication`은 `previousSynchronizationSha256`로 직전 등록 증거를 연결하며 고정 신뢰 배열의 정확한 prefix 순서로만 소비한다. 각 새 rounds 항목은 `deliveryProof:{path,sha256}`와 `deliveryVerifiedAt`을 추가하여 원래 normal backup 또는 successor checkpoint의 canonical 원문을 연결한다. 기존 `roundId/originalLedgerSha256/bankVersion/bankSha256/artifactSha256/manifestSha256/deliveredAt`과 proof의 sourceRelease·artifact·manifest·수락/완료 시각이 정확히 같아야 한다. 해당 proof·대장·은행은 실제 공개 remoteInventory에도 같은 해시로 있어야 한다. pin 추가는 외부 사실의 별도 독립 검토가 필요하며 자체 해시 계산만으로 공개 사실이 되지 않는다.
+
+역사적 재구성의 입력은 caller가 선언한 old/future 상태가 아니라 고정 이벤트가 연결한 원래 전체 archive inventory다. 전체 허용 목록 및 파일 크기/바이트 해시가 정확히 일치해야 하며, 누락·추가·변조·symlink나 검토되지 않은 경로로 범위를 넓히지 않는다. 감사 시각은 그 원본 proof의 preparedAt에서만 얻고 새 공개 검증/최종 cutoff보다 앞서야 한다. 읽기 전용 결과는 현재 발행 또는 새 저작 문맥을 반환하지 않는다. 일반 loader는 새 proof가 빠진 현재 작업본을 계속 차단한다.
+
+원래006–008 공개 증거와009 terminal origin·firstUnresolvedAt/deadlineAt/skip 및 고정 bootstrap 해시는 변경하지 않는다. 후속 공개 등록은 전달 기록의 canPublish=false·공개 수0·unknown을 바꾸지 않는다. 현재 manifest.finalRelease와 publicationState.finalized 및 최종 cutoff는 별도 현재 전체 검사에서 계속 적용한다.

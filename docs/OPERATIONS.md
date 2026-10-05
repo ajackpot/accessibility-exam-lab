@@ -290,3 +290,32 @@ node scripts/release-guard.mjs --finalize
 예외는 010의 원래 종결 시각 `2026-10-04T11:44:42+00:00`·원문 SHA-256 `d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b`, 은행 SHA-256 `50b6131f1ffb174bf4a459b0a91a2498465c0dccea0e4aee30259f195086b214`, 전달 checkpoint 원문 SHA-256 `a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917` 및 검증 완료 `2026-10-04T12:27:05.849Z`에 한정한다. `previousLedgerSha256`·`previousDeliveryCheckpointSha256`·`previousDeliveryVerifiedAt`을 원문 및 검증된 오프라인 선행 연결과 대조하며, 선언이나 임의 Map만으로 증거를 대신하지 않는다.
 
 011의 판정 마감은 `2026-10-04T14:30:00Z`, 다음 예정 시작은 `2026-10-04T15:00:00Z`다. 실제 시작을 15:00으로 꾸미거나 이미 소비한 11:00 발생분을 다시 쓰지 않는다. 이미 닫힌010의 원래14:30 계획 마감·모든 은행·종결 대장·전달 proof 바이트는 보존한다. 009의 기존 예외는 그대로이며 다른 ID·날짜·시각으로 확대하지 않는다. 후보당3회·계보6회·더 이른 실제 후속 회차·영구/최종 동결·공개 수0·실제 Git/Pages 확인 경계는 유지한다.
+
+
+## 누적 공개 증거의 append-only 후속 등록
+
+실제 payload 커밋·parent/tree·해당 커밋의 Pages 성공·live 파일 해시를 확인한 뒤에만 새 `docs/publications/` 이벤트와 `PUBLICATION_SYNCHRONIZATIONS`의 다음 고정 해시를 독립 검토하여 추가한다. 새 이벤트는 직전 증거 SHA-256, 원래 각 회차의 대장/은행, 정확한 원래 전달 proof 경로/해시와 실제 전달·검증 시각, 원격 전체 inventory를 연결한다. 기존 proof·종결 대장·은행·전달 manifest·원래 unknown/not_attempted·009 원격 anchor는 그대로 둔다. 자기 자신을 포함하지 않는 실제 payload와 뒤따르는 증거 지원 커밋을 구분한다.
+
+정상 현재 `loadRoundContext`는 등록된 공개 proof 및 필요한 원본 전달 의존성을 자체 허용 목록과 실제 파일에서 확인한다. proof 누락을 과거 importer 이름, Boolean, Map 또는 임의 감사 시각으로 허용하지 않는다. 새 회차는 확인 시각 뒤 최신 공개 은행을 사용하며 현재 양쪽 동결·cutoff·fresh 원격 head/ancestry를 다시 확인한다.
+
+이미 동결된 전체본은 새 증거 파일을 소급 삽입하지 않는다. 별도 읽기 전용 `auditHistoricalRelease(root)`는 검토된 공개 이벤트가 연결한 정확한 원래 전달 proof에서 전체 파일 inventory와 `deltaManifest.preparedAt`을 얻는다. 후보의 전체 허용 목록 및 모든 파일 바이트/크기/해시가 그 원본과 같을 때만 그 기록된 경계에서 역사적 발행 검사를 수행한다. 반환은 `exact_historical_delivery_audit`이며 `currentReleaseClearance:false`, `canStartNewContent:false`다. 현재 공개·새 콘텐츠·Git 재시도 승인이 아니다. 변경분을 검사할 때는 확인된 원래 공개 anchor에 적용하여 같은 정확한 전체본을 먼저 복원한다.
+
+전달 체크포인트 내부의 중간 은행 검사도 각 원본 `preparedAt`까지 실제 시작된 대장/정정과 그때 이미 적격한 선행 증거만 사용한다. 미래 공개 proof의 고정 해시는 확인하지만 기준으로 활성화하지 않는다. 그 뒤 별도의 전체 현재 캠페인/발행 검사를 수행하므로 과거 검사가 현재 최신 은행·동결·원래 전체 의존성 검사를 대체하지 못한다.
+
+## Git 전송: 개별 blob과 SHA-only tree
+
+공개 전송의 기본 경로는 검토된 파일별 `create_blob`과 SHA-only `create_tree`다. 정확한 바이트 길이·SHA-256·Git blob SHA를 먼저 계산하고, 원격에서 존재와 동일성을 확인한 blob은 재사용한다. 필요한 blob만 별도로 생성하며 성공 응답의 SHA를 계산값과 대조한다. 모든 blob이 확인된 뒤 tree에는 `path`, `mode:100644`, `type:blob`, `sha`만 담는다. 큰 파일 본문을 tree의 `content`에 섞지 않는다. 내용 편집·줄바꿈 변환·redaction으로 전송 문제를 피하지 않는다.
+
+누적010과 누적017 공개 작업에서 tree 무응답 정체가 각각 보고되었다. 원래010 요청의 정확한 입력은 확보하지 못했으므로 동일 payload였다고 단정하지 않는다. 정확한 입력을 재구성한 2026-10-05 누적017 요청은 67개 변경 경로 중 58개 inline 파일(3,845,437바이트)과 은행 SHA 참조9개를 담았고 compact JSON은 4,027,001바이트였다. 이 요청은 응답 없이 정체되었다. 235바이트 SHA-only canary는 9.872초에 기존 기준 tree를 반환했다. 이후 58개 blob을 개별 생성하고 확인된 은행 blob 9개를 재사용한 8,340바이트 SHA-only target 요청은 8.026초에 성공했다. 결과 전체 tree는 검토한 178파일 tree `cb46eebf28c239a69dae310da01eeeb79027aa7a`와 같았다. 4,366,904바이트 은행의 개별 create_blob은 성공했으므로 일반적인 4MB 전송 상한으로 설명할 수 없다. 이는 관측된 전송 방식의 개선이며 backend의 정확한 원인, POST 크기 제한 또는 보편적인 실패 임계값을 증명하지 않는다. Canary나 재제출은 자동 운영 단계가 아니다.
+
+`scripts/sha-only-tree.mjs`의 `prepareShaOnlyTreeRequest`는 검토 inventory의 현재 실제 바이트·경로·해시를 다시 검사하여 SHA-only 요청을 만들고 `validateShaOnlyTreeRequest`는 inline content, 미확인 blob SHA, 추가 필드, 중복·위험 경로·삭제를 거부한다. 이 helper의 반환값은 GitHub REST 본문 형태 `{base_tree, tree}`다. 현재 연결된 `create_tree` 도구에는 저장소를 별도로 확인한 후 `repository_full_name`, `base_tree_sha: request.base_tree`, `tree_elements: request.tree`로 정확히 대응시킨다. connector 인자 이름이 바뀌면 실제 도구 schema를 다시 확인하며 반환값을 그대로 전송하지 않는다. 이 읽기 전용 보조 도구는 전달된 remote 확인값의 진실성, Git 권한, 현재 head, ancestry, 동결 또는 공개 성공을 대신 검증하지 않으며 `publicationClearance:false`다. 삭제가 필요한 작업은 별도 승인·검토 경로를 따른다.
+
+공개 직전 60초 이내에 다시 확인한 원격 head/tree와 검토 기준이 같은지, 외부 변경·ancestry·경로/버전 충돌이 없는지, 로컬/원격의 두 동결 표시와 실제 현재 시각·최종 cutoff·전체 검사 결과를 확인한다. 은행·manifest·보존 기록은 하나의 검토 tree/commit에 묶고 기대한 단일 parent를 확인한 후 `force:false`로 main을 한 번 원자 갱신한다. commit/ref 성공만으로 실제 공개로 세지 않고 정확한 head의 Pages 성공과 live 길이/해시를 다시 확인한다.
+
+권한 승인 대기와 도구 실행 중/무응답을 구별한다. 실제 권한 요청 알림이 없으면 권한 대기라고 추정하거나 그 10분 시계를 만들어 내지 않는다. 실행 무응답의 원인도 권한 문제라고 단정하지 않는다. 이미 제출된 불명 쓰기는 기존 최초 지속 기록·유한 재대조 기한으로 종료하고 unknown을 실패·미변경으로 바꾸지 않는다. 인코딩·요청 크기·tool을 바꾼 맹목적 재시도는 금지한다. SHA-only 기본값은 이전 unknown 쓰기의 재시도 권한, 거부 우회, 늦은 승인 후 재개 또는 새로운 권한을 부여하지 않는다. 별도 명시 승인이 필요한 예외는 기존 좁은 규칙과 독립 검토를 그대로 따른다. 진행 중 무응답 작업의 ref 후속 단계를 실행하거나 같은 요청을 겹쳐 제출하지 않는다.
+
+## 009–017 공개 동기화의 확인 범위
+
+`docs/publications/cumulative-009-017.json`과 보고서는 원래 006–008 증거의 해시를 잇는 별도 공개 확인이다. payload commit `33be0045287029edb8a33477503c654d3001beac`의 Pages run `37325284427` 성공, 178개 원격 파일·36개 live 경로의 정확한 해시·길이(불변 은행 22개 포함)를 확인했다. 일반 684개(필기615·실기69), 시드14개이며 기존 공개403개 대비 신규 실제 공개는281개다. 후속 지원 커밋에 들어가는 이 증거는 자기 지원 커밋의 미래 배포를 미리 보증하지 않는다.
+
+원래 009 archive의 실제 전체 replay는 원본 14파일을 확보하지 못하여 `not_run`이다. 원래 고정 anchor·proof/hash·terminal 검사는 보존한다. 확보한 원본013/017 전체본과017 delta만 별도 읽기 전용 실제 복원 감사로 검사하며 이를 모든 역사적 ZIP replay로 확대 보고하지 않는다. 원래 원격 unknown, download-only/백업 영수증, 모든 종결 공개0 카운터와 은행·ZIP 원문은 수정하지 않는다. 실제 렌더링 브라우저 UI·Windows/NVDA·모바일 보조기술 실측은 미실시다.

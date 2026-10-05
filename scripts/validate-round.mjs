@@ -7,7 +7,7 @@ import {isDeepStrictEqual} from 'node:util';
 import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion, presentQuestion} from '../src/domain.js';
 
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
-import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts} from './publication-sync.mjs';
+import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts, validateSynchronizationDeliveryProof} from './publication-sync.mjs';
 import {validateEditorialHistory, validateEditorialTransition, validateCampaignBaselines} from './editorial-ledger.mjs';
 export {editorialHash, editorialContent, editorialContentHash, editorialBlindPackage, editorialChangedPaths, editorialComponentStates} from './editorial-ledger.mjs';
 
@@ -571,7 +571,51 @@ async function readOfflinePublicFile(root, relative) {
   return fs.readFile(current);
 }
 
-export async function loadRoundContext(root = ROOT, input = null, {release = false, now = Date.now()} = {}) {
+export async function loadRoundContext(root = ROOT, input = null, options = {}) {
+  return loadContext(root,input,options);
+}
+/** Read-only reconstruction of an exact original delivered source. No supplied
+ * date/Boolean/Map selects this exception and no current release context escapes.
+ * Source bytes, full inventory and boundary all come from independently pinned
+ * external-delivery evidence linked to an independently pinned publication. */
+export async function auditHistoricalRelease(root) {
+  const listed=(await readOfflinePublicFile(root,'PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).map(p=>p.trim()).filter(p=>p&&!p.startsWith('#'));
+  if(new Set(listed).size!==listed.length)throw new Error('Duplicate historical archive allowlist path');
+  const actual=[];
+  async function walk(directory,prefix='') {
+    for(const entry of await fs.readdir(directory,{withFileTypes:true})) {
+      const relative=prefix+entry.name;
+      if(entry.isDirectory())await walk(path.join(directory,entry.name),relative+'/');
+      else if(entry.isFile())actual.push(relative);
+      else throw new Error('Historical archive requires regular files and directories only');
+    }
+  }
+  await walk(root);
+  if(!isDeepStrictEqual(actual.sort(),[...listed].sort()))throw new Error('Historical archive has extra, missing or unlisted source files');
+  for(const pin of PUBLICATION_SYNCHRONIZATIONS) {
+    const raw=await readOfflinePublicFile(ROOT,pin.path);
+    if(digest(raw)!==pin.sha256)throw new Error('Publication authority proof hash mismatch');
+    const event=JSON.parse(raw);if(!event.previousSynchronizationSha256)continue;
+    for(const source of event.rounds) {
+      const sourceRaw=await readOfflinePublicFile(ROOT,source.deliveryProof.path);
+      const proof=validateSynchronizationDeliveryProof(event,source,sourceRaw),inventory=proof.completeManifest.files;
+      if(inventory.length!==listed.length||inventory.some(f=>!listed.includes(f.path)))continue;
+      let exact=true;
+      for(const f of inventory) {
+        let b;try{b=await readOfflinePublicFile(root,f.path);}catch(e){if(e.code!=='ENOENT')throw e;exact=false;break;}
+        if(b.length!==f.bytes||digest(b)!==f.sha256){exact=false;break;}
+      }
+      if(!exact)continue;
+      const asOf=proof.deltaManifest.preparedAt,at=Date.parse(asOf);
+      if(!Number.isFinite(at)||at>=Date.parse(event.verifiedAt)||at>=FREEZE_AT)throw new Error('Historical archive must predate publication evidence and final cutoff');
+      const context=await loadContext(root,null,{release:true,now:at},{publicationProofSha256:pin.sha256});
+      const checked=validateReleaseLedger(context.ledgers,{...context,now:at});
+      return {...checked,kind:'exact_historical_delivery_audit',asOf,roundId:source.roundId,sourceProofSha256:source.deliveryProof.sha256,currentReleaseClearance:false,canStartNewContent:false};
+    }
+  }
+  throw new Error('Historical audit requires an exact independently pinned complete source inventory');
+}
+async function loadContext(root = ROOT, input = null, {release = false, now = Date.now()} = {}, historicalSnapshot = null) {
   const directory = path.join(root, 'docs/rounds');
   const paths = (await fs.readdir(directory)).filter(name => /^round-.*\.json$/.test(name) && !['round-ledger.schema.json', 'round-ledger.template.json'].includes(name)).map(name => path.join(directory, name));
   const editorialDirectory = path.join(root, 'docs/corrections');
@@ -613,10 +657,21 @@ export async function loadRoundContext(root = ROOT, input = null, {release = fal
   }
   const publicationState = JSON.parse(await fs.readFile(path.join(root, 'data/publication-state.json'), 'utf8'));
   const synchronizations=[];
+  const listed=new Set((await readOfflinePublicFile(root,'PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).map(p=>p.trim()).filter(p=>p&&!p.startsWith('#')));
   for(const pin of PUBLICATION_SYNCHRONIZATIONS) {
+    // Only auditHistoricalRelease can supply this already authenticated boundary.
+    // Ordinary current loading never permits an absent reviewed publication.
+    if(historicalSnapshot?.publicationProofSha256===pin.sha256)break;
     const raw=await readOfflinePublicFile(root,pin.path);
     if(digest(raw)!==pin.sha256)throw new Error('Publication synchronization proof hash mismatch');
-    synchronizations.push(JSON.parse(raw.toString()));
+    if(!listed.has(pin.path))throw new Error('Publication synchronization dependency missing from reviewed allowlist');
+    const record=JSON.parse(raw.toString());
+    const relevant=record.rounds.every(s=>ledgers.some(r=>r.roundId===s.roundId))||ledgers.some(r=>Date.parse(r.startedAt)>=Date.parse(record.verifiedAt));
+    if(record.previousSynchronizationSha256&&relevant)for(const source of record.rounds) {
+      if(!listed.has(source.deliveryProof?.path))throw new Error('Publication delivery proof dependency missing from reviewed allowlist');
+      validateSynchronizationDeliveryProof(record,source,await readOfflinePublicFile(root,source.deliveryProof.path));
+    }
+    synchronizations.push(record);
   }
   let offlineBases=new Map(),deliveryCheckpointSources=new Map(),indexRaw,resolvedArtifacts=new Set();
   try {indexRaw=await readOfflinePublicFile(root,'docs/deliveries/offline-chain.json');}catch(error){if(error.code!=='ENOENT')throw error;}

@@ -217,6 +217,7 @@ test('CLI context reads every ledger, excludes schema/template, and never falls 
   for (const [file, value] of [['docs/rounds/round-ledger.schema.json', schema], ['docs/rounds/round-ledger.template.json', template], [`docs/rounds/${r.roundId}.json`, r], ['data/publication-state.json', {finalized: false}]]) await fs.writeFile(path.join(root, file), JSON.stringify(value));
   await fs.writeFile(path.join(root, `docs/rounds/${r.roundId}.md`), 'Synthetic report.');
   await fs.cp(new URL('../docs/publications',import.meta.url),path.join(root,'docs/publications'),{recursive:true});
+  await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',...(await fs.readdir(path.join(root,'docs/publications'))).map(p=>'docs/publications/'+p)].join('\n')+'\n');
   const context = await loadRoundContext(root); assert.equal(context.ledgers.length, 1); assert.equal(context.banks.size, 0);
   assert.match(validateRoundLedgers(context.ledgers, context).errors.join('\n'), /missing immutable bank/);
 });

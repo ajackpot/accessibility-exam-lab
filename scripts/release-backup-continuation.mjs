@@ -109,6 +109,32 @@ export function validateNormalBackupContinuation(proof,{now=Date.now(),publicati
  const offlineBase={roundId:source.roundId,bankVersion:source.bankVersion,bankSha256:source.bankSha256,ledgerSha256:source.ledgerSha256,manifestSha256:NORMAL_BACKUP_PINS.deltaManifest,baseCommit:source.baseCommit,recordedAt:proof.attachmentAcceptedAt,eligibleAt:state.eligibleAt};
  return {canStartNewContent:true,canPublish:false,eligibleAt:state.eligibleAt,offlineBase,artifactSha256:NORMAL_BACKUP_PINS.delta,newlyPublishedRegular:0,reservedLearningGoalIds:sources[0].candidates.filter(c=>c.decision==='accepted').map(c=>c.learningGoalId).sort()};
 }
+/** Archive-only fallback cannot authorize current work. Verify the importing
+ * authority at the real current boundary before and after an exact historical
+ * audit; absent proof is never enough to take this route successfully. */
+async function validateDeliveredArchiveCampaign(root,now) {
+ const {loadRoundContext,validateReleaseLedger,auditHistoricalRelease}=await import('./validate-round.mjs');
+ const {PUBLICATION_SYNCHRONIZATIONS}=await import('./publication-sync.mjs');
+ let missing=false;
+ for(const pin of PUBLICATION_SYNCHRONIZATIONS)try{await fs.lstat(path.join(root,pin.path));}catch(error){if(error.code!=='ENOENT')throw error;missing=true;}
+ if(!missing) {
+  const context=await loadRoundContext(root,null,{release:true,now});
+  const checked=validateReleaseLedger(context.ledgers,{...context,now});
+  if(!checked.ok)fail('Invalid full delivered campaign: '+checked.errors.join('; '));
+  return;
+ }
+ const current=async()=>{
+  const authority=path.resolve(import.meta.dirname,'..'),at=Date.now();
+  checkOpen({now:at,manifest:JSON.parse(await publicBytes(authority,'data/manifest.json')),publicationState:JSON.parse(await publicBytes(authority,'data/publication-state.json'))});
+  const context=await loadRoundContext(authority,null,{release:true,now:at});
+  const checked=validateReleaseLedger(context.ledgers,{...context,now:at});
+  if(!checked.ok)fail('Current authority failed full release gate: '+checked.errors.join('; '));
+ };
+ await current();
+ const historical=await auditHistoricalRelease(root);
+ if(!historical.ok)fail('Invalid exact historical delivered campaign: '+historical.errors.join('; '));
+ await current();
+}
 /** Private preparation: exact ZIPs and original private receipts in, sanitized proof out.
  * Caller must independently review and pin the actual terminal evidence before installing proof.
  * No output file, upload, Git operation or permission request is performed here. */
@@ -137,9 +163,7 @@ export async function prepareNormalBackupContinuation({deltaZip,completeZip,libr
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'normal-backup-verified-'));
  try{
   for(const f of completeManifest.files){const p=path.join(root,f.path);await fs.mkdir(path.dirname(p),{recursive:true});await fs.writeFile(p,complete.get('project/'+f.path),{flag:'wx'});}
-  const {loadRoundContext,validateReleaseLedger}=await import('./validate-round.mjs');
-  const context=await loadRoundContext(root,null,{release:true,now});
-  const checked=validateReleaseLedger(context.ledgers,{...context,now});if(!checked.ok)fail('Invalid full delivered campaign: '+checked.errors.join('; '));
+  await validateDeliveredArchiveCampaign(root,now);
  }finally{await fs.rm(root,{recursive:true,force:true});}
  // Completion is an observed wall-clock checkpoint, never a caller-invented eligibility time.
  proof.verifiedAt=new Date().toISOString();
@@ -266,7 +290,17 @@ export async function loadReleaseBackupContinuations(root,context){
  // Check each source as an active release as well as the final full campaign.
  // This also checks immutable item preservation across intermediate successors.
  const {validateReleaseLedger}=await import('./validate-round.mjs');
- for(const p of checkpoints){const check=validateReleaseLedger(ledgers,{...context,offlineBases,deliveryCheckpointSources,manifest:JSON.parse(p.runtimeManifestRaw)});if(!check.ok)fail('Invalid delivered successor campaign: '+check.errors.join('; '));}
+ for(const p of checkpoints){
+  // Audit this frozen source at its actual archive preparation boundary, not as
+  // today's active release. Later publications remain authenticated but inactive.
+  // The full current campaign is independently checked by loadRoundContext.
+  const at=Math.min(now,Date.parse(p.deltaManifest.preparedAt));
+  const historicalLedgers=ledgers.filter(r=>Date.parse(r.startedAt)<=at);
+  const historicalEditorials=context.editorials.filter(r=>Date.parse(r.startedAt)<=at);
+  const historicalBases=new Map([...offlineBases].filter(([,e])=>Date.parse(e.eligibleAt)<=at&&historicalLedgers.some(r=>r.roundId===e.roundId)));
+  const check=validateReleaseLedger(historicalLedgers,{...context,now:at,editorials:historicalEditorials,offlineBases:historicalBases,deliveryCheckpointSources,manifest:JSON.parse(p.runtimeManifestRaw)});
+  if(!check.ok)fail('Invalid delivered successor campaign: '+check.errors.join('; '));
+ }
  return {checkpoints,offlineBases,deliveryCheckpointSources};
 }
 /** Private preparation only: returns a PROPOSED proof/trust append, never writes,
@@ -309,8 +343,7 @@ export async function prepareReleaseBackupContinuation({deltaZip,completeZip,lib
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'delivered-successor-'));
  try{
   for(const f of c.files){const target=path.join(root,f.path);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,complete.get('project/'+f.path),{flag:'wx'});}
-  const {loadRoundContext,validateReleaseLedger}=await import('./validate-round.mjs');
-  const context=await loadRoundContext(root,null,{release:true,now});const checked=validateReleaseLedger(context.ledgers,{...context,now});if(!checked.ok)fail('Invalid actual delivered campaign: '+checked.errors.join('; '));
+  await validateDeliveredArchiveCampaign(root,now);
  }finally{await fs.rm(root,{recursive:true,force:true});}
  await currentFreeze(Date.now());
  p.verifiedAt=new Date().toISOString();inspectSuccessor(p,previous,source);

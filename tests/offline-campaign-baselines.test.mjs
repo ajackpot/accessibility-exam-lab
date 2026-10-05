@@ -96,6 +96,8 @@ test('offline context rejects untrusted index shape and traversal before consult
   try {
     await fs.mkdir(path.join(temp,'docs/rounds'),{recursive:true});await fs.mkdir(path.join(temp,'docs/deliveries'),{recursive:true});await fs.mkdir(path.join(temp,'data'),{recursive:true});
     await fs.cp(path.join(root,'docs/publications'),path.join(temp,'docs/publications'),{recursive:true});
+    // Loader evidence dependencies are explicitly listed even in this malformed-index fixture.
+    await fs.writeFile(path.join(temp,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',...(await fs.readdir(path.join(temp,'docs/publications'))).map(p=>'docs/publications/'+p)].join('\n')+'\n');
     await fs.copyFile(path.join(root,'docs/rounds/round-ledger.schema.json'),path.join(temp,'docs/rounds/round-ledger.schema.json'));
     await fs.writeFile(path.join(temp,'data/publication-state.json'),'{}');
     await fs.writeFile(path.join(temp,'docs/deliveries/offline-chain.json'),json({schemaVersion:1,receipts:[],manifests:[],ledgerPaths:[],extra:true}));

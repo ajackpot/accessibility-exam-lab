@@ -123,3 +123,12 @@
 예외는 010의 원래 종결 시각 `2026-10-04T11:44:42+00:00`·원문 SHA-256 `d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b`, 은행 SHA-256 `50b6131f1ffb174bf4a459b0a91a2498465c0dccea0e4aee30259f195086b214`, 전달 checkpoint 원문 SHA-256 `a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917` 및 검증 완료 `2026-10-04T12:27:05.849Z`에 한정한다. `previousLedgerSha256`·`previousDeliveryCheckpointSha256`·`previousDeliveryVerifiedAt`을 원문 및 검증된 오프라인 선행 연결과 대조하며, 선언이나 임의 Map만으로 증거를 대신하지 않는다.
 
 011의 판정 마감은 `2026-10-04T14:30:00Z`, 다음 예정 시작은 `2026-10-04T15:00:00Z`다. 실제 시작을 15:00으로 꾸미거나 이미 소비한 11:00 발생분을 다시 쓰지 않는다. 이미 닫힌010의 원래14:30 계획 마감·모든 은행·종결 대장·전달 proof 바이트는 보존한다. 009의 기존 예외는 그대로이며 다른 ID·날짜·시각으로 확대하지 않는다. 후보당3회·계보6회·더 이른 실제 후속 회차·영구/최종 동결·공개 수0·실제 Git/Pages 확인 경계는 유지한다.
+
+## SHA-only Git 전송과 후속 공개 확인
+
+- Git tree는 확인된 blob SHA만 사용한다. 검토 inventory의 바이트 길이·SHA-256·Git blob SHA를 대조하고 이미 존재하는 같은 blob은 재사용하며, 필요한 blob만 별도 생성한다. `scripts/sha-only-tree.mjs`의 읽기 전용 preflight로 실제 파일과 요청을 대조한다. tree inline content, 미확인 blob, 임의 필드·삭제·경로 확장은 거부하며 원문 편집/redaction으로 전송 오류를 회피하지 않는다
+- 2026-10-05의 4,027,001바이트 혼합 inline 요청 정체와 8,340바이트 SHA-only 요청의 8.026초 성공은 관측된 전송 개선이다. backend 원인·POST 크기 제한은 입증되지 않았다. 재현 수치는 OPERATIONS를 따르며 canary·재시도 자체를 자동 허용하지 않는다
+- 실제 권한 알림 대기와 도구 실행 무응답을 구분한다. 최초 unknown·유한 재대조 기한·종결·거부를 보존하며 SHA-only 전환으로 불명 쓰기를 재시도하거나 접근 거부를 우회하지 않는다. 기존 좁은 명시 재제출 예외 외의 권한은 생기지 않는다
+- 공개 직전 fresh 원격 head/tree·ancestry·외부 변경·양쪽 동결·현재 시각·cutoff·전체 검사를 다시 확인한다. 기대 parent와 전체 tree를 확인한 하나의 commit을 `force:false`로 한 번 갱신한 뒤 정확한 head의 Pages와 live 해시를 확인한다
+- 009–017의 현재 공개 상태는 별도 `docs/publications/cumulative-009-017.json`과 검토된 append-only pin을 사용한다. 원래 대장의 공개0·unknown/미시도와 모든 은행·전달 proof·ZIP, 006–008 증거와 고정009 anchor는 바꾸지 않는다. 새 회차는 실제 확인 시각 이후에만 최신 공개은행을 기준으로 삼고 새로 확인한 원격 head를 sourceCommit으로 쓴다. 증거 payload와 뒤따르는 지원 커밋은 별개다
+- 원래009 전체 archive replay는 원본14파일 부재로 `not_run`이다. 실제013/017 전체본·017 delta 검사와 고정009 proof/terminal 검사를 구분한다. 확인하지 못한 archive·렌더링 UI·보조기술 검사를 통과라고 기록하지 않는다

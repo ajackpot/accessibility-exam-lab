@@ -63,6 +63,9 @@ test('round010 uses exact009 and retains actually public regular8 coverage with 
  const dupe=clone(r);dupe.candidates=[clone(context.ledgers.find(r=>r.roundId==='round-009').candidates[0])];assert.equal(validateRoundLedgers([...context.ledgers,dupe],options()).ok,false);
 });
 test('default loader and explicit release context accept real010 lineage without rewriting009',async t=>{
+ // This disposable synthetic010 is audited at its own historical boundary.
+ // A later real cumulative publication must not make it a current release.
+ const now=Date.parse('2026-10-04T12:00:00Z');
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'normal-backup-next-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
  // This disposable regression is historical009 plus synthetic010, even after
  // real010 has a reviewed delivery checkpoint. Reset only the fixture authority.

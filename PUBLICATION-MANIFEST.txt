@@ -239,3 +239,8 @@ docs/rounds/round-017.md
 tests/round-seventeen-bank.test.mjs
 
 docs/deliveries/checkpoints/round-017.json
+tests/publication-sync-successors.test.mjs
+docs/publications/cumulative-009-017.json
+docs/publications/cumulative-009-017.md
+scripts/sha-only-tree.mjs
+tests/sha-only-tree.test.mjs
