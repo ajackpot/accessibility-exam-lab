@@ -353,3 +353,23 @@ loader는 등록된 각 사슬을 자기 원격 anchor에서 별도로 검증한
 `evidence-loss-block.mjs`는 기본/명시 은행, 전체 이력·baseline, outgoing 파일/ZIP와 전달·공개·후속 기준 proof에서 차단을 검사한다. 경로 변경·문항/선택지 이름 변경·호출자 Boolean/제외 목록·registry/event/대장 누락으로 해제되지 않는다. 원래 복구 은행은 비공개 증거이며 공개 불변 은행이나 ZIP에 넣지 않는다. active 은행은 마지막 실제 전달 검증본을 유지한다.
 
 후속 정규 회차는 기존14.3에 따라 최신 실제 전달 검증 은행에서 독립 목표를 선정할 수 있다. 채택 목표를 재검토해 증거 소실을 치유하거나 이름만 바꿔 재사용하지 않는다. 탈락 목표의 기존 새 1차 근거·campaign당1회 재개방 조건은 그대로이며 이 이벤트 자체는 근거·권한이 아니다. 모든 실제 새 후보에는 전체 재개방·일정·마감·동결·현재 시각·발행 검사를 적용한다. 원 탈락 원문·별칭과 예약된 전용 선택지를 재생하지 않는다. 사고 전 정확한 역사 archive의 읽기 전용 검증은 미래 이벤트를 요구하지 않으며 현재 발행 권한을 제공하지 않는다.
+
+
+## 독립 오프라인 사슬의 공개 동기화 계약
+
+별도 공개 이벤트가 독립 전달 checkpoint를 참조할 때 `delivered_independent_offline_checkpoint`의 원문 SHA, reviewed trust의 path/round/chain/anchor/predecessor와 정확한 embedded receipt SHA를 함께 검사한다. 전체 사슬의 실제 원래 영수증·manifest 검증 뒤에만 소속을 확인한다. 서로 다른 원격 anchor의 사슬을 연결하거나 caller Boolean/Map을 외부 사실 대신 사용하지 않는다. 실제 payload의 원격 전체 inventory에는 자기 전달 checkpoint·trust prefix와 모든 불변 대장·은행·원래 공개 증거·격리·발행 차단·사고 기록을 보존한다.
+
+새 independent source는 기존 provenance 필드와 함께 `receiptSha256`, `accepted`, `quarantined`, `eligible`, `newlyPublicRegular`를 명시한다. accepted는 역사적 채택 전체이며 eligible은 검증된 격리 disposition에서만 도출한다. round-022는 accepted31·quarantined19·eligible12이고 receipt의 acceptedGoalIds31을 보존한다. 실제 bank와 정확한 baseline의 새 questionId 집합은 eligible 후보 집합과 같아야 한다. 전체 정규·필기·실기·testOnly·과목별 수와 anchor 대비 새 공개 수는 실제 최종 bank에서 다시 계산한다. 원래 두 공개 이벤트에는 새 필드를 소급 추가하지 않는다.
+
+`loadRoundContext`는 전체 campaign 검사 뒤 각 독립 사슬을 자기 원래 receipts/manifests로 별도 해소하고 성공한 exact artifact 집합만 합친다. 해소 결과를 과거 proof 검사에 전달하지 않는다. 현재 공개 해소는 원래 `canPublish:false`, unknown·최초 불확실성 시계·공개0·검토 이력·전달 ZIP을 바꾸지 않으며 격리 목표 예약을 해제하지 않는다. 증거 소실로 차단된 round-023은 publication source·receipt·checkpoint·baseline으로 쓸 수 없고, 원 ledger/event/incident는 그대로 남기며 소실된 원 Markdown을 새로 만들지 않는다.
+
+새 event/pin 등록은 실제 payload main·정확한 commit의 Pages·live bytes 확인과 독립 검토 이후에만 한다. 이 계약 자체는 새 공개 확인 또는 Git 쓰기 허가가 아니다. 뒤따르는 지원 commit은 자신의 별도 Pages/live 확인이 필요하다. 미래 event는 이전 회차 기준을 소급 변경하지 않으며 cutoff·현재/전달본의 두 동결 marker·기존 일정과 review 한도를 유지한다.
+
+정확한 역사 archive 감사의 시각은 기존 normal-backup proof에서는 원래 `deltaManifest.preparedAt`을 유지한다. 그 필드가 없는 independent schema1/2 전달은 원문 pin으로 인증된 실제 `proof.savedAt`을 쓴다. 이는 전체 원본 저장이 확인된 시각이며 저작 준비 시각을 새로 만들어 내지 않는다. 각 입력 파일/허용 목록/크기/CRC/SHA를 정확히 대조하고, 결과는 계속 `currentReleaseClearance:false`, `canStartNewContent:false`다.
+
+
+## 2026-10-07의018–027 공개 확인
+
+별도 `docs/publications/cumulative-018-027.json`과 보고서가 payload `da645d3d7a37b67551344bf7853c92e54eecddfd`, Pages37583421170 성공,242파일 원격 tree·52개 live 경로의 실제 일치를 기록한다. 일반882개(필기806·실기76)와 시드14개이며017 대비 새 공개는198개다.018–022·024–027의 원 채택217개 중022의19개는 계속 격리한다.023은 예약 전용으로 남기고 공개 source에 넣지 않는다. 원래 대장·은행·proof·trust prefix·ZIP·공개0·unknown·최초 불확실성 시계를 바꾸지 않는다. 이 기록을 넣는 후속 지원 commit은 자신의 별도 Pages/live 검증이 필요하다.
+
+비발행 읽기에서 검증 시각보다 이른 시각을 명시했고 해당 공개 source 전체도 사후 시작 회차도 없는 역사적 부분집합은 뒤의 전달 의존성을 요구하지 않는다. 이 경우에도 모든 이벤트 원문 SHA와 pin 순서를 먼저 인증하며 이벤트를 활성화하거나 artifact를 해소하지 않는다. 현재 시각·발행 문맥·source 전체·사후 시작 회차 및 인자 없는 직접 호출은 정확한 전달 증거와 검증된 사슬 소속을 계속 요구한다. 실제 원 archive 감사는 별도의 정확한 inventory 경계만 사용한다.

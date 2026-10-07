@@ -1,4 +1,5 @@
 import {createSyntheticValidator} from './quarantine-fixtures.mjs';
+import {validatePublicationSynchronizations,validateIndependentSynchronizationSources} from '../scripts/publication-sync.mjs';
 import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -224,6 +225,16 @@ test('CLI context reads every ledger, excludes schema/template, and never falls 
   await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',...(await fs.readdir(path.join(root,'docs/publications'))).map(p=>'docs/publications/'+p)].join('\n')+'\n');
   const context = await loadRoundContext(root,null,{now:Date.parse('2026-10-02T05:50:00Z')}); assert.equal(context.ledgers.length, 1); assert.equal(context.banks.size, 0);
   assert.match(validateRoundLedgers(context.ledgers, context).errors.join('\n'), /missing immutable bank/);
+  // Later event bytes remain authenticated, but this explicit Oct2 read cannot
+  // resolve them or demand sources that are unrelated to its one-ledger subset.
+  const at=Date.parse('2026-10-02T05:50:00Z'),future=context.synchronizations.find(e=>e.rounds.some(s=>s.deliveryProof?.path.startsWith('docs/deliveries/chains/')));
+  assert.ok(future);assert.equal(context.resolvedArtifacts.size,0);assert.equal(context.independentOfflineChains.size,0);
+  const history=validatePublicationSynchronizations(context.synchronizations,{...context,now:at});assert.equal(history.ok,true,history.errors.join('\n'));assert.deepEqual(history.history,[]);
+  const membership=options=>validateIndependentSynchronizationSources(context.synchronizations,context.independentOfflineChains,context.deliveryCheckpointSources,options);
+  for(const options of [undefined,{ledgers:context.ledgers,release:false},{ledgers:context.ledgers,now:Date.parse(future.verifiedAt),release:false},{ledgers:context.ledgers,now:at,release:true},{ledgers:future.rounds.map(s=>({roundId:s.roundId})),now:at,release:false},{ledgers:[{roundId:'later-fixture',startedAt:future.verifiedAt}],now:at,release:false}])await assert.rejects(membership(options),/synchronization delivery proof/);
+  const file=path.join(root,`docs/publications/${future.syncId}.json`),original=await fs.readFile(file);await fs.appendFile(file,' ');
+  await assert.rejects(loadRoundContext(root,null,{now:at}),/proof hash/);await fs.writeFile(file,original);
+
 });
 
 function manifestFor(f) { return {schemaVersion: 1, finalRelease: false, changeSummary: f.bank.changeSummary, bankVersion: f.bank.bankVersion, releasedAt: f.bank.releasedAt, file: `releases/${f.bank.bankVersion}/bank.json`, sha256: f.r.publication.bankSha256}; }

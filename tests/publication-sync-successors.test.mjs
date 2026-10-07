@@ -10,7 +10,8 @@ import {validateCampaignBaselines} from '../scripts/editorial-ledger.mjs';
 import {validatePublicationSynchronizations,validatePublicationEvidenceOrder,validateSynchronizationDeliveryProof} from '../scripts/publication-sync.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..'),hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>JSON.stringify(o,null,2)+'\n';
-const loaded=await loadRoundContext(root,null,{release:true}),proof=loaded.synchronizations.at(-1),now=Date.now();
+const loaded=await loadRoundContext(root,null,{release:true}),proof=loaded.synchronizations.find(e=>e.syncId==='cumulative-009-017'),now=Date.now();
+loaded.synchronizations=loaded.synchronizations.slice(0,loaded.synchronizations.indexOf(proof)+1);
 const publicationPath=`docs/publications/${proof.syncId}.json`;
 function failed(result,pattern){assert.equal(result.ok,false);if(pattern)assert.match(result.errors.join('\n'),pattern);}
 function successor(start=new Date(Date.parse(proof.verifiedAt)+1).toISOString()){
@@ -21,10 +22,10 @@ function successor(start=new Date(Date.parse(proof.verifiedAt)+1).toISOString())
 test('reviewed successor publication preserves every original ledger, bank and uncertainty byte',()=>{
  assert.ok(proof.previousSynchronizationSha256,'A genuinely reviewed successor event must be registered before this closure is complete');
  const before=loaded.ledgers.map(json),banks=[...loaded.banks].map(([v,e])=>[v,hash(e.raw)]);
- const result=validatePublicationSynchronizations(loaded.synchronizations,{...loaded,now});assert.equal(result.ok,true,result.errors.join('\n'));assert.equal(result.history.at(-1).publication.bankVersion,proof.manifest.bankVersion);
+ const result=validatePublicationSynchronizations(loaded.synchronizations,{...loaded,now});assert.equal(result.ok,true,result.errors.join('\n'));assert.equal(result.history.find(e=>e.syncId===proof.syncId).publication.bankVersion,proof.manifest.bankVersion);
  assert.equal(validateRoundLedgers(loaded.ledgers,{...loaded,now}).ok,true);assert.equal(validateReleaseLedger(loaded.ledgers,{...loaded,now}).ok,true);
  for(const s of proof.rounds){const ledger=loaded.ledgers.find(r=>r.roundId===s.roundId);assert.equal(ledger.publication.status,'not_attempted');assert.equal(ledger.publication.verifiedAt,null);assert(ledger.candidates.every(c=>c.publishedBankVersion===null));assert.equal(hash(loaded.ledgerSources.get(s.roundId)),s.originalLedgerSha256);assert.equal(hash(loaded.banks.get(s.bankVersion).raw),s.bankSha256);}
- const bank=JSON.parse(loaded.banks.get(proof.manifest.bankVersion).raw),regular=bank.questions.filter(q=>!q.testOnly),prior=loaded.synchronizations.at(-2);
+ const bank=JSON.parse(loaded.banks.get(proof.manifest.bankVersion).raw),regular=bank.questions.filter(q=>!q.testOnly),prior=loaded.synchronizations.find(e=>e.syncId==='cumulative-006-008');
  assert.equal(proof.counts.regular,regular.length);assert.equal(proof.counts.written,regular.filter(q=>q.type==='written').length);assert.equal(proof.counts.practical,regular.filter(q=>q.type==='practical').length);assert.equal(proof.counts.testOnly,bank.questions.filter(q=>q.testOnly).length);assert.equal(proof.counts.newlyPublicFromAnchor,regular.length-prior.counts.regular);assert.equal(proof.rounds.reduce((n,s)=>n+s.accepted,0),proof.counts.newlyPublicFromAnchor);
  assert.deepEqual(loaded.ledgers.map(json),before);assert.deepEqual([...loaded.banks].map(([v,e])=>[v,hash(e.raw)]),banks);
 });

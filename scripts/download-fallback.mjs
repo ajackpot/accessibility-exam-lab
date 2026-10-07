@@ -579,5 +579,10 @@ export async function validateSynchronizedDeliveryChain(receipts, {synchronizati
   if(!full.ok||!editorials.ok)return {ok:false,errors:[...full.errors,...editorials.errors],canStartNewContent:false};
   const proof=resolveSynchronizedArtifacts(receipts,context);
   if(!proof.ok)return {...proof,canStartNewContent:false};
-  return {...validateDeliveryChain(receipts,{...options,resolvedArtifacts:proof.resolvedArtifacts}),resolvedArtifacts:proof.resolvedArtifacts};
+  const checked=validateDeliveryChain(receipts,{...options,resolvedArtifacts:proof.resolvedArtifacts});
+  // Publication resolves delivery artifacts, never quarantine reservations.
+  const quarantine=validateQuarantineCampaign(context.ledgers,context);
+  if(!quarantine.ok)return {ok:false,errors:quarantine.errors,canStartNewContent:false};
+  const sourceIds=new Set(receipts.map(r=>r.content?.roundId)),heldGoals=context.ledgers.filter(r=>sourceIds.has(r.roundId)).flatMap(r=>r.candidates.filter(c=>quarantine.dispositions.get(r.roundId)?.quarantinedCandidateIds.includes(c.candidateId)).map(c=>c.learningGoalId));
+  return {...checked,reservedLearningGoalIds:[...new Set([...(checked.reservedLearningGoalIds??[]),...heldGoals])].sort(),resolvedArtifacts:proof.resolvedArtifacts};
 }

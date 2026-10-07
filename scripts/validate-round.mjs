@@ -9,7 +9,7 @@ import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanation
 
 import {validateQuarantineCampaign, loadQuarantineDependencies} from './prepublication-quarantine.mjs';
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
-import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts, validateSynchronizationDeliveryProof} from './publication-sync.mjs';
+import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts, validateSynchronizationDeliveryProof, validateIndependentSynchronizationSources, requiresSynchronizationDeliveryDependencies} from './publication-sync.mjs';
 import {validateEditorialHistory, validateEditorialTransition, validateCampaignBaselines} from './editorial-ledger.mjs';
 export {editorialHash, editorialContent, editorialContentHash, editorialBlindPackage, editorialChangedPaths, editorialComponentStates} from './editorial-ledger.mjs';
 
@@ -617,7 +617,9 @@ export async function auditHistoricalRelease(root) {
         if(b.length!==f.bytes||digest(b)!==f.sha256){exact=false;break;}
       }
       if(!exact)continue;
-      const asOf=proof.deltaManifest.preparedAt,at=Date.parse(asOf);
+      // Independent schema1/2 deltas have no preparedAt. Their reviewed actual
+      // save receipt is the earliest authenticated complete-source boundary.
+      const asOf=proof.kind==='delivered_independent_offline_checkpoint'?proof.savedAt:proof.deltaManifest.preparedAt,at=Date.parse(asOf);
       if(!Number.isFinite(at)||at>=Date.parse(event.verifiedAt)||at>=FREEZE_AT)throw new Error('Historical archive must predate publication evidence and final cutoff');
       const context=await loadContext(root,null,{release:true,now:at},{publicationProofSha256:pin.sha256});
       const checked=validateReleaseLedger(context.ledgers,{...context,now:at});
@@ -683,14 +685,14 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     if(digest(raw)!==pin.sha256)throw new Error('Publication synchronization proof hash mismatch');
     if(!listed.has(pin.path))throw new Error('Publication synchronization dependency missing from reviewed allowlist');
     const record=JSON.parse(raw.toString());
-    const relevant=record.rounds.every(s=>ledgers.some(r=>r.roundId===s.roundId))||ledgers.some(r=>Date.parse(r.startedAt)>=Date.parse(record.verifiedAt));
+    const relevant=requiresSynchronizationDeliveryDependencies(record,{ledgers,now,release});
     if(record.previousSynchronizationSha256&&relevant)for(const source of record.rounds) {
       if(!listed.has(source.deliveryProof?.path))throw new Error('Publication delivery proof dependency missing from reviewed allowlist');
       validateSynchronizationDeliveryProof(record,source,await readOfflinePublicFile(root,source.deliveryProof.path));
     }
     synchronizations.push(record);
   }
-  let offlineBases=new Map(),deliveryCheckpointSources=new Map(),indexRaw,resolvedArtifacts=new Set();
+  let offlineBases=new Map(),deliveryCheckpointSources=new Map(),indexRaw,legacyChain=null,resolvedArtifacts=new Set();
   try {indexRaw=await readOfflinePublicFile(root,'docs/deliveries/offline-chain.json');}catch(error){if(error.code!=='ENOENT')throw error;}
   if(indexRaw) {
     const index=JSON.parse(indexRaw.toString()),keys=['schemaVersion','receipts','manifests','ledgerPaths'];
@@ -716,9 +718,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     const offline=validateOfflineContinuation(index.receipts,{manifests,ledgers:new Map([...ledgerSources,...frozenLedgers]),banks:new Map([...banks].map(([version,entry])=>[version,entry.raw])),now,publicationState});
     if(!offline.ok||!(offline.offlineBases instanceof Map))throw new Error(`Invalid offline delivery evidence: ${(offline.errors||[]).join('; ')}`);
     offlineBases=offline.offlineBases;
-    const resolution=resolveSynchronizedArtifacts(index.receipts,{synchronizations,ledgers,banks,ledgerSources,now,publicationState});
-    if(!resolution.ok)throw new Error(resolution.errors.join('; '));
-    resolvedArtifacts=resolution.resolvedArtifacts;
+    legacyChain={receipts:index.receipts,manifests};
   }
   // A delivered normal backup keeps its original manifests and chain. A separate
   // pinned terminal event may add its exact predecessor before full-history gates.
@@ -741,10 +741,24 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
   const {loadIndependentOfflineChains}=await import('./offline-chain-continuation.mjs');
   const independent=await loadIndependentOfflineChains(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources});
   offlineBases=independent.offlineBases;deliveryCheckpointSources=independent.deliveryCheckpointSources;
+  await validateIndependentSynchronizationSources(synchronizations,independent.chains,deliveryCheckpointSources,{ledgers,now,release});
   if(indexRaw||normalRaw||independent.chains.size) {
     const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources});
     const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations});
     if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
+  }
+  // Resolve only after current full-campaign validation. Keep every anchor's
+  // original receipts/manifests separate and never feed resolutions to inspectProof.
+  const campaignContext={ledgers,editorials,schema,banks,reviewPackages,availableFiles,publicationState,manifest,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources};
+  const {validateDeliveryChain}=await import('./download-fallback.mjs');
+  for(const chain of [legacyChain,...independent.chains.values()].filter(Boolean)) {
+    const resolution=resolveSynchronizedArtifacts(chain.receipts,{...campaignContext,now});
+    if(!resolution.ok)throw new Error('Synchronized original delivery chain failed: '+resolution.errors.join('; '));
+    if(resolution.resolvedArtifacts.size){
+      const checked=validateDeliveryChain(chain.receipts,{manifests:chain.manifests,reconciliationHistory:chain.proof?[chain.proof.uncertainty.wait]:[],ledgers:ledgerSources,banks:new Map([...banks].map(([v,e])=>[v,e.raw])),now,publicationState,resolvedArtifacts:resolution.resolvedArtifacts});
+      if(!checked.ok)throw new Error('Synchronized original receipts failed: '+checked.errors.join('; '));
+      for(const artifact of resolution.resolvedArtifacts)resolvedArtifacts.add(artifact);
+    }
   }
   return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, quarantineDispositions};
 }

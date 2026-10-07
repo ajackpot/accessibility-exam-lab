@@ -269,3 +269,6 @@ tests/stimulus-layout.test.mjs
 tests/ui-state.test.mjs
 tests/workflows.test.mjs
 docs/deliveries/chains/public-regular17/round-027.json
+tests/publication-sync-independent.test.mjs
+docs/publications/cumulative-018-027.json
+docs/publications/cumulative-018-027.md

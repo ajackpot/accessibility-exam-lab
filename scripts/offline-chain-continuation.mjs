@@ -49,6 +49,13 @@ function inspectProof(p,pin,previous,context,prior){
  const checked=validateOfflineContinuation(receipts,{manifests,ledgers:new Map(ledgerSources),banks:new Map([...context.banks].map(([v,e])=>[v,e.raw])),now,publicationState:context.publicationState,reconciliationHistory:[u.wait]});if(!checked.ok||!checked.canStartNewContent)fail('Invalid independent offline chain: '+[...checked.errors,...checked.continuationBlockers].join('; '));
  return {pin,proof:p,anchor,receipts,manifests,checked,eligibleAt:Math.max(time(p.verifiedAt),time(u.wait.skippedAt))};
 }
+// A returned Map is an observation from this validator, never caller authority.
+const validatedChainMaps=new WeakMap();
+const chainStamp=chains=>hash(json([...chains].map(([id,c])=>({id,pin:c.pin,proof:c.proof,anchor:c.anchor,receipts:c.receipts,manifests:[...c.manifests]}))));
+function sealChains(chains){validatedChainMaps.set(chains,chainStamp(chains));return chains;}
+export function assertValidatedIndependentOfflineChains(chains){
+ if(!(chains instanceof Map)||!validatedChainMaps.has(chains)||validatedChainMaps.get(chains)!==chainStamp(chains))fail('Publication requires untouched fully validated independent chains, not a caller Map');
+}
 /** Trust is imported with this validator. Candidate registries must be exact prefixes,
  * and may not omit an already-reviewed source or successor dependency. */
 export async function loadIndependentOfflineChains(root,context){
@@ -71,7 +78,7 @@ export async function loadIndependentOfflineChains(root,context){
  // Legacy partial ledger audits need no active runtime manifest. Modern source
  // trees and any registered evidence must still carry its real freeze marker.
  if(modern||raw){if(context.manifest?.finalRelease===true||context.publicationState?.finalized===true)fail('Current persistent freeze blocks independent continuation');context={...context,manifest:JSON.parse(await bytes(root,'data/manifest.json')),publicationState:JSON.parse(await bytes(root,'data/publication-state.json'))};open(context);}
- if(!local.checkpoints.length)return {offlineBases,deliveryCheckpointSources,chains};open(context);
+ if(!local.checkpoints.length)return {offlineBases,deliveryCheckpointSources,chains:sealChains(chains)};open(context);
  for(const [i,pin] of local.checkpoints.entries()){
   if(!allow.has(pin.path))fail('Independent checkpoint absent from allowlist');const b=await bytes(root,pin.path);if(hash(b)!==pin.sha256)fail('Missing, mutated or unreviewed independent proof');const p=JSON.parse(b);if(!equal(b,json(p)))fail('Noncanonical independent proof');
   const next=inspectProof(p,pin,chains.get(pin.chainId),context,prefix(i));
@@ -81,7 +88,7 @@ export async function loadIndependentOfflineChains(root,context){
   if(offlineBases.has(p.deltaArtifactSha256)||[...offlineBases.values()].some(e=>e.roundId===base.roundId||e.bankVersion===base.bankVersion))fail('Duplicate offline artifact, round or bank across independent chains');
   offlineBases.set(p.deltaArtifactSha256,base);deliveryCheckpointSources.set(pin.roundId,b);chains.set(pin.chainId,next);
  }
- return {offlineBases,deliveryCheckpointSources,chains};
+ return {offlineBases,deliveryCheckpointSources,chains:sealChains(chains)};
 }
 /** Original external receipts must still be independently reviewed before pinning.
  * This function verifies archives/campaign and returns only a sanitized proposal. */

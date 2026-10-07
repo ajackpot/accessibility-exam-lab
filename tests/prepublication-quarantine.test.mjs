@@ -38,6 +38,7 @@ async function fixture(t){
  await fs.cp(path.join(ROOT,'scripts'),path.join(registrationRoot,'scripts'),{recursive:true});await fs.cp(path.join(ROOT,'src'),path.join(registrationRoot,'src'),{recursive:true});
  await fs.copyFile(path.join(ROOT,'package.json'),path.join(registrationRoot,'package.json'));
  await write(registrationRoot,'docs/quarantines/trust.json',json(trust));
+ await write(registrationRoot,'docs/deliveries/offline-chain-trust.json',json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  await write(registrationRoot,'docs/release-blocks/trust.json',json({schemaVersion:1,kind:'reviewed_evidence_loss_blocks',events:[]}));
  const unregistered=await import(pathToFileURL(path.join(registrationRoot,'scripts/prepublication-quarantine.mjs')));
  const registration={sourceRoot,deliveredRoot:sourceRoot,ledger:clone(r),candidatePackages:packages,evidenceBytes,now:Date.parse('2026-10-02T05:48:00Z')};
