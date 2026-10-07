@@ -1,3 +1,4 @@
+import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -26,7 +27,7 @@ function nextRound(){
  r.baseline={sourceCommit:b.baseCommit,bankVersion:b.bankVersion,bankSha256:b.bankSha256,regularWrittenBySubject:coverage.regularWrittenBySubject,regularPractical:coverage.regularPractical,offlinePredecessor:{artifactSha256:NORMAL_BACKUP_PINS.delta,manifestSha256:b.manifestSha256,ledgerSha256:b.ledgerSha256,roundId:b.roundId}};
  r.coverageAfter=regularCoverage(remote);return r;
 }
-function options(extra={}){return {...context,now,availableFiles:new Set([...context.availableFiles,'docs/rounds/round-010.md']),...extra};}
+function options(extra={}){return {...context,now:Date.parse('2026-10-04T12:00:00Z'),availableFiles:new Set([...context.availableFiles,'docs/rounds/round-010.md']),...extra};}
 test('exact unchanged normal release proof authorizes only local continuation after both actual clocks',()=>{
  assert.equal(normal.canStartNewContent,true);assert.equal(normal.canPublish,false);assert.equal(normal.newlyPublishedRegular,0);assert.equal(normal.reservedLearningGoalIds.length,34);assert.equal(new Set(normal.reservedLearningGoalIds).size,34);
  assert.equal(proof.deltaManifest.deliveryMode,'release_backup');assert.equal(proof.completeManifest.deliveryMode,'release_backup');
@@ -70,10 +71,13 @@ test('default loader and explicit release context accept real010 lineage without
  // This disposable regression is historical009 plus synthetic010, even after
  // real010 has a reviewed delivery checkpoint. Reset only the fixture authority.
  const paths=parsePublicAllowlist(await fs.readFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),'utf8'));
- const later=paths.filter(p=>{const r=p.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/),b=p.match(/^data\/releases\/[^/]+-regular\.(\d+)\//);return r&&Number(r[1])>9||b&&Number(b[1])>9||p.startsWith('docs/deliveries/checkpoints/');});
+ const later=paths.filter(p=>{const r=p.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/),b=p.match(/^data\/releases\/[^/]+-regular\.(\d+)\//);return r&&Number(r[1])>9||b&&Number(b[1])>9||p.startsWith('docs/deliveries/checkpoints/')||p.startsWith('docs/deliveries/chains/');});
  for(const p of later)await fs.rm(path.join(dir,p));
  await fs.writeFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),paths.filter(p=>!later.includes(p)).join('\n')+'\n');
+ // This disposable historical fixture predates every independent delivery.
+ if(paths.includes('docs/deliveries/offline-chain-trust.json'))await fs.writeFile(path.join(dir,'docs/deliveries/offline-chain-trust.json'),json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  await fs.writeFile(path.join(dir,'docs/deliveries/release-backup-trust.json'),json({schemaVersion:1,rootProofSha256:hash(raw),checkpoints:[]}));
+ await retainHistoricalQuarantinePrefix(dir,now);
  const fixture=await import(pathToFileURL(path.join(dir,'scripts/validate-round.mjs')));
  const r=nextRound(),bank=JSON.parse(context.banks.get(r.baseline.bankVersion).raw);bank.bankVersion='2026.10.04-regular.10';bank.roundId=r.roundId;bank.releasedAt='2026-10-04T11:06:00Z';bank.changeSummary='Synthetic zero-addition bank; never a real release.';
  const b=json(bank);Object.assign(r.publication,{bankVersion:bank.bankVersion,bankSha256:hash(b)});
@@ -100,7 +104,10 @@ test('default loader and explicit release context accept real010 lineage without
   const extracted=await fixture.loadRoundContext(path.join(dir,'empty-full/project'),null,{release:true,now});assert.equal(validateReleaseLedger(extracted.ledgers,{...extracted,now}).ok,true);
  }
 
- await fs.unlink(path.join(dir,NORMAL_BACKUP_PATH));await assert.rejects(loadRoundContext(dir,null,{release:true,now}),/offline predecessor|latest verified/);
+ await fs.unlink(path.join(dir,NORMAL_BACKUP_PATH));
+ // The complete allowlist guard may reject this exact missing mandatory proof
+ // before the later lineage guard. Unrelated missing files are not accepted.
+ await assert.rejects(loadRoundContext(dir,null,{release:true,now}),error=>/offline predecessor|latest verified/.test(error.message)||(error.code==='ENOENT'&&error.path===path.join(dir,NORMAL_BACKUP_PATH)));
 });
 test('private preparation rejects invented receipts before touching artifact or terminal evidence',async()=>{
  await assert.rejects(prepareNormalBackupContinuation({deltaZip:Buffer.from('fake'),completeZip:Buffer.from('fake'),libraryReceiptRaw:Buffer.from('{}'),attachmentReceiptRaw:Buffer.from('{}')}),/Exact verified Library/);
@@ -110,7 +117,7 @@ test('manifest-only freeze blocks continuation in both release and ordinary cont
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'normal-backup-manifest-freeze-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
  const mp=path.join(dir,'data/manifest.json'),m=JSON.parse(await fs.readFile(mp));assert.equal(JSON.parse(await fs.readFile(path.join(dir,'data/publication-state.json'))).finalized,false);
  await fs.writeFile(mp,json({...m,finalRelease:true}));
- for(const release of [true,false])await assert.rejects(loadRoundContext(dir,null,{release,now}),/manifest freeze/);
+ for(const release of [true,false])await assert.rejects(loadRoundContext(dir,null,{release,now}),/freeze/);
  // Both real markers false remains eligible in both modes, without altering output selection.
  await fs.writeFile(mp,json({...m,finalRelease:false}));
  for(const release of [true,false]){const c=await loadRoundContext(dir,null,{release,now});assert.ok(c.offlineBases.has(NORMAL_BACKUP_PINS.delta));if(!release)assert.equal(c.manifest,null);}

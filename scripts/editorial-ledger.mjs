@@ -1,3 +1,4 @@
+import {validateEvidenceLossCampaign,assertEvidenceLossProvenance} from './evidence-loss-block.mjs';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
 import {validateBank, validateBankForPublication, validateExplanationAuthoring, FREEZE_AT} from '../src/domain.js';
@@ -100,7 +101,7 @@ function decisionRecord(record) {
 /** Shared cumulative ordering. Offline evidence permits staging, never Git authorization. */
 export function validateCampaignBaselines(ledgers, {editorials=[], now=null, activeBankVersion=null, offlineBases=new Map(), ledgerSources=new Map(), synchronizations=[], banks=new Map(), publicationState=null}={}) {
   const sync=validatePublicationSynchronizations(synchronizations,{ledgers,banks,ledgerSources,now,publicationState,activeBankVersion});
-  const errors=[...sync.errors],all=[...ledgers,...editorials],verified=[...all.filter(r=>r.publication?.status==='verified'&&Number.isFinite(Date.parse(r.publication.verifiedAt))),...sync.history];
+  const errors=[...sync.errors,...validateEvidenceLossCampaign(ledgers,{banks,ledgerSources,now,publicationState,offlineBases,manifest:activeBankVersion?{bankVersion:activeBankVersion}:null}).errors],all=[...ledgers,...editorials],verified=[...all.filter(r=>r.publication?.status==='verified'&&Number.isFinite(Date.parse(r.publication.verifiedAt))),...sync.history];
   const delivered=[];
   if(!(offlineBases instanceof Map))errors.push('offline baselines must be a validated evidence Map');
   else for(const [artifact,evidence] of offlineBases) {

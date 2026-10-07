@@ -1,3 +1,4 @@
+import {assertEvidenceLossPayload} from './evidence-loss-block.mjs';
 /** Read-only transport preflight. No Git/network writes, permission decisions,
  * unknown-outcome retries, ref updates, or publication clearance. */
 import fs from 'node:fs/promises';
@@ -39,6 +40,7 @@ export async function prepareShaOnlyTreeRequest({root,baseTree,reviewedChanges,c
   let p=path.resolve(root);const parts=safePath(f.path).split('/');
   for(const [i,part] of parts.entries()){p=path.join(p,part);const st=await fs.lstat(p);if(st.isSymbolicLink()||(i===parts.length-1?!st.isFile():!st.isDirectory()))throw Error('Reviewed source requires regular files and directories');}
   const b=await fs.readFile(p);
+  assertEvidenceLossPayload(b,f.path);
   if(b.length!==f.bytes||digest('sha256',b)!==f.sha256||gitBlobSha(b)!==f.gitBlob)throw Error('Reviewed source byte length, SHA-256 or Git blob SHA mismatch');
  }
  validateShaOnlyTreeRequest(request,{baseTree,reviewedChanges,confirmedBlobShas});

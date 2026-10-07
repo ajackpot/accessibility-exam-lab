@@ -1,3 +1,4 @@
+import {createSyntheticValidator} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -144,8 +145,9 @@ test('approval expiry and later reconciliation cap remain separate terminal cloc
   assert.equal(result.reconciliation[0].deadlineAt,'2026-10-04T01:37:54.486Z');
   assert.equal(m.deliveryMode,'download_only');
 });
-test('frozen historical evidence stays valid after cutoff while every advance is blocked',async()=>{
-  const f=await fixture(),result=call(f,{now:Date.parse('2026-10-17T00:00:00Z'),publicationState:{finalized:true}});
+test('frozen historical evidence stays valid after cutoff while every advance is blocked',async t=>{
+  const historical=await createSyntheticValidator();t.after(historical.cleanup);
+  const f=await fixture(),result=historical.delivery.validateOfflineContinuation(f.receipts,{...f,now:Date.parse('2026-10-17T00:00:00Z'),publicationState:{finalized:true}});
   assert.equal(result.ok,true,JSON.stringify(result.errors));assert.equal(result.canStartNewContent,false);assert.equal(result.canPublish,false);
 });
 test('tampered ancestor review gates and release timestamps are caught on every delivered bank',async()=>{

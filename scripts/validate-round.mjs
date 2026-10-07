@@ -1,3 +1,4 @@
+import {validateEvidenceLossCampaign,loadEvidenceLossDependencies} from './evidence-loss-block.mjs';
 import fs from 'node:fs/promises';
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
@@ -6,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
 import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion, presentQuestion} from '../src/domain.js';
 
+import {validateQuarantineCampaign, loadQuarantineDependencies} from './prepublication-quarantine.mjs';
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
 import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts, validateSynchronizationDeliveryProof} from './publication-sync.mjs';
 import {validateEditorialHistory, validateEditorialTransition, validateCampaignBaselines} from './editorial-ledger.mjs';
@@ -175,6 +177,10 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
   }
   // Do not draw campaign conclusions from a partial set after a schema failure.
   if (errors.length) return {ok: false, errors, warnings, rounds: []};
+  const evidenceLoss=validateEvidenceLossCampaign(rounds,{banks,ledgerSources,now,publicationState,offlineBases});
+  errors.push(...evidenceLoss.errors);
+  const quarantine=validateQuarantineCampaign(rounds,{banks,ledgerSources,now,publicationState});
+  errors.push(...quarantine.errors);
   const roundById = new Map(), candidatesById = new Map(), goals = new Map(), lineages = new Map(), templates = new Map(), questionIds = new Map();
   const bankCache = new Map();
   function bankRecord(version, round, at, publication = false) {
@@ -311,8 +317,8 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
     if (publicationState?.finalized && publicationState.finalizedAt && (start >= Date.parse(publicationState.finalizedAt) || (close ?? deadline) > Date.parse(publicationState.finalizedAt))) fail(round, '/decisionDeadline', 'round exceeds the persistent early freeze');
     walkStrings(round, (text, at) => { if (!text.trim()) fail(round, at, 'blank-only strings are not public conclusions'); if (/\b(?:REPLACE-[A-Z-]+|TEMPLATE ONLY)\b/.test(text)) fail(round, at, 'template placeholder remains'); });
     if (/^0+$/.test(round.baseline.sourceCommit) || /^0+$/.test(round.baseline.bankSha256)) fail(round, '/baseline', 'placeholder commit/hash is not verified evidence');
-    if (availableFiles && round.status === 'closed' && !availableFiles.has(`docs/rounds/${round.roundId}.md`)) fail(round, '', 'closed round is missing its public Markdown report');
-    for (const record of round.validation) if (record.reportPath !== null && (!safeRelative(record.reportPath) || (availableFiles && !availableFiles.has(record.reportPath)))) fail(round, '/validation', `missing or unsafe reportPath ${record.reportPath}`);
+    if (availableFiles && round.status === 'closed' && !availableFiles.has(`docs/rounds/${round.roundId}.md`) && !(evidenceLoss.ok&&evidenceLoss.reportDispositions.get(round.roundId)===`docs/rounds/${round.roundId}.md`)) fail(round, '', 'closed round is missing its public Markdown report');
+    for (const record of round.validation) if (record.reportPath !== null && (!safeRelative(record.reportPath) || (availableFiles && !availableFiles.has(record.reportPath) && !(evidenceLoss.ok&&evidenceLoss.reportDispositions.get(round.roundId)===record.reportPath)))) fail(round, '/validation', `missing or unsafe reportPath ${record.reportPath}`);
     const actualCounts = {registered: round.candidates.length, accepted: 0, rejected: 0, pending: 0};
     for (const candidate of round.candidates) {
       const at = `/candidates/${candidate.candidateId}`; actualCounts[candidate.decision]++;
@@ -427,7 +433,8 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
         for (const q of baseline.bank.questions) if (!isDeepStrictEqual(currentQuestions.get(q.questionId), q)) fail(round, '/publication', `existing question changed or removed: ${q.questionId}`);
         for (const o of baseline.bank.options) if (!isDeepStrictEqual(currentOptions.get(o.optionId), o)) fail(round, '/publication', `existing option changed or removed: ${o.optionId}`);
         for (const s of baseline.bank.sources) if (!isDeepStrictEqual(currentSources.get(s.id), s)) fail(round, '/publication', `existing source changed or removed: ${s.id}`);
-        const accepted = new Map(round.candidates.filter(c => c.decision === 'accepted').map(c => [c.questionId, c]));
+        const eligible = new Set(quarantine.dispositions.get(round.roundId)?.eligibleCandidateIds||[]);
+        const accepted = new Map(round.candidates.filter(c => c.decision === 'accepted' && eligible.has(c.candidateId)).map(c => [c.questionId, c]));
         const newSeen = new Set();
         for (const q of publication.bank.questions.filter(q => !oldQuestions.has(q.questionId))) {
           const c = accepted.get(q.questionId);
@@ -492,6 +499,9 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   if (bank.bankVersion !== manifest.bankVersion || bank.releasedAt !== manifest.releasedAt || digest(active.raw) !== manifest.sha256) fail('active manifest version/release/hash does not match bank bytes');
   try { validateExplanationAuthoring(bank, historicalExplanationBaseline(banks)); } catch(error) { fail(`explanation authoring: ${error.message}`); }
   errors.push(...validateCampaignBaselines(ledgers,{editorials,now:historyOptions.now??null,activeBankVersion:bank.bankVersion,offlineBases:historyOptions.offlineBases,ledgerSources:historyOptions.ledgerSources,synchronizations:historyOptions.synchronizations,banks,publicationState:historyOptions.publicationState}).errors);
+  errors.push(...validateEvidenceLossCampaign(ledgers,{banks,...historyOptions,manifest}).errors);
+  const quarantine=validateQuarantineCampaign(ledgers,{banks,...historyOptions,manifest});
+  errors.push(...quarantine.errors);
   const regular = bank.questions.filter(q => q.testOnly === false && q.verificationStatus === 'published');
   // Historical seed-only releases do not invent a regular expansion round.
   if (!regular.length) {
@@ -540,7 +550,8 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
     const current = new Map(after.map(v => [v[key], v]));
     for (const value of before) if (!isDeepStrictEqual(value, current.get(value[key]))) fail(`existing ${kind} changed or removed: ${value[key]}`);
   }
-  const accepted = new Map(round.candidates.filter(c => c.decision === 'accepted').map(c => [c.questionId, c]));
+  const eligible = new Set(quarantine.dispositions.get(round.roundId)?.eligibleCandidateIds||[]);
+  const accepted = new Map(round.candidates.filter(c => c.decision === 'accepted' && eligible.has(c.candidateId)).map(c => [c.questionId, c]));
   const seen = new Set();
   for (const q of bank.questions.filter(q => !oldQuestions.has(q.questionId))) {
     const c = accepted.get(q.questionId), last = c?.cycles.at(-1);
@@ -552,9 +563,9 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
       if (!e || !source || ['url', 'version', 'location'].some(key => e[key] !== source[key])) fail(`new question lacks matching reviewed primary evidence: ${q.questionId}/${id}`);
     }
   }
-  for (const c of round.candidates.filter(c => c.decision === 'accepted')) if (!currentQuestions.has(c.questionId)) fail(`accepted candidate is absent from staged release: ${c.candidateId}`);
+  for (const c of accepted.values()) if (!currentQuestions.has(c.questionId)) fail(`eligible accepted candidate is absent from staged release: ${c.candidateId}`);
   if (bank.bankVersion === baseline.bankVersion || Date.parse(bank.releasedAt) < Date.parse(round.closedAt ?? round.startedAt) || Date.parse(bank.releasedAt) >= FREEZE_AT || historyOptions.now !== null && historyOptions.now !== undefined && Date.parse(bank.releasedAt) > historyOptions.now) fail('staged release must be a new bank after decision closure and before campaign freeze/current time');
-  return {ok: errors.length === 0, errors};
+  return {ok: errors.length === 0, errors, disposition:quarantine.dispositions.get(round.roundId)};
 }
 
 async function readOfflinePublicFile(root, relative) {
@@ -616,6 +627,7 @@ export async function auditHistoricalRelease(root) {
   throw new Error('Historical audit requires an exact independently pinned complete source inventory');
 }
 async function loadContext(root = ROOT, input = null, {release = false, now = Date.now()} = {}, historicalSnapshot = null) {
+  await loadEvidenceLossDependencies(root,{now});
   const directory = path.join(root, 'docs/rounds');
   const paths = (await fs.readdir(directory)).filter(name => /^round-.*\.json$/.test(name) && !['round-ledger.schema.json', 'round-ledger.template.json'].includes(name)).map(name => path.join(directory, name));
   const editorialDirectory = path.join(root, 'docs/corrections');
@@ -645,6 +657,11 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     const file = path.join(root, 'data/releases', version, 'bank.json');
     try { banks.set(version, {raw: await fs.readFile(file)}); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
+  for(const version of await fs.readdir(path.join(root,'data/releases')).catch(error=>{if(error.code==='ENOENT')return [];throw error;})){
+    if(!/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(version))throw new Error('Invalid immutable bank directory');
+    if(!banks.has(version)){try{banks.set(version,{raw:await readOfflinePublicFile(root,`data/releases/${version}/bank.json`)});}catch(error){if(error.code!=='ENOENT')throw error;}}
+  }
+  const quarantineDispositions=await loadQuarantineDependencies(root,{ledgers,banks,ledgerSources,now,publicationState:JSON.parse(await fs.readFile(path.join(root,'data/publication-state.json'),'utf8')),manifest});
   const reviewPackages=new Map();
   for(const file of new Set(editorials.flatMap(e=>e.corrections.flatMap(c=>c.cycles.map(cycle=>cycle.reviewPackagePath))).filter(Boolean))) {
     if(!safeRelative(file)||!/^docs\/corrections\/evidence\/[^/]+-cycle-[123]\.json$/.test(file))throw new Error(`Unsafe editorial review package path: ${file}`);
@@ -694,7 +711,9 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
       frozenLedgers.set(ledger.roundId,raw);ledgerSources.set(ledger.roundId,raw);
     }
     const {validateOfflineContinuation}=await import('./download-fallback.mjs');
-    const offline=validateOfflineContinuation(index.receipts,{manifests,ledgers:frozenLedgers,banks:new Map([...banks].map(([version,entry])=>[version,entry.raw])),now,publicationState});
+    // Quarantine is campaign-wide; receipt provenance still uses its exact
+    // frozen originals (last), without dropping later source-round history.
+    const offline=validateOfflineContinuation(index.receipts,{manifests,ledgers:new Map([...ledgerSources,...frozenLedgers]),banks:new Map([...banks].map(([version,entry])=>[version,entry.raw])),now,publicationState});
     if(!offline.ok||!(offline.offlineBases instanceof Map))throw new Error(`Invalid offline delivery evidence: ${(offline.errors||[]).join('; ')}`);
     offlineBases=offline.offlineBases;
     const resolution=resolveSynchronizedArtifacts(index.receipts,{synchronizations,ledgers,banks,ledgerSources,now,publicationState});
@@ -719,12 +738,15 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
       offlineBases=continuation.offlineBases;deliveryCheckpointSources=continuation.deliveryCheckpointSources;
     }
   }
-  if(indexRaw||normalRaw) {
+  const {loadIndependentOfflineChains}=await import('./offline-chain-continuation.mjs');
+  const independent=await loadIndependentOfflineChains(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources});
+  offlineBases=independent.offlineBases;deliveryCheckpointSources=independent.deliveryCheckpointSources;
+  if(indexRaw||normalRaw||independent.chains.size) {
     const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources});
     const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations});
     if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
   }
-  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources};
+  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, quarantineDispositions};
 }
 export async function main(args = process.argv.slice(2)) {
   let input = null, nextRoundAt = null, release = false;

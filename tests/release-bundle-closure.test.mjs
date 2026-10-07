@@ -1,3 +1,4 @@
+import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -15,17 +16,19 @@ async function write(root,p,raw){await fs.mkdir(path.dirname(path.join(root,p)),
 async function fixture(t){
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'release-closure-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));const baseRoot=path.join(dir,'base'),workRoot=path.join(dir,'work');
  // Freeze a synthetic predecessor through 008 even when the live checkout has 009+.
- const paths=parsePublicAllowlist(await fs.readFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'utf8')).filter(p=>{
+ let paths=parsePublicAllowlist(await fs.readFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'utf8')).filter(p=>{
   const r=/^docs\/rounds\/round-(\d+)(?:[./-]|$)/.exec(p),b=/^data\/releases\/[^/]*-regular\.(\d+)\//.exec(p);
-  return !(r&&Number(r[1])>=9)&&!(b&&Number(b[1])>=9)&&!p.startsWith('docs/deliveries/checkpoints/');
+  return !(r&&Number(r[1])>=9)&&!(b&&Number(b[1])>=9)&&!p.startsWith('docs/deliveries/checkpoints/')&&!p.startsWith('docs/deliveries/chains/');
  });
  for(const p of paths)await write(baseRoot,p,await fs.readFile(path.join(root,p)));
+ // Reset only this pre-independent-delivery fixture's copied authority.
+ if(paths.includes('docs/deliveries/offline-chain-trust.json'))await write(baseRoot,'docs/deliveries/offline-chain-trust.json',json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  // The through008 fixture predates successor deliveries. Its imported authority
  // must use the same isolated empty registry as its exact packaged bytes.
  await write(baseRoot,'docs/deliveries/release-backup-trust.json',json({schemaVersion:1,rootProofSha256:hash(await fs.readFile(path.join(baseRoot,'docs/deliveries/normal-backup-009.json'))),checkpoints:[]}));
  const bank8Raw=await fs.readFile(path.join(baseRoot,'data/releases/2026.10.04-regular.8/bank.json')),bank8=JSON.parse(bank8Raw),coverage=regularCoverage(bank8);
  const manifest8={schemaVersion:1,bankVersion:bank8.bankVersion,releasedAt:bank8.releasedAt,file:`releases/${bank8.bankVersion}/bank.json`,sha256:hash(bank8Raw),changeSummary:bank8.changeSummary,finalRelease:false};
- await write(baseRoot,'data/manifest.json',json(manifest8));await write(baseRoot,'PUBLICATION-MANIFEST.txt',paths.join('\n')+'\n');await fs.cp(baseRoot,workRoot,{recursive:true});
+ await write(baseRoot,'data/manifest.json',json(manifest8));await write(baseRoot,'PUBLICATION-MANIFEST.txt',paths.join('\n')+'\n');await retainHistoricalQuarantinePrefix(baseRoot,now);paths=parsePublicAllowlist(await fs.readFile(path.join(baseRoot,'PUBLICATION-MANIFEST.txt'),'utf8'));await fs.cp(baseRoot,workRoot,{recursive:true});
  const r=JSON.parse(await fs.readFile(path.join(baseRoot,'docs/rounds/round-ledger.template.json')));
  Object.assign(r,{roundId:'round-009',status:'closed',startedAt:'2026-10-04T08:54:06Z',decisionDeadline:'2026-10-04T10:30:00Z',closedAt:'2026-10-04T09:00:00Z',summary:'Synthetic regression fixture; no real acceptance, publication or delivery claim.',baseline:{sourceCommit:'50fd2807a0ff8fc2c10cbf2628f65d0ca53065c2',bankVersion:bank8.bankVersion,bankSha256:hash(bank8Raw),regularWrittenBySubject:coverage.regularWrittenBySubject,regularPractical:coverage.regularPractical},coverageAfter:coverage,noGapExplanation:'Synthetic regression examines artifact dependency closure, not real question coverage.',validation:[{check:'synthetic report dependency',result:'pass',summary:'Fixture only',reportPath}],manualStartException:{kind:'explicit_user_requested_next_round',requestedAt:'2026-10-04T08:54:06Z',previousRoundId:'round-008',previousClosedAt:'2026-10-04T07:56:30.743478+00:00',nextScheduledStart:'2026-10-04T11:00:00Z',reason:'Synthetic exact authorization fixture; no real content work.'}});
  const bank9={...bank8,bankVersion:'2026.10.04-regular.9',roundId:r.roundId,releasedAt:r.closedAt,changeSummary:'Synthetic packaging regression with no content additions.'},bank9Raw=json(bank9);

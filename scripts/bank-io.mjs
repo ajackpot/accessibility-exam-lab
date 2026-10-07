@@ -1,13 +1,20 @@
+import {assertNoEvidenceLossContent,loadEvidenceLossDependencies} from './evidence-loss-block.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {validateBankForPublication,validateExplanationAuthoring,sha256} from '../src/domain.js';
+import {assertNoQuarantinedContent} from './prepublication-quarantine.mjs';
 import {readHistoricalExplanationBaseline} from './explanation-authoring.mjs';
 
 /** An ordinary build validates the currently selected release, never a seed fallback. */
 export async function readBankInput(root,input) {
+  // The root's current evidence registry is required even for an explicit bank input.
+  let validator='';try{validator=await fs.readFile(path.join(root,'scripts/validate-round.mjs'),'utf8');}catch(error){if(error.code!=='ENOENT')throw error;}
+  let loader='',hasRegistry=false;try{loader=await fs.readFile(path.join(root,'scripts/bank-io.mjs'),'utf8');}catch(error){if(error.code!=='ENOENT')throw error;}
+  try{await fs.lstat(path.join(root,'docs/release-blocks/trust.json'));hasRegistry=true;}catch(error){if(error.code!=='ENOENT')throw error;}
+  if(hasRegistry||validator.includes('loadEvidenceLossDependencies')||loader.includes('loadEvidenceLossDependencies'))await loadEvidenceLossDependencies(root);
   if(input) {
     const raw=await fs.readFile(path.resolve(input),'utf8');
-    const bank=validateBankForPublication(JSON.parse(raw));
+    const bank=assertNoEvidenceLossContent(assertNoQuarantinedContent(validateBankForPublication(JSON.parse(raw))));
     // Only the verified active release is a carry-forward baseline. Candidates
     // cannot opt out using a bankVersion, testOnly flag or supplied metadata.
     let hasBaseline=true;
@@ -22,7 +29,7 @@ export async function readBankInput(root,input) {
   if(typeof manifest.bankVersion!=='string'||!/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(manifest.bankVersion)||manifest.file!==`releases/${manifest.bankVersion}/bank.json`)throw new Error('Active manifest release path is invalid.');
   const raw=await fs.readFile(path.join(root,'data',manifest.file),'utf8');
   if(await sha256(raw)!==manifest.sha256)throw new Error('Active manifest hash mismatch.');
-  const bank=validateBankForPublication(JSON.parse(raw));
+  const bank=assertNoEvidenceLossContent(assertNoQuarantinedContent(validateBankForPublication(JSON.parse(raw))));
   if(bank.changeSummary!==manifest.changeSummary)throw new Error('Active manifest change summary mismatch.');
   if(bank.bankVersion!==manifest.bankVersion||bank.releasedAt!==manifest.releasedAt)throw new Error('Active manifest version or release time mismatch.');
   validateExplanationAuthoring(bank,await readHistoricalExplanationBaseline(root));

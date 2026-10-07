@@ -1,10 +1,14 @@
-import test from 'node:test';
+import {createSyntheticValidator} from './quarantine-fixtures.mjs';
+import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {CAMPAIGN_SCHEDULE_VERSIONS, FOUR_HOUR_CADENCE_AT, FINAL_DECISION_AT, nextScheduledRoundAt, validateRoundLedgers, validateEditorialLedgers, validateReleaseLedger, loadRoundContext, regularCoverage} from '../scripts/validate-round.mjs';
 import {FREEZE_AT} from '../src/domain.js';
+
+const syntheticValidator=await createSyntheticValidator();
+after(syntheticValidator.cleanup);
 
 // Synthetic schedule fixtures never claim content review or actual publication.
 const root = new URL('../', import.meta.url);
@@ -20,7 +24,7 @@ function round(start = '2026-10-03T00:00:00+09:00', id = 'round-003', deadline =
   Object.assign(r.baseline, {sourceCommit: 'a'.repeat(40), bankVersion: seed.bankVersion, bankSha256: hash(seedRaw)});
   return r;
 }
-function result(rounds, options = {}) { return validateRoundLedgers(rounds, {banks, ...options}); }
+function result(rounds, options = {}) { return syntheticValidator.round.validateRoundLedgers(rounds, {banks, ...options}); }
 function pass(rounds, options) { const r = result(rounds, options); assert.equal(r.ok, true, r.errors.join('\n')); }
 function fail(rounds, pattern, options) { const r = result(rounds, options); assert.equal(r.ok, false, 'invalid schedule passed'); assert.match(r.errors.join('\n'), pattern); }
 async function historicalContext() {

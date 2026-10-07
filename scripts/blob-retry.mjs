@@ -43,7 +43,10 @@ function decode(operation) {
     if (!operation.content.isWellFormed()) fail('Malformed UTF-8 content');
     return Buffer.from(operation.content, 'utf8');
   }
-  if (operation.encoding !== 'base64' || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(operation.content)) fail('Noncanonical blob encoding');
+  // A repeated-group regexp over multi-megabyte banks can exhaust the JS stack.
+  // Validate the alphabet/length in linear time, then enforce exact canonical
+  // padding and pad bits with the unchanged decode/re-encode equality below.
+  if (operation.encoding !== 'base64' || operation.content.length % 4 !== 0 || /[^A-Za-z0-9+/=]/.test(operation.content)) fail('Noncanonical blob encoding');
   const raw = Buffer.from(operation.content, 'base64');
   if (raw.toString('base64') !== operation.content) fail('Noncanonical base64 content');
   return raw;

@@ -1,3 +1,4 @@
+import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -38,9 +39,12 @@ async function historicalTen(t,sourceRoot=root){
  // A disposable historical authority must be internally coherent even when this
  // test runs after real011/012 delivery. Never alter the production trust prefix.
  const paths=parsePublicAllowlist((await read(dir,'PUBLICATION-MANIFEST.txt')).toString());
- const later=paths.filter(p=>{const r=p.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/),b=p.match(/^data\/releases\/[^/]+-regular\.(\d+)\//),c=p.match(/^docs\/deliveries\/checkpoints\/round-(\d+)\.json$/);return r&&Number(r[1])>10||b&&Number(b[1])>10||c&&Number(c[1])>10;});
+ const later=paths.filter(p=>{const r=p.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/),b=p.match(/^data\/releases\/[^/]+-regular\.(\d+)\//),c=p.match(/^docs\/deliveries\/checkpoints\/round-(\d+)\.json$/);return r&&Number(r[1])>10||b&&Number(b[1])>10||c&&Number(c[1])>10||p.startsWith('docs/deliveries/chains/');});
  await allow(dir,[],later);for(const p of later)await fs.rm(path.join(dir,p),{force:true});
+ // Reset only copied authority so real later independent proofs stay isolated.
+ if(paths.includes('docs/deliveries/offline-chain-trust.json'))await write(dir,'docs/deliveries/offline-chain-trust.json',json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  const trust=JSON.parse(await read(dir,'docs/deliveries/release-backup-trust.json'));trust.checkpoints=trust.checkpoints.filter(p=>Number(p.roundId.slice(6))<=10);await write(dir,'docs/deliveries/release-backup-trust.json',json(trust));
+ await retainHistoricalQuarantinePrefix(dir,now);
  const proof=JSON.parse(await read(dir,'docs/deliveries/checkpoints/round-010.json'));await write(dir,'data/manifest.json',proof.runtimeManifestRaw);
  return dir;
 }

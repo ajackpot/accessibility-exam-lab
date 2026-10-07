@@ -1,0 +1,1832 @@
+{
+  "schemaVersion": 1,
+  "kind": "pre_first_release_quarantine",
+  "auditId": "quarantine-001",
+  "campaignId": "2026-exam-final",
+  "roundId": "round-022",
+  "recordedAt": "2026-10-06T08:23:36.663Z",
+  "sourceDecisionSha256": "c0c40b525150a53546828808176b884580e3cd712c8ead49e819cd4a32170390",
+  "previousAuditSha256": null,
+  "priorTrustSha256": "2ee3589efa18554befaea81fcbfb3e31395b944f9561f0c992d05eaff0bd0746",
+  "boundary": {
+    "observedAt": "2026-10-06T08:23:36.663Z",
+    "manifestRaw": "{\n  \"schemaVersion\": 1,\n  \"bankVersion\": \"2026.10.06-regular.21\",\n  \"releasedAt\": \"2026-10-06T03:49:26.092Z\",\n  \"file\": \"releases/2026.10.06-regular.21/bank.json\",\n  \"sha256\": \"da5181bc4f2987dfeb8ea487e8004134fecb36b178b031a04161c1339a38f7d7\",\n  \"changeSummary\": \"21회차 정규 누적 문제 은행: 독립 검토를 통과한 일반 학습 필기 29문항·실기 1문항 추가. 기존 기능 검증용 14개 testOnly 시드·기존 불변 은행은 유지. 후보 31개 중 채택 30개, 탈락 1개. 누적 일반 811개·테스트14개. 과목별20개 조건 충족으로100문항 모의시험 사용 가능.\",\n  \"finalRelease\": false\n}\n",
+    "publicationStateRaw": "{\"finalized\":false}\n",
+    "deliveredManifestRaw": "{\n  \"schemaVersion\": 1,\n  \"bankVersion\": \"2026.10.06-regular.21\",\n  \"releasedAt\": \"2026-10-06T03:49:26.092Z\",\n  \"file\": \"releases/2026.10.06-regular.21/bank.json\",\n  \"sha256\": \"da5181bc4f2987dfeb8ea487e8004134fecb36b178b031a04161c1339a38f7d7\",\n  \"changeSummary\": \"21회차 정규 누적 문제 은행: 독립 검토를 통과한 일반 학습 필기 29문항·실기 1문항 추가. 기존 기능 검증용 14개 testOnly 시드·기존 불변 은행은 유지. 후보 31개 중 채택 30개, 탈락 1개. 누적 일반 811개·테스트14개. 과목별20개 조건 충족으로100문항 모의시험 사용 가능.\",\n  \"finalRelease\": false\n}\n",
+    "deliveredPublicationStateRaw": "{\"finalized\":false}\n",
+    "priorFiles": [
+      {
+        "path": ".nojekyll",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": ".gitignore",
+        "sha256": "29083e4405b36165cbf0eee261a311d7b65382c36bced279d778e4bcda9c223e",
+        "bytes": 35
+      },
+      {
+        "path": "README.md",
+        "sha256": "fdb8ca7de3cf43e27b3cbc370ef85264745c179d9723fb1a3d9d78b2096df6f0",
+        "bytes": 25996
+      },
+      {
+        "path": "PUBLICATION-MANIFEST.txt",
+        "sha256": "f6989651ac1f5c78f213a60b27d0e795840602591d7b3d08a754c938706e1d65",
+        "bytes": 8222
+      },
+      {
+        "path": "package.json",
+        "sha256": "6844b034b6e7cf7733bbbd088d62d21a3946e33038a23ef9ca562066c113f1a7",
+        "bytes": 436
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "357e0083ec4c0fd53a902c2cd80253feaf257014fd9bde65273dc76f8f0bebc7",
+        "bytes": 258
+      },
+      {
+        "path": "index.html",
+        "sha256": "ae0f05356a85cbfb34f42f9a16a60b43132d29920d95f8badd8e6d02df76e3d5",
+        "bytes": 2192
+      },
+      {
+        "path": "style.css",
+        "sha256": "4ccf0d8e11b9f03525ef7494ef7b34f553c58d5ce955d2714b92087ba5b23bb4",
+        "bytes": 8153
+      },
+      {
+        "path": "src/app.js",
+        "sha256": "65c2bbf05f2fd163daff4d56898187c39f787622ba3c43a81bf0123be94bd15d",
+        "bytes": 86527
+      },
+      {
+        "path": "src/workflows.js",
+        "sha256": "b9e0fa054b7ceb33d5a7454a5a7910b80173c3fca203b73922a26b7d80d03b19",
+        "bytes": 6205
+      },
+      {
+        "path": "src/domain.js",
+        "sha256": "517385b595fe3cd4520d0da88bbe860459432b2f310dfd4db43e79270db234de",
+        "bytes": 42668
+      },
+      {
+        "path": "src/legacy-materials.js",
+        "sha256": "77308ebe6a638851dfbe78bab2ba4a78d66ac2d344efae51e080ea67f3d7fca8",
+        "bytes": 11993
+      },
+      {
+        "path": "src/legacy-question-display.js",
+        "sha256": "9efbb3f65b736c26546a3d26dd16a9adaa7bb759b2a876ae859f98737b5fa170",
+        "bytes": 177619
+      },
+      {
+        "path": "src/storage.js",
+        "sha256": "83f3770cabaedc198e58ecf75ca6e598dec103c1b96da71b68b5171fbf582f65",
+        "bytes": 8056
+      },
+      {
+        "path": "src/backup.js",
+        "sha256": "e3e21b163046a06b0a31dc8c5b15394931b904e82aa68130b6646ce1b2c275d1",
+        "bytes": 10281
+      },
+      {
+        "path": "scripts/build.mjs",
+        "sha256": "def6c0c20b4adb546ad02240e0a60d6d49c4d0563a60951f376fb95c1aad4e79",
+        "bytes": 1406
+      },
+      {
+        "path": "scripts/check.mjs",
+        "sha256": "094cf5d2bda261e840e6e79c85f08dd360b05794c066e4c15007949250080e61",
+        "bytes": 2000
+      },
+      {
+        "path": "scripts/validate-bank.mjs",
+        "sha256": "7624ddbf40d3fa38418a5458c001d2882892f49a0e1d291c37b7657295dba024",
+        "bytes": 766
+      },
+      {
+        "path": "scripts/release-guard.mjs",
+        "sha256": "2952ae5889cd27ffca98cfed504e06165b579a68467497b47f86be94b62830bc",
+        "bytes": 2213
+      },
+      {
+        "path": "data/manifest.json",
+        "sha256": "974fb69c43bc502a177fe7fdaa45e381ca5246965ac5f789c48d0ba7316242d0",
+        "bytes": 644
+      },
+      {
+        "path": "data/publication-state.json",
+        "sha256": "01f951b39cc2daaca5012abf589a7fda62127430ad3a79af3ad95bfeeed863cc",
+        "bytes": 20
+      },
+      {
+        "path": "data/seed-bank.json",
+        "sha256": "baa4ee31c10022e5f1325b66b2adf32bc2ef49fdb88a316ddd89acefe1532101",
+        "bytes": 90813
+      },
+      {
+        "path": "data/seed-bank-v2.json",
+        "sha256": "5b6b3506888af368cc591e1c751651d16f154c43dde460a0ccbcc916e2b78eac",
+        "bytes": 93040
+      },
+      {
+        "path": "data/seed-bank-v3.json",
+        "sha256": "92b98f94a82451b80cb75008d2ca688a205b60c4f0df3930e788542efc85acee",
+        "bytes": 95357
+      },
+      {
+        "path": "data/seed-bank-v4.json",
+        "sha256": "46c18e0ed3265a1de768f1d08bbeb4e6ada571293aae9c19c0766093df973d99",
+        "bytes": 97467
+      },
+      {
+        "path": "data/releases/2026.10.02-seed.1/bank.json",
+        "sha256": "baa4ee31c10022e5f1325b66b2adf32bc2ef49fdb88a316ddd89acefe1532101",
+        "bytes": 90813
+      },
+      {
+        "path": "data/releases/2026.10.02-seed.2/bank.json",
+        "sha256": "5b6b3506888af368cc591e1c751651d16f154c43dde460a0ccbcc916e2b78eac",
+        "bytes": 93040
+      },
+      {
+        "path": "data/releases/2026.10.02-seed.3/bank.json",
+        "sha256": "92b98f94a82451b80cb75008d2ca688a205b60c4f0df3930e788542efc85acee",
+        "bytes": 95357
+      },
+      {
+        "path": "data/releases/2026.10.02-seed.4/bank.json",
+        "sha256": "46c18e0ed3265a1de768f1d08bbeb4e6ada571293aae9c19c0766093df973d99",
+        "bytes": 97467
+      },
+      {
+        "path": "docs/PRD.md",
+        "sha256": "c4f29882170e7c59623431f1b653290852401c5cd6cfb99f35870c7c6c9bf0bd",
+        "bytes": 217522
+      },
+      {
+        "path": "docs/DATA-CONTRACT.md",
+        "sha256": "2628b0a743c65646905b37f9daad1c0461759f0f9efb32a3c0f044324175d1a6",
+        "bytes": 86083
+      },
+      {
+        "path": "docs/OPERATIONS.md",
+        "sha256": "6437f0456a3cf6841d77dff8a43cb0188feb0171b0065dd8a0b846423b014cf4",
+        "bytes": 82704
+      },
+      {
+        "path": "docs/NVDA-CHECKLIST.md",
+        "sha256": "d58688e64f750f959a043522e2d0aa2854af459ee6e931ef170e9c183ee475a4",
+        "bytes": 10519
+      },
+      {
+        "path": "docs/ANNOUNCEMENTS.md",
+        "sha256": "de9ef7be5c8e4b052f4c40933cce9f6ca7efa1b38f62b01fdd8d32dff7da8318",
+        "bytes": 6075
+      },
+      {
+        "path": "docs/VALIDATION.md",
+        "sha256": "eb2a6fad4f3a423c00856632079cf93d49de53f02ec0d6211f9d090862dcce7e",
+        "bytes": 147826
+      },
+      {
+        "path": "docs/SOURCE-REVIEW.md",
+        "sha256": "a3ffa82798d2e2e7bf7df809e8ea98c9fb045a94dd4d06c9feb87b44dc4c1d50",
+        "bytes": 25298
+      },
+      {
+        "path": "docs/SEED-VALIDATION.json",
+        "sha256": "4d5747458ee092fe49cb7c727949a7be2b2b9b667fed9433d6e686f04e65b3b9",
+        "bytes": 2968
+      },
+      {
+        "path": "tests/domain.test.mjs",
+        "sha256": "28f5f14d468a6562bf1f268520edd7088fd70e5d8733978278307353d947106f",
+        "bytes": 17060
+      },
+      {
+        "path": "tests/choice-order.test.mjs",
+        "sha256": "5b506d795b57750e172d32021e456e3ef7d9fc5124d940be3325c71fb73cba45",
+        "bytes": 9843
+      },
+      {
+        "path": "tests/feedback-policy.test.mjs",
+        "sha256": "8e01aadfbf682510a40de17755be62b55679e572b6feacf7a0c94a46a50c2b3c",
+        "bytes": 8069
+      },
+      {
+        "path": "tests/stimulus-layout.test.mjs",
+        "sha256": "6a1b765117b9db7ea4af47f83e1879f62910092100f5035e83e78863e657c268",
+        "bytes": 22130
+      },
+      {
+        "path": "tests/concise-format.test.mjs",
+        "sha256": "0bc89d1661bd421bbef3c3921b64c80781d7ad244392c0ca94dc50176706beed",
+        "bytes": 9453
+      },
+      {
+        "path": "tests/workflows.test.mjs",
+        "sha256": "f21e58a192168492511d4b76eb641ea240072c1e22dbece93dca83243b047ced",
+        "bytes": 10630
+      },
+      {
+        "path": "tests/ui-state.test.mjs",
+        "sha256": "1f6e674548ad260ae2f16949ee579ff268d5976823a51fc6064230db1dfff50e",
+        "bytes": 21526
+      },
+      {
+        "path": "tests/announcements.test.mjs",
+        "sha256": "4fa8885292ae93dd7dd57d35535222166b016e8456b3ab38a2d93a609598981f",
+        "bytes": 15820
+      },
+      {
+        "path": "qa/harness.html",
+        "sha256": "4d029caf82c8068f573d0ee6accc0d81b5f3ac5d0ef6c72dc986916d56fffc86",
+        "bytes": 592
+      },
+      {
+        "path": "qa/browser-harness.js",
+        "sha256": "24cc3995160ebb0523ec9f1c6efeb8c60deea3aa6e6a67e189fa9e2cf74acf66",
+        "bytes": 6248
+      },
+      {
+        "path": "qa/fixture.mjs",
+        "sha256": "d47fbb7de879be505dff8662823467545c8da0e642e80fd212b210a70e90735d",
+        "bytes": 2498
+      },
+      {
+        "path": "qa/domain-boundary.test.mjs",
+        "sha256": "69bdd09dbc764bd3086f4aee90b50cbf555aac066159be45eba7fb3b0aaf4e8d",
+        "bytes": 8902
+      },
+      {
+        "path": "qa/backup-network.test.mjs",
+        "sha256": "99d5aa2044d7b0d6003048f01d41eb420badc1abf2614c2e897c96b2dfad7f2c",
+        "bytes": 6020
+      },
+      {
+        "path": "qa/seed-content.test.mjs",
+        "sha256": "3f5a30aae1986540d962a0371e44cc683cceafdfee1c0cb8848a35d8e3aa5049",
+        "bytes": 3974
+      },
+      {
+        "path": "qa/viewport.html",
+        "sha256": "6a3c47a6a869a04a4c71842ee2e84b107d1defa713324f544c9042f736902ccd",
+        "bytes": 841
+      },
+      {
+        "path": "qa/viewport.js",
+        "sha256": "515073fb4b38c63ea84d04409f4556f15a4c9cd2174039df7552a22a064d6634",
+        "bytes": 374
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256": "5689e84f9c313109d178054062818991da366ee03ea3160853a53fbcd130e987",
+        "bytes": 31954
+      },
+      {
+        "path": "scripts/bank-io.mjs",
+        "sha256": "94e0a00a2f8600c9ec3b6891df184fadc12e337b6d48bc161f5991a18b500cca",
+        "bytes": 2178
+      },
+      {
+        "path": "scripts/validate-round.mjs",
+        "sha256": "e241054d18119902d74181f7efb7d83e172214710fc3c7db7cb64724cd69f261",
+        "bytes": 68655
+      },
+      {
+        "path": "tests/build-current-bank.test.mjs",
+        "sha256": "4d99f90d7e5a6358b3f2bcdb3d0b6878dff2567cf183a04bb5fddac2322c4380",
+        "bytes": 5056
+      },
+      {
+        "path": "tests/round-ledger.test.mjs",
+        "sha256": "64588a0d5a7d3edaedab96edd1b1eb4adc07bd0243adc515efac5d31c5f7ac0d",
+        "bytes": 25337
+      },
+      {
+        "path": "docs/rounds/round-ledger.schema.json",
+        "sha256": "184c4594c7d40160506edcfaf7d7baf64f6567e0201b88919d83544a037faaad",
+        "bytes": 32151
+      },
+      {
+        "path": "docs/rounds/round-ledger.template.json",
+        "sha256": "518b5f44f5cb24b8d5a5dee65696ad7b01b4fb563456e5387924e70063124842",
+        "bytes": 1774
+      },
+      {
+        "path": "docs/rounds/round-001.json",
+        "sha256": "c75d8afae8bb42ee8892e6c755585d7d6240be0e004e7c2078af2e568424ecea",
+        "bytes": 353338
+      },
+      {
+        "path": "docs/rounds/round-001.md",
+        "sha256": "32009e6899c5e79eb26b53926969804eb0f27ef113f1501dc2b788a850226e56",
+        "bytes": 9892
+      },
+      {
+        "path": "docs/rounds/round-report.template.md",
+        "sha256": "9b7af662bf50878bf5874638ca7dee6bd052fe07cd6eb0d733b6d82f275bcebe",
+        "bytes": 1938
+      },
+      {
+        "path": "tests/regular-practice.test.mjs",
+        "sha256": "b594285d5b9bb6ffbe89bce8bc805a8fb6a294bf8a681d443f2f2b0a8621e540",
+        "bytes": 16203
+      },
+      {
+        "path": "tests/regular-bank.test.mjs",
+        "sha256": "c5e456ac12164879fc029734a5c4df0b5f49965874f6e9dacfa4667d09ea09b1",
+        "bytes": 7335
+      },
+      {
+        "path": "data/releases/2026.10.02-regular.1/bank.json",
+        "sha256": "3abb68de23d9b58755bd9c039df5c803775705c86df0256d59570fe3c3eea5e0",
+        "bytes": 488491
+      },
+      {
+        "path": "src/reviewed-option-explanations.js",
+        "sha256": "741280d1881b920e15196d213e0a8adadbd09a49b9e2a473d50b9b415cb1f361",
+        "bytes": 31114
+      },
+      {
+        "path": "scripts/explanation-authoring.mjs",
+        "sha256": "9439300866fad60d1a0428054cd7370bf56dd76dde6c00226f5121d18c37cd5b",
+        "bytes": 1500
+      },
+      {
+        "path": "tests/explanation-redundancy.test.mjs",
+        "sha256": "4b1201294e4a1740ea3eab651be259c0c8535279b61e7e78e00d44415c604d64",
+        "bytes": 16126
+      },
+      {
+        "path": "scripts/editorial-ledger.mjs",
+        "sha256": "5ed1c7bb31f88b11ca902ca244198d850ad6544bf907d922bd713877ba360ad3",
+        "bytes": 39103
+      },
+      {
+        "path": "tests/editorial-ledger.test.mjs",
+        "sha256": "f3bf519bb806c3e343af4b808fd00deea088b6006439050972e0f99eb88ac202",
+        "bytes": 24809
+      },
+      {
+        "path": "docs/corrections/editorial-ledger.schema.json",
+        "sha256": "a4df31637df5eebc663ae20181e3bb5a3e99ea6a4f73efdbc42f40521c924e11",
+        "bytes": 20556
+      },
+      {
+        "path": "docs/corrections/editorial-001.json",
+        "sha256": "9c8687564fa07f3bb78409cbb42cd0e7ad366c707c6fd4582945c51b776fb7aa",
+        "bytes": 286931
+      },
+      {
+        "path": "docs/corrections/editorial-001.md",
+        "sha256": "b84f8a8f3db4b0fe469ac5665f9288595a88882284d1fb42d5d02ff2b83b06f4",
+        "bytes": 8701
+      },
+      {
+        "path": "docs/corrections/choice-audit-001.json",
+        "sha256": "6db79fdb59495fa41f1b228848aef47dac29fd5c8997942ed3bcf17930d8f463",
+        "bytes": 190125
+      },
+      {
+        "path": "data/releases/2026.10.02-editorial.1/bank.json",
+        "sha256": "0d6f624cf75d6fed7fb95b4f2b0ce995df9b73b8475ebab805d42cb9fcad12f2",
+        "bytes": 477759
+      },
+      {
+        "path": "docs/corrections/evidence/editorial-001-cycle-1.json",
+        "sha256": "ce9fc9dc9d5dc93f03eda4dce2d566f2c732ad53858d29ba62e32fbc6460a2c4",
+        "bytes": 155858
+      },
+      {
+        "path": "docs/corrections/evidence/editorial-001-cycle-2.json",
+        "sha256": "045a2312d707e1358e12a85b774ad34e2f7352e91cd72771195eddf5fcc52a22",
+        "bytes": 4888
+      },
+      {
+        "path": "tests/editorial-bank.test.mjs",
+        "sha256": "888f979acd74544f8b22f8b36f2f07cd2952a814943bad3ac8f93e09c71f3e10",
+        "bytes": 8435
+      },
+      {
+        "path": "tests/round-schedule-substitution.test.mjs",
+        "sha256": "f30452473df087cf95854cfa827703d22f0b3bd803be8dbab75eefb6a6b9633b",
+        "bytes": 4702
+      },
+      {
+        "path": "tests/four-hour-cadence.test.mjs",
+        "sha256": "bb647dbd79fc7daca440cd8624861e43cc518bc09e02f7594ff8f33241ab5367",
+        "bytes": 10810
+      },
+      {
+        "path": "tests/round-two-bank.test.mjs",
+        "sha256": "b51933e14438974e753a0da03d314a659a08cd104c7aee1dbd85c266b60f7de7",
+        "bytes": 5561
+      },
+      {
+        "path": "docs/rounds/round-002.json",
+        "sha256": "c17964b6914eda23559f2c1435a6f0113a767ae8ecf7e7637ad1dca2269affda",
+        "bytes": 341065
+      },
+      {
+        "path": "docs/rounds/round-002.md",
+        "sha256": "0297f7c619b5bb720a89e8116e12e9455d3b5c2e64ef9a2e2d526a71f6f09996",
+        "bytes": 12551
+      },
+      {
+        "path": "data/releases/2026.10.02-regular.2/bank.json",
+        "sha256": "c79139eaee12943dc65b8cbcaeda37b62254b379ef367ab9a57c2fded3beed54",
+        "bytes": 836158
+      },
+      {
+        "path": "tests/round-three-bank.test.mjs",
+        "sha256": "70002fef4005fd4494e7b049700e81eb0d2ad8d782955a4e5ed028317de555cd",
+        "bytes": 7425
+      },
+      {
+        "path": "docs/rounds/round-003.json",
+        "sha256": "a9109b4eefd625739a71cbd4539af9854cde64141a6e8bdbc65a147505bb39ac",
+        "bytes": 390364
+      },
+      {
+        "path": "docs/rounds/round-003.md",
+        "sha256": "6c74bccbda99387bf910d6686f7727980832dad01f8228d8843839a2d3305e6e",
+        "bytes": 12160
+      },
+      {
+        "path": "data/releases/2026.10.03-regular.3/bank.json",
+        "sha256": "bfd499128280d67ebafbdd1f401bf8a12ff85d89373bd3284d9dfb12ae150c48",
+        "bytes": 1184180
+      },
+      {
+        "path": "tests/round-four-bank.test.mjs",
+        "sha256": "81be124732da65ebc1f33293864175e985f1e428a284efd98f2b4d5b3c6b3ada",
+        "bytes": 7429
+      },
+      {
+        "path": "docs/rounds/round-004.json",
+        "sha256": "d0fb636538d847cdaefb88e2e928e58b5f5e2dbed1f7ceb5bd0f268f40b3f767",
+        "bytes": 481074
+      },
+      {
+        "path": "docs/rounds/round-004.md",
+        "sha256": "d7a950e29f0b0656861c05f04cdebedd29817e1c34551fdd7b2f19c35915fa68",
+        "bytes": 13421
+      },
+      {
+        "path": "data/releases/2026.10.03-regular.4/bank.json",
+        "sha256": "104cd566d0e39cd76d9a075969f725ab2c4c0e72b90687ee2e140046e6c5bddf",
+        "bytes": 1527288
+      },
+      {
+        "path": "tests/round-five-bank.test.mjs",
+        "sha256": "951df6d3b6ea8aa54f9266ecd373f1183f76226777f9bdbe1d15b8e35994d0d0",
+        "bytes": 7405
+      },
+      {
+        "path": "docs/rounds/round-005.json",
+        "sha256": "fa0251513a03de3099e424f99a0286627f335a6e52e11b365e72cd41fe128ac2",
+        "bytes": 389452
+      },
+      {
+        "path": "docs/rounds/round-005.md",
+        "sha256": "46504e44d61610dae49e59818aa445257dcce4d866c044de2ea2c2143febfe76",
+        "bytes": 14013
+      },
+      {
+        "path": "data/releases/2026.10.04-regular.5/bank.json",
+        "sha256": "77a312eb775786ccd069a5f1ec77d4ec96df8141eca657f0f594f02ac30820e1",
+        "bytes": 1846853
+      },
+      {
+        "path": "scripts/download-fallback.mjs",
+        "sha256": "331b46eb7022ec0dbf85d3b5faaebb0fa1de4073d9bed1c237ceb881bd699637",
+        "bytes": 54916
+      },
+      {
+        "path": "tests/download-fallback.test.mjs",
+        "sha256": "fea305c2d175622e163ee40079655cc34b72407d14364615a7f90a6b74c5a7ca",
+        "bytes": 24560
+      },
+      {
+        "path": "tests/round-six-bank.test.mjs",
+        "sha256": "aed5a78e7c5daefaf6d0dde88707a9713319a857d69b8c472d6a36778ca3b5d2",
+        "bytes": 7405
+      },
+      {
+        "path": "docs/rounds/round-006.json",
+        "sha256": "3189388a549bc8d87259a58a32aa094b1688556b8d4477047dca8319b49d16af",
+        "bytes": 282759
+      },
+      {
+        "path": "docs/rounds/round-006.md",
+        "sha256": "d0f2a96e402cce799a119c6a21661d4c611c408913200b2c6bff22e797fff39a",
+        "bytes": 10061
+      },
+      {
+        "path": "data/releases/2026.10.04-regular.6/bank.json",
+        "sha256": "14058752f728e9653aa5df025134953fafba50795213784ea27deafc295f9437",
+        "bytes": 2090682
+      },
+      {
+        "path": "tests/bounded-reconciliation.test.mjs",
+        "sha256": "71aa7115d7322395e2785a3111ec71aecfe8f35297091b105f9789699971c1bc",
+        "bytes": 17046
+      },
+      {
+        "path": "tests/offline-campaign-baselines.test.mjs",
+        "sha256": "5e53a557e660c1fcd7460de053cac9780966c81be0e9cf0e5bc27ad9e7316b74",
+        "bytes": 14126
+      },
+      {
+        "path": "docs/deliveries/offline-chain.json",
+        "sha256": "606e5f980cd4c9c92ab36d84dbc99effed5bcd536956ab1a40da539445c22978",
+        "bytes": 18352
+      },
+      {
+        "path": "docs/deliveries/14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a/ledger.json",
+        "sha256": "3189388a549bc8d87259a58a32aa094b1688556b8d4477047dca8319b49d16af",
+        "bytes": 282759
+      },
+      {
+        "path": "data/releases/2026.10.04-regular.7/bank.json",
+        "sha256": "1b27d3e201cdaf177d1b1d353adc4e9b89b9d3f45596ee810037efd66bd00421",
+        "bytes": 2321772
+      },
+      {
+        "path": "docs/rounds/round-007.json",
+        "sha256": "6fda864ed8df49a9adecbb6def072dbc075fae17e834b5af451b0d2d1a89a66d",
+        "bytes": 277053
+      },
+      {
+        "path": "docs/rounds/round-007.md",
+        "sha256": "9539951dcfd5af971a96f16904b38c2c22dc10398affad59c5659eaa4a27c8d3",
+        "bytes": 9800
+      },
+      {
+        "path": "tests/round-seven-bank.test.mjs",
+        "sha256": "1e4013efd0506ce4d739c9fecc4214eeff3a2c683f0c5e68229046f325b4cb70",
+        "bytes": 8120
+      },
+      {
+        "path": "docs/deliveries/6a7c6e7488003917dc6e85d962787f4392c5248f71238c28d2defbc94c526449/ledger.json",
+        "sha256": "6fda864ed8df49a9adecbb6def072dbc075fae17e834b5af451b0d2d1a89a66d",
+        "bytes": 277053
+      },
+      {
+        "path": "data/releases/2026.10.04-regular.8/bank.json",
+        "sha256": "ee533f5e4a546d14b7f2624700fb8d0dd0a47601290f9de9147f769ebf93feab",
+        "bytes": 2566089
+      },
+      {
+        "path": "docs/rounds/round-008.json",
+        "sha256": "65e117b3c940ace648ac152b56ecedbdb90c5593b12306f0d449f829ab11d128",
+        "bytes": 302651
+      },
+      {
+        "path": "docs/rounds/round-008.md",
+        "sha256": "22f3bce380c82f5497cb3b9f5e7f39773e0ea070a69614096ba5161f3f25e184",
+        "bytes": 10320
+      },
+      {
+        "path": "tests/round-eight-bank.test.mjs",
+        "sha256": "171e3a47fd531e80f1231524e6bc9a5a7a6d35bf386311199e2eec409b3e2c4e",
+        "bytes": 8633
+      },
+      {
+        "path": "scripts/complete-bundle.mjs",
+        "sha256": "c0df47e9237a08c2f24878324e5fadb6a8f0e1ec3f8accaa0c9e0c8e4a068950",
+        "bytes": 14497
+      },
+      {
+        "path": "tests/complete-bundle.test.mjs",
+        "sha256": "ffafdcb1475166046aa30a2ab09fbba1072cece29a132f06670bad7f2ab603ab",
+        "bytes": 10578
+      },
+      {
+        "path": "scripts/blob-retry.mjs",
+        "sha256": "bf24bd7c249c169922e859fd26223efdc235709d4190d6458ddb08f30532a7ff",
+        "bytes": 13752
+      },
+      {
+        "path": "tests/blob-retry.test.mjs",
+        "sha256": "87450744106e0e581d6e5921a9fceb61849b9e0b3e0fa72a033b313ee25f8ce0",
+        "bytes": 16005
+      },
+      {
+        "path": "scripts/publication-sync.mjs",
+        "sha256": "17729fb2f6851026acbdadca0c4fae1996b39960c56ceca01e30f8a18b2fdec7",
+        "bytes": 7526
+      },
+      {
+        "path": "tests/publication-sync.test.mjs",
+        "sha256": "89d9cb6e9c5aabfcbbe2c31fcfa2d1c725064122e6328290531ead8f652192a2",
+        "bytes": 8552
+      },
+      {
+        "path": "docs/publications/cumulative-006-008.json",
+        "sha256": "50f08325d272954d9cb9d8f25c945ec71a2032f6a70f0869bba3e9a402c3aae0",
+        "bytes": 39825
+      },
+      {
+        "path": "docs/publications/cumulative-006-008.md",
+        "sha256": "37eb3572185ab5248fb7239762745b125294e5548ff9b54e519eb1ca2cb9b2dc",
+        "bytes": 3730
+      },
+      {
+        "path": "tests/manual-round-eleven.test.mjs",
+        "sha256": "f2cdcfda00242cc952d4cce3d4a5651ddb459d31f2c53925e4643ad232846fbe",
+        "bytes": 20715
+      },
+      {
+        "path": "tests/manual-round-nine.test.mjs",
+        "sha256": "36f19ebe73e1f1f5b5e0b85d3e581ce2a5e1b12988fcd033881cf1291a58d362",
+        "bytes": 4695
+      },
+      {
+        "path": "scripts/release-bundle.mjs",
+        "sha256": "75692dad5afe67af8c64c4d75b1147703e8ee7f81c5b4b4d1650bdb060ab4451",
+        "bytes": 7421
+      },
+      {
+        "path": "tests/release-bundle.test.mjs",
+        "sha256": "4c93d555859882a7b833efbf87228b85e99da72f43896833bb3bb1753ea23bdf",
+        "bytes": 5702
+      },
+      {
+        "path": "tests/release-bundle-closure.test.mjs",
+        "sha256": "47d8a48d4b29b163c02cbcf3409b075a845e41eb3f76824570f2bbb0aff8be21",
+        "bytes": 6828
+      },
+      {
+        "path": "data/releases/2026.10.04-regular.9/bank.json",
+        "sha256": "c8e6b663a1a4d56e759b063e4b7c5dc21430ea9added7a6c292c3a597548b5ef",
+        "bytes": 2752640
+      },
+      {
+        "path": "docs/rounds/round-009.json",
+        "sha256": "6d62f1f3d2f8ed6343b5e4e05f523338395dc3396ad5b7d3eaa67345cbaa0bde",
+        "bytes": 232736
+      },
+      {
+        "path": "docs/rounds/round-009.md",
+        "sha256": "da02f6da8b946abb36d9fee92241b81e1ad66827d0b0779a9496e5ba394d46b1",
+        "bytes": 8517
+      },
+      {
+        "path": "tests/round-nine-bank.test.mjs",
+        "sha256": "2cf7b23b7ed44d03578108c62b3a3748cf71a6a3319b80e49ff12890a7f08fa5",
+        "bytes": 9698
+      },
+      {
+        "path": "scripts/release-backup-continuation.mjs",
+        "sha256": "2ae7f18d1364d94aa5549c8826dc4ecafc3baa3be412f971edaf4daeaefbbf1f",
+        "bytes": 42283
+      },
+      {
+        "path": "tests/normal-backup-continuation.test.mjs",
+        "sha256": "1ce12eccc9eaf78ee27355d7b105419456db7c57b029e11889d9d19f05cacb2b",
+        "bytes": 15808
+      },
+      {
+        "path": "docs/deliveries/normal-backup-009.json",
+        "sha256": "09d3204e96048f6d8ff57dd4616caa8c95d161690e2a4592e3fa090142604f9e",
+        "bytes": 54509
+      },
+      {
+        "path": "data/releases/2026.10.04-regular.10/bank.json",
+        "sha256": "50b6131f1ffb174bf4a459b0a91a2498465c0dccea0e4aee30259f195086b214",
+        "bytes": 2997484
+      },
+      {
+        "path": "docs/rounds/round-010.json",
+        "sha256": "d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b",
+        "bytes": 298124
+      },
+      {
+        "path": "docs/rounds/round-010.md",
+        "sha256": "86bafeb96281964f9cc96257653850fc6e077ac25ee7db4908633b96cacb1f9c",
+        "bytes": 10187
+      },
+      {
+        "path": "tests/round-ten-bank.test.mjs",
+        "sha256": "4b2ea1543d790d44c762d270f42f7342aca8d5dd435d0b99eddcf75e384822e8",
+        "bytes": 7753
+      },
+      {
+        "path": "docs/deliveries/release-backup-trust.json",
+        "sha256": "503b802bef534ad931280946f9acda995c782bcc1599169c311cb8774684c223",
+        "bytes": 2809
+      },
+      {
+        "path": "tests/release-backup-successors.test.mjs",
+        "sha256": "72b3238b3444e2068fed517f771aa628f11f68b7c84ee887a016d5bee2a3204a",
+        "bytes": 25266
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-010.json",
+        "sha256": "a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917",
+        "bytes": 60815
+      },
+      {
+        "path": "data/releases/2026.10.04-regular.11/bank.json",
+        "sha256": "d0238fe9b047cdee1e281054a55cabe4569f365d8b8d1e8ff393f7a5a8f94e71",
+        "bytes": 3144130
+      },
+      {
+        "path": "docs/rounds/round-011.json",
+        "sha256": "0b907604e4a3fdd543b03210779e99ff99995370d7878e5fa2098d40b279abc5",
+        "bytes": 157954
+      },
+      {
+        "path": "docs/rounds/round-011.md",
+        "sha256": "6015b2cb5bd04068c15be60abc354780ab3fc8d0f825c274a99288fd07625da3",
+        "bytes": 9823
+      },
+      {
+        "path": "tests/round-eleven-bank.test.mjs",
+        "sha256": "9a88d7b359a313899b6329381cb4d48b716046d0c188362d57b0e99777319e79",
+        "bytes": 7847
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-011.json",
+        "sha256": "7eae43bdc8b68b43d76264a14a19ca16e27e180b4f3a0d99afc9776e43f24714",
+        "bytes": 64240
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.12/bank.json",
+        "sha256": "97058b787f6ed8a9b42bf3d55d681efc8482c32fb98270dbac7f7537a420bd4f",
+        "bytes": 3350246
+      },
+      {
+        "path": "docs/rounds/round-012.json",
+        "sha256": "b4d6aaa4e901b1f058edcc49a6dc9b062fe70262dcca9e049ca76dcc2172e59e",
+        "bytes": 254570
+      },
+      {
+        "path": "docs/rounds/round-012.md",
+        "sha256": "83900918fb9dca475b8158b0cd2284a607da3ccc30f8ab5ce731170d8e815ff4",
+        "bytes": 10474
+      },
+      {
+        "path": "tests/round-twelve-bank.test.mjs",
+        "sha256": "0f3fe64d7acbe9c56a0ca2c0c94773c0408ce6c6718126143626cf8ba95d2c05",
+        "bytes": 9725
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-012.json",
+        "sha256": "9f8746a287d6970110f6931d8d689eb04f35b8616076148eaa4cfff0c4b7f1cd",
+        "bytes": 67093
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.13/bank.json",
+        "sha256": "e4ce0f0c47fe71715caaf154ceab90407882b8a4ed4468a9f374927d1f95bbdc",
+        "bytes": 3527605
+      },
+      {
+        "path": "docs/rounds/round-013.json",
+        "sha256": "cbdb8d9d4ea3d7e8f790da64ca5e68bc0b258be66d4578f58972c8a43d021c80",
+        "bytes": 216459
+      },
+      {
+        "path": "docs/rounds/round-013.md",
+        "sha256": "e1de6108baf8725b83388997c8dce8cbac677666b6add171371fbdca6a071e68",
+        "bytes": 9470
+      },
+      {
+        "path": "tests/round-thirteen-bank.test.mjs",
+        "sha256": "dcb0ab44a92a03ae3ecf8f427ccf1ad96cf5a3bc53169273bb13acc4cd2de63b",
+        "bytes": 11344
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-013.json",
+        "sha256": "47ffa61415346b88943a1cbc7ca2ad97a851ab3b102c21a90f0af74510500e1b",
+        "bytes": 69947
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.14/bank.json",
+        "sha256": "26221e173dd1d0ebd65195401375fff1689059227bb8eacc2b00e52d4c1f3607",
+        "bytes": 3729337
+      },
+      {
+        "path": "docs/rounds/round-014.json",
+        "sha256": "4f2550ec833980ac3c412cbfb1062e80e9475d37a4795abfbbc1184b2984ecd9",
+        "bytes": 239774
+      },
+      {
+        "path": "docs/rounds/round-014.md",
+        "sha256": "08da7796590ab5a057394f3759b4bd35b683c6b25b9bdb3334aeb810e5e207e9",
+        "bytes": 9550
+      },
+      {
+        "path": "tests/round-fourteen-bank.test.mjs",
+        "sha256": "4cd7c4afcb990208ea1958135dcf54cef8231522dc191eeb55b0f7e689dd2e76",
+        "bytes": 11493
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-014.json",
+        "sha256": "6dd039b325a7d278a69d5c78ec094f79fd16261e5fbaad905921bc74849e6370",
+        "bytes": 72806
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.15/bank.json",
+        "sha256": "2f53d81ce37427930f16b1dcf59003745064ed5b95f863bc937c25925e232938",
+        "bytes": 3975059
+      },
+      {
+        "path": "docs/rounds/round-015.json",
+        "sha256": "97bd3e0cc084cf20613b692a7d06fe3781f7b6cc60ffdf6fabc7ee2d40efe855",
+        "bytes": 295531
+      },
+      {
+        "path": "docs/rounds/round-015.md",
+        "sha256": "43de1e75f1a74ce99f086efa0ddda4bcbcb2741fd4779562e2f51d2859ab56cc",
+        "bytes": 12785
+      },
+      {
+        "path": "tests/round-fifteen-bank.test.mjs",
+        "sha256": "1e2fdaf8df700a81a0f5ef862e44e48e467af5e9a00266d136ac22ded55e54dd",
+        "bytes": 13835
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-015.json",
+        "sha256": "ef00037df738a4e07762094859c4275d0a2a7253543ce72dc4cbc195ab1eb484",
+        "bytes": 75673
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.16/bank.json",
+        "sha256": "882dc4987352e03c117b481c582ffb4e5e1e73630e5c61a004085076285b31df",
+        "bytes": 4164646
+      },
+      {
+        "path": "docs/rounds/round-016.json",
+        "sha256": "875ceb65d58a322c4219335311c9957ba10168a09fd2110548bbb5acee7d5cce",
+        "bytes": 241511
+      },
+      {
+        "path": "docs/rounds/round-016.md",
+        "sha256": "01dd01f1394663c2fd710daebf131305d97e64430e394f507370f3bd51f1eeeb",
+        "bytes": 12899
+      },
+      {
+        "path": "tests/round-sixteen-bank.test.mjs",
+        "sha256": "20a53ef5ee089f68cea98d50541eba8f14319c7d62f008375c3ca4955990ee02",
+        "bytes": 14095
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-016.json",
+        "sha256": "addf91482f01962534b7303aae4eb17b5a695715354314fdfc04659677f5e5b3",
+        "bytes": 78532
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.17/bank.json",
+        "sha256": "3197db32a0268b01dddbd2f2cb75b02dfa101204ce3f132db034f5abba46fca3",
+        "bytes": 4366904
+      },
+      {
+        "path": "docs/rounds/round-017.json",
+        "sha256": "36d4f9fbb54df648a818b8e6ba07cdb71dfc46dbb9e443c5fc0efcc658698c82",
+        "bytes": 254514
+      },
+      {
+        "path": "docs/rounds/round-017.md",
+        "sha256": "634ef49419c7ef919e8bfc5e2fce7ee6c99675e7cabd63f19de6742a419cbfed",
+        "bytes": 12732
+      },
+      {
+        "path": "tests/round-seventeen-bank.test.mjs",
+        "sha256": "34e53765020d8591d98b57b76564d944a5b48b0a1397af12f6d9ced2feda2840",
+        "bytes": 14269
+      },
+      {
+        "path": "docs/deliveries/checkpoints/round-017.json",
+        "sha256": "fee82929ab9abcb310dbc5eaae9c57d715ad77197837984b15782fe17cb98eb1",
+        "bytes": 81397
+      },
+      {
+        "path": "tests/publication-sync-successors.test.mjs",
+        "sha256": "a941a952f9fa1d986d0ea6d97ff7bd91f32d7680cf6bab6cc453b31362cc123c",
+        "bytes": 8216
+      },
+      {
+        "path": "docs/publications/cumulative-009-017.json",
+        "sha256": "fe147c597a5a5f155d6a65e7e9fd641e6a38f9c8d0db1147f513d1b2943959e2",
+        "bytes": 61580
+      },
+      {
+        "path": "docs/publications/cumulative-009-017.md",
+        "sha256": "13fb56b8eb30ec7b5d355c6257e6c2e879dadcb2d00fa870d5f60f7db76be294",
+        "bytes": 2859
+      },
+      {
+        "path": "scripts/sha-only-tree.mjs",
+        "sha256": "c9543a945f3cdcf99122795b5e94639b1074db30f51e66ca70b162beea28aea7",
+        "bytes": 3360
+      },
+      {
+        "path": "tests/sha-only-tree.test.mjs",
+        "sha256": "a43a52967ecd4c6248a7c41e20b12a94bf387ed5b9b19a81e934a8785dd939e8",
+        "bytes": 2647
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.18/bank.json",
+        "sha256": "8f8c65bad43b3a7cd77d803ec0507b7972e6d962c8cfc5ae3e15aa6e7edbd0e9",
+        "bytes": 4544419
+      },
+      {
+        "path": "docs/rounds/round-018.json",
+        "sha256": "7d00c33e53de27d0c3215eaff12379e6cf982bdccd8edd01cd4b0bc946dfa29a",
+        "bytes": 227304
+      },
+      {
+        "path": "docs/rounds/round-018.md",
+        "sha256": "95cce30731c22b4a77f48a00db1241dceee7bd8f19549d93dcfc7026075474b2",
+        "bytes": 14043
+      },
+      {
+        "path": "tests/round-eighteen-bank.test.mjs",
+        "sha256": "63c70d86e4b2eff5ad63729892150052e0069b877b7b1af97490ac66fa5e54d8",
+        "bytes": 13135
+      },
+      {
+        "path": "scripts/offline-chain-continuation.mjs",
+        "sha256": "c26930c29a9b37b06c38aa24bf4363386707cfa30be716733bda3c37ce8f9089",
+        "bytes": 25790
+      },
+      {
+        "path": "docs/deliveries/offline-chain-trust.json",
+        "sha256": "27b3f8a2a0d893b3105ddecff913ef7d550d920558a4b0f0276c169c8698f12f",
+        "bytes": 1915
+      },
+      {
+        "path": "tests/independent-offline-chains.test.mjs",
+        "sha256": "86a491046646536f36328ea7540b4cb201886c440e488ef4cfe78d98176feaed",
+        "bytes": 22236
+      },
+      {
+        "path": "docs/deliveries/chains/public-regular17/round-018.json",
+        "sha256": "ef461b2dc417ae324c96b314475e586315122e38cbfeba9bc360becb14f096aa",
+        "bytes": 124297
+      },
+      {
+        "path": "data/releases/2026.10.05-regular.19/bank.json",
+        "sha256": "8fc3b284231a86473f9cbbed63ce45e6eba6ac1f887e565995101949d034062a",
+        "bytes": 4733570
+      },
+      {
+        "path": "docs/rounds/round-019.json",
+        "sha256": "2685c06ef95b57020a0919db2f2bfee132a4d12ddc849da6e1707dd270fb323f",
+        "bytes": 224684
+      },
+      {
+        "path": "docs/rounds/round-019.md",
+        "sha256": "428696ed6d2598a32c7adc4c5422d0df7a8cc449a604842c4e97e6ea230f3779",
+        "bytes": 14273
+      },
+      {
+        "path": "tests/round-nineteen-bank.test.mjs",
+        "sha256": "782292e3fc2cef4fc20734bae73cb0387ab2e6f961c14f9c4a7d8c296c1a1c45",
+        "bytes": 13311
+      },
+      {
+        "path": "docs/deliveries/chains/public-regular17/round-019.json",
+        "sha256": "fc91a5e036ceb56a13a0134b37506cdb1bd19409da59fc6ecf405477b4890311",
+        "bytes": 91419
+      },
+      {
+        "path": "data/releases/2026.10.06-regular.20/bank.json",
+        "sha256": "efa0c3fe529df1b1464535921c94bc0e22edf01deeb22b26d1467649f38cea49",
+        "bytes": 5016935
+      },
+      {
+        "path": "docs/rounds/round-020.json",
+        "sha256": "518a7baf8ff7be0368b16f7211f35c1bd02d61a67a4e91f04605d19622eac96c",
+        "bytes": 389206
+      },
+      {
+        "path": "docs/rounds/round-020.md",
+        "sha256": "eced93ebaaed26ab68db86dd50128f1d4e5fb9fb34e07852677d9bd0affe607a",
+        "bytes": 16510
+      },
+      {
+        "path": "tests/round-twenty-bank.test.mjs",
+        "sha256": "43949f88c9e77b3a021c4825c2dcf0cefb20d010b58cca0723dfce884c2330da",
+        "bytes": 13311
+      },
+      {
+        "path": "docs/deliveries/chains/public-regular17/round-020.json",
+        "sha256": "7b63bf2c7a76611de53b45d89bb48f516d9af693bb45f57e295b3790307537d5",
+        "bytes": 92048
+      },
+      {
+        "path": "data/releases/2026.10.06-regular.21/bank.json",
+        "sha256": "da5181bc4f2987dfeb8ea487e8004134fecb36b178b031a04161c1339a38f7d7",
+        "bytes": 5229439
+      },
+      {
+        "path": "docs/rounds/round-021.json",
+        "sha256": "9f1cd52e1bc12ea03b8cbcde2679d488e061448bb3c77d9cbc41f46f50613b8a",
+        "bytes": 265656
+      },
+      {
+        "path": "docs/rounds/round-021.md",
+        "sha256": "906938a2adcef7baaa6d992eac3eeb5a10ba6cee489e21a2b56a735dbdc6e67a",
+        "bytes": 14758
+      },
+      {
+        "path": "tests/round-twentyone-bank.test.mjs",
+        "sha256": "006632ffac96bd115559d7d63b59d392e19670622819c5925f6ded26c28fa19f",
+        "bytes": 13311
+      },
+      {
+        "path": "docs/deliveries/chains/public-regular17/round-021.json",
+        "sha256": "1727996883b9277ee2446caf8d52ef85254b4bbf42cfbaa4d44a815e5b39bb17",
+        "bytes": 92695
+      }
+    ],
+    "independentReviewSha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+  },
+  "targets": [
+    {
+      "candidateId": "r022-html-css-practical-s3-w01",
+      "questionId": "r022-html-css-practical-s3-w01",
+      "revision": 1,
+      "learningGoalId": "r022-html-css-practical-template-cross-origin-iframe-contentdocument-null-while-contentwindow-proxy-remains",
+      "templateId": "r022-html-css-practical-template-cross-origin-iframe-contentdocument-null-while-contentwindow-proxy-remains",
+      "lineageId": "r022-html-css-practical-template-cross-origin-iframe-contentdocument-null-while-contentwindow-proxy-remains",
+      "candidateSha256": "4ebc7ebb18ae7c6a9446118c5459ba5bcebf58a95ea827e969a546cf3821cb66",
+      "contentSha256": "aa1dc89127100b748976ef9b7d7322fd86a28f90ff9c3508efd3d913c02b9990",
+      "identityFreeSha256": "d2f60a8303b1a3fcdf811fae2dbd43a3ef6575845a3a9b3e9e1db636b23ddbb8",
+      "exclusiveOptionIds": [
+        "r022-html-css-practical-s3-w01-o1",
+        "r022-html-css-practical-s3-w01-o2",
+        "r022-html-css-practical-s3-w01-o3",
+        "r022-html-css-practical-s3-w01-o4",
+        "r022-html-css-practical-s3-w01-o5"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "두 iframe getter의 실제 출처 조건과 반환 규칙이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "ebef7f56b2b153c82b680de6329712f1b9e86f500eb60ee1722d6d0c3caaa90a"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "6b52b0808ed18562ea164278726f3af42dd66d718d2ca2b91f017f7d82211cb1"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7665058c651793ff918f4922fe81bb4296590557d2231d2babea2f3e5904b0f7"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-html-css-practical-s3-w03",
+      "questionId": "r022-html-css-practical-s3-w03",
+      "revision": 1,
+      "learningGoalId": "r022-html-css-practical-template-document-title-getter-normalizes-whitespace-without-mutating-title-text",
+      "templateId": "r022-html-css-practical-template-document-title-getter-normalizes-whitespace-without-mutating-title-text",
+      "lineageId": "r022-html-css-practical-template-document-title-getter-normalizes-whitespace-without-mutating-title-text",
+      "candidateSha256": "d21035ce98fd1a79842be33796be584cf03f72e9b9fec71f7c24a87d720653c4",
+      "contentSha256": "27fc6ad5bce3c34abb15a27abf2467246f1b12ff3d94b49b275fac4a87528a49",
+      "identityFreeSha256": "be03d632d3760cd44a90439d8c559833bd41a024778b667c74c9346ce62924e3",
+      "exclusiveOptionIds": [
+        "r022-html-css-practical-s3-w03-o1",
+        "r022-html-css-practical-s3-w03-o2",
+        "r022-html-css-practical-s3-w03-o3",
+        "r022-html-css-practical-s3-w03-o4",
+        "r022-html-css-practical-s3-w03-o5"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "문항 해설이 제목 문자열의 양끝 공백 제거와 내부 공백 축약 규칙을 설명하지 않는다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "ebef7f56b2b153c82b680de6329712f1b9e86f500eb60ee1722d6d0c3caaa90a"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "6b52b0808ed18562ea164278726f3af42dd66d718d2ca2b91f017f7d82211cb1"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "2539907389539b457b35a1ac8298006a866fdbbc26c722908705bcc01a8c0965"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-html-css-practical-s3-w05",
+      "questionId": "r022-html-css-practical-s3-w05",
+      "revision": 1,
+      "learningGoalId": "r022-html-css-practical-template-option-constructor-third-argument-sets-default-without-current-selection",
+      "templateId": "r022-html-css-practical-template-option-constructor-third-argument-sets-default-without-current-selection",
+      "lineageId": "r022-html-css-practical-template-option-constructor-third-argument-sets-default-without-current-selection",
+      "candidateSha256": "6eedef9ca934e48f1f7d0634188e9aa8676ca8cfb1da144b51ed1fb7595fa528",
+      "contentSha256": "a45cc98914ca3618ab95f4ba0e6e6537b9b4c0b2ad3898bbbda508fae07c3f4d",
+      "identityFreeSha256": "c35fc434632e1c62abd8a3bef09b7c58ae9f340084a8e31c3b27b9ba8c8a76cb",
+      "exclusiveOptionIds": [
+        "r022-html-css-practical-s3-w05-o1",
+        "r022-html-css-practical-s3-w05-o2",
+        "r022-html-css-practical-s3-w05-o3",
+        "r022-html-css-practical-s3-w05-o4",
+        "r022-html-css-practical-s3-w05-o5"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "Option 생성자의 현재 선택 인수 기본값과 기본 선택값의 관계를 문항 해설이 설명하지 않는다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "ebef7f56b2b153c82b680de6329712f1b9e86f500eb60ee1722d6d0c3caaa90a"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "6b52b0808ed18562ea164278726f3af42dd66d718d2ca2b91f017f7d82211cb1"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7665058c651793ff918f4922fe81bb4296590557d2231d2babea2f3e5904b0f7"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-html-css-practical-s4-w02",
+      "questionId": "r022-html-css-practical-s4-w02",
+      "revision": 1,
+      "learningGoalId": "r022-html-css-practical-template-css-hex-escape-terminator-whitespace-not-part-of-identifier",
+      "templateId": "r022-html-css-practical-template-css-hex-escape-terminator-whitespace-not-part-of-identifier",
+      "lineageId": "r022-html-css-practical-template-css-hex-escape-terminator-whitespace-not-part-of-identifier",
+      "candidateSha256": "6a6cd39c0e285c7fa51ee0d1c380cae7bff2aca8caf8e7c42dd4be4e4bac522c",
+      "contentSha256": "9ab3fddb8a2d97727eb3eef78c3e9ff252c2ebf4c729483151b885f817dda0e8",
+      "identityFreeSha256": "1d7418d61e8880d08ef2acbff55c3eab1713ebc83e4ba41b52dff44210569df4",
+      "exclusiveOptionIds": [
+        "r022-html-css-practical-s4-w02-o1",
+        "r022-html-css-practical-s4-w02-o2",
+        "r022-html-css-practical-s4-w02-o3",
+        "r022-html-css-practical-s4-w02-o4",
+        "r022-html-css-practical-s4-w02-o5"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "16진수 escape의 문자 변환과 종료 공백 소비 규칙이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "ebef7f56b2b153c82b680de6329712f1b9e86f500eb60ee1722d6d0c3caaa90a"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "6b52b0808ed18562ea164278726f3af42dd66d718d2ca2b91f017f7d82211cb1"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7665058c651793ff918f4922fe81bb4296590557d2231d2babea2f3e5904b0f7"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-html-css-practical-s4-w04",
+      "questionId": "r022-html-css-practical-s4-w04",
+      "revision": 1,
+      "learningGoalId": "r022-html-css-practical-template-boolean-wrapper-object-truthiness-distinct-from-stored-false",
+      "templateId": "r022-html-css-practical-template-boolean-wrapper-object-truthiness-distinct-from-stored-false",
+      "lineageId": "r022-html-css-practical-template-boolean-wrapper-object-truthiness-distinct-from-stored-false",
+      "candidateSha256": "db6cfbf27754291dbdc6266ef4c89437b7c8b59727705ecd375d4a8a31a7aa3d",
+      "contentSha256": "d1764d00368ea27a31b7144343b38d0f07e3088b2ae87d35be49b7d94ca56a8b",
+      "identityFreeSha256": "8078ecd30bc072ad08c3db5e648ea769e3df077c7408246466b3b89329c11c5f",
+      "exclusiveOptionIds": [
+        "r022-html-css-practical-s4-w04-o1",
+        "r022-html-css-practical-s4-w04-o2",
+        "r022-html-css-practical-s4-w04-o3",
+        "r022-html-css-practical-s4-w04-o4",
+        "r022-html-css-practical-s4-w04-o5"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "Boolean 래퍼 객체의 참 변환과 저장 원시값 추출 규칙이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "ebef7f56b2b153c82b680de6329712f1b9e86f500eb60ee1722d6d0c3caaa90a"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "6b52b0808ed18562ea164278726f3af42dd66d718d2ca2b91f017f7d82211cb1"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7665058c651793ff918f4922fe81bb4296590557d2231d2babea2f3e5904b0f7"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-html-css-practical-s4-w06",
+      "questionId": "r022-html-css-practical-s4-w06",
+      "revision": 1,
+      "learningGoalId": "r022-html-css-practical-template-ordinary-object-number-and-string-conversion-use-different-method-order",
+      "templateId": "r022-html-css-practical-template-ordinary-object-number-and-string-conversion-use-different-method-order",
+      "lineageId": "r022-html-css-practical-template-ordinary-object-number-and-string-conversion-use-different-method-order",
+      "candidateSha256": "54a51883e91e0644d163042475d33125391da60d805319cac8032b23c4ff071b",
+      "contentSha256": "54b176bff9fc8143be7b8a46d6a6addf6b44be9e9e7fcdc860cf8443115fb8dd",
+      "identityFreeSha256": "86c8d94b7c482e1c7b70e0d288f4ff06abcc751632726078d56328dc65106a0a",
+      "exclusiveOptionIds": [
+        "r022-html-css-practical-s4-w06-o1",
+        "r022-html-css-practical-s4-w06-o2",
+        "r022-html-css-practical-s4-w06-o3",
+        "r022-html-css-practical-s4-w06-o4",
+        "r022-html-css-practical-s4-w06-o5"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "원시값 변환 hint에 따른 두 메서드의 실제 호출 순서가 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "ebef7f56b2b153c82b680de6329712f1b9e86f500eb60ee1722d6d0c3caaa90a"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "6b52b0808ed18562ea164278726f3af42dd66d718d2ca2b91f017f7d82211cb1"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7665058c651793ff918f4922fe81bb4296590557d2231d2babea2f3e5904b0f7"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-html-css-practical-s4-w07",
+      "questionId": "r022-html-css-practical-s4-w07",
+      "revision": 1,
+      "learningGoalId": "r022-html-css-practical-template-copywithin-overlap-preserves-source-values-without-resizing-or-new-array",
+      "templateId": "r022-html-css-practical-template-copywithin-overlap-preserves-source-values-without-resizing-or-new-array",
+      "lineageId": "r022-html-css-practical-template-copywithin-overlap-preserves-source-values-without-resizing-or-new-array",
+      "candidateSha256": "659eefc0cd4a6e5f363c47db259ee9c8eb5afb1279783829fdf63bf52b4eeedc",
+      "contentSha256": "554587971f330f4c8d05200d1c3d80baf3b7e75fb92636e02061d070401ca2b5",
+      "identityFreeSha256": "dfa292a2950788de32f4a1c5e22e4bce0cacc96d99d15f53a09644eadf9433ab",
+      "exclusiveOptionIds": [
+        "r022-html-css-practical-s4-w07-o1",
+        "r022-html-css-practical-s4-w07-o2",
+        "r022-html-css-practical-s4-w07-o3",
+        "r022-html-css-practical-s4-w07-o4",
+        "r022-html-css-practical-s4-w07-o5"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "겹치는 copyWithin 복사와 동일 객체·길이 보존의 동작 규칙이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "ebef7f56b2b153c82b680de6329712f1b9e86f500eb60ee1722d6d0c3caaa90a"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "6b52b0808ed18562ea164278726f3af42dd66d718d2ca2b91f017f7d82211cb1"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7665058c651793ff918f4922fe81bb4296590557d2231d2babea2f3e5904b0f7"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-internet-applications-s2-w02",
+      "questionId": "r022-internet-applications-s2-w02",
+      "revision": 1,
+      "learningGoalId": "r022-internet-applications-template-matter-multiadmin-adds-second-control-platform-without-removing-first",
+      "templateId": "r022-internet-applications-template-matter-multiadmin-adds-second-control-platform-without-removing-first",
+      "lineageId": "r022-internet-applications-template-matter-multiadmin-adds-second-control-platform-without-removing-first",
+      "candidateSha256": "4e86193760d24b89edd98d5d77bb5667784dda0eabaac5a0cafcd41168743630",
+      "contentSha256": "fd20cfabcfedab969c3d4af97a179ddc516518f8393d5783435cff50b97eef41",
+      "identityFreeSha256": "084546a5368c45c282469ed493ae79df1d88a62e16b64482b45709246ab9844b",
+      "exclusiveOptionIds": [
+        "r022-internet-applications-s2-w02-o01",
+        "r022-internet-applications-s2-w02-o02",
+        "r022-internet-applications-s2-w02-o03",
+        "r022-internet-applications-s2-w02-o04",
+        "r022-internet-applications-s2-w02-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "나머지 환경 조건이 고정된 상황에서 필요한 등록 절차의 판단 근거가 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "bfffd7db73f848f1215ede8b8e5feb7e6b2604a64e65fc69c2ab7ccea9ff70b3"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "f4c3182aa5c0c6c33b16229864ed3e53b76fc8ff5e1dd55a1e33a76df5927130"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "1908f7f5b0606060dc0a92c9c217dfaaa81dbf1502b3a49079276e3393eb23e0"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-internet-applications-s2-w03",
+      "questionId": "r022-internet-applications-s2-w03",
+      "revision": 1,
+      "learningGoalId": "r022-internet-applications-template-onedrive-restore-promotes-older-content-retains-former-current-in-history",
+      "templateId": "r022-internet-applications-template-onedrive-restore-promotes-older-content-retains-former-current-in-history",
+      "lineageId": "r022-internet-applications-template-onedrive-restore-promotes-older-content-retains-former-current-in-history",
+      "candidateSha256": "a7d497c0fab54927aac828b03b531fc0d53c87d497f726bf98f6df89382d2826",
+      "contentSha256": "5ab4168616dedbe43c291d6063c156d2499bbdd6b19790245fd0c761aac1beec",
+      "identityFreeSha256": "f8ce92aa9ae37327f86a3651620436e005955eb9ad75b6b9ca7457ec50e345d6",
+      "exclusiveOptionIds": [
+        "r022-internet-applications-s2-w03-o01",
+        "r022-internet-applications-s2-w03-o02",
+        "r022-internet-applications-s2-w03-o03",
+        "r022-internet-applications-s2-w03-o04",
+        "r022-internet-applications-s2-w03-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "이전 버전 복원 후 현재 내용과 후속 이력이 어떻게 남는지 문항 해설이 설명하지 않는다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "bfffd7db73f848f1215ede8b8e5feb7e6b2604a64e65fc69c2ab7ccea9ff70b3"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "f4c3182aa5c0c6c33b16229864ed3e53b76fc8ff5e1dd55a1e33a76df5927130"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "1908f7f5b0606060dc0a92c9c217dfaaa81dbf1502b3a49079276e3393eb23e0"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-internet-applications-s2-w04",
+      "questionId": "r022-internet-applications-s2-w04",
+      "revision": 1,
+      "learningGoalId": "r022-internet-applications-template-passkey-biometric-unlocks-local-key-server-verifies-signed-challenge",
+      "templateId": "r022-internet-applications-template-passkey-biometric-unlocks-local-key-server-verifies-signed-challenge",
+      "lineageId": "r022-internet-applications-template-passkey-biometric-unlocks-local-key-server-verifies-signed-challenge",
+      "candidateSha256": "f6db5cb42fac245d040a0bb4d3cd57bc1de6706f47655785a2fa16f1b698988f",
+      "contentSha256": "56d81cc288fcac15511bb5d8af19100cb94fe51534278d5e56c426fe64ae8f15",
+      "identityFreeSha256": "5c5846fa31d84e4bdeb658e49f765eae1c06a2cc0ee155cc86108deb69dc84cf",
+      "exclusiveOptionIds": [
+        "r022-internet-applications-s2-w04-o01",
+        "r022-internet-applications-s2-w04-o02",
+        "r022-internet-applications-s2-w04-o03",
+        "r022-internet-applications-s2-w04-o04",
+        "r022-internet-applications-s2-w04-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "단말의 서명과 서버의 공개키 검증 역할을 문항 해설이 설명하지 않는다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "bfffd7db73f848f1215ede8b8e5feb7e6b2604a64e65fc69c2ab7ccea9ff70b3"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "f4c3182aa5c0c6c33b16229864ed3e53b76fc8ff5e1dd55a1e33a76df5927130"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "1908f7f5b0606060dc0a92c9c217dfaaa81dbf1502b3a49079276e3393eb23e0"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-internet-applications-s2-w07",
+      "questionId": "r022-internet-applications-s2-w07",
+      "revision": 1,
+      "learningGoalId": "r022-internet-applications-template-network-bandwidth-throughput-oneway-latency-measure-different-quantities",
+      "templateId": "r022-internet-applications-template-network-bandwidth-throughput-oneway-latency-measure-different-quantities",
+      "lineageId": "r022-internet-applications-template-network-bandwidth-throughput-oneway-latency-measure-different-quantities",
+      "candidateSha256": "071fba8a52e8d89b951621662b12fcc776b7c70415751df2648ef7e2e8790a6b",
+      "contentSha256": "f374b0b24cb12892b00b52e66ccf24253094009af47fc8b62724cc3fc5f4ea7e",
+      "identityFreeSha256": "124e19dd579c06516b1989ed07756738118651efb509a7b8d354024667ce3a36",
+      "exclusiveOptionIds": [
+        "r022-internet-applications-s2-w07-o01",
+        "r022-internet-applications-s2-w07-o02",
+        "r022-internet-applications-s2-w07-o03",
+        "r022-internet-applications-s2-w07-o04",
+        "r022-internet-applications-s2-w07-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "측정량을 대역폭·처리량·지연 시간에 대응시키는 규칙이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "bfffd7db73f848f1215ede8b8e5feb7e6b2604a64e65fc69c2ab7ccea9ff70b3"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "f4c3182aa5c0c6c33b16229864ed3e53b76fc8ff5e1dd55a1e33a76df5927130"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "1908f7f5b0606060dc0a92c9c217dfaaa81dbf1502b3a49079276e3393eb23e0"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s1-w01",
+      "questionId": "r022-policy-assistive-s1-w01",
+      "revision": 1,
+      "learningGoalId": "r022-policy-assistive-template-ada-coordination-duty-requires-designated-internal-employee-despite-outsourcing",
+      "templateId": "r022-policy-assistive-template-ada-coordination-duty-requires-designated-internal-employee-despite-outsourcing",
+      "lineageId": "r022-policy-assistive-template-ada-coordination-duty-requires-designated-internal-employee-despite-outsourcing",
+      "candidateSha256": "5907f0282a4d3d6f76fa56b377699bbe77fb977cc45f1f94286ee7e5f63870bd",
+      "contentSha256": "1c0000f7430286e2da5a27116acb9d50a55bb89cec1a866f8f00e85f2c8112d4",
+      "identityFreeSha256": "845391d6a51303889e0a37836f9375edff44e8717e7b4dac42cce354cd8c3e99",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s1-w01-o01",
+        "r022-policy-assistive-s1-w01-o02",
+        "r022-policy-assistive-s1-w01-o03",
+        "r022-policy-assistive-s1-w01-o04",
+        "r022-policy-assistive-s1-w01-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "해당 공공기관이 외주와 별개로 내부 직원을 지정해야 하는 의무가 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "8c84b1baed23e13af454d7f2242df0ea7ed28e53b7fd1fe05a4ce3f8b6dfc82c"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "daaee07873c76fc078c0187326c783fce27e224b1f972875858b15a9db8eaebe"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s1-w03",
+      "questionId": "r022-policy-assistive-s1-w03",
+      "revision": 2,
+      "learningGoalId": "r022-policy-assistive-template-ada-retaliation-protection-covers-nondisabled-investigation-witness",
+      "templateId": "r022-policy-assistive-template-ada-retaliation-protection-covers-nondisabled-investigation-witness",
+      "lineageId": "r022-policy-assistive-template-ada-retaliation-protection-covers-nondisabled-investigation-witness",
+      "candidateSha256": "6983e3ca6e7cf415b3901e84bf41e5170a533f42e9da8582946230373bc1071c",
+      "contentSha256": "0bd4103f25ea69bbd96eb6939772749c030a7a1572bcd916245077b955d01adf",
+      "identityFreeSha256": "0855e39ecb29d84fc358c0d6e5a9db1102db9e2ba1b43c5d137feea7817383b8",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s1-w03-o01",
+        "r022-policy-assistive-s1-w03-o02",
+        "r022-policy-assistive-s1-w03-o03",
+        "r022-policy-assistive-s1-w03-o04",
+        "r022-policy-assistive-s1-w03-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "조사 증언자에게 적용되는 보복 금지의 보호 범위가 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "3ceab3a55af5b3f51af7aac2d1779afc3cdd739d7d11cd9d70c3a2c2f9fff774"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "b28305c6ea638c3ffc06fbe3ffd03e95b72d897db71a90c61df2b734b5b4db40"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s1-w04",
+      "questionId": "r022-policy-assistive-s1-w04",
+      "revision": 1,
+      "learningGoalId": "r022-policy-assistive-template-ada-companion-effective-communication-eligibility-not-coapplicant-or-interpreter-status",
+      "templateId": "r022-policy-assistive-template-ada-companion-effective-communication-eligibility-not-coapplicant-or-interpreter-status",
+      "lineageId": "r022-policy-assistive-template-ada-companion-effective-communication-eligibility-not-coapplicant-or-interpreter-status",
+      "candidateSha256": "b1ca428dcd0050ac689fe928ab0d09e2ec90c47dbc4d08bf1a9731c9018969c3",
+      "contentSha256": "1b60cb7bafd6d9dc596e468dd0baffa3018360443544f07a44a6dfcec2c6c1e4",
+      "identityFreeSha256": "272bb5cbdb6c7217fcb3d5a7db91d628f1452954b7b82793112d666fe05bdbc8",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s1-w04-o01",
+        "r022-policy-assistive-s1-w04-o02",
+        "r022-policy-assistive-s1-w04-o03",
+        "r022-policy-assistive-s1-w04-o04",
+        "r022-policy-assistive-s1-w04-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "기관이 의사소통하는 것이 적절한 관련인을 동반자 지원 대상으로 판단하는 기준이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "8c84b1baed23e13af454d7f2242df0ea7ed28e53b7fd1fe05a4ce3f8b6dfc82c"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "daaee07873c76fc078c0187326c783fce27e224b1f972875858b15a9db8eaebe"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s5-w01",
+      "questionId": "r022-policy-assistive-s5-w01",
+      "revision": 1,
+      "learningGoalId": "r022-policy-assistive-template-nvda-native-selection-copies-application-rich-content-not-only-browse-text",
+      "templateId": "r022-policy-assistive-template-nvda-native-selection-copies-application-rich-content-not-only-browse-text",
+      "lineageId": "r022-policy-assistive-template-nvda-native-selection-copies-application-rich-content-not-only-browse-text",
+      "candidateSha256": "be3e7c9795038092f8d5439da1661a3e3217e97e38f19f3cb8d052894cef3329",
+      "contentSha256": "6faf881b2b74f6c8dd0dc90f818eb73463bfd2cfefc299f09272d27c79c354ad",
+      "identityFreeSha256": "3dd7a4a60f8fbf40d96b44ca5ccd0c872f2838be4781c0d1f2979a02d47dc2da",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s5-w01-o01",
+        "r022-policy-assistive-s5-w01-o02",
+        "r022-policy-assistive-s5-w01-o03",
+        "r022-policy-assistive-s5-w01-o04",
+        "r022-policy-assistive-s5-w01-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "일반 텍스트 복사와 Native Selection의 서식 전달 효과가 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "8c84b1baed23e13af454d7f2242df0ea7ed28e53b7fd1fe05a4ce3f8b6dfc82c"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "daaee07873c76fc078c0187326c783fce27e224b1f972875858b15a9db8eaebe"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s5-w02",
+      "questionId": "r022-policy-assistive-s5-w02",
+      "revision": 1,
+      "learningGoalId": "r022-policy-assistive-template-nvda-on-demand-speaks-report-commands-but-not-focus-changes",
+      "templateId": "r022-policy-assistive-template-nvda-on-demand-speaks-report-commands-but-not-focus-changes",
+      "lineageId": "r022-policy-assistive-template-nvda-on-demand-speaks-report-commands-but-not-focus-changes",
+      "candidateSha256": "048f7533b9477ed3164c15de2b40dbe336e28b71f2ad90988a1d1f8681eaf664",
+      "contentSha256": "58c0a2c5e34ec8d864e275069b4aa5e1f12d0674113909acc8fe9b66f1738299",
+      "identityFreeSha256": "9741eaf624124c0f53e0dcef218159b1f12eeb922ae7ca34ae4662cf7f7c7046",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s5-w02-o01",
+        "r022-policy-assistive-s5-w02-o02",
+        "r022-policy-assistive-s5-w02-o03",
+        "r022-policy-assistive-s5-w02-o04",
+        "r022-policy-assistive-s5-w02-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "On-demand 발화 모드의 자동 반응과 보고 명령에 대한 동작이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "8c84b1baed23e13af454d7f2242df0ea7ed28e53b7fd1fe05a4ce3f8b6dfc82c"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "daaee07873c76fc078c0187326c783fce27e224b1f972875858b15a9db8eaebe"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s5-w03",
+      "questionId": "r022-policy-assistive-s5-w03",
+      "revision": 1,
+      "learningGoalId": "r022-policy-assistive-template-nvda-screen-layout-off-segments-interactive-elements-in-browse-lines",
+      "templateId": "r022-policy-assistive-template-nvda-screen-layout-off-segments-interactive-elements-in-browse-lines",
+      "lineageId": "r022-policy-assistive-template-nvda-screen-layout-off-segments-interactive-elements-in-browse-lines",
+      "candidateSha256": "ae102634ab1255ab19b69afe6b3929d929cec5c09b24edaead08b63b23803dc9",
+      "contentSha256": "3cca1a09cb508f18b9162ca232877a90b845550e3c1319928d5af1c15fda8ea6",
+      "identityFreeSha256": "c45e0c18faf57af0cf82ee4fcb7702e3b6f4865f1f84c0b01f115396c410897b",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s5-w03-o01",
+        "r022-policy-assistive-s5-w03-o02",
+        "r022-policy-assistive-s5-w03-o03",
+        "r022-policy-assistive-s5-w03-o04",
+        "r022-policy-assistive-s5-w03-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "화면 배치 사용 해제가 상호작용 요소의 탐색 줄을 바꾸는 효과가 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "8c84b1baed23e13af454d7f2242df0ea7ed28e53b7fd1fe05a4ce3f8b6dfc82c"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "daaee07873c76fc078c0187326c783fce27e224b1f972875858b15a9db8eaebe"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s5-w04",
+      "questionId": "r022-policy-assistive-s5-w04",
+      "revision": 1,
+      "learningGoalId": "r022-policy-assistive-template-nvda-revert-last-saved-custom-settings-distinct-from-saving-and-factory-reset",
+      "templateId": "r022-policy-assistive-template-nvda-revert-last-saved-custom-settings-distinct-from-saving-and-factory-reset",
+      "lineageId": "r022-policy-assistive-template-nvda-revert-last-saved-custom-settings-distinct-from-saving-and-factory-reset",
+      "candidateSha256": "fb27b1bb174991a3ffad32da68708f62271ec1f9d15c92a3968d9075d0fa944b",
+      "contentSha256": "39238254649c8d9210a934afa4977951c2bd76d99f38d6a5842cc418bb56b6b2",
+      "identityFreeSha256": "0b485e99d55802b2b59541fd2fd1c05c56fc554444253f788192807d0c82f5fb",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s5-w04-o01",
+        "r022-policy-assistive-s5-w04-o02",
+        "r022-policy-assistive-s5-w04-o03",
+        "r022-policy-assistive-s5-w04-o04",
+        "r022-policy-assistive-s5-w04-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "저장된 구성 복구가 미저장 변경을 버리고 저장값을 재적용하는 규칙이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "8c84b1baed23e13af454d7f2242df0ea7ed28e53b7fd1fe05a4ce3f8b6dfc82c"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "daaee07873c76fc078c0187326c783fce27e224b1f972875858b15a9db8eaebe"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    },
+    {
+      "candidateId": "r022-policy-assistive-s5-w05",
+      "questionId": "r022-policy-assistive-s5-w05",
+      "revision": 1,
+      "learningGoalId": "r022-policy-assistive-template-windows-slowkeys-minimum-held-duration-not-bounce-or-repeat-timing",
+      "templateId": "r022-policy-assistive-template-windows-slowkeys-minimum-held-duration-not-bounce-or-repeat-timing",
+      "lineageId": "r022-policy-assistive-template-windows-slowkeys-minimum-held-duration-not-bounce-or-repeat-timing",
+      "candidateSha256": "7785ecd173a6065e647dc3043587bf7561ab9c35cb3ee6b5f306f6317d7cb958",
+      "contentSha256": "6d457ce1618a498e5e1c1acfc733712eb33a948e79e559c3d9f4665c3a215bdc",
+      "identityFreeSha256": "5f77436f16953fe0664b65c2b99730b8cfe26fffbebde49a80d0ad0834e4533c",
+      "exclusiveOptionIds": [
+        "r022-policy-assistive-s5-w05-o01",
+        "r022-policy-assistive-s5-w05-o02",
+        "r022-policy-assistive-s5-w05-o03",
+        "r022-policy-assistive-s5-w05-o04",
+        "r022-policy-assistive-s5-w05-o05"
+      ],
+      "targetPaths": [
+        "/question/explanation"
+      ],
+      "reasonCode": "missing_question_level_solution_rationale",
+      "reason": "SlowKeys가 최초 키 수용 전 유지 시간을 제어하는 규칙이 문항 해설에 없다.",
+      "evidence": [
+        {
+          "kind": "original_author",
+          "sha256": "8c84b1baed23e13af454d7f2242df0ea7ed28e53b7fd1fe05a4ce3f8b6dfc82c"
+        },
+        {
+          "kind": "accepted_review",
+          "sha256": "daaee07873c76fc078c0187326c783fce27e224b1f972875858b15a9db8eaebe"
+        },
+        {
+          "kind": "defect_clarification",
+          "sha256": "7ed2ffb74545d90708d11a7c6fcb228acb8ec584f91883ccb6720fa35bdc58a6"
+        },
+        {
+          "kind": "independent_release_review",
+          "sha256": "833cc7a59bb9cb5a7dcb2b63f6ac94176cbf5a24ffd8d91d2f08cf611444893c"
+        }
+      ]
+    }
+  ]
+}

@@ -328,3 +328,39 @@ JSON Schema만으로 횟수 합계·다른 파일 이력·정답 의미를 검�
 역사적 재구성의 입력은 caller가 선언한 old/future 상태가 아니라 고정 이벤트가 연결한 원래 전체 archive inventory다. 전체 허용 목록 및 파일 크기/바이트 해시가 정확히 일치해야 하며, 누락·추가·변조·symlink나 검토되지 않은 경로로 범위를 넓히지 않는다. 감사 시각은 그 원본 proof의 preparedAt에서만 얻고 새 공개 검증/최종 cutoff보다 앞서야 한다. 읽기 전용 결과는 현재 발행 또는 새 저작 문맥을 반환하지 않는다. 일반 loader는 새 proof가 빠진 현재 작업본을 계속 차단한다.
 
 원래006–008 공개 증거와009 terminal origin·firstUnresolvedAt/deadlineAt/skip 및 고정 bootstrap 해시는 변경하지 않는다. 후속 공개 등록은 전달 기록의 canPublish=false·공개 수0·unknown을 바꾸지 않는다. 현재 manifest.finalRelease와 publicationState.finalized 및 최종 cutoff는 별도 현재 전체 검사에서 계속 적용한다.
+
+
+## 독립 원격 기준의 후속 오프라인 전달 사슬
+
+기존 `offline-chain.json`과 고정009 정상 백업 사슬은 역사적 원문 그대로 보존한다. 이후 별도로 검증한 최신 공개 기준에서 실제 권한 만료가 생기면 새 사슬의 첫 전달로 등록하며, 이전009의 원격 기준·timeout·unknown origin에 이어 붙이지 않는다. 새 사슬은 `scripts/offline-chain-continuation.mjs`와 별도의 append-only `docs/deliveries/offline-chain-trust.json`을 사용한다. 등록은 round 번호 특례가 아니라 독립 검토한 원격 commit·manifest·은행·전체 inventory와 두 ZIP·원래 종결 대장·native 첨부 증거의 정확한 해시를 기준으로 한다.
+
+`prepareIndependentOfflineContinuation`은 실제 두 ZIP과 원래 Library 저장/두 native 첨부 수락 영수증을 검사하고 공개 가능한 제안 proof만 반환한다. 제안·prepared·실패·한 파일 수락은 전달 증거가 아니다. 외부 서비스의 원래 결과를 독립 검토한 후 새 작업본에만 proof와 registry pin을 추가한다. 이미 전달한 source ZIP은 수정하지 않으며, proof의 실제 검증 완료 이전에는 다음 회차를 시작하지 않는다. 비공개 서비스·메시지 식별자는 해시로만 연결한다.
+
+새 root의 실제 권한 만료 시각과 최초 operation 불확실성·고정 10분 기한·실제 지속 기록한 skip을 그대로 보존한다. operation 은행 hash와 전달 delta hash의 연결은 검토된 proof에 명시한다. 나중의 Git 관찰로 최초 불확실성 시계를 초기화하지 않는다. 후속 schema2 전달은 같은 원래 reconciliation 기록을 사용하며 새로운 timeout을 만들지 않는다. 각각의 current/전달본 manifest·publication-state 동결 표시가 명시적으로 false인지와 최종 cutoff를 함께 검사한다.
+
+loader는 등록된 각 사슬을 자기 원격 anchor에서 별도로 검증한 뒤 원래006/009와 모든 새 사슬의 증거를 전체 캠페인 검사에 합친다. 누락·자기 선언 pin·혼합 ZIP·분기·다른 같은 commit inventory·은행/대장/검토 횟수 변경·오래된 선행자·중복 목표·후기 proof의 소급 적용을 거부한다. 최신 실제 공개 기준과 최신 전달 누적 선행자의 순서를 기존 전체 검증기로 대조하며 공개 수는0, 원래 unknown은unknown으로 남긴다. 이 로컬 검사는 Git 쓰기·권한 요청·배포 권한을 부여하지 않는다.
+
+
+## 첫 발행 전 격리 계약
+
+`scripts/prepublication-quarantine.mjs`와 `docs/quarantines/trust.json`은 새로 작성되어 한 번도 전달/공개되지 않은 accepted 개정판의 발행 제외만 담당한다. 기존 round/editorial schema·terminal decision·review cycle은 바뀌지 않는다. `kind:pre_first_release_quarantine` 감사 파일은 정규 JSON 바이트 SHA-256으로 pin하고 이전 감사 SHA와 prior trust prefix SHA를 연결한다. 후보 작업본의 registry는 검증기에 포함된 독립 검토 registry의 정확한 prefix여야 한다. 이미 적용된 source/후속 회차에서 pin·증거·원본 후보·역사 파일이 빠지거나 변하면 fail closed한다.
+
+- 후보 결박: candidateId/questionId/revision/learningGoalId/templateId/lineageId, 원 terminal candidate 전체의 canonical SHA-256, question+정확한 연결 options의 canonical SHA-256, identity-free fingerprint, 전용 option ID, 결함 targetPaths와 짧은 사유, 원 저작·채택 검토·결함 확인·독립 공개 QA의 private evidence SHA-256을 남긴다. canonical은 객체 키를 재귀 정렬하고 배열 순서는 유지한 compact JSON이다. 내용 해시는 발행 metadata 승격 전의 저작 원본을 대상으로 한다
+- 신뢰 등록: 원문을 읽은 별도 공개 QA가 모든 원본 해시·개정판·결함·검토 역할, 새 전용 선택지의 비공유성, 전체 기존 은행/전달/공개 이력에서 대상 부재를 확인한 뒤 독립 감사 파일과 trust pin을 검토한다. 선언한 hash/Boolean/Map만으로 omission을 허용하지 않는다. 공개 파일에는 raw author/blind/review packet·서비스 식별자·비공개 경로를 넣지 않는다
+- 최초 경계: 아직 첫 불변 은행을 만들기 전이며 source publication은 not_attempted/blocked, commit/bankVersion/bankSha256/verifiedAt은 모두 null이어야 한다. round 시작 이후의 실제 관측 시각, 현재 작업본과 직전 전달본의 두 동결 marker 원문, 전체 이전 public inventory와 독립 첫 발행 QA 증거 해시를 보존한다. 현재·전달본 어느 쪽도 frozen이어서는 안 된다. 이후 발행은 감사 시각보다 빠를 수 없으며 현재 최종 cutoff/영구 동결도 다시 검사한다. 과거 exact archive의 읽기 전용 검증에는 미래 감사를 소급 요구하지 않으며 새 발행 권한을 만들지 않는다
+- alias 차단: stable candidate/question/goal/template/lineage 충돌과 완전한 동일 내용 fingerprint 충돌을 거부한다. fingerprint는 ID/source label/revision/review metadata/material filename·선택지 순서 변경을 제외하고 내용·정오 역할을 비교한다. 임의의 의미 재서술을 완전 탐지하지 않으므로 새로운 목표의 의미 독립성은 여전히 별도 QA다. 격리한 전용 option을 orphan 또는 다른 문항의 공유 option으로 발행하지 않는다
+- 검증 결과: `loadRoundContext.quarantineDispositions`와 `validateQuarantineCampaign`의 검증된 Map은 round별 acceptedCandidateIds/quarantinedCandidateIds/eligibleCandidateIds/auditSha256s/counts를 제공한다. 실패한 결과로 제외를 적용하지 않는다. counts.accepted는 원 대장과 같고 eligible=accepted−quarantined다. sourceDecisionSha256은 원 회차의 closure·baseline·policy·모든 terminal candidate/cycle·비공개가 아닌 계획 필드를 결박한다. publication/coverageAfter/validation/summary, 실제 공개 수 두 필드와 후보 publishedBankVersion만 이 projection에서 제외하며 그 변경은 기존 공개 검증기를 별도로 통과해야 한다. published 수와 regular coverage는 실제 은행/공개 증거로 별도 계산한다
+- 경로 일치: 일반 release, 명시적/기본 bank build, offline delivery/continuation, standalone packaging에서 같은 제약을 적용한다. 영수증 acceptedGoalIds와 다음 회차 예약은 격리분을 포함한 원 accepted 집합이다. 실제 새 은행 추가분만 eligible 집합이다. 격리 대상은 기존 published 선행자가 아니므로 accepted_content_editorial의 검증된 공개 선행자 guard로 교정할 수 없다
+
+감사·pin 추가 외에 이미 공개한 감사·은행·원 대장·전달 proof·ZIP은 수정하지 않는다. 이 경로에는 unhold·내용 수정·새 cycle·재개방·카운터 초기화 API가 없다. 구조 검증은 실제 independent review, 의미 정확성, 원격 관찰이나 학습자 세션 보존 실측을 대신하지 않는다.
+
+
+## Denial-only evidence-loss release block
+
+전체 검토 증거·원 보고서·전달 산출물을 잃은 미전달 종결 회차는 실제 저작 결함에 대한 quarantine으로 바꾸지 않는다. `docs/release-blocks/trust.json`의 독립 검토한 append-only pin과 별도 이벤트로 full 원 대장 바이트·모든 후보 이력·시작한 모든 개정판의 내용 지문·전용 선택지·은행 버전을 예약한다. 새 내용 판정·cycle·재검토·공개·전달 proof를 만들거나 원 대장을 다시 쓰지 않는다.
+
+사고 보고서는 날짜가 명확한 `docs/incidents/`의 별도 파일이다. 정확한 원 대장·이벤트·사고 문서가 검증된 경우에만 해당 원 Markdown 보고서 부재를 `reservation_only_missing_original_report`로 만족한다. 이는 소실 보고서의 복구나 원 pass 요약에 대한 현재 실행 증거가 아니다. 다른 누락 보고서에는 적용하지 않는다.
+
+`evidence-loss-block.mjs`는 기본/명시 은행, 전체 이력·baseline, outgoing 파일/ZIP와 전달·공개·후속 기준 proof에서 차단을 검사한다. 경로 변경·문항/선택지 이름 변경·호출자 Boolean/제외 목록·registry/event/대장 누락으로 해제되지 않는다. 원래 복구 은행은 비공개 증거이며 공개 불변 은행이나 ZIP에 넣지 않는다. active 은행은 마지막 실제 전달 검증본을 유지한다.
+
+후속 정규 회차는 기존14.3에 따라 최신 실제 전달 검증 은행에서 독립 목표를 선정할 수 있다. 채택 목표를 재검토해 증거 소실을 치유하거나 이름만 바꿔 재사용하지 않는다. 탈락 목표의 기존 새 1차 근거·campaign당1회 재개방 조건은 그대로이며 이 이벤트 자체는 근거·권한이 아니다. 모든 실제 새 후보에는 전체 재개방·일정·마감·동결·현재 시각·발행 검사를 적용한다. 원 탈락 원문·별칭과 예약된 전용 선택지를 재생하지 않는다. 사고 전 정확한 역사 archive의 읽기 전용 검증은 미래 이벤트를 요구하지 않으며 현재 발행 권한을 제공하지 않는다.

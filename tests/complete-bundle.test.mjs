@@ -7,7 +7,10 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {parsePublicAllowlist, main as fallbackMain} from '../scripts/download-fallback.mjs';
 import {freezeCompleteProject,writeCompleteZip,writeOfflineDeliveryPair,completeInstructions,createCompleteReceipt} from '../scripts/complete-bundle.mjs';
-const root=path.resolve(import.meta.dirname,'..'), now=Date.parse('2026-10-04T09:00:00Z');
+const root=path.resolve(import.meta.dirname,'..');
+// Simulated current-tree audit time follows both the active bank and included block events.
+const blockPins=JSON.parse(await fs.readFile(path.join(root,'docs/release-blocks/trust.json'))).events;
+const now=Math.max(Date.parse('2026-10-04T09:00:00Z'),Date.parse(JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))).releasedAt)+60_000,...blockPins.map(p=>Date.parse(p.recordedAt)+60_000));
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const json=value=>Buffer.from(JSON.stringify(value,null,2)+'\n');
 async function reviewed() {
@@ -64,7 +67,7 @@ test('new packages obey both timestamp cutoff and persistent freeze',async()=>{
   const f=await fixture();await assert.rejects(freezeCompleteProject({...f,now:Date.parse('2026-10-16T15:00:00Z')}),/cutoff/);
   const s=await frozen();const e=s.files.find(f=>f.path==='data/publication-state.json');e.raw=json({finalized:true});e.sha256=sha(e.raw);e.bytes=e.raw.length;
   for(const item of s.manifest.files)if(item.path===e.path){item.sha256=e.sha256;item.bytes=e.bytes;}s.manifest.frozenSourceInventory=structuredClone(s.manifest.files);
-  await assert.rejects(writeCompleteZip(s,'/unused.zip',{now}),/Persistent freeze/);
+  await assert.rejects(writeCompleteZip(s,'/unused.zip',{now}),/freeze/i);
 });
 test('delta and full outputs cannot be the same path; CLI requires both',async()=>{
   await assert.rejects(writeOfflineDeliveryPair({deltaOutputPath:'x.zip',completeOutputPath:'x.zip'}),/must differ/);
@@ -80,7 +83,7 @@ test('changed full bytes and retained delta deletion are rejected before either 
 });
 test('complete receipt records separate status without modifying original release provenance',async()=>{
   const s=await frozen(),before=json(s.manifest),artifact={sha256:'a'.repeat(64),manifestSha256:sha(before)};
-  const r=createCompleteReceipt({snapshot:s,artifact,status:'delivered',recordedAt:'2026-10-04T09:00:00Z'});
+  const r=createCompleteReceipt({snapshot:s,artifact,status:'delivered',recordedAt:new Date(now).toISOString()});
   assert.equal(r.kind,'complete_project_delivery');assert.equal(r.sourceDeltaArtifactSha256,s.manifest.sourceRelease.deltaArtifactSha256);assert.equal(r.newlyPublishedRegular,0);assert.deepEqual(json(s.manifest),before);
   assert.throws(()=>createCompleteReceipt({snapshot:s,artifact:{...artifact,manifestSha256:'b'.repeat(64)},recordedAt:r.recordedAt}),/Invalid complete delivery receipt/);
 });

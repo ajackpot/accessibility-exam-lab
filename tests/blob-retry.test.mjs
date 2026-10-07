@@ -46,6 +46,24 @@ test('strict operation parsing rejects tree-inline, route aliases and encoding t
     {...operation('a'), repository: 'example/exam-lab/../other'}
   ]) assert.throws(() => identifyGitBlob(candidate));
 });
+test('multi-megabyte canonical base64 preserves exact identity without regex stack exhaustion', () => {
+  const raw = Buffer.alloc(4_544_419, 0xa5);
+  const encoded = {...operation(''), encoding: 'base64', content: raw.toString('base64')};
+  assert.deepEqual(identifyGitBlob(encoded), {
+    bytes: raw.length,
+    sha256: createHash('sha256').update(raw).digest('hex'),
+    gitBlobSha: createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex')
+  });
+  for (const content of [encoded.content + '\n', encoded.content.slice(1),
+    encoded.content.slice(0, -4) + 'YR==', '====' + encoded.content.slice(4),
+    encoded.content.slice(0, 100) + '_' + encoded.content.slice(101)]) {
+    assert.throws(() => identifyGitBlob({...encoded, content}));
+  }
+  for (const content of ['', 'YQ==', 'YWI=', 'YWJj']) {
+    const bytes = Buffer.from(content, 'base64');
+    assert.equal(identifyGitBlob({...encoded, content}).sha256, digest(bytes));
+  }
+});
 test('reservation is persisted before returning one exact operation; old evidence remains unknown', async t => {
   const props = await fixture(t), before = structuredClone(props);
   const result = await reserveBlobRetry(props);

@@ -8,11 +8,11 @@ import {validateCampaignBaselines} from '../scripts/editorial-ledger.mjs';
 import {validatePublicationSynchronizations, resolveSynchronizedArtifacts} from '../scripts/publication-sync.mjs';
 import {validateSynchronizedDeliveryChain, validateOfflineContinuation} from '../scripts/download-fallback.mjs';
 import {FREEZE_AT} from '../src/domain.js';
-const root=path.resolve(import.meta.dirname,'..'), now=Math.max(Date.now(),Date.parse('2026-10-04T12:00:00Z'));
-const loaded=await loadRoundContext(root,null,{release:true,now});
+const root=path.resolve(import.meta.dirname,'..'),currentNow=Math.max(Date.now(),Date.parse('2026-10-04T12:00:00Z')),now=Date.parse('2026-10-04T12:00:00Z');
+const loaded=await loadRoundContext(root,null,{release:true,now:currentNow});
 const proof=loaded.synchronizations[0], clone=structuredClone;
 // This is the immutable006–008 synchronization fixture, not a moving latest release.
-const context={...loaded,synchronizations:[proof],offlineBases:new Map([...loaded.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:loaded.ledgers.filter(r=>Number(r.roundId.slice(6))<=8),manifest:proof.manifest};
+const context={...loaded,ledgerSources:new Map([...loaded.ledgerSources].filter(([id])=>Number(id.slice(6))<=8)),synchronizations:[proof],offlineBases:new Map([...loaded.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:loaded.ledgers.filter(r=>Number(r.roundId.slice(6))<=8),manifest:proof.manifest};
 const index=JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/offline-chain.json')));
 function successor(start='2026-10-04T11:00:00Z') {
   const bank=JSON.parse(context.banks.get(proof.manifest.bankVersion).raw),coverage=regularCoverage(bank);
@@ -74,6 +74,6 @@ test('exact receipts resolve current content publication without rewriting histo
 test('normal context loader fails closed on missing or tampered proof bytes',async t=>{
   const dir=await fs.mkdtemp(path.join(os.tmpdir(),'publication-sync-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));
   await fs.cp(root,dir,{recursive:true});const p=path.join(dir,'docs/publications/cumulative-006-008.json');
-  await fs.appendFile(p,' ');await assert.rejects(loadRoundContext(dir,null,{release:true,now}),/proof hash/);
-  await fs.unlink(p);await assert.rejects(loadRoundContext(dir,null,{release:true,now}),/ENOENT/);
+  await fs.appendFile(p,' ');await assert.rejects(loadRoundContext(dir,null,{release:true,now:currentNow}),/proof hash|immutable pre-quarantine history/);
+  await fs.unlink(p);await assert.rejects(loadRoundContext(dir,null,{release:true,now:currentNow}),/ENOENT/);
 });

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "kind": "reviewed_evidence_loss_blocks",
+  "events": [
+    {
+      "eventId": "evidence-loss-001",
+      "roundId": "round-023",
+      "path": "docs/release-blocks/evidence-loss-001.json",
+      "sha256": "539ce32358dd3da9d73bb6f573cd601311ecf797f470ead2aa60eca0abf10d0c",
+      "recordedAt": "2026-10-06T14:31:42Z"
+    }
+  ]
+}

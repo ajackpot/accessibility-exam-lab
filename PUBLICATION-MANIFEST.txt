@@ -1,246 +1,271 @@
 # Allow-list for the public developer preview. Paths are relative to repository root.
 # No other workspace paths, uploaded files, backups, secrets, or raw QA logs may be published.
-.nojekyll
+# Bounded regular content rounds
+# 0.2.8 reviewed explanation presentation and authoring gate
+# Bounded accepted-content editorial corrections (no new knowledge quota)
+# Second regular expansion
+# Third regular expansion
+# Fourth regular expansion
+# Fifth regular expansion
+# Local-only permission-timeout delivery policy and regression tests
+# Sixth regular expansion
+# Bounded reconciliation and verified offline cumulative continuation
+# Seventh offline cumulative expansion
+# Delivered seventh-round offline checkpoint
+# Eighth offline cumulative expansion
+# Standalone cumulative project delivery (packaging-policy-001)
+# Explicit one-shot content-addressed blob retry guard
+# Verified cumulative publication event; original ledgers and receipts stay unchanged
+# Exact manual009 start and normal-release dual backups
+# Ninth explicitly requested regular expansion
+# Tenth scheduled cumulative expansion from exact delivered009
+# Reviewed generic post-attachment successor checkpoints
+# Eleventh exact manual cumulative expansion from delivered010
+# Twelfth scheduled cumulative expansion from exact delivered011
+# Thirteenth scheduled expansion from exact delivered012
+# Fourteenth scheduled expansion from exact delivered013
+# Fifteenth scheduled expansion from exact delivered014
+# Sixteenth scheduled expansion from exact delivered015
+# Seventeenth scheduled expansion from exact delivered016
 .gitignore
-README.md
+.nojekyll
+AGENTS.md
 PUBLICATION-MANIFEST.txt
-package.json
-package-lock.json
-index.html
-style.css
-src/app.js
-src/workflows.js
-src/domain.js
-src/legacy-materials.js
-src/legacy-question-display.js
-src/storage.js
-src/backup.js
-scripts/build.mjs
-scripts/check.mjs
-scripts/validate-bank.mjs
-scripts/release-guard.mjs
+README.md
 data/manifest.json
 data/publication-state.json
-data/seed-bank.json
-data/seed-bank-v2.json
-data/seed-bank-v3.json
-data/seed-bank-v4.json
+data/releases/2026.10.02-editorial.1/bank.json
+data/releases/2026.10.02-regular.1/bank.json
+data/releases/2026.10.02-regular.2/bank.json
 data/releases/2026.10.02-seed.1/bank.json
 data/releases/2026.10.02-seed.2/bank.json
 data/releases/2026.10.02-seed.3/bank.json
 data/releases/2026.10.02-seed.4/bank.json
-docs/PRD.md
-docs/DATA-CONTRACT.md
-docs/OPERATIONS.md
-docs/NVDA-CHECKLIST.md
+data/releases/2026.10.03-regular.3/bank.json
+data/releases/2026.10.03-regular.4/bank.json
+data/releases/2026.10.04-regular.10/bank.json
+data/releases/2026.10.04-regular.11/bank.json
+data/releases/2026.10.04-regular.5/bank.json
+data/releases/2026.10.04-regular.6/bank.json
+data/releases/2026.10.04-regular.7/bank.json
+data/releases/2026.10.04-regular.8/bank.json
+data/releases/2026.10.04-regular.9/bank.json
+data/releases/2026.10.05-regular.12/bank.json
+data/releases/2026.10.05-regular.13/bank.json
+data/releases/2026.10.05-regular.14/bank.json
+data/releases/2026.10.05-regular.15/bank.json
+data/releases/2026.10.05-regular.16/bank.json
+data/releases/2026.10.05-regular.17/bank.json
+data/releases/2026.10.05-regular.18/bank.json
+data/releases/2026.10.05-regular.19/bank.json
+data/releases/2026.10.06-regular.20/bank.json
+data/releases/2026.10.06-regular.21/bank.json
+data/releases/2026.10.06-regular.22/bank.json
+data/releases/2026.10.06-regular.24/bank.json
+data/releases/2026.10.06-regular.25/bank.json
+data/releases/2026.10.06-regular.26/bank.json
+data/releases/2026.10.07-regular.27/bank.json
+data/seed-bank-v2.json
+data/seed-bank-v3.json
+data/seed-bank-v4.json
+data/seed-bank.json
 docs/ANNOUNCEMENTS.md
-docs/VALIDATION.md
-docs/SOURCE-REVIEW.md
+docs/DATA-CONTRACT.md
+docs/NVDA-CHECKLIST.md
+docs/OPERATIONS.md
+docs/PRD.md
 docs/SEED-VALIDATION.json
-tests/domain.test.mjs
-tests/choice-order.test.mjs
-tests/feedback-policy.test.mjs
-tests/stimulus-layout.test.mjs
-tests/concise-format.test.mjs
-tests/workflows.test.mjs
-tests/ui-state.test.mjs
-tests/announcements.test.mjs
-qa/harness.html
-qa/browser-harness.js
-qa/fixture.mjs
-qa/domain-boundary.test.mjs
+docs/SOURCE-REVIEW.md
+docs/VALIDATION.md
+docs/corrections/choice-audit-001.json
+docs/corrections/editorial-001.json
+docs/corrections/editorial-001.md
+docs/corrections/editorial-ledger.schema.json
+docs/corrections/evidence/editorial-001-cycle-1.json
+docs/corrections/evidence/editorial-001-cycle-2.json
+docs/deliveries/14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a/ledger.json
+docs/deliveries/6a7c6e7488003917dc6e85d962787f4392c5248f71238c28d2defbc94c526449/ledger.json
+docs/deliveries/chains/public-regular17/round-018.json
+docs/deliveries/chains/public-regular17/round-019.json
+docs/deliveries/chains/public-regular17/round-020.json
+docs/deliveries/chains/public-regular17/round-021.json
+docs/deliveries/chains/public-regular17/round-022.json
+docs/deliveries/chains/public-regular17/round-024.json
+docs/deliveries/chains/public-regular17/round-025.json
+docs/deliveries/chains/public-regular17/round-026.json
+docs/deliveries/checkpoints/round-010.json
+docs/deliveries/checkpoints/round-011.json
+docs/deliveries/checkpoints/round-012.json
+docs/deliveries/checkpoints/round-013.json
+docs/deliveries/checkpoints/round-014.json
+docs/deliveries/checkpoints/round-015.json
+docs/deliveries/checkpoints/round-016.json
+docs/deliveries/checkpoints/round-017.json
+docs/deliveries/normal-backup-009.json
+docs/deliveries/offline-chain-trust.json
+docs/deliveries/offline-chain.json
+docs/deliveries/release-backup-trust.json
+docs/incidents/2026-10-06-round-023-evidence-loss.md
+docs/publications/cumulative-006-008.json
+docs/publications/cumulative-006-008.md
+docs/publications/cumulative-009-017.json
+docs/publications/cumulative-009-017.md
+docs/quarantines/quarantine-001.json
+docs/quarantines/trust.json
+docs/release-blocks/evidence-loss-001.json
+docs/release-blocks/trust.json
+docs/rounds/round-001.json
+docs/rounds/round-001.md
+docs/rounds/round-002.json
+docs/rounds/round-002.md
+docs/rounds/round-003.json
+docs/rounds/round-003.md
+docs/rounds/round-004.json
+docs/rounds/round-004.md
+docs/rounds/round-005.json
+docs/rounds/round-005.md
+docs/rounds/round-006.json
+docs/rounds/round-006.md
+docs/rounds/round-007.json
+docs/rounds/round-007.md
+docs/rounds/round-008.json
+docs/rounds/round-008.md
+docs/rounds/round-009.json
+docs/rounds/round-009.md
+docs/rounds/round-010.json
+docs/rounds/round-010.md
+docs/rounds/round-011.json
+docs/rounds/round-011.md
+docs/rounds/round-012.json
+docs/rounds/round-012.md
+docs/rounds/round-013.json
+docs/rounds/round-013.md
+docs/rounds/round-014.json
+docs/rounds/round-014.md
+docs/rounds/round-015.json
+docs/rounds/round-015.md
+docs/rounds/round-016.json
+docs/rounds/round-016.md
+docs/rounds/round-017.json
+docs/rounds/round-017.md
+docs/rounds/round-018.json
+docs/rounds/round-018.md
+docs/rounds/round-019.json
+docs/rounds/round-019.md
+docs/rounds/round-020.json
+docs/rounds/round-020.md
+docs/rounds/round-021.json
+docs/rounds/round-021.md
+docs/rounds/round-022.json
+docs/rounds/round-022.md
+docs/rounds/round-023.json
+docs/rounds/round-024.json
+docs/rounds/round-024.md
+docs/rounds/round-025.json
+docs/rounds/round-025.md
+docs/rounds/round-026.json
+docs/rounds/round-026.md
+docs/rounds/round-027.json
+docs/rounds/round-027.md
+docs/rounds/round-ledger.schema.json
+docs/rounds/round-ledger.template.json
+docs/rounds/round-report.template.md
+index.html
+package-lock.json
+package.json
 qa/backup-network.test.mjs
+qa/browser-harness.js
+qa/domain-boundary.test.mjs
+qa/fixture.mjs
+qa/harness.html
 qa/seed-content.test.mjs
 qa/viewport.html
 qa/viewport.js
-
-# Bounded regular content rounds
-AGENTS.md
 scripts/bank-io.mjs
-scripts/validate-round.mjs
-tests/build-current-bank.test.mjs
-tests/round-ledger.test.mjs
-docs/rounds/round-ledger.schema.json
-docs/rounds/round-ledger.template.json
-docs/rounds/round-001.json
-docs/rounds/round-001.md
-
-docs/rounds/round-report.template.md
-tests/regular-practice.test.mjs
-tests/regular-bank.test.mjs
-data/releases/2026.10.02-regular.1/bank.json
-
-# 0.2.8 reviewed explanation presentation and authoring gate
-src/reviewed-option-explanations.js
-scripts/explanation-authoring.mjs
-tests/explanation-redundancy.test.mjs
-
-# Bounded accepted-content editorial corrections (no new knowledge quota)
-scripts/editorial-ledger.mjs
-tests/editorial-ledger.test.mjs
-docs/corrections/editorial-ledger.schema.json
-docs/corrections/editorial-001.json
-docs/corrections/editorial-001.md
-docs/corrections/choice-audit-001.json
-data/releases/2026.10.02-editorial.1/bank.json
-docs/corrections/evidence/editorial-001-cycle-1.json
-docs/corrections/evidence/editorial-001-cycle-2.json
-tests/editorial-bank.test.mjs
-
-tests/round-schedule-substitution.test.mjs
-tests/four-hour-cadence.test.mjs
-
-# Second regular expansion
-tests/round-two-bank.test.mjs
-docs/rounds/round-002.json
-docs/rounds/round-002.md
-data/releases/2026.10.02-regular.2/bank.json
-
-# Third regular expansion
-tests/round-three-bank.test.mjs
-docs/rounds/round-003.json
-docs/rounds/round-003.md
-data/releases/2026.10.03-regular.3/bank.json
-
-# Fourth regular expansion
-tests/round-four-bank.test.mjs
-docs/rounds/round-004.json
-docs/rounds/round-004.md
-data/releases/2026.10.03-regular.4/bank.json
-
-# Fifth regular expansion
-tests/round-five-bank.test.mjs
-docs/rounds/round-005.json
-docs/rounds/round-005.md
-data/releases/2026.10.04-regular.5/bank.json
-
-# Local-only permission-timeout delivery policy and regression tests
-scripts/download-fallback.mjs
-tests/download-fallback.test.mjs
-
-# Sixth regular expansion
-tests/round-six-bank.test.mjs
-docs/rounds/round-006.json
-docs/rounds/round-006.md
-data/releases/2026.10.04-regular.6/bank.json
-
-# Bounded reconciliation and verified offline cumulative continuation
-tests/bounded-reconciliation.test.mjs
-tests/offline-campaign-baselines.test.mjs
-docs/deliveries/offline-chain.json
-docs/deliveries/14607b2a7bab099366834cc87756a57353b9c5c79220d3801c1dc8ca9f29b62a/ledger.json
-
-# Seventh offline cumulative expansion
-data/releases/2026.10.04-regular.7/bank.json
-docs/rounds/round-007.json
-docs/rounds/round-007.md
-tests/round-seven-bank.test.mjs
-
-# Delivered seventh-round offline checkpoint
-docs/deliveries/6a7c6e7488003917dc6e85d962787f4392c5248f71238c28d2defbc94c526449/ledger.json
-
-# Eighth offline cumulative expansion
-data/releases/2026.10.04-regular.8/bank.json
-docs/rounds/round-008.json
-docs/rounds/round-008.md
-tests/round-eight-bank.test.mjs
-
-# Standalone cumulative project delivery (packaging-policy-001)
-scripts/complete-bundle.mjs
-tests/complete-bundle.test.mjs
-
-# Explicit one-shot content-addressed blob retry guard
 scripts/blob-retry.mjs
-tests/blob-retry.test.mjs
-
-# Verified cumulative publication event; original ledgers and receipts stay unchanged
+scripts/build.mjs
+scripts/check.mjs
+scripts/complete-bundle.mjs
+scripts/download-fallback.mjs
+scripts/editorial-ledger.mjs
+scripts/evidence-loss-block.mjs
+scripts/explanation-authoring.mjs
+scripts/offline-chain-continuation.mjs
+scripts/prepublication-quarantine.mjs
 scripts/publication-sync.mjs
-tests/publication-sync.test.mjs
-docs/publications/cumulative-006-008.json
-docs/publications/cumulative-006-008.md
-
-# Exact manual009 start and normal-release dual backups
+scripts/release-backup-continuation.mjs
+scripts/release-bundle.mjs
+scripts/release-guard.mjs
+scripts/sha-only-tree.mjs
+scripts/validate-bank.mjs
+scripts/validate-round.mjs
+src/app.js
+src/backup.js
+src/domain.js
+src/legacy-materials.js
+src/legacy-question-display.js
+src/reviewed-option-explanations.js
+src/storage.js
+src/workflows.js
+style.css
+tests/announcements.test.mjs
+tests/blob-retry.test.mjs
+tests/bounded-reconciliation.test.mjs
+tests/build-current-bank.test.mjs
+tests/choice-order.test.mjs
+tests/complete-bundle.test.mjs
+tests/concise-format.test.mjs
+tests/domain.test.mjs
+tests/download-fallback.test.mjs
+tests/editorial-bank.test.mjs
+tests/editorial-ledger.test.mjs
+tests/evidence-loss-block.test.mjs
+tests/explanation-redundancy.test.mjs
+tests/feedback-policy.test.mjs
+tests/four-hour-cadence.test.mjs
+tests/independent-offline-chains.test.mjs
 tests/manual-round-eleven.test.mjs
 tests/manual-round-nine.test.mjs
-scripts/release-bundle.mjs
-tests/release-bundle.test.mjs
-
-tests/release-bundle-closure.test.mjs
-
-# Ninth explicitly requested regular expansion
-data/releases/2026.10.04-regular.9/bank.json
-docs/rounds/round-009.json
-docs/rounds/round-009.md
-tests/round-nine-bank.test.mjs
-scripts/release-backup-continuation.mjs
 tests/normal-backup-continuation.test.mjs
-docs/deliveries/normal-backup-009.json
-
-# Tenth scheduled cumulative expansion from exact delivered009
-data/releases/2026.10.04-regular.10/bank.json
-docs/rounds/round-010.json
-docs/rounds/round-010.md
-tests/round-ten-bank.test.mjs
-
-# Reviewed generic post-attachment successor checkpoints
-docs/deliveries/release-backup-trust.json
-tests/release-backup-successors.test.mjs
-docs/deliveries/checkpoints/round-010.json
-
-# Eleventh exact manual cumulative expansion from delivered010
-data/releases/2026.10.04-regular.11/bank.json
-docs/rounds/round-011.json
-docs/rounds/round-011.md
-tests/round-eleven-bank.test.mjs
-docs/deliveries/checkpoints/round-011.json
-
-# Twelfth scheduled cumulative expansion from exact delivered011
-data/releases/2026.10.05-regular.12/bank.json
-docs/rounds/round-012.json
-docs/rounds/round-012.md
-tests/round-twelve-bank.test.mjs
-docs/deliveries/checkpoints/round-012.json
-
-# Thirteenth scheduled expansion from exact delivered012
-data/releases/2026.10.05-regular.13/bank.json
-docs/rounds/round-013.json
-docs/rounds/round-013.md
-tests/round-thirteen-bank.test.mjs
-docs/deliveries/checkpoints/round-013.json
-
-# Fourteenth scheduled expansion from exact delivered013
-data/releases/2026.10.05-regular.14/bank.json
-docs/rounds/round-014.json
-docs/rounds/round-014.md
-tests/round-fourteen-bank.test.mjs
-
-docs/deliveries/checkpoints/round-014.json
-
-# Fifteenth scheduled expansion from exact delivered014
-data/releases/2026.10.05-regular.15/bank.json
-docs/rounds/round-015.json
-docs/rounds/round-015.md
-tests/round-fifteen-bank.test.mjs
-
-docs/deliveries/checkpoints/round-015.json
-
-# Sixteenth scheduled expansion from exact delivered015
-data/releases/2026.10.05-regular.16/bank.json
-docs/rounds/round-016.json
-docs/rounds/round-016.md
-tests/round-sixteen-bank.test.mjs
-
-docs/deliveries/checkpoints/round-016.json
-
-# Seventeenth scheduled expansion from exact delivered016
-data/releases/2026.10.05-regular.17/bank.json
-docs/rounds/round-017.json
-docs/rounds/round-017.md
-tests/round-seventeen-bank.test.mjs
-
-docs/deliveries/checkpoints/round-017.json
+tests/offline-campaign-baselines.test.mjs
+tests/prepublication-quarantine.test.mjs
 tests/publication-sync-successors.test.mjs
-docs/publications/cumulative-009-017.json
-docs/publications/cumulative-009-017.md
-scripts/sha-only-tree.mjs
+tests/publication-sync.test.mjs
+tests/quarantine-fixtures.mjs
+tests/regular-bank.test.mjs
+tests/regular-practice.test.mjs
+tests/release-backup-successors.test.mjs
+tests/release-bundle-closure.test.mjs
+tests/release-bundle.test.mjs
+tests/round-eight-bank.test.mjs
+tests/round-eighteen-bank.test.mjs
+tests/round-eleven-bank.test.mjs
+tests/round-fifteen-bank.test.mjs
+tests/round-five-bank.test.mjs
+tests/round-four-bank.test.mjs
+tests/round-fourteen-bank.test.mjs
+tests/round-ledger.test.mjs
+tests/round-nine-bank.test.mjs
+tests/round-nineteen-bank.test.mjs
+tests/round-schedule-substitution.test.mjs
+tests/round-seven-bank.test.mjs
+tests/round-seventeen-bank.test.mjs
+tests/round-six-bank.test.mjs
+tests/round-sixteen-bank.test.mjs
+tests/round-ten-bank.test.mjs
+tests/round-thirteen-bank.test.mjs
+tests/round-three-bank.test.mjs
+tests/round-twelve-bank.test.mjs
+tests/round-twenty-bank.test.mjs
+tests/round-twentyfive-bank.test.mjs
+tests/round-twentyfour-bank.test.mjs
+tests/round-twentyone-bank.test.mjs
+tests/round-twentyseven-bank.test.mjs
+tests/round-twentysix-bank.test.mjs
+tests/round-twentytwo-bank.test.mjs
+tests/round-two-bank.test.mjs
 tests/sha-only-tree.test.mjs
+tests/stimulus-layout.test.mjs
+tests/ui-state.test.mjs
+tests/workflows.test.mjs
+docs/deliveries/chains/public-regular17/round-027.json

@@ -178,7 +178,7 @@ export async function prepareNormalBackupContinuation({deltaZip,completeZip,libr
 export const RELEASE_BACKUP_TRUST_PATH='docs/deliveries/release-backup-trust.json';
 const hex=/^[a-f0-9]{64}$/;
 const roundNumber=id=>/^round-\d+$/.test(id)?Number(id.slice(6)):NaN;
-const immutable=p=>p.startsWith('data/releases/')||/^data\/seed-bank(?:-v\d+)?\.json$/.test(p)||/^docs\/(?:rounds\/round-\d+\.(?:json|md)|corrections\/(?:editorial-\d+\.(?:json|md)|evidence\/))/.test(p)||(p.startsWith('docs/deliveries/')&&p!==RELEASE_BACKUP_TRUST_PATH)||/^docs\/publications\/.*\.(?:json|md)$/.test(p);
+const immutable=p=>p.startsWith('data/releases/')||/^data\/seed-bank(?:-v\d+)?\.json$/.test(p)||/^docs\/(?:rounds\/round-\d+\.(?:json|md)|corrections\/(?:editorial-\d+\.(?:json|md)|evidence\/))/.test(p)||(p.startsWith('docs/deliveries/')&&p!==RELEASE_BACKUP_TRUST_PATH)||/^docs\/publications\/.*\.(?:json|md)$/.test(p)||/^docs\/quarantines\/(?!trust\.json)[^/]+\.json$/.test(p);
 function trustRegistry(value){
  keys(value,['schemaVersion','rootProofSha256','checkpoints']);
  if(value.schemaVersion!==1||value.rootProofSha256!==NORMAL_BACKUP_PROOF_SHA256||!Array.isArray(value.checkpoints))fail('Invalid reviewed checkpoint trust root');
@@ -352,3 +352,6 @@ export async function prepareReleaseBackupContinuation({deltaZip,completeZip,lib
  if(trusted.checkpoints.some(pin=>pin.roundId===trustRecord.roundId))fail('Already reviewed delivery cannot be checkpointed twice');
  return {status:'proposed_requires_independent_receipt_review',proof:p,proofRaw,trustRecord,trustRegistryRaw:json(trustRegistry({...trusted,checkpoints:[...trusted.checkpoints,trustRecord]}))};
 }
+
+// Shared read-only ZIP validation for independently anchored delivery proofs.
+export {archive as readDeliveredArchive, inspectArchive as validateDeliveredArchiveEntries};

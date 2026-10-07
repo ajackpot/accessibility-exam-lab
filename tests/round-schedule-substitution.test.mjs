@@ -1,8 +1,12 @@
-import test from 'node:test';
+import {createSyntheticValidator} from './quarantine-fixtures.mjs';
+import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {validateRoundLedgers,nextScheduledRoundAt} from '../scripts/validate-round.mjs';
+
+const syntheticValidator=await createSyntheticValidator();
+after(syntheticValidator.cleanup);
 
 // Deliberately synthetic fixtures; these are not content-review or publication evidence.
 const template=JSON.parse(fs.readFileSync(new URL('../docs/rounds/round-ledger.template.json',import.meta.url),'utf8'));
@@ -14,7 +18,7 @@ function round(){
  Object.assign(r.baseline,{sourceCommit:'a'.repeat(40),bankVersion:bank.bankVersion,bankSha256:createHash('sha256').update(raw).digest('hex')});
  return r;
 }
-function result(rounds,options={}){return validateRoundLedgers(rounds,{banks,now:Date.parse('2026-10-02T10:40:00Z'),...options});}
+function result(rounds,options={}){return syntheticValidator.round.validateRoundLedgers(rounds,{banks,now:Date.parse('2026-10-02T10:40:00Z'),...options});}
 function pass(rounds,options){const r=result(rounds,options);assert.equal(r.ok,true,r.errors.join('\n'));}
 function fail(rounds,options){const r=result(rounds,options);assert.equal(r.ok,false,'invalid schedule fixture unexpectedly passed');}
 function closed(){const r=round();Object.assign(r,{status:'closed',closedAt:'2026-10-02T10:50:00Z',decisionDeadline:'2026-10-02T11:00:00Z',noGapExplanation:'This zero-candidate fixture tests schedule bounds only, not actual learning coverage.'});return r;}

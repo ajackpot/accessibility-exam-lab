@@ -53,9 +53,9 @@ test('current loader requires all current proof dependencies and both freeze fie
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'publication-successor-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
  async function mutate(file,fn,re){const target=path.join(dir,file),original=await fs.readFile(target);try{await fn(target,original);await assert.rejects(loadRoundContext(dir,null,{release:true}),re);}finally{await fs.writeFile(target,original);}}
  await mutate(publicationPath,p=>fs.unlink(p),/ENOENT/);
- await mutate(publicationPath,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/proof hash/);
+ await mutate(publicationPath,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/proof hash|immutable pre-quarantine history changed: docs\/publications\/cumulative-009-017\.json/);
  await mutate(proof.rounds.at(-1).deliveryProof.path,p=>fs.unlink(p),/ENOENT|dependency/);
- await mutate(proof.rounds.at(-1).deliveryProof.path,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/tampered/);
+ await mutate(proof.rounds.at(-1).deliveryProof.path,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/tampered|immutable pre-quarantine history changed: docs\/deliveries\/checkpoints\/round-017\.json/);
  await mutate('PUBLICATION-MANIFEST.txt',(p,b)=>fs.writeFile(p,b.toString().split('\n').filter(v=>v!==publicationPath).join('\n')),/dependency/);
  for(const [file,key] of [['data/manifest.json','finalRelease'],['data/publication-state.json','finalized']])await mutate(file,(p,b)=>fs.writeFile(p,json({...JSON.parse(b),[key]:true})),/freeze/);
  await assert.rejects(loadRoundContext(dir,null,{release:true,now:FREEZE_AT}),/cutoff|freeze/);

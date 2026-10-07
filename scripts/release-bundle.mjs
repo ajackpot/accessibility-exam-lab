@@ -1,3 +1,4 @@
+import {assertEvidenceLossPayload,assertEvidenceLossProvenance} from './evidence-loss-block.mjs';
 /** Exact reviewed normal-release backups. Never synthesizes Git waits or publication. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -18,7 +19,7 @@ async function bytes(root,relative){
 async function reviewedFiles(root,entries){
  if(!Array.isArray(entries)||!entries.length)throw Error('Exact reviewed inventory required');
  parsePublicAllowlist(entries.map(e=>e.path).join('\n'));
- const files=[];for(const e of entries){if(!equal(Object.keys(e).sort(),['bytes','path','sha256'])||!Number.isSafeInteger(e.bytes)||e.bytes<0||!/^[a-f0-9]{64}$/.test(e.sha256))throw Error('Invalid reviewed inventory');const raw=await bytes(root,e.path);if(raw.length!==e.bytes||sha(raw)!==e.sha256)throw Error('Reviewed bytes mismatch: '+e.path);files.push({...e,raw});}
+ const files=[];for(const e of entries){if(!equal(Object.keys(e).sort(),['bytes','path','sha256'])||!Number.isSafeInteger(e.bytes)||e.bytes<0||!/^[a-f0-9]{64}$/.test(e.sha256))throw Error('Invalid reviewed inventory');const raw=await bytes(root,e.path);assertEvidenceLossPayload(raw,e.path);if(raw.length!==e.bytes||sha(raw)!==e.sha256)throw Error('Reviewed bytes mismatch: '+e.path);files.push({...e,raw});}
  const allow=files.find(f=>f.path==='PUBLICATION-MANIFEST.txt');if(!allow||!equal(parsePublicAllowlist(allow.raw.toString()).sort(),files.map(f=>f.path).sort()))throw Error('Inventory must equal complete public allowlist');
  return files.sort((a,b)=>a.path.localeCompare(b.path));
 }
@@ -27,7 +28,7 @@ export async function writeReleaseDeliveryPair({baseRoot,workRoot,baseCommit,bas
  if(path.resolve(deltaOutputPath)===path.resolve(completeOutputPath))throw Error('Distinct artifact paths required');
  for(const p of [deltaOutputPath,completeOutputPath]){try{await fs.lstat(p);throw Error('Output exists; preserve artifacts');}catch(e){if(e.code!=='ENOENT')throw e;}}
  const base=await reviewedFiles(baseRoot,baseInventory),files=await reviewedFiles(workRoot,reviewedInventory),old=new Map(base.map(f=>[f.path,f])),current=new Map(files.map(f=>[f.path,f]));
- for(const f of base){if(!current.has(f.path))throw Error('Normal release backup does not delete prior public paths');if((f.path.startsWith('data/releases/')||/^docs\/(rounds\/round-\d+|corrections\/editorial-\d+)\.json$/.test(f.path))&&current.get(f.path).sha256!==f.sha256)throw Error('Immutable bank/closed ledger changed: '+f.path);}
+ for(const f of base){if(!current.has(f.path))throw Error('Normal release backup does not delete prior public paths');if((/^docs\/quarantines\/(?!trust\.json)[^/]+\.json$/.test(f.path)||f.path.startsWith('data/releases/')||/^docs\/(rounds\/round-\d+|corrections\/editorial-\d+)\.json$/.test(f.path))&&current.get(f.path).sha256!==f.sha256)throw Error('Immutable bank/closed ledger changed: '+f.path);}
  for(const snapshot of [new Map(base.map(f=>[f.path,f])),current]){
   const state=snapshot.get('data/publication-state.json'),manifest=snapshot.get('data/manifest.json');
   if(!state||!manifest||JSON.parse(state.raw).finalized!==false||JSON.parse(manifest.raw).finalRelease!==false)throw Error('Persistent freeze or inconsistent freeze markers block release backup');
@@ -41,6 +42,7 @@ export async function writeReleaseDeliveryPair({baseRoot,workRoot,baseCommit,bas
   context=await loadRoundContext(frozenRoot,null,{release:true,now});const check=validateReleaseLedger(context.ledgers,{...context,now});if(!check.ok)throw Error(check.errors.join('\n'));
  } finally {await fs.rm(frozenRoot,{recursive:true,force:true});}
 
+ assertEvidenceLossProvenance({roundId});
  const ledger=context.ledgers.find(r=>r.roundId===roundId),m=context.manifest;if(!ledger||ledger.status!=='closed'||ledger.publication.bankVersion!==m.bankVersion||ledger.publication.bankSha256!==m.sha256)throw Error('Exact closed current release required');
  const changed=files.filter(f=>old.get(f.path)?.sha256!==f.sha256);if(!changed.length)throw Error('No new release bytes');
  const manifest={schemaVersion:1,kind:'developer_patch_not_learner_import',deliveryMode:'release_backup',roundId,baseCommit,baseVerifiedAt,preparedAt:new Date(now).toISOString(),gitPublicationStatus:ledger.publication.status,publicationCommit:ledger.publication.commit,bankVersion:m.bankVersion,bankSha256:m.sha256,newlyPublishedByPackaging:0,prerequisiteArtifacts:[],files:changed.map(({raw,...f})=>({...f,beforeSha256:old.get(f.path)?.sha256??null})),deletions:[]};

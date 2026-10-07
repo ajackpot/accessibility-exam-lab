@@ -1,10 +1,14 @@
-import test from 'node:test';
+import {createSyntheticValidator} from './quarantine-fixtures.mjs';
+import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {validateJsonSchema, validateReleaseLedger, validateRoundLedger, validateRoundLedgers, regularCoverage, nextScheduledRoundAt, loadRoundContext} from '../scripts/validate-round.mjs';
+
+const syntheticValidator=await createSyntheticValidator();
+after(syntheticValidator.cleanup);
 
 const schema = JSON.parse(await fs.readFile(new URL('../docs/rounds/round-ledger.schema.json', import.meta.url), 'utf8'));
 const template = JSON.parse(await fs.readFile(new URL('../docs/rounds/round-ledger.template.json', import.meta.url), 'utf8'));
@@ -29,7 +33,7 @@ function round(candidates = [candidate()]) {
   r.noGapExplanation = 'This synthetic fixture covers validator behavior only; remaining real content coverage is outside this test.';
   return r;
 }
-function validate(r, options = {}) { return validateRoundLedger(r, {schema, banks: banks(), ...options}); }
+function validate(r, options = {}) { return syntheticValidator.round.validateRoundLedger(r, {schema, banks: banks(), ...options}); }
 function passes(r, options) { const result = validate(r, options); assert.equal(result.ok, true, result.errors.join('\n')); return result; }
 function fails(r, pattern, options) { const result = validate(r, options); assert.equal(result.ok, false, 'mutation unexpectedly passed'); assert.match(result.errors.join('\n'), pattern); }
 function revision(c, outcome, reviewerSuffix = '2') {
@@ -218,7 +222,7 @@ test('CLI context reads every ledger, excludes schema/template, and never falls 
   await fs.writeFile(path.join(root, `docs/rounds/${r.roundId}.md`), 'Synthetic report.');
   await fs.cp(new URL('../docs/publications',import.meta.url),path.join(root,'docs/publications'),{recursive:true});
   await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',...(await fs.readdir(path.join(root,'docs/publications'))).map(p=>'docs/publications/'+p)].join('\n')+'\n');
-  const context = await loadRoundContext(root); assert.equal(context.ledgers.length, 1); assert.equal(context.banks.size, 0);
+  const context = await loadRoundContext(root,null,{now:Date.parse('2026-10-02T05:50:00Z')}); assert.equal(context.ledgers.length, 1); assert.equal(context.banks.size, 0);
   assert.match(validateRoundLedgers(context.ledgers, context).errors.join('\n'), /missing immutable bank/);
 });
 

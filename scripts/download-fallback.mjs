@@ -1,3 +1,9 @@
+import {validateEvidenceLossCampaign,validateEvidenceLossSnapshot,assertEvidenceLossPayload,assertEvidenceLossProvenance,isEvidenceLossReservedLedger} from './evidence-loss-block.mjs';
+import {validateQuarantineCampaign,validateQuarantineSnapshot,assertNoQuarantinedContent} from './prepublication-quarantine.mjs';
+function deliveryQuarantine(ledgers,options){
+  try{const parsed=[...ledgers.values()].map(raw=>JSON.parse(raw)),context={...options,ledgerSources:ledgers},q=validateQuarantineCampaign(parsed,context),e=validateEvidenceLossCampaign(parsed,context);return {...q,ok:q.ok&&e.ok,errors:[...q.errors,...e.errors]};}
+  catch(error){return {ok:false,errors:['Invalid quarantine campaign input: '+error.message],dispositions:new Map()};}
+}
 /** Operator-side, local-only publication fallback. No Git, network, upload or learner API. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -130,7 +136,7 @@ async function regularFile(root, relative, optional = false) {
   }
   return fs.readFile(current);
 }
-const protectedBank = p => /^data\/(?:releases\/|seed-bank(?:-v\d+)?\.json$)/.test(p);
+const protectedBank = p => /^data\/(?:releases\/|seed-bank(?:-v\d+)?\.json$)/.test(p)||/^docs\/quarantines\/(?!trust\.json)[^/]+\.json$/.test(p);
 
 /** Freeze exactly reviewed changed/added bytes against a read-only verified export.
  * baseInventory comes from that exact remote commit, not from the candidate tree.
@@ -173,13 +179,14 @@ export async function freezePublicDelta({baseRoot, workRoot, baseCommit, baseVer
   const allowRaw = await regularFile(workRoot, 'PUBLICATION-MANIFEST.txt');
   const allow = parsePublicAllowlist(allowRaw.toString());
   if (!allow.includes('PUBLICATION-MANIFEST.txt')) fail('Candidate allowlist must include itself');
-  const files = [], deletions = [];
+  const files = [], deletions = [], allFiles = [];
   for (const name of [...new Set([...oldAllow, ...allow])].sort()) {
     const before = baseline.get(name) ?? null;
     const raw = await regularFile(workRoot, name, true);
     // Deletions require both an absent file and explicit reviewed null hash below.
     if (!allow.includes(name) && raw !== null) fail(`Removed allowlist file still exists: ${name}`);
     if (allow.includes(name) && raw === null) fail(`Allowlisted file is missing: ${name}`);
+    if(raw!==null&&allow.includes(name))allFiles.push({path:name,raw});
     if (before && raw?.equals(before)) continue;
     if (before && protectedBank(name)) fail(`Immutable historical bank cannot change or be deleted: ${name}`);
     const afterHash = raw === null ? null : hash(raw);
@@ -187,6 +194,8 @@ export async function freezePublicDelta({baseRoot, workRoot, baseCommit, baseVer
     const metadata = {path: name, beforeSha256: before === null ? null : hash(before), sha256: afterHash, bytes: raw?.length ?? 0};
     if (raw === null) deletions.push(metadata); else files.push({...metadata, raw: Buffer.from(raw)});
   }
+  validateEvidenceLossSnapshot(allFiles,{now});
+  validateQuarantineSnapshot(allFiles,{now});
   const changedPaths = [...files, ...deletions].map(f => f.path).sort();
   if (Object.keys(reviewedSha256 || {}).sort().join('\n') !== changedPaths.join('\n')) fail('Review allowlist must exactly match the changed/added/deleted paths');
   const {deliveryScope, reportingEvidence} = classifyDelta(files, baseline, state.roundId);
@@ -298,15 +307,19 @@ function checkSnapshot(snapshot) {
     exactKeys(file, [...fileKeys, 'raw'], 'frozen file');
     if (!Buffer.isBuffer(file.raw) || hash(file.raw) !== file.sha256 || file.raw.length !== file.bytes) fail('Frozen file bytes changed');
     if (fileKeys.some(key => file[key] !== manifest.files[i][key])) fail('Frozen manifest differs from files');
+    assertEvidenceLossPayload(file.raw,file.path);
+    if(bankPath(file.path))assertNoQuarantinedContent(JSON.parse(file.raw));
   }
 }
 function contentProvenance(snapshot) {
   if (!needsContent(snapshot.manifest)) return null;
   const ledgers = snapshot.files.filter(f => /^docs\/(?:rounds\/round-\d+|corrections\/editorial-\d+)\.json$/.test(f.path));
-  if (ledgers.length !== 1) fail('Content delta needs exactly one frozen operational ledger');
-  const file = ledgers[0], ledger = JSON.parse(file.raw), editorial = ledger.kind === 'accepted_content_editorial';
+  const active=ledgers.filter(f=>JSON.parse(f.raw).roundId===snapshot.manifest.roundId||JSON.parse(f.raw).correctionRoundId===snapshot.manifest.roundId);
+  if(active.length!==1||ledgers.some(f=>f!==active[0]&&!isEvidenceLossReservedLedger(f.raw,f.path)))fail('Content delta needs exactly one active ledger; other history must be exact pinned reservation-only evidence');
+  const file = active[0], ledger = JSON.parse(file.raw), editorial = ledger.kind === 'accepted_content_editorial';
   const roundId = editorial ? ledger.correctionRoundId : ledger.roundId;
   const records = editorial ? ledger.corrections : ledger.candidates;
+  assertEvidenceLossProvenance({roundId});
   const bankVersion = ledger.publication?.bankVersion;
   const bank = snapshot.files.find(f => f.path === `data/releases/${bankVersion}/bank.json`);
   if (!bank || roundId !== snapshot.manifest.roundId || ledger.status !== 'closed' || ledger.publication.status === 'verified' || ledger.publication.bankSha256 !== bank.sha256 || !Array.isArray(records) || records.some(c => !['accepted', 'rejected'].includes(c.decision))) fail('Content delta lacks a closed unpublished exact ledger/bank');
@@ -358,7 +371,8 @@ export function createDeliveryReceipt({snapshot, artifact, status = 'prepared', 
  * Missing content/history or forks block expansion. Git uncertainty has a bounded local-only continuation gate.
  */
 export function validateDeliveryChain(receipts, {manifests = new Map(), ledgers = new Map(), banks = new Map(), resolvedArtifacts = new Set(), now = null, publicationState = null, reconciliationHistory = [], _basicOnly = false} = {}) {
-  const errors = [], seen = new Set(), goals = new Map(); let previous = null;
+  const quarantine=deliveryQuarantine(ledgers,{banks,now,publicationState});
+  const errors = [...quarantine.errors], seen = new Set(), goals = new Map(); let previous = null;
   const unresolved = [];
   for (const receipt of receipts) {
     const bad = message => errors.push(`${receipt?.roundId || 'delivery'}: ${message}`);
@@ -372,6 +386,7 @@ export function validateDeliveryChain(receipts, {manifests = new Map(), ledgers 
     if (!manifest || hash(json(manifest)) !== receipt.manifestSha256 || manifest.parentDeliverySha256 !== previous || manifest.baseCommit !== receipt.baseCommit || manifest.roundId !== receipt.roundId || manifest.executionId !== receipt.executionId || manifest.deliveryMode !== 'download_only' || manifest.newlyPublishedRegular !== 0) bad('missing or changed frozen manifest');
     if (manifest && needsContent(manifest) && !receipt.content) bad('content-bearing delivery is missing accepted provenance');
     if (receipt.content) {
+      try{assertEvidenceLossProvenance(receipt.content);}catch(error){bad(error.message);}
       const content = receipt.content, raw = ledgers.get(content.roundId), bankRaw = banks.get(content.bankVersion);
       if (content.roundId !== receipt.roundId || !manifest?.files.some(f => f.path === content.ledgerPath && f.sha256 === content.ledgerSha256) || !manifest?.files.some(f => f.path === `data/releases/${content.bankVersion}/bank.json` && f.sha256 === content.bankSha256)) bad('accepted content is not in this exact frozen public delta');
       if (!raw || hash(raw) !== content.ledgerSha256 || !bankRaw || hash(bankRaw) !== content.bankSha256) bad('missing or changed immutable accepted ledger/bank');
@@ -390,7 +405,8 @@ export function validateDeliveryChain(receipts, {manifests = new Map(), ledgers 
               if (!editorial || !resolvedArtifacts.has(previousGoal.artifactSha256) || !ref || ref.roundId !== previousGoal.roundId || ref.bankVersion !== previousGoal.bankVersion || ref.bankSha256 !== previousGoal.bankSha256 || ref.questionRevision !== previousGoal.revision || c.questionId !== previousGoal.questionId || c.revision <= previousGoal.revision) bad('accepted offline learning goal duplicated, forked or unresolved');
             }
             goals.set(c.learningGoalId, {artifactSha256: receipt.artifactSha256, roundId: content.roundId, bankVersion: content.bankVersion, bankSha256: content.bankSha256, questionId: c.questionId, revision: c.revision});
-            if (c.publishedBankVersion !== null || !bank.questions.some(q => q.questionId === c.questionId && q.templateId === c.templateId && q.revision === c.revision)) bad('accepted offline question is missing or wrongly claims publication');
+            const held=quarantine.dispositions.get(content.roundId)?.quarantinedCandidateIds.includes(c.candidateId);
+            if (c.publishedBankVersion !== null || !held && !bank.questions.some(q => q.questionId === c.questionId && q.templateId === c.templateId && q.revision === c.revision)) bad('eligible accepted offline question is missing or wrongly claims publication');
           }
         } catch { bad('invalid frozen ledger/bank JSON'); }
       }
@@ -418,7 +434,8 @@ export function validateDeliveryChain(receipts, {manifests = new Map(), ledgers 
 /** Verify a delivered local chain independently of remote publication. Full campaign validators
  * must also pass with offlineBases; this helper never marks anything published or resolves a ref. */
 export function validateOfflineContinuation(receipts, {manifests = new Map(), ledgers = new Map(), banks = new Map(), resolvedArtifacts = new Set(), now = Date.now(), publicationState = null, reconciliationHistory = []} = {}) {
-  const basic = validateDeliveryChain(receipts, {manifests, ledgers, banks, resolvedArtifacts, _basicOnly: true});
+  const basic = validateDeliveryChain(receipts, {manifests, ledgers, banks, resolvedArtifacts, now, publicationState, _basicOnly: true});
+  const quarantine=deliveryQuarantine(ledgers,{banks,now,publicationState});
   const errors = [...basic.errors], continuationBlockers = [], offlineBases = new Map(), reconciliation = [];
   let previousContent = null, previousEligibility = null;
   if (!Number.isFinite(now)) errors.push('Invalid current time');
@@ -434,7 +451,7 @@ export function validateOfflineContinuation(receipts, {manifests = new Map(), le
         if (!predecessor || manifest.offlineBase.artifactSha256 !== predecessor.artifactSha256 || ['roundId','bankVersion','bankSha256'].some(key => manifest.offlineBase[key] !== predecessor.content[key])) fail('Offline manifest does not identify its exact cumulative predecessor');
         const origin = receipts.find(entry => entry.artifactSha256 === manifest.reconciliation.artifactSha256);
         const originManifest = origin && manifests.get(origin.artifactSha256);
-        if (!originManifest || originManifest.schemaVersion !== 1 || instant(manifest.reconciliation.firstUnresolvedAt) !== instant(originManifest.gitOutcome.observedAt) || instant(manifest.reconciliation.skippedAt) > instant(receipt.recordedAt)) fail('Offline manifest changed its original reconciliation clock or predates the recorded skip');
+        if (!originManifest || originManifest.schemaVersion !== 1 || instant(manifest.reconciliation.firstUnresolvedAt) !== instant(startReconciliationWait({artifactSha256:origin.artifactSha256,firstUnresolvedAt:originManifest.gitOutcome.observedAt,previous:reconciliationHistory}).firstUnresolvedAt) || instant(manifest.reconciliation.skippedAt) > instant(receipt.recordedAt)) fail('Offline manifest changed its original reconciliation clock or predates the recorded skip');
       }
       if (!resolvedArtifacts.has(receipt.artifactSha256)) {
         if (receipt.status !== 'delivered') fail('Offline advancement requires verified delivered files, not prepared/failed delivery');
@@ -464,8 +481,9 @@ export function validateOfflineContinuation(receipts, {manifests = new Map(), le
       }
       const oldQuestions = new Set(baseline.questions.map(q => q.questionId)), oldTemplates = new Set(baseline.questions.map(q => q.templateId));
       const additions = bank.questions.filter(q => !oldQuestions.has(q.questionId));
-      const accepted = ledger.candidates.filter(candidate => candidate.decision === 'accepted');
-      if (additions.length !== accepted.length) fail('Offline bank additions differ from exact accepted decisions');
+      const eligible=new Set(quarantine.dispositions.get(ledger.roundId)?.eligibleCandidateIds||[]);
+      const accepted = ledger.candidates.filter(candidate => candidate.decision === 'accepted' && eligible.has(candidate.candidateId));
+      if (additions.length !== accepted.length) fail('Offline bank additions differ from exact eligible accepted decisions');
       for (const question of additions) {
         const record = accepted.find(candidate => candidate.questionId === question.questionId);
         const last = record?.cycles?.at(-1);

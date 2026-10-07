@@ -227,9 +227,16 @@ test('the complete real public allowlist can produce a changed-file-only package
     for (const directory of [baseRoot, workRoot]) { await fs.mkdir(path.dirname(path.join(directory, name)), {recursive: true}); await fs.writeFile(path.join(directory, name), raw); }
   }
   await fs.appendFile(path.join(workRoot, 'README.md'), '\nLocal helper test only.\n');
-  const snapshot = await freezePublicDelta({baseRoot, workRoot, baseInventory, baseCommit: commit, baseVerifiedAt: iso(begin - 1), reviewedSha256: {'README.md': digest(await fs.readFile(path.join(workRoot, 'README.md')))}, wait: timedOut(), gitOutcome: outcome(), now});
+  const currentManifest=JSON.parse(await fs.readFile(path.join(repo,'data/manifest.json')));
+  // This current-tree fixture must be after every included evidence event, not
+  // merely after the unchanged active bank. Its clock is simulated, not a receipt.
+  const blockPins=JSON.parse(await fs.readFile(path.join(repo,'docs/release-blocks/trust.json'))).events;
+  const currentBegin=Math.max(begin,Date.parse(currentManifest.releasedAt)+60_000,...blockPins.map(p=>Date.parse(p.recordedAt)+60_000)),currentNow=currentBegin+GIT_PERMISSION_TIMEOUT_MS+1000;
+  const currentWait=advanceGitPermissionWait(startGitPermissionWait({roundId:'round-fixture-current',executionId:'current-allowlist-fixture',notifiedAt:iso(currentBegin),provider:'git'}),{now:currentBegin+GIT_PERMISSION_TIMEOUT_MS});
+  const currentOutcome=reconcileGitOutcome({baseCommit:commit,observedHead:commit,observedAt:iso(currentNow),refWrite:'not_submitted',objects:'none'});
+  const snapshot = await freezePublicDelta({baseRoot, workRoot, baseInventory, baseCommit: commit, baseVerifiedAt: iso(currentBegin-1), reviewedSha256: {'README.md': digest(await fs.readFile(path.join(workRoot, 'README.md')))}, wait:currentWait,gitOutcome:currentOutcome,now:currentNow});
   assert.deepEqual(snapshot.files.map(f => f.path), ['README.md']);
-  const artifact = await writeDownloadZip(snapshot, path.join(root, 'real.zip'));
+  const artifact = await writeDownloadZip(snapshot, path.join(root, 'real.zip'),{now:currentNow});
   assert.ok(artifact.bytes > 0);
 });
 

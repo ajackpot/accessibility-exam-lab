@@ -1,0 +1,712 @@
+{
+  "schemaVersion": 1,
+  "kind": "evidence_loss_release_block",
+  "eventId": "evidence-loss-001",
+  "campaignId": "2026-exam-final",
+  "roundId": "round-023",
+  "recordedAt": "2026-10-06T14:31:42Z",
+  "previousEventSha256": null,
+  "priorTrustSha256": "55708a84d2b2534d3b7af8ee1c329d9f64581252c3230dde9206955cea0f2273",
+  "sourceLedger": {
+    "path": "docs/rounds/round-023.json",
+    "sha256": "b1ed48e8bc693774423891bf7a46bf31fcd19e96d55bf18422998c95bdd6cf28"
+  },
+  "reservedBank": {
+    "bankVersion": "2026.10.06-regular.23",
+    "sha256": "703eea136ab193a619709485cec638da15ba472744783ca1534af40713010675"
+  },
+  "incidentReport": {
+    "path": "docs/incidents/2026-10-06-round-023-evidence-loss.md",
+    "sha256": "eb8272c482b5549d3264f56976227f2564aeb1c0edf836bb81434c926de94436",
+    "missingOriginalPath": "docs/rounds/round-023.md",
+    "disposition": "reservation_only_missing_original_report"
+  },
+  "targets": [
+    {
+      "candidateId": "r023-policy-assistive-s1-w01",
+      "questionId": "r023-policy-assistive-s1-w01",
+      "learningGoalId": "r023-policy-assistive-template-ada-personally-prescribed-device-exclusion-not-service-specific-communication-aid",
+      "templateId": "r023-policy-assistive-template-ada-personally-prescribed-device-exclusion-not-service-specific-communication-aid",
+      "lineageId": "r023-policy-assistive-template-ada-personally-prescribed-device-exclusion-not-service-specific-communication-aid",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "c3aa0a5036594b3b41d0c480f0c60eabe9db3105b1b3ceaed3e4c6c58f8e1e7e",
+      "contentSha256": "a8a399e076c29c41fa667763eb0c69cb3a20069aa287c9278d93697bcb48c875",
+      "identityFreeSha256": "7f448316ddfbbbb1cad2563263787ea814148cac747516f7953d66915c2671cc",
+      "exclusiveOptionIds": [
+        "r023-policy-assistive-s1-w01-o01",
+        "r023-policy-assistive-s1-w01-o02",
+        "r023-policy-assistive-s1-w01-o03",
+        "r023-policy-assistive-s1-w01-o04",
+        "r023-policy-assistive-s1-w01-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "2dca3a84899f0d8ab43245f84dd67fb642ce3d613ac711051a313d6267f080d7",
+          "identityFreeSha256": "7f448316ddfbbbb1cad2563263787ea814148cac747516f7953d66915c2671cc",
+          "authorPackageSha256": "e6b61c01dbf535b76f57c2b964d2820764a5a85b362effce541eec9a407f5f21",
+          "questionIdentityFreeSha256": "321929d391daf82c7cc1dd2bfa9232df8dbc56969aa814c3f0b0ff3bf99d9daf",
+          "optionIdentityFreeSha256s": [
+            "56e286dd3b22318d567830c8ee5a64b535af49944c65a2943af57eb7e67ca453",
+            "877dd3af17f11f10530c9cfa58d037774c54cfe71fd07b2033b01d8814f3ab0b",
+            "e53043020d6e0c2bce7644ea4222a204153f1954a481883c059fb615ac2a680e",
+            "3b580a16c779dc3e7de53848e22f53c220d043695cc223534f26971a25ed9f6d",
+            "50ef22be30497e41c01ba1cbd53ffccb6e1a6c350a3aaafdc813b74bf2a9887b"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-policy-assistive-s1-w02",
+      "questionId": "r023-policy-assistive-s1-w02",
+      "learningGoalId": "r023-policy-assistive-template-ada-permissibly-separate-online-program-does-not-bar-qualified-mainstream-participation",
+      "templateId": "r023-policy-assistive-template-ada-permissibly-separate-online-program-does-not-bar-qualified-mainstream-participation",
+      "lineageId": "r023-policy-assistive-template-ada-permissibly-separate-online-program-does-not-bar-qualified-mainstream-participation",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "ebb3f3f236e93adfa81a832e000e58d325ee56cfc4fca37b17831f1aab5c0bef",
+      "contentSha256": "94580dcd76d04b11b727247e7b45830e92a025862e039b0c62fe538be2b11daa",
+      "identityFreeSha256": "b4fdc7be7cc7c948d5612044d040a6a88a72f4e5e538824d65acabc3e3b0b2e5",
+      "exclusiveOptionIds": [
+        "r023-policy-assistive-s1-w02-o01",
+        "r023-policy-assistive-s1-w02-o02",
+        "r023-policy-assistive-s1-w02-o03",
+        "r023-policy-assistive-s1-w02-o04",
+        "r023-policy-assistive-s1-w02-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "c0fce50f86bf4f5752f39dceff7693b49569c9c5f3b003744fa10527d63910ca",
+          "identityFreeSha256": "b4fdc7be7cc7c948d5612044d040a6a88a72f4e5e538824d65acabc3e3b0b2e5",
+          "authorPackageSha256": "e6b61c01dbf535b76f57c2b964d2820764a5a85b362effce541eec9a407f5f21",
+          "questionIdentityFreeSha256": "212943afc888aecc456dfef6c93d95b62da87d4e5ae853dfef4d8bd6417068d9",
+          "optionIdentityFreeSha256s": [
+            "34fa6d10b132566ab1ea5bb159302f6033fe12d8a403eedf2580b5621793430b",
+            "3a2392a6ca9fea1042d751eeb1a86cf69f50fbd7857054048254da55af8e7cfb",
+            "c6e050870695804efd518d8a2c6fb7b568546d960c0cb0dc12ff03debc5b4230",
+            "17ce8cf5cbe22f93065bd71784313c8ace8e5379c6989fb2f5621bffafb1282c",
+            "6d0b78e8af3fb860490c944381e8dfebe8e5c9ed09982c8fa5ded1b2d785d6ab"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-policy-assistive-s1-w03",
+      "questionId": "r023-policy-assistive-s1-w03",
+      "learningGoalId": "r023-policy-assistive-template-ada-titleiv-relay-telephone-inquiry-handled-like-other-calls",
+      "templateId": "r023-policy-assistive-template-ada-titleiv-relay-telephone-inquiry-handled-like-other-calls",
+      "lineageId": "r023-policy-assistive-template-ada-titleiv-relay-telephone-inquiry-handled-like-other-calls",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "036bcdbee5886670cb8c9b65c53af88aae06718c14568e56d803a02ef2e08e87",
+      "contentSha256": "db7f33f8a5b95623f63909ffe926e912b8d37b2011328cb9cd92c3779b0ca769",
+      "identityFreeSha256": "659a37061756393b96a5fa040ad7a93c7844238dd471bf5da5546cd07ccbbbf1",
+      "exclusiveOptionIds": [
+        "r023-policy-assistive-s1-w03-o01",
+        "r023-policy-assistive-s1-w03-o02",
+        "r023-policy-assistive-s1-w03-o03",
+        "r023-policy-assistive-s1-w03-o04",
+        "r023-policy-assistive-s1-w03-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "8991eb009feea8497463a93c69160237168fc7710e2f4e26b9022dcc97c35856",
+          "identityFreeSha256": "659a37061756393b96a5fa040ad7a93c7844238dd471bf5da5546cd07ccbbbf1",
+          "authorPackageSha256": "e6b61c01dbf535b76f57c2b964d2820764a5a85b362effce541eec9a407f5f21",
+          "questionIdentityFreeSha256": "f5ab13ef5aefe775cdfa0298a207a65576857bacc4beb217cf24c2e2df5d3117",
+          "optionIdentityFreeSha256s": [
+            "12d035c1a33c1c5e41fadee4d93be099372beafb40b26cf7a2ff8e84a9e88c38",
+            "daa04f4e73cac003dfdbb4bfc87aa0585b60d7b0732f45858d2c5c1ba56238a5",
+            "a66d93e9b7d0dd5c67ab897eb26fdd50c96035365ee36779df4bd0f69fe3f1b6",
+            "2564ca8c336346537d7f9054a44d81228e41228765618dac469d1750b5c551d6",
+            "1b02fc75f9541b48d86600c5baf447d39b2b06ce3ec76e08d5845047d1fc326e"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-policy-assistive-s5-w01",
+      "questionId": "r023-policy-assistive-s5-w01",
+      "learningGoalId": "r023-policy-assistive-template-nvda-portable-admin-elevation-does-not-enable-uac-secure-screen-access",
+      "templateId": "r023-policy-assistive-template-nvda-portable-admin-elevation-does-not-enable-uac-secure-screen-access",
+      "lineageId": "r023-policy-assistive-template-nvda-portable-admin-elevation-does-not-enable-uac-secure-screen-access",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "d66f58e6d784a18779da731712d674e8eaf333c6f64d55f4fb729fc188b698be",
+      "contentSha256": "3aaab497e2ff09120d764eabf65997caa6d78cccf080ddfbf1d70d158e250a05",
+      "identityFreeSha256": "6220f77c7f7a4f5f2369d39062a841fa4f7e15afd3a72fbaf209ee9dd68da617",
+      "exclusiveOptionIds": [
+        "r023-policy-assistive-s5-w01-o01",
+        "r023-policy-assistive-s5-w01-o02",
+        "r023-policy-assistive-s5-w01-o03",
+        "r023-policy-assistive-s5-w01-o04",
+        "r023-policy-assistive-s5-w01-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "4bc64341023e9421b051d2a079c81d56bb831edad92229dc14046ed66e141939",
+          "identityFreeSha256": "6220f77c7f7a4f5f2369d39062a841fa4f7e15afd3a72fbaf209ee9dd68da617",
+          "authorPackageSha256": "e6b61c01dbf535b76f57c2b964d2820764a5a85b362effce541eec9a407f5f21",
+          "questionIdentityFreeSha256": "0a57627313bbb921a274d7a8c79b0d657b43546546812bc2c4236250499deea1",
+          "optionIdentityFreeSha256s": [
+            "3ae6edd40c14a88c1fad9021278be47148f2ea7c9e96e6c53d3645d00fa48967",
+            "6dbc0683c3dd6df2e40617dec9c6b0ceb453424ef2f350a6ff36adad37461ce8",
+            "7e20e5af5e17443d3f3ee2c429ac7203bfad53250675d009427a9a70ff9b96a6",
+            "77b844e8d77dc87ef0ca7420c43298a9e8195bd235bd2daaec7f9712553aa0fc",
+            "80b196e2534af21e192fdd07e2b2c945aa3c041d1836a131aab01b39bfc0af76"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-policy-assistive-s5-w02",
+      "questionId": "r023-policy-assistive-s5-w02",
+      "learningGoalId": "r023-policy-assistive-template-nvda-dots-seven-eight-commits-contracted-braille-without-space-or-enter",
+      "templateId": "r023-policy-assistive-template-nvda-dots-seven-eight-commits-contracted-braille-without-space-or-enter",
+      "lineageId": "r023-policy-assistive-template-nvda-dots-seven-eight-commits-contracted-braille-without-space-or-enter",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "9e3e2f5180d06b4cdaaa645a361b407cb4a71f33d03c1780e31ba809c750fd67",
+      "contentSha256": "82acf035b31968f5e85233f28b68caa77e0575b3584c35ad2d24b56074ccb306",
+      "identityFreeSha256": "70d1ee2cd1b6582097bb4cee1c0cf173b3fedfdc2a1a093f20da183d18ac6ad3",
+      "exclusiveOptionIds": [
+        "r023-policy-assistive-s5-w02-o01",
+        "r023-policy-assistive-s5-w02-o02",
+        "r023-policy-assistive-s5-w02-o03",
+        "r023-policy-assistive-s5-w02-o04",
+        "r023-policy-assistive-s5-w02-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "29e237c4a3d09b0800c3735d3af1aebf2105fd168b5b565ce223fe8fc84abfdc",
+          "identityFreeSha256": "70d1ee2cd1b6582097bb4cee1c0cf173b3fedfdc2a1a093f20da183d18ac6ad3",
+          "authorPackageSha256": "e6b61c01dbf535b76f57c2b964d2820764a5a85b362effce541eec9a407f5f21",
+          "questionIdentityFreeSha256": "d60364dcb596989dcc89ce6f0f1291f2dcd0365ce64f8701ef25873043d11c23",
+          "optionIdentityFreeSha256s": [
+            "661788fd22dc3119c170ee43f21ce2a6edc81045d405eccf953440f704d96046",
+            "dd944e206701b172b1c43cc28eb7b055b71065d1f3f6ed689736ffc0e94b23f0",
+            "9d7d7bfaa49284d34882147fe3931532708c08fa11c3727b209fbb0313b6b763",
+            "1a36f71db0e7efa2042330592d71cdcc4e3b9c2a8211d27de17ad0143351acaf",
+            "b4711a28a15ef109c41ef7c753ecb4295e3d8f01b7ae5c4175ad74cc074f2528"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-policy-assistive-s5-w03",
+      "questionId": "r023-policy-assistive-s5-w03",
+      "learningGoalId": "r023-policy-assistive-template-nvda-braille-display-speech-output-retains-report-text-when-audio-speech-off",
+      "templateId": "r023-policy-assistive-template-nvda-braille-display-speech-output-retains-report-text-when-audio-speech-off",
+      "lineageId": "r023-policy-assistive-template-nvda-braille-display-speech-output-retains-report-text-when-audio-speech-off",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "f3c704722458b96e9dd9980dd24cf1a926f88d2c13df584612008d951cc711dc",
+      "contentSha256": "5fdda3072344f8b44cfd663cb8ed7ba316f7e85902e9a72ba6bdef05c75ab981",
+      "identityFreeSha256": "c592e6be751855920c47c506875eddab5d6f5f874672fb6890cb93e33742e5f7",
+      "exclusiveOptionIds": [
+        "r023-policy-assistive-s5-w03-o01",
+        "r023-policy-assistive-s5-w03-o02",
+        "r023-policy-assistive-s5-w03-o03",
+        "r023-policy-assistive-s5-w03-o04",
+        "r023-policy-assistive-s5-w03-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "bc19767af097955d9e977d5b9701fb56d7ec4afb7ea501160ab79ed9cc529b21",
+          "identityFreeSha256": "c592e6be751855920c47c506875eddab5d6f5f874672fb6890cb93e33742e5f7",
+          "authorPackageSha256": "e6b61c01dbf535b76f57c2b964d2820764a5a85b362effce541eec9a407f5f21",
+          "questionIdentityFreeSha256": "323f015c8b49fa98cb425cea1ffd900dc2249007bd37e36872acde9e5c268198",
+          "optionIdentityFreeSha256s": [
+            "a58b964186827d175a1e3773203f4b33fdaaf98a1b60e0c00937872ad87aa5ca",
+            "1b99c1fd9cc4d33d66af4fe4f6961b16c637dfe298373fdbe669578a8b4ef5aa",
+            "d493a84d6149d83f8371896c28510e008d623c44e5c5277436dc5b6cae367dca",
+            "559d12e7ed0287bbf3c0c992623edbd44ce20abe82fd4eba295faecbe20d4b8f",
+            "b9560a7506a1f09ebfe5a619285997858a0a3b02c66f59e75d22fd9ff0a4bbc0"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-policy-assistive-s5-w04",
+      "questionId": "r023-policy-assistive-s5-w04",
+      "learningGoalId": "r023-policy-assistive-template-windows-voice-access-initial-language-download-versus-offline-local-control",
+      "templateId": "r023-policy-assistive-template-windows-voice-access-initial-language-download-versus-offline-local-control",
+      "lineageId": "r023-policy-assistive-template-windows-voice-access-initial-language-download-versus-offline-local-control",
+      "revision": 1,
+      "decision": "rejected",
+      "attemptCount": 1,
+      "candidateHistorySha256": "f6a7a7a295f7700ca64237b91a13a1e4b776869cd5cc65e1b026c95724f1d671",
+      "contentSha256": null,
+      "identityFreeSha256": null,
+      "exclusiveOptionIds": [
+        "r023-policy-assistive-s5-w04-o01",
+        "r023-policy-assistive-s5-w04-o02",
+        "r023-policy-assistive-s5-w04-o03",
+        "r023-policy-assistive-s5-w04-o04",
+        "r023-policy-assistive-s5-w04-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "7c97c8de739d744f92cfa8daa2d4d24a9cbe600a13f162ce82d09dd21159a46d",
+          "identityFreeSha256": "c7cb214b5d4b0d0b298ca5ecaa18bc4d135f719d3cbf252395abef9f5f1c6840",
+          "authorPackageSha256": "e6b61c01dbf535b76f57c2b964d2820764a5a85b362effce541eec9a407f5f21",
+          "questionIdentityFreeSha256": "f8165fcd3639edff447c56e1fdb53eb377838d07d4c01835c9c8f5e69d9e3ab9",
+          "optionIdentityFreeSha256s": [
+            "c060ef4df6df225e982d776b9ab2e5344d2e9a3bcc6d206d6ed441234f038881",
+            "9928eba21160dbaed3f48b76fe30238242439c5503960a2186d7aae2a1120969",
+            "230037b68b99122d15fbdf95eb270afe95598805c87990913da9c5aa65f1ca69",
+            "faaec06c1359c02276b647e0714dce2872aea84e2890cfe459b66129cecf1b75",
+            "16c7d2dde0dfeb479c991ee0305eab7922026b76653e5b43715db2e9f2e5513f"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-internet-applications-s2-w01",
+      "questionId": "r023-internet-applications-s2-w01",
+      "learningGoalId": "r023-internet-applications-template-cloud-version-copy-recovers-selected-text-without-replacing-current-document",
+      "templateId": "r023-internet-applications-template-cloud-version-copy-recovers-selected-text-without-replacing-current-document",
+      "lineageId": "r023-internet-applications-template-cloud-version-copy-recovers-selected-text-without-replacing-current-document",
+      "revision": 1,
+      "decision": "rejected",
+      "attemptCount": 1,
+      "candidateHistorySha256": "580a43aef2e345e7deca499f4a5f2b5487563f0280be94d225bf07217718b333",
+      "contentSha256": null,
+      "identityFreeSha256": null,
+      "exclusiveOptionIds": [
+        "r023-internet-applications-s2-w01-o01",
+        "r023-internet-applications-s2-w01-o02",
+        "r023-internet-applications-s2-w01-o03",
+        "r023-internet-applications-s2-w01-o04",
+        "r023-internet-applications-s2-w01-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "d36a8a7484fc559833761c9af8dfe537797caf6e198c1126042ca0cd48a35538",
+          "identityFreeSha256": "459dcd3ff78a3e444b1d27d92d7b55ca8838e1f7d0ebe27b6755cd11e9fc619e",
+          "authorPackageSha256": "ee616ec17453da850d8f22a2ac84bbcbe17dfb49ca3ff322890b6e68c5b2e6e0",
+          "questionIdentityFreeSha256": "6e1e34acbbc4bb5884648de058f756edf9b1bbdebb2549c8287e04630e376a96",
+          "optionIdentityFreeSha256s": [
+            "30dae14e14b6404eba21cf3db79f2dd08f4ae3c00e98c3c900d4290c79fdf3cd",
+            "60c226d802a26d7de0ab4c6f4a1215c35928f2a9798493abc312c856bb60e587",
+            "1083d559b88bc9e476f639f9d82e34d6bf7d5c8f4a2f152bed50352d57d7f6ed",
+            "d132df704e8620f18a7cf26325cc2bea121fda153f27b5119391c0dafe1c3b23",
+            "4f854fe34edf1e081ccd8adcaf9bb05591894d27844791ae7b9bebc3936f4339"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-internet-applications-s2-w02",
+      "questionId": "r023-internet-applications-s2-w02",
+      "learningGoalId": "r023-internet-applications-template-casambi-matter-bridge-device-control-does-not-transfer-platform-scenes",
+      "templateId": "r023-internet-applications-template-casambi-matter-bridge-device-control-does-not-transfer-platform-scenes",
+      "lineageId": "r023-internet-applications-template-casambi-matter-bridge-device-control-does-not-transfer-platform-scenes",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "93f43ceded43cbf55b69bcb274343cf24332a3b85aaaf70b0e41808f0d8e0b23",
+      "contentSha256": "279d48f60279a41bde0c71e406c2b6bccfa5c4f1b7352793d946486fae84056a",
+      "identityFreeSha256": "c13dd2c5e65d83d477e493ff12ddfe12840e5e2b313fc969373fc751e1b56199",
+      "exclusiveOptionIds": [
+        "r023-internet-applications-s2-w02-o01",
+        "r023-internet-applications-s2-w02-o02",
+        "r023-internet-applications-s2-w02-o03",
+        "r023-internet-applications-s2-w02-o04",
+        "r023-internet-applications-s2-w02-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "6027187a653621728b2dc0d329cd6b8d1e0c55f2872c2774732eca07879da298",
+          "identityFreeSha256": "c13dd2c5e65d83d477e493ff12ddfe12840e5e2b313fc969373fc751e1b56199",
+          "authorPackageSha256": "ee616ec17453da850d8f22a2ac84bbcbe17dfb49ca3ff322890b6e68c5b2e6e0",
+          "questionIdentityFreeSha256": "b449be307f777846e414329451c3db3a160d61c0e3845739db76de8820f14377",
+          "optionIdentityFreeSha256s": [
+            "3c6866d7f084597bb1aac95e467466a193230fc3052ece9ed4e4507f038b8862",
+            "cfb203b0033f6cc53001ac0ea1e3a3abdfd62effc44c7d272cbf2c206a1c10f3",
+            "352f8096b25c8c70fcb8d46b9ecf3230864f8691ccef20d6c100374d200fb58a",
+            "a9ffb1821090a0b434cc97cea62bbcdf2a9ba2a33815fb32e59f82898a14e1dc",
+            "7fcb2ee2a1901fb29ac38b2db76c5b613d74bf4c04d988243200d0721b91157a"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-internet-applications-s2-w03",
+      "questionId": "r023-internet-applications-s2-w03",
+      "learningGoalId": "r023-internet-applications-template-image-search-first-google-observation-distinct-from-capture-or-edit-date",
+      "templateId": "r023-internet-applications-template-image-search-first-google-observation-distinct-from-capture-or-edit-date",
+      "lineageId": "r023-internet-applications-template-image-search-first-google-observation-distinct-from-capture-or-edit-date",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "6b57a31e6e81afd5ee6d1246467172a53c9a576e6c717af99c46030061b8aad4",
+      "contentSha256": "14314d3f348c2fe405fb2a8cb76cbae49bfa3de794e961025729d6be4774069e",
+      "identityFreeSha256": "90220e2f00c67c44c5cf1c00400fcc982d9dbe7c172a558d4ce1f3ebefe02ad6",
+      "exclusiveOptionIds": [
+        "r023-internet-applications-s2-w03-o01",
+        "r023-internet-applications-s2-w03-o02",
+        "r023-internet-applications-s2-w03-o03",
+        "r023-internet-applications-s2-w03-o04",
+        "r023-internet-applications-s2-w03-o05"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "6dfe8d13ba2b56d21fa2e9abe7f067c8582c588345ba15a7029203c7c47abb9c",
+          "identityFreeSha256": "90220e2f00c67c44c5cf1c00400fcc982d9dbe7c172a558d4ce1f3ebefe02ad6",
+          "authorPackageSha256": "ee616ec17453da850d8f22a2ac84bbcbe17dfb49ca3ff322890b6e68c5b2e6e0",
+          "questionIdentityFreeSha256": "34e9e61cb0c7d9a2bf58e889e5c459c8fa4a401c0f0d6a1bced10db7c84ca83e",
+          "optionIdentityFreeSha256s": [
+            "c9d942183cdd4032cd5cdf3778aeeeddf10263a0a5dd62b926c247253b065725",
+            "04786010dbc442c8807cf8363ff3fd7a63ae6172818df46a9df5ee6a75079626",
+            "29eb5a58a818a9b949a41d4fc4c0eebf391e98156cf3202a44a2db1dffbf30db",
+            "71889e4f4f3d39eb61e8bce45c069b31b33660b353e12f3a5e1255b401114ab9",
+            "ace7473cbce66b7d112276e422d7472fef35603f86093a32257dfa7b27966c20"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s3-w01",
+      "questionId": "r023-html-css-practical-s3-w01",
+      "learningGoalId": "r023-html-css-practical-template-implicit-submission-disabled-first-default-does-not-skip-to-later-enabled-submitter",
+      "templateId": "r023-html-css-practical-template-implicit-submission-disabled-first-default-does-not-skip-to-later-enabled-submitter",
+      "lineageId": "r023-html-css-practical-template-implicit-submission-disabled-first-default-does-not-skip-to-later-enabled-submitter",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "05c7d99dacad4724e537d7cc5f15941b88df13e56f52d764d29a003c977a202e",
+      "contentSha256": "8053a1a68016afe9c2eb0594bed46273fd84b94f282e4370cce9bb6750d426ac",
+      "identityFreeSha256": "d38746ea67d58adab87af373fa6c66a1f4c1c29556486febe196cf136b216f88",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s3-w01-o1",
+        "r023-html-css-practical-s3-w01-o2",
+        "r023-html-css-practical-s3-w01-o3",
+        "r023-html-css-practical-s3-w01-o4",
+        "r023-html-css-practical-s3-w01-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "ccd16a62ded3d067a1cb7cdb6fa2f2aadb58c7351d2b7101fd90510df5d4c770",
+          "identityFreeSha256": "d38746ea67d58adab87af373fa6c66a1f4c1c29556486febe196cf136b216f88",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "980e90fa59fc5382ba3540f32b2a1b522f02059ec3bb813a3e57afa061c2835f",
+          "optionIdentityFreeSha256s": [
+            "156e444f9aa4fb9902262fafed82801264d4ad9384ec97a006325e42a04157f4",
+            "b0323469fc8801ea0c885d50ee7b6639a9a3033101964451a57595c3c2dc6194",
+            "a91cb4217bedd2682725d76df128116b2eaff8c985dcd1bb16c5a4469ab80165",
+            "9241aa2e3dea251f7b0fda7565f39fa954b67e642ba4c730e2e5a12956bea3b9",
+            "6aa9746f36ffea9df99232e9ff5275aad68d9b10ae597c18ed4e3300713fc5eb"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s3-w02",
+      "questionId": "r023-html-css-practical-s3-w02",
+      "learningGoalId": "r023-html-css-practical-template-canceling-invalid-event-suppresses-reporting-without-making-control-valid",
+      "templateId": "r023-html-css-practical-template-canceling-invalid-event-suppresses-reporting-without-making-control-valid",
+      "lineageId": "r023-html-css-practical-template-canceling-invalid-event-suppresses-reporting-without-making-control-valid",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "b031f75f053deaa4d4d5031dbc03646ba9f600847d8a5d6a35c62cd1afac2db3",
+      "contentSha256": "af94065a17cc51b408d70bf0fdf9701cd6a01ef31e3009ae652d33321143e6b9",
+      "identityFreeSha256": "0f9acadbe3e6aa391e4120104bf83573266d20c7a7943487cb7c24806880580b",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s3-w02-o1",
+        "r023-html-css-practical-s3-w02-o2",
+        "r023-html-css-practical-s3-w02-o3",
+        "r023-html-css-practical-s3-w02-o4",
+        "r023-html-css-practical-s3-w02-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "1e18caa7454e1139391f1393131c6f12ce9e4814deb3d6a35407fa483bc7dfa4",
+          "identityFreeSha256": "0f9acadbe3e6aa391e4120104bf83573266d20c7a7943487cb7c24806880580b",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "c992044cd94373fa45639a09ff610a8de6b08a8aedb630923665f038d4adb400",
+          "optionIdentityFreeSha256s": [
+            "a3261567743e53569bd5209c8f8d638efe3e7756e9139226ef039dd7f52674dc",
+            "6bdc61338212633e1ecd24fae53ada5b153967a2afb2b899c18aa990e164de07",
+            "d5ba1876373bfde043c0274e6d7d5e47114684cbe5ad9d77787bc31955e61dad",
+            "2eee5fa3b47a31e2f489b6313e7f593e8df90c101894b3271514ff541a494b70",
+            "60259c5994acce2ae9a0f7652353d84b7f6754fbb5d709f0c8cc322afcdaa5e5"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s3-w03",
+      "questionId": "r023-html-css-practical-s3-w03",
+      "learningGoalId": "r023-html-css-practical-template-canvas-context-mode-reuses-same-object-and-rejects-incompatible-type-without-switching",
+      "templateId": "r023-html-css-practical-template-canvas-context-mode-reuses-same-object-and-rejects-incompatible-type-without-switching",
+      "lineageId": "r023-html-css-practical-template-canvas-context-mode-reuses-same-object-and-rejects-incompatible-type-without-switching",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "664cdfe533561c008e6bccd8fb4aa98ca3d90befaf6ec93d19fa4bd5c31845c4",
+      "contentSha256": "a8faead6fbd76ef8d056ea566e86eff9310f0c4c6ffe9708c8ef02ff2e47c15b",
+      "identityFreeSha256": "5fe3f7051dea076ba18356850667bdc1c090c96d299b824a6b7b71228e607776",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s3-w03-o1",
+        "r023-html-css-practical-s3-w03-o2",
+        "r023-html-css-practical-s3-w03-o3",
+        "r023-html-css-practical-s3-w03-o4",
+        "r023-html-css-practical-s3-w03-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "e424fc1f665a1199669a14a7508a1f546d0c71a7bc6a02bba5e342a1f4be503c",
+          "identityFreeSha256": "5fe3f7051dea076ba18356850667bdc1c090c96d299b824a6b7b71228e607776",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "966d31bd011156a867d86108024c87e61a9910ab1fa5f3599fe1973d80497449",
+          "optionIdentityFreeSha256s": [
+            "9c2fef2e60fba87ef2908383cb9e6368be49ddb370cec0672ff642d72830ae46",
+            "2ba2680f6149ec2cdb1e4723a9fefb4772fcb130b56d7b5bc875f47ec96f9e5e",
+            "6a90df80cabccd46cd17874d958d115564c552400f4ae3fe873a9dda363c09d8",
+            "e61224e856e1778cae8dfe47abc9ab1ee7d45b6c2eb9705115b775e5e8674fcd",
+            "05d7ba4b87f8943ec524efac2f3fc4599ed05a20ace98df8db7f76101002b267"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s3-w04",
+      "questionId": "r023-html-css-practical-s3-w04",
+      "learningGoalId": "r023-html-css-practical-template-innertext-nonrendered-query-root-falls-back-to-textcontent-unlike-hidden-descendant-collection",
+      "templateId": "r023-html-css-practical-template-innertext-nonrendered-query-root-falls-back-to-textcontent-unlike-hidden-descendant-collection",
+      "lineageId": "r023-html-css-practical-template-innertext-nonrendered-query-root-falls-back-to-textcontent-unlike-hidden-descendant-collection",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "dfdd3005857a052c7b0d8b34f7924c672b8c7f99597fc9e53d0415d1ab7615c4",
+      "contentSha256": "4786ace97f63beaf9e086fa44c6ce7b2488d0f2c27b8e8073603c0fdfa77ae35",
+      "identityFreeSha256": "169ba7e10483985a9ae0cb137d0163a5b2198d9860c1f8f31839658981ea30ef",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s3-w04-o1",
+        "r023-html-css-practical-s3-w04-o2",
+        "r023-html-css-practical-s3-w04-o3",
+        "r023-html-css-practical-s3-w04-o4",
+        "r023-html-css-practical-s3-w04-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "b709bb8b06fbaa3ad061ed0dcbf8617b9fe8214d3afd5d995a830ab8485384ee",
+          "identityFreeSha256": "169ba7e10483985a9ae0cb137d0163a5b2198d9860c1f8f31839658981ea30ef",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "6ecec36ec64d558e70df7f11b7dd656988e4d8d3912fada6a812a193760c2aaa",
+          "optionIdentityFreeSha256s": [
+            "48b80290e4e3acb3818ef22b36b6da1ad675c73a8e27d686ae0f1682d9123591",
+            "01ffbc48857b8eccbe9dbe58795c155e62c0540fc8e1d0f4ed9d3d21be1b26e5",
+            "8f7c937f1c2ed145d99441790ab546bcc7288e9292f5724dba822fbee1f41926",
+            "22ddd81a600db78cae3e36b6e7cd978f1e55477f8495ac3fa976e4b53bfef6c9",
+            "167ad5613c735c9d7b7a6a6b05d32cdb49160ad2923ffb47dce248c003f6cea0"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s4-w01",
+      "questionId": "r023-html-css-practical-s4-w01",
+      "learningGoalId": "r023-html-css-practical-template-later-float-cannot-rise-above-earlier-float-even-when-an-upper-gap-fits",
+      "templateId": "r023-html-css-practical-template-later-float-cannot-rise-above-earlier-float-even-when-an-upper-gap-fits",
+      "lineageId": "r023-html-css-practical-template-later-float-cannot-rise-above-earlier-float-even-when-an-upper-gap-fits",
+      "revision": 2,
+      "decision": "accepted",
+      "attemptCount": 2,
+      "candidateHistorySha256": "f7f166a4510d8babb83a2b0b307f70d047d7a95ff69b5d8ac02c168e02c72bf7",
+      "contentSha256": "4ab6ddf54cce0982c2c18d01bf202d40132deaf9088f91318bae4d43c586f4ed",
+      "identityFreeSha256": "85b53e2024877db743f8e42f6e4d79a18fc1d6ba71c0de3b5dc964c6501c094b",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s4-w01-o1",
+        "r023-html-css-practical-s4-w01-o2",
+        "r023-html-css-practical-s4-w01-o3",
+        "r023-html-css-practical-s4-w01-o4",
+        "r023-html-css-practical-s4-w01-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "6ec02f5ade47560f846e51cc084973d950069404c8ff04237d016f3465b1d238",
+          "identityFreeSha256": "88258ef5848e59f20c4adab8f06e7850dcad8456b359fb32f4da6570a8473d8f",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "7ca4cfeecd24dc91b82d38aed5ec3ad02a33950c613e44d5edc45fbbdbe42a8e",
+          "optionIdentityFreeSha256s": [
+            "57d38facf4694edff316073a8fa8fa6eba1a8dfba52b7bc5ad5efc464bc7be49",
+            "51b0094fb4a83a85777474b42a8dc04d5fc2f8b965cefa0fe083eb3be01ace68",
+            "5790ca8ccbe1dd8a0b293ccfc57d2f7e23f848db0e71e868589ecac1084ce0e8",
+            "eb475392ea2e7dca7a13ee3f6fe5fb2440494303a1f1e642d811fb20a88cb365",
+            "adc4931e13be7900e6f806d69bc9eaf7dc6651188fabab63f47f170af37dc68a"
+          ]
+        },
+        {
+          "revision": 2,
+          "contentSha256": "d55a3e8b883caa5ab31698b05a9d73872d8dfaa870e014dfbf87c237009b18ee",
+          "identityFreeSha256": "85b53e2024877db743f8e42f6e4d79a18fc1d6ba71c0de3b5dc964c6501c094b",
+          "authorPackageSha256": "175f96730b6d2dbce321aadb27238786c18c1c9c6a4e22837eaeafb19bb7d33c",
+          "questionIdentityFreeSha256": "a157cfc20f5bb3d9b02b088972bf0c763b9121dcc124bde270729d2faa5b9ae4",
+          "optionIdentityFreeSha256s": [
+            "57d38facf4694edff316073a8fa8fa6eba1a8dfba52b7bc5ad5efc464bc7be49",
+            "51b0094fb4a83a85777474b42a8dc04d5fc2f8b965cefa0fe083eb3be01ace68",
+            "5790ca8ccbe1dd8a0b293ccfc57d2f7e23f848db0e71e868589ecac1084ce0e8",
+            "eb475392ea2e7dca7a13ee3f6fe5fb2440494303a1f1e642d811fb20a88cb365",
+            "adc4931e13be7900e6f806d69bc9eaf7dc6651188fabab63f47f170af37dc68a"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s4-w02",
+      "questionId": "r023-html-css-practical-s4-w02",
+      "learningGoalId": "r023-html-css-practical-template-arrow-function-lexical-this-retains-enclosing-receiver-but-reads-current-property",
+      "templateId": "r023-html-css-practical-template-arrow-function-lexical-this-retains-enclosing-receiver-but-reads-current-property",
+      "lineageId": "r023-html-css-practical-template-arrow-function-lexical-this-retains-enclosing-receiver-but-reads-current-property",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "b705ed5f54c3991fa5154d7d9538c7d629376b5f8b8cddc144f5a138a358841b",
+      "contentSha256": "e96a4a8ba0334f0f680812937e46e6153292ab2ed7917eaa9154fad42e9dbf12",
+      "identityFreeSha256": "b41529295e8a6e747ceaa772e19f885652d1ac4d2c7ab8845eac33afb7c764ca",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s4-w02-o1",
+        "r023-html-css-practical-s4-w02-o2",
+        "r023-html-css-practical-s4-w02-o3",
+        "r023-html-css-practical-s4-w02-o4",
+        "r023-html-css-practical-s4-w02-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "10a289105bb3984f86210edc6a0050e25091bf37fc330baf2b3e19167740b1a6",
+          "identityFreeSha256": "b41529295e8a6e747ceaa772e19f885652d1ac4d2c7ab8845eac33afb7c764ca",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "3ccf867683d6e85d7b9ad5d67431a70cb701d1fbfc12ab32540edae0c3850d55",
+          "optionIdentityFreeSha256s": [
+            "87914c0d3f18fa13f20702d8c9bb7bd42ecabde280412a9b6c97bc560709c2f4",
+            "477d8a93774f4aa8f6d2b41020446f48bb6b83e221263f0a7d18a90b8b84aac3",
+            "63a8ed5501f875fb63b7d373bf0cd8ff2fccaa338252851dfe8d4d89eddb1ad7",
+            "bcc72fa2c1550ec34a4f7f71c3aae5b1069ba612d0def51f24a4f701ae798659",
+            "a45debd731eccc941d77a15102c146910922e3e92fbc6d03c7d9b66afa938bca"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s4-w03",
+      "questionId": "r023-html-css-practical-s4-w03",
+      "learningGoalId": "r023-html-css-practical-template-object-freeze-protects-own-reference-but-does-not-recursively-freeze-nested-object",
+      "templateId": "r023-html-css-practical-template-object-freeze-protects-own-reference-but-does-not-recursively-freeze-nested-object",
+      "lineageId": "r023-html-css-practical-template-object-freeze-protects-own-reference-but-does-not-recursively-freeze-nested-object",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "c2e9334fd1f13a0d8008004b5edf2052fb0c6c948ab6004daf00f860e5bf6e9b",
+      "contentSha256": "9b17ac58b8c0d1127bf4b2828451f2258d3c25e086db2a5e91a2c3849479fae3",
+      "identityFreeSha256": "efa060ba9a55b00feab4a2c3bd09101ac3db49aa5e36194c4f8efce2a25c5deb",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s4-w03-o1",
+        "r023-html-css-practical-s4-w03-o2",
+        "r023-html-css-practical-s4-w03-o3",
+        "r023-html-css-practical-s4-w03-o4",
+        "r023-html-css-practical-s4-w03-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "7972f49fbfae5e75196c2ae33ad5abba9493e0c59b08358fb9670c1b2b8d75f3",
+          "identityFreeSha256": "efa060ba9a55b00feab4a2c3bd09101ac3db49aa5e36194c4f8efce2a25c5deb",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "a17b8fa1481b50814c2619a942c9b11e3f30eca2c9ea8b0566035a2665750556",
+          "optionIdentityFreeSha256s": [
+            "e78e0c09f8208ecc27a1f54f70a7e89eb9ca5da3bef953fda80fdb47c61376d1",
+            "a5d646d92d6abbe37203e07d4f7de47ba1a219926a84b12405b26a37b22b976c",
+            "dc5910ff20fb82a20021392b0943bc86693da462b0e7cd1b46e0b281b715932a",
+            "5e1108ed26670a3c079abdb9390a7b537244c64596454c95486e9f53b5472bec",
+            "b3c81490f9dd6879ef0c312ab1069eb5cfc8b64b833e274f955c5f4506812e1b"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-s4-w04",
+      "questionId": "r023-html-css-practical-s4-w04",
+      "learningGoalId": "r023-html-css-practical-template-replace-template-expands-captures-whole-match-and-escaped-dollar",
+      "templateId": "r023-html-css-practical-template-replace-template-expands-captures-whole-match-and-escaped-dollar",
+      "lineageId": "r023-html-css-practical-template-replace-template-expands-captures-whole-match-and-escaped-dollar",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "a087b4a44c3d270f44e818480c06a0b4f1ccbeb8265d9e47187c277424b26c7c",
+      "contentSha256": "62ceaa943078a2592d6acfe7db96fcf4ff0397c3a05678bcf731e1cb5fe35148",
+      "identityFreeSha256": "5578c2e320be929d9e4ab3fd1006bce410dc1976dd74d7ccc7d3cc12f451f8bf",
+      "exclusiveOptionIds": [
+        "r023-html-css-practical-s4-w04-o1",
+        "r023-html-css-practical-s4-w04-o2",
+        "r023-html-css-practical-s4-w04-o3",
+        "r023-html-css-practical-s4-w04-o4",
+        "r023-html-css-practical-s4-w04-o5"
+      ],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "56b68a5c4f2b153708298a43909dc04ac8775ef237056a5c56eeb6e83fbf1fc9",
+          "identityFreeSha256": "5578c2e320be929d9e4ab3fd1006bce410dc1976dd74d7ccc7d3cc12f451f8bf",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "a69d8d43700fe780094c8a58808cedff1f6b1e6132680bcfd0c2877a8f8fb8d6",
+          "optionIdentityFreeSha256s": [
+            "e0bfe3398fdc5224ab951cffbe37e702b326f834e2abb290bd5be791381a2c54",
+            "e5f7390e010e756426d1c57dcbdb600f26aafa5300c392188646bc4b4eefca1b",
+            "ed609532ccfe6ab3fa79fec74781102502f466f7462ca8bed7c286c3ecbfe000",
+            "bd94763f99fa813286b863bc7895fdf0cd495367fe642f5e6a9245fcde450664",
+            "a2a50a2d7a7f6f05fd29fdb0c4261461a43e6e4ea33d104b34e172740fae3894"
+          ]
+        }
+      ]
+    },
+    {
+      "candidateId": "r023-html-css-practical-p01",
+      "questionId": "r023-html-css-practical-p01",
+      "learningGoalId": "r023-html-css-practical-template-changed-captioned-source-list-needs-media-load-to-restart-resource-selection",
+      "templateId": "r023-html-css-practical-template-changed-captioned-source-list-needs-media-load-to-restart-resource-selection",
+      "lineageId": "r023-html-css-practical-template-changed-captioned-source-list-needs-media-load-to-restart-resource-selection",
+      "revision": 1,
+      "decision": "accepted",
+      "attemptCount": 1,
+      "candidateHistorySha256": "3a416727f4c7b27ce08e3749ad37995d01497aaddc7951a1594169204fa30ba3",
+      "contentSha256": "0c476974fd26d0851ce4feb6110e650c96aa35b0316c98d35c2109335e0ae37b",
+      "identityFreeSha256": "4934d31151295eab7d90a16cfc7cda250254bb5aeb5ba886956f1ab5d8213219",
+      "exclusiveOptionIds": [],
+      "contentStates": [
+        {
+          "revision": 1,
+          "contentSha256": "9679ed691833d8c8c33cc5db8450e27e3dfc1c7be0cca777171def9e44eb7fa0",
+          "identityFreeSha256": "4934d31151295eab7d90a16cfc7cda250254bb5aeb5ba886956f1ab5d8213219",
+          "authorPackageSha256": "97e0f5e2b2366890a8552680f0d6f060dd0aeb9d6126ec068732551e5d8dac70",
+          "questionIdentityFreeSha256": "4934d31151295eab7d90a16cfc7cda250254bb5aeb5ba886956f1ab5d8213219",
+          "optionIdentityFreeSha256s": []
+        }
+      ]
+    }
+  ]
+}

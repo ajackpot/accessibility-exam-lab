@@ -43,6 +43,7 @@
 
 ## 해설 작성과 중복 방지
 
+- 매 후보 개정판의 독립 문안 검토에서 question.explanation이 정답을 도출하는 실제 규칙·계산·결과를 설명하는지 확인한다. 점검 목표나 “X/Y를 구별한다”라는 대상 이름만으로 부족하며, 빠진 풀이를 정답 선택지·part 해설에서 빌려 통과시키지 않는다. 실제 관계를 진술하는 간결한 대조는 유효하고 선택지별 이유 전체를 다시 복사하지 않는다. 첫 발행 전 격리는 마지막 안전 검사이며 이 검토를 뒤로 미루는 허가가 아니다
 - PRD 6.2~6.3의 필드 역할을 따른다. 모든 문항의 question.explanation은 필수다. 전용 선택지의 option.explanation에는 해당 문항의 선택지 이유를 한 번, 공유 선택지에는 재사용할 정의·판단 이유의 정본을 쓴다. 기존 schemaVersion 3의 필수 기본 해설을 없애지 않는다
 - link.contextExplanation에는 기본 해설에 없는 문항별 적용 조건·예외·이유만 필요한 때 추가한다. 추가 정보가 없으면 생략하거나 빈 문자열로 둔다. 같은 설명 복사, 정답/오답 문구만 덧붙이기, 의미만 바꿔 쓴 반복, 문항 해설에 선택지 이유 전체 재복제를 금지한다
 - 새로 작성·변경한 문항은 엄격한 발행 검사와 독립 문안 검토를 통과해야 한다. 누적 은행의 기존 문항 예외는 고정 경로·SHA-256으로 검증한 과거 불변 기준본의 문항 전체와 연결 선택지 전체가 정확히 같을 때만 허용한다. 후보 경로 입력, 인자 없는 build/check, 릴리스 대장 검증을 모두 통과하며 ID·testOnly·새 manifest로 예외를 넓히지 않는다
@@ -132,3 +133,28 @@
 - 공개 직전 fresh 원격 head/tree·ancestry·외부 변경·양쪽 동결·현재 시각·cutoff·전체 검사를 다시 확인한다. 기대 parent와 전체 tree를 확인한 하나의 commit을 `force:false`로 한 번 갱신한 뒤 정확한 head의 Pages와 live 해시를 확인한다
 - 009–017의 현재 공개 상태는 별도 `docs/publications/cumulative-009-017.json`과 검토된 append-only pin을 사용한다. 원래 대장의 공개0·unknown/미시도와 모든 은행·전달 proof·ZIP, 006–008 증거와 고정009 anchor는 바꾸지 않는다. 새 회차는 실제 확인 시각 이후에만 최신 공개은행을 기준으로 삼고 새로 확인한 원격 head를 sourceCommit으로 쓴다. 증거 payload와 뒤따르는 지원 커밋은 별개다
 - 원래009 전체 archive replay는 원본14파일 부재로 `not_run`이다. 실제013/017 전체본·017 delta 검사와 고정009 proof/terminal 검사를 구분한다. 확인하지 못한 archive·렌더링 UI·보조기술 검사를 통과라고 기록하지 않는다
+
+
+## 독립 원격 기준의 검토된 오프라인 사슬
+
+최신 공개 은행을 새로 확인한 뒤 발생한 실제 권한 만료는 기존006/고정009 사슬을 고쳐 쓰지 않고 별도 원격 anchor의 사슬로 등록한다. `offline-chain-trust.json`의 검토된 append-only pin과 `prepareIndependentOfflineContinuation`을 사용한다. 실제 두 native 첨부 수락과 source 전체 검증 전에는 checkpoint를 등록하지 않는다. 전달본은 동결하고 proof는 후속 작업본에만 넣는다. 최초 불확실성·실제 skip·원래 대장/은행/검토 횟수·모든 과거 proof를 보존하며 최신 누적 선행자·두 동결 표시·cutoff와 전체 캠페인 검사를 통과해야 한다. 상세 계약은 OPERATIONS와 DATA-CONTRACT를 따른다.
+
+
+## 첫 발행 전 안전 격리
+
+- PRD 13.6.1의 좁은 release-only 경로만 쓴다. 독립 QA가 실제 결함과 한 번도 전달/공개되지 않은 정확한 accepted 개정판임을 전체 역사로 확인한 경우만 append-only 감사·trust pin을 등록한다. 후보 작업본의 Boolean/hash/제외 목록은 권한이 아니다
+- 원 accepted/rejected·키·revision·검토 횟수/한도·목표/template/계보 예약을 보존한다. 격리는 새 cycle·재판정·교정·재개방·미완료 이월이 아니며 unhold 경로가 없다. 이미 전달/공개된 은행·시드·세션·ZIP은 바꾸지 않는다
+- 새 전용 선택지/비공유 실기만 허용하며 기존·공유 객체가 겹치면 차단한다. exact candidate/content hash와 rename-resistant fingerprint, 원 채택·결함·별도 QA의 해시를 결박하고 공개 감사에는 identity/hash/짧은 사유만 담는다. private 원시 출제/맹검/검토 로그·서비스 식별자·workspace 경로는 제외한다
+- 검증된 quarantineDispositions로만 eligible 집합을 얻는다. 역사적 accepted·격리·eligible·실제 전달·실제 공개 수를 구별하며 영수증/후속 회차의 accepted 목표 예약은 격리분도 포함한다. release/build/offline/packaging 경로와 alias·누락·변조·공유·freeze 음성 검사를 모두 확인한다
+- 13.8의 genuine published predecessor 요건과 기존 3회/6회·마감·일정·동결은 완화하지 않는다. 과거 archive 검증에는 미래 audit을 요구하거나 새 공개 권한을 부여하지 않는다
+
+
+## 검토 증거 소실 후 발행 차단
+
+전체 검토 증거·원 보고서·전달 산출물을 잃은 미전달 종결 회차는 실제 저작 결함에 대한 quarantine으로 바꾸지 않는다. `docs/release-blocks/trust.json`의 독립 검토한 append-only pin과 별도 이벤트로 full 원 대장 바이트·모든 후보 이력·시작한 모든 개정판의 내용 지문·전용 선택지·은행 버전을 예약한다. 새 내용 판정·cycle·재검토·공개·전달 proof를 만들거나 원 대장을 다시 쓰지 않는다.
+
+사고 보고서는 날짜가 명확한 `docs/incidents/`의 별도 파일이다. 정확한 원 대장·이벤트·사고 문서가 검증된 경우에만 해당 원 Markdown 보고서 부재를 `reservation_only_missing_original_report`로 만족한다. 이는 소실 보고서의 복구나 원 pass 요약에 대한 현재 실행 증거가 아니다. 다른 누락 보고서에는 적용하지 않는다.
+
+`evidence-loss-block.mjs`는 기본/명시 은행, 전체 이력·baseline, outgoing 파일/ZIP와 전달·공개·후속 기준 proof에서 차단을 검사한다. 경로 변경·문항/선택지 이름 변경·호출자 Boolean/제외 목록·registry/event/대장 누락으로 해제되지 않는다. 원래 복구 은행은 비공개 증거이며 공개 불변 은행이나 ZIP에 넣지 않는다. active 은행은 마지막 실제 전달 검증본을 유지한다.
+
+후속 정규 회차는 기존14.3에 따라 최신 실제 전달 검증 은행에서 독립 목표를 선정할 수 있다. 채택 목표를 재검토해 증거 소실을 치유하거나 이름만 바꿔 재사용하지 않는다. 탈락 목표의 기존 새 1차 근거·campaign당1회 재개방 조건은 그대로이며 이 이벤트 자체는 근거·권한이 아니다. 모든 실제 새 후보에는 전체 재개방·일정·마감·동결·현재 시각·발행 검사를 적용한다. 원 탈락 원문·별칭과 예약된 전용 선택지를 재생하지 않는다. 사고 전 정확한 역사 archive의 읽기 전용 검증은 미래 이벤트를 요구하지 않으며 현재 발행 권한을 제공하지 않는다.

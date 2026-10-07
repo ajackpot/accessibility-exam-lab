@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "kind": "reviewed_independent_offline_chains",
+  "checkpoints": [
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-018",
+      "path": "docs/deliveries/chains/public-regular17/round-018.json",
+      "sha256": "ef461b2dc417ae324c96b314475e586315122e38cbfeba9bc360becb14f096aa",
+      "previousProofSha256": null,
+      "verifiedAt": "2026-10-05T17:52:45.002Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-019",
+      "path": "docs/deliveries/chains/public-regular17/round-019.json",
+      "sha256": "fc91a5e036ceb56a13a0134b37506cdb1bd19409da59fc6ecf405477b4890311",
+      "previousProofSha256": "ef461b2dc417ae324c96b314475e586315122e38cbfeba9bc360becb14f096aa",
+      "verifiedAt": "2026-10-05T20:55:41.652Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-020",
+      "path": "docs/deliveries/chains/public-regular17/round-020.json",
+      "sha256": "7b63bf2c7a76611de53b45d89bb48f516d9af693bb45f57e295b3790307537d5",
+      "previousProofSha256": "fc91a5e036ceb56a13a0134b37506cdb1bd19409da59fc6ecf405477b4890311",
+      "verifiedAt": "2026-10-06T00:54:04.152Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-021",
+      "path": "docs/deliveries/chains/public-regular17/round-021.json",
+      "sha256": "1727996883b9277ee2446caf8d52ef85254b4bbf42cfbaa4d44a815e5b39bb17",
+      "previousProofSha256": "7b63bf2c7a76611de53b45d89bb48f516d9af693bb45f57e295b3790307537d5",
+      "verifiedAt": "2026-10-06T05:29:18.084Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-022",
+      "path": "docs/deliveries/chains/public-regular17/round-022.json",
+      "sha256": "cae57a98490b5b27a3791644583caf10b7be8be50218841f312f750574cd4dd3",
+      "previousProofSha256": "1727996883b9277ee2446caf8d52ef85254b4bbf42cfbaa4d44a815e5b39bb17",
+      "verifiedAt": "2026-10-06T11:01:03.572Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-024",
+      "path": "docs/deliveries/chains/public-regular17/round-024.json",
+      "sha256": "d7870a7640dee5f939af3d7e431b3e3f5fb7d4ec9db1be62d77a18653f2cece9",
+      "previousProofSha256": "cae57a98490b5b27a3791644583caf10b7be8be50218841f312f750574cd4dd3",
+      "verifiedAt": "2026-10-06T18:05:25.161Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-025",
+      "path": "docs/deliveries/chains/public-regular17/round-025.json",
+      "sha256": "736302c86ec030a1ada023968b5ffcb16d9d96283eab8518fc242a74141eecb0",
+      "previousProofSha256": "d7870a7640dee5f939af3d7e431b3e3f5fb7d4ec9db1be62d77a18653f2cece9",
+      "verifiedAt": "2026-10-06T21:25:20.901Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-026",
+      "path": "docs/deliveries/chains/public-regular17/round-026.json",
+      "sha256": "5bc3c2d8bac932d027dcab4d0d4a00f06107a286a0a209c5f463b3449a45e8c6",
+      "previousProofSha256": "736302c86ec030a1ada023968b5ffcb16d9d96283eab8518fc242a74141eecb0",
+      "verifiedAt": "2026-10-07T01:52:32.239Z"
+    },
+    {
+      "chainId": "public-regular17",
+      "anchorSha256": "f33603b5eee6db3fb7d7789b259812b268d8ffd9d7e4c4b2b0afa604c24dc60a",
+      "roundId": "round-027",
+      "path": "docs/deliveries/chains/public-regular17/round-027.json",
+      "sha256": "2ae996a37d466e6a0969814ad9379bdc9de1c0788e55c836dfc9b5fe6df785cd",
+      "previousProofSha256": "5bc3c2d8bac932d027dcab4d0d4a00f06107a286a0a209c5f463b3449a45e8c6",
+      "verifiedAt": "2026-10-07T05:36:02.272Z"
+    }
+  ]
+}
