@@ -272,3 +272,5 @@ docs/deliveries/chains/public-regular17/round-027.json
 tests/publication-sync-independent.test.mjs
 docs/publications/cumulative-018-027.json
 docs/publications/cumulative-018-027.md
+docs/analysis/2026-10-07-pdf-gap-allocation.json
+docs/analysis/2026-10-07-pdf-gap-plan.md
