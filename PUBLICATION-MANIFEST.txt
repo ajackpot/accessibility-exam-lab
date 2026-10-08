@@ -310,3 +310,4 @@ tests/ui-state.test.mjs
 tests/workflows.test.mjs
 docs/reviews/2026-10-08-held-items-final-review.md
 docs/deliveries/normal-chains/round-028/round-031.json
+docs/publications/cumulative-028-031.json
