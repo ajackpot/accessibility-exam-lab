@@ -1,5 +1,7 @@
 # 검증된 문제 은행 운영 절차
 
+2026-10-08 명시 승인 이후 새 기본 전달은 마지막 `packaging-policy-002` 절의 전체 7z + 변경분 ZIP 절차를 따른다. 앞선 전체 ZIP·두 ZIP 지시는 당시 정책과 원 증거의 설명으로 보존한다. 기존 내용 검증·사슬·일정·동결 조건은 계속 적용한다.
+
 이 문서는 별도 실행자의 재현 가능한 작업 지시입니다. 저장소 밖의 대화·비공개 노트·개인 첨부파일·하드코딩한 인증 토큰에 의존하지 않습니다. 저장소는 `https://github.com/ajackpot/accessibility-exam-lab`입니다. 배포 권한과 실행 비용이 확인된 환경에서만 원격 작업을 수행합니다. 정적 앱이나 CI가 자동으로 AI 사용 권한을 얻지는 않습니다.
 
 ## 고정 경계
@@ -439,3 +441,30 @@ native 수락의 `nativeAcceptance`, upload helper 관측의 `helperCompletionOb
 ## 실제 전달된 정상 사슬의 누적 Pages 반영
 
 DATA-CONTRACT의 `verified_normal_chain_publication`만 사용한다. 새 최종 회차도 먼저 두 실제 첨부 수락·독립 증거 검토·checkpoint 등록을 마친다. 과거 중단된 publisher는 재개하지 않으며 새로운 사용자 지시와 현재 작업의 권한을 별도로 확인한다. 현재 원격 head/tree·동결·cutoff·충돌을 다시 읽고, 검토된 정확한 source의 통합 검사를 한 번 실행한다. SHA-only inventory로 새 payload를 반영하고 exact-head Pages와 필수 live 경로를 대조한 뒤에만 별도 공개 event/pin을 독립 검토·등록한다. 원 receipt 해시·대장·은행·proof·trust prefix와 모든 미확정 쓰기 시각은 보존한다. 후속 지원 commit의 원격/Pages/live 확인도 별도로 마친다.
+
+## 전체 7z와 변경분 ZIP 운영 (packaging-policy-002, 2026-10-08)
+
+이 절은 2026-10-08 명시 승인 이후 새 전달의 기본 포장에 적용한다. 앞선 `packaging-policy-001` 및 각 사슬의 전체 ZIP·두 ZIP 표현은 당시 실제 형식과 증거를 설명한다. 이미 고정·전달된 artifact를 변환하거나 원 manifest·영수증·trust prefix·closed 대장에 새 필드를 소급 추가하지 않는다. 새 기본 pair는 `DELTA.zip`과 `COMPLETE.7z`다. 정책 파일은 `docs/packaging/packaging-policy-002.md`다.
+
+### 준비와 검증
+
+1. 최신 검증된 전달 source와 실제 공개 base를 구별하여 고정한다. 같은 내용의 재포장이라면 원 은행·runtime·종결 대장·시드·이전 전달/공개 증거 바이트를 보존하고 지원 파일의 정확한 before/after만 `packagingRevision`에 기록한다. 새 문항이나 문항 revision을 만들지 않는다. 변경분은 실제 baseCommit·baseVerifiedAt·전체 base inventory를 사용하며 현재 작업본으로 가짜 기준을 만들지 않는다 이번처럼 새 변경분과 전체본을 함께 만드는 일반 릴리스 백업은 최종 전체 소스를 frozenSourceInventory로 고정하고 packagingRevision은 null로 둔다. packagingRevision은 기존 delta를 유지한 채 전체본만 추가 제공하는 경우에 적용한다.
+2. 전체 공개 허용 목록을 의미/개인정보 검토하고 모든 경로·크기·SHA-256을 고정한다. 필수 앱·설정·스크립트·검사·문서 및 허용된 모든 불변 은행/대장/증거가 있어야 한다. `.git`, 개인 학습 기록, 비공개 출제/맹검/원시 검토 자료·로컬 계획·서비스 식별자·비밀을 제외한다. 정확한 inventory 없이 일부 파일만 빼서 크기를 줄이지 않는다
+3. `freezeCompleteProject`의 새 기본 전체 snapshot은 complete manifest v2/`archiveFormat:7z`이며 `writeCompleteArchive`로 단일 일반 7z를 쓴다. `writeReleaseDeliveryPair`와 `writeOfflineDeliveryPair`의 새 기본 전체 출력은 `.7z`, delta 출력은 `.zip`이다. 기존 `writeCompleteZip`은 명시적인 v1/ZIP 호환 경로로 남고 이전 영수증을 새 성공으로 바꾸지 않는다. 기존 파일을 덮어쓰지 않는다. 7z 포장/검증 지원은 Python 3 표준 라이브러리를 사용하고 앱·브라우저 runtime이나 npm 의존성을 추가하지 않는다. 수신자는 Python으로 복원할 필요 없이 일반 7z 해제만 한다
+4. `scripts/archive-format.mjs`의 실제 형식 판별로 전체본을 읽는다. 새 v2/7z 선언과 실제 컨테이너가 같아야 하며 과거 v1은 ZIP으로만 읽는다. 7z 해독 실패를 ZIP 추측 재시도로 숨기지 않는다. 지원 범위 밖 형식·암호화/분할·손상·unsafe path·중복·대소문자 충돌·symlink·금지 항목·크기/CRC/SHA 불일치·자원 한도 초과는 중단한다. delta는 여전히 ZIP 전용이다
+5. 실제 일반 7z 도구로 **새 빈 폴더에 한 번 해제**한 전체 `project/`를 검토 inventory와 대조한다. 이전 archive·순차 delta·저장소 밖 자료·맞춤 복원 스크립트 없이 모든 파일이 있어야 한다. delta는 자기 정확한 base에서 별도 재구성하고 같은 전체 inventory·바이트인지 확인한다. 각 결과에서 필요한 import/build/시작 smoke와 안전 검사를 수행한다. `npm run release:validate`, `npm test`, `npm run build`의 서로 다른 의미 검사를 유지하며 기존 `check`/`release:check` 단독 보호도 유지한다. 전체 corpus를 다시 실행하지 않는다면 위 `validation-efficiency-001`의 독립 인증·정확한 입력/환경·종결 증거 조건을 모두 확인하고 재사용 범위를 명시한다
+6. 검증이 끝난 **실제 각 artifact**의 형식·정확한 바이트 수·SHA-256·manifest SHA-256과 실행/재사용/미실시 범위를 기록한다. 현재 20 MiB(20,971,520바이트)는 관측된 native 첨부 실패를 예방하기 위한 운영 점검선이다. 공식 보편적 서비스 제한·사용자 환경의 한도 또는 이 크기 이하 수락을 보장하는 값으로 쓰지 않는다. 추정 압축률이나 파일 확장자만으로 크기·형식을 확정하지 않는다
+7. 지원되는 Library 저장과 각 실제 native 첨부 수락 결과를 확인해야 전달 완료다. 준비, 저장만 성공, 첫 첨부 실패, 한 파일만 수락은 각각 그대로 기록한다. 이미 전달한 동일 delta는 변경하거나 중복 첨부하지 않고 기존 실제 수락을 연결할 수 있다. 새 전체본을 추가 전달할 때는 별도 append-only 사건과 실제 새 바이트/형식/해시를 연결한다. 사용자의 열람/다운로드·Git/Pages 공개·새 후속 기준 등록은 별도 사실이다. 자기 미래 전달 proof를 이미 고정한 archive에 삽입하지 않는다
+
+`prepareNormalBackupRoot`, `prepareNormalBackupSuccessor`, `prepareIndependentOfflineContinuation` 등 검증기의 기존 `completeZip` 인자명은 과거 API 호환 이름이다. 새 전체 Buffer는 실제 magic과 인증된 내부 manifest에 따라 7z로 검증한다. 인자명 때문에 7z를 ZIP으로 보고하거나 원 proof 스키마를 임의로 바꾸지 않는다. 아직 해당 형식의 사슬 증거·독립 검토를 확인하지 못한 경로에서는 호환성을 추정하지 않고 차단한다.
+
+### 수신자용 짧은 한국어 적용 안내
+
+- 새 설치는 전체 7z 하나를 새 빈 폴더에 한 번 풉니다. `project/`가 프로젝트 루트이며 `manifest.json`·`APPLY-KO.txt`를 확인합니다. 이전 ZIP이나 별도 복원 스크립트는 필요하지 않습니다
+- 기존 프로젝트와 앱에서 내보낸 학습 기록 백업을 먼저 보관합니다. 같은 사이트 주소에서 공개 파일만 교체하고 자체 수정·관련 없는 파일·`.git`·서버 설정을 덮어쓰거나 삭제하지 않습니다
+- 브라우저 저장 데이터는 지우지 않습니다. 같은 브라우저와 같은 프로토콜·호스트·포트를 유지합니다. 주소가 달라지면 앱 백업 기능으로 기록을 보존/복원합니다. archive를 앱의 학습 기록 가져오기에 넣지 않습니다
+- 전체본을 사용했다면 같은 회차 변경분 ZIP은 다시 적용하지 않습니다. 변경분만 쓸 때는 표시된 정확한 기준 프로젝트와 before/after 해시가 일치해야 합니다
+
+[Microsoft 공식 안내](https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/zip-and-unzip-files)는 Windows 11 24H2의 7z 지원을 명시한다(2026-10-08 확인). 다른 OS·구버전은 호환 해제 도구가 필요할 수 있다. 사용자 환경에 도구가 있다고 추정하거나 설치를 자동 수행하지 않는다. 공식 지원 설명과 이 프로젝트의 실제 Windows/NVDA 검증을 구별하고 미실측은 미실시로 남긴다.
+
+이 작업은 포장 형식 전환이다. 새 비용·자격증명·권한·전달 목적지를 요구하지 않으며 Git 쓰기·중단 publisher 재개 허가를 만들지 않는다. 원 unknown·최초 시계·terminal·채택/공개 수, 후보당 3회·계보 6회, 4시간 일정·회차 마감·현재 및 source 동결·최종 cutoff를 계속 지킨다.

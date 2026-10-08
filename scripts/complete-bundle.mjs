@@ -1,3 +1,4 @@
+import {completeManifestFormat,encodeSevenZip,decodeSevenZip,verifyArchiveFormat} from './archive-format.mjs';
 import {validateNormalBackupChainSnapshot} from './normal-backup-chain.mjs';
 import {validateNormalBackupRootSnapshot} from './normal-backup-root.mjs';
 import {validateEvidenceLossSnapshot,assertEvidenceLossProvenance} from './evidence-loss-block.mjs';
@@ -13,6 +14,8 @@ const json = value => Buffer.from(JSON.stringify(value, null, 2) + '\n');
 const hex = /^[a-f0-9]{64}$/;
 const fail = message => { throw new Error(message); };
 const equal = (a,b) => JSON.stringify(a) === JSON.stringify(b);
+// Private provenance for current writer checks; never serialized into the archive.
+const completeSourceRoots=new WeakMap(),authorityRoot=path.resolve(import.meta.dirname,'..');
 function keys(value, expected, label) {
   if (!value || typeof value !== 'object' || Array.isArray(value) || !equal(Object.keys(value).sort(), [...expected].sort())) fail(`Invalid ${label} fields`);
 }
@@ -41,7 +44,7 @@ async function readPublic(root, relative) {
   return fs.readFile(current);
 }
 // A packaging-only overlay cannot alter runtime, data, original history or reports.
-const policyPath = p => ['AGENTS.md','README.md','PUBLICATION-MANIFEST.txt','docs/PRD.md','docs/OPERATIONS.md','docs/DATA-CONTRACT.md','scripts/download-fallback.mjs','scripts/complete-bundle.mjs','tests/complete-bundle.test.mjs','scripts/blob-retry.mjs','tests/blob-retry.test.mjs'].includes(p);
+const policyPath = p => ['AGENTS.md','README.md','PUBLICATION-MANIFEST.txt','docs/PRD.md','docs/OPERATIONS.md','docs/DATA-CONTRACT.md','scripts/download-fallback.mjs','scripts/complete-bundle.mjs','tests/complete-bundle.test.mjs','scripts/blob-retry.mjs','tests/blob-retry.test.mjs','scripts/archive-format.mjs','scripts/sevenz-codec.py','scripts/release-bundle.mjs','scripts/release-backup-continuation.mjs','scripts/normal-backup-root.mjs','scripts/normal-backup-chain.mjs','scripts/offline-chain-continuation.mjs','tests/archive-format.test.mjs','tests/sevenz-codec.test.mjs','tests/release-bundle.test.mjs','tests/release-bundle-closure.test.mjs','tests/independent-offline-chains.test.mjs','tests/manual-round-eleven.test.mjs','tests/release-backup-successors.test.mjs','tests/normal-backup-continuation.test.mjs','tests/normal-backup-root.test.mjs','docs/packaging/packaging-policy-002.md'].includes(p);
 function checkSource(source) {
   keys(source, ['roundId','deltaArtifactSha256','deltaManifestSha256','baseCommit','bankVersion','bankSha256','ledgerPath','ledgerSha256'], 'source release');
   if (!/^(round|editorial)-\d+$/.test(source.roundId) || !/^[A-Za-z0-9_.-]+$/.test(source.bankVersion) || !/^[a-f0-9]{40}$/.test(source.baseCommit) || /^0+$/.test(source.baseCommit) || ![source.deltaArtifactSha256,source.deltaManifestSha256,source.bankSha256,source.ledgerSha256].every(v => hex.test(v)) || source.ledgerPath !== `docs/${source.roundId.startsWith('editorial-') ? 'corrections' : 'rounds'}/${source.roundId}.json`) fail('Invalid release identity');
@@ -58,8 +61,8 @@ function checkOverlay(base, files, policy) {
 function checkComplete(snapshot,now=null) {
   keys(snapshot, ['manifest','files'], 'complete snapshot');
   const {manifest:m,files} = snapshot;
-  keys(m, ['schemaVersion','kind','deliveryMode','newlyPublishedRegular','projectDirectory','prerequisiteArtifacts','sourceRelease','frozenSourceInventory','packagingRevision','files'], 'complete manifest');
-  if (m.schemaVersion !== 1 || m.kind !== 'complete_project_not_learner_import' || !['download_only','release_backup'].includes(m.deliveryMode) || m.newlyPublishedRegular !== 0 || m.projectDirectory !== 'project' || !equal(m.prerequisiteArtifacts,[])) fail('Invalid standalone delivery contract');
+  const format=completeManifestFormat(m);
+  if (m.kind !== 'complete_project_not_learner_import' || !['download_only','release_backup'].includes(m.deliveryMode) || m.newlyPublishedRegular !== 0 || m.projectDirectory !== 'project' || !equal(m.prerequisiteArtifacts,[])) fail('Invalid standalone delivery contract');
   checkSource(m.sourceRelease); const base = inventory(m.frozenSourceInventory), entries = inventory(m.files);
   if (!equal(entries,m.files) || !equal(base,m.frozenSourceInventory) || !Array.isArray(files) || files.length !== entries.length) fail('Complete inventory ordering mismatch');
   checkOverlay(base,entries,m.packagingRevision);
@@ -71,6 +74,7 @@ function checkComplete(snapshot,now=null) {
   const allow = byPath.get('PUBLICATION-MANIFEST.txt');
   if (!allow || !equal(parsePublicAllowlist(allow.raw.toString()).sort(), entries.map(e=>e.path).sort())) fail('Complete inventory must equal entire publication allowlist');
   const required=['.nojekyll','README.md','AGENTS.md','package.json','package-lock.json','index.html','style.css','src/app.js','src/domain.js','src/workflows.js','src/storage.js','src/backup.js','src/legacy-materials.js','src/legacy-question-display.js','src/reviewed-option-explanations.js','scripts/build.mjs','scripts/check.mjs','scripts/validate-bank.mjs','scripts/validate-round.mjs','scripts/release-guard.mjs','scripts/bank-io.mjs','scripts/editorial-ledger.mjs','scripts/explanation-authoring.mjs','scripts/download-fallback.mjs','scripts/complete-bundle.mjs','data/publication-state.json','docs/PRD.md','docs/OPERATIONS.md','docs/DATA-CONTRACT.md','tests/complete-bundle.test.mjs'];
+  if(format==='7z')required.push('scripts/archive-format.mjs','scripts/sevenz-codec.py','tests/archive-format.test.mjs','tests/sevenz-codec.test.mjs');
   if(required.some(p=>!byPath.has(p)) || !files.some(f=>f.path.startsWith('qa/'))) fail('Incomplete standalone project prerequisites');
   const release=m.sourceRelease, manifest=JSON.parse(byPath.get('data/manifest.json')?.raw || 'null');
   const bank=byPath.get(`data/releases/${release.bankVersion}/bank.json`), ledger=byPath.get(release.ledgerPath);
@@ -84,26 +88,56 @@ function checkComplete(snapshot,now=null) {
   validateQuarantineSnapshot(files,{now});
   if (manifest.finalRelease || JSON.parse(byPath.get('data/publication-state.json')?.raw || 'null')?.finalized) fail('Persistent freeze blocks new complete packaging');
 }
-export async function freezeCompleteProject({workRoot, reviewedInventory, sourceRelease, frozenSourceInventory = reviewedInventory, packagingRevision = null, deliveryMode = 'download_only', now = Date.now()}) {
+export async function freezeCompleteProject({workRoot, reviewedInventory, sourceRelease, frozenSourceInventory = reviewedInventory, packagingRevision = null, deliveryMode = 'download_only', archiveFormat = '7z', now = Date.now()}) {
   if (!Number.isFinite(now) || now >= FREEZE_AT) fail('Final cutoff blocks new complete packaging');
+  if(!['7z','zip'].includes(archiveFormat))fail('Unsupported complete archive format');
   const entries=inventory(reviewedInventory), files=[];
   for (const e of entries) {
     const raw=await readPublic(workRoot,e.path);
     if (sha(raw)!==e.sha256 || raw.length!==e.bytes) fail(`Reviewed complete bytes mismatch: ${e.path}`);
     files.push({...e,raw:Buffer.from(raw)});
   }
-  const snapshot={manifest:{schemaVersion:1,kind:'complete_project_not_learner_import',deliveryMode,newlyPublishedRegular:0,projectDirectory:'project',prerequisiteArtifacts:[],sourceRelease:{...sourceRelease},frozenSourceInventory:inventory(frozenSourceInventory),packagingRevision:structuredClone(packagingRevision),files:entries},files};
-  checkComplete(snapshot,now); return snapshot;
+  const snapshot={manifest:{schemaVersion:archiveFormat==='7z'?2:1,...(archiveFormat==='7z'?{archiveFormat:'7z'}:{}),kind:'complete_project_not_learner_import',deliveryMode,newlyPublishedRegular:0,projectDirectory:'project',prerequisiteArtifacts:[],sourceRelease:{...sourceRelease},frozenSourceInventory:inventory(frozenSourceInventory),packagingRevision:structuredClone(packagingRevision),files:entries},files};
+  checkComplete(snapshot,now);completeSourceRoots.set(snapshot,path.resolve(workRoot));return snapshot;
 }
 export function completeInstructions(m) {
-  return `전체 적용본 / ${m.sourceRelease.roundId}\n\n이 ZIP 하나로 최신 프로젝트를 준비할 수 있습니다. 이전 회차 ZIP이나 변경분을 순서대로 적용할 필요가 없습니다.\n포함 은행: ${m.sourceRelease.bankVersion}\n은행 SHA-256: ${m.sourceRelease.bankSha256}\n\n1. 새 빈 폴더에 압축을 풉니다. project/ 폴더가 완전한 프로젝트 루트입니다.\n2. Node.js 22 이상과 Python 3이 있는 환경에서 project/ 안에서 npm run check, npm test, npm run build를 실행합니다. 별도 npm 패키지 설치는 필요하지 않습니다. 확인 후 npm run serve로 실행하고 http://localhost:4173/에 접속합니다. index.html을 파일로 직접 열지 않습니다.\n3. 기존 프로젝트/배포를 교체하려면 먼저 기존 프로젝트 파일과 앱에서 내보낸 학습 기록 백업을 별도 보관합니다. 빈 폴더에서 검증한 project/의 공개 파일만 기존과 같은 상대 경로로 배포하고, 관련 없는 사용자 파일이나 서버 설정을 삭제하지 않습니다. 기존 Git 작업 사본의 .git을 교체하거나 강제 push하지 않습니다. 충돌하는 자체 수정이 있으면 먼저 비교합니다.\n4. 브라우저의 저장 데이터·학습 기록을 지우지 않습니다. 같은 브라우저와 같은 사이트 주소(프로토콜·호스트·포트)를 유지해야 기존 기록에 계속 접근할 수 있습니다. 주소를 바꾸면 기록이 별도로 보일 수 있으므로 앱의 학습 기록 백업 기능으로 보존·복원합니다. 이 ZIP 자체는 앱의 학습 기록 가져오기에 넣지 않습니다.\n5. 전체본과 변경분은 같은 회차의 두 전달 방식입니다. 전체본을 사용했다면 해당 변경분을 다시 적용하지 않습니다. manifest.json에는 모든 프로젝트 경로·크기·SHA-256과 출처가 있습니다. 선행 ZIP 해시는 이력 확인용이며 설치 전제조건이 아닙니다.\n6. 이 파일 전달 자체는 GitHub/Pages 배포 완료를 뜻하지 않습니다. 자동 Git 작업은 하지 않으며 기존 권한·미확정 결과·최종 동결 제한을 유지합니다. 실제 공개 완료는 별도로 확인합니다.\n`;
+  const historical=`전체 적용본 / ${m.sourceRelease.roundId}\n\n이 ZIP 하나로 최신 프로젝트를 준비할 수 있습니다. 이전 회차 ZIP이나 변경분을 순서대로 적용할 필요가 없습니다.\n포함 은행: ${m.sourceRelease.bankVersion}\n은행 SHA-256: ${m.sourceRelease.bankSha256}\n\n1. 새 빈 폴더에 압축을 풉니다. project/ 폴더가 완전한 프로젝트 루트입니다.\n2. Node.js 22 이상과 Python 3이 있는 환경에서 project/ 안에서 npm run check, npm test, npm run build를 실행합니다. 별도 npm 패키지 설치는 필요하지 않습니다. 확인 후 npm run serve로 실행하고 http://localhost:4173/에 접속합니다. index.html을 파일로 직접 열지 않습니다.\n3. 기존 프로젝트/배포를 교체하려면 먼저 기존 프로젝트 파일과 앱에서 내보낸 학습 기록 백업을 별도 보관합니다. 빈 폴더에서 검증한 project/의 공개 파일만 기존과 같은 상대 경로로 배포하고, 관련 없는 사용자 파일이나 서버 설정을 삭제하지 않습니다. 기존 Git 작업 사본의 .git을 교체하거나 강제 push하지 않습니다. 충돌하는 자체 수정이 있으면 먼저 비교합니다.\n4. 브라우저의 저장 데이터·학습 기록을 지우지 않습니다. 같은 브라우저와 같은 사이트 주소(프로토콜·호스트·포트)를 유지해야 기존 기록에 계속 접근할 수 있습니다. 주소를 바꾸면 기록이 별도로 보일 수 있으므로 앱의 학습 기록 백업 기능으로 보존·복원합니다. 이 ZIP 자체는 앱의 학습 기록 가져오기에 넣지 않습니다.\n5. 전체본과 변경분은 같은 회차의 두 전달 방식입니다. 전체본을 사용했다면 해당 변경분을 다시 적용하지 않습니다. manifest.json에는 모든 프로젝트 경로·크기·SHA-256과 출처가 있습니다. 선행 ZIP 해시는 이력 확인용이며 설치 전제조건이 아닙니다.\n6. 이 파일 전달 자체는 GitHub/Pages 배포 완료를 뜻하지 않습니다. 자동 Git 작업은 하지 않으며 기존 권한·미확정 결과·최종 동결 제한을 유지합니다. 실제 공개 완료는 별도로 확인합니다.\n`;
+  if(completeManifestFormat(m)==='zip')return historical;
+  return historical.replace('이 ZIP 하나로','이 7z 하나로').replace('이 ZIP 자체는','이 7z 자체는').replace('1. 새 빈 폴더에 압축을 풉니다.', '1. 7z를 지원하는 일반 압축 해제 도구로 새 빈 폴더에 한 번 압축을 풉니다. 전용 복원 스크립트나 이전 압축 파일은 필요하지 않습니다.');
 }
+/** Historical schema-v1 ZIP writer; never silently relabels a schema-v2 payload. */
 export async function writeCompleteZip(snapshot, outputPath, {now=Date.now()}={}) {
   if (!Number.isFinite(now) || now>=FREEZE_AT) fail('Final cutoff blocks new complete ZIP');
   checkComplete(snapshot,now);
+  if(completeManifestFormat(snapshot.manifest)!=='zip')fail('Historical ZIP writer requires explicit schema-v1 ZIP snapshot');
+  if(path.extname(outputPath).toLowerCase()!=='.zip')fail('Historical ZIP output requires .zip extension');
   const raw=zipStored([{name:'manifest.json',raw:json(snapshot.manifest)},{name:'APPLY-KO.txt',raw:Buffer.from(completeInstructions(snapshot.manifest))},...snapshot.files.map(f=>({name:`project/${f.path}`,raw:f.raw}))],{compress:true});
   await fs.writeFile(outputPath,raw,{flag:'wx'});
   return {path:outputPath,sha256:sha(raw),bytes:raw.length,manifestSha256:sha(json(snapshot.manifest)),fileCount:snapshot.files.length};
+}
+async function assertLiveCompleteFreeze(snapshot){
+  const sourceRoot=completeSourceRoots.get(snapshot);if(!sourceRoot)fail('Current 7z writer requires the original frozen snapshot and source root');
+  for(const root of new Set([authorityRoot,sourceRoot])){
+    const manifest=JSON.parse(await readPublic(root,'data/manifest.json')),state=JSON.parse(await readPublic(root,'data/publication-state.json'));
+    if(manifest.finalRelease!==false||state.finalized!==false)fail('Live authority/source freeze blocks complete 7z packaging');
+  }
+}
+/** Current standalone transport. Verify the actual decoded bytes before writing. */
+export async function writeCompleteArchive(snapshot,outputPath,{now=Date.now()}={}){
+  if(!Number.isFinite(now)||now>=FREEZE_AT)fail('Final cutoff blocks new complete archive');
+  checkComplete(snapshot,now);
+  if(completeManifestFormat(snapshot.manifest)!=='7z'||path.extname(outputPath).toLowerCase()!=='.7z')fail('Current COMPLETE requires schema-v2 7z and .7z output');
+  try{await fs.lstat(outputPath);fail('EEXIST: preserve immutable complete archive');}catch(e){if(e.code!=='ENOENT')throw e;}
+  await assertLiveCompleteFreeze(snapshot);
+  const entries=[{name:'manifest.json',raw:json(snapshot.manifest)},{name:'APPLY-KO.txt',raw:Buffer.from(completeInstructions(snapshot.manifest))},...snapshot.files.map(f=>({name:'project/'+f.path,raw:f.raw}))];
+  const raw=encodeSevenZip(entries),decoded=decodeSevenZip(raw);verifyArchiveFormat(decoded,'7z');
+  if(decoded.size!==entries.length||entries.some(e=>!decoded.get(e.name)?.equals(e.raw)))fail('Complete 7z exact decoded bytes differ');
+  // Compression is potentially lengthy; recheck wall-clock and freeze after it.
+  const completedNow=Math.max(now,Date.now());if(completedNow>=FREEZE_AT)fail('Final cutoff crossed during complete packaging');checkComplete(snapshot,completedNow);
+  await assertLiveCompleteFreeze(snapshot);
+  if(Date.now()>=FREEZE_AT)fail('Final cutoff crossed at complete write boundary');
+  await fs.writeFile(outputPath,raw,{flag:'wx'});
+  return {path:outputPath,archiveFormat:'7z',sha256:sha(raw),bytes:raw.length,manifestSha256:sha(json(snapshot.manifest)),fileCount:snapshot.files.length};
 }
 /** Mandatory future delivery pair. Partial preparation is never delivery. */
 export async function writeOfflineDeliveryPair({deltaSnapshot, workRoot, reviewedInventory, deltaOutputPath, completeOutputPath, now=Date.now()}) {
@@ -115,6 +149,7 @@ export async function writeOfflineDeliveryPair({deltaSnapshot, workRoot, reviewe
   const entryMap=new Map(entries.map(e=>[e.path,e]));
   for(const e of deltaSnapshot.manifest.files) if(entryMap.get(e.path)?.sha256!==e.sha256 || entryMap.get(e.path)?.bytes!==e.bytes) fail('Delta and complete release bytes differ');
   for(const e of deltaSnapshot.manifest.deletions) if(entryMap.has(e.path)) fail('Complete release retains a deleted delta path');
+  if(path.extname(deltaOutputPath).toLowerCase()!=='.zip'||path.extname(completeOutputPath).toLowerCase()!=='.7z')fail('Delivery pair requires DELTA.zip and COMPLETE.7z');
   const delta=await writeDownloadZip(deltaSnapshot,deltaOutputPath,{now});
   const m=JSON.parse(await readPublic(workRoot,'data/manifest.json'));
   const candidates=[];
@@ -123,7 +158,7 @@ export async function writeOfflineDeliveryPair({deltaSnapshot, workRoot, reviewe
   const ledgerPath=candidates[0].path;
   const sourceRelease={roundId:candidates[0].id,deltaArtifactSha256:delta.sha256,deltaManifestSha256:sha(json(deltaSnapshot.manifest)),baseCommit:deltaSnapshot.manifest.baseCommit,bankVersion:m.bankVersion,bankSha256:m.sha256,ledgerPath,ledgerSha256:sha(await readPublic(workRoot,ledgerPath))};
   const snapshot=await freezeCompleteProject({workRoot,reviewedInventory:entries,sourceRelease,now});
-  const complete=await writeCompleteZip(snapshot,completeOutputPath,{now});
+  const complete=await writeCompleteArchive(snapshot,completeOutputPath,{now});
   return {status:'prepared_not_delivered',delta,complete,completeManifest:snapshot.manifest};
 }
 /** Full-delivery receipts are separate from immutable delta provenance chains. */

@@ -1,5 +1,7 @@
 # 데이터 계약 v3 (앱 0.2.9)
 
+포장 외피 추가 계약: 2026-10-08 명시 승인 이후 새 전체본에는 문서 끝 `packaging-policy-002`의 complete v2/7z를 적용하며 delta는 ZIP을 유지한다. 이전 complete v1/ZIP·원 proof는 호환 검증하고 수정하지 않는다. 아래 은행·세션·앱 스키마 변경은 없다.
+
 기존 은행·스냅샷 읽기의 정식 검증기는 `src/domain.js`의 `validateBank` 및 `src/backup.js`의 `validateSession`입니다. 새 등록·공개 후보는 더 엄격한 `validateBankForPublication` 구조 검사와 `validateExplanationAuthoring` 해설 저작 검사를 추가 통과해야 합니다. 후보 JSON 경로를 명시한 validate/build뿐 아니라 인자 없는 현재 은행 build/check와 릴리스 대장 검증도 새/변경 문항의 해설 검사를 실행합니다. 후보는 현재 manifest를 교체하기 전에 검사하며, 직접 manifest를 새 은행으로 바꿔도 저작 검사를 우회할 수 없습니다. 이전 seed.1/seed.2/seed.3 백업을 새 저작 규칙으로 소급 거부하지 않습니다. 출제와 채점에 사용하지 않는 추가 메타데이터는 보존할 수 있습니다. 스키마 변경은 앱 호환성 검토 후 별도로 합니다.
 
 ## 은행 JSON
@@ -442,3 +444,35 @@ archiveVerifiedAt과 attachmentAcceptedAt은 과거 사실이다. verificationCo
 정상 successor reader는 원 두 create 결과와 실제 한 complete replacement의 요청/결과를 별도 원문으로 받는다. 원 create receipt의 rawResultSha256·helper 시각은 그대로이며, 추가 replacementUpload는 role·requestSha256·rawResultSha256·previousArchiveSealSha256·실제 helperExitCode/helperCompletionObservedAt을 결박한다. 같은 Library ID, 요청의 실제 이전 version, 실제 다음 version, 정확한 현재 ZIP/버전/xattrs와 원 delta를 함께 검사한다. 현재 두 item 행은 각각의 실제 결과에서 선택한 뷰이며 합성 raw tool response가 아니다. replace 목적을 create로 이름 바꾸지 않는다.
 
 원 archive seal과 source가 같고 실제 새 seal·교체 완료·native 수락의 순서를 확인해야 한다. 최초 native 실패는 실패로 남기고 실제 수락만 별도 영수증으로 기록한다. 정상 upload receipt는 작성 시점의 사실에 따라 awaiting_parent_actual_response 또는 native_attachment_accepted를 허용한다. 이 상태만으로 수락을 추론하지 않으며 실제 별도 native 영수증·message/IDs·시각 검사 조건은 그대로이고 과거 receipt 원문은 바꾸지 않는다. 없는 server savedAt이나 사용자 다운로드를 만들지 않는다. 공개 successor proof 스키마는 같으며, 추가 private 근거는 기존 receipt/seal SHA를 통해 연결한다. 원 전달 ZIP/source·기존 proof·trust prefix는 소급 수정하지 않는다.
+
+## 전체 7z 외피 계약 (complete v2, packaging-policy-002, 2026-10-08)
+
+2026-10-08 명시 승인 이후 새 기본 전달 pair는 complete v2/7z와 기존 delta/ZIP이다. 이전 `complete v1, packaging-policy-001` 절은 당시 ZIP 계약과 정확한 역사적 증거에 계속 적용한다. 문서·지원 코드의 포장 개정은 새 은행/문항/학습 기록 스키마 개정이 아니며 원 runtime·은행·closed 대장·ZIP·manifest·proof·영수증 바이트를 바꾸지 않는다.
+
+### 형식 선언과 실제 컨테이너
+
+- 새 전체 manifest는 기존 complete 필드에 `archiveFormat`만 추가한 정확한 집합을 갖는다: `schemaVersion`, `archiveFormat`, `kind`, `deliveryMode`, `newlyPublishedRegular`, `projectDirectory`, `prerequisiteArtifacts`, `sourceRelease`, `frozenSourceInventory`, `packagingRevision`, `files`
+- 새 값은 `schemaVersion:2`, `archiveFormat:'7z'`다. `kind:'complete_project_not_learner_import'`, `projectDirectory:'project'`, `prerequisiteArtifacts:[]`, `newlyPublishedRegular:0`과 기존 `download_only`/`release_backup` 경계를 유지한다. 알 수 없는 필드·형식 조합은 거부한다
+- 역사적 complete `schemaVersion:1`은 암묵적으로 ZIP이며 `archiveFormat`을 덧붙이지 않는다. ZIP 선언으로 7z를, 7z 선언으로 ZIP을 수용하지 않는다. 기존 v1의 정확한 파일·manifest·receipt 해시는 그대로 검증한다
+- delta는 ZIP 전용이며 기존 manifest 스키마를 바꾸지 않는다. 정상 `release_backup` delta의 v1과 기존 offline continuation delta의 v2를 complete 외피 v2와 혼동하지 않는다
+- `scripts/archive-format.mjs`는 확장자나 호출자 Boolean 대신 실제 archive 바이트로 형식을 판별한 뒤 내부 manifest 선언을 대조한다. 지원하지 않는 magic, 손상 또는 선언 불일치는 실패로 종료한다. 한 형식의 실패를 다른 형식으로 추측 재시도하여 수용하지 않는다
+
+### 전체 파일과 출처 보존
+
+`sourceRelease`, `frozenSourceInventory`, `packagingRevision`, `files`의 의미·원 hash 연결은 기존 complete 계약과 같다. `files`는 `{path,sha256,bytes}`의 정확한 전체 공개 inventory이며 실제 해제된 `project/<path>`의 경로·크기·SHA-256과 같아야 한다. `manifest.json`·`APPLY-KO.txt` 외에 검사되지 않은 payload를 허용하지 않는다. 포함 파일 추가/누락·빈 경로·unsafe path·대소문자 충돌·중복·symlink·특수 파일·금지된 개인/비공개 자료를 거부한다.
+
+전체 archive는 일반 해제 도구로 빈 폴더에 한 번 해제하는 단일·비암호화 7z다. 이전 archive·순차 delta·맞춤 재구성 프로그램 없이 전체 프로젝트 파일을 제공해야 한다. 선행 delta/사슬 해시는 provenance이며 설치 조건이 아니다. 앱·설정·검사/스크립트·문서·모든 필요한 불변 은행·closed 대장과 공개 가능한 전달/공개 이력은 생략하지 않는다. 용량 절감을 이유로 원 콘텐츠를 편집하거나 기록을 삭제하지 않는다.
+
+`packagingRevision`은 검토된 지원 경로와 정확한 before/after hash만 허용한다. 이 개정의 별도 요약은 `docs/packaging/packaging-policy-002.md`이며 넓은 디렉터리 권한이나 모든 문서의 변경 허가가 아니다. 기존 데이터·runtime·원 ledger/proof/receipt의 변경, 불변 파일 삭제·이름 교체, trust prefix 재작성은 포장 overlay로 허용하지 않는다.
+
+### 검증과 증거 경계
+
+ZIP/7z 모두 실제 CRC·압축/해제 크기·전체 파일 SHA-256과 정확한 허용 목록을 검사한다. 7z reader는 제한된 지원 profile만 읽고 header·metadata·파일 수·개별/총 해제 크기·dictionary의 자원 한도를 적용한다. 암호화·분할·비지원 coder/구조·과도한 자원 선언·손상은 거부한다. 검증 한도는 포장 지원 코드의 안전 경계이며 플랫폼 첨부 한도와 다르다.
+
+`ARCHIVE_LIMITS`의 상한은 archive 128 MiB, 개별 파일 32 MiB, 총 해제 바이트 512 MiB, entry 4,096개, header/metadata 2 MiB, LZMA2 dictionary 64 MiB다. byte 한도는 각각 1 MiB=1,048,576바이트로 계산한다. 이 값 이하라도 경로·정확한 manifest·CRC/SHA·허용 profile 검사가 실패하면 거부한다. 한도 변경은 검토된 코드·음성 검사·계약 개정을 함께 필요로 한다.
+
+`freezeCompleteProject`는 새 기본 7z snapshot을 만들고 `writeCompleteArchive`가 실제 전체 archive를 생성한다. 명시적 `writeCompleteZip`은 v1/ZIP 호환 경로다. 사슬 검증 API의 역사적 `completeZip` 인자명은 Buffer의 실제 형식과 별개이며 실제 magic과 내부 manifest를 검증한다. 기존 source·current 동결, cutoff·eligibility·전체 캠페인·격리/발행 차단·원 사슬 검사를 유지한다. 형식 호환성은 전달 성공이나 새 사슬 등록 권한이 아니다.
+
+일반 도구로 해제한 전체본과 자기 정확한 base에서 재구성한 delta를 각각 검토 source 전체 inventory와 대조하고 필요한 smoke를 실제 실행한다. 종결 소스 검사 재사용은 `validation-efficiency-001`의 독립 인증·정확한 전체 입력과 환경·종결 증거를 만족해야 하며 미실행 corpus를 archive 내 실행으로 세지 않는다. 선언·파일 hash·caller pass만으로 외부 서비스 수락·독립 검토·실제 일반 도구 해제를 증명하지 않는다.
+
+전달 증거에는 실제 artifact의 형식·정확한 바이트 수·SHA-256·manifest SHA와 Library 저장 및 각 native 첨부 수락을 연결한다. 기존 receipt/proof의 스키마를 소급 바꾸지 않고 해당 경로가 허용하는 append-only 사건으로 기록한다. 20 MiB(20,971,520바이트)는 현재 관측 기반 운영 점검선이며 공식 보편적 한도나 전달 보장 필드가 아니다. 저장 성공만으로 `delivered`를 선언하지 않는다. 원 실패·unknown·미실시·공개 수0을 그대로 유지하며 사용자 열람/다운로드·Git/Pages 반영은 별도 증거가 필요하다.

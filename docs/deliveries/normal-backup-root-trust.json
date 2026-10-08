@@ -10,6 +10,15 @@
       "continuationAnchorSha256": "fce5fab9a9fd3d37df9cc8f8911bb5fc17c9a8ff85295d8554896596c3541fc5",
       "registeredAt": "2026-10-07T15:35:57.030Z",
       "eligibleAt": "2026-10-07T15:35:57.030Z"
+    },
+    {
+      "roundId": "round-032",
+      "path": "docs/deliveries/normal-roots/round-032.json",
+      "sha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "sourceAnchorSha256": "bb361ba27c6d6196fd50094c55a265f1126d1a481ce5d24ce14e95235dfbc73c",
+      "continuationAnchorSha256": "bb361ba27c6d6196fd50094c55a265f1126d1a481ce5d24ce14e95235dfbc73c",
+      "registeredAt": "2026-10-08T09:30:16.871Z",
+      "eligibleAt": "2026-10-08T09:30:16.871Z"
     }
   ]
 }

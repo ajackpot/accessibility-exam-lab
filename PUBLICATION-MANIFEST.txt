@@ -69,6 +69,7 @@ data/releases/2026.10.07-regular.28/bank.json
 data/releases/2026.10.08-regular.29/bank.json
 data/releases/2026.10.08-regular.30/bank.json
 data/releases/2026.10.08-regular.31/bank.json
+data/releases/2026.10.08-regular.32/bank.json
 data/seed-bank-v2.json
 data/seed-bank-v3.json
 data/seed-bank-v4.json
@@ -113,21 +114,26 @@ docs/deliveries/normal-backup-chain-trust.json
 docs/deliveries/normal-backup-root-trust.json
 docs/deliveries/normal-chains/round-028/round-029.json
 docs/deliveries/normal-chains/round-028/round-030.json
+docs/deliveries/normal-chains/round-028/round-031.json
 docs/deliveries/normal-roots/round-028.json
+docs/deliveries/normal-roots/round-032.json
 docs/deliveries/offline-chain-trust.json
 docs/deliveries/offline-chain.json
 docs/deliveries/release-backup-trust.json
 docs/incidents/2026-10-06-round-023-evidence-loss.md
+docs/packaging/packaging-policy-002.md
 docs/publications/cumulative-006-008.json
 docs/publications/cumulative-006-008.md
 docs/publications/cumulative-009-017.json
 docs/publications/cumulative-009-017.md
 docs/publications/cumulative-018-027.json
 docs/publications/cumulative-018-027.md
+docs/publications/cumulative-028-031.json
 docs/quarantines/quarantine-001.json
 docs/quarantines/trust.json
 docs/release-blocks/evidence-loss-001.json
 docs/release-blocks/trust.json
+docs/reviews/2026-10-08-held-items-final-review.md
 docs/rounds/round-001.json
 docs/rounds/round-001.md
 docs/rounds/round-002.json
@@ -189,6 +195,8 @@ docs/rounds/round-030.json
 docs/rounds/round-030.md
 docs/rounds/round-031.json
 docs/rounds/round-031.md
+docs/rounds/round-032.json
+docs/rounds/round-032.md
 docs/rounds/round-ledger.schema.json
 docs/rounds/round-ledger.template.json
 docs/rounds/round-report.template.md
@@ -203,6 +211,7 @@ qa/harness.html
 qa/seed-content.test.mjs
 qa/viewport.html
 qa/viewport.js
+scripts/archive-format.mjs
 scripts/bank-io.mjs
 scripts/blob-retry.mjs
 scripts/build.mjs
@@ -222,6 +231,7 @@ scripts/release-backup-continuation.mjs
 scripts/release-bundle.mjs
 scripts/release-guard.mjs
 scripts/release-window.mjs
+scripts/sevenz-codec.py
 scripts/sha-only-tree.mjs
 scripts/source-checks.mjs
 scripts/source-snapshot.mjs
@@ -238,6 +248,7 @@ src/storage.js
 src/workflows.js
 style.css
 tests/announcements.test.mjs
+tests/archive-format.test.mjs
 tests/blob-retry.test.mjs
 tests/bounded-reconciliation.test.mjs
 tests/build-current-bank.test.mjs
@@ -292,6 +303,7 @@ tests/round-ten-bank.test.mjs
 tests/round-thirteen-bank.test.mjs
 tests/round-thirty-bank.test.mjs
 tests/round-thirtyone-bank.test.mjs
+tests/round-thirtytwo-bank.test.mjs
 tests/round-three-bank.test.mjs
 tests/round-twelve-bank.test.mjs
 tests/round-twenty-bank.test.mjs
@@ -304,10 +316,8 @@ tests/round-twentyseven-bank.test.mjs
 tests/round-twentysix-bank.test.mjs
 tests/round-twentytwo-bank.test.mjs
 tests/round-two-bank.test.mjs
+tests/sevenz-codec.test.mjs
 tests/sha-only-tree.test.mjs
 tests/stimulus-layout.test.mjs
 tests/ui-state.test.mjs
 tests/workflows.test.mjs
-docs/reviews/2026-10-08-held-items-final-review.md
-docs/deliveries/normal-chains/round-028/round-031.json
-docs/publications/cumulative-028-031.json

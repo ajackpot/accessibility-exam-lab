@@ -558,7 +558,7 @@ export function assessGitSyncPlan({baseCommit, observedHead, baseIsAncestor, obs
 // Pure helpers intentionally do not poll, cancel prompts, publish, upload or change status.
 // CLI packages only a private plan with actual wall-clock expiry and exclusive output.
 export async function main(args = process.argv.slice(2)) {
-  if (args.length !== 3) fail('Usage: node scripts/download-fallback.mjs PRIVATE-PLAN.json DELTA.zip COMPLETE.zip (both required)');
+  if (args.length !== 3) fail('Usage: node scripts/download-fallback.mjs PRIVATE-PLAN.json DELTA.zip COMPLETE.7z (both required)');
   const plan = JSON.parse(await fs.readFile(args[0], 'utf8'));
   delete plan.now;
   const snapshot = await freezePublicDelta({...plan, now: Date.now()});

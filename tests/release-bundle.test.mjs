@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {execFileSync} from 'node:child_process';
+import {readDeliveredArchive,validateDeliveredArchiveEntries} from '../scripts/release-backup-continuation.mjs';
 import {parsePublicAllowlist} from '../scripts/download-fallback.mjs';
 import {writeReleaseDeliveryPair} from '../scripts/release-bundle.mjs';
 import {FREEZE_AT} from '../src/domain.js';
@@ -13,11 +13,13 @@ async function inventory(root){return Promise.all(parsePublicAllowlist(await fs.
 async function fixture(t){
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'release-bundle-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));const baseRoot=path.join(dir,'base'),workRoot=path.join(dir,'work');await fs.cp(root,baseRoot,{recursive:true});await fs.cp(root,workRoot,{recursive:true});await fs.writeFile(path.join(workRoot,'docs/RELEASE-BACKUP-TEST.txt'),'Synthetic packaging fixture, no publication claim.\n');await fs.appendFile(path.join(workRoot,'PUBLICATION-MANIFEST.txt'),'\ndocs/RELEASE-BACKUP-TEST.txt\n');
  const m=JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))),b=JSON.parse(await fs.readFile(path.join(root,'data',m.file)));
- return {baseRoot,workRoot,baseCommit:'50fd2807a0ff8fc2c10cbf2628f65d0ca53065c2',baseVerifiedAt:'2026-10-04T08:51:19.196Z',baseInventory:await inventory(baseRoot),reviewedInventory:await inventory(workRoot),roundId:b.roundId,deltaOutputPath:path.join(dir,'delta.zip'),completeOutputPath:path.join(dir,'complete.zip'),now:Date.now()};
+ return {baseRoot,workRoot,baseCommit:'50fd2807a0ff8fc2c10cbf2628f65d0ca53065c2',baseVerifiedAt:'2026-10-04T08:51:19.196Z',baseInventory:await inventory(baseRoot),reviewedInventory:await inventory(workRoot),roundId:b.roundId,deltaOutputPath:path.join(dir,'delta.zip'),completeOutputPath:path.join(dir,'complete.7z'),now:Date.now()};
 }
 test('normal release emits truthful exact delta/full pair without invented permission wait or deployment',async t=>{
  const f=await fixture(t),r=await writeReleaseDeliveryPair(f);assert.equal(r.status,'prepared_not_delivered');assert.equal(r.deliveryMode,'release_backup');assert.equal(r.completeManifest.deliveryMode,'release_backup');assert.equal(r.deltaManifest.newlyPublishedByPackaging,0);assert.deepEqual(r.completeManifest.prerequisiteArtifacts,[]);assert.equal(r.completeManifest.sourceRelease.deltaArtifactSha256,r.delta.sha256);assert.equal(r.deltaManifest.permissionDeadlineAt,undefined);assert.equal(r.deltaManifest.gitStoppedAt,undefined);
- const result=execFileSync('python3',['-c',`import zipfile,json,hashlib,sys,pathlib\na,b=map(zipfile.ZipFile,sys.argv[1:3]);assert a.testzip() is None and b.testzip() is None\nam=json.loads(a.read('manifest.json'));bm=json.loads(b.read('manifest.json'));assert am['deliveryMode']==bm['deliveryMode']=='release_backup'\nassert '동결 원 대장의 역사적 공개 상태' in a.read('APPLY-KO.txt').decode()\nassert 'docs/publications' in a.read('APPLY-KO.txt').decode()\nassert set(a.namelist())=={'manifest.json','APPLY-KO.txt'}|{'files/'+f['path'] for f in am['files']}\nassert set(b.namelist())=={'manifest.json','APPLY-KO.txt'}|{'project/'+f['path'] for f in bm['files']}\nfor z,m,prefix in [(a,am,'files/'),(b,bm,'project/')]:\n for f in m['files']:\n  raw=z.read(prefix+f['path']);assert len(raw)==f['bytes'] and hashlib.sha256(raw).hexdigest()==f['sha256']\nprint('two exact backups')`,r.delta.path,r.complete.path],{encoding:'utf8'});assert.match(result,/two exact/);
+ assert.equal(r.completeManifest.schemaVersion,2);assert.equal(r.completeManifest.archiveFormat,'7z');
+ for(const [artifact,prefix]of [[r.delta,'files/'],[r.complete,'project/']]){const raw=await fs.readFile(artifact.path),entries=readDeliveredArchive(raw,artifact.sha256),m=JSON.parse(entries.get('manifest.json'));validateDeliveredArchiveEntries(entries,m,prefix);assert.equal(m.deliveryMode,'release_backup');}
+
  await assert.rejects(writeReleaseDeliveryPair(f),/Output exists/);
 });
 test('normal release rejects missing or modified review inventory before writing either ZIP',async t=>{

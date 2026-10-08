@@ -1,3 +1,4 @@
+import {completeManifestFormat,archiveSignature,decodeSevenZip,verifyArchiveFormat,ARCHIVE_LIMITS} from './archive-format.mjs';
 /** Narrow bridge from exact delivered normal backups. Never rewrites manifests or performs Git. */
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -31,10 +32,12 @@ function crc32(raw){let c=0xffffffff;for(const byte of raw){c^=byte;for(let i=0;
 function archive(raw, pin){
  if(!Buffer.isBuffer(raw)||hash(raw)!==pin)fail('Exact delivered ZIP hash required');
  if(raw.length<22)fail('Truncated delivered ZIP');
- const entries=new Map(),headers=[];let at=0;
+ const entries=new Map(),headers=[];let at=0,total=0;
+ if(raw.length>ARCHIVE_LIMITS.archiveBytes)fail('Delivered ZIP archive size limit exceeded');
  while(at+30<=raw.length&&raw.readUInt32LE(at)===0x04034b50){
   const flag=raw.readUInt16LE(at+6),method=raw.readUInt16LE(at+8),crc=raw.readUInt32LE(at+14),packed=raw.readUInt32LE(at+18),size=raw.readUInt32LE(at+22),nl=raw.readUInt16LE(at+26),xl=raw.readUInt16LE(at+28);
   if(flag!==0x800||raw.readUInt16LE(at+4)!==20||xl!==0||![0,8].includes(method)||size>32*1024*1024||at+30+nl+xl+packed>raw.length)fail('Unsupported or truncated delivered ZIP entry');
+  total+=size;if(total>ARCHIVE_LIMITS.totalBytes||headers.length>=ARCHIVE_LIMITS.entries)fail('Delivered ZIP total/count limit exceeded');
   const filename=raw.subarray(at+30,at+30+nl);if(!nl||filename.some(b=>b<0x21||b>0x7e))fail('Delivered ZIP filenames must use safe ASCII bytes');
   const name=filename.toString('ascii');parsePublicAllowlist(name.replace(/^(?:files|project)\//,''));if([...entries.keys()].some(p=>p.toLowerCase()===name.toLowerCase()))fail('Duplicate archive path');
   const start=at+30+nl+xl,end=start+packed,b=method===8?inflateRawSync(raw.subarray(start,end),{maxOutputLength:Math.max(1,size)}):raw.subarray(start,end);
@@ -210,9 +213,9 @@ function inspectSuccessor(p,previous,source){
  if(p.schemaVersion!==1||p.kind!=='delivered_release_backup_checkpoint'||p.rootProofSha256!==NORMAL_BACKUP_PROOF_SHA256||!equal(p.origin,previous.origin)||!equal(p.predecessor,{roundId:previous.roundId,artifactSha256:previous.artifactSha256,proofSha256:previous.proofSha256})||![p.priorTrustSha256,p.deltaArtifactSha256,p.completeArtifactSha256,p.libraryReceiptSha256,p.attachmentReceiptSha256].every(v=>hex.test(v))||p.userOpenOrDownloadObserved!==false)fail('Invalid checkpoint, predecessor or original uncertainty origin');
  const d=p.deltaManifest,c=p.completeManifest,s=c?.sourceRelease;
  keys(d,['schemaVersion','kind','deliveryMode','roundId','baseCommit','baseVerifiedAt','preparedAt','gitPublicationStatus','publicationCommit','bankVersion','bankSha256','newlyPublishedByPackaging','prerequisiteArtifacts','files','deletions']);
- keys(c,['schemaVersion','kind','deliveryMode','newlyPublishedRegular','projectDirectory','prerequisiteArtifacts','sourceRelease','frozenSourceInventory','packagingRevision','files']);
+ completeManifestFormat(c);
  keys(s,['roundId','deltaArtifactSha256','deltaManifestSha256','baseCommit','bankVersion','bankSha256','ledgerPath','ledgerSha256']);
- if(d.schemaVersion!==1||c.schemaVersion!==1||d.kind!=='developer_patch_not_learner_import'||c.kind!=='complete_project_not_learner_import'||d.deliveryMode!=='release_backup'||c.deliveryMode!=='release_backup'||c.projectDirectory!=='project'||d.newlyPublishedByPackaging!==0||c.newlyPublishedRegular!==0||!equal(d.prerequisiteArtifacts,[])||!equal(c.prerequisiteArtifacts,[])||!equal(d.deletions,[])||c.packagingRevision!==null||!equal(c.frozenSourceInventory,c.files))fail('Exact normal delta and standalone full delivery required');
+ if(d.schemaVersion!==1||d.kind!=='developer_patch_not_learner_import'||c.kind!=='complete_project_not_learner_import'||d.deliveryMode!=='release_backup'||c.deliveryMode!=='release_backup'||c.projectDirectory!=='project'||d.newlyPublishedByPackaging!==0||c.newlyPublishedRegular!==0||!equal(d.prerequisiteArtifacts,[])||!equal(c.prerequisiteArtifacts,[])||!equal(d.deletions,[])||c.packagingRevision!==null||!equal(c.frozenSourceInventory,c.files))fail('Exact normal delta and standalone full delivery required');
  if(s.deltaArtifactSha256!==p.deltaArtifactSha256||s.deltaManifestSha256!==hash(json(d))||s.roundId!==d.roundId||s.bankVersion!==d.bankVersion||s.bankSha256!==d.bankSha256||s.baseCommit!==d.baseCommit||s.baseCommit!==previous.baseCommit||s.ledgerPath!==`docs/rounds/${s.roundId}.json`||roundNumber(s.roundId)<=roundNumber(previous.roundId))fail('Checkpoint release identity or verified public anchor mismatch');
  for(const [files,delta] of [[c.files,false],[d.files,true]]){
   if(!Array.isArray(files)||!files.length)fail('Missing exact archive inventory');
@@ -245,7 +248,7 @@ export async function validateReleaseBackupDependencies(root){
  const allow=new Set(parsePublicAllowlist((await publicBytes(root,'PUBLICATION-MANIFEST.txt')).toString()));
  const raw=await publicBytes(root,RELEASE_BACKUP_TRUST_PATH),local=trustRegistry(JSON.parse(raw));
  if(!equal(local,beforeTrust(local.checkpoints.length))||!equal(raw,json(local)))fail('Unreviewed or rewritten checkpoint trust registry');
- for(const p of ['scripts/release-backup-continuation.mjs',RELEASE_BACKUP_TRUST_PATH,NORMAL_BACKUP_PATH,...local.checkpoints.map(pin=>pin.path)]){
+ for(const p of ['scripts/release-backup-continuation.mjs',...(continuation.includes('decodeSevenZip')?['scripts/archive-format.mjs','scripts/sevenz-codec.py']:[]),RELEASE_BACKUP_TRUST_PATH,NORMAL_BACKUP_PATH,...local.checkpoints.map(pin=>pin.path)]){
   if(!allow.has(p))fail('Modern continuation dependency missing from reviewed allowlist: '+p);
   let b;try{b=await publicBytes(root,p);}catch(e){if(p===NORMAL_BACKUP_PATH&&e.code==='ENOENT')fail('Missing exact normal-backup offline predecessor proof for successor');throw e;}
   const pin=local.checkpoints.find(pin=>pin.path===p);
@@ -325,7 +328,7 @@ export async function prepareReleaseBackupContinuation({deltaZip,completeZip,lib
  }
  if(Date.parse(attached.attachmentAcceptedAt)!==lastAcceptance)fail('Pair acceptance must be the later actual native attachment');
  if(!Number.isFinite(Date.parse(saved.savedAt))||!Number.isFinite(Date.parse(attached.attachmentAcceptedAt))||Date.parse(saved.savedAt)>now||Date.parse(attached.attachmentAcceptedAt)>now)fail('Actual nonfuture delivery times required');
- const delta=archive(deltaZip,hash(deltaZip)),complete=archive(completeZip,hash(completeZip)),d=JSON.parse(delta.get('manifest.json')),c=JSON.parse(complete.get('manifest.json'));
+ const delta=readDeliveredArchive(deltaZip,hash(deltaZip)),complete=readDeliveredArchive(completeZip,hash(completeZip)),d=JSON.parse(delta.get('manifest.json')),c=JSON.parse(complete.get('manifest.json'));
  if(!equal(delta.get('manifest.json'),json(d))||!equal(complete.get('manifest.json'),json(c)))fail('Exact canonical archive manifest bytes required');
  inspectArchive(delta,d,'files/');inspectArchive(complete,c,'project/');
  if(!equal(parsePublicAllowlist(complete.get('project/PUBLICATION-MANIFEST.txt').toString()).sort(),c.files.map(f=>f.path).sort()))fail('Full delivered inventory must equal allowlist');
@@ -353,5 +356,11 @@ export async function prepareReleaseBackupContinuation({deltaZip,completeZip,lib
  return {status:'proposed_requires_independent_receipt_review',proof:p,proofRaw,trustRecord,trustRegistryRaw:json(trustRegistry({...trusted,checkpoints:[...trusted.checkpoints,trustRecord]}))};
 }
 
-// Shared read-only ZIP validation for independently anchored delivery proofs.
-export {archive as readDeliveredArchive, inspectArchive as validateDeliveredArchiveEntries};
+// Existing parameter names (including completeZip) are compatibility aliases for
+// exact raw archive bytes. The discriminator is checked against container magic.
+export function readDeliveredArchive(raw,pin){
+ if(!Buffer.isBuffer(raw)||hash(raw)!==pin)fail('Exact delivered archive hash required');
+ const format=archiveSignature(raw),entries=format==='zip'?archive(raw,pin):decodeSevenZip(raw);
+ verifyArchiveFormat(entries,format);return entries;
+}
+export {inspectArchive as validateDeliveredArchiveEntries};

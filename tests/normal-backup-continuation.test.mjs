@@ -1,3 +1,4 @@
+import {decodeSevenZip} from '../scripts/archive-format.mjs';
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -95,12 +96,12 @@ test('default loader and explicit release context accept real010 lineage without
   const paths=parsePublicAllowlist(await fs.readFile(allowlistPath,'utf8'));
   await fs.writeFile(allowlistPath,[...new Set([...paths,'docs/rounds/round-010.json','docs/rounds/round-010.md','data/releases/'+bank.bankVersion+'/bank.json'])].join('\n')+'\n');
   const inventory=async folder=>Promise.all(parsePublicAllowlist(await fs.readFile(path.join(folder,'PUBLICATION-MANIFEST.txt'),'utf8')).map(async p=>{const raw=await fs.readFile(path.join(folder,p));return {path:p,sha256:hash(raw),bytes:raw.length};}));
-  const pair=await writeReleaseDeliveryPair({baseRoot:process.env.NORMAL_BACKUP_REMOTE_BASE_ROOT,workRoot:dir,baseCommit:proof.deltaManifest.baseCommit,baseVerifiedAt:proof.deltaManifest.baseVerifiedAt,baseInventory:await inventory(process.env.NORMAL_BACKUP_REMOTE_BASE_ROOT),reviewedInventory:await inventory(dir),roundId:'round-010',deltaOutputPath:path.join(dir,'synthetic-changes.zip'),completeOutputPath:path.join(dir,'synthetic-complete.zip'),now});
+  const pair=await writeReleaseDeliveryPair({baseRoot:process.env.NORMAL_BACKUP_REMOTE_BASE_ROOT,workRoot:dir,baseCommit:proof.deltaManifest.baseCommit,baseVerifiedAt:proof.deltaManifest.baseVerifiedAt,baseInventory:await inventory(process.env.NORMAL_BACKUP_REMOTE_BASE_ROOT),reviewedInventory:await inventory(dir),roundId:'round-010',deltaOutputPath:path.join(dir,'synthetic-changes.zip'),completeOutputPath:path.join(dir,'synthetic-complete.7z'),now});
   assert.equal(pair.deltaManifest.baseCommit,'500811b7ee226f33cfb598df42c6cb347b935d28');
   for(const version of ['2026.10.04-regular.9','2026.10.04-regular.10'])assert.ok(pair.deltaManifest.files.some(f=>f.path===`data/releases/${version}/bank.json`));
   assert.equal(pair.deltaManifest.deliveryMode,'release_backup');assert.deepEqual(pair.completeManifest.prerequisiteArtifacts,[]);assert.equal(pair.completeManifest.sourceRelease.roundId,'round-010');
-  const {execFileSync}=await import('node:child_process');
-  execFileSync('python3',['-c','import zipfile,sys,json,hashlib; z=zipfile.ZipFile(sys.argv[1]); assert z.testzip() is None; m=json.loads(z.read("manifest.json")); assert m["prerequisiteArtifacts"]==[]; [(_ for _ in ()).throw(Exception("hash")) for f in m["files"] if hashlib.sha256(z.read("project/"+f["path"])).hexdigest()!=f["sha256"]]; z.extractall(sys.argv[2])',pair.complete.path,path.join(dir,'empty-full')]);
+  const full=decodeSevenZip(await fs.readFile(pair.complete.path)),cm=JSON.parse(full.get('manifest.json'));assert.deepEqual(cm.prerequisiteArtifacts,[]);for(const f of cm.files)assert.equal(hash(full.get('project/'+f.path)),f.sha256);
+  assert.deepEqual([...full.keys()].sort(),['manifest.json','APPLY-KO.txt',...cm.files.map(f=>'project/'+f.path)].sort());const restored=path.join(dir,'empty-full');await fs.mkdir(restored);for(const [name,bytes]of full){const target=path.join(restored,name);await fs.mkdir(path.dirname(target),{recursive:true});await fs.writeFile(target,bytes,{flag:'wx'});}
   const extracted=await fixture.loadRoundContext(path.join(dir,'empty-full/project'),null,{release:true,now});assert.equal(validateReleaseLedger(extracted.ledgers,{...extracted,now}).ok,true);
  }
 

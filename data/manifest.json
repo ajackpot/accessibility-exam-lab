@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.08-regular.31",
-  "releasedAt": "2026-10-08T04:59:53.150Z",
-  "file": "releases/2026.10.08-regular.31/bank.json",
-  "sha256": "39810e9b50c55b51af7875e96252f9132b0447d28e7edd1ff900c3124bb96fab",
-  "changeSummary": "31회차 검증 누적본: 신규 필기 11개·실기 3개, 누적 일반 908개·기존 시드14개. 정확히 전달 검증된 30회차를 기준으로 기존 문항과 예약 이력을 보존했다. 새 문항의 전체 해설에는 실제 풀이 규칙과 적용 결과를 담았다. Git/Pages 공개 여부는 별도 확인한다.",
+  "bankVersion": "2026.10.08-regular.32",
+  "releasedAt": "2026-10-08T08:13:09.696Z",
+  "file": "releases/2026.10.08-regular.32/bank.json",
+  "sha256": "fc7e606d60e6081ab155d45966b5ac5ca0ff0585c1db18ad40582006f943ceb6",
+  "changeSummary": "32회차 검증 누적본: 신규 필기 7개·실기 0개, 누적 일반 915개·기존 시드14개. 실제 Git/Pages 공개가 확인된 31회차를 기준으로 기존 문항과 예약 이력을 보존했다. 새 문항의 전체 해설에는 실제 풀이 규칙과 적용 결과를 담았다. Git/Pages 공개 여부는 별도 확인한다.",
   "finalRelease": false
 }

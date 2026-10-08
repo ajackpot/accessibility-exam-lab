@@ -2,6 +2,8 @@
 
 이 파일은 저장소의 반복 작업 규칙 정본이다. `agents.md`로 요청된 내용을 도구가 인식하는 표준 파일명 `AGENTS.md`로 관리한다. 소문자 사본을 따로 만들지 않는다. 상세 요구사항은 `docs/PRD.md` 1.9, 운영 순서는 `docs/OPERATIONS.md`, 구조·불변 조건은 `docs/DATA-CONTRACT.md`를 함께 읽는다.
 
+2026-10-08 명시 승인 이후 새 전달의 포장 형식은 아래 `packaging-policy-002`가 우선한다. 기존 절의 전체 ZIP·두 ZIP 요구는 당시 정책과 원본 증거로 보존하며, 새 기본 전달은 **전체 7z + 변경분 ZIP**이다. 내용·이력·일정·검토·동결 규칙은 그대로 적용한다.
+
 ## 시작 전에
 
 - 최신 원격 main, manifest, publication-state, 직전 확대 회차의 대장·다음 조사 계획과 최신 공개 확인된 편집 정정 대장·보고서를 함께 확인한다. 정상 원격 확대는 현재 manifest의 활성 은행을 기준으로 하며, 아래의 유한 재대조 정책으로 허용된 오프라인 확대는 정확히 검증한 전달 사슬의 최신 선행 은행을 별도 기준으로 삼는다. 두 경우 모두 정정된 문구·revision을 보존하고 기존 범위·공유 선택지 공백 조사를 이어 가며 마지막 확대 은행으로 되돌리지 않는다. 사용자 대화나 비공개 파일에 의존하지 않는 공개 산출물만 저장한다
@@ -201,3 +203,15 @@
 ## 검증 실행 통합
 
 PRD·OPERATIONS의 validation-efficiency-001을 따른다. 고유 의미 검사는 유지하고 같은 스냅샷의 `check`·직접 release ledger·`release:check` 연속 중복은 `npm run release:validate` 한 번으로 통합할 수 있다. 단독 validator의 보호를 끄지 않으며 새 명령은 전체 테스트·build·archive 또는 공개 증거를 대신하지 않는다. 입력/runner/runtime/전체 의존성과 종결 결과가 독립 인증된 동일 소스 proof만 정확한 archive 재구성 검사와 빈 폴더 smoke를 별도 수행한 뒤 재사용할 수 있다. 재사용/실행/미실시를 구별하고 과거 기록을 고쳐 쓰지 않는다. 실제 시각·두 동결 marker·현재 eligibility·실제 remote/Pages 검사는 각 작업 경계에서 갱신한다. 종료가 확인된 로컬 idempotent 검사의 재실행에는 Git 10분 대기를 전용하지 않으며 결과 불명 외부 쓰기는 원 정책을 유지한다.
+
+## 전체 7z와 변경분 ZIP 전달 (packaging-policy-002, 2026-10-08)
+
+- 새 기본 전달은 `COMPLETE.7z`와 `DELTA.zip`이다. 전체본은 일반 7z 해제 한 번으로 빈 폴더에 `project/`와 manifest·한국어 안내를 제공한다. 이전 archive·순차 delta·별도 복원 스크립트를 설치 조건으로 삼지 않는다
+- 전체 공개 허용 목록과 모든 필요한 불변 은행·종결 대장·전달/공개 증거를 원문대로 포함한다. 새 문항·문항 개정·은행 재작성은 하지 않는다. `.git`, 비공개 출제/검토 자료·서비스 식별자·개인 학습 기록·비밀은 제외한다
+- 새 전체 manifest는 `schemaVersion:2`, `archiveFormat:7z`이며 기존 complete v1/ZIP과 delta 계약은 보존한다. 실제 archive 형식·선언·크기·CRC·전체 파일 SHA-256을 대조하고 다른 형식으로 추측 재시도하지 않는다. 상세 필드·제한은 DATA-CONTRACT를 따른다
+- 변경분은 정확한 공개 기준 커밋·전체 inventory·before/after에만 적용한다. 전체본 설치와 delta 재구성을 각각 검사하고 `validation-efficiency-001`의 엄격한 재사용 조건 또는 실제 전체 검증을 유지한다
+- 실제 artifact별 형식·바이트 수·SHA-256, Library 저장 결과와 native 첨부 수락을 확인한 뒤에만 전달 완료로 알린다. 현재 20 MiB는 관측한 첨부 실패에 근거한 운영 점검선이며 보편적 공식 한도나 수락 보장이 아니다
+- Windows 11 24H2의 공식 7z 지원과 이 프로젝트의 Windows/NVDA 실측을 구별한다. 다른 환경은 호환 해제 도구가 필요할 수 있으며 설치를 자동 요구하거나 수행하지 않는다. 학습 기록 백업·동일 사이트 주소 유지를 안내하고 브라우저 저장소 삭제를 요구하지 않는다
+- 원 ZIP·manifest·영수증·trust prefix·검토 횟수·최초 unknown/종결 시계·공개 수는 바꾸지 않는다. 새 비용·자격증명·권한·전달 목적지를 추가하지 않으며 이 포장 승인을 Git 쓰기나 중단된 publisher 재개 허가로 쓰지 않는다
+
+정본 개정 요약은 `docs/packaging/packaging-policy-002.md`, 실행 순서는 OPERATIONS의 같은 개정 절을 따른다.

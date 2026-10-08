@@ -1,3 +1,4 @@
+import {encodeSevenZip,decodeSevenZip,archiveSignature} from '../scripts/archive-format.mjs';
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -48,7 +49,7 @@ async function historicalTen(t,sourceRoot=root){
  const proof=JSON.parse(await read(dir,'docs/deliveries/checkpoints/round-010.json'));await write(dir,'data/manifest.json',proof.runtimeManifestRaw);
  return dir;
 }
-function entries(raw){const out=new Map();let at=0;while(raw.readUInt32LE(at)===0x04034b50){const size=raw.readUInt32LE(at+18),nl=raw.readUInt16LE(at+26),xl=raw.readUInt16LE(at+28),start=at+30+nl+xl;out.set(raw.subarray(at+30,at+30+nl).toString(),raw.readUInt16LE(at+8)===8?inflateRawSync(raw.subarray(start,start+size)):raw.subarray(start,start+size));at=start+size;}return out;}
+function entries(raw){if(archiveSignature(raw)==='7z')return decodeSevenZip(raw);const out=new Map();let at=0;while(raw.readUInt32LE(at)===0x04034b50){const size=raw.readUInt32LE(at+18),nl=raw.readUInt16LE(at+26),xl=raw.readUInt16LE(at+28),start=at+30+nl+xl;out.set(raw.subarray(at+30,at+30+nl).toString(),raw.readUInt16LE(at+8)===8?inflateRawSync(raw.subarray(start,start+size)):raw.subarray(start,start+size));at=start+size;}return out;}
 
 
 test('exact manual011 separates earlier request from actual start and preserves the closed010 deadline',()=>{
@@ -121,13 +122,13 @@ test('exact manual011 can be checkpointed and followed by ordinary012 without an
  const r=manual();Object.assign(r,{status:'closed',closedAt:'2026-10-04T13:09:00Z',noGapExplanation:'Synthetic timing-only fixture; no new learning goals.'});const bank11=await stageBank(dir,r,JSON.parse(raw));
  const v11=await moduleAt(dir,'validate-round'),c11=await v11.loadRoundContext(dir,null,{release:true,now:Date.now()});const result11=v11.validateReleaseLedger(c11.ledgers,{...c11,now:Date.now()});assert.equal(result11.ok,true,result11.errors.join('\n'));
  const {writeReleaseDeliveryPair}=await moduleAt(dir,'release-bundle');
- const pair=await writeReleaseDeliveryPair({baseRoot:base,workRoot:dir,baseCommit:'500811b7ee226f33cfb598df42c6cb347b935d28',baseVerifiedAt:'2026-10-04T13:09:30Z',baseInventory:await inventory(base),reviewedInventory:await inventory(dir),roundId:'round-011',deltaOutputPath:path.join(parent,'delta.zip'),completeOutputPath:path.join(parent,'complete.zip'),now:Date.parse('2026-10-04T13:10:00Z')});
+ const pair=await writeReleaseDeliveryPair({baseRoot:base,workRoot:dir,baseCommit:'500811b7ee226f33cfb598df42c6cb347b935d28',baseVerifiedAt:'2026-10-04T13:09:30Z',baseInventory:await inventory(base),reviewedInventory:await inventory(dir),roundId:'round-011',deltaOutputPath:path.join(parent,'delta.zip'),completeOutputPath:path.join(parent,'complete.7z'),now:Date.parse('2026-10-04T13:10:00Z')});
  const delta=entries(await fs.readFile(pair.delta.path)),complete=entries(await fs.readFile(pair.complete.path)),d=JSON.parse(delta.get('manifest.json')),c=JSON.parse(complete.get('manifest.json'));
  // Reconstruct the fixture's cumulative before-hash list from the fixed009
  // anchor. This is fixture assembly, never an assertion of a new remote read.
  const pinned=JSON.parse(await read(dir,'docs/deliveries/normal-backup-009.json')),old=new Map(pinned.deltaManifest.files.map(f=>[f.path,f])),anchor=new Map(pinned.completeManifest.files.filter(f=>!old.has(f.path)||old.get(f.path).beforeSha256!==null).map(f=>[f.path,old.has(f.path)?old.get(f.path).beforeSha256:f.sha256]));
  d.files=c.files.filter(f=>anchor.get(f.path)!==f.sha256).map(f=>({...f,beforeSha256:anchor.get(f.path)??null}));for(const name of [...delta.keys()])if(name.startsWith('files/'))delta.delete(name);for(const f of d.files)delta.set('files/'+f.path,complete.get('project/'+f.path));delta.set('manifest.json',json(d));
- const deltaZip=zipStored([...delta].map(([name,raw])=>({name,raw})),{compress:true});c.sourceRelease.deltaArtifactSha256=hash(deltaZip);c.sourceRelease.deltaManifestSha256=hash(json(d));complete.set('manifest.json',json(c));const completeZip=zipStored([...complete].map(([name,raw])=>({name,raw})),{compress:true});
+ const deltaZip=zipStored([...delta].map(([name,raw])=>({name,raw})),{compress:true});c.sourceRelease.deltaArtifactSha256=hash(deltaZip);c.sourceRelease.deltaManifestSha256=hash(json(d));complete.set('manifest.json',json(c));const completeZip=encodeSevenZip([...complete].map(([name,raw])=>({name,raw})));
  const artifacts=[['delta',deltaZip],['complete',completeZip]].map(([kind,b])=>({kind,library_file_id:`synthetic-never-delivered-${kind}`,sha256:hash(b),bytes:b.length}));
  const saved={schemaVersion:1,roundId:'round-011',status:'library_saved_attachment_pending',savedAt:'2026-10-04T13:10:30Z',newlyPublishedByDelivery:0,artifacts};
  const attached={...saved,status:'native_attachments_accepted',attachmentAcceptedAt:'2026-10-04T13:11:00Z',attachments:artifacts.map(a=>({kind:a.kind,library_file_id:a.library_file_id,messageId:'synthetic-no-real-message',acceptedAt:'2026-10-04T13:11:00Z'})),userOpenOrDownloadObserved:false,deliveryMode:'release_backup',publicationAtPreparation:'not_attempted',publicationCountsChangedByDelivery:false};

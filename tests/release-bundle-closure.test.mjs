@@ -39,7 +39,7 @@ async function fixture(t){
  await write(workRoot,reportPath,'Required report exists only in the mutable workspace, not the reviewed artifact.\n');
  await write(workRoot,'PUBLICATION-MANIFEST.txt',[...paths,...Object.keys(additions)].join('\n')+'\n');
  const {writeReleaseDeliveryPair}=await import(pathToFileURL(path.join(workRoot,'scripts/release-bundle.mjs')));
- return {packagePair:writeReleaseDeliveryPair,baseRoot,workRoot,baseCommit:r.baseline.sourceCommit,baseVerifiedAt:'2026-10-04T08:51:19.196Z',baseInventory:await inventory(baseRoot),reviewedInventory:await inventory(workRoot),roundId:r.roundId,deltaOutputPath:path.join(dir,'delta.zip'),completeOutputPath:path.join(dir,'complete.zip'),now};
+ return {packagePair:writeReleaseDeliveryPair,baseRoot,workRoot,baseCommit:r.baseline.sourceCommit,baseVerifiedAt:'2026-10-04T08:51:19.196Z',baseInventory:await inventory(baseRoot),reviewedInventory:await inventory(workRoot),roundId:r.roundId,deltaOutputPath:path.join(dir,'delta.zip'),completeOutputPath:path.join(dir,'complete.7z'),now};
 }
 async function noOutputs(f){for(const p of [f.deltaOutputPath,f.completeOutputPath])await assert.rejects(fs.stat(p),{code:'ENOENT'});}
 test('normal backup cannot validate a required report outside the exact packaged inventory',async t=>{
