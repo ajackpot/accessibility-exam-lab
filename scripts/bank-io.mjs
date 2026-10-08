@@ -12,6 +12,8 @@ export async function readBankInput(root,input) {
   let loader='',hasRegistry=false;try{loader=await fs.readFile(path.join(root,'scripts/bank-io.mjs'),'utf8');}catch(error){if(error.code!=='ENOENT')throw error;}
   try{await fs.lstat(path.join(root,'docs/release-blocks/trust.json'));hasRegistry=true;}catch(error){if(error.code!=='ENOENT')throw error;}
   if(hasRegistry||validator.includes('loadEvidenceLossDependencies')||loader.includes('loadEvidenceLossDependencies'))await loadEvidenceLossDependencies(root);
+  if(validator.includes('loadNormalBackupRoots')||loader.includes('validateNormalBackupRootDependencies')||await fs.stat(path.join(root,'docs/deliveries/normal-backup-root-trust.json')).then(()=>true,error=>{if(error.code==='ENOENT')return false;throw error;})){const {validateNormalBackupRootDependencies}=await import('./normal-backup-root.mjs');await validateNormalBackupRootDependencies(root);}
+  if(validator.includes('loadNormalBackupChains')||loader.includes('validateNormalBackupChainDependencies')||await fs.stat(path.join(root,'docs/deliveries/normal-backup-chain-trust.json')).then(()=>true,error=>{if(error.code==='ENOENT')return false;throw error;})){const {validateNormalBackupChainDependencies}=await import('./normal-backup-chain.mjs');await validateNormalBackupChainDependencies(root);}
   if(input) {
     const raw=await fs.readFile(path.resolve(input),'utf8');
     const bank=assertNoEvidenceLossContent(assertNoQuarantinedContent(validateBankForPublication(JSON.parse(raw))));

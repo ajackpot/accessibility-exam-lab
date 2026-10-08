@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "kind": "reviewed_normal_release_roots",
+  "roots": [
+    {
+      "roundId": "round-028",
+      "path": "docs/deliveries/normal-roots/round-028.json",
+      "sha256": "e97e8f07760fe3d5f1fbb423d5598dd01163e8092a493031aa67919b6cb9f271",
+      "sourceAnchorSha256": "dd8c760d35277598a51bab39f2485809b76a3cc6482d7ad6de230d4a28da86bc",
+      "continuationAnchorSha256": "fce5fab9a9fd3d37df9cc8f8911bb5fc17c9a8ff85295d8554896596c3541fc5",
+      "registeredAt": "2026-10-07T15:35:57.030Z",
+      "eligibleAt": "2026-10-07T15:35:57.030Z"
+    }
+  ]
+}

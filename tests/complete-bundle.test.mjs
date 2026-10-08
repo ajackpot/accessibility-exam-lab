@@ -10,7 +10,8 @@ import {freezeCompleteProject,writeCompleteZip,writeOfflineDeliveryPair,complete
 const root=path.resolve(import.meta.dirname,'..');
 // Simulated current-tree audit time follows both the active bank and included block events.
 const blockPins=JSON.parse(await fs.readFile(path.join(root,'docs/release-blocks/trust.json'))).events;
-const now=Math.max(Date.parse('2026-10-04T09:00:00Z'),Date.parse(JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))).releasedAt)+60_000,...blockPins.map(p=>Date.parse(p.recordedAt)+60_000));
+const normalPins=[...JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/normal-backup-root-trust.json'))).roots,...JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/normal-backup-chain-trust.json'))).checkpoints];
+const now=Math.max(Date.parse('2026-10-04T09:00:00Z'),Date.parse(JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))).releasedAt)+60_000,...blockPins.map(p=>Date.parse(p.recordedAt)+60_000),...normalPins.map(p=>Date.parse(p.registeredAt)+60_000));
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const json=value=>Buffer.from(JSON.stringify(value,null,2)+'\n');
 async function reviewed() {
@@ -101,3 +102,5 @@ test('symlink roots and directory traversal inventories are rejected',async t=>{
   await assert.rejects(freezeCompleteProject({...f,workRoot:path.join(dir,'linked')}),/Symlink root/);
   f.reviewedInventory.push({path:'../secret.txt',sha256:'a'.repeat(64),bytes:0});await assert.rejects(freezeCompleteProject(f),/Unsafe/);
 });
+
+test('new complete packaging cannot predate an included delivered checkpoint registration',async()=>{const f=await fixture(),latest=Math.max(...normalPins.map(p=>Date.parse(p.registeredAt)));if(normalPins.length)await assert.rejects(freezeCompleteProject({...f,now:latest-1}),/registration|eligible/);});

@@ -13,6 +13,7 @@ async function write(root,p,raw){await fs.mkdir(path.dirname(path.join(root,p)),
 const trust={schemaVersion:1,kind:'reviewed_prepublication_quarantines',audits:[]};
 const seedRaw=await read('data/releases/2026.10.02-seed.4/bank.json'),seed=JSON.parse(seedRaw);
 const source=seed.sources[0];
+const normalBackupRootProofSha256=JSON.parse(await read('docs/deliveries/release-backup-trust.json')).rootProofSha256;
 function packageFor(suffix){
  const q=clone(seed.questions.find(q=>q.type==='written'&&q.subjectId==='s1'));
  Object.assign(q,{questionId:'synthetic-'+suffix,templateId:'synthetic-template-'+suffix,learningGoalId:'synthetic-goal-'+suffix,revision:1,testOnly:false,verificationStatus:'candidate',contentStage:'regular_candidate',stem:'Synthetic original '+suffix+' scenario.',explanation:'Synthetic '+suffix+' governing rationale.',sourceRefs:[source.id],reviewNote:'Synthetic fixture, not exam content.'});
@@ -39,6 +40,12 @@ async function fixture(t){
  await fs.copyFile(path.join(ROOT,'package.json'),path.join(registrationRoot,'package.json'));
  await write(registrationRoot,'docs/quarantines/trust.json',json(trust));
  await write(registrationRoot,'docs/deliveries/offline-chain-trust.json',json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
+ // Import dependency only; an empty synthetic registry conveys no normal-backup authority.
+ await write(registrationRoot,'docs/deliveries/normal-backup-root-trust.json',json({schemaVersion:1,kind:'reviewed_normal_release_roots',roots:[]}));
+ // Import/dependency closure only: no delivered successors or accepted proof pins.
+ await write(registrationRoot,'docs/deliveries/normal-backup-chain-trust.json',json({schemaVersion:1,kind:'reviewed_normal_release_successors',checkpoints:[]}));
+ // Static import identity only: no bootstrap proof or delivery checkpoints are supplied.
+ await write(registrationRoot,'docs/deliveries/release-backup-trust.json',json({schemaVersion:1,rootProofSha256:normalBackupRootProofSha256,checkpoints:[]}));
  await write(registrationRoot,'docs/release-blocks/trust.json',json({schemaVersion:1,kind:'reviewed_evidence_loss_blocks',events:[]}));
  const unregistered=await import(pathToFileURL(path.join(registrationRoot,'scripts/prepublication-quarantine.mjs')));
  const registration={sourceRoot,deliveredRoot:sourceRoot,ledger:clone(r),candidatePackages:packages,evidenceBytes,now:Date.parse('2026-10-02T05:48:00Z')};
@@ -46,7 +53,7 @@ async function fixture(t){
  await fs.cp(registrationRoot,root,{recursive:true});for(const p of ['docs/rounds/round-ledger.schema.json','docs/corrections/editorial-ledger.schema.json'])await write(root,p,await read(p));
  await write(root,'docs/quarantines/trust.json',json({...trust,audits:[proposed.pin]}));await write(root,proposed.pin.path,json(audit));
  for(const [p,raw]of prior)await write(root,p,raw);
- await write(root,'PUBLICATION-MANIFEST.txt',Buffer.from([...listed,'scripts/prepublication-quarantine.mjs','docs/quarantines/trust.json',proposed.pin.path,'scripts/validate-round.mjs','scripts/evidence-loss-block.mjs','docs/release-blocks/trust.json'].join('\n')+'\n'));
+ await write(root,'PUBLICATION-MANIFEST.txt',Buffer.from([...listed,'scripts/prepublication-quarantine.mjs','docs/quarantines/trust.json',proposed.pin.path,'scripts/validate-round.mjs','scripts/evidence-loss-block.mjs','docs/release-blocks/trust.json','scripts/normal-backup-root.mjs','docs/deliveries/normal-backup-root-trust.json','scripts/normal-backup-chain.mjs','docs/deliveries/normal-backup-chain-trust.json'].join('\n')+'\n'));
  const api=await import(pathToFileURL(path.join(root,'scripts/prepublication-quarantine.mjs'))),roundApi=await import(pathToFileURL(path.join(root,'scripts/validate-round.mjs'))),delivery=await import(pathToFileURL(path.join(root,'scripts/download-fallback.mjs'))),bankApi=await import(pathToFileURL(path.join(root,'scripts/bank-io.mjs')));
  const bank=clone(seed);Object.assign(bank,{bankVersion:'synthetic-quarantined-release',releasedAt:'2026-10-02T05:46:00Z'});const q=clone(eligible.question);Object.assign(q,{verificationStatus:'published',contentStage:'regular'});bank.questions.push(q);bank.options.push(...clone(eligible.options));const raw=json(bank);
  Object.assign(r.publication,{status:'not_attempted',commit:null,verifiedAt:null,url:null,bankVersion:bank.bankVersion,bankSha256:sha(raw),blockers:[]});

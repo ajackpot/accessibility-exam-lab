@@ -11,7 +11,19 @@ import {validatePublicationSynchronizations,validatePublicationEvidenceOrder,val
 import {FREEZE_AT} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..'),hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>JSON.stringify(o,null,2)+'\n';
 const loaded=await loadRoundContext(root,null,{release:true}),proof=loaded.synchronizations.find(e=>e.syncId==='cumulative-009-017'),now=Date.now();
+const laterAuthorities=loaded.synchronizations.slice(loaded.synchronizations.indexOf(proof)+1);
 loaded.synchronizations=loaded.synchronizations.slice(0,loaded.synchronizations.indexOf(proof)+1);
+// This historical delivery fixture excludes later normal remote-backed rounds
+// whose genuine baseline authority is deliberately outside this event prefix.
+const excludedFixtureRounds=new Set(loaded.ledgers.filter(l=>!l.baseline?.offlinePredecessor&&laterAuthorities.some(e=>l.baseline?.bankVersion===e.manifest.bankVersion&&Date.parse(l.startedAt)>=Date.parse(e.verifiedAt))).map(l=>l.roundId));
+// A delivered descendant cannot retain a baseline whose normal source was
+// removed with its later publication authority. Keep unrelated offline chains.
+let excludedMore;
+do{excludedMore=false;for(const l of loaded.ledgers){if(excludedFixtureRounds.has(l.baseline?.offlinePredecessor?.roundId)&&!excludedFixtureRounds.has(l.roundId)){excludedFixtureRounds.add(l.roundId);excludedMore=true;}}}while(excludedMore);
+loaded.ledgers=loaded.ledgers.filter(l=>!excludedFixtureRounds.has(l.roundId));
+const fixtureTip=loaded.ledgers.filter(l=>l.publication?.bankVersion&&l.publication.status==='not_attempted').sort((a,b)=>Date.parse(a.startedAt)-Date.parse(b.startedAt)).at(-1),fixtureBank=JSON.parse(loaded.banks.get(fixtureTip.publication.bankVersion).raw);
+loaded.manifest={...loaded.manifest,bankVersion:fixtureBank.bankVersion,releasedAt:fixtureBank.releasedAt,file:`releases/${fixtureBank.bankVersion}/bank.json`,sha256:fixtureTip.publication.bankSha256,changeSummary:fixtureBank.changeSummary};
+
 const publicationPath=`docs/publications/${proof.syncId}.json`;
 function failed(result,pattern){assert.equal(result.ok,false);if(pattern)assert.match(result.errors.join('\n'),pattern);}
 function successor(start=new Date(Date.parse(proof.verifiedAt)+1).toISOString()){

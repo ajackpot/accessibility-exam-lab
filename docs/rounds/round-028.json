@@ -1,0 +1,731 @@
+{
+  "ledgerSchemaVersion": 1,
+  "campaignId": "2026-exam-final",
+  "roundId": "round-028",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-07T11:00:01.811380+00:00",
+  "decisionDeadline": "2026-10-07T14:00:00Z",
+  "closedAt": "2026-10-07T11:51:40.131Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxReopeningsPerGoal": 1,
+    "maxLineageCycles": 6,
+    "maxRoundHours": 4
+  },
+  "baseline": {
+    "sourceCommit": "8522672659b0b2e0d9ae5a8363e6549ba88443df",
+    "bankVersion": "2026.10.07-regular.27",
+    "bankSha256": "2f6d630f8e3f039563e657cf232193d7a67fddb64f14e068179a855327680abf",
+    "regularWrittenBySubject": {
+      "s1": 117,
+      "s2": 190,
+      "s3": 168,
+      "s4": 187,
+      "s5": 144
+    },
+    "regularPractical": 76
+  },
+  "targets": {
+    "writtenBySubject": {
+      "s1": 2,
+      "s2": 0,
+      "s3": 1,
+      "s4": 0,
+      "s5": 1
+    },
+    "practical": 0
+  },
+  "candidates": [
+    {
+      "candidateId": "r028-aria-law-s3-w01",
+      "lineageId": "r028-aria-law-template-abstract-landmark-role-prohibited-in-author-content",
+      "learningGoalId": "r028-aria-law-template-abstract-landmark-role-prohibited-in-author-content",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r028-aria-law-s3-w01",
+      "revision": 1,
+      "templateId": "r028-aria-law-template-abstract-landmark-role-prohibited-in-author-content",
+      "authorId": "author-r028-aria-law",
+      "evidence": [
+        {
+          "sourceId": "r028-aria-law-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "HTML 개론: WAI-ARIA 소개·Role·Property & State; 정보접근성 개론: 전자정보 이용약자의 장애유형 이해",
+          "checkedAt": "2026-10-07T11:03:34.098210+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트의 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314와 전체 추출을 다시 대조했다. HTML 과목은 WAI-ARIA 1.2 권고판의 역할을, 정보접근성 과목은 장애유형 이해를 명시한다. 새 HWP 취득은 하지 않았다. 법정 분류 갱신에 한정하며 임상 수치·치료·개인의 등록 적격은 다루지 않는다.",
+          "rights": "지정 1차 자료의 기술·법정 분류 사실을 짧게 의역했다. 한국어 지문·선택지·해설은 독자 작성했고 제공 PDF의 문제 문구, 공식 샘플, 유료 문제집, 표준 예문을 복제하지 않았다. 원문 바이트는 비공개 검증용이며 공개 문항에 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r028-aria-law-src-aria12-abstract-landmark",
+          "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2: Abstract Roles and Landmark Roles",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#abstract_roles",
+          "version": "W3C Recommendation, 2023-06-06",
+          "location": "§5.2.1 Abstract Roles; §5.3.1 Abstract Roles; §5.3.4 Landmark Roles; §5.4 landmark",
+          "checkedAt": "2026-10-07T10:59:35.176435+00:00",
+          "summary": "추상 역할은 역할 모델을 조직하는 기반이며 저자가 콘텐츠에 직접 사용할 수 없다. landmark는 추상 역할 목록에 있고 banner·complementary·navigation·region은 landmark를 상속하는 구체적인 역할이다. 역할의 이름을 아는 것과 해당 요소에 올바르게 적용하는 것은 별도 판단이다.",
+          "rights": "지정 1차 자료의 기술·법정 분류 사실을 짧게 의역했다. 한국어 지문·선택지·해설은 독자 작성했고 제공 PDF의 문제 문구, 공식 샘플, 유료 문제집, 표준 예문을 복제하지 않았다. 원문 바이트는 비공개 검증용이며 공개 문항에 재배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T11:06:24.139Z",
+          "finishedAt": "2026-10-07T11:20:55.764Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "정답 키·해설 공개 전 D를 독립 선택했고 공개 뒤 r028-aria-law-s3-w01-o03과 일치했다. 그 입력의 표준 버전·notes에는 정답을 직접 공개하는 사실이 없었다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "2023-06-06 고정 WAI-ARIA 1.2의 추상 역할 규칙과 다섯 역할 정의, 공식 출제기준 보존 원문을 직접 대조했다. 역할 분류로 범위를 제한한 독자 문항이며 원문 문제·예문 복제를 확인하지 못했다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-aria12-abstract-landmark"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "landmark만 추상 역할이므로 단일 정답이다. 나머지 역할의 실제 적용 조건은 notes에서 별도로 구분한다. 기존 역할 토큰 순서 문항은 비추상 역할을 조건으로 제공하므로 추상 역할 식별·직접 사용 금지와 목표가 다르다. 전체 필드 검색·인접 문항·예약 대조에서 이 목표 중복은 발견되지 않았으며 확인 불가 과거 개정판의 예약은 유지한다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-aria12-abstract-landmark"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "다섯 선택지가 동일한 role 할당 형식으로 평행하며 모두 같은 랜드마크 분류의 그럴듯한 후보다. 위치·길이·한정어 단서를 확인하지 못했다. 지문·notes가 자립적이고 불필요한 보기가 없다. 실제 question.explanation이 추상 역할 금지와 목적에 맞는 구체 역할 선택을 직접 설명한다. 현행 렌더 함수 실행에서 미채점 세션은 지문·notes·선택지만 제공하고 기준·출처·해설은 해설 영역에 제공했다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-aria12-abstract-landmark"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "동결 SHA-256·revision 1을 확인한 뒤 schema 3, 신규 엄격 해설, 가상 published 분기, 현재 누적 은행 결합, 격리·근거손실 차단 검사를 실행해 통과했다. 4/5지선다 4,096회에서 가능한 모든 정답 포함 순서형(96/120개)과 모든 선택지 채점을 확인했다. 정본·저작 원문은 변경하지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r028-aria-law-s5-w01",
+      "lineageId": "r028-aria-law-template-korean-disability-pancreatic-category-added-july2026",
+      "learningGoalId": "r028-aria-law-template-korean-disability-pancreatic-category-added-july2026",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r028-aria-law-s5-w01",
+      "revision": 2,
+      "templateId": "r028-aria-law-template-korean-disability-pancreatic-category-added-july2026",
+      "authorId": "author-r028-aria-law",
+      "evidence": [
+        {
+          "sourceId": "r028-aria-law-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "HTML 개론: WAI-ARIA 소개·Role·Property & State; 정보접근성 개론: 전자정보 이용약자의 장애유형 이해",
+          "checkedAt": "2026-10-07T11:03:34.098210+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트의 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314와 전체 추출을 다시 대조했다. HTML 과목은 WAI-ARIA 1.2 권고판의 역할을, 정보접근성 과목은 장애유형 이해를 명시한다. 새 HWP 취득은 하지 않았다. 법정 분류 갱신에 한정하며 임상 수치·치료·개인의 등록 적격은 다루지 않는다.",
+          "rights": "지정 1차 자료의 기술·법정 분류 사실을 짧게 의역했다. 한국어 지문·선택지·해설은 독자 작성했고 제공 PDF의 문제 문구, 공식 샘플, 유료 문제집, 표준 예문을 복제하지 않았다. 원문 바이트는 비공개 검증용이며 공개 문항에 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r028-aria-law-src-disability-appendix16",
+          "title": "장애인복지법 시행령 별표 1: 장애의 종류 및 기준에 따른 장애인",
+          "url": "https://www.law.go.kr/flDownload.do?bylClsCd=110201&flSeq=159613615&gubun=",
+          "version": "별표 1, 2025-12-16 개정; 제16호 2026-07-01 시행",
+          "location": "PDF 1~3쪽의 제1호~제16호; 3쪽 제16호 췌장장애인",
+          "checkedAt": "2026-10-07T10:59:50.620911+00:00",
+          "summary": "공식 별표는 기존 제1호부터 제15호를 유지하고 제16호에 췌장장애인을 별도로 둔다. 따라서 해당 개정의 시행 뒤 유형 목록에는 췌장장애를 포함한 16개 항목이 있다. 이 문항은 법정 분류의 포함 여부를 다루며 개별 진단이나 등록 기준을 판정하지 않는다.",
+          "rights": "지정 1차 자료의 기술·법정 분류 사실을 짧게 의역했다. 한국어 지문·선택지·해설은 독자 작성했고 제공 PDF의 문제 문구, 공식 샘플, 유료 문제집, 표준 예문을 복제하지 않았다. 원문 바이트는 비공개 검증용이며 공개 문항에 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r028-aria-law-src-disability-amendment-35912",
+          "title": "장애인복지법 시행령 일부개정령: 대통령령 제35912호",
+          "url": "https://www.law.go.kr/LSW/lsRvsDocListP.do?chrClsCd=010102&lsId=004628",
+          "version": "대통령령 제35912호, 2025-12-16 공포",
+          "location": "제정·개정문: 별표 1 제16호 신설 및 부칙",
+          "checkedAt": "2026-10-07T10:59:43.721067+00:00",
+          "summary": "개정문은 별표 1 제16호의 췌장장애인을 신설한다. 부칙은 일반 시행일을 2026-01-01로 정하되 이 신설 조항은 2026-07-01부터 시행하도록 별도로 정한다. 2025-12-16 공포일이나 일반 시행일을 제16호의 시행일로 대신할 수 없다.",
+          "rights": "지정 1차 자료의 기술·법정 분류 사실을 짧게 의역했다. 한국어 지문·선택지·해설은 독자 작성했고 제공 PDF의 문제 문구, 공식 샘플, 유료 문제집, 표준 예문을 복제하지 않았다. 원문 바이트는 비공개 검증용이며 공개 문항에 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r028-aria-law-src-mohw-pancreatic-commencement",
+          "title": "보건복지부: 췌장장애 지원 본격화",
+          "url": "https://www.mohw.go.kr/gallery.es?act=view&list_no=379879&bid=0003&mid=a10607030000",
+          "version": "보건복지부 2026-02-20 게시 안내",
+          "location": "본문의 장애인복지법 시행령 개정 및 7월 1일 시행 안내",
+          "checkedAt": "2026-10-07T10:59:57.868765+00:00",
+          "summary": "보건복지부는 2025년 12월 시행령 개정으로 췌장장애를 장애의 한 종류로 인정하고 2026년 7월 1일 시행 예정이라고 안내했다. 이는 제35912호 부칙의 조항별 시행일과 일치한다. 구체적인 의료기기·급여·등록 적격에 관한 문항 근거로 확대하지 않는다.",
+          "rights": "지정 1차 자료의 기술·법정 분류 사실을 짧게 의역했다. 한국어 지문·선택지·해설은 독자 작성했고 제공 PDF의 문제 문구, 공식 샘플, 유료 문제집, 표준 예문을 복제하지 않았다. 원문 바이트는 비공개 검증용이며 공개 문항에 재배포하지 않는다."
+        }
+      ],
+      "attemptCount": 2,
+      "lineageAttemptCount": 2,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T11:06:24.139Z",
+          "finishedAt": "2026-10-07T11:20:55.764Z",
+          "gates": {
+            "blindSolve": {
+              "result": "fail",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "선택 A는 공개된 키와 일치하지만 맹검 입력의 standardVersion에 “제16호 2026-07-01 시행”이 들어 있어 평가 대상인 별도 항목·시행일을 미리 알려 준다. 따라서 이 cycle은 정답을 숨긴 독립 풀이를 입증하지 못해 fail이다. 정답 일치만으로 통과 처리하지 않는다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "공식 별표·제35912호 개정문/부칙·보건복지부 자료를 직접 대조해 제16호 신설과 2026-07-01 시행, 기준일의 16개 유형을 확인했다. 장애유형 이해라는 공식 범위 안이며 개인 진단·등록 적격·급여 판정으로 확장하지 않는다. 날짜·분류 사실의 독자 문안이다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-disability-appendix16",
+                "r028-aria-law-src-disability-amendment-35912",
+                "r028-aria-law-src-mohw-pancreatic-commencement"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "법적 정답은 유일하게 A다. 공포일·일반 시행일은 부칙 단서의 시행일을 대신하지 않고 기존 명칭 변경이나 사업명 변경도 아니다. 현재 법령의 후속 개정은 해당 항목을 변경하지 않았다. 보조기술 정의·사용자 평가·정당한 편의 등 인접 문항과 목표가 다르고 가용 전체 필드·예약 이력에서 췌장장애 항목 신설 목표의 중복은 발견되지 않았다. 알려진 누락 이력은 해제하지 않는다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-disability-appendix16",
+                "r028-aria-law-src-disability-amendment-35912",
+                "r028-aria-law-src-mohw-pancreatic-commencement"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "선택지 자체는 동일한 갱신 설명 형식이고 네 오답 모두 실제 날짜·법정 분류 혼동을 다룬다. question.explanation도 신설·특별 시행일·16개라는 실제 풀이를 포함한다. 그러나 정확한 검토 입력의 standardVersion이 정답 사실을 공개하므로 문안/검토 메타데이터 gate는 fail이다. 현행 일반 미채점 필기 화면에서는 이 필드를 숨기는 것을 렌더 함수 실행으로 확인했으므로 학습자 화면 누출이라고 보고하지 않는다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-disability-appendix16",
+                "r028-aria-law-src-disability-amendment-35912",
+                "r028-aria-law-src-mohw-pancreatic-commencement"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-aria-law-v1",
+              "summary": "동결 revision 1에서 schema 3, 신규 엄격 해설, published 가상 분기, 현재 누적 은행 결합, 격리·근거손실 차단 검사를 모두 실제 실행해 통과했다. 이 문항의 4/5지선다 4,096회와 모든 유효 순서형·선택지 채점이 통과했다. 자동 검사 통과는 맹검 입력의 의미상 정답 노출을 해소하지 않는다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "revise",
+          "summary": "정확한 맹검 입력이 평가 대상인 제16호와 2026-07-01 시행을 공개했다. 이 revision은 맹검 독립성·정답 단서 방지 gate를 통과하지 못한다."
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-07T11:26:37.007Z",
+          "finishedAt": "2026-10-07T11:38:49.638910Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-legal-v2",
+              "summary": "키 공개 전에 지정 1차 법령을 직접 조사해 B를 잠갔고 공개 키와 일치했다. 수정된 판 식별 정보에는 평가 대상인 제16호나 2026-07-01 시행일이 없으며 정답을 직접 알려 주지 않는다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-legal-v2",
+              "summary": "공식 별표, 제35912호 개정문과 부칙, 보건복지부 안내를 새로 대조해 독립 유형 신설과 2026-07-01 시행을 확인했다. 원본 출제범위를 다시 추출해 장애유형 이해에 속함을 확인했으며 개인의 임상·등록·급여 판정으로 확대하지 않는다. 분류·날짜 사실의 독자 문안이다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-disability-appendix16",
+                "r028-aria-law-src-disability-amendment-35912",
+                "r028-aria-law-src-mohw-pancreatic-commencement"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-legal-v2",
+              "summary": "별표 신설과 특별 시행일을 함께 반영하는 B만 맞다. 공포일·일반 시행일·명칭 변경·사업명 해석은 각각 원문과 충돌한다. 가용 전체 문항·선택지·해설과 예약 목표를 대조해 기존 목표의 중복이나 재개방을 발견하지 않았고 누락 이력의 예약은 보존한다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-disability-appendix16",
+                "r028-aria-law-src-disability-amendment-35912",
+                "r028-aria-law-src-mohw-pancreatic-commencement"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-legal-v2",
+              "summary": "모든 선택지가 동일한 안내문 갱신 관점과 날짜·분류·수량 구조를 유지한다. 네 오답은 공포/시행, 일반/특별 시행, 명칭 변경/신설, 지원명칭/법정 유형의 타당한 혼동이다. 정확한 전체 해설은 새 항목·특별 시행일·기준일의 16개 적용을 스스로 설명한다. 직접 정답을 공개하던 판 정보가 수정되었으며 새 입력과 미채점 화면의 직접 누출은 없다.",
+              "evidenceRefs": [
+                "r028-aria-law-src-scope-written",
+                "r028-aria-law-src-disability-appendix16",
+                "r028-aria-law-src-disability-amendment-35912",
+                "r028-aria-law-src-mohw-pancreatic-commencement"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-legal-v2",
+              "summary": "정확한 revision 2에서 schema 3, 신규 엄격 해설, published 가상 분기, 현재 누적은행 결합, 격리·증거손실 차단을 실제 실행해 통과했다. 4/5지선다 4,096회, 모든 유효 선택지 순서, 22,528개 채점 단언 및 미채점 렌더 함수 검사를 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r028-kwcag-s1-w01",
+      "lineageId": "r028-kwcag-template-kwcag21-to22-relocated-table-and-linear-order-versus-new-character-shortcuts",
+      "learningGoalId": "r028-kwcag-template-kwcag21-to22-relocated-table-and-linear-order-versus-new-character-shortcuts",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r028-kwcag-s1-w01",
+      "revision": 2,
+      "templateId": "r028-kwcag-template-kwcag21-to22-relocated-table-and-linear-order-versus-new-character-shortcuts",
+      "authorId": "author-r028-kwcag",
+      "evidence": [
+        {
+          "sourceId": "r028-kwcag-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "웹접근성 표준 개론 > 웹 접근성 표준 발달과정: 제정/개정, 역사, 버전별 구분 및 의미, 관련 주요 기관",
+          "checkedAt": "2026-10-07T11:01:30Z",
+          "summary": "공식 지정판 보존본의 SHA-256과 추출을 재확인했다. 이 범위는 국내표준의 개정 종류와 표준에 기재된 기관 역할을 포함하며 국제 기술 성공기준 세부사항으로 확장하지 않는다.",
+          "rights": "공식 표준의 사실·개정 관계·기관 역할을 필요한 범위에서 요약했다. 가상 업무 상황, 지문, 선택지와 해설은 독자 작성했으며 제공 PDF의 문제나 공식 샘플을 복제하지 않았다. 원문 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r028-kwcag-src-2022-revision-and-roles",
+          "title": "국립전파연구원 — 한국형 웹 콘텐츠 접근성 지침 2.2 및 공식 첨부 KS X OT0003:2022",
+          "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+          "version": "KS X OT0003:2022 / 2022-12-28 개정",
+          "location": "앞부분 원안작성협력·표준열람·담당부처·의견/질문 안내; 해설 2.2 주요 개정내용 및 6.2 R3/R2 목차 전후 대조표(인쇄쪽 42, 44–45)",
+          "checkedAt": "2026-10-07T11:01:30Z",
+          "summary": "공식 게시물의 개정일과 직접 내려받은 2.2 DOCX를 확인했다. 표의 구성은 7.3.2에서 5.3.1, 콘텐츠의 선형구조는 7.3.1에서 5.3.2로 이동하며 문자 단축키 6.1.4는 신규다. 앞부분에는 한국정보통신기술협회가 원안작성협력 기관, 국립전파연구원이 표준열람 및 의견·질문 안내 창구로 기재된다.",
+          "rights": "공식 표준의 사실·개정 관계·기관 역할을 필요한 범위에서 요약했다. 가상 업무 상황, 지문, 선택지와 해설은 독자 작성했으며 제공 PDF의 문제나 공식 샘플을 복제하지 않았다. 원문 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r028-kwcag-src-2015-predecessor",
+          "title": "국립전파연구원 공식 첨부 — 한국형 웹 콘텐츠 접근성 지침 2.1",
+          "url": "https://www.rra.go.kr/FileDownSvl?file_parentseq=5247&file_seq=2&file_type=notice",
+          "version": "KWCAG 2.1 / KS X OT0003:2015",
+          "location": "7.3 콘텐츠의 논리성: 7.3.1 콘텐츠의 선형 구조, 7.3.2 표의 구성",
+          "checkedAt": "2026-10-07T11:01:30Z",
+          "summary": "같은 공식 게시물의 2.1 첨부를 직접 내려받아 두 검사항목이 개정 전부터 존재했음을 별도로 확인했다.",
+          "rights": "공식 표준의 사실·개정 관계·기관 역할을 필요한 범위에서 요약했다. 가상 업무 상황, 지문, 선택지와 해설은 독자 작성했으며 제공 PDF의 문제나 공식 샘플을 복제하지 않았다. 원문 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 2,
+      "lineageAttemptCount": 2,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T11:12:38.221Z",
+          "finishedAt": "2026-10-07T11:25:49.747081Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "키 공개 전에 고정한 독립 답안이 정답 키와 일치한다. 직접적인 정답 키 노출은 없다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "공식 2.2 전후 대조표와 2.1 본문을 독립 대조하여 두 항목의 이동과 문자 단축키 신설을 확인했다. 지정 출제범위와 사실 요약의 이용 범위가 타당하다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-2015-predecessor"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "고정판에서 정답은 하나이며 상위 지침 변경과 검사항목 변경을 구분한다. 전체 보존 이력·예약 목표와 대조한 결과 기존 체계 개수·구현 목표와 구별된다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-2015-predecessor"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "내용·길이·배열은 평행하지만 notes의 범주 열거가 명칭 변경 오답의 제거 단서를 준다. 전체 문항 해설은 실제 풀이를 완결하나 notes 수정이 필요하다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-2015-predecessor"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "정확한 v1 바이트에서 스키마·엄격한 해설·발행 투영·격리 보호 및 4/5지선다 생성·채점을 직접 검사하여 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "revise",
+          "summary": "이동·신설·삭제라는 notes의 열거는 명칭 변경 오답만 변경 분류 범주 밖으로 밀어내는 비대칭적 단서다. 정답 자체를 공개하거나 복수 정답을 만들지는 않지만, 모든 오답이 목표 지식에 의해 판단되어야 한다는 문안 기준에는 미달한다."
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-07T11:33:53.651Z",
+          "finishedAt": "2026-10-07T11:45:49.584840Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "키·해설·과거 검토를 보기 전에 정답을 고정했고 공개된 키와 일치한다. 답변 전 모든 제공 필드에서 직접 정답 노출을 발견하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "공식 지정판·보존 출제범위와 필요한 선행판 또는 기관명을 독립 확인했다. 국내표준의 사실 관계를 독자 문항으로 적용했으며 범위·판·권리 경계를 지켰다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-2015-predecessor"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "고정판과 제시된 판단 단위에서 정답은 하나다. 전체 보존 이력·원 대장·격리 및 증거 소실 예약을 재검사하고 가까운 완전한 문항과 의미를 대조하여 신규 목표임을 확인했다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-2015-predecessor"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "선택지는 같은 세 항목 분류 형식이며 모든 오답은 이동·신규·삭제·명칭 변경에 대한 관련 오개념이다. notes는 판 정보만 남겨 이전 범주열거 단서를 해소했고 문항 해설은 규칙과 세 결과를 스스로 설명한다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-2015-predecessor"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "정확한 v2 바이트에서 schema3·엄격한 해설·발행 투영·예약 보호와 누적 기준본 검사를 실제 실행했다. 4/5지선다의 모든 유효 부분집합·순서를 생성하고 고정 키 채점을 확인했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r028-kwcag-s1-w02",
+      "lineageId": "r028-kwcag-template-kwcag22-drafting-cooperation-tta-versus-standard-access-and-questions-rra",
+      "learningGoalId": "r028-kwcag-template-kwcag22-drafting-cooperation-tta-versus-standard-access-and-questions-rra",
+      "subjectId": "s1",
+      "type": "written",
+      "questionId": "r028-kwcag-s1-w02",
+      "revision": 2,
+      "templateId": "r028-kwcag-template-kwcag22-drafting-cooperation-tta-versus-standard-access-and-questions-rra",
+      "authorId": "author-r028-kwcag",
+      "evidence": [
+        {
+          "sourceId": "r028-kwcag-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "웹접근성 표준 개론 > 웹 접근성 표준 발달과정: 제정/개정, 역사, 버전별 구분 및 의미, 관련 주요 기관",
+          "checkedAt": "2026-10-07T11:01:30Z",
+          "summary": "공식 지정판 보존본의 SHA-256과 추출을 재확인했다. 이 범위는 국내표준의 개정 종류와 표준에 기재된 기관 역할을 포함하며 국제 기술 성공기준 세부사항으로 확장하지 않는다.",
+          "rights": "공식 표준의 사실·개정 관계·기관 역할을 필요한 범위에서 요약했다. 가상 업무 상황, 지문, 선택지와 해설은 독자 작성했으며 제공 PDF의 문제나 공식 샘플을 복제하지 않았다. 원문 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r028-kwcag-src-2022-revision-and-roles",
+          "title": "국립전파연구원 — 한국형 웹 콘텐츠 접근성 지침 2.2 및 공식 첨부 KS X OT0003:2022",
+          "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+          "version": "KS X OT0003:2022 / 2022-12-28 개정",
+          "location": "앞부분 원안작성협력·표준열람·담당부처·의견/질문 안내; 해설 2.2 주요 개정내용 및 6.2 R3/R2 목차 전후 대조표(인쇄쪽 42, 44–45)",
+          "checkedAt": "2026-10-07T11:01:30Z",
+          "summary": "공식 게시물의 개정일과 직접 내려받은 2.2 DOCX를 확인했다. 표의 구성은 7.3.2에서 5.3.1, 콘텐츠의 선형구조는 7.3.1에서 5.3.2로 이동하며 문자 단축키 6.1.4는 신규다. 앞부분에는 한국정보통신기술협회가 원안작성협력 기관, 국립전파연구원이 표준열람 및 의견·질문 안내 창구로 기재된다.",
+          "rights": "공식 표준의 사실·개정 관계·기관 역할을 필요한 범위에서 요약했다. 가상 업무 상황, 지문, 선택지와 해설은 독자 작성했으며 제공 PDF의 문제나 공식 샘플을 복제하지 않았다. 원문 권리는 각 권리자에게 있다."
+        },
+        {
+          "sourceId": "r028-kwcag-src-nia-official-name",
+          "title": "NIA 한국지능정보사회진흥원 공식 홈페이지",
+          "url": "https://www.nia.or.kr/",
+          "version": "공식 홈페이지 기관명 / 2026-10-07 확인",
+          "location": "HTML title 및 기관명 메타데이터",
+          "checkedAt": "2026-10-07T11:21:33.280248+00:00",
+          "summary": "NIA 공식 홈페이지에서 기관의 한글 명칭이 한국지능정보사회진흥원임을 확인했다. 이 명칭 확인은 표준 앞부분의 참여자 소속 기관을 설명하기 위한 것이며 원안작성협력·표준열람 역할은 지정 KWCAG 2.2 정본에 근거한다.",
+          "rights": "공식 기관명을 확인해 필요한 범위에서 표기했다. 홈페이지의 소개 문장·화면·그림은 복제하지 않았다."
+        }
+      ],
+      "attemptCount": 2,
+      "lineageAttemptCount": 2,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T11:12:38.221Z",
+          "finishedAt": "2026-10-07T11:25:49.747081Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "키 공개 전에 고정한 독립 답안이 정답 키와 일치한다. 직접적인 정답 키 노출은 없다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "공식 고정판·선행판·보존 출제범위를 독립 확인했으며 정답의 근거와 이용 범위가 타당하다. 원문 NIA 오기는 별도 문안 결함으로 구분했다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "고정된 2022년판에서 정답은 하나다. 전체 보존 이력·예약 목표와 대조한 결과 기존 기관 역할·심의 주기 목표와 구별된다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "두 오답과 한 선택지 해설이 원문의 기관명 오기를 그대로 전파해 역할 지식 밖의 제거 단서를 준다. 텍스트 구조와 전체 문항 해설은 적합하지만 기관명 수정이 필요하다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v1",
+              "summary": "정확한 v1 바이트에서 스키마·엄격한 해설·발행 투영·격리 보호 및 4/5지선다 생성·채점을 직접 검사하여 통과했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "revise",
+          "summary": "독립 다운로드 DOCX 앞부분의 간사 근무처에는 한국지능정보화사회진흥원이 실제로 인쇄되어 있다. NIA 공식 사이트의 기관명은 한국지능정보사회진흥원이다. 원문 오기를 학습 선택지의 정상 기관명처럼 복제하여 오답을 기관 철자만으로 제외할 수 있다."
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-07T11:33:53.651Z",
+          "finishedAt": "2026-10-07T11:45:49.584840Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "키·해설·과거 검토를 보기 전에 정답을 고정했고 공개된 키와 일치한다. 답변 전 모든 제공 필드에서 직접 정답 노출을 발견하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "공식 지정판·보존 출제범위와 필요한 선행판 또는 기관명을 독립 확인했다. 국내표준의 사실 관계를 독자 문항으로 적용했으며 범위·판·권리 경계를 지켰다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-nia-official-name"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "고정판과 제시된 판단 단위에서 정답은 하나다. 전체 보존 이력·원 대장·격리 및 증거 소실 예약을 재검사하고 가까운 완전한 문항과 의미를 대조하여 신규 목표임을 확인했다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-nia-official-name"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "기관 역할 쌍의 문법·관점·정보량이 평행하고 오답은 관련 기관 역할 혼동이다. 두 선택지와 해당 해설의 기관명 오기를 수정하여 철자 단서를 해소했다. 문항 해설은 두 역할의 정답 관계를 스스로 설명한다.",
+              "evidenceRefs": [
+                "r028-kwcag-src-scope-written",
+                "r028-kwcag-src-2022-revision-and-roles",
+                "r028-kwcag-src-nia-official-name"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r028-kwcag-v2",
+              "summary": "정확한 v2 바이트에서 schema3·엄격한 해설·발행 투영·예약 보호와 누적 기준본 검사를 실제 실행했다. 4/5지선다의 모든 유효 부분집합·순서를 생성하고 고정 키 채점을 확인했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    }
+  ],
+  "counts": {
+    "registered": 4,
+    "accepted": 4,
+    "rejected": 0,
+    "pending": 0,
+    "publishedRegularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "publishedRegularPractical": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 117,
+      "s2": 190,
+      "s3": 168,
+      "s4": 187,
+      "s5": 144
+    },
+    "regularPractical": 76,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.07-regular.28",
+    "bankSha256": "4795edb33936b9dd9ee7e5a27040cbabc4af280cbd26334d53e264b9ccdc8764",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [
+    {
+      "check": "후보 독립 검토·정확한 해설 필드",
+      "result": "pass",
+      "summary": "후보 4개·시작 검토 7회를 기한 안에 종결했다. 모든 채택 문항은 같은 개정판의 다섯 검사와 문항 전체 해설의 실제 풀이 규칙·적용 근거 검토를 통과했다.",
+      "reportPath": "docs/rounds/round-028.md"
+    },
+    {
+      "check": "실제 브라우저·Windows/NVDA",
+      "result": "not_run",
+      "summary": "새 콘텐츠의 실제 브라우저·보조기술 조작/출력 및 사용자 학습 기록 관찰은 수행하지 않았다.",
+      "reportPath": "docs/NVDA-CHECKLIST.md"
+    }
+  ],
+  "nextRoundGaps": [
+    {
+      "gapId": "round-028-gap-01",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s1"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "공식 표준 앞부분의 기술심의회 세부 명칭과 개정 이력의 불완전한 날짜 표기가 일관되지 않음을 확인했다. 채택 문항은 이 불일치 항목을 정답 근거로 사용하지 않는다.",
+      "neededEvidenceOrCounterexample": "해당 표기를 바로잡는 국립전파연구원의 정정 공지, 정정된 고정판 또는 독립된 공식 기록",
+      "nextAction": "위원회 세부 명칭이나 불완전한 날짜 자체를 묻는 목표는 권위 있는 정정 자료를 먼저 찾는다.",
+      "completionCriterion": "정확한 불일치가 1차 기록으로 해소되어야 하며 그렇지 않으면 후보 등록 전 제외한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-028-gap-02",
+      "category": "coverage",
+      "subjectIds": [
+        "s3"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "ARIA 역할이 추상 역할인지와 구체적인 웹 요소에 적합한 역할인지는 별개 판단이다.",
+      "neededEvidenceOrCounterexample": "고정 ARIA1.2의 역할 정의, 호스트 언어 의미와 기존 문항의 전체 조건·해설",
+      "nextAction": "이름·영역 목적·호스트 요소 조건을 함께 다룰 독립 목표가 실제로 남아 있는지 기존 은행부터 대조한다.",
+      "completionCriterion": "기존 목표와 구별되는 판단 규칙과 타당한 오답이 모두 성립할 때만 새 후보로 등록한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-028-gap-03",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "과거의 유한 자료군에서 109개 후보의 113개 시작 개정판 원문이 확보되지 않은 한계를 유지한다.",
+      "neededEvidenceOrCounterexample": "출처와 원래 해시가 검증되는 해당 개정판 원본 및 전체 검토 보고서",
+      "nextAction": "기존 목표·탈락 사유·후속 원문·횟수를 보수적으로 예약하고 새로 확보된 원본만 검증한다.",
+      "completionCriterion": "소실된 원본이나 보고서를 다시 작성한 것을 복구라고 하지 않으며 차단·격리 목표를 재사용하지 않는다.",
+      "priority": "medium",
+      "reopenEligible": false
+    }
+  ],
+  "noGapExplanation": null,
+  "summary": "정규 28회차 후보 4개 중 4개 채택·0개 탈락·미결정 0개. 새 누적 일반 886개·시드 14개이며 공개 확인 전 신규 공개 수는 0개다. 검증된 원격 regular.27의 전체 문항·선택지·출처와 과거 편집 정정·격리·발행 차단·검토 이력을 보존한다."
+}

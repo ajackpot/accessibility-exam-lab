@@ -94,6 +94,9 @@
 
 미확정 쓰기의 자동 재시도 금지는 기본값이다. 다만 이전 실행이 영구 `download_only`로 끝났고 tree/commit/ref를 전혀 제출하지 않은 분리된 `create_blob`만, **종료 뒤 사용자가 새로 명시한 요청**에 대해 새 executionId로 독립 검토한다. 기존 로컬 실행의 종료와 대기 중인 후속 Git 쓰기가 없음도 독립 확인한다. 원래 저장소·도구·인코딩·해독 바이트·바이트 수·SHA-256·Git blob SHA가 모두 같아야 한다. 60초 이내의 실제 원격 head와 로컬/원격 영구 동결 상태, 별도 신규 권한 대기의 10분 상한·현재 실제 시각·최종 cutoff·전체 발행 검사를 확인한다.
 
+
+권한 알림 없이 결과가 미확정인 분리된 blob도, 원래 재대조 10분 경과·영구 쓰기 중단·실제 로컬 실행 종료 및 후속 Git 쓰기 대기 없음이 독립 확인되고 종료 후 새로운 명시적 사용자 요청이 있는 경우에만 같은 단일 재제출 guard를 사용한다. 이 경로는 원 `permissionWait:null`과 실제 `no_request_observed` terminal/제출 원문·해시·microsecond UTC 시각을 그대로 결박한다. `download_only`·권한 알림·서버 취소를 만들어 내지 않으며 원 unknown·최초 시계·중단은 유지한다. 동일 저장소·도구·인코딩·해독 바이트·SHA, 새 execution/operation, 실제 fresh head·양쪽 동결·cutoff와 제출 전 하나의 고정된 durable request/object claim 조건은 같다. 원문 해시나 caller Boolean만으로 외부 사실·권한이 인증되는 것은 아니며 운영자가 원 증거와 새 요청을 독립 확인한다. 후속 tree/commit/ref가 제출됐거나 불명인 경로는 허용하지 않는다.
+
 `scripts/blob-retry.mjs`의 `initializeBlobRetryJournal`/`reserveBlobRetry`로 원래 작업당 하나의 고정된 비공개 지속 기록에 요청/객체당 한 번을 **제출 전에** 배타 생성·동기화한다. 실패·불명·중단도 한 번을 소비하며 기록의 이동·삭제·재초기화로 횟수를 되찾지 않는다. 기존 unknown·최초 10분 시계·종결 상태는 그대로 둔다. 증거/지속 기록 누락이나 손상은 차단한다. 자동/예약/늦은 승인·인코딩 변경·tree-inline 우회·tree/commit/ref 재시도는 허용하지 않으며 이 검사는 공개 승인이나 배포 완료를 뜻하지 않는다.
 
 ## 별도 누적 공개 확인 기록
@@ -176,3 +179,25 @@
 ## 2026-10-07의018–027 공개 확인
 
 별도 `docs/publications/cumulative-018-027.json`과 보고서가 payload `da645d3d7a37b67551344bf7853c92e54eecddfd`, Pages37583421170 성공,242파일 원격 tree·52개 live 경로의 실제 일치를 기록한다. 일반882개(필기806·실기76)와 시드14개이며017 대비 새 공개는198개다.018–022·024–027의 원 채택217개 중022의19개는 계속 격리한다.023은 예약 전용으로 남기고 공개 source에 넣지 않는다. 원래 대장·은행·proof·trust prefix·ZIP·공개0·unknown·최초 불확실성 시계를 바꾸지 않는다. 이 기록을 넣는 후속 지원 commit은 자신의 별도 Pages/live 검증이 필요하다.
+
+## 독립 풀이 입력의 정답 단서 차단
+
+- 맹검 자료는 실제 학습자가 답하기 전에 보는 지문·참고 사항·보기·선택지와 풀이에 꼭 필요한 판 식별 정보로 구성한다. 채점 후에 제공하는 출처 제목·조항 번호·시행일·버전 설명도 평가 대상 사실을 직접 알려 주면 맹검 입력에서 제외하거나 정답을 암시하지 않는 정확한 판 식별 정보로 제한한다
+- 원문 출처와 채점 후 인용은 그대로 보존한다. 맹검 입력의 문제를 실제 앱의 채점 전 노출 문제라고 바꾸어 보고하지 않으며, 지문·자료·선택지·모든 제공 메타데이터를 함께 점검한다
+- 정답 단서가 포함된 입력으로 시작한 검토도 1회를 소비한다. 그 풀이를 독립 검증 통과로 쓰지 않고 원 입력·답·발견 내용을 보존한다. 수정본은 같은 후보의 남은 한도에서 새 개정판과 키를 보지 않은 새 검토자로 검토하며 회차·후보 ID를 바꾸어 횟수를 초기화하지 않는다
+
+
+## 정상 전달 후속 사슬의 내용 전용 계약
+
+정상 release_backup 루트의 후속 전달은 별도 `normal-backup-chain.mjs`와 append-only `docs/deliveries/normal-backup-chain-trust.json`으로 검증한다. 루트 proof와 원 registry를 바꾸거나 후속 전달을 새 루트·009 origin·timeout으로 바꾸지 않는다. generic successor proof는 exact root/previous proof, 원 ledger·bank·두 archive와 manifest, 실제 native 수락, 검증 완료 및 등록 시각을 연결한다. 원 영수증의 recordedAt과 실제 attachmentAcceptedAt은 별개이고 없는 server savedAt을 만들지 않는다. 공개 proof에는 원 receipt의 해시만 보존하며 private 경로·서비스 ID를 싣지 않는다.
+
+각 delta는 자기 실제 공개 baseCommit·관측 시각·전체 inventory의 before/after로 재구성한다. 같은 공개은행의 검토된 additive analysis 후손 외의 anchor 변경, 경로 삭제·충돌, 원 delivered history 변경, trust prefix 생략·분기·순서 변경은 금지한다. delivered source는 앞선 proof들을 포함하되 자기 미래 등록을 포함할 필요는 없다.
+
+준비 proposal과 합성 테스트는 권한이 아니다. 실제 원본 증거와 정확한 변경을 새 독립 검토한 뒤 현재 시각의 등록 pin을 준비한다. loader의 후속 offlineBase는 전체 campaign 검사와 원 채택/격리/증거소실 예약, 재개방·검토 한도, 현재 및 source 동결·cutoff 아래에서만 쓴다. 실제 새 formal 시작은 등록 eligibility 뒤에 별도로 정하고 기존 예정 발생분·마감을 소급 변경하지 않는다. 일반·명시 build와 독립 packaging도 같은 dependency/snapshot 검사를 한다.
+
+이 확장은 다음 내용 회차 기준과 자체 완결 포장에 한정한다. publication-sync·정상 공개 이벤트·resolvedArtifacts 규약을 확대하지 않고 canPublish=false·공개증가0을 유지한다. Git 쓰기·새 publication proof·원 stopped publisher 재개 권한이 아니다.
+
+
+## 검증 실행 통합
+
+PRD·OPERATIONS의 validation-efficiency-001을 따른다. 고유 의미 검사는 유지하고 같은 스냅샷의 `check`·직접 release ledger·`release:check` 연속 중복은 `npm run release:validate` 한 번으로 통합할 수 있다. 단독 validator의 보호를 끄지 않으며 새 명령은 전체 테스트·build·archive 또는 공개 증거를 대신하지 않는다. 입력/runner/runtime/전체 의존성과 종결 결과가 독립 인증된 동일 소스 proof만 정확한 archive 재구성 검사와 빈 폴더 smoke를 별도 수행한 뒤 재사용할 수 있다. 재사용/실행/미실시를 구별하고 과거 기록을 고쳐 쓰지 않는다. 실제 시각·두 동결 marker·현재 eligibility·실제 remote/Pages 검사는 각 작업 경계에서 갱신한다. 종료가 확인된 로컬 idempotent 검사의 재실행에는 Git 10분 대기를 전용하지 않으며 결과 불명 외부 쓰기는 원 정책을 유지한다.

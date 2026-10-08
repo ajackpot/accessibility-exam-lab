@@ -1,3 +1,4 @@
+import {isNormalPublication} from './normal-publication.mjs';
 import {validateEvidenceLossCampaign,loadEvidenceLossDependencies} from './evidence-loss-block.mjs';
 import fs from 'node:fs/promises';
 import {readFileSync} from 'node:fs';
@@ -9,7 +10,7 @@ import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanation
 
 import {validateQuarantineCampaign, loadQuarantineDependencies} from './prepublication-quarantine.mjs';
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
-import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts, validateSynchronizationDeliveryProof, validateIndependentSynchronizationSources, requiresSynchronizationDeliveryDependencies} from './publication-sync.mjs';
+import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts, validateSynchronizationDeliveryProof, validateIndependentSynchronizationSources, validateNormalChainSynchronizationSources, requiresSynchronizationDeliveryDependencies} from './publication-sync.mjs';
 import {validateEditorialHistory, validateEditorialTransition, validateCampaignBaselines} from './editorial-ledger.mjs';
 export {editorialHash, editorialContent, editorialContentHash, editorialBlindPackage, editorialChangedPaths, editorialComponentStates} from './editorial-ledger.mjs';
 
@@ -606,7 +607,7 @@ export async function auditHistoricalRelease(root) {
   for(const pin of PUBLICATION_SYNCHRONIZATIONS) {
     const raw=await readOfflinePublicFile(ROOT,pin.path);
     if(digest(raw)!==pin.sha256)throw new Error('Publication authority proof hash mismatch');
-    const event=JSON.parse(raw);if(!event.previousSynchronizationSha256)continue;
+    const event=JSON.parse(raw);if(!event.previousSynchronizationSha256 || isNormalPublication(event))continue;
     for(const source of event.rounds) {
       const sourceRaw=await readOfflinePublicFile(ROOT,source.deliveryProof.path);
       const proof=validateSynchronizationDeliveryProof(event,source,sourceRaw),inventory=proof.completeManifest.files;
@@ -686,7 +687,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     if(!listed.has(pin.path))throw new Error('Publication synchronization dependency missing from reviewed allowlist');
     const record=JSON.parse(raw.toString());
     const relevant=requiresSynchronizationDeliveryDependencies(record,{ledgers,now,release});
-    if(record.previousSynchronizationSha256&&relevant)for(const source of record.rounds) {
+    if(record.previousSynchronizationSha256&&relevant&&!isNormalPublication(record))for(const source of record.rounds) {
       if(!listed.has(source.deliveryProof?.path))throw new Error('Publication delivery proof dependency missing from reviewed allowlist');
       validateSynchronizationDeliveryProof(record,source,await readOfflinePublicFile(root,source.deliveryProof.path));
     }
@@ -741,12 +742,19 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
   const {loadIndependentOfflineChains}=await import('./offline-chain-continuation.mjs');
   const independent=await loadIndependentOfflineChains(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources});
   offlineBases=independent.offlineBases;deliveryCheckpointSources=independent.deliveryCheckpointSources;
+  const {loadNormalBackupRoots}=await import('./normal-backup-root.mjs');
+  const normalRoots=await loadNormalBackupRoots(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources});
+  offlineBases=normalRoots.offlineBases;deliveryCheckpointSources=normalRoots.deliveryCheckpointSources;
+  const {loadNormalBackupChains}=await import('./normal-backup-chain.mjs');
+  const normalChain=await loadNormalBackupChains(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources});
+  offlineBases=normalChain.offlineBases;deliveryCheckpointSources=normalChain.deliveryCheckpointSources;
   await validateIndependentSynchronizationSources(synchronizations,independent.chains,deliveryCheckpointSources,{ledgers,now,release});
-  if(indexRaw||normalRaw||independent.chains.size) {
+  if(indexRaw||normalRaw||independent.chains.size||normalRoots.roots.size||synchronizations.some(isNormalPublication)) {
     const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources});
     const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations});
     if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
   }
+  await validateNormalChainSynchronizationSources(synchronizations,normalChain.chains,deliveryCheckpointSources,{ledgers,now,release});
   // Resolve only after current full-campaign validation. Keep every anchor's
   // original receipts/manifests separate and never feed resolutions to inspectProof.
   const campaignContext={ledgers,editorials,schema,banks,reviewPackages,availableFiles,publicationState,manifest,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources};
@@ -760,7 +768,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
       for(const artifact of resolution.resolvedArtifacts)resolvedArtifacts.add(artifact);
     }
   }
-  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, quarantineDispositions};
+  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, normalBackupRoots:normalRoots.roots, normalBackupChains:normalChain.chains, quarantineDispositions};
 }
 export async function main(args = process.argv.slice(2)) {
   let input = null, nextRoundAt = null, release = false;

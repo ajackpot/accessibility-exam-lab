@@ -12,6 +12,7 @@
     "build": "node scripts/build.mjs",
     "serve": "python3 -m http.server 4173",
     "release:check": "node scripts/release-guard.mjs",
-    "verify": "npm run check && npm test"
+    "verify": "npm run check && npm test",
+    "release:validate": "node scripts/validate-release.mjs"
   }
 }

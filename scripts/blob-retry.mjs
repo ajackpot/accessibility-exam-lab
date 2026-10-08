@@ -63,26 +63,50 @@ function checkWait(wait, now, executionId, terminal) {
     if (wait.state !== 'download_only' || instant(wait.stoppedAt) < deadline || instant(wait.stoppedAt) > now) fail('Original execution must be persistently terminal download_only');
   } else if (wait.state !== 'git_ready' || wait.stoppedAt !== null || now >= deadline) fail('New execution permission is not ready or has expired');
 }
+// Preserve exact authenticated source timestamps, including microseconds/+00:00.
+// Compare at the JS clock's precision without rewriting their journal strings.
+function sourceInstant(value) {
+  const match = typeof value === 'string' && /^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d{1,9}))?(?:Z|\+00:00)$/.exec(value);
+  if (!match) fail('Invalid stopped-source UTC timestamp');
+  const canonical = `${match[1]}.${(match[2] || '').padEnd(3, '0').slice(0, 3)}Z`, at = Date.parse(canonical);
+  if (!Number.isFinite(at) || new Date(at).toISOString() !== canonical) fail('Invalid stopped-source UTC timestamp');
+  return at;
+}
+function checkStoppedBlobTerminal(original, now) {
+  const evidence = original.terminalEvidence;
+  keys(evidence, ['terminalRaw', 'terminalSha256', 'submittedRaw', 'submittedSha256'], 'stopped blob terminal evidence');
+  for (const prefix of ['terminal', 'submitted']) {
+    if (typeof evidence[prefix+'Raw'] !== 'string' || !evidence[prefix+'Raw'].isWellFormed() || !hex.test(evidence[prefix+'Sha256']) || hash(Buffer.from(evidence[prefix+'Raw'])) !== evidence[prefix+'Sha256']) fail('Exact original stopped-blob evidence bytes required');
+  }
+  const terminal = JSON.parse(evidence.terminalRaw), submitted = JSON.parse(evidence.submittedRaw), u = terminal.uncertainty, wait = terminal.authorizationWait, r = original.reconciliation;
+  keys(submitted, ['operation', 'path', 'bytes', 'sha256', 'gitBlob', 'submittedAt', 'encoding'], 'original submitted blob');
+  if (terminal.schemaVersion !== 1 || terminal.status !== 'terminal_writes_stopped_unresolved_unattached_blob' || terminal.executionId !== original.executionId || terminal.repository !== original.operation.repository || !id.test(terminal.roundId) || wait?.state !== 'no_request_observed' || wait.requestedAt !== null || wait.deadlineAt !== null || wait.elicitationRequestId !== null || terminal.writesPermanentlyStopped !== true || terminal.furtherWritesAuthorized !== false || ['treeSubmitted','commitSubmitted','refSubmitted'].some(key=>terminal[key] !== false) || u?.outcome !== 'unknown' || u.reconciliation !== 'skip_git_step' || u.requestCancellationConfirmed !== false) fail('Original no-permission stopped blob must remain unknown and permanently stopped');
+  if (submitted.operation !== 'create_blob' || submitted.encoding !== original.operation.encoding || submitted.bytes !== original.identity.bytes || submitted.sha256 !== original.identity.sha256 || submitted.gitBlob !== original.identity.gitBlobSha || !isDeepStrictEqual(u.operation, submitted) || !Array.isArray(terminal.submittedGitWrites) || terminal.submittedGitWrites.some(v=>v.operation !== 'create_blob') || terminal.submittedGitWrites.filter(v=>isDeepStrictEqual(v, submitted)).length !== 1) fail('Stopped terminal must bind the exact original submitted content-addressed blob');
+  if (u.firstUnresolvedAt !== r.firstUnresolvedAt || u.deadlineAt !== r.deadlineAt || u.actualSkipPersistedAt !== r.skippedAt || r.artifactSha256 !== submitted.sha256 || sourceInstant(submitted.submittedAt) > sourceInstant(r.firstUnresolvedAt) || sourceInstant(terminal.completedAt) < sourceInstant(r.skippedAt) || sourceInstant(terminal.completedAt) > now) fail('Original stopped blob identity and unresolved clock cannot be reset');
+}
 function checkOriginal(original, now) {
-  keys(original, ['executionId', 'operationId', 'operation', 'identity', 'permissionWait', 'reconciliation', 'outcomes', 'localExecutionState', 'isolatedBlobOnly', 'evidenceReference'], 'original evidence');
+  keys(original, ['executionId', 'operationId', 'operation', 'identity', 'permissionWait', 'reconciliation', 'outcomes', 'localExecutionState', 'isolatedBlobOnly', 'evidenceReference', ...(original?.permissionWait === null ? ['terminalEvidence'] : [])], 'original evidence');
   if (!id.test(original.executionId) || !id.test(original.operationId) || !id.test(original.evidenceReference)) fail('Original operation and independent evidence references are required');
   if (original.localExecutionState !== 'terminated' || original.isolatedBlobOnly !== true) fail('Original local execution must be terminated with no queued downstream Git writes');
   keys(original.identity, ['bytes', 'sha256', 'gitBlobSha'], 'original blob identity');
   const identity = identifyGitBlob(original.operation);
   if (!Number.isSafeInteger(original.identity.bytes) || !hex.test(original.identity.sha256) || !gitSha.test(original.identity.gitBlobSha) || !isDeepStrictEqual(identity, original.identity)) fail('Original decoded byte length, SHA256 or Git blob SHA mismatch');
-  checkWait(original.permissionWait, now, original.executionId, true);
+  if (original.permissionWait === null) checkStoppedBlobTerminal(original, now);
+  else checkWait(original.permissionWait, now, original.executionId, true);
   keys(original.outcomes, ['blob', 'tree', 'commit', 'ref'], 'original outcomes');
   if (original.outcomes.blob !== 'unknown' || ['tree', 'commit', 'ref'].some(key => original.outcomes[key] !== 'not_submitted')) fail('Only an unknown isolated blob with no submitted tree/commit/ref is eligible');
   const r = original.reconciliation;
   keys(r, ['artifactSha256', 'firstUnresolvedAt', 'deadlineAt', 'state', 'skippedAt'], 'original reconciliation');
-  if (!hex.test(r.artifactSha256) || instant(r.deadlineAt) !== instant(r.firstUnresolvedAt) + GIT_RECONCILIATION_TIMEOUT_MS || r.state !== 'skip_git_step' || instant(r.skippedAt) < instant(r.deadlineAt) || instant(r.skippedAt) > now) fail('Original bounded reconciliation must stay terminal without a clock reset');
+  const sourceTime = original.permissionWait === null ? sourceInstant : instant;
+  if (!hex.test(r.artifactSha256) || sourceTime(r.deadlineAt) !== sourceTime(r.firstUnresolvedAt) + GIT_RECONCILIATION_TIMEOUT_MS || r.state !== 'skip_git_step' || sourceTime(r.skippedAt) < sourceTime(r.deadlineAt) || sourceTime(r.skippedAt) > now) fail('Original bounded reconciliation must stay terminal without a clock reset');
   // The content hash pins bytes without putting the whole payload into the journal.
   return {...structuredClone(original), operation: {tool: original.operation.tool, operation: original.operation.operation, repository: original.operation.repository, encoding: original.operation.encoding}};
 }
 function checkRequest(request, original, now) {
   keys(request, ['type', 'reference', 'requestedAt', 'repository'], 'new human request');
   if (request.type !== 'explicit_human_request' || !id.test(request.reference) || request.repository !== original.operation.repository) fail('A new explicit human request for this repository is required; recurring authority is insufficient');
-  if (instant(request.requestedAt) <= instant(original.permissionWait.stoppedAt) || instant(request.requestedAt) > now) fail('Human request must follow the terminal original execution and cannot be future-dated');
+  const stopped = original.permissionWait === null ? sourceInstant(JSON.parse(original.terminalEvidence.terminalRaw).completedAt) : instant(original.permissionWait.stoppedAt);
+  if (instant(request.requestedAt) <= stopped || instant(request.requestedAt) > now) fail('Human request must follow the terminal original execution and cannot be future-dated');
 }
 function checkAttempt({original, request, attempt, publication}, now) {
   const anchor = checkOriginal(original, now);

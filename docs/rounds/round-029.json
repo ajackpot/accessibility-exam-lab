@@ -1,0 +1,639 @@
+{
+  "ledgerSchemaVersion": 1,
+  "campaignId": "2026-exam-final",
+  "roundId": "round-029",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-07T15:40:03.755460+00:00",
+  "decisionDeadline": "2026-10-07T18:00:00Z",
+  "closedAt": "2026-10-07T16:08:56.655Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxReopeningsPerGoal": 1,
+    "maxLineageCycles": 6,
+    "maxRoundHours": 4
+  },
+  "baseline": {
+    "sourceCommit": "170c0b1d982cb17212ae6697fd517b53e0fa5cec",
+    "bankVersion": "2026.10.07-regular.28",
+    "bankSha256": "4795edb33936b9dd9ee7e5a27040cbabc4af280cbd26334d53e264b9ccdc8764",
+    "offlinePredecessor": {
+      "artifactSha256": "af9e0ccf7c44a81f3236d1eed2bf5d2d8570cea6c2496f10b0b499adb4027adf",
+      "manifestSha256": "ac3b6943037444a4136319d9ed1c8d3107ee9980fa41d5600dd828bca3bd196c",
+      "ledgerSha256": "e8e4c5d3ee54ff5ddf29171a44c5900be8fbcd1ca35e9ac7ea9d98dac36cc841",
+      "roundId": "round-028"
+    },
+    "regularWrittenBySubject": {
+      "s1": 119,
+      "s2": 190,
+      "s3": 169,
+      "s4": 187,
+      "s5": 145
+    },
+    "regularPractical": 76
+  },
+  "targets": {
+    "writtenBySubject": {
+      "s1": 0,
+      "s2": 2,
+      "s3": 2,
+      "s4": 0,
+      "s5": 0
+    },
+    "practical": 0
+  },
+  "candidates": [
+    {
+      "candidateId": "r029-network-s2-w01",
+      "lineageId": "r029-network-template-arpanet-1983-ncp-to-tcpip-transition-distinct-from-web-milestones",
+      "learningGoalId": "r029-network-template-arpanet-1983-ncp-to-tcpip-transition-distinct-from-web-milestones",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r029-network-s2-w01",
+      "revision": 1,
+      "templateId": "r029-network-template-arpanet-1983-ncp-to-tcpip-transition-distinct-from-web-milestones",
+      "authorId": "author-r029-network",
+      "evidence": [
+        {
+          "sourceId": "r029-network-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론: 인터넷 이해 > 인터넷 역사; 웹 브라우저 > 개요·종류·기능과 활용",
+          "checkedAt": "2026-10-07T15:11:32.604898+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트의 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314와 전체 추출을 재대조했다. 인터넷 역사와 브라우저의 기초 구성·기능은 필기 범위다. 통합 학습자료 PDF 61쪽의 수록 출제기준과도 일치한다. 새 HWP 취득은 하지 않았다.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-rfc801-198111",
+          "title": "RFC 801: NCP/TCP Transition Plan",
+          "url": "https://www.rfc-editor.org/rfc/rfc801.txt",
+          "version": "RFC 801, November 1981 고정 발행본",
+          "location": "Introduction (1쪽), The General Plan (2쪽), Milestones의 Full Internet Service (5쪽)",
+          "checkedAt": "2026-10-07T15:05:03.399364+00:00",
+          "summary": "1981년 계획은 1983년 1월 1일까지 NCP에서 IP/TCP로 완전히 전환하는 목표를 제시한다. ARPANET의 구축은 1969년부터였으며 기존 망의 호스트 프로토콜을 바꾸는 후속 작업이다. 계획문만으로 실제 이행을 단정하지 않고 개발 참여자들의 회고와 교차 확인했다. 취득 원문 40,824바이트, SHA-256 a7cbc0348ceb9f0f3b93f31a012286e157fc001034f6877ffdab274e92167dcc.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-isoc-history-1997",
+          "title": "Internet Society: Brief History of the Internet",
+          "url": "https://www.internetsociety.org/wp-content/uploads/2017/09/ISOC-History-of-the-Internet_1997.pdf",
+          "version": "표지 1997, Internet Society가 제공하는 19쪽 PDF 보존판",
+          "location": "4쪽 Origins of the Internet; 9쪽 Proving the Ideas의 ARPANET 전환 문단",
+          "checkedAt": "2026-10-07T15:10:32.573296+00:00",
+          "summary": "인터넷 개발 참여자들의 공동 회고는 ARPANET 호스트 프로토콜이 1983년 1월 1일 NCP에서 TCP/IP로 전환됐다고 명시한다. 1969년 최초 노드·호스트의 연결과 이 사건을 구분한다. 취득 PDF 549,375바이트, SHA-256 d711e2e53fdbcbf2f3608b8249a3ab9d0badfe048572d1fa30c087b1516c0aac.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-cern-web-history",
+          "title": "CERN: A short history of the Web",
+          "url": "https://home.cern/science/computing/the-birth-of-the-web/short-history-web/",
+          "version": "2026-10-07T15:09:22Z 취득 HTML 스냅샷",
+          "location": "How the Web began; Going global",
+          "checkedAt": "2026-10-07T15:09:22.696201+00:00",
+          "summary": "CERN의 기관 역사 설명은 최초 WWW 제안을 1989년 3월, Mosaic 첫 공개와 확산을 1993년, CERN의 WWW 소스코드 무상 공개를 1993년 4월 30일로 설명한다. 이 사건들은 ARPANET의 1983년 호스트 프로토콜 전환과 다르다. URL의 내용을 영구 고정판으로 간주하지 않으며 이번 취득 249,272바이트와 SHA-256 261497d43d38d6d11ea2d6ed6c87a31a0761308c8c5b18d8c4c854f5ed8151ae에 근거한다.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T15:42:48.387Z",
+          "finishedAt": "2026-10-07T15:58:57.180909Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "키 공개 전 답 C를 고정했다. 모든 선택지를 별도로 판별했고 mapping의 정답 o03과 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "공식 범위 HWP와 RFC 801 계획·ISOC 참여자 회고·CERN 역사 기록의 고정 판/보존 바이트를 독립 확인했다. 모든 날짜 선택지가 근거에 맞고 자체 작성한 짧은 사실 문장이다.",
+              "evidenceRefs": [
+                "r029-network-src-scope-written",
+                "r029-network-src-rfc801-198111",
+                "r029-network-src-isoc-history-1997",
+                "r029-network-src-cern-web-history"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "1983-01-01의 역사적 전환과 개별 호스트의 이행 과정을 구별했다. 선택지 중 NCP→TCP/IP 전환만 해당하고 다른 사건은 1969/1989/1993년이다. 1,609개 보존 내용 변형·950개 문항 ID·936개 종결 예약을 재구성해 대조했다. WWW와 인터넷의 관계, CERN 코드 재배포권, SDN의 서비스 범위, IP 전달 방식과 달리 특정 호스트 프로토콜 전환을 직접 채점하는 독립 목표다.",
+              "evidenceRefs": [
+                "r029-network-src-scope-written",
+                "r029-network-src-rfc801-198111",
+                "r029-network-src-isoc-history-1997",
+                "r029-network-src-cern-web-history"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "다섯 선택지는 모두 실제 인터넷/웹 이정표이며 같은 사건 서술 관점·문법으로 작성됐다. 정답만 긴 문장이나 오답만 극단적인 한정어가 되는 단서가 없다. 날짜 메타데이터는 지문을 반복할 뿐 사건을 공개하지 않는다. 실제 question.explanation 자체가 날짜→전환 대상→NCP/TCP/IP 관계를 설명한다. 필기 문항이므로 실기 part 교차 누출은 해당 없음.",
+              "evidenceRefs": [
+                "r029-network-src-scope-written",
+                "r029-network-src-rfc801-198111",
+                "r029-network-src-isoc-history-1997",
+                "r029-network-src-cern-web-history"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "정확한 revision 1 동결 바이트로 schema3·새 문항 엄격 해설·가상 published 발행 분기·regular.28 누적 투영 및 고정 역사 해설 기준을 독립 실행했다. 출처 레코드와 원 은행은 불변이다. 1,024회 seeded 제시, 가능한 432개 표시 순열, 8,624회 채점 검증, 4,608회 단일 선택지 해설 검증을 통과했다. 4지선다의 모든 부분집합과 각 선택지의 모든 위치를 확인했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r029-network-s2-w02",
+      "lineageId": "r029-network-template-desktop-chromium128-blink-layout-versus-v8-javascript-execution",
+      "learningGoalId": "r029-network-template-desktop-chromium128-blink-layout-versus-v8-javascript-execution",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r029-network-s2-w02",
+      "revision": 1,
+      "templateId": "r029-network-template-desktop-chromium128-blink-layout-versus-v8-javascript-execution",
+      "authorId": "author-r029-network",
+      "evidence": [
+        {
+          "sourceId": "r029-network-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론: 인터넷 이해 > 인터넷 역사; 웹 브라우저 > 개요·종류·기능과 활용",
+          "checkedAt": "2026-10-07T15:11:32.604898+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트의 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314와 전체 추출을 재대조했다. 인터넷 역사와 브라우저의 기초 구성·기능은 필기 범위다. 통합 학습자료 PDF 61쪽의 수록 출제기준과도 일치한다. 새 HWP 취득은 하지 않았다.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-chromium128-blink",
+          "title": "Chromium: Blink README",
+          "url": "https://chromium.googlesource.com/chromium/src/+/606aa55c7d687518d34b55accc5a71ea0bd28727/third_party/blink/README.md?format=TEXT",
+          "version": "Chromium 128.0.6613.84 / commit 606aa55c7d687518d34b55accc5a71ea0bd28727",
+          "location": "third_party/blink/README.md 첫 문단",
+          "checkedAt": "2026-10-07T15:08:11.588038+00:00",
+          "summary": "고정 커밋의 README는 Blink를 Chromium이 사용하는 브라우저 엔진이라고 명시한다. tag의 실제 commit을 확인한 뒤 같은 파일을 commit 주소에서도 취득하여 바이트 일치를 확인했다. 해독한 UTF-8 원문 787바이트, SHA-256 d9a2d79204c5de9441dfde80ea4be0d36c9bf0032d3782ab223356639ea4ed8d. 현재의 다른 버전·모바일 제품으로 일반화하지 않는다.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-chromium128-rendering-core",
+          "title": "Chromium: Blink Renderer Core README",
+          "url": "https://chromium.googlesource.com/chromium/src/+/606aa55c7d687518d34b55accc5a71ea0bd28727/third_party/blink/renderer/core/README.md?format=TEXT",
+          "version": "Chromium 128.0.6613.84 / commit 606aa55c7d687518d34b55accc5a71ea0bd28727",
+          "location": "third_party/blink/renderer/core/README.md: Core rendering encompasses four key stages",
+          "checkedAt": "2026-10-07T15:08:12.367153+00:00",
+          "summary": "고정판 Blink의 핵심 렌더링 단계에는 DOM·Style·Layout·Paint가 포함된다. CSS에 따른 문서 배치는 Layout의 역할이며 JavaScript 언어의 산술식 실행과 구분한다. 해독한 UTF-8 원문 1,315바이트, SHA-256 f5b4de3d8d88983c5fd696d1f8afe5d8b49c8e3444947af7543645a0741a527a.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-chromium128-layout",
+          "title": "Chromium: Blink Layout README",
+          "url": "https://chromium.googlesource.com/chromium/src/+/606aa55c7d687518d34b55accc5a71ea0bd28727/third_party/blink/renderer/core/layout/README.md?format=TEXT",
+          "version": "Chromium 128.0.6613.84 / commit 606aa55c7d687518d34b55accc5a71ea0bd28727",
+          "location": "third_party/blink/renderer/core/layout/README.md: 서두, Box model, Coordinate Spaces",
+          "checkedAt": "2026-10-07T15:11:32.604030+00:00",
+          "summary": "Blink의 layout 디렉터리는 레이아웃 객체를 구현한다. CSS 박스와 좌표계에 따라 요소 배치의 크기·위치를 다루는 영역임을 확인했다. 해독한 UTF-8 원문 18,408바이트, SHA-256 1aadc72f90a8975135da7e43af34e536f1bb226d2e1fa7cc27b696fc50741416. 문항은 내부 클래스나 복잡한 좌표 계산을 묻지 않는다.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-chromium128-v8-pin",
+          "title": "Chromium: DEPS의 V8 버전 연결",
+          "url": "https://chromium.googlesource.com/chromium/src/+/606aa55c7d687518d34b55accc5a71ea0bd28727/DEPS?format=TEXT",
+          "version": "Chromium 128.0.6613.84 / commit 606aa55c7d687518d34b55accc5a71ea0bd28727",
+          "location": "v8_revision 변수(318행) 및 src/v8 의존성(2652~2653행)",
+          "checkedAt": "2026-10-07T15:08:12.367222+00:00",
+          "summary": "지정 Chromium 커밋의 v8_revision은 e6286d70c55da94a8e12658918989b9b9dc325c8이다. 이 핀에 해당하는 V8 README를 읽어 서로 다른 시점의 제품 문서를 섞지 않았다. 해독한 DEPS 원문 223,142바이트, SHA-256 97511d4dd605ce7b9f88d2cfaa7a107bc5420c13927a97eee34bc27acb2b115b.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        },
+        {
+          "sourceId": "r029-network-src-chromium128-v8-readme",
+          "title": "V8: JavaScript Engine README",
+          "url": "https://chromium.googlesource.com/v8/v8/+/e6286d70c55da94a8e12658918989b9b9dc325c8/README.md?format=TEXT",
+          "version": "Chromium 128.0.6613.84에 고정된 V8 commit e6286d70c55da94a8e12658918989b9b9dc325c8",
+          "location": "README.md 서두: V8 JavaScript Engine",
+          "checkedAt": "2026-10-07T15:08:11.599151+00:00",
+          "summary": "V8은 JavaScript 엔진이며 ECMA-262의 ECMAScript를 구현한다. 문항의 JavaScript 산술식 실행은 이 언어 실행 엔진의 역할이다. Chromium DEPS에 고정된 커밋의 해독 원문 964바이트, SHA-256 c937395945cfaed0d90cabfc4079affdcc2390d3c4eec8aa468458887bb86f7b.",
+          "rights": "공식 1차 자료의 사실과 역할을 짧게 의역했다. 지문·선택지·해설은 독자 작성했으며 제공 PDF의 표나 문제, 공식 시험 샘플, 유료 문제집을 복제하지 않았다. 원문 바이트는 비공개 근거 확인용이며 문항과 함께 재배포하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T15:42:48.387Z",
+          "finishedAt": "2026-10-07T15:58:57.180909Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "키 공개 전 답 A를 고정했다. CSS 레이아웃과 JavaScript 실행의 역할을 독립 구분했고 mapping의 정답 o04와 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "공식 범위 HWP 및 Chromium 128 태그→고정 커밋→DEPS의 V8 핀→각 README의 연결을 독립 확인했다. 버전 혼합 없이 Blink/V8의 역할을 뒷받침하며 원문·문제의 부적절한 복제는 발견하지 못했다.",
+              "evidenceRefs": [
+                "r029-network-src-scope-written",
+                "r029-network-src-chromium128-blink",
+                "r029-network-src-chromium128-rendering-core",
+                "r029-network-src-chromium128-layout",
+                "r029-network-src-chromium128-v8-pin",
+                "r029-network-src-chromium128-v8-readme"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "지정 데스크톱 Chromium 기본 구성에서 Blink/V8만 두 역할을 순서대로 충족한다. WebKit 계보, 다른 플랫폼, 스크립트의 DOM 변경 요청은 반례가 아니다. 전체 보존 변형·예약을 대조했으며 기존 브라우저 조작·프로필·권한, Gecko의 text-indent 분쟁, NVDA Blink Cursor와 별개 목표다.",
+              "evidenceRefs": [
+                "r029-network-src-scope-written",
+                "r029-network-src-chromium128-blink",
+                "r029-network-src-chromium128-rendering-core",
+                "r029-network-src-chromium128-layout",
+                "r029-network-src-chromium128-v8-pin",
+                "r029-network-src-chromium128-v8-readme"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "다섯 선택지 모두 두 역할을 같은 순서·형식으로 배정한다. 역할 교환·한 엔진에 통합·옛 엔진 혼동이 유관 오답이며 길이·말투·위치 단서가 없다. 버전 메타데이터와 notes는 적용 범위만 정하고 엔진 역할을 누출하지 않는다. 실제 question.explanation 자체가 각 역할과 결과 조합을 명시한다. 필기 문항이므로 실기 part 교차 누출은 해당 없음.",
+              "evidenceRefs": [
+                "r029-network-src-scope-written",
+                "r029-network-src-chromium128-blink",
+                "r029-network-src-chromium128-rendering-core",
+                "r029-network-src-chromium128-layout",
+                "r029-network-src-chromium128-v8-pin",
+                "r029-network-src-chromium128-v8-readme"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "r029-network-review-cycle1",
+              "summary": "정확한 revision 1 동결 바이트로 schema3·새 문항 엄격 해설·가상 published 발행 분기·regular.28 누적 투영 및 고정 역사 해설 기준을 독립 실행했다. 출처 레코드와 원 은행은 불변이다. 1,024회 seeded 제시, 가능한 432개 표시 순열, 8,624회 채점 검증, 4,608회 단일 선택지 해설 검증을 통과했다. 4지선다의 모든 부분집합과 각 선택지의 모든 위치를 확인했다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r029-aria-s3-w01",
+      "lineageId": "r029-aria-template-separator-focusability-conditions-superclass-and-current-value-duty",
+      "learningGoalId": "r029-aria-template-separator-focusability-conditions-superclass-and-current-value-duty",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r029-aria-s3-w01",
+      "revision": 1,
+      "templateId": "r029-aria-template-separator-focusability-conditions-superclass-and-current-value-duty",
+      "authorId": "author-r029-aria",
+      "evidence": [
+        {
+          "sourceId": "r029-aria-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "HTML 개론: WAI-ARIA 소개·Role·Property & State; 제공 통합 PDF 62쪽의 해당 공식 기준",
+          "checkedAt": "2026-10-07T15:11:14.881471+00:00",
+          "summary": "공식 HWP 보존본 80,896바이트의 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 다시 대조했다. 보존 추출과 제공 통합 PDF의 62쪽을 함께 확인했으며 HTML 과목의 역할·속성·상태 범위와 WAI-ARIA 1.2 지정판을 따른다. 새 HWP를 내려받은 것으로 주장하지 않는다.",
+          "rights": "지정 1차 자료의 규격 사실을 짧게 의역했다. 한국어 지문·선택지·해설과 코드 사례는 독자 작성했으며 제공 PDF의 문제 문구, 공식 샘플·유료 문제집 또는 표준 예문을 복제하지 않았다. 원문·추출·렌더링은 비공개 검증용이며 공개 문항에는 포함하지 않는다."
+        },
+        {
+          "sourceId": "r029-aria-src-separator-conditional",
+          "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2: separator",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#separator",
+          "version": "W3C Recommendation, 2023-06-06",
+          "location": "§5.4 Definition of Roles: separator 본문 및 Characteristics 표",
+          "checkedAt": "2026-10-07T15:11:14.881471+00:00",
+          "summary": "초점을 받을 수 없는 separator는 정적 구조 요소이며 상위 역할은 structure다. 초점 가능한 separator의 상위 역할은 widget이며 저자는 현재 위치를 나타내는 수치 aria-valuenow를 설정하고 위치가 바뀔 때 갱신해야 한다. 이름은 이 현재값 요구를 대신하지 않는다. 비기본 최솟값·최댓값 및 복수 초점 separator의 이름에 대한 SHOULD를 MUST로 바꾸지 않는다.",
+          "rights": "지정 1차 자료의 규격 사실을 짧게 의역했다. 한국어 지문·선택지·해설과 코드 사례는 독자 작성했으며 제공 PDF의 문제 문구, 공식 샘플·유료 문제집 또는 표준 예문을 복제하지 않았다. 원문·추출·렌더링은 비공개 검증용이며 공개 문항에는 포함하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T15:46:48.071Z",
+          "finishedAt": "2026-10-07T16:02:03.974002Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "키 공개 전 E 하나를 잠갔고 고정 매핑의 o03과 일치했다. 독립 풀이에서 복수 정답이나 답을 드러내는 메타데이터는 발견하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "공식 보존 출제기준과 고정 WAI-ARIA1.2 2023-06-06판 조항을 독립 대조했다. s3 범위·원작성·권리 및 MUST/SHOULD 구별이 맞다. 실제 브라우저/보조기술 동작 검증으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r029-aria-src-scope-written",
+                "r029-aria-src-separator-conditional"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "A의 비초점 조건과 B의 초점 가능 조건을 모두 적용해야 o03 하나가 남는다. 같은 역할명의 조건부 상위 역할·현재값 의무가 새 판단 규칙이며, 기존 메뉴 집합 경계·progressbar 갱신·slider 값 텍스트/방향 문제를 단순 재포장한 것이 아니다. 전체1,427변형·950ID와34역사통제·936종결 예약을 확인했다. 탈락14·격리19·증거소실19목표/20회 및113소실 개정판/109ID의 예약은 유지하며 재개방·ID 초기화가 아니다.",
+              "evidenceRefs": [
+                "r029-aria-src-scope-written",
+                "r029-aria-src-separator-conditional"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "다섯 선택지 모두 같은 비교 수준과 문법으로 실제 개념 혼동을 제시하고 오답의 적용 오류를 조항에 대조했다. 정답만의 말투·길이·위치 단서가 없고 notes가 필요한 범위를 한정한다. question.explanation 자체의 규칙과 사례 적용을 확인했다. 두 필기 문항에는 실기 교차 답안 노출이 없고 독립 맹검 메타데이터에도 정답 단서가 없다.",
+              "evidenceRefs": [
+                "r029-aria-src-scope-written",
+                "r029-aria-src-separator-conditional"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "동일 revision1 동결 SHA에서 독립 schema3·엄격 해설·발행 projection·exact regular.28 누적 projection·격리/증거소실 guard를 실행해 통과했다. 4/5지선다 각각256 seed로 총1,024표현·5,632채점 검증, 모든 선택지 전 위치·저장 순서·해설1회·채점 전 비공개를 확인했다. 전체 suite·브라우저/NVDA 실측은 미실시다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r029-aria-s3-w02",
+      "lineageId": "r029-aria-template-flowto-multiple-idrefs-user-choice-alternate-reading-relationship",
+      "learningGoalId": "r029-aria-template-flowto-multiple-idrefs-user-choice-alternate-reading-relationship",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r029-aria-s3-w02",
+      "revision": 1,
+      "templateId": "r029-aria-template-flowto-multiple-idrefs-user-choice-alternate-reading-relationship",
+      "authorId": "author-r029-aria",
+      "evidence": [
+        {
+          "sourceId": "r029-aria-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "HTML 개론: WAI-ARIA 소개·Role·Property & State; 제공 통합 PDF 62쪽의 해당 공식 기준",
+          "checkedAt": "2026-10-07T15:11:14.881471+00:00",
+          "summary": "공식 HWP 보존본 80,896바이트의 SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314를 다시 대조했다. 보존 추출과 제공 통합 PDF의 62쪽을 함께 확인했으며 HTML 과목의 역할·속성·상태 범위와 WAI-ARIA 1.2 지정판을 따른다. 새 HWP를 내려받은 것으로 주장하지 않는다.",
+          "rights": "지정 1차 자료의 규격 사실을 짧게 의역했다. 한국어 지문·선택지·해설과 코드 사례는 독자 작성했으며 제공 PDF의 문제 문구, 공식 샘플·유료 문제집 또는 표준 예문을 복제하지 않았다. 원문·추출·렌더링은 비공개 검증용이며 공개 문항에는 포함하지 않는다."
+        },
+        {
+          "sourceId": "r029-aria-src-flowto-relationship",
+          "title": "Accessible Rich Internet Applications (WAI-ARIA) 1.2: aria-flowto and related relationships",
+          "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-flowto",
+          "version": "W3C Recommendation, 2023-06-06",
+          "location": "§6.7 aria-flowto; 같은 절의 aria-owns·aria-describedby·aria-details; §4.3 Managing Focus and Supporting Keyboard Navigation",
+          "checkedAt": "2026-10-07T15:11:14.881471+00:00",
+          "summary": "aria-flowto는 사용자의 재량에 따른 대체 읽기 순서의 다음 요소들을 참조한다. 여러 ID 참조를 주면 보조기술은 참조 요소들을 경로 선택지로 제공하는 것이 권고되며 사용자가 대상 중 어느 것으로 이동할지 선택할 수 있다. 이 관계는 DOM 재배치, Tab 순서 지정, 부모·자식 소유 관계 또는 설명 문자열 결합을 뜻하지 않는다. 규격 의미와 권고 수준을 판단하며 실제 제품 지원을 보장하지 않는다.",
+          "rights": "지정 1차 자료의 규격 사실을 짧게 의역했다. 한국어 지문·선택지·해설과 코드 사례는 독자 작성했으며 제공 PDF의 문제 문구, 공식 샘플·유료 문제집 또는 표준 예문을 복제하지 않았다. 원문·추출·렌더링은 비공개 검증용이며 공개 문항에는 포함하지 않는다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-07T15:46:48.071Z",
+          "finishedAt": "2026-10-07T16:02:03.974002Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "키 공개 전 A 하나를 잠갔고 고정 매핑의 o02와 일치했다. 독립 풀이에서 복수 정답이나 답을 드러내는 메타데이터는 발견하지 않았다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "공식 보존 출제기준과 고정 WAI-ARIA1.2 2023-06-06판 조항을 독립 대조했다. s3 범위·원작성·권리 및 MUST/SHOULD 구별이 맞다. 실제 브라우저/보조기술 동작 검증으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r029-aria-src-scope-written",
+                "r029-aria-src-flowto-relationship"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "case와 steps는 강제 연속 방문 목록이 아닌 선택 가능한 후속 읽기 대상이므로 o02 하나가 남는다. 기존 owns 부모·자식, details 확장 설명, describedby 문자열 계산과 다른 관계 규칙이다. 기존 corpus에 flowto 직접 일치는 없다. 전체1,427변형·950ID와34역사통제·936종결 예약을 확인했다. 탈락14·격리19·증거소실19목표/20회 및113소실 개정판/109ID의 예약은 유지하며 재개방·ID 초기화가 아니다.",
+              "evidenceRefs": [
+                "r029-aria-src-scope-written",
+                "r029-aria-src-flowto-relationship"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "다섯 선택지 모두 같은 비교 수준과 문법으로 실제 개념 혼동을 제시하고 오답의 적용 오류를 조항에 대조했다. 정답만의 말투·길이·위치 단서가 없고 notes가 필요한 범위를 한정한다. question.explanation 자체의 규칙과 사례 적용을 확인했다. 두 필기 문항에는 실기 교차 답안 노출이 없고 독립 맹검 메타데이터에도 정답 단서가 없다.",
+              "evidenceRefs": [
+                "r029-aria-src-scope-written",
+                "r029-aria-src-flowto-relationship"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "r029-aria-review-cycle1",
+              "summary": "동일 revision1 동결 SHA에서 독립 schema3·엄격 해설·발행 projection·exact regular.28 누적 projection·격리/증거소실 guard를 실행해 통과했다. 4/5지선다 각각256 seed로 총1,024표현·5,632채점 검증, 모든 선택지 전 위치·저장 순서·해설1회·채점 전 비공개를 확인했다. 전체 suite·브라우저/NVDA 실측은 미실시다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    }
+  ],
+  "counts": {
+    "registered": 4,
+    "accepted": 4,
+    "rejected": 0,
+    "pending": 0,
+    "publishedRegularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "publishedRegularPractical": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 117,
+      "s2": 190,
+      "s3": 168,
+      "s4": 187,
+      "s5": 144
+    },
+    "regularPractical": 76,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.08-regular.29",
+    "bankSha256": "e4aa308bd28027aff2b17882fe45b5559ddfb21cd734305f43040cb28f50e264",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [
+    {
+      "check": "후보 독립 검토·정확한 해설 필드",
+      "result": "pass",
+      "summary": "후보 4개·시작 검토 4회를 기한 안에 종결했다. 모든 채택 문항은 같은 개정판의 다섯 검사와 문항 전체 해설의 실제 풀이 규칙·적용 근거 검토를 통과했다.",
+      "reportPath": "docs/rounds/round-029.md"
+    },
+    {
+      "check": "실제 브라우저·Windows/NVDA",
+      "result": "not_run",
+      "summary": "새 콘텐츠의 실제 브라우저·보조기술 조작/출력 및 사용자 학습 기록 관찰은 수행하지 않았다.",
+      "reportPath": "docs/NVDA-CHECKLIST.md"
+    }
+  ],
+  "nextRoundGaps": [
+    {
+      "gapId": "round-029-gap-01",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "1983년 ARPANET 전환은 당시 전환 계획과 개발 참여자의 사후 기록으로 대조했다. DNS 최초 규격의 발행과 실제 보급 시점은 이번 판단 근거로 사용하지 않았다.",
+      "neededEvidenceOrCounterexample": "각 사건의 당시 1차 기록과 최초 규격·운영 전환·보급을 구별하는 직접 근거",
+      "nextAction": "연도나 사건명만 바꾼 반복 문항을 만들지 않고 기존 인터넷 역사 문항 전체와 먼저 대조한다.",
+      "completionCriterion": "독립적인 새 판단 규칙과 다섯 선택지의 사실 근거가 함께 확인된 경우에만 별도 후보를 시작한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-029-gap-02",
+      "category": "validation",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "엔진 역할은 데스크톱 Chromium 128.0.6613.84 및 연결된 V8 커밋으로 한정했다. 다른 플랫폼이나 현재 제품의 구성·실제 화면 출력을 측정하지 않았다.",
+      "neededEvidenceOrCounterexample": "제품·플랫폼·정확한 판을 고정한 공식 원문과 허용된 환경의 실제 출력",
+      "nextAction": "같은 브랜드의 모든 플랫폼을 동일 엔진으로 일반화하지 않는다. 제품명만 바꾼 목표를 추가하지 않는다.",
+      "completionCriterion": "판·플랫폼·문서상의 역할과 실제 관측이 분리되어 확인된다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-029-gap-03",
+      "category": "validation",
+      "subjectIds": [
+        "s3"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "초점 가능한 separator와 복수 aria-flowto 관계를 고정 ARIA 1.2의 조건 및 규범 강도로 판정했다. 특정 보조기술의 키보드·읽기 경로 지원을 실측하지 않았다.",
+      "neededEvidenceOrCounterexample": "보조기술·브라우저·운영체제 판과 설정, 정확한 입력·출력 관측",
+      "nextAction": "규격 의미와 실제 지원을 구분하고 허용된 환경에서만 별도 측정한다. 이미 다룬 현재값 속성이나 관계 이름만 바꾸어 신규 목표로 세지 않는다.",
+      "completionCriterion": "문서의 MUST/SHOULD/MAY와 실제 지원 결과·미실시가 분리되어 기록된다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-029-gap-04",
+      "category": "coverage",
+      "subjectIds": [
+        "s1",
+        "s4"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "공개된 PDF 후속 계획의 다음 우선 조사 대상은 반복 광고영역 분류·조건부 글꼴 변형·ECMAScript 2020 연산자 두 목표다. 이번 회차에는 이들 후보를 시작하지 않았다.",
+      "neededEvidenceOrCounterexample": "공식 출제범위와 고정 표준판의 정확한 조건·반례, 기존 모든 학습 필드 및 탈락 예약과의 비교",
+      "nextAction": "다음 배정 회차에서 원래 목표 예약을 먼저 대조한다. 반복 영역의 분류를 과거 탈락 구현 목표의 재개방으로 바꾸지 않고 연산자·글꼴 조건의 독립성을 확인한다.",
+      "completionCriterion": "실제 독립 목표와 타당한 오답·실질적 해설을 확보한 것만 원래 후보 한도와 판정 마감 안에서 시작한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-029-gap-05",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "practical"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "과거의 유한 자료군에서 109개 후보의 113개 시작 개정판 원문이 확보되지 않은 한계를 유지한다. 22회차 19개 격리 목표와 23회차의 모든 내용·이력 예약도 그대로다.",
+      "neededEvidenceOrCounterexample": "원래 출처 및 내용 해시와 대조할 수 있는 해당 개정판 원본과 실제 검토 기록",
+      "nextAction": "없는 원문을 다시 작성한 것을 복구라고 하지 않는다. 새로운 원본을 확보한 경우에만 출처·해시를 별도 검증하고 기존 판정·재개방 한도를 보존한다.",
+      "completionCriterion": "확인한 자료의 범위와 소실 한계를 명확히 구별하며 격리·차단 내용을 새 이름으로 재사용하지 않는다.",
+      "priority": "medium",
+      "reopenEligible": false
+    }
+  ],
+  "noGapExplanation": null,
+  "summary": "정규 29회차 후보 4개 중 4개 채택·0개 탈락·미결정 0개. 새 누적 일반 890개·시드 14개이며 공개 확인 전 신규 공개 수는 0개다. 정확히 전달 검증된 regular.28의 전체 문항·선택지·출처와 과거 편집 정정·격리·발행 차단·검토 이력을 보존한다."
+}

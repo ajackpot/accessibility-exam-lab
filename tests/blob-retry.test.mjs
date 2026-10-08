@@ -247,3 +247,54 @@ test('cutoff reached during claim I/O withholds operation and permanently consum
   t.mock.method(Date, 'now', () => NOW);
   await assert.rejects(reserveBlobRetry(props), /EEXIST/);
 });
+
+function stoppedEvidence() {
+  const props=evidence(),o=props.original,submitted={operation:'create_blob',path:'data/releases/synthetic/bank.json',bytes:o.identity.bytes,sha256:o.identity.sha256,gitBlob:o.identity.gitBlobSha,submittedAt:iso(NOW-3_000_001),encoding:o.operation.encoding};
+  o.permissionWait=null;o.reconciliation={artifactSha256:o.identity.sha256,firstUnresolvedAt:iso(NOW-3_000_000),deadlineAt:iso(NOW-2_400_000),state:'skip_git_step',skippedAt:'2026-10-04T08:00:00.123456+00:00'};
+  const terminal={schemaVersion:1,completedAt:'2026-10-04T08:00:00.123648+00:00',executionId:o.executionId,roundId:'synthetic-round',status:'terminal_writes_stopped_unresolved_unattached_blob',repository:o.operation.repository,authorizationWait:{state:'no_request_observed',requestedAt:null,deadlineAt:null,elicitationRequestId:null},uncertainty:{operation:submitted,firstUnresolvedAt:o.reconciliation.firstUnresolvedAt,deadlineAt:o.reconciliation.deadlineAt,outcome:'unknown',readOnlyBlobObservation:'404',requestCancellationConfirmed:false,reconciliation:'skip_git_step',actualSkipPersistedAt:o.reconciliation.skippedAt},submittedGitWrites:[submitted],treeSubmitted:false,commitSubmitted:false,refSubmitted:false,writesPermanentlyStopped:true,furtherWritesAuthorized:false};
+  o.terminalEvidence={terminalRaw:JSON.stringify(terminal,null,2)+'\n',terminalSha256:'',submittedRaw:JSON.stringify(submitted),submittedSha256:''};
+  o.terminalEvidence.terminalSha256=digest(o.terminalEvidence.terminalRaw);o.terminalEvidence.submittedSha256=digest(o.terminalEvidence.submittedRaw);return props;
+}
+function mutateTerminal(props,change){const e=props.original.terminalEvidence,t=JSON.parse(e.terminalRaw);change(t);e.terminalRaw=JSON.stringify(t,null,2)+'\n';e.terminalSha256=digest(e.terminalRaw);}
+test('stopped isolated blob admits one separately requested exact retry without invented permission clock or old settlement',async t=>{
+ t.mock.method(Date,'now',()=>NOW);const root=await fs.mkdtemp(path.join(os.tmpdir(),'stopped-blob-test-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ const props={...stoppedEvidence(),directory:path.join(root,'fixed-original-journal')},before=structuredClone(props);
+ await initializeBlobRetryJournal(props);const result=await reserveBlobRetry(props);
+ assert.equal(result.started.originalOutcome,'unknown');assert.equal(result.started.retryOutcome,'unknown');assert.equal(result.started.permissionWait,null);assert.deepEqual(props,before);assert.deepEqual(result.operation,props.attempt.operation);
+ const original=JSON.parse(await fs.readFile(path.join(props.directory,'original.json'))).original;
+ assert.equal(original.permissionWait,null);assert.deepEqual(original.terminalEvidence,props.original.terminalEvidence);assert.equal(original.reconciliation.skippedAt,'2026-10-04T08:00:00.123456+00:00');assert.equal(JSON.parse(original.terminalEvidence.terminalRaw).uncertainty.requestCancellationConfirmed,false);
+ await assert.rejects(reserveBlobRetry({...props,attempt:{...props.attempt,executionId:'other-new-execution',operationId:'other-new-operation'}}),/EEXIST/);
+ await assert.rejects(initializeBlobRetryJournal(props),/EEXIST/);
+});
+test('stopped branch rejects fabricated timeout, changed raw evidence, clocks, authority and downstream writes before any claim',async t=>{
+ t.mock.method(Date,'now',()=>NOW);const root=await fs.mkdtemp(path.join(os.tmpdir(),'stopped-blob-negative-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ const props={...stoppedEvidence(),directory:path.join(root,'fixed-original-journal')};await initializeBlobRetryJournal(props);
+ const changes=[
+  p=>delete p.original.terminalEvidence,
+  p=>p.original.terminalEvidence.terminalRaw+=' ',
+  p=>p.original.terminalEvidence.submittedRaw+=' ',
+  p=>p.original.permissionWait=evidence().original.permissionWait,
+  p=>mutateTerminal(p,t=>t.authorizationWait.requestedAt=iso(NOW-3_000_000)),
+  p=>mutateTerminal(p,t=>t.authorizationWait.state='download_only'),
+  p=>mutateTerminal(p,t=>t.writesPermanentlyStopped=false),
+  p=>mutateTerminal(p,t=>t.furtherWritesAuthorized=true),
+  p=>mutateTerminal(p,t=>t.treeSubmitted=true),
+  p=>mutateTerminal(p,t=>t.commitSubmitted=true),
+  p=>mutateTerminal(p,t=>t.refSubmitted=true),
+  p=>mutateTerminal(p,t=>t.uncertainty.requestCancellationConfirmed=true),
+  p=>mutateTerminal(p,t=>t.uncertainty.outcome='failed'),
+  p=>mutateTerminal(p,t=>t.uncertainty.firstUnresolvedAt=iso(NOW-2_999_999)),
+  p=>mutateTerminal(p,t=>t.uncertainty.operation.encoding='base64'),
+  p=>mutateTerminal(p,t=>t.submittedGitWrites.push({...t.uncertainty.operation,operation:'create_tree'})),
+  p=>mutateTerminal(p,t=>t.completedAt='2026-02-30T08:00:00.123456+00:00'),
+  p=>mutateTerminal(p,t=>t.completedAt=iso(NOW+1)),
+  p=>p.original.reconciliation.deadlineAt=iso(NOW-2_000_000),
+  p=>p.original.localExecutionState='unknown',
+  p=>p.original.isolatedBlobOnly=false,
+  p=>p.request.type='recurring_automation',
+  p=>p.request.requestedAt='2026-10-04T08:00:00.123Z',
+  p=>p.publication.ref='unknown'
+ ];
+ for(const change of changes){const bad=structuredClone(props);change(bad);await assert.rejects(reserveBlobRetry(bad));assert.deepEqual(await fs.readdir(props.directory),['original.json']);}
+ const changed=structuredClone(props);mutateTerminal(changed,t=>t.readOnlyBlobObservation='still_unknown');await assert.rejects(reserveBlobRetry(changed),/cannot be reset or replaced/);
+});

@@ -175,7 +175,7 @@ round-002 대장의 `scheduleSubstitution`은 승인된 이 한 번의 교체만
 7. 변경분과 별도 전체본을 각각 검증하고, 두 파일의 지원되는 Library 업로드와 사용자 첨부 전송이 실제 성공한 뒤에만 `delivered`라고 기록합니다. 업로드/첨부가 실패하면 `delivery_failed`로 보고하고 비공개 서명 URL을 우회 전달하지 않습니다. 다운로드 가능 파일 제공과 Git/Pages 공개를 구별하며 새 공개 수는 0입니다. 준비 시 `prepared`, 전달 성공/실패 때 별도의 append-only 영수증 사건을 기록하고 이전 사건/후보를 덮어쓰지 않습니다. 같은 artifact의 최신 상태 사건 하나를 사슬 검사에 넣고 모든 사건 이력은 보존합니다
 8. 영수증은 `docs/deliveries/`의 공개용 짧은 결과만 다음 허용된 저장소 반영 때 포함합니다. 전달 직후 해당 회차 Git 쓰기로 기록하지 않습니다. 원격 밖에서도 정확한 ZIP/manifest/영수증/종결 후보·은행 바이트를 복구 가능한 저장소에 보존합니다. 파일 경로만 저장하거나 임시 파일이 남을 것으로 가정하지 않습니다. 서비스 접근 식별자·비공개 링크는 공개 영수증에서 제외합니다
 
-**전체 적용본 필수 동반 (packaging-policy-001):** 새 다운로드 전달은 `writeOfflineDeliveryPair`로 변경분과 전체본을 함께 준비합니다. 전체본 `project/`에는 정확한 공개 허용 목록 전체를 넣고 별도 `manifest.json`·`APPLY-KO.txt`를 제공합니다. 전체본에는 이전 ZIP이 필요하지 않습니다. 원 delta/사슬 해시는 출처 검증용으로만 남깁니다. 모든 파일을 사전에 의미/개인정보 검토하고 검토 inventory와 정확히 대조하며, 원본과 별도 동결한 바이트로 ZIP을 만듭니다. 빈 폴더에 풀고 `project/`에서 인자 없는/명시적 build/check와 전체 테스트·발행 검사를 실행합니다. CRC·모든 파일 해시·안전 경로·중복/대소문자 충돌·허용 목록 일치도 확인합니다.
+**전체 적용본 필수 동반 (packaging-policy-001):** 새 다운로드 전달은 `writeOfflineDeliveryPair`로 변경분과 전체본을 함께 준비합니다. 전체본 `project/`에는 정확한 공개 허용 목록 전체를 넣고 별도 `manifest.json`·`APPLY-KO.txt`를 제공합니다. 전체본에는 이전 ZIP이 필요하지 않습니다. 원 delta/사슬 해시는 출처 검증용으로만 남깁니다. 모든 파일을 사전에 의미/개인정보 검토하고 검토 inventory와 정확히 대조하며, 원본과 별도 동결한 바이트로 ZIP을 만듭니다. 빈 폴더에 풀고 `project/`에서 build·소스·전체 테스트·발행 검사를 실행합니다. 기본/명시 입력이 동일한 경우의 중복 실행 통합과, 종결 소스 증거를 재사용하는 대체 경로는 아래 validation-efficiency-001의 모든 조건을 충족할 때만 적용합니다. 재사용을 archive 내 실제 전체 테스트 실행으로 보고하지 않습니다. CRC·모든 파일 해시·안전 경로·중복/대소문자 충돌·허용 목록 일치도 확인합니다.
 
 이미 전달된 변경분에 전체본만 추가 제공하는 경우 기존 delta/영수증은 바꾸거나 재첨부하지 않습니다. 정확한 frozenSourceInventory와 별도 packagingRevision의 경로/before/after 해시를 넣어 `freezeCompleteProject`/`writeCompleteZip`으로 생성하고 독립 검토합니다. full 영수증은 `kind:complete_project_delivery`로 원 delta 사슬과 분리하며 업로드·첨부 성공 전에는 prepared입니다. 다음 회차는 기존 delta 사슬의 정확한 기준을 유지하며 전체본에만 추가된 지원 파일도 다음 delta 검토에 빠짐없이 포함합니다.
 
@@ -188,6 +188,9 @@ round-002 대장의 `scheduleSubstitution`은 승인된 이 한 번의 교체만
 ### 새 명시 요청에 따른 단일 blob 재제출의 좁은 예외
 
 미확정 쓰기의 자동 재시도 금지는 기본값이다. 다만 이전 실행이 영구 `download_only`로 끝났고 tree/commit/ref를 전혀 제출하지 않은 분리된 `create_blob`만, **종료 뒤 사용자가 새로 명시한 요청**에 대해 새 executionId로 독립 검토한다. 기존 로컬 실행의 종료와 대기 중인 후속 Git 쓰기가 없음도 독립 확인한다. 원래 저장소·도구·인코딩·해독 바이트·바이트 수·SHA-256·Git blob SHA가 모두 같아야 한다. 60초 이내의 실제 원격 head와 로컬/원격 영구 동결 상태, 별도 신규 권한 대기의 10분 상한·현재 실제 시각·최종 cutoff·전체 발행 검사를 확인한다.
+
+
+권한 알림 없이 결과가 미확정인 분리된 blob도, 원래 재대조 10분 경과·영구 쓰기 중단·실제 로컬 실행 종료 및 후속 Git 쓰기 대기 없음이 독립 확인되고 종료 후 새로운 명시적 사용자 요청이 있는 경우에만 같은 단일 재제출 guard를 사용한다. 이 경로는 원 `permissionWait:null`과 실제 `no_request_observed` terminal/제출 원문·해시·microsecond UTC 시각을 그대로 결박한다. `download_only`·권한 알림·서버 취소를 만들어 내지 않으며 원 unknown·최초 시계·중단은 유지한다. 동일 저장소·도구·인코딩·해독 바이트·SHA, 새 execution/operation, 실제 fresh head·양쪽 동결·cutoff와 제출 전 하나의 고정된 durable request/object claim 조건은 같다. 원문 해시나 caller Boolean만으로 외부 사실·권한이 인증되는 것은 아니며 운영자가 원 증거와 새 요청을 독립 확인한다. 후속 tree/commit/ref가 제출됐거나 불명인 경로는 허용하지 않는다.
 
 `scripts/blob-retry.mjs`의 `initializeBlobRetryJournal`/`reserveBlobRetry`로 원래 작업당 하나의 고정된 비공개 지속 기록에 요청/객체당 한 번을 **제출 전에** 배타 생성·동기화한다. 실패·불명·중단도 한 번을 소비하며 기록의 이동·삭제·재초기화로 횟수를 되찾지 않는다. 기존 unknown·최초 10분 시계·종결 상태는 그대로 둔다. 증거/지속 기록 누락이나 손상은 차단한다. 자동/예약/늦은 승인·인코딩 변경·tree-inline 우회·tree/commit/ref 재시도는 허용하지 않으며 이 검사는 공개 승인이나 배포 완료를 뜻하지 않는다.
 
@@ -373,3 +376,66 @@ loader는 등록된 각 사슬을 자기 원격 anchor에서 별도로 검증한
 별도 `docs/publications/cumulative-018-027.json`과 보고서가 payload `da645d3d7a37b67551344bf7853c92e54eecddfd`, Pages37583421170 성공,242파일 원격 tree·52개 live 경로의 실제 일치를 기록한다. 일반882개(필기806·실기76)와 시드14개이며017 대비 새 공개는198개다.018–022·024–027의 원 채택217개 중022의19개는 계속 격리한다.023은 예약 전용으로 남기고 공개 source에 넣지 않는다. 원래 대장·은행·proof·trust prefix·ZIP·공개0·unknown·최초 불확실성 시계를 바꾸지 않는다. 이 기록을 넣는 후속 지원 commit은 자신의 별도 Pages/live 검증이 필요하다.
 
 비발행 읽기에서 검증 시각보다 이른 시각을 명시했고 해당 공개 source 전체도 사후 시작 회차도 없는 역사적 부분집합은 뒤의 전달 의존성을 요구하지 않는다. 이 경우에도 모든 이벤트 원문 SHA와 pin 순서를 먼저 인증하며 이벤트를 활성화하거나 artifact를 해소하지 않는다. 현재 시각·발행 문맥·source 전체·사후 시작 회차 및 인자 없는 직접 호출은 정확한 전달 증거와 검증된 사슬 소속을 계속 요구한다. 실제 원 archive 감사는 별도의 정확한 inventory 경계만 사용한다.
+
+## 정상 원격 회차의 별도 공개 등록
+
+1. 실제 원격 head를 기준으로 시작하고 offlinePredecessor가 없는 정상 회차의 closed 대장·검토된 은행·manifest를 고정한다. timeout·download_only·전달 proof를 만들어 내지 않는다. 정상 두 백업 ZIP은 기존 `writeReleaseDeliveryPair`의 release_backup 경로로 준비한다
+2. 최신 head/ancestry·현재/원격 동결 표시·cutoff·전체 검사를 다시 확인하고 승인된 payload의 실제 단일 parent와 전체 tree를 확인한다. 정확한 commit의 Pages 성공 뒤 runtime 파일·모든 불변 은행·원 대장·두 동결 표시의 live HTTP200 길이와 SHA-256을 확인한다
+3. DATA-CONTRACT의 verified_normal_publication 이벤트를 실제 관측으로 작성한다. 전체 remoteInventory에는 모든 파일의 Git blob SHA도 기록한다. exact runtimeManifestRaw·publicationStateRaw와 normal_frozen_ledger source의 baseline·원 ledger SHA를 포함한다. 원 대장·기존 공개 이벤트·trust prefix·은행은 수정하지 않는다
+4. 독립 검토가 실제 관측과 이벤트 바이트를 확인한 뒤에만 PUBLICATION_SYNCHRONIZATIONS의 마지막 해시 뒤에 새 pin을 추가하고 공개 허용 목록에 이벤트/보고서를 등록한다. helper의 구조 검사는 외부 사실 확인을 대신하지 않는다. 새 이벤트는 자신의 미래 지원 커밋을 증명하지 않으며 그 지원 커밋은 별도로 Pages/live 검증한다
+5. 등록 이후 loader·전체 캠페인·발행 검사를 다시 한다. 원 공개0·검토 이력을 보존하고 정상 이벤트에서 offlineBases·delivery checkpoint·resolved artifact가 생기지 않았는지 확인한다. auditHistoricalRelease는 원래 전달 archive만 검사하며 이 정상 이벤트를 전달 증거로 사용하지 않는다
+
+## 정상 원격 기준 release_backup 루트 등록
+
+1. `prepareNormalBackupRoot`에 실제 delta/full ZIP, 원 upload/native receipt, 원 upload tool 결과, archive audit, source checkpoint, 실제 stopped publisher 증거(있는 경우), 정확한 원 공개 트리와 검토된 같은-bank support 후손 트리를 입력한다. 원 receipt를 기존009/helper 형식으로 변환하지 않는다
+2. helper는 ZIP의 CRC·안전 경로·크기·SHA·전체 allowlist와 원 delta 재구성, 원 closed 대장·은행, 전체 캠페인, 양쪽 동결·현재 cutoff를 검사한다. 반환 proposal은 전달/등록 권한이 아니다. 실제 archive/native 시각과 새 verificationCompletedAt을 구분한다
+3. 별도 검토자가 원 tool 결과의 두 Library ID와 native 수락, source/continuation anchor 관계, 원 전체 역사 및 proposal을 검토한다. 이후 `proposeNormalBackupRootRegistration(proofRaw)`로 실제 현재 registeredAt/eligibleAt의 새 pin과 append-only registry를 준비한다. 해당 proof와 registry를 새 작업본에만 등록하고 allowlist에 module·registry·proof·tests를 포함한다. 이미 전달된 ZIP은 수정하지 않는다
+4. 등록된 정확한 proof를 `loadRoundContext`에서 읽어 검증한 offlineBase를 후속 baseline으로 쓴다. 실제 formal ledger.startedAt은 registration eligibility 뒤여야 한다. 먼저 한 비공개 조사가 있었다면 그 조사 시각과 formal 시작을 구분하고, 검토 횟수·회차 occurrence·원래 마감은 초기화/연장하지 않는다
+5. 원009/독립 timeout 사슬과 모든 publication/quarantine/release-block/incident 이력은 유지한다. 새로운 permission timeout·download_only·savedAt·공개 완료·사용자 다운로드를 추정하지 않는다. 원 Git 실행의 영구 종료는 그대로다
+6. 현재 구현은 정상 public-baseline root만 등록한다. 후속 offline 전달은 새 root로 위장하지 않으며, 다음 checkpoint가 필요하면 원 이력을 보존한 별도 좁은 확장을 먼저 검토한다
+
+
+## 정상 전달 후속 사슬의 내용 전용 계약
+
+정상 release_backup 루트의 후속 전달은 별도 `normal-backup-chain.mjs`와 append-only `docs/deliveries/normal-backup-chain-trust.json`으로 검증한다. 루트 proof와 원 registry를 바꾸거나 후속 전달을 새 루트·009 origin·timeout으로 바꾸지 않는다. generic successor proof는 exact root/previous proof, 원 ledger·bank·두 archive와 manifest, 실제 native 수락, 검증 완료 및 등록 시각을 연결한다. 원 영수증의 recordedAt과 실제 attachmentAcceptedAt은 별개이고 없는 server savedAt을 만들지 않는다. 공개 proof에는 원 receipt의 해시만 보존하며 private 경로·서비스 ID를 싣지 않는다.
+
+각 delta는 자기 실제 공개 baseCommit·관측 시각·전체 inventory의 before/after로 재구성한다. 같은 공개은행의 검토된 additive analysis 후손 외의 anchor 변경, 경로 삭제·충돌, 원 delivered history 변경, trust prefix 생략·분기·순서 변경은 금지한다. delivered source는 앞선 proof들을 포함하되 자기 미래 등록을 포함할 필요는 없다.
+
+준비 proposal과 합성 테스트는 권한이 아니다. 실제 원본 증거와 정확한 변경을 새 독립 검토한 뒤 현재 시각의 등록 pin을 준비한다. loader의 후속 offlineBase는 전체 campaign 검사와 원 채택/격리/증거소실 예약, 재개방·검토 한도, 현재 및 source 동결·cutoff 아래에서만 쓴다. 실제 새 formal 시작은 등록 eligibility 뒤에 별도로 정하고 기존 예정 발생분·마감을 소급 변경하지 않는다. 일반·명시 build와 독립 packaging도 같은 dependency/snapshot 검사를 한다.
+
+이 확장은 다음 내용 회차 기준과 자체 완결 포장에 한정한다. publication-sync·정상 공개 이벤트·resolvedArtifacts 규약을 확대하지 않고 canPublish=false·공개증가0을 유지한다. Git 쓰기·새 publication proof·원 stopped publisher 재개 권한이 아니다.
+
+
+## 검증 실행의 통합과 정확한 증거 재사용 (validation-efficiency-001)
+
+검사의 목적은 고유한 의미·안전 계약의 확인이며 실행 횟수 자체를 늘리는 것이 아니다. 같은 정확한 입력과 같은 계약을 연속 명령에서 반복 계산한 횟수를 독립 검토 수나 품질 지표로 보고하지 않는다. 테스트 수는 실행 대조용으로만 남기며, 이름·문장이 비슷하거나 오래 걸린다는 이유만으로 테스트 사례·불변 조건을 삭제하지 않는다.
+
+- 모든 변경 문항의 정확한 개정판에는 독립 맹검 풀이, 1차 출처·범위·권리, 정답 유일성·반례, 문안·접근성, 구조·엄격한 해설 검사가 필요하다. 공유 선택지·출처 변경의 영향 문항도 다시 검토한다. 후보 cycle·계보·일정·실패·불변 이력·격리·증거 소실 예약은 그대로 보존한다
+- 릴리스마다 전체 campaign·불변 과거 파일·활성 은행의 의미 검증을 충족한다. 섞기·정답 집합·채점·저장 순서·스냅샷·백업·시간·AI 경계·접근성 동작의 고유 회귀를 보존한다. 동일 입력의 중복 실행과 서로 다른 의미 계약을 구별한다
+- `npm run release:validate`는 기존 전체 `validate-round --release` 호출과 소스 검사를 각각 한 번 실행하고 시작/끝에 실제 시각과 두 영구 동결 표시를 확인한다. 기존 `check`, 직접 `validate-round --release`, `release:check -- --check-only`를 같은 스냅샷에서 연속 실행하던 묶음 대신 쓸 수 있다. 기존 단독 명령은 완전한 검사를 유지하며 새 명령은 `npm test`, build, archive 검사 또는 실제 공개를 수행했다고 뜻하지 않는다. 전체 이력 loader 안의 반복 검증은 이 단계에서 그대로 둔다
+- 새 명령은 입력 proof·skip flag·사용자 시각을 받지 않고 실행 시작/끝의 전체 경로·파일 바이트·runtime 정체성을 비교한다. `.git` 관리 영역 외 숨김 파일·의존성·빈 폴더도 비교하며 symlink는 거부한다. 외부 수정자가 없는 별도 고정 작업본에서 실행하고 로그·상태 파일은 작업본 밖에 쓴다. 시작/끝의 일치는 중간에 다른 프로세스가 변경하지 않았다는 증명을 대신하지 않는다. 실행 중 입력이 바뀌거나 결과가 비종결이면 통과로 쓰지 않는다
+- 기본/명시 경로가 같은 은행 바이트를 가리킬 때 동일 발행 검사를 반복할 필요는 없다. 다만 후보 경로의 별도 규약, 변경 은행·manifest 정합성, immutable collision 및 각 API/CLI의 동작 회귀는 유지한다. 새 명령이 명시 후보 bank 검사를 수행한 것으로 보고하지 않는다
+
+### 동일 archive에 대한 종결 소스 증거의 재사용
+
+이 개정 이후에는 아래 조건을 전부 독립 확인한 정확히 동일한 재구성본에서 결정적 전체 corpus의 중복 실행을 생략할 수 있다. 기존 전체 archive 실행 의무의 명시적 대체 경로이며 과거 미실시를 실행으로 바꾸지 않는다. 구현되지 않았거나 증거를 확인할 수 없는 경우 기존 전체 실행 경로를 사용한다. 새 통합 CLI 자체에는 저장 proof를 읽거나 archive 실행을 생략하는 기능이 없다.
+
+1. 실제 실행한 명령·검사/runner 원문·전체 전이 의존성·fixture·package/lock·schema·trust pin·문서 입력과 추가/누락에 민감한 전체 경로 집합의 SHA-256/크기 inventory, Node/runtime·platform·dependency 환경, 시작/종료·exit/TAP·원본 로그가 정확히 결박된 성공 종결 증거를 보관한다. 해시 문자열·commit 이름·mtime·테스트 파일만 같거나 호출자가 만든 pass Boolean은 증거가 아니다. 원 실행과 독립 보관 기록의 일치를 확인하고 검사되지 않은 의존성은 보수적으로 전체 무효화한다
+2. 전체 ZIP과 delta는 각각 별도로 안전 경로·허용 목록·privacy·중복/대소문자 충돌·CRC·크기·모든 파일 SHA를 검사한다. 전체본을 새 빈 폴더에 추출하고 delta는 실제 고정 원격 base에서 before/after로 독립 재구성한다. 두 결과 각각이 검토 소스의 전체 파일 집합 및 바이트와 같음을 확인한다. 이력·원 proof·은행·누락 파일 검사를 건너뛰지 않는다
+3. 두 재구성본에서 각각 빈 폴더 시작/import/build smoke를 실제 실행하여 숨은 외부 파일·경로·환경 의존성이 없음을 확인한다. 쓰기를 하는 build는 폐기 가능한 고정 사본에서 실행하고 입력/출력 정체성을 확인한다. 서로 다른 runtime/dependency 또는 변경·누락 입력, 미종결/소실 증거에는 재사용하지 않는다
+4. 보고서는 실제 수행한 archive 검사와 `소스에서 실행한 정확한 증거 재사용`을 구별하고 원 증거·inventory·runner·환경·종결 결과 해시와 적용 대상을 연결한다. 재사용한 테스트를 각 archive에서 실행한 것으로 세거나 표시하지 않는다. 실패와 미실시는 보존한다
+5. 실제 작업 경계의 현재 시각·두 동결 표시·현재 eligibility·정확한 입력 정체성은 새로 확인한다. 역사적 읽기 전용 proof나 소스 성공 결과는 현재 공개 권한이 아니다. 실제 remote commit/tree와 그 commit의 Pages/live bytes 증거는 별도로 필요하다
+
+### 종료가 확인된 로컬 검사 재개
+
+로컬 검사와 자식 프로세스가 실제 종료됐는지 먼저 확인하고 원 command·source·로그·종결 기록을 보존한다. 실행 중이면 그 실행을 기다린다. 종료됐으나 종결 결과를 얻지 못했으면 원 시도를 `미완료/unknown`으로 보존하고 누락된 idempotent 로컬 검사만 새 attempt에 재실행할 수 있다. 잘린 로그로 exit 0을 만들어 내지 않는다. 원 Git 권한/불확실 쓰기의 10분 대기는 이 로컬 검사 재개에 적용하지 않는다. Git·Library 업로드·첨부·권한 등록 등 결과 불명 외부 쓰기에는 원래 재시도 금지·확인 정책을 그대로 적용한다.
+
+### 독립 범위 제한 seal의 정상 전달 등록
+
+정상 후속 recorder는 기존 archive seal과 `pass_independent_bounded_release_archive_and_evidence_review`를 같은 실제 전달 사실의 읽기 전용 view로 검사한다. 후자는 `verifiedAt`, 정확한 `sourceTree`·`sourceInventorySha256`·`sourceFiles`·`baseCommit`, `archives.delta/complete`, 재구성 root, 양쪽 실제 smoke와 원 증거 참조 및 `scope`를 보존한다. scope·잔여 제한과 원 SHA를 바꾸거나 전체 suite 통과로 승격하지 않는다. 새 회차 번호별 seal 형식을 추가하지 않고 이 공통 필드를 유지한다.
+
+native 수락의 `nativeAcceptance`, upload helper 관측의 `helperCompletionObservedAt`, checkpoint의 source inventory는 원래 관측으로만 읽는다. 서버 savedAt 또는 다른 alias를 만들어 넣지 않는다. 별도 검토자는 원 seal의 증거·smoke 영수증·로그·두 실제 저장/첨부 결과를 인증한 뒤 기존 generic successor proof와 append-only 등록을 검토한다. 이 view만으로 등록·공개 권한은 생기지 않는다.
+
+## 실제 전달된 정상 사슬의 누적 Pages 반영
+
+DATA-CONTRACT의 `verified_normal_chain_publication`만 사용한다. 새 최종 회차도 먼저 두 실제 첨부 수락·독립 증거 검토·checkpoint 등록을 마친다. 과거 중단된 publisher는 재개하지 않으며 새로운 사용자 지시와 현재 작업의 권한을 별도로 확인한다. 현재 원격 head/tree·동결·cutoff·충돌을 다시 읽고, 검토된 정확한 source의 통합 검사를 한 번 실행한다. SHA-only inventory로 새 payload를 반영하고 exact-head Pages와 필수 live 경로를 대조한 뒤에만 별도 공개 event/pin을 독립 검토·등록한다. 원 receipt 해시·대장·은행·proof·trust prefix와 모든 미확정 쓰기 시각은 보존한다. 후속 지원 commit의 원격/Pages/live 확인도 별도로 마친다.

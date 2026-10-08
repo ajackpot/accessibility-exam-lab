@@ -1,3 +1,5 @@
+import {validateNormalBackupChainSnapshot} from './normal-backup-chain.mjs';
+import {validateNormalBackupRootSnapshot} from './normal-backup-root.mjs';
 import {validateEvidenceLossSnapshot,assertEvidenceLossProvenance} from './evidence-loss-block.mjs';
 import {validateQuarantineSnapshot} from './prepublication-quarantine.mjs';
 /** Reviewed complete public snapshot packaging. No Git, network, upload or learner APIs. */
@@ -75,6 +77,8 @@ function checkComplete(snapshot,now=null) {
   if (!manifest || manifest.bankVersion !== release.bankVersion || manifest.sha256 !== release.bankSha256 || manifest.file !== `releases/${release.bankVersion}/bank.json` || bank?.sha256 !== release.bankSha256 || ledger?.sha256 !== release.ledgerSha256) fail('Complete runtime manifest/bank/ledger identity mismatch');
   const b=JSON.parse(bank.raw), l=JSON.parse(ledger.raw);
   if (b.bankVersion !== release.bankVersion || (l.roundId || l.correctionRoundId) !== release.roundId || l.status !== 'closed' || l.publication.bankVersion !== release.bankVersion || l.publication.bankSha256 !== release.bankSha256) fail('Complete release has no matching closed ledger');
+  validateNormalBackupRootSnapshot(files,{now});
+  validateNormalBackupChainSnapshot(files,{now,requireCurrentEligibility:true});
   validateEvidenceLossSnapshot(files,{now});
   assertEvidenceLossProvenance(m.sourceRelease);
   validateQuarantineSnapshot(files,{now});

@@ -1,32 +1,32 @@
-# Allow-list for the public developer preview. Paths are relative to repository root.
-# No other workspace paths, uploaded files, backups, secrets, or raw QA logs may be published.
-# Bounded regular content rounds
 # 0.2.8 reviewed explanation presentation and authoring gate
+# Allow-list for the public developer preview. Paths are relative to repository root.
 # Bounded accepted-content editorial corrections (no new knowledge quota)
-# Second regular expansion
-# Third regular expansion
-# Fourth regular expansion
-# Fifth regular expansion
-# Local-only permission-timeout delivery policy and regression tests
-# Sixth regular expansion
 # Bounded reconciliation and verified offline cumulative continuation
-# Seventh offline cumulative expansion
+# Bounded regular content rounds
 # Delivered seventh-round offline checkpoint
 # Eighth offline cumulative expansion
-# Standalone cumulative project delivery (packaging-policy-001)
-# Explicit one-shot content-addressed blob retry guard
-# Verified cumulative publication event; original ledgers and receipts stay unchanged
-# Exact manual009 start and normal-release dual backups
-# Ninth explicitly requested regular expansion
-# Tenth scheduled cumulative expansion from exact delivered009
-# Reviewed generic post-attachment successor checkpoints
 # Eleventh exact manual cumulative expansion from delivered010
-# Twelfth scheduled cumulative expansion from exact delivered011
-# Thirteenth scheduled expansion from exact delivered012
-# Fourteenth scheduled expansion from exact delivered013
+# Exact manual009 start and normal-release dual backups
+# Explicit one-shot content-addressed blob retry guard
 # Fifteenth scheduled expansion from exact delivered014
-# Sixteenth scheduled expansion from exact delivered015
+# Fifth regular expansion
+# Fourteenth scheduled expansion from exact delivered013
+# Fourth regular expansion
+# Local-only permission-timeout delivery policy and regression tests
+# Ninth explicitly requested regular expansion
+# No other workspace paths, uploaded files, backups, secrets, or raw QA logs may be published.
+# Reviewed generic post-attachment successor checkpoints
+# Second regular expansion
 # Seventeenth scheduled expansion from exact delivered016
+# Seventh offline cumulative expansion
+# Sixteenth scheduled expansion from exact delivered015
+# Sixth regular expansion
+# Standalone cumulative project delivery (packaging-policy-001)
+# Tenth scheduled cumulative expansion from exact delivered009
+# Third regular expansion
+# Thirteenth scheduled expansion from exact delivered012
+# Twelfth scheduled cumulative expansion from exact delivered011
+# Verified cumulative publication event; original ledgers and receipts stay unchanged
 .gitignore
 .nojekyll
 AGENTS.md
@@ -65,6 +65,10 @@ data/releases/2026.10.06-regular.24/bank.json
 data/releases/2026.10.06-regular.25/bank.json
 data/releases/2026.10.06-regular.26/bank.json
 data/releases/2026.10.07-regular.27/bank.json
+data/releases/2026.10.07-regular.28/bank.json
+data/releases/2026.10.08-regular.29/bank.json
+data/releases/2026.10.08-regular.30/bank.json
+data/releases/2026.10.08-regular.31/bank.json
 data/seed-bank-v2.json
 data/seed-bank-v3.json
 data/seed-bank-v4.json
@@ -77,6 +81,8 @@ docs/PRD.md
 docs/SEED-VALIDATION.json
 docs/SOURCE-REVIEW.md
 docs/VALIDATION.md
+docs/analysis/2026-10-07-pdf-gap-allocation.json
+docs/analysis/2026-10-07-pdf-gap-plan.md
 docs/corrections/choice-audit-001.json
 docs/corrections/editorial-001.json
 docs/corrections/editorial-001.md
@@ -93,6 +99,7 @@ docs/deliveries/chains/public-regular17/round-022.json
 docs/deliveries/chains/public-regular17/round-024.json
 docs/deliveries/chains/public-regular17/round-025.json
 docs/deliveries/chains/public-regular17/round-026.json
+docs/deliveries/chains/public-regular17/round-027.json
 docs/deliveries/checkpoints/round-010.json
 docs/deliveries/checkpoints/round-011.json
 docs/deliveries/checkpoints/round-012.json
@@ -102,6 +109,11 @@ docs/deliveries/checkpoints/round-015.json
 docs/deliveries/checkpoints/round-016.json
 docs/deliveries/checkpoints/round-017.json
 docs/deliveries/normal-backup-009.json
+docs/deliveries/normal-backup-chain-trust.json
+docs/deliveries/normal-backup-root-trust.json
+docs/deliveries/normal-chains/round-028/round-029.json
+docs/deliveries/normal-chains/round-028/round-030.json
+docs/deliveries/normal-roots/round-028.json
 docs/deliveries/offline-chain-trust.json
 docs/deliveries/offline-chain.json
 docs/deliveries/release-backup-trust.json
@@ -110,6 +122,8 @@ docs/publications/cumulative-006-008.json
 docs/publications/cumulative-006-008.md
 docs/publications/cumulative-009-017.json
 docs/publications/cumulative-009-017.md
+docs/publications/cumulative-018-027.json
+docs/publications/cumulative-018-027.md
 docs/quarantines/quarantine-001.json
 docs/quarantines/trust.json
 docs/release-blocks/evidence-loss-001.json
@@ -167,6 +181,14 @@ docs/rounds/round-026.json
 docs/rounds/round-026.md
 docs/rounds/round-027.json
 docs/rounds/round-027.md
+docs/rounds/round-028.json
+docs/rounds/round-028.md
+docs/rounds/round-029.json
+docs/rounds/round-029.md
+docs/rounds/round-030.json
+docs/rounds/round-030.md
+docs/rounds/round-031.json
+docs/rounds/round-031.md
 docs/rounds/round-ledger.schema.json
 docs/rounds/round-ledger.template.json
 docs/rounds/round-report.template.md
@@ -190,14 +212,21 @@ scripts/download-fallback.mjs
 scripts/editorial-ledger.mjs
 scripts/evidence-loss-block.mjs
 scripts/explanation-authoring.mjs
+scripts/normal-backup-chain.mjs
+scripts/normal-backup-root.mjs
+scripts/normal-publication.mjs
 scripts/offline-chain-continuation.mjs
 scripts/prepublication-quarantine.mjs
 scripts/publication-sync.mjs
 scripts/release-backup-continuation.mjs
 scripts/release-bundle.mjs
 scripts/release-guard.mjs
+scripts/release-window.mjs
 scripts/sha-only-tree.mjs
+scripts/source-checks.mjs
+scripts/source-snapshot.mjs
 scripts/validate-bank.mjs
+scripts/validate-release.mjs
 scripts/validate-round.mjs
 src/app.js
 src/backup.js
@@ -226,9 +255,15 @@ tests/four-hour-cadence.test.mjs
 tests/independent-offline-chains.test.mjs
 tests/manual-round-eleven.test.mjs
 tests/manual-round-nine.test.mjs
+tests/normal-backup-chain-fixtures.mjs
+tests/normal-backup-chain.test.mjs
 tests/normal-backup-continuation.test.mjs
+tests/normal-backup-root.test.mjs
 tests/offline-campaign-baselines.test.mjs
 tests/prepublication-quarantine.test.mjs
+tests/publication-sync-independent.test.mjs
+tests/publication-sync-normal-chain.test.mjs
+tests/publication-sync-normal.test.mjs
 tests/publication-sync-successors.test.mjs
 tests/publication-sync.test.mjs
 tests/quarantine-fixtures.mjs
@@ -237,6 +272,7 @@ tests/regular-practice.test.mjs
 tests/release-backup-successors.test.mjs
 tests/release-bundle-closure.test.mjs
 tests/release-bundle.test.mjs
+tests/release-validation-orchestration.test.mjs
 tests/round-eight-bank.test.mjs
 tests/round-eighteen-bank.test.mjs
 tests/round-eleven-bank.test.mjs
@@ -254,11 +290,15 @@ tests/round-six-bank.test.mjs
 tests/round-sixteen-bank.test.mjs
 tests/round-ten-bank.test.mjs
 tests/round-thirteen-bank.test.mjs
+tests/round-thirty-bank.test.mjs
+tests/round-thirtyone-bank.test.mjs
 tests/round-three-bank.test.mjs
 tests/round-twelve-bank.test.mjs
 tests/round-twenty-bank.test.mjs
+tests/round-twentyeight-bank.test.mjs
 tests/round-twentyfive-bank.test.mjs
 tests/round-twentyfour-bank.test.mjs
+tests/round-twentynine-bank.test.mjs
 tests/round-twentyone-bank.test.mjs
 tests/round-twentyseven-bank.test.mjs
 tests/round-twentysix-bank.test.mjs
@@ -268,9 +308,5 @@ tests/sha-only-tree.test.mjs
 tests/stimulus-layout.test.mjs
 tests/ui-state.test.mjs
 tests/workflows.test.mjs
-docs/deliveries/chains/public-regular17/round-027.json
-tests/publication-sync-independent.test.mjs
-docs/publications/cumulative-018-027.json
-docs/publications/cumulative-018-027.md
-docs/analysis/2026-10-07-pdf-gap-allocation.json
-docs/analysis/2026-10-07-pdf-gap-plan.md
+docs/reviews/2026-10-08-held-items-final-review.md
+docs/deliveries/normal-chains/round-028/round-031.json

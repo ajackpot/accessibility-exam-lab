@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "kind": "reviewed_normal_release_successors",
+  "checkpoints": [
+    {
+      "rootProofSha256": "e97e8f07760fe3d5f1fbb423d5598dd01163e8092a493031aa67919b6cb9f271",
+      "roundId": "round-029",
+      "path": "docs/deliveries/normal-chains/round-028/round-029.json",
+      "sha256": "c2b047cd27d8d3167a3ac3bb068ccd8c2c1838522e58a60c83b8dd291ab870ca",
+      "previousProofSha256": "e97e8f07760fe3d5f1fbb423d5598dd01163e8092a493031aa67919b6cb9f271",
+      "registeredAt": "2026-10-07T22:24:08.795Z",
+      "eligibleAt": "2026-10-07T22:24:08.795Z"
+    },
+    {
+      "rootProofSha256": "e97e8f07760fe3d5f1fbb423d5598dd01163e8092a493031aa67919b6cb9f271",
+      "roundId": "round-030",
+      "path": "docs/deliveries/normal-chains/round-028/round-030.json",
+      "sha256": "35d82d052baf2230a45c6bd05bd6498e6b0b2657177b98ae10a95ce44861bb6e",
+      "previousProofSha256": "c2b047cd27d8d3167a3ac3bb068ccd8c2c1838522e58a60c83b8dd291ab870ca",
+      "registeredAt": "2026-10-08T03:17:00.352Z",
+      "eligibleAt": "2026-10-08T03:17:00.352Z"
+    },
+    {
+      "rootProofSha256": "e97e8f07760fe3d5f1fbb423d5598dd01163e8092a493031aa67919b6cb9f271",
+      "roundId": "round-031",
+      "path": "docs/deliveries/normal-chains/round-028/round-031.json",
+      "sha256": "0a6a5c30d3665a20b91084e6502db240c79e7e52258b7d31fb2f1fc7ed5b9a54",
+      "previousProofSha256": "35d82d052baf2230a45c6bd05bd6498e6b0b2657177b98ae10a95ce44861bb6e",
+      "registeredAt": "2026-10-08T06:03:44.907Z",
+      "eligibleAt": "2026-10-08T06:03:44.907Z"
+    }
+  ]
+}
