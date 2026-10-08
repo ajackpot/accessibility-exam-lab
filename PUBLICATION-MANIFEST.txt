@@ -129,6 +129,7 @@ docs/publications/cumulative-009-017.md
 docs/publications/cumulative-018-027.json
 docs/publications/cumulative-018-027.md
 docs/publications/cumulative-028-031.json
+docs/publications/normal-032.json
 docs/quarantines/quarantine-001.json
 docs/quarantines/trust.json
 docs/release-blocks/evidence-loss-001.json
