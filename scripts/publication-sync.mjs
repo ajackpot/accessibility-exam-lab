@@ -1,7 +1,8 @@
 /** Append-only, reviewed external publication evidence. No Git, network or history writes. */
+import {RECONCILED_NORMAL_CHAIN_PUBLICATION_KIND,isReconciledNormalChainPublication,validateReconciledNormalChainMembership} from './normal-chain-publication-event.mjs';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
-import {isNormalPublication, isNormalChainPublication, NORMAL_SOURCE_KEYS, NORMAL_CHAIN_SOURCE_KEYS, validateNormalPublication, validateNormalBankTransition} from './normal-publication.mjs';
+import {isNormalPublication, isNormalChainPublication, NORMAL_SOURCE_KEYS, NORMAL_CHAIN_SOURCE_KEYS, validateNormalPublication, validateNormalBankTransition,normalPublicationTree} from './normal-publication.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 import normalRootTrust from '../docs/deliveries/normal-backup-root-trust.json' with {type:'json'};
 import normalChainTrust from '../docs/deliveries/normal-backup-chain-trust.json' with {type:'json'};
@@ -118,12 +119,13 @@ export async function validateNormalChainSynchronizationSources(synchronizations
  const {assertValidatedNormalBackupChains}=await import('./normal-backup-chain.mjs');assertValidatedNormalBackupChains(chains);validatePublicationEvidenceOrder(synchronizations);
  for(const record of synchronizations){
   if(!isNormalChainPublication(record)||!requiresSynchronizationDeliveryDependencies(record,dependencyContext))continue;
-  let chain=null,position=-1;
+  let chain=null,position=-1;const positions=[];
   for(const source of record.rounds){const p=validateSynchronizationDeliveryProof(record,source,deliveryCheckpointSources.get(source.roundId)),root=p.kind==='delivered_normal_release_root_checkpoint'?source.deliveryProof.sha256:p.rootProofSha256,c=chains.get(root),i=c?.sources.findIndex(s=>s.proofSha256===source.deliveryProof.sha256);
-   if(!c||i<0||chain&&(chain!==c||i!==position+1)||!equal(c.sources[i].proof,p))throw Error('Normal publication sources must be contiguous members of one fully validated chain');chain=c;position=i;
+   if(!c||i<0||chain&&(chain!==c||i!==position+1)||!equal(c.sources[i].proof,p))throw Error('Normal publication sources must be contiguous members of one fully validated chain');chain=c;position=i;positions.push(i);
   }
   const p=chain.sources[position].proof,anchor=p.kind==='delivered_normal_release_root_checkpoint'?p.continuationAnchor:p.publicAnchor;
   if(record.parent!==anchor.baseCommit)throw Error('Normal-chain publication parent must match its exact reviewed public anchor');
+  if(isReconciledNormalChainPublication(record))validateReconciledNormalChainMembership(record,{chain,positions,synchronizations,ledgers:dependencyContext.ledgers,ledgerSources:dependencyContext.ledgerSources,treeFunction:normalPublicationTree});
   const inventory=checkedInventory(record);
   if(anchor.remoteInventory.some(f=>!inventory.has(f.path)||f.path.startsWith('docs/analysis/')&&!equal(inventory.get(f.path),f)))throw Error('Normal-chain publication must retain every public anchor path and exact reviewed analysis');
  }
@@ -191,7 +193,7 @@ export function validatePublicationSynchronizations(synchronizations = [], {ledg
   for (const record of synchronizations) {
     if (!trusted(record)) { errors.push('publication synchronization proof is absent, unreviewed or tampered'); continue; }
     if (!Array.isArray(record.rounds) || !record.rounds.length) { errors.push('Publication synchronization requires original delivered sources'); continue; }
-    if (!['verified_cumulative_publication','verified_normal_publication','verified_normal_chain_publication'].includes(record.kind) || !isNormalPublication(record) && record.rounds.some(s=>s.kind==='normal_frozen_ledger' || !isNormalChainPublication(record)&&s.kind==='normal_delivered_checkpoint' || record.previousSynchronizationSha256 && (!s.deliveryProof || !safePath(s.deliveryProof.path) || !/^[a-f0-9]{64}$/.test(s.deliveryProof.sha256)))) { errors.push('Unknown or mismatched publication event/source kind'); continue; }
+    if (!['verified_cumulative_publication','verified_normal_publication','verified_normal_chain_publication',RECONCILED_NORMAL_CHAIN_PUBLICATION_KIND].includes(record.kind) || !isNormalPublication(record) && record.rounds.some(s=>s.kind==='normal_frozen_ledger' || !isNormalChainPublication(record)&&s.kind==='normal_delivered_checkpoint' || record.previousSynchronizationSha256 && (!s.deliveryProof || !safePath(s.deliveryProof.path) || !/^[a-f0-9]{64}$/.test(s.deliveryProof.sha256)))) { errors.push('Unknown or mismatched publication event/source kind'); continue; }
     if (seen.has(record.syncId)) { errors.push('duplicate publication synchronization'); continue; }
     seen.add(record.syncId);
     const at = Date.parse(record.verifiedAt);

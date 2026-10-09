@@ -1,6 +1,7 @@
 /** Semantic checks for a separately reviewed normal publication event.
  * This module does not authenticate external observations, register a pin, write
  * Git, or grant publication clearance. Only the pinned caller activates history. */
+import {isReconciledNormalChainPublication,validateReconciledNormalPublication} from './normal-chain-publication-event.mjs';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
 import quarantineTrust from '../docs/quarantines/trust.json' with {type:'json'};
@@ -19,7 +20,7 @@ export const NORMAL_PUBLICATION_KIND='verified_normal_publication';
 export const NORMAL_SOURCE_KEYS=['kind','roundId','ledgerPath','originalLedgerSha256','bankVersion','bankSha256','baseline','accepted','originalPublicationStatus','quarantined','eligible','newlyPublicRegular'];
 export const NORMAL_CHAIN_PUBLICATION_KIND='verified_normal_chain_publication';
 export const NORMAL_CHAIN_SOURCE_KEYS=['kind','roundId','ledgerPath','originalLedgerSha256','bankVersion','bankSha256','accepted','originalPublicationStatus','quarantined','eligible','newlyPublicRegular','artifactSha256','manifestSha256','deliveredAt','deliveryVerifiedAt','deliveryProof','attachmentReceiptSha256'];
-export const isNormalChainPublication=record=>record?.kind===NORMAL_CHAIN_PUBLICATION_KIND;
+export const isNormalChainPublication=record=>record?.kind===NORMAL_CHAIN_PUBLICATION_KIND||isReconciledNormalChainPublication(record);
 export const isNormalPublication=record=>record?.kind===NORMAL_PUBLICATION_KIND;
 /** Compute the exact regular-file Git tree, including nested directory trees. */
 export function normalPublicationTree(inventory) {
@@ -29,17 +30,18 @@ export function normalPublicationTree(inventory) {
  return tree(root);
 }
 export function validateNormalPublication(record,{ledgers,banks,ledgerSources,inventory,previousPublication}) {
- const chain=isNormalChainPublication(record);
- const keys=['schemaVersion','syncId','kind','previousSynchronizationSha256','verifiedAt','repository','commit','parent','tree','commitUrl','pages','siteUrl','manifest','manifestSha256','runtimeManifestRaw','publicationStateRaw','counts','writtenBySubject','rounds','remoteInventory','liveAssets','limitations'];
+ const chain=isNormalChainPublication(record),reconciled=isReconciledNormalChainPublication(record);
+ const keys=['schemaVersion','syncId','kind','previousSynchronizationSha256','verifiedAt','repository','commit','parent','tree','commitUrl','pages','siteUrl','manifest','manifestSha256','runtimeManifestRaw','publicationStateRaw','counts','writtenBySubject','rounds','remoteInventory','liveAssets','limitations',...(reconciled?['reconciliation']:[])];
  if(!equal(Object.keys(record).sort(),keys.sort())||record.schemaVersion!==1||!previousPublication||record.repository!==previousPublication.repository||record.siteUrl!==previousPublication.siteUrl||![record.commit,record.parent,record.tree].every(v=>sha.test(v)&&v!=='0'.repeat(40))||record.commit===record.parent||record.commitUrl!==`https://github.com/${record.repository}/commit/${record.commit}`)throw Error('Normal publication requires exact event fields and actual payload identity');
  const at=Date.parse(record.verifiedAt),p=record.pages;
  if(!Number.isFinite(at)||at>=FREEZE_AT||!p||!equal(Object.keys(p).sort(),['conclusion','headSha','runId','status','url'])||!Number.isSafeInteger(p.runId)||p.runId<=0||p.headSha!==record.commit||p.status!=='completed'||p.conclusion!=='success'||p.url!==`https://github.com/${record.repository}/actions/runs/${p.runId}`)throw Error('Normal publication requires exact-head successful Pages before cutoff');
  if(!Array.isArray(record.rounds)||!record.rounds.length||!chain&&record.rounds.length!==1)throw Error('Normal publication requires exact frozen ledger sources');
+ const reconciliation=reconciled?validateReconciledNormalPublication(record,{ledgers,ledgerSources,previousPublication,treeFunction:normalPublicationTree}):null;
  const s=record.rounds.at(-1);
  for(const source of record.rounds){
   const l=ledgers.find(l=>l.roundId===source.roundId),raw=ledgerSources.get(source.roundId);
   assertEvidenceLossProvenance(source);
-  if(!equal(Object.keys(source).sort(),[...(chain?NORMAL_CHAIN_SOURCE_KEYS:NORMAL_SOURCE_KEYS)].sort())||source.kind!==(chain?'normal_delivered_checkpoint':'normal_frozen_ledger')||!l||l.status!=='closed'||!chain&&l.baseline.offlinePredecessor||l.publication.status!=='not_attempted'||l.publication.blockers.length||source.originalPublicationStatus!==l.publication.status||source.ledgerPath!==`docs/rounds/${source.roundId}.json`||!raw||hash(raw)!==source.originalLedgerSha256||!equal(JSON.parse(raw),l)||!Number.isFinite(Date.parse(l.closedAt))||Date.parse(l.closedAt)>at||Date.parse(l.startedAt)<Date.parse(previousPublication.verifiedAt))throw Error('Normal publication requires exact closed unpublished ledger sources');
+  if(!equal(Object.keys(source).sort(),[...(chain?NORMAL_CHAIN_SOURCE_KEYS:NORMAL_SOURCE_KEYS)].sort())||source.kind!==(chain?'normal_delivered_checkpoint':'normal_frozen_ledger')||!l||l.status!=='closed'||!chain&&l.baseline.offlinePredecessor||l.publication.status!=='not_attempted'||l.publication.blockers.length||source.originalPublicationStatus!==l.publication.status||source.ledgerPath!==`docs/rounds/${source.roundId}.json`||!raw||hash(raw)!==source.originalLedgerSha256||!equal(JSON.parse(raw),l)||!Number.isFinite(Date.parse(l.closedAt))||Date.parse(l.closedAt)>at||Date.parse(l.startedAt)<Date.parse(previousPublication.verifiedAt)&&!reconciliation?.earlyRoundIds.has(source.roundId))throw Error('Normal publication requires exact closed unpublished ledger sources');
   const baseline={sourceCommit:l.baseline.sourceCommit,bankVersion:l.baseline.bankVersion,bankSha256:l.baseline.bankSha256};
   if(!chain&&(!equal(source.baseline,baseline)||record.parent!==baseline.sourceCommit)||l.publication.bankVersion!==source.bankVersion||l.publication.bankSha256!==source.bankSha256)throw Error('Normal publication must bind its exact public baseline, payload parent and frozen bank');
   if(source===record.rounds[0]&&(baseline.bankVersion!==previousPublication.manifest.bankVersion||baseline.bankSha256!==previousPublication.manifest.sha256))throw Error('Normal publication must start at the exact previous public bank');

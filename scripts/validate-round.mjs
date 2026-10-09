@@ -754,7 +754,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations});
     if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
   }
-  await validateNormalChainSynchronizationSources(synchronizations,normalChain.chains,deliveryCheckpointSources,{ledgers,now,release});
+  await validateNormalChainSynchronizationSources(synchronizations,normalChain.chains,deliveryCheckpointSources,{ledgers,ledgerSources,now,release});
   // Resolve only after current full-campaign validation. Keep every anchor's
   // original receipts/manifests separate and never feed resolutions to inspectProof.
   const campaignContext={ledgers,editorials,schema,banks,reviewPackages,availableFiles,publicationState,manifest,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources};

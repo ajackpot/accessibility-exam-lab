@@ -70,6 +70,9 @@ data/releases/2026.10.08-regular.29/bank.json
 data/releases/2026.10.08-regular.30/bank.json
 data/releases/2026.10.08-regular.31/bank.json
 data/releases/2026.10.08-regular.32/bank.json
+data/releases/2026.10.08-regular.33/bank.json
+data/releases/2026.10.08-regular.34/bank.json
+data/releases/2026.10.09-regular.35/bank.json
 data/seed-bank-v2.json
 data/seed-bank-v3.json
 data/seed-bank-v4.json
@@ -115,6 +118,8 @@ docs/deliveries/normal-backup-root-trust.json
 docs/deliveries/normal-chains/round-028/round-029.json
 docs/deliveries/normal-chains/round-028/round-030.json
 docs/deliveries/normal-chains/round-028/round-031.json
+docs/deliveries/normal-chains/round-032/round-033.json
+docs/deliveries/normal-chains/round-032/round-034.json
 docs/deliveries/normal-roots/round-028.json
 docs/deliveries/normal-roots/round-032.json
 docs/deliveries/offline-chain-trust.json
@@ -198,6 +203,12 @@ docs/rounds/round-031.json
 docs/rounds/round-031.md
 docs/rounds/round-032.json
 docs/rounds/round-032.md
+docs/rounds/round-033.json
+docs/rounds/round-033.md
+docs/rounds/round-034.json
+docs/rounds/round-034.md
+docs/rounds/round-035.json
+docs/rounds/round-035.md
 docs/rounds/round-ledger.schema.json
 docs/rounds/round-ledger.template.json
 docs/rounds/round-report.template.md
@@ -224,6 +235,8 @@ scripts/evidence-loss-block.mjs
 scripts/explanation-authoring.mjs
 scripts/normal-backup-chain.mjs
 scripts/normal-backup-root.mjs
+scripts/normal-chain-publication-ancestry.mjs
+scripts/normal-chain-publication-event.mjs
 scripts/normal-publication.mjs
 scripts/offline-chain-continuation.mjs
 scripts/prepublication-quarantine.mjs
@@ -271,6 +284,8 @@ tests/normal-backup-chain-fixtures.mjs
 tests/normal-backup-chain.test.mjs
 tests/normal-backup-continuation.test.mjs
 tests/normal-backup-root.test.mjs
+tests/normal-chain-publication-ancestry.test.mjs
+tests/normal-chain-publication-event.test.mjs
 tests/offline-campaign-baselines.test.mjs
 tests/prepublication-quarantine.test.mjs
 tests/publication-sync-independent.test.mjs
@@ -303,7 +318,10 @@ tests/round-sixteen-bank.test.mjs
 tests/round-ten-bank.test.mjs
 tests/round-thirteen-bank.test.mjs
 tests/round-thirty-bank.test.mjs
+tests/round-thirtyfive-bank.test.mjs
+tests/round-thirtyfour-bank.test.mjs
 tests/round-thirtyone-bank.test.mjs
+tests/round-thirtythree-bank.test.mjs
 tests/round-thirtytwo-bank.test.mjs
 tests/round-three-bank.test.mjs
 tests/round-twelve-bank.test.mjs
@@ -322,3 +340,4 @@ tests/sha-only-tree.test.mjs
 tests/stimulus-layout.test.mjs
 tests/ui-state.test.mjs
 tests/workflows.test.mjs
+docs/deliveries/normal-chains/round-032/round-035.json

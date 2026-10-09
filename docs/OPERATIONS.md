@@ -468,3 +468,27 @@ DATA-CONTRACT의 `verified_normal_chain_publication`만 사용한다. 새 최종
 [Microsoft 공식 안내](https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/zip-and-unzip-files)는 Windows 11 24H2의 7z 지원을 명시한다(2026-10-08 확인). 다른 OS·구버전은 호환 해제 도구가 필요할 수 있다. 사용자 환경에 도구가 있다고 추정하거나 설치를 자동 수행하지 않는다. 공식 지원 설명과 이 프로젝트의 실제 Windows/NVDA 검증을 구별하고 미실측은 미실시로 남긴다.
 
 이 작업은 포장 형식 전환이다. 새 비용·자격증명·권한·전달 목적지를 요구하지 않으며 Git 쓰기·중단 publisher 재개 허가를 만들지 않는다. 원 unknown·최초 시계·terminal·채택/공개 수, 후보당 3회·계보 6회, 4시간 일정·회차 마감·현재 및 source 동결·최종 cutoff를 계속 지킨다.
+
+구조화된 원 bounded seal을 후속 reader에 연결할 때는 원 archive 두 개·seal·source inventory와, seal이 참조하는 원 evidence/명령 로그/실행 파일 바이트를 `supportingEvidence` Map으로 명시적으로 공급한다. 실제 source/base 재구성, 종결 source 검사, 두 smoke와 형식별 구조를 읽기 전용으로 확인한다. 미지 필드·alias 충돌·hash 누락 또는 미종결 증거는 중단하며 새 pass 필드로 보완하지 않는다. `inspectNormalBackupBoundedArchiveEvidence`의 성공은 제한된 원 archive 증거 확인일 뿐 전달·전체 suite·공개·등록 성공이 아니다. 현재 실제 서비스 결과에서 별도로 검토한 append-only receipt/checkpoint와 새 독립 코드 검토 없이 후속 proof를 채택하지 않는다. 원 ZIP view·영수증·동결 source/7z/ZIP·seal은 그대로 보존한다.
+
+### 선행 정상 은행 공개 뒤 후속 archive 기준 이동
+
+내용 대장이 이전 offlinePredecessor와 역사적 sourceCommit을 사용해 시작된 뒤 그 선행 은행이 실제 공개되면, 새 delta는 실제 현재 공개 head/inventory를 기준으로 만들되 원 대장의 기준을 고쳐 쓰지 않는다. 기존 같은은행/additive analysis 전이에 맞추려고 관측 head·manifest·시각을 꾸미지 않는다.
+
+1. 원 전달 사슬·현재 공개 이벤트 pin·실제 중간 commit 응답·지원 commit의 Pages/live 원본을 따로 보존한다. 원 anchor부터 현재 head까지 한 commit도 빠뜨리지 않고 parent/tree/전체 inventory를 대조한다. 지원 등록 외 외부 변경은 중단하고 별도 검토한다
+2. 새 공개 source와 정확한 원 검토 이력을 합친 후 기존 한 번의 release 검증, 두 archive 재구성과 필요한 smoke/독립 증거 검토를 수행한다. 실제 저장·native 첨부가 끝나기 전에 새 successor proof를 만들거나 전달로 표시하지 않는다
+3. `prepareNormalBackupSuccessor`에 실제 새 publicAnchorRoot와 원래 관측의 `verified_normal_chain_publication_ancestry` JSON을 anchorEvidenceRaw로 전달한다. 이 공개용 JSON에는 private 경로·서비스 식별자 없이 실제 원본 요청/응답의 해시와 공개 Git/Pages/파일 사실만 담는다. 원본 private evidence와 대응을 독립 검토한다
+4. 제안 proof의 새 명시 discriminator, original anchor 해시, 두 실제 archive와 원 receipt 해시·현재 검증 시각을 확인한 뒤 기존 append-only successor 등록 절차를 따른다. 마지막 원격 head 확인과 archive 경계의 실제 freeze/cutoff를 다시 확인하며 과거 관측을 현재 fresh clearance라고 부르지 않는다
+5. 다음 회차는 새 등록 eligibility 뒤에만 시작한다. 이전 대장/첨부/proof·trust prefix와 모든 은행·정정·격리·증거소실 예약은 그대로 보존한다. 이 절은 Git 쓰기나 별도 공개 event 등록·중단된 publisher 재개의 권한이 아니다
+
+### 등록된 ancestor 전이를 사용한 정상 사슬의 안전한 Git 공개 확인
+
+다운로드를 먼저 완수한다. 아직 전달/등록하지 않은 새 종결 회차를 공개 source에 섞지 않는다. 기존 normal-chain event의 시작/parent 검사를 통과시키려고 원 대장을 고치지 말고, 실제 등록된 ancestor 전이가 해당 원 source prefix를 인증할 때만 DATA-CONTRACT의 새 `verified_reconciled_normal_chain_publication`을 사용한다.
+
+1. 실제 최신 등록 tip과 원 사슬, 정확한 선행 public event, 전이 proof와 원 receipt 해시, 검토된 전체 source/변경 inventory를 고정한다. 원 history·은행·정정·격리·증거소실 예약과 새 helper 의존성을 포함한다. 다른 head나 경로 충돌은 강제로 덮어쓰지 않는다
+2. 실제 Git 실행의 권한과 기존/현재 outcome journal을 별도로 확인한다. 기존 unknown/영구 중단은 그대로이며 새 event 코드가 재시도·늦은 승인·canary의 권한을 만들지 않는다
+3. 실제 main/commit/전체 tree/두 freeze marker를 각각 새로 읽어 원 응답과 서로 다른 실제 관측 시각을 보존한다. 등록된 tip anchor와 같지 않으면 중단한다. 검토한 blob SHA만 사용하는 tree와 기대 단일 parent의 commit을 준비하고, 마지막60초 이내 boundary 및 cutoff를 확인한 뒤 force:false·expectedSha를 결박한 원자 ref 갱신을 한 번 수행한다
+4. ref 성공만으로 공개로 세지 않는다. 정확한 실제 payload commit의 Pages 성공과 필수 live 경로의 HTTP200·길이·SHA-256을 확인한다. 실제 완료 뒤에만 원 source 창과 fresh parent/ref 증거를 포함한 새 event proposal을 만든다. 없는 commit/run/response·시각을 채우거나 합성 fixture를 실제 evidence로 쓰지 않는다
+5. 전체 semantic/source membership/count 검사를 적용한 event와 append-only pin을 독립 검토한다. 별도 지원 commit의 원격/Pages/live 확인까지 끝낸 뒤 완료한 동기화로 보고한다. 한 단계가 미확정이면 그 실제 상태를 남기고 안전한 기존 다운로드를 유지한다
+
+코드·로컬 계획·proposal 또는 정상 사슬 proof 자체는 공개 허가/성공이 아니다. 기존 event 형식, archive 자격, 원 대장 시각, 등록 chronology, 두 동결 표시, 최종 cutoff와 모든 검토 한도는 계속 적용한다. 검증 효율화 변경을 이 통합 경로에 섞지 않는다.

@@ -215,3 +215,11 @@ PRD·OPERATIONS의 validation-efficiency-001을 따른다. 고유 의미 검사�
 - 원 ZIP·manifest·영수증·trust prefix·검토 횟수·최초 unknown/종결 시계·공개 수는 바꾸지 않는다. 새 비용·자격증명·권한·전달 목적지를 추가하지 않으며 이 포장 승인을 Git 쓰기나 중단된 publisher 재개 허가로 쓰지 않는다
 
 정본 개정 요약은 `docs/packaging/packaging-policy-002.md`, 실행 순서는 OPERATIONS의 같은 개정 절을 따른다.
+
+## 검증된 선행 공개 뒤 정상 후속 전달 기준의 한정 전이
+
+위 정상 전달 사슬의 같은 공개은행·additive analysis 제한은 기존 전이에 그대로 적용하며, DATA-CONTRACT와 OPERATIONS의 `verified_normal_chain_ancestor_publication` 명시 경로만 정확한 원 전달 anchor·연속 Git ancestry·이미 pin된 같은 사슬 선행 공개·별도 지원 Pages/live·원 시작/마감/eligibility를 독립 검토한 뒤 새 실제 archive 기준을 허용한다. 원 대장 sourceCommit·proof·trust·은행·최초 unknown과 실제 전달 검증은 보존하며, 이는 Git 공개 이벤트/쓰기·과거 publisher 재개·효율화 guard 완화를 허용하지 않는다.
+
+## 등록된 선행 공개 전이를 사용하는 별도 정상 사슬 공개 이벤트
+
+`verified_reconciled_normal_chain_publication`만 이미 등록된 `verified_normal_chain_ancestor_publication` successor proof를 참조하여 선행 은행의 뒤늦은 공개 확인보다 먼저 시작된 정확한 오프라인 source를 별도로 공개 확인할 수 있다. DATA-CONTRACT의 명시 reconciliation·원 시작/마감/등록 eligibility·연속 source·fresh main/ref 계약과 OPERATIONS의 별도 실행 절차를 따른다. 기존 event 종류의 시작/parent guard, 원 대장·proof·trust·unknown·중단 기록과 다운로드 우선순위는 바꾸지 않는다. 현재 parent가 등록된 tip anchor와 다르면 이 경로는 중단하며 actual Git/Pages/live 증거와 독립 pin 검토 없이 공개나 재시도를 주장하지 않는다.

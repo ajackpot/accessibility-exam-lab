@@ -476,3 +476,41 @@ ZIP/7z 모두 실제 CRC·압축/해제 크기·전체 파일 SHA-256과 정확�
 일반 도구로 해제한 전체본과 자기 정확한 base에서 재구성한 delta를 각각 검토 source 전체 inventory와 대조하고 필요한 smoke를 실제 실행한다. 종결 소스 검사 재사용은 `validation-efficiency-001`의 독립 인증·정확한 전체 입력과 환경·종결 증거를 만족해야 하며 미실행 corpus를 archive 내 실행으로 세지 않는다. 선언·파일 hash·caller pass만으로 외부 서비스 수락·독립 검토·실제 일반 도구 해제를 증명하지 않는다.
 
 전달 증거에는 실제 artifact의 형식·정확한 바이트 수·SHA-256·manifest SHA와 Library 저장 및 각 native 첨부 수락을 연결한다. 기존 receipt/proof의 스키마를 소급 바꾸지 않고 해당 경로가 허용하는 append-only 사건으로 기록한다. 20 MiB(20,971,520바이트)는 현재 관측 기반 운영 점검선이며 공식 보편적 한도나 전달 보장 필드가 아니다. 저장 성공만으로 `delivered`를 선언하지 않는다. 원 실패·unknown·미실시·공개 수0을 그대로 유지하며 사용자 열람/다운로드·Git/Pages 반영은 별도 증거가 필요하다.
+
+### 실제 구조화 bounded seal의 읽기 전용 호환
+
+정상 후속 reader는 역사적 `freshlyRehashedRoots` 객체 배열·`smokes` 배열 view와, 원래 문자열 root 배열·`smokes.{complete,delta}`·`sourceEvidence`·`unresolvedBlockingFindings`로 작성된 구조화 view를 별도로 판별한다. 구조화 표지 중 하나라도 있으면 정확한 구조화 필드 집합을 요구한다. 누락·혼합 alias·알 수 없는 schema/필드·범위 승격은 실패하며 과거 view로 재시도하지 않는다. 원 seal에 새 필드나 ZIP 검증 주장을 삽입하지 않는다.
+
+구조화 view의 `supportingEvidence`는 원 경로를 키로 하고 원 Buffer를 값으로 하는 명시적 Map이다. reader는 seal의 경로를 자동으로 열거나 기록된 명령을 실행하지 않는다. 모든 참조의 실제 크기·SHA-256, 7z profile의 entry/manifest/codec/자원 한도, source·base inventory와 Git tree, 정확한 before/after delta 재구성, 종결 source 명령·로그·runner·runtime 및 두 smoke의 원 receipt/로그/전체 snapshot을 대조한다. source build는 자신의 embedded-runtime bounded terminal 계약을 유지하고 다른 source runner의 중복 필드를 만들어 넣지 않는다. base root의 파일 수를 새 전체 source 수로 바꾸지 않는다.
+
+DELTA와 역사적 COMPLETE ZIP에는 CRC·local/central 일치·span/후행 바이트·경로 검사를 요구한다. 실제 v2/7z COMPLETE에는 원 CRC/header/resource profile과 일반 도구의 빈 폴더 단일 해제·regular-file/경로 증거를 요구하고 ZIP 전용 alias는 거부한다. 실제 raw decoder와 내부 manifest가 형식·내용의 정본이며 선언된 pass로 대체하지 않는다. 7z를 약한 schema1 영수증 분기로 보내지 않는다.
+
+`inspectNormalBackupBoundedArchiveEvidence`는 위 원본 검증만 수행하며 `deliveryVerified:false`, `canPublish:false`와 원 scope/limitations를 반환한다. 기존 전달 inspector/preparer에 추가한 `supportingEvidence`는 이 구조화 view에서만 필수다. native 수락·업로드·checkpoint·현재 등록/eligibility와 독립 검토는 별도 기존 조건이며 이 함수는 receipt, proof, pin을 생성하거나 바꾸지 않는다. archive/역사 전체 corpus 미실행, UI·Windows/NVDA 등 잔여 제한을 pass로 바꾸지 않는다.
+
+증거 참조는 구조의 모양을 탐색해 추정하지 않고 명시된 reference slot에서 읽는다. 각 descriptor는 정확히 `path/bytes/sha256`만 허용하며 추가 metadata가 있거나 원 Buffer가 없으면 거부한다. structured source/smoke record, 원 terminal/started record, 명령, inventory/snapshot, runtime/environment, archive/profile의 지원된 필드 집합도 엄격히 검사한다. 새로운 schema·`callerVerified`·별칭으로 참조 인증을 생략할 수 없다. 이 검사는 이전 미지원 형식을 조용히 수용하는 확장이 아니며 원본 바이트를 새 계약에 맞추어 고치지 않는다.
+
+## 검증된 선행 공개를 거친 정상 후속 전달 anchor
+
+기존 정상 successor의 같은 공개은행·additive analysis 전이 계약은 그대로다. 별도 `anchorTransition.kind: verified_normal_chain_ancestor_publication`만 원래 전달 anchor에서 실제로 공개 확인된 동일 정상 사슬의 선행 은행을 거쳐 새 공개 head로 이동할 수 있다. 이전 proof·delta·대장의 sourceCommit, 실제 시작/마감/종결·검토 이력·최초 unknown과 등록 시각을 바꾸지 않는다. 새 source 대장의 내용 기준은 원래 정확한 offlinePredecessor이고, 새 archive의 delta 기준은 실제 관측한 새 공개 commit이다.
+
+새 전이는 정확한 원 anchor 원문 해시와 `verified_normal_chain_publication_ancestry` 증거를 결박한다. 증거는 원 anchor와 최종 head, 실제 head 관측 시각/응답 해시, 빠짐없는 단일-parent commit 경로, 각 commit의 전체 bytes/SHA-256/Git blob inventory와 tree, 실제 commit 관측 시각/요청·응답 해시, 기존 publication pin 목록을 포함한다. 중간 payload는 이미 가져온 정확한 publication 이벤트의 commit/parent/tree/전체 inventory와 같아야 한다. 그 source들은 검증된 원 정상 전달 사슬의 중복 없는 선행 구성원이어야 한다.
+
+지원 commit은 해당 payload 바로 뒤의 정확한 publication JSON·publication-sync pin·allowlist 3경로 등록에 한정한다. 다른 외부 변경이나 삭제는 이 경로에서 거부한다. 지원 commit 자신의 exact-head Pages 성공, payload 검증 뒤의 Pages 완료, 필수 3경로·manifest·publication-state·active bank의 실제 HTTP200 길이/해시와 완료 시각을 별도로 결박한다. 마지막 head 관측과 앞선 commit 읽기·Pages/live 관측은 실제 서로 다른 시각을 유지한다. 알고 있는 event와 anchor marker 원문은 Git blob SHA까지 대조한다.
+
+정상 successor의 실제 두 archive 저장/첨부·독립 검토·전체 archive/내용 검사·정확한 predecessor 등록 eligibility는 모두 기존 경로로 검증한다. 닫힌 대장만으로 전달 자격을 추론하지 않으며 새 전이는 전달 proof나 pin을 자체 등록하지 않는다. 원 후보 시작/종결은 원 마감 안이고 선행 등록 eligibility 뒤여야 한다. 새 모듈은 standalone snapshot의 필수 의존성이다. raw 관측 해시는 외부 사실을 독립 검토할 근거이며 caller Boolean, 임의 Map, 합성 테스트나 로컬 성공이 그 검토를 대체하지 않는다.
+
+이 확장은 정상 후속 전달의 archive 기준 이동에 한정한다. 기존 normal-publication과 normal-chain-publication의 시작/parent guard, publication-sync 이벤트 종류·pin 및 legacy resolvedArtifacts는 확대하지 않는다. 이 archive 전이 확장 자체는 Git 공개 이벤트를 구현하지 않는다. 별도 공개 event의 명시 ancestry 계약은 아래 「등록된 선행 공개 전이를 결박하는 정상 사슬 공개 이벤트」 절을 따르며, 원 전달 proof의 canPublish=false·포장 공개증가0·최종 동결과 원 publisher 영구 중단은 유지한다.
+
+## 등록된 선행 공개 전이를 결박하는 정상 사슬 공개 이벤트
+
+새 `verified_reconciled_normal_chain_publication`은 기존 정상 사슬 source 형식과 전체 공개 검사를 유지하고, 정확한 `reconciliation` 필드만 추가하는 별도 종류다. 기존 `verified_normal_publication`과 `verified_normal_chain_publication`의 원 source 시작 시각·payload parent 조건은 바뀌지 않는다. 이전 대장, 공개 event, 전달 proof, pin 또는 archive에 새 필드를 소급 추가하지 않는다.
+
+reconciliation은 schemaVersion1, kind `registered_normal_chain_ancestor_publication`, `transitionProof`, `sourceWindows`, `parentObservation`, `refUpdate`의 정확한 필드만 가진다. transitionProof의 path/SHA는 현재 가져온 정상 successor trust의 원문 proof와 같아야 하고, 그 proof에 이미 독립 등록된 `verified_normal_chain_ancestor_publication` 전이가 있어야 한다. 그 전이의 마지막 기존 publication pin이 바로 이번 event의 previousSynchronizationSha256다. 새 event의 source는 같은 원래 정상 사슬의 연속 등록 suffix이며 전이 source를 포함한다. 첫 source의 정확한 전달 선행은행이 직전 공개은행이고 마지막 source의 검토된 anchor가 실제 payload parent다.
+
+sourceWindows의 각 roundId·startedAt·decisionDeadline·closedAt·predecessorEligibleAt은 원문 대장과 실제 직전 proof의 등록 시각에 정확히 대응한다. source는 원 선행 등록 이후 시작하고 원 최대4시간/판정 마감 안에 종결되어 실제 전달·등록을 마쳐야 한다. 선행 공개 확인보다 빠른 시작은 등록된 전이 이전의 정확한 역사 anchor prefix에만 허용한다. 시각·sourceCommit·offlinePredecessor·최대 검토/재개방 횟수는 바꾸지 않으며 닫힌 대장만으로 전달 자격을 추론하지 않는다. 관련 없는 미래 등록을 과거 event의 필수 의존성으로 만들지 않는다.
+
+parentObservation은 정확한 repository·refs/heads/main·commit·tree·전체 bytes/SHA-256/Git blob inventory, 실제 head/commit/tree/manifest/publication-state 각각의 관측 시각과 원 응답 해시를 결박한다. 전부 actual ref 제출 전60초 이내여야 한다. 현재 parent와 전체 inventory는 등록된 전이의 마지막 실제 공개 anchor와 같아야 하며 다른 head나 외부 변경은 별도 검토 없이 허용하지 않는다. refUpdate는 같은 repository/ref, 실제 expectedSha·결과 commit SHA, force:false, 실제 제출/완료 시각 및 요청/응답 해시를 담는다. 모든 source 등록과 원래 선행 관계가 이 boundary 전에 성립하고 ref 완료 뒤에만 event를 확인한다.
+
+전체 campaign과 기존 sealed normal-chain loader를 거친 source membership 단계에서 변경하지 않은 `validateNormalChainAncestorTransition`을 다시 적용한다. caller Boolean/Map 또는 새 event 선언으로 사슬을 인증하지 않는다. 기존 normal-chain parent==tip anchor guard, 전체 Git tree, 원 은행 전이·적격/격리/신규 공개 수, 모든 immutable/외부 지원 경로, trust prefix, runtime·은행·source 대장·proof·두 동결 marker의 live 검사도 그대로다. 최종 cutoff와 영구 freeze는 우회하지 않는다.
+
+이 필드들은 실제 외부 관측에 대한 독립 검토를 위한 결박이며 서비스 서명 검증이나 로컬 쓰기 권한이 아니다. 실제 성공한 payload main, exact-head Pages/live를 확인한 후에만 별도 event/pin을 검토·등록한다. 그 지원 commit은 자기 Pages/live 확인이 필요하다. 원 stopped publisher·결과 불명 blob·최초 시계·공개0·canPublish:false는 보존하며 legacy resolvedArtifacts에 정상 artifact를 넣지 않는다.

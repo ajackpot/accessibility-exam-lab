@@ -28,6 +28,33 @@
       "previousProofSha256": "35d82d052baf2230a45c6bd05bd6498e6b0b2657177b98ae10a95ce44861bb6e",
       "registeredAt": "2026-10-08T06:03:44.907Z",
       "eligibleAt": "2026-10-08T06:03:44.907Z"
+    },
+    {
+      "rootProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "roundId": "round-033",
+      "path": "docs/deliveries/normal-chains/round-032/round-033.json",
+      "sha256": "3957a4d5390731af2313a71b1d7bfa1ee737d72313a34f50b034d63c6bf8b95d",
+      "previousProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "registeredAt": "2026-10-08T13:32:43.272Z",
+      "eligibleAt": "2026-10-08T13:32:43.272Z"
+    },
+    {
+      "rootProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "roundId": "round-034",
+      "path": "docs/deliveries/normal-chains/round-032/round-034.json",
+      "sha256": "0de8deccd08abe7521eebdf5293b30f5d52dd88d2583b374442c3139d2ff593c",
+      "previousProofSha256": "3957a4d5390731af2313a71b1d7bfa1ee737d72313a34f50b034d63c6bf8b95d",
+      "registeredAt": "2026-10-08T16:50:53.891Z",
+      "eligibleAt": "2026-10-08T16:50:53.891Z"
+    },
+    {
+      "rootProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "roundId": "round-035",
+      "path": "docs/deliveries/normal-chains/round-032/round-035.json",
+      "sha256": "e8c0229548b2cee6b251d517116fd8b3e1a64ab9cd31abbf18afdc47d1d73e08",
+      "previousProofSha256": "0de8deccd08abe7521eebdf5293b30f5d52dd88d2583b374442c3139d2ff593c",
+      "registeredAt": "2026-10-08T20:55:33.739Z",
+      "eligibleAt": "2026-10-08T20:55:33.739Z"
     }
   ]
 }
