@@ -171,7 +171,7 @@ export function validateCampaignBaselines(ledgers, {editorials=[], now=null, act
   for(const r of all) {
     requireLatest(r,Date.parse(r.startedAt),'round-start');
     if(r.publication?.status==='verified')requireLatest(r,Date.parse(r.publication.verifiedAt),'publication-order');
-    if(identityOf(r).effectiveBankVersion===activeBankVersion && r.publication.status!=='verified' && now!==null && !sync.history.some(h=>h.publication.bankVersion===activeBankVersion&&h.synchronizedRoundIds.includes(r.roundId)))requireLatest(r,now,'active-release');
+    if(activeBankVersion!==null && identityOf(r).effectiveBankVersion===activeBankVersion && r.publication.status!=='verified' && now!==null && !sync.history.some(h=>h.publication.bankVersion===activeBankVersion&&h.synchronizedRoundIds.includes(r.roundId)))requireLatest(r,now,'active-release');
   }
   if(activeBankVersion && now!==null) {
     const active=all.find(r=>identityOf(r).effectiveBankVersion===activeBankVersion),latest=verified.filter(r=>Date.parse(r.publication.verifiedAt)<=now).sort((a,b)=>Date.parse(b.publication.verifiedAt)-Date.parse(a.publication.verifiedAt))[0];

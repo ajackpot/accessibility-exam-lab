@@ -385,3 +385,4 @@ docs/analysis/2026-10-10-existing-bank-value-terminal-decisions.json
 docs/analysis/2026-10-10-existing-bank-value-final-decisions.md
 src/new-session-eligibility.js
 tests/new-session-eligibility.test.mjs
+docs/publications/normal-041-selection-001.json
