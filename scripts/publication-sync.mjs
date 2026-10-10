@@ -22,7 +22,8 @@ export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze([
   Object.freeze({path:'docs/publications/cumulative-018-027.json', sha256:'1c4130dcdc2b873d061f193977d5a1b6ffb17f2ec8952df2df55614edc5ed6ab'}),
   Object.freeze({path:'docs/publications/cumulative-028-031.json', sha256:'447ba055dace66219430b1a31ca51759581afcfdc3ec7986acc05fb1832f694e'}),
   Object.freeze({path:'docs/publications/normal-032.json', sha256:'527f9921a248343e8a7f24ca245bba38d7cc459e7a2b6b88c832a5b0e71b5e6e'}),
-  Object.freeze({path:'docs/publications/reconciled-033-035.json', sha256:'0d1abf3b66419e370f4c0376f45e9e9b59749ffb1c3261ad69ebd47529855ed4'})
+  Object.freeze({path:'docs/publications/reconciled-033-035.json', sha256:'0d1abf3b66419e370f4c0376f45e9e9b59749ffb1c3261ad69ebd47529855ed4'}),
+  Object.freeze({path:'docs/publications/reconciled-036-039.json', sha256:'45c50ede41e88d67ad794951d541604e59f5571c9c81846f879fc8017802c6d6'})
 ]);
 function trusted(record) {
   return record && PUBLICATION_SYNCHRONIZATIONS.some(pin => hash(json(record)) === pin.sha256);
