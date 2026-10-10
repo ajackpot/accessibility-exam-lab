@@ -3,6 +3,53 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 
+/** Enumerate the actual copied history, including files not publicly allowlisted.
+ * The caller supplies its own mkdtemp container and explicit historical boundary.
+ * Only these test-owned temporary prefixes may be changed. */
+export async function pruneHistoricalFixtureHistory(root,{temporaryRoot,maxRound,at,checkpoints='later'}) {
+  async function rejectLinkedAncestors(input) {
+    if(!path.isAbsolute(input)||path.normalize(input)!==input)throw Error('Historical fixture root must be an absolute normalized path');
+    for(let current=input;;current=path.dirname(current)) {
+      if((await fs.lstat(current)).isSymbolicLink())throw Error('Historical fixture root or ancestor cannot be a symbolic link');
+      if(path.dirname(current)===current)break;
+    }
+  }
+  await rejectLinkedAncestors(temporaryRoot);await rejectLinkedAncestors(root);
+  const temporary=await fs.realpath(os.tmpdir()),owner=await fs.realpath(temporaryRoot),resolved=await fs.realpath(root);
+  if(path.dirname(owner)!==temporary||! /^(?:independent-chains-|manual011-check-|normal-backup-next-|historical-boundary-test-)[A-Za-z0-9]{6}$/.test(path.basename(owner))||
+     !(resolved===owner||resolved.startsWith(owner+path.sep))||resolved===await fs.realpath(path.resolve(import.meta.dirname,'..'))||
+     !Number.isInteger(maxRound)||maxRound<1||!Number.isFinite(at)||!['later','all','none'].includes(checkpoints))throw Error('Historical fixture requires an owned temporary root and explicit boundary');
+  const files=[];
+  async function walk(relative='') {
+    for(const entry of await fs.readdir(path.join(resolved,relative),{withFileTypes:true})) {
+      const name=relative?relative+'/'+entry.name:entry.name;
+      if(entry.isSymbolicLink())throw Error('Historical fixture cannot contain symbolic links');
+      if(entry.isDirectory())await walk(name);else if(entry.isFile())files.push(name);else throw Error('Unsupported historical fixture entry');
+    }
+  }
+  await walk();
+  const laterBanks=new Set(),keptBanks=new Set();
+  for(const file of files) {
+    const match=file.match(/^docs\/rounds\/round-(\d+)\.json$/);if(!match)continue;
+    const ledger=JSON.parse(await fs.readFile(path.join(resolved,file)));
+    if(Number(match[1])<=maxRound) {
+      if(!Number.isFinite(Date.parse(ledger.startedAt))||Date.parse(ledger.startedAt)>at)throw Error('Kept fixture ledger exceeds its historical clock');
+      for(const version of [ledger.baseline?.bankVersion,ledger.publication?.bankVersion])if(version)keptBanks.add(`data/releases/${version}/bank.json`);
+    } else if(ledger.publication?.bankVersion)laterBanks.add(`data/releases/${ledger.publication.bankVersion}/bank.json`);
+  }
+  const removed=files.filter(file=>{
+    const round=file.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/),bank=file.match(/^data\/releases\/[^/]+-regular\.(\d+)\/bank\.json$/),checkpoint=file.match(/^docs\/deliveries\/checkpoints\/round-(\d+)\.json$/);
+    return Boolean(round&&Number(round[1])>maxRound||!keptBanks.has(file)&&(laterBanks.has(file)||bank&&Number(bank[1])>maxRound)||
+      file.startsWith('docs/deliveries/chains/')||checkpoint&&(checkpoints==='all'||checkpoints==='later'&&Number(checkpoint[1])>maxRound));
+  });
+  // Everything is selected and checked before any mutation. No real source paths
+  // are accepted, and kept ledgers' bank dependencies are never removed.
+  for(const file of removed)await fs.rm(path.join(resolved,file));
+  const selected=new Set(removed),allow=path.join(resolved,'PUBLICATION-MANIFEST.txt');
+  await fs.writeFile(allow,(await fs.readFile(allow,'utf8')).split(/\r?\n/).filter(file=>!selected.has(file.trim())).join('\n'));
+  return removed.sort();
+}
+
 export async function retainHistoricalQuarantinePrefix(root,at) {
   const resolved=await fs.realpath(root),temporary=await fs.realpath(os.tmpdir())+path.sep;
   if(resolved===await fs.realpath(path.resolve(import.meta.dirname,'..'))||!resolved.startsWith(temporary)||!Number.isFinite(at))throw Error('Historical fixture must be a disposable temporary directory with an explicit clock');

@@ -27,8 +27,15 @@ function repin(event){return sourceCode.replace(/export const PUBLICATION_SYNCHR
 test('normal frozen-ledger publication has independent authority and never invents delivery resolution',async t=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'normal-publication-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
  await retainHistoricalQuarantinePrefix(dir,at);
- const fixtureRead=p=>fs.readFile(path.join(dir,p)),future=(await fixtureRead('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(p=>/^docs\/rounds\/round-0(?:2[89]|[3-9]\d)\./.test(p)||/^data\/releases\/[^/]+-regular\.(?:2[89]|[3-9]\d)\//.test(p));
- for(const p of future)await fs.rm(path.join(dir,p),{force:true});await fs.writeFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),(await fixtureRead('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(p=>!future.includes(p)).join('\n'));
+ // This owned temporary copy ends at27 before synthetic028 is introduced.
+ // Enumerate actual directories so local-only later history cannot survive a
+ // publication-allowlist filter. Earlier independent delivery proofs are kept.
+ const fixtureRead=p=>fs.readFile(path.join(dir,p)),future=[];
+ for(const name of await fs.readdir(path.join(dir,'docs/rounds'))){const match=name.match(/^round-(\d+)\.(?:json|md)$/);if(match&&Number(match[1])>27)future.push('docs/rounds/'+name);}
+ for(const version of await fs.readdir(path.join(dir,'data/releases'))){const match=version.match(/-regular\.(\d+)$/);if(match&&Number(match[1])>27)future.push('data/releases/'+version+'/bank.json');}
+ for(const file of future)await fs.rm(path.join(dir,file));
+ const removed=new Set(future);await fs.writeFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),(await fixtureRead('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(file=>!removed.has(file.trim())).join('\n'));
+ assert.ok((await fs.readdir(path.join(dir,'docs/rounds'))).every(name=>{const match=name.match(/^round-(\d+)\.(?:json|md)$/);return !match||Number(match[1])<=27;}));
  const bank=JSON.parse(loaded.banks.get(prior.manifest.bankVersion).raw);bank.bankVersion='synthetic-normal-publication';bank.releasedAt='2026-10-07T11:01:00Z';const bankRaw=J(bank),bankPath=`data/releases/${bank.bankVersion}/bank.json`;
  const ledger=structuredClone(loaded.ledgers.find(l=>l.roundId==='round-027'));
  Object.assign(ledger,{roundId:'round-028',startedAt:'2026-10-07T11:00:00Z',decisionDeadline:'2026-10-07T14:00:00Z',closedAt:'2026-10-07T11:01:00Z',candidates:[],validation:[]});

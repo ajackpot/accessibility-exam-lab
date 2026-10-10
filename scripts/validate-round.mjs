@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
 import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion, presentQuestion} from '../src/domain.js';
 
-import {validateQuarantineCampaign, loadQuarantineDependencies} from './prepublication-quarantine.mjs';
+import {parseImmutableBank, withBankParsingSession, validateQuarantineCampaign, loadQuarantineDependencies} from './prepublication-quarantine.mjs';
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
 import {PUBLICATION_SYNCHRONIZATIONS, validatePublicationSynchronizations, resolveSynchronizedArtifacts, validateSynchronizationDeliveryProof, validateIndependentSynchronizationSources, validateNormalChainSynchronizationSources, requiresSynchronizationDeliveryDependencies} from './publication-sync.mjs';
 import {validateEditorialHistory, validateEditorialTransition, validateCampaignBaselines} from './editorial-ledger.mjs';
@@ -190,7 +190,7 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
     let cached = bankCache.get(version);
     if (!cached) {
       try {
-        const rawBank = JSON.parse(entry.raw.toString());
+        const rawBank = parseImmutableBank(entry.raw);
         validateBank(rawBank);
         if (rawBank.bankVersion !== version) throw new Error('bankVersion does not match immutable path');
         if (entry.bank && !isDeepStrictEqual(entry.bank, rawBank)) throw new Error('parsed bank does not match raw bytes');
@@ -495,7 +495,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   const active = get(manifest.bankVersion);
   if (!active?.raw) return {ok: false, errors: ['release: missing active immutable bank bytes']};
   let bank;
-  try { bank = validateBankForPublication(JSON.parse(active.raw.toString())); } catch (error) { return {ok: false, errors: [`release: invalid active bank: ${error.message}`]}; }
+  try { bank = validateBankForPublication(parseImmutableBank(active.raw)); } catch (error) { return {ok: false, errors: [`release: invalid active bank: ${error.message}`]}; }
   if (bank.changeSummary !== manifest.changeSummary) fail('active manifest change summary does not match bank');
   if (bank.bankVersion !== manifest.bankVersion || bank.releasedAt !== manifest.releasedAt || digest(active.raw) !== manifest.sha256) fail('active manifest version/release/hash does not match bank bytes');
   try { validateExplanationAuthoring(bank, historicalExplanationBaseline(banks)); } catch(error) { fail(`explanation authoring: ${error.message}`); }
@@ -521,7 +521,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
     const baselineRaw = get(e.baseline.bankVersion)?.raw;
     if (!baselineRaw) fail('editorial baseline is missing');
     else {
-      try { const baseline = validateBank(JSON.parse(baselineRaw.toString())); validateEditorialTransition(e, baseline, bank, {banks, regularCoverage, now:historyOptions.now}, fail); }
+      try { const baseline = validateBank(parseImmutableBank(baselineRaw)); validateEditorialTransition(e, baseline, bank, {banks, regularCoverage, now:historyOptions.now}, fail); }
       catch(error) { fail(`editorial baseline/transition: ${error.message}`); }
     }
     return {ok: errors.length === 0, errors};
@@ -542,7 +542,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   const baselineRaw = get(round.baseline.bankVersion)?.raw;
   if (!baselineRaw) return {ok: false, errors: [...errors, 'release: missing immutable baseline bank bytes']};
   let baseline;
-  try { baseline = validateBank(JSON.parse(baselineRaw.toString())); } catch (error) { return {ok: false, errors: [...errors, `release: invalid baseline bank: ${error.message}`]}; }
+  try { baseline = validateBank(parseImmutableBank(baselineRaw)); } catch (error) { return {ok: false, errors: [...errors, `release: invalid baseline bank: ${error.message}`]}; }
   if (digest(baselineRaw) !== round.baseline.bankSha256) fail('baseline hash mismatch');
   const oldQuestions = new Map(baseline.questions.map(q => [q.questionId, q]));
   const oldTemplates = new Set(baseline.questions.map(q => q.templateId));
@@ -584,13 +584,16 @@ async function readOfflinePublicFile(root, relative) {
 }
 
 export async function loadRoundContext(root = ROOT, input = null, options = {}) {
-  return loadContext(root,input,options);
+  return withBankParsingSession(root, () => loadContext(root,input,options));
 }
 /** Read-only reconstruction of an exact original delivered source. No supplied
  * date/Boolean/Map selects this exception and no current release context escapes.
  * Source bytes, full inventory and boundary all come from independently pinned
  * external-delivery evidence linked to an independently pinned publication. */
 export async function auditHistoricalRelease(root) {
+  return withBankParsingSession(root, () => auditHistoricalReleaseInSession(root));
+}
+async function auditHistoricalReleaseInSession(root) {
   const listed=(await readOfflinePublicFile(root,'PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).map(p=>p.trim()).filter(p=>p&&!p.startsWith('#'));
   if(new Set(listed).size!==listed.length)throw new Error('Duplicate historical archive allowlist path');
   const actual=[];
@@ -771,6 +774,9 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
   return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, normalBackupRoots:normalRoots.roots, normalBackupChains:normalChain.chains, quarantineDispositions};
 }
 export async function main(args = process.argv.slice(2)) {
+  return withBankParsingSession(ROOT, () => runMain(args));
+}
+async function runMain(args) {
   let input = null, nextRoundAt = null, release = false;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--release') { release = true; continue; }

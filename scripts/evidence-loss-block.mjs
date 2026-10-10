@@ -5,7 +5,7 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
 import {FREEZE_AT} from '../src/domain.js';
-import {quarantineHash,quarantineFingerprint} from './prepublication-quarantine.mjs';
+import {parseImmutableBankValue,quarantineHash,quarantineFingerprint} from './prepublication-quarantine.mjs';
 import reviewedTrust from '../docs/release-blocks/trust.json' with {type:'json'};
 const ROOT=path.resolve(import.meta.dirname,'..');
 export const EVIDENCE_LOSS_TRUST_PATH='docs/release-blocks/trust.json';
@@ -80,7 +80,7 @@ export function validateEvidenceLossCampaign(ledgers,{banks=new Map(),ledgerSour
  try{
   if(now!==null&&!Number.isFinite(now))fail('invalid current clock');
   if(manifest)assertNoEvidenceLossContent(manifest);
-  for(const [,entry]of banks instanceof Map?banks:Object.entries(banks)){const raw=entry.raw??entry;assertNoEvidenceLossContent(JSON.parse(raw));}
+  for(const [,entry]of banks instanceof Map?banks:Object.entries(banks)){const raw=entry.raw??entry;assertNoEvidenceLossContent(parseImmutableBankValue(raw));}
   for(const [,p]of offlineBases instanceof Map?offlineBases:[])assertEvidenceLossProvenance(p);
   for(const {event:e}of events()){
    if(!relevant(e,ledgers,now))continue;

@@ -1,3 +1,4 @@
+import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 /** Disposable synthetic publication authorities only. No network or production pin writes. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -23,18 +24,40 @@ const finalProof=JSON.parse(sourceProofs.get(rounds.at(-1).roundId)),manifest=JS
 // Replacing already published equivalent content retains its real verification
 // boundary, so later normal rounds keep their authentic baseline authority.
 const equivalentPublication=loaded.synchronizations.find(e=>e.manifest.bankVersion===manifest.bankVersion);
-const synthetic={...structuredClone(originalEvents.at(-1)),syncId:'synthetic-independent-publication',previousSynchronizationSha256:H(J(originalEvents.at(-1))),verifiedAt:equivalentPublication?.verifiedAt??new Date(Date.now()-1).toISOString(),commit:'1'.repeat(40),parent:'2'.repeat(40),tree:'3'.repeat(40),commitUrl:'https://example.invalid/synthetic',pages:{runId:1,headSha:'1'.repeat(40),status:'completed',conclusion:'success',url:'https://example.invalid/synthetic'},manifest,manifestSha256:H(Buffer.from(finalProof.runtimeManifestRaw)),counts:{regular:regular.length,written:regular.filter(q=>q.type==='written').length,practical:regular.filter(q=>q.type==='practical').length,testOnly:bank.questions.length-regular.length,total:bank.questions.length,newlyPublicFromAnchor:regular.length-684},writtenBySubject:Object.fromEntries(['s1','s2','s3','s4','s5'].map(s=>[s,regular.filter(q=>q.type==='written'&&q.subjectId===s).length])),rounds,remoteInventory:await Promise.all((await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(p=>p&&!p.startsWith('#')).map(async p=>{const raw=await read(p);return {path:p,bytes:raw.length,sha256:H(raw)};})),liveAssets:[],limitations:['Synthetic test only, never external publication evidence']};
-// This event publishes the delivered ancestor; the current tree may already have a later descendant.
-Object.assign(synthetic.remoteInventory.find(f=>f.path==='data/manifest.json'),{bytes:Buffer.byteLength(finalProof.runtimeManifestRaw),sha256:H(Buffer.from(finalProof.runtimeManifestRaw))});
+const synthetic={...structuredClone(originalEvents.at(-1)),syncId:'synthetic-independent-publication',previousSynchronizationSha256:H(J(originalEvents.at(-1))),verifiedAt:equivalentPublication?.verifiedAt??new Date(Date.now()-1).toISOString(),commit:'1'.repeat(40),parent:'2'.repeat(40),tree:'3'.repeat(40),commitUrl:'https://example.invalid/synthetic',pages:{runId:1,headSha:'1'.repeat(40),status:'completed',conclusion:'success',url:'https://example.invalid/synthetic'},manifest,manifestSha256:H(Buffer.from(finalProof.runtimeManifestRaw)),counts:{regular:regular.length,written:regular.filter(q=>q.type==='written').length,practical:regular.filter(q=>q.type==='practical').length,testOnly:bank.questions.length-regular.length,total:bank.questions.length,newlyPublicFromAnchor:regular.length-684},writtenBySubject:Object.fromEntries(['s1','s2','s3','s4','s5'].map(s=>[s,regular.filter(q=>q.type==='written'&&q.subjectId===s).length])),rounds,remoteInventory:[],liveAssets:[],limitations:['Synthetic test only, never external publication evidence']};
+// Its inventory is built from the explicit disposable031 prefix below.
 const lists=e=>[...originalEvents,e];
 function repin(source,event){return source.replace(/export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze\(\[[\s\S]*?\n\]\);/,`export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze([\n${[...originalEvents,event].map(e=>"  Object.freeze({path:'docs/publications/"+e.syncId+".json',sha256:'"+H(J(e))+"'})").join(',\n')}\n]);`);}
 const fail=r=>assert.equal(r.ok,false,r.errors?.join('\n'));
 
 test('independent publication binds original31/19/12 disposition and all delivered receipts without changing clocks',async t=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'sync-independent-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
+ // Explicit historical descendant boundary:031 is delivered and eligible,
+ // but the real031 cumulative publication has not yet occurred. The27 event
+ // below is synthetic equivalent authority, never an actual repository snapshot.
+ // Preserve all original retained ledgers/proofs and their timestamps.
+ const chainTrust=JSON.parse(await read('docs/deliveries/normal-backup-chain-trust.json')),tipPin=chainTrust.checkpoints.find(p=>p.roundId==='round-031');assert.ok(tipPin);
+ const tip=JSON.parse(await read(tipPin.path)),fixtureNow=Date.parse(tipPin.eligibleAt)+1000;
+ const nextPublication=loaded.synchronizations.find(e=>e.manifest.bankVersion===JSON.parse(tip.runtimeManifestRaw).bankVersion);assert.ok(nextPublication&&fixtureNow<Date.parse(nextPublication.verifiedAt));
+ t.mock.timers.enable({apis:['Date'],now:fixtureNow});
+ const removed=[];
+ for(const name of await fs.readdir(path.join(dir,'docs/rounds'))){const match=name.match(/^round-(\d+)\.(?:json|md)$/);if(match&&Number(match[1])>31)removed.push('docs/rounds/'+name);}
+ for(const version of await fs.readdir(path.join(dir,'data/releases'))){const match=version.match(/-regular\.(\d+)$/);if(match&&Number(match[1])>31)removed.push('data/releases/'+version+'/bank.json');}
+ for(const file of removed)await fs.rm(path.join(dir,file));
+ const removedSet=new Set(removed),allowPath=path.join(dir,'PUBLICATION-MANIFEST.txt');
+ await fs.writeFile(allowPath,(await fs.readFile(allowPath,'utf8')).split(/\r?\n/).filter(file=>!removedSet.has(file.trim())).join('\n'));
+ await retainHistoricalQuarantinePrefix(dir,fixtureNow);
+ const rootTrust=JSON.parse(await read('docs/deliveries/normal-backup-root-trust.json')),retainedRoot=rootTrust.roots.find(p=>p.roundId==='round-028');assert.ok(retainedRoot);
+ const retainedPins=[retainedRoot,...chainTrust.checkpoints.filter(p=>p.rootProofSha256===retainedRoot.sha256&&Number(p.roundId.slice(6))<=31)];assert.equal(retainedPins.length,4);
+ for(const pin of retainedPins){const actual=await fs.readFile(path.join(dir,pin.path));assert.equal(H(actual),pin.sha256);assert.deepEqual(actual,await read(pin.path));}
+
+ await fs.writeFile(path.join(dir,'data/manifest.json'),tip.runtimeManifestRaw);await fs.writeFile(path.join(dir,'data/publication-state.json'),tip.publicationStateRaw);
+ synthetic.remoteInventory=await Promise.all((await fs.readFile(allowPath,'utf8')).split(/\r?\n/).filter(p=>p&&!p.startsWith('#')).map(async p=>{const raw=await fs.readFile(path.join(dir,p));return {path:p,bytes:raw.length,sha256:H(raw)};}));
+ // The event publishes27 while the active local marker remains delivered031.
+ Object.assign(synthetic.remoteInventory.find(f=>f.path==='data/manifest.json'),{bytes:Buffer.byteLength(finalProof.runtimeManifestRaw),sha256:H(Buffer.from(finalProof.runtimeManifestRaw))});
  const eventPath='docs/publications/synthetic-independent-publication.json';await fs.writeFile(path.join(dir,eventPath),J(synthetic));await fs.appendFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),eventPath+'\n');await fs.writeFile(path.join(dir,'scripts/publication-sync.mjs'),repin(syncSource,synthetic));
  const api=await import(pathToFileURL(path.join(dir,'scripts/publication-sync.mjs')).href),v=await import(pathToFileURL(path.join(dir,'scripts/validate-round.mjs')).href);
- const before=[...loaded.ledgerSources].map(([k,b])=>[k,H(b)]),c=await v.loadRoundContext(dir,null,{release:true});
+ const before=[...loaded.ledgerSources].filter(([id])=>Number(id.slice(6))<=31).map(([k,b])=>[k,H(b)]),c=await v.loadRoundContext(dir,null,{release:true});
  assert.equal(v.validateReleaseLedger(c.ledgers,{...c,now:Date.now()}).ok,true);
  const s22=synthetic.rounds.find(s=>s.roundId==='round-022');assert.deepEqual([s22.accepted,s22.quarantined,s22.eligible,s22.newlyPublicRegular],[31,19,12,12]);
  assert.equal(JSON.parse(sourceProofs.get('round-022')).receipt.content.acceptedGoalIds.length,31);
@@ -42,8 +65,22 @@ test('independent publication binds original31/19/12 disposition and all deliver
  const delivery=await import(pathToFileURL(path.join(dir,'scripts/download-fallback.mjs')).href);
  const resolved=await delivery.validateSynchronizedDeliveryChain(chain.receipts,{manifests:chain.manifests,ledgers:c.ledgerSources,banks:new Map([...c.banks].map(([v,e])=>[v,e.raw])),now:Date.now(),publicationState:c.publicationState,synchronizations:c.synchronizations,campaignContext:c});
  assert.equal(resolved.ok,true,resolved.errors.join('\n'));assert.equal(resolved.reservedLearningGoalIds.length,19);assert.equal(resolved.canStartNewContent,true);
- assert.deepEqual([...c.resolvedArtifacts].sort(),[...new Set([...loaded.resolvedArtifacts,...chain.receipts.map(r=>r.artifactSha256)])].sort());assert.equal(chain.checked.canPublish,false);assert.equal(chain.proof.uncertainty.wait.firstUnresolvedAt,'2026-10-05T16:53:14Z');
- assert.deepEqual([...c.ledgerSources].map(([k,b])=>[k,H(b)]),before);assert.equal(c.manifest.bankVersion,loaded.manifest.bankVersion,'publishing an ancestor must not roll back a delivered descendant');
+ // Resolution belongs to actual retained delivery receipts, not every
+ // artifact mentioned by publication history. Preserve both exact sets.
+ const legacyRaw=await read('docs/deliveries/offline-chain.json');
+ assert.deepEqual(await fs.readFile(path.join(dir,'docs/deliveries/offline-chain.json')),legacyRaw);
+ const legacyReceipts=JSON.parse(legacyRaw).receipts;
+ assert.deepEqual(legacyReceipts.map(r=>r.roundId),['round-006','round-007']);
+ assert.deepEqual(chain.receipts.map(r=>r.roundId),['round-018','round-019','round-020','round-021','round-022','round-024','round-025','round-026','round-027']);
+ const expectedResolved=new Set([...legacyReceipts,...chain.receipts].map(r=>r.artifactSha256));
+ assert.equal(expectedResolved.size,legacyReceipts.length+chain.receipts.length);
+ assert.deepEqual([...c.resolvedArtifacts].sort(),[...expectedResolved].sort());
+ const publishedOnly=originalEvents.flatMap(e=>e.rounds).filter(s=>Number(s.roundId.slice(6))>=8&&Number(s.roundId.slice(6))<=17);
+ assert.deepEqual([...new Set(publishedOnly.map(s=>s.roundId))].sort(),Array.from({length:10},(_,i)=>`round-${String(i+8).padStart(3,'0')}`));
+ for(const s of publishedOnly){assert.ok(s.artifactSha256);assert.equal(expectedResolved.has(s.artifactSha256),false);assert.equal(c.resolvedArtifacts.has(s.artifactSha256),false);}
+ for(const event of originalEvents)assert.deepEqual(c.synchronizations.find(e=>e.syncId===event.syncId),event);
+ assert.equal(chain.checked.canPublish,false);assert.equal(chain.proof.uncertainty.wait.firstUnresolvedAt,'2026-10-05T16:53:14Z');
+ assert.deepEqual([...c.ledgerSources].map(([k,b])=>[k,H(b)]),before);assert.equal(c.manifest.bankVersion,JSON.parse(tip.runtimeManifestRaw).bankVersion,'publishing27 must not roll back the exact delivered031 descendant');
  for(const s of synthetic.rounds){api.validateSynchronizationDeliveryProof(synthetic,s,sourceProofs.get(s.roundId));assert.throws(()=>api.validateSynchronizationDeliveryProof(synthetic,s,Buffer.concat([sourceProofs.get(s.roundId),Buffer.from(' ')])),/tampered/);}
  const source26=synthetic.rounds.at(-1);const forged=structuredClone(chain.receipts);forged.at(-1).recordedAt='2026-10-01T00:00:00Z';fail(api.resolveSynchronizedArtifacts(forged,{...c,synchronizations:lists(synthetic),now:Date.now()}));
  const at=Date.parse(synthetic.verifiedAt);for(const [now,active]of [[at-1,false],[at,true],[at+1,true]]){const result=api.validatePublicationSynchronizations(lists(synthetic),{...c,now});assert.equal(result.ok,true,result.errors.join('\n'));assert.equal(result.history.some(h=>h.syncId===synthetic.syncId),active);}

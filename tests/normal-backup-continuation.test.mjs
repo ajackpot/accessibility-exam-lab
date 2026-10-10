@@ -1,5 +1,5 @@
 import {decodeSevenZip} from '../scripts/archive-format.mjs';
-import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
+import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -72,9 +72,7 @@ test('default loader and explicit release context accept real010 lineage without
  // This disposable regression is historical009 plus synthetic010, even after
  // real010 has a reviewed delivery checkpoint. Reset only the fixture authority.
  const paths=parsePublicAllowlist(await fs.readFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),'utf8'));
- const later=paths.filter(p=>{const r=p.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/),b=p.match(/^data\/releases\/[^/]+-regular\.(\d+)\//);return r&&Number(r[1])>9||b&&Number(b[1])>9||p.startsWith('docs/deliveries/checkpoints/')||p.startsWith('docs/deliveries/chains/');});
- for(const p of later)await fs.rm(path.join(dir,p));
- await fs.writeFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),paths.filter(p=>!later.includes(p)).join('\n')+'\n');
+ await pruneHistoricalFixtureHistory(dir,{temporaryRoot:dir,maxRound:9,at:now,checkpoints:'all'});
  // This disposable historical fixture predates every independent delivery.
  if(paths.includes('docs/deliveries/offline-chain-trust.json'))await fs.writeFile(path.join(dir,'docs/deliveries/offline-chain-trust.json'),json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  await fs.writeFile(path.join(dir,'docs/deliveries/release-backup-trust.json'),json({schemaVersion:1,rootProofSha256:hash(raw),checkpoints:[]}));

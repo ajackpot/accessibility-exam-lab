@@ -223,8 +223,16 @@ test('CLI context reads every ledger, excludes schema/template, and never falls 
   await fs.writeFile(path.join(root, `docs/rounds/${r.roundId}.md`), 'Synthetic report.');
   await fs.cp(new URL('../docs/publications',import.meta.url),path.join(root,'docs/publications'),{recursive:true});
   await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',...(await fs.readdir(path.join(root,'docs/publications'))).map(p=>'docs/publications/'+p)].join('\n')+'\n');
-  const context = await loadRoundContext(root,null,{now:Date.parse('2026-10-02T05:50:00Z')}); assert.equal(context.ledgers.length, 1); assert.equal(context.banks.size, 0);
-  assert.match(validateRoundLedgers(context.ledgers, context).errors.join('\n'), /missing immutable bank/);
+  const historicalAt=Date.parse('2026-10-02T05:50:00Z');
+  // Normal-publication evidence requires a valid campaign even in this
+  // historical read. A missing immutable baseline must fail, never fall back.
+  await assert.rejects(loadRoundContext(root,null,{now:historicalAt}),/missing immutable bank bytes/);
+  const seedPath=path.join(root,'data/releases',seed.bankVersion,'bank.json');
+  await fs.mkdir(path.dirname(seedPath),{recursive:true});await fs.writeFile(seedPath,seedRaw);
+  assert.equal(hash(await fs.readFile(seedPath)),r.baseline.bankSha256);
+  const context = await loadRoundContext(root,null,{now:historicalAt}); assert.equal(context.ledgers.length, 1); assert.equal(context.banks.size, 1);
+  assert.equal(context.banks.has(seed.bankVersion),true);
+  const validated=validateRoundLedgers(context.ledgers,context);assert.equal(validated.ok,true,validated.errors.join('\n'));
   // Later event bytes remain authenticated, but this explicit Oct2 read cannot
   // resolve them or demand sources that are unrelated to its one-ledger subset.
   const at=Date.parse('2026-10-02T05:50:00Z'),future=context.synchronizations.find(e=>e.rounds.some(s=>s.deliveryProof?.path.startsWith('docs/deliveries/chains/')));

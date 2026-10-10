@@ -72,5 +72,14 @@ test('current loader requires all current proof dependencies and both freeze fie
  await mutate('PUBLICATION-MANIFEST.txt',(p,b)=>fs.writeFile(p,b.toString().split('\n').filter(v=>v!==publicationPath).join('\n')),/dependency/);
  for(const [file,key] of [['data/manifest.json','finalRelease'],['data/publication-state.json','finalized']])await mutate(file,(p,b)=>fs.writeFile(p,json({...JSON.parse(b),[key]:true})),/freeze/);
  await assert.rejects(loadRoundContext(dir,null,{release:true,now:FREEZE_AT}),/cutoff|freeze/);
- await assert.rejects(auditHistoricalRelease(dir),/exact independently pinned/);
+ // Separate membership rejection from the independently pinned inventory check.
+ // The temporary exact copy intentionally contains only the stated public files;
+ // real local-only history remains untouched in both root and this loader copy.
+ const exact=await fs.mkdtemp(path.join(os.tmpdir(),'publication-exact-inventory-'));t.after(()=>fs.rm(exact,{recursive:true,force:true}));
+ const listed=(await fs.readFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),'utf8')).split(/\r?\n/).map(p=>p.trim()).filter(p=>p&&!p.startsWith('#'));
+ for(const file of listed){const target=path.join(exact,file);await fs.mkdir(path.dirname(target),{recursive:true});await fs.copyFile(path.join(dir,file),target);}
+ const extra=path.join(exact,'unlisted-fixture.txt');await fs.writeFile(extra,'Intentional extra file for membership rejection.\n');
+ await assert.rejects(auditHistoricalRelease(exact),/^Error: Historical archive has extra, missing or unlisted source files$/);
+ await fs.unlink(extra);
+ await assert.rejects(auditHistoricalRelease(exact),/exact independently pinned/);
 });

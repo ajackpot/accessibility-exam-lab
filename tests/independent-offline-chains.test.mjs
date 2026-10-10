@@ -1,5 +1,5 @@
 import {encodeSevenZip,decodeSevenZip,archiveSignature} from '../scripts/archive-format.mjs';
-import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
+import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
 /** Synthetic archives/receipts only. No network, external attachment or publication. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -29,14 +29,20 @@ test('independent public anchor carries delivered018 into synthetic019 and020 wi
  const source=path.join(tmp,'source18');await fs.cp(root,source,{recursive:true});
  // Only this disposable fixture resets its independently reviewed trust data.
  // Real later checkpoints and ledgers must never authenticate synthetic018.
- const sourcePaths=parsePublicAllowlist((await read(source,'PUBLICATION-MANIFEST.txt')).toString()),laterBanks=new Set();
- for(const p of sourcePaths){const m=p.match(/^docs\/rounds\/round-(\d+)\.json$/);if(m&&Number(m[1])>18){const r=JSON.parse(await read(source,p));if(r.publication?.bankVersion)laterBanks.add(`data/releases/${r.publication.bankVersion}/bank.json`);}}
- const removed=sourcePaths.filter(p=>{const m=p.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/);return p.startsWith('docs/deliveries/chains/')||m&&Number(m[1])>18||laterBanks.has(p);});
- for(const p of removed)await fs.rm(path.join(source,p));await allow(source,[],removed);
+ await pruneHistoricalFixtureHistory(source,{temporaryRoot:tmp,maxRound:18,at:Date.now(),checkpoints:'none'});
  await write(source,trust,J({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  await retainHistoricalQuarantinePrefix(source,Date.now());
  const source18BankRaw=await read(source,'data/releases/2026.10.05-regular.18/bank.json'),source18Bank=JSON.parse(source18BankRaw);
  await write(source,'data/manifest.json',J({schemaVersion:1,bankVersion:source18Bank.bankVersion,releasedAt:source18Bank.releasedAt,file:`releases/${source18Bank.bankVersion}/bank.json`,sha256:H(source18BankRaw),changeSummary:source18Bank.changeSummary,finalRelease:false}));
+
+
+ // Ordinary loading must still reject unlisted future history when test-only
+ // pruning is deliberately bypassed. No allowlist entry masks the injection.
+ const futurePath='docs/rounds/round-099.json',injectedFuture=JSON.parse(await read(source,'docs/rounds/round-018.json'));
+ Object.assign(injectedFuture,{roundId:'round-099',startedAt:'2026-10-15T19:00:00Z',decisionDeadline:'2026-10-15T22:00:00Z',closedAt:'2026-10-15T19:01:00Z'});
+ await write(source,futurePath,J(injectedFuture));
+ try {await assert.rejects(context(source),/round-099\/startedAt: recorded round execution is in the future/);}
+ finally {await fs.rm(path.join(source,futurePath));}
 
  const base=path.join(tmp,'public17');await fs.cp(source,base,{recursive:true});const bank17=JSON.parse(await read(base,'data/releases/2026.10.05-regular.17/bank.json')),remove=['docs/rounds/round-018.json','docs/rounds/round-018.md','data/releases/2026.10.05-regular.18/bank.json'];for(const p of remove)await fs.rm(path.join(base,p));await allow(base,[],remove);await write(base,'data/manifest.json',J({schemaVersion:1,bankVersion:bank17.bankVersion,releasedAt:bank17.releasedAt,file:`releases/${bank17.bankVersion}/bank.json`,sha256:H(await read(base,`data/releases/${bank17.bankVersion}/bank.json`)),changeSummary:bank17.changeSummary,finalRelease:false}));
  const head='04dcdf53384590a12159601d76029b1b8a13bb4f',observation='2026-10-05T17:05:00Z';
@@ -122,4 +128,48 @@ test('independent public anchor carries delivered018 into synthetic019 and020 wi
  });
  // A valid delivered record never retroactively authorizes a start before proof review.
  const g=structuredClone(c.ledgers),future=g.find(r=>r.roundId==='round-020');future.startedAt=proposals[1].proof.attachmentAcceptedAt;const bad=v.validateRoundLedgers(g,{...c,now:Date.now()});assert.equal(bad.ok,false);assert.match(bad.errors.join('\n'),/eligible|predecessor|schedule|cadence/);
+});
+
+
+test('historical fixture boundary uses actual files and refuses unsafe roots before mutation',async t=>{
+ const tmp=await fs.mkdtemp(path.join(os.tmpdir(),'historical-boundary-test-'));t.after(()=>fs.rm(tmp,{recursive:true,force:true}));
+ const d=path.join(tmp,'copy'),at=Date.parse('2026-10-04T12:00:00Z');
+ const ledger=(roundId,bankVersion)=>J({roundId,startedAt:'2026-10-02T00:00:00Z',baseline:{bankVersion:'seed'},publication:{bankVersion}});
+ const contents=new Map([
+  ['docs/rounds/round-009.json',ledger('round-009','kept')],['docs/rounds/round-009.md',Buffer.from('kept')],
+  ['docs/rounds/round-097.json',ledger('round-097','future-unusual-name')],['docs/rounds/round-097.md',Buffer.from('unlisted future')],
+  ['docs/rounds/round-098.json',ledger('round-098','kept')],
+  ['data/releases/seed/bank.json',Buffer.from('seed')],['data/releases/kept/bank.json',Buffer.from('kept bank')],
+  ['data/releases/future-unusual-name/bank.json',Buffer.from('unlisted future bank')],
+  ['data/releases/synthetic-regular.96/bank.json',Buffer.from('listed future bank')],
+  ['docs/deliveries/checkpoints/round-009.json',Buffer.from('old checkpoint')],
+  ['docs/deliveries/checkpoints/round-097.json',Buffer.from('unlisted future checkpoint')],
+  ['docs/deliveries/chains/future.json',Buffer.from('unlisted chain')],['README.md',Buffer.from('unrelated')]
+ ]);
+ for(const [file,raw] of contents)await write(d,file,raw);
+ const listed=['PUBLICATION-MANIFEST.txt','docs/rounds/round-009.json','docs/rounds/round-009.md','data/releases/seed/bank.json','data/releases/kept/bank.json','data/releases/synthetic-regular.96/bank.json','docs/deliveries/checkpoints/round-009.json','README.md'];
+ await write(d,'PUBLICATION-MANIFEST.txt',listed.join('\n')+'\n');
+ const realHistory=(await fs.readdir(path.join(root,'docs/rounds'))).filter(file=>/^round-\d+\.(?:json|md)$/.test(file));
+ const sourceBefore=new Map(await Promise.all(realHistory.map(async file=>[file,H(await read(root,'docs/rounds/'+file))])));
+ await assert.rejects(pruneHistoricalFixtureHistory(root,{temporaryRoot:tmp,maxRound:9,at}),/owned temporary/);
+ await assert.rejects(pruneHistoricalFixtureHistory(d,{temporaryRoot:tmp,maxRound:NaN,at}),/explicit boundary/);
+ await assert.rejects(pruneHistoricalFixtureHistory(d,{temporaryRoot:tmp,maxRound:9,at:NaN}),/explicit boundary/);
+ await fs.symlink(root,path.join(d,'source-link'));
+ await assert.rejects(pruneHistoricalFixtureHistory(d,{temporaryRoot:tmp,maxRound:9,at}),/symbolic links/);
+ await fs.unlink(path.join(d,'source-link'));
+ const alias=path.join(tmp,'alias');await fs.symlink(d,alias);
+ await assert.rejects(pruneHistoricalFixtureHistory(alias,{temporaryRoot:tmp,maxRound:9,at}),/root or ancestor.*symbolic link/);
+ await fs.mkdir(path.join(d,'child'));
+ await assert.rejects(pruneHistoricalFixtureHistory(path.join(alias,'child'),{temporaryRoot:tmp,maxRound:9,at}),/root or ancestor.*symbolic link/);
+ await assert.rejects(pruneHistoricalFixtureHistory(d,{temporaryRoot:alias,maxRound:9,at}),/root or ancestor.*symbolic link/);
+ await fs.unlink(alias);
+
+ for(const [file,raw] of contents)assert.deepEqual(await read(d,file),raw);
+ const removed=await pruneHistoricalFixtureHistory(d,{temporaryRoot:tmp,maxRound:9,at});
+ for(const file of ['docs/rounds/round-097.json','docs/rounds/round-097.md','docs/rounds/round-098.json','data/releases/future-unusual-name/bank.json','data/releases/synthetic-regular.96/bank.json','docs/deliveries/checkpoints/round-097.json','docs/deliveries/chains/future.json'])assert.ok(removed.includes(file),file);
+ for(const [file,raw] of contents)if(removed.includes(file))await assert.rejects(fs.stat(path.join(d,file)),{code:'ENOENT'});else assert.deepEqual(await read(d,file),raw);
+ assert.deepEqual(parsePublicAllowlist((await read(d,'PUBLICATION-MANIFEST.txt')).toString()),listed.filter(file=>!removed.includes(file)));
+ for(const [file,hash] of sourceBefore)assert.equal(H(await read(root,'docs/rounds/'+file)),hash,file);
+ const wrongClock=JSON.parse(await read(d,'docs/rounds/round-009.json'));wrongClock.startedAt='2026-10-06T00:00:00Z';await write(d,'docs/rounds/round-009.json',J(wrongClock));
+ await assert.rejects(pruneHistoricalFixtureHistory(d,{temporaryRoot:tmp,maxRound:9,at}),/historical clock/);
 });

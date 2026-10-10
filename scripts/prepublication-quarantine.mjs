@@ -1,11 +1,69 @@
 /** Prospective first-release exclusions. Never changes review decisions or repairs content. */
 import fs from 'node:fs/promises';
+import {AsyncLocalStorage} from 'node:async_hooks';
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {isDeepStrictEqual as equal} from 'node:util';
+import {isDeepStrictEqual as equal,types} from 'node:util';
 import {FREEZE_AT} from '../src/domain.js';
 import reviewedTrust from '../docs/quarantines/trust.json' with {type:'json'};
+
+// Parse representations only: no semantic result, trust, path, clock or freeze
+// decision is cached. Each outer operation owns and discards its private store.
+const bankParsingSession = new AsyncLocalStorage();
+const typedArrayBuffer = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(Uint8Array.prototype), 'buffer').get;
+function ordinaryBuffer(raw) {
+  if (!Buffer.isBuffer(raw) || Object.getPrototypeOf(raw) !== Buffer.prototype) return false;
+  if (['toString','valueOf','buffer','length','byteLength','byteOffset','copy','constructor'].some(key => Object.hasOwn(raw,key)) || Object.hasOwn(raw,Symbol.toPrimitive)) return false;
+  try { return !types.isSharedArrayBuffer(typedArrayBuffer.call(raw)); } catch { return false; }
+}
+export async function withBankParsingSession(root, operation) {
+  const identity = path.resolve(root);
+  const active = bankParsingSession.getStore();
+  if (active?.root === identity && !active.closed) return operation();
+  const session = {root:identity, buffers:new WeakMap(), strings:new Map(), closed:false, changed:false};
+  return bankParsingSession.run(session, async () => {
+    try { return await operation(); }
+    finally { session.closed = true; session.buffers = null; session.strings = null; }
+  });
+}
+function freezeJSON(value) {
+  const pending = [value];
+  while (pending.length) {
+    const item = pending.pop();
+    if (item && typeof item === 'object') {
+      for (const child of Object.values(item)) pending.push(child);
+      Object.freeze(item);
+    }
+  }
+  return value;
+}
+// Evidence-loss historically uses JSON.parse(value), while other bank paths
+// explicitly call value.toString(). Preserve that distinction for special input.
+export function parseImmutableBankValue(raw) {
+  return ordinaryBuffer(raw) || typeof raw === 'string' ? parseImmutableBank(raw) : JSON.parse(raw);
+}
+export function parseImmutableBank(raw) {
+  const session = bankParsingSession.getStore();
+  // Preserve standalone API behavior. Unusual caller-owned values are never
+  // adopted as reusable byte authority, even inside a session.
+  const buffer = ordinaryBuffer(raw);
+  if (!session || session.closed || (!buffer && typeof raw !== 'string')) return JSON.parse(raw.toString());
+  if (session.changed) throw new Error('Immutable bank bytes changed during parsing session');
+  const entries = buffer ? session.buffers : session.strings;
+  const previous = entries.get(raw);
+  if (previous) {
+    if (buffer && Buffer.compare(raw, previous.bytes) !== 0) {
+      session.changed = true;
+      throw new Error('Immutable bank bytes changed during parsing session');
+    }
+    return previous.value;
+  }
+  const bytes = buffer ? Buffer.from(raw) : raw;
+  const value = freezeJSON(JSON.parse(bytes.toString()));
+  entries.set(raw, {bytes, value});
+  return value;
+}
 
 export const QUARANTINE_TRUST_PATH='docs/quarantines/trust.json';
 const ROOT=path.resolve(import.meta.dirname,'..');
@@ -166,7 +224,7 @@ export function validateQuarantineCampaign(ledgers,{banks=new Map(),ledgerSource
   if(!trusted.audits.length){for(const d of dispositions.values())d.counts={accepted:d.acceptedCandidateIds.length,quarantined:0,eligible:d.eligibleCandidateIds.length};return {ok:true,errors,dispositions};}
   try {
     const entries=banks instanceof Map?[...banks]:Object.entries(banks);
-    const parsed=entries.map(([v,e])=>[v,JSON.parse((e.raw??e).toString()),e.raw??e]);
+    const parsed=entries.map(([v,e])=>[v,parseImmutableBank(e.raw??e),e.raw??e]);
     for(const [,bank,raw]of parsed){const sha=hash(raw);if(!checkedBankHashes.has(sha)){assertNoQuarantinedContent(bank);checkedBankHashes.add(sha);}}
     for(const {pin,audit:a}of trustedAudits()){
       const source=ledgers.find(r=>r.roundId===a.roundId);

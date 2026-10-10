@@ -226,6 +226,8 @@ docs/rounds/round-038.json
 docs/rounds/round-038.md
 docs/rounds/round-039.json
 docs/rounds/round-039.md
+docs/rounds/round-040.json
+docs/rounds/round-040.md
 docs/rounds/round-ledger.schema.json
 docs/rounds/round-ledger.template.json
 docs/rounds/round-report.template.md
@@ -362,4 +364,5 @@ tests/stimulus-layout.test.mjs
 tests/ui-state.test.mjs
 tests/workflows.test.mjs
 docs/deliveries/normal-chains/round-032/round-039.json
+tests/immutable-bank-parsing.test.mjs
 docs/publications/reconciled-036-039.json

@@ -223,3 +223,8 @@ PRD·OPERATIONS의 validation-efficiency-001을 따른다. 고유 의미 검사�
 ## 등록된 선행 공개 전이를 사용하는 별도 정상 사슬 공개 이벤트
 
 `verified_reconciled_normal_chain_publication`만 이미 등록된 `verified_normal_chain_ancestor_publication` successor proof를 참조하여 선행 은행의 뒤늦은 공개 확인보다 먼저 시작된 정확한 오프라인 source를 별도로 공개 확인할 수 있다. DATA-CONTRACT의 명시 reconciliation·원 시작/마감/등록 eligibility·연속 source·fresh main/ref 계약과 OPERATIONS의 별도 실행 절차를 따른다. 첫 source 자신이 조기 시작한 전이 source인 경우는 정확한 전달 선행은행과 원 시작·자기 판정 마감·eligibility를 보존하는 DATA-CONTRACT의 좁은 분기로만 검증한다. 선행 공개와 후보 종결의 추가 선후 조건을 만들지 않는다. 기존 event 종류의 시작/parent guard, 원 대장·proof·trust·unknown·중단 기록과 다운로드 우선순위는 바꾸지 않는다. 현재 parent가 등록된 tip anchor와 다르면 이 경로는 중단하며 actual Git/Pages/live 증거와 독립 pin 검토 없이 공개나 재시도를 주장하지 않는다.
+
+
+## 불변 은행 파싱 재사용
+
+`validation-efficiency-002`는 한 실행 안의 정확한 은행 JSON 표현만 재사용한다. 모든 의미·이력·신뢰·현재 시각·동결 검사는 유지하고, 다른 루트·호출·바이트에 통과 결과를 넘기지 않는다. 기존 불변 은행·대장·검토 원문·전달 증거를 고치지 않는다. 실측 파싱 성능과 전체 gate 시간을 구별한다. 상세 범위는 OPERATIONS와 DATA-CONTRACT의 같은 절을 따른다.

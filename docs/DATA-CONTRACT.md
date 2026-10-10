@@ -514,3 +514,15 @@ parentObservation은 정확한 repository·refs/heads/main·commit·tree·전체
 전체 campaign과 기존 sealed normal-chain loader를 거친 source membership 단계에서 변경하지 않은 `validateNormalChainAncestorTransition`을 다시 적용한다. caller Boolean/Map 또는 새 event 선언으로 사슬을 인증하지 않는다. 기존 normal-chain parent==tip anchor guard, 전체 Git tree, 원 은행 전이·적격/격리/신규 공개 수, 모든 immutable/외부 지원 경로, trust prefix, runtime·은행·source 대장·proof·두 동결 marker의 live 검사도 그대로다. 최종 cutoff와 영구 freeze는 우회하지 않는다.
 
 이 필드들은 실제 외부 관측에 대한 독립 검토를 위한 결박이며 서비스 서명 검증이나 로컬 쓰기 권한이 아니다. 실제 성공한 payload main, exact-head Pages/live를 확인한 후에만 별도 event/pin을 검토·등록한다. 그 지원 commit은 자기 Pages/live 확인이 필요하다. 원 stopped publisher·결과 불명 blob·최초 시계·공개0·canPublish:false는 보존하며 legacy resolvedArtifacts에 정상 artifact를 넣지 않는다.
+
+
+## 검증 중 불변 은행 JSON 재사용 (validation-efficiency-002)
+
+한 번의 정규 대장 CLI 실행, 단독 context loader 호출 또는 정확한 과거 전달본 감사 호출 안에서만, 같은 정규화된 프로젝트 루트의 정확히 같은 은행 바이트를 다시 JSON으로 해석하는 작업을 줄인다. 과거 전달본 감사는 로딩부터 마지막 대장 의미 검사까지 해당 과거 루트의 한 범위로 묶으며, 이 감사의 결과는 현재 릴리스 허가로 사용할 수 없다. 저장된 검증 결과를 재사용하는 기능이 아니다. 모든 기존 의미 검사·격리/증거 소실 예약·출처/신뢰 파일 읽기·이력 경계·현재 시각·동결 확인은 그대로 실행한다.
+
+- 저장소는 모듈 내부의 실행 범위에 두며 외부 cache/proof/skip 인자를 받지 않는다. 루트가 달라지거나 호출이 끝나면 저장소를 공유하지 않는다. 비동기 후속 작업도 종료된 저장소를 재사용하지 않는다
+- 일반 Buffer는 내부 복사본과 매 재사용 시 바이트 전체를 비교한다. 변경이 감지되면 해당 실행의 재사용을 실패 처리하며 원상복구로 통과시키지 않는다. 문자열은 정확한 값으로 구별한다. 공유 메모리나 특수 호출자 객체는 재사용하지 않는다
+- JSON 결과는 중첩 객체·배열까지 변경 불가로 만든다. 은행 버전·파일 이름·호출자 해시·객체 동일성만으로 바이트 검사를 생략하지 않는다. 다른 Buffer나 다른 문자열은 새로 해석하며 그 뒤 원래 의미 검사를 수행한다
+- 단독 검증 API가 실행 저장소 없이 호출되면 기존처럼 매번 해석한다. 파싱 성공은 은행 schema·manifest·trust·발행 가능성의 통과를 뜻하지 않는다. 검증 결과·시각·동결·이력 집합을 캐시하지 않는다
+- 기존 전체 스냅샷/런타임 비교와 외부 수정자가 없는 고정 작업본 조건은 유지한다. 파일을 읽기 전후 경로·symlink·허용 목록 검사도 생략하지 않는다. 실행 중 외부에서 수정 후 되돌리는 상황을 이 최적화가 탐지했다고 주장하지 않는다
+- 성능 수치는 같은 입력·런타임에서 실제 측정한 범위만 보고한다. 파싱 구간 측정을 전체 릴리스 검증 시간이나 검토 품질 향상으로 바꾸어 설명하지 않는다

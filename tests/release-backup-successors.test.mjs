@@ -1,5 +1,5 @@
 import {encodeSevenZip,decodeSevenZip,archiveSignature} from '../scripts/archive-format.mjs';
-import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
+import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
 /** Synthetic future archives/receipts only. Nothing here is uploaded or delivered. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -52,12 +52,12 @@ async function check(dir,authority=dir){const v=await moduleAt(authority,'valida
 
 test('generic reviewed checkpoints carry exact010 to011 to012 without adapter edits',async t=>{
  t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-10-04T11:10:00Z')});
- const temp=await fs.mkdtemp(path.join(os.tmpdir(),'generic-delivery-test-'));t.after(()=>fs.rm(temp,{recursive:true,force:true}));
+ const temp=await fs.mkdtemp(path.join(os.tmpdir(),'historical-boundary-test-'));t.after(()=>fs.rm(temp,{recursive:true,force:true}));
  // Isolate synthetic successors from later real campaign records and trust data.
  // Only this disposable fixture resets its registry; production history is never edited.
  const seed=path.join(temp,'historical9');await fs.cp(root,seed,{recursive:true});
- const seedPaths=parsePublicAllowlist((await read(seed,'PUBLICATION-MANIFEST.txt')).toString()),later=seedPaths.filter(p=>{const r=p.match(/^docs\/rounds\/round-(\d+)\.(?:json|md)$/),b=p.match(/^data\/releases\/[^/]+-regular\.(\d+)\//);return r&&Number(r[1])>9||b&&Number(b[1])>9||p.startsWith('docs/deliveries/checkpoints/')||p.startsWith('docs/deliveries/chains/');});
- await allow(seed,[],later);for(const p of later)await fs.rm(path.join(seed,p));
+ const seedPaths=parsePublicAllowlist((await read(seed,'PUBLICATION-MANIFEST.txt')).toString());
+ await pruneHistoricalFixtureHistory(seed,{temporaryRoot:temp,maxRound:9,at:Date.now(),checkpoints:'all'});
  // Clear only this historical fixture's newer independent delivery authority.
  if(seedPaths.includes('docs/deliveries/offline-chain-trust.json'))await write(seed,'docs/deliveries/offline-chain-trust.json',json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  await retainHistoricalQuarantinePrefix(seed,Date.now());

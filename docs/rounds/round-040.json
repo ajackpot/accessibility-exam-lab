@@ -1,0 +1,152 @@
+{
+  "ledgerSchemaVersion": 1,
+  "campaignId": "2026-exam-final",
+  "roundId": "round-040",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-09T15:38:44.634695+00:00",
+  "decisionDeadline": "2026-10-09T18:00:00Z",
+  "closedAt": "2026-10-09T17:08:18.061Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxReopeningsPerGoal": 1,
+    "maxLineageCycles": 6,
+    "maxRoundHours": 4
+  },
+  "baseline": {
+    "sourceCommit": "340671e07b0552b6e3cfec0ca25026738d5d4ad5",
+    "bankVersion": "2026.10.09-regular.39",
+    "bankSha256": "42cc772d52de759ee9c292f2d47bd71aa5e0371c8679fa7992a218ee68cda919",
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 207,
+      "s5": 159
+    },
+    "regularPractical": 80,
+    "offlinePredecessor": {
+      "roundId": "round-039",
+      "artifactSha256": "063b7f9e9d951e86156cb8b194c946347ecf98b0e7e95f1160e81988f80eaffa",
+      "manifestSha256": "ff7ea5d461f5e82486c35aef5cd3f3cdb494f000613fe396ca54c5318eadbc1b",
+      "ledgerSha256": "2d12921b762cbefe943b5e741a53144ebdce01526f31af79d460a565e5d43145"
+    }
+  },
+  "targets": {
+    "writtenBySubject": {
+      "s1": 0,
+      "s2": 1,
+      "s3": 1,
+      "s4": 1,
+      "s5": 0
+    },
+    "practical": 0
+  },
+  "candidates": [],
+  "counts": {
+    "registered": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "pending": 0,
+    "publishedRegularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "publishedRegularPractical": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 198,
+      "s3": 178,
+      "s4": 201,
+      "s5": 153
+    },
+    "regularPractical": 80,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "skipped",
+    "commit": null,
+    "bankVersion": null,
+    "bankSha256": null,
+    "verifiedAt": null,
+    "url": null,
+    "blockers": [
+      "time_budget_no_candidates_registered"
+    ]
+  },
+  "validation": [
+    {
+      "check": "품질 우선 무신규 종료",
+      "result": "pass",
+      "summary": "채택 문항이 없어 새 불변 은행을 만들지 않았다. 후보 등록·시작 검토가 모두 0개이며 세 조사 목표는 미등록으로 보존한다. 기존 은행·공개 상태와 모든 역사 예약을 보존한다.",
+      "reportPath": "docs/rounds/round-040.md"
+    },
+    {
+      "check": "새 콘텐츠 실제 브라우저·Windows/NVDA",
+      "result": "not_run",
+      "summary": "새 은행을 만들지 않았으며 보조기술 실측은 수행하지 않았다.",
+      "reportPath": "docs/NVDA-CHECKLIST.md"
+    }
+  ],
+  "nextRoundGaps": [
+    {
+      "gapId": "round-040-unregistered-01",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [
+        "r040-primary-template-http421-different-connection-retry-permitted-even-for-nonidempotent-method"
+      ],
+      "candidateIds": [],
+      "finding": "조사한 목표 R40-S2-MISDIRECTED-RETRY는 이번 회차에 후보로 등록하거나 독립 검토를 시작하지 않았다. 실제 전체 검증 시간에 비추어 마감 전 필수 후보 처리와 개정 여유를 안전하게 확보하지 못했다.",
+      "neededEvidenceOrCounterexample": "다음 회차의 실제 기준 은행·보존된 전체 학습 필드·기존 후보 예약과 정확한 고정판 1차 근거를 다시 대조해야 한다. 이번 조사 자료는 독립 풀이·답 잠금·키 공개·채택 증거가 아니다.",
+      "nextAction": "다음 실제 발생분에서 당시의 승인 계획과 신규성 검토를 거쳐 조사 목표를 다시 판단한다: 421 응답을 받은 비멱등 POST를 다른 연결로 재시도할 수 있는 응답별 허용 규칙을 적용한다.",
+      "completionCriterion": "실제 등록 이후 같은 개정판의 독립 풀이·1차 근거·단일 정답성·선택지 및 문항 전체 해설·구조 검증이 실제 기한 안에 완료되어야 한다. 이번 미등록 자료를 탈락 후보의 재개방이나 완료된 검토로 세지 않는다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-040-unregistered-02",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s3"
+      ],
+      "learningGoalIds": [
+        "r040-primary-template-equally-appropriate-icons-select-last-in-current-document-tree-order"
+      ],
+      "candidateIds": [],
+      "finding": "조사한 목표 R40-S3-ICON-TIE-ORDER는 이번 회차에 후보로 등록하거나 독립 검토를 시작하지 않았다. 실제 전체 검증 시간에 비추어 마감 전 필수 후보 처리와 개정 여유를 안전하게 확보하지 못했다.",
+      "neededEvidenceOrCounterexample": "다음 회차의 실제 기준 은행·보존된 전체 학습 필드·기존 후보 예약과 정확한 고정판 1차 근거를 다시 대조해야 한다. 이번 조사 자료는 독립 풀이·답 잠금·키 공개·채택 증거가 아니다.",
+      "nextAction": "다음 실제 발생분에서 당시의 승인 계획과 신규성 검토를 거쳐 조사 목표를 다시 판단한다: 동등하게 적합한 아이콘 후보의 선택은 각 문서에서 목록을 수집한 시점의 마지막 트리 순서를 따름을 적용한다.",
+      "completionCriterion": "실제 등록 이후 같은 개정판의 독립 풀이·1차 근거·단일 정답성·선택지 및 문항 전체 해설·구조 검증이 실제 기한 안에 완료되어야 한다. 이번 미등록 자료를 탈락 후보의 재개방이나 완료된 검토로 세지 않는다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-040-unregistered-03",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s4"
+      ],
+      "learningGoalIds": [
+        "r040-primary-template-bound-constructor-ignores-bound-this-but-preserves-prefixed-arguments"
+      ],
+      "candidateIds": [],
+      "finding": "조사한 목표 R40-S4-BOUND-CONSTRUCTION는 이번 회차에 후보로 등록하거나 독립 검토를 시작하지 않았다. 실제 전체 검증 시간에 비추어 마감 전 필수 후보 처리와 개정 여유를 안전하게 확보하지 못했다.",
+      "neededEvidenceOrCounterexample": "다음 회차의 실제 기준 은행·보존된 전체 학습 필드·기존 후보 예약과 정확한 고정판 1차 근거를 다시 대조해야 한다. 이번 조사 자료는 독립 풀이·답 잠금·키 공개·채택 증거가 아니다.",
+      "nextAction": "다음 실제 발생분에서 당시의 승인 계획과 신규성 검토를 거쳐 조사 목표를 다시 판단한다: bind로 만든 함수를 new로 호출하면 저장된 this 대신 새 인스턴스를 사용하되 선행 인수는 유지하는 경계를 코드에 적용한다.",
+      "completionCriterion": "실제 등록 이후 같은 개정판의 독립 풀이·1차 근거·단일 정답성·선택지 및 문항 전체 해설·구조 검증이 실제 기한 안에 완료되어야 한다. 이번 미등록 자료를 탈락 후보의 재개방이나 완료된 검토로 세지 않는다.",
+      "priority": "medium",
+      "reopenEligible": false
+    }
+  ],
+  "noGapExplanation": null,
+  "summary": "정규 40회차는 후보 0개·채택 0개·탈락 0개·미결정 0개로 종결했다. 품질 기준에 따라 새 은행을 만들지 않았으며 실제 공개 수는 0개다."
+}

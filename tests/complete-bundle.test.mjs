@@ -8,10 +8,17 @@ import {execFileSync} from 'node:child_process';
 import {parsePublicAllowlist, main as fallbackMain} from '../scripts/download-fallback.mjs';
 import {freezeCompleteProject,writeCompleteArchive,writeCompleteZip,writeOfflineDeliveryPair,completeInstructions,createCompleteReceipt} from '../scripts/complete-bundle.mjs';
 const root=path.resolve(import.meta.dirname,'..');
-// Simulated current-tree audit time follows both the active bank and included block events.
+// Simulated current-tree audit time follows actual included chronology, never scheduled deadlines.
 const blockPins=JSON.parse(await fs.readFile(path.join(root,'docs/release-blocks/trust.json'))).events;
 const normalPins=[...JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/normal-backup-root-trust.json'))).roots,...JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/normal-backup-chain-trust.json'))).checkpoints];
-const now=Math.max(Date.parse('2026-10-04T09:00:00Z'),Date.parse(JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))).releasedAt)+60_000,...blockPins.map(p=>Date.parse(p.recordedAt)+60_000),...normalPins.map(p=>Date.parse(p.registeredAt)+60_000));
+const includedLedgerPaths=parsePublicAllowlist(await fs.readFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'utf8')).filter(p=>/^docs\/(?:rounds\/round-\d+|corrections\/editorial-\d+)\.json$/.test(p));
+const includedLedgers=await Promise.all(includedLedgerPaths.map(async p=>JSON.parse(await fs.readFile(path.join(root,p)))));
+const ledgerActualTimes=includedLedgers.flatMap(l=>[l.startedAt,...(l.closedAt===undefined?[]:[l.closedAt])]).map(value=>{
+  const time=Date.parse(value);assert.ok(Number.isFinite(time),'Included ledger actual timestamp must be finite');return time;
+});
+const latestIncludedStart=Math.max(...includedLedgers.map(l=>Date.parse(l.startedAt)));
+const priorEvidenceTime=Math.max(Date.parse('2026-10-04T09:00:00Z'),Date.parse(JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))).releasedAt),...blockPins.map(p=>Date.parse(p.recordedAt)),...normalPins.map(p=>Date.parse(p.registeredAt)));
+const now=Math.max(priorEvidenceTime,...ledgerActualTimes)+60_000;
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const json=value=>Buffer.from(JSON.stringify(value,null,2)+'\n');
 async function reviewed() {
@@ -27,6 +34,11 @@ async function fixture() {
 }
 async function temp(t) { const p=await fs.mkdtemp(path.join(os.tmpdir(),'complete-bundle-'));t.after(()=>fs.rm(p,{recursive:true,force:true}));return p; }
 const frozen=async()=>freezeCompleteProject({...await fixture(),archiveFormat:"zip"});
+test('current-tree fixture follows actual ledger chronology and retains the future-start rejection',async()=>{
+  assert.ok(ledgerActualTimes.every(time=>now>=time+60_000));
+  assert.ok(latestIncludedStart-1>priorEvidenceTime,'Chronology negative must remain after prior evidence registration');
+  await assert.rejects(freezeCompleteProject({...await fixture(),now:latestIncludedStart-1}),/Normal-chain successor requires exact registered predecessor and current eligible chronology/);
+});
 test('complete snapshot contains the exact allowlist and has no installation predecessor',async()=>{
   const s=await frozen(); assert.deepEqual(s.manifest.prerequisiteArtifacts,[]);
   assert.equal(s.manifest.kind,'complete_project_not_learner_import'); assert.equal(s.manifest.packagingRevision,null);
