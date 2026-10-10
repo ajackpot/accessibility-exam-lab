@@ -55,6 +55,42 @@
       "previousProofSha256": "0de8deccd08abe7521eebdf5293b30f5d52dd88d2583b374442c3139d2ff593c",
       "registeredAt": "2026-10-08T20:55:33.739Z",
       "eligibleAt": "2026-10-08T20:55:33.739Z"
+    },
+    {
+      "rootProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "roundId": "round-036",
+      "path": "docs/deliveries/normal-chains/round-032/round-036.json",
+      "sha256": "5261c03a5ed00b61bece59cecec6fb85351c1b0c614c672aab7075ab65a2ef27",
+      "previousProofSha256": "e8c0229548b2cee6b251d517116fd8b3e1a64ab9cd31abbf18afdc47d1d73e08",
+      "registeredAt": "2026-10-09T01:41:31.191Z",
+      "eligibleAt": "2026-10-09T01:41:31.191Z"
+    },
+    {
+      "rootProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "roundId": "round-037",
+      "path": "docs/deliveries/normal-chains/round-032/round-037.json",
+      "sha256": "e9a0a35aef9464fce89de390ca245a87f9d314f6019167982b5d0108f9a2606f",
+      "previousProofSha256": "5261c03a5ed00b61bece59cecec6fb85351c1b0c614c672aab7075ab65a2ef27",
+      "registeredAt": "2026-10-09T05:20:34.517Z",
+      "eligibleAt": "2026-10-09T05:20:34.517Z"
+    },
+    {
+      "rootProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "roundId": "round-038",
+      "path": "docs/deliveries/normal-chains/round-032/round-038.json",
+      "sha256": "e659651f9c2b96be09f2e2eb4b09841ad55d36a2bb3582701bc8d3e03573aa4e",
+      "previousProofSha256": "e9a0a35aef9464fce89de390ca245a87f9d314f6019167982b5d0108f9a2606f",
+      "registeredAt": "2026-10-09T09:21:01.190Z",
+      "eligibleAt": "2026-10-09T09:21:01.190Z"
+    },
+    {
+      "rootProofSha256": "5d1cb7c3ca72c6246ab94d03fc7c140ea5643c09e816d799c23f345227c37fe5",
+      "roundId": "round-039",
+      "path": "docs/deliveries/normal-chains/round-032/round-039.json",
+      "sha256": "f945a5485208156ff3c5488de04e0c83bef46b8fcf8882a827bc806aaa6dbf89",
+      "previousProofSha256": "e659651f9c2b96be09f2e2eb4b09841ad55d36a2bb3582701bc8d3e03573aa4e",
+      "registeredAt": "2026-10-09T13:08:59.812Z",
+      "eligibleAt": "2026-10-09T13:08:59.812Z"
     }
   ]
 }

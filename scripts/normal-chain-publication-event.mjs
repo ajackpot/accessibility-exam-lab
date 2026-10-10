@@ -47,7 +47,14 @@ export function validateReconciledNormalPublication(record,{ledgers,ledgerSource
   const ref={roundId:previous.pin.roundId,artifactSha256:p.deltaArtifactSha256,manifestSha256:H(J(p.deltaManifest)),ledgerSha256:release.ledgerSha256};
   if(!equal(l.baseline.offlinePredecessor,ref)||l.baseline.sourceCommit!==anchorOf(p).baseCommit||l.baseline.bankVersion!==release.bankVersion||l.baseline.bankSha256!==release.bankSha256||e.proof.previousProofSha256!==previous.pin.sha256||s.originalLedgerSha256!==e.proof.completeManifest.sourceRelease.ledgerSha256||s.bankVersion!==e.proof.completeManifest.sourceRelease.bankVersion||s.bankSha256!==e.proof.completeManifest.sourceRelease.bankSha256)fail('original delivered predecessor/source bindings changed');
   if(start<instant(previousPublication.verifiedAt)){
-   if(index>=bridgeIndex||l.baseline.sourceCommit!==historical.baseCommit||anchorOf(e.proof).baseCommit!==historical.baseCommit)fail('earlier start is outside the registered historical-anchor prefix');earlyRoundIds.add(s.roundId);
+   // Preserve the original historical-prefix exception exactly. A distinct,
+   // bounded case covers a first source that began from its exact eligible
+   // delivered predecessor, then itself registered that ancestor's publication.
+   // Its own unchanged candidate window applies even if publication occurred
+   // during review. Later sources and changed baselines cannot borrow this case.
+   const historicalPrefix=index<bridgeIndex&&l.baseline.sourceCommit===historical.baseCommit&&anchorOf(e.proof).baseCommit===historical.baseCommit;
+   const originalWindowTransitionSource=i===0&&index===bridgeIndex&&l.baseline.sourceCommit===historical.baseCommit&&release.bankVersion===previousPublication.manifest.bankVersion&&release.bankSha256===previousPublication.manifest.sha256&&equal(anchorOf(e.proof),anchor);
+   if(!historicalPrefix&&!originalWindowTransitionSource)fail('earlier start is outside the registered historical-anchor prefix or exact original-window predecessor transition');earlyRoundIds.add(s.roundId);
   }
  }
  if(!positions.includes(bridgeIndex)||positions[0]>bridgeIndex||anchorOf(entries[positions.at(-1)].proof).baseCommit!==record.parent||!equal(anchorOf(entries[positions.at(-1)].proof).remoteInventory,anchor.remoteInventory))fail('published suffix must include and retain the exact reconciliation');

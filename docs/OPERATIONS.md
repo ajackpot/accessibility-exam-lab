@@ -485,7 +485,7 @@ DATA-CONTRACT의 `verified_normal_chain_publication`만 사용한다. 새 최종
 
 다운로드를 먼저 완수한다. 아직 전달/등록하지 않은 새 종결 회차를 공개 source에 섞지 않는다. 기존 normal-chain event의 시작/parent 검사를 통과시키려고 원 대장을 고치지 말고, 실제 등록된 ancestor 전이가 해당 원 source prefix를 인증할 때만 DATA-CONTRACT의 새 `verified_reconciled_normal_chain_publication`을 사용한다.
 
-1. 실제 최신 등록 tip과 원 사슬, 정확한 선행 public event, 전이 proof와 원 receipt 해시, 검토된 전체 source/변경 inventory를 고정한다. 원 history·은행·정정·격리·증거소실 예약과 새 helper 의존성을 포함한다. 다른 head나 경로 충돌은 강제로 덮어쓰지 않는다
+1. 실제 최신 등록 tip과 원 사슬, 정확한 선행 public event, 전이 proof와 원 receipt 해시, 검토된 전체 source/변경 inventory를 고정한다. 첫 source 자신이 선행 공개보다 먼저 시작한 전이 source라면, 정확한 전달 선행은행이 직전 공개은행이고 자기 원 판정 마감 안에 종결했는지 추가 확인한다. 선행 공개가 후보 검토 중에 일어났다는 이유만으로 자격을 잃지 않는다. 원 시작·종결·baseline·offlinePredecessor·선행 등록 eligibility를 고쳐 맞추지 않는다. 원 history·은행·정정·격리·증거소실 예약과 새 helper 의존성을 포함한다. 다른 head나 경로 충돌은 강제로 덮어쓰지 않는다
 2. 실제 Git 실행의 권한과 기존/현재 outcome journal을 별도로 확인한다. 기존 unknown/영구 중단은 그대로이며 새 event 코드가 재시도·늦은 승인·canary의 권한을 만들지 않는다
 3. 실제 main/commit/전체 tree/두 freeze marker를 각각 새로 읽어 원 응답과 서로 다른 실제 관측 시각을 보존한다. 등록된 tip anchor와 같지 않으면 중단한다. 검토한 blob SHA만 사용하는 tree와 기대 단일 parent의 commit을 준비하고, 마지막60초 이내 boundary 및 cutoff를 확인한 뒤 force:false·expectedSha를 결박한 원자 ref 갱신을 한 번 수행한다
 4. ref 성공만으로 공개로 세지 않는다. 정확한 실제 payload commit의 Pages 성공과 필수 live 경로의 HTTP200·길이·SHA-256을 확인한다. 실제 완료 뒤에만 원 source 창과 fresh parent/ref 증거를 포함한 새 event proposal을 만든다. 없는 commit/run/response·시각을 채우거나 합성 fixture를 실제 evidence로 쓰지 않는다

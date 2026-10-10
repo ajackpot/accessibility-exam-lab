@@ -1,0 +1,780 @@
+{
+  "ledgerSchemaVersion": 1,
+  "campaignId": "2026-exam-final",
+  "roundId": "round-037",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-09T03:32:17.900579+00:00",
+  "decisionDeadline": "2026-10-09T06:00:00Z",
+  "closedAt": "2026-10-09T04:44:10.156Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxReopeningsPerGoal": 1,
+    "maxLineageCycles": 6,
+    "maxRoundHours": 4
+  },
+  "baseline": {
+    "sourceCommit": "340671e07b0552b6e3cfec0ca25026738d5d4ad5",
+    "bankVersion": "2026.10.09-regular.36",
+    "bankSha256": "f787ac4bde2bb77c916f44004a831ef45362d99c979cf6d26568aaee0731b777",
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 199,
+      "s3": 179,
+      "s4": 203,
+      "s5": 155
+    },
+    "regularPractical": 80,
+    "offlinePredecessor": {
+      "roundId": "round-036",
+      "artifactSha256": "cd6ce62815e342a9ed650bccc23dae2cd135c0f2d715f13dc3f0f95c01d16cdf",
+      "manifestSha256": "ce74ae897d524cd45aef0caa821e260b78a01326d7e66e0f6fe3f646e66bd0e8",
+      "ledgerSha256": "917690d1afa39fc652ea6c666cb07f03d215a8d7d79cff043012a1c95a71bc94"
+    }
+  },
+  "targets": {
+    "writtenBySubject": {
+      "s1": 0,
+      "s2": 2,
+      "s3": 1,
+      "s4": 2,
+      "s5": 1
+    },
+    "practical": 0
+  },
+  "candidates": [
+    {
+      "candidateId": "r037-web-s2-w01",
+      "lineageId": "r037-web-template-if-none-match-weak-comparison-ignores-validator-strength",
+      "learningGoalId": "r037-web-template-if-none-match-weak-comparison-ignores-validator-strength",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r037-web-s2-w01",
+      "revision": 1,
+      "templateId": "r037-web-template-if-none-match-weak-comparison-ignores-validator-strength",
+      "authorId": "round037-web-and-script-at-authors",
+      "evidence": [
+        {
+          "sourceId": "r035-primary-src-written-scope",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론의 URL·WWW; HTML 문서 구조·구현; CSS/스크립트의 객체·함수 등 기초문법; 정보접근성의 보조공학 서비스 종류·역할·이용방식",
+          "checkedAt": "2026-10-08T19:22:53.376175+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트(SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 추출문을 다시 대조했다. 해당 영역 안의 자체 응용 학습이며 세부 API나 제품 단축키가 독립 출제항목이라는 뜻은 아니다. 새 HWP 취득으로 보고하지 않는다.",
+          "rights": "1차 자료의 규칙을 간결하게 의역하고 지문·코드·선택지·해설은 독자 작성했다. 공식 시험 샘플이나 교재 문항·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 각 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r037-web-src-weak-if-none-match",
+          "title": "RFC 9110: HTTP Semantics",
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-13.1.2",
+          "version": "RFC 9110, June 2022",
+          "location": "§8.8.3.2 Comparison; §13.1.2 If-None-Match",
+          "checkedAt": "2026-10-09T03:03:39.103666+00:00",
+          "summary": "If-None-Match는 약한 비교 함수를 사용하며 W/ 여부와 관계없이 opaque-tag가 같은 태그를 일치로 본다. 조건이 거짓인 GET에는 304로 응답한다. RFC Editor 고정 원문을 새로 내려받아 확인했다.",
+          "rights": "고정판 1차 자료의 규칙을 간결하게 의역하고 지문·가상 코드·선택지·해설을 독자 작성했다. 공식 시험 샘플·유료 문제집·표준 예제나 원문 전문을 복제하지 않았다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-09T03:56:24.539Z",
+          "finishedAt": "2026-10-09T04:06:14.256808Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "키 접근 전에 확정한 C006의 B가 해당 개정판의 유일 정답과 일치한다. If-None-Match는 약한 비교를 사용하므로 두 태그가 일치한다. 조건이 거짓인 GET에는 304를 반환한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "고정판 1차 원문과 보존 공식 범위 원본을 독립 확인했다. RFC 9110 §13.1.2는 약한 비교와 거짓 조건의 GET/HEAD 304를 요구한다. §8.8.3.2에서 opaque-tag 동일성을 확인했다. 유효한 원 서버 GET과 다른 선행조건 없음이 원문 적용 범위를 충족한다. 기술 사실의 짧은 한국어 의역과 독자 가상 코드·선택지이며 표준 전문이나 공식 시험 예제를 배포하지 않는다. 원문 권리를 포괄 재배포 허락으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-weak-if-none-match"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "If-None-Match는 약한 비교를 사용하므로 두 태그가 일치한다. 조건이 거짓인 GET에는 304를 반환한다. 조건을 유지하는 대안 정답은 없다. 1353개 실제 변형(옵션 연결 완전1350/부분3), 별도92개 요약,989개 역사 예약의 모든 학습 필드를 검색하고 가까운 목표의 원문을 대조했다. 기존 r003-internet-html-w07은 이미 주어진 304 응답의 재사용 의미, r005-internet-html-w07은 PUT의 If-Match 선택이다. 이번은 강약 표시가 다른 태그에 약한 비교를 적용해야만 응답 코드를 결정하므로 새로운 판별 규칙이다. 022의19개 격리와023의19개 예약을 유지하며,109후보/113개정 누락 원문을 복원했다고 주장하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-weak-if-none-match"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "네 선택지를 각각 근거·상황 적용·오개념·병렬 형식·정답 단서로 검토했다. 지문/가정/자료와 실제 해설이 분리되고 정답만 유난히 길거나 문법적으로 두드러지는 단서는 없다. 해설 필드 자체가 규칙과 적용 결과를 제시하며 중복 contextExplanation은 없다. 전부 단일 필기 문항으로 실기 후속 부분 누출은 해당하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-weak-if-none-match"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "정확한 동결 SHA 개정판에 validateBank, 인메모리 출판 투영 validateBankForPublication, validateExplanationAuthoring, 단일키·4보기·보기 지시문 검사를 실제 실행해 통과했다. s4 두 코드는 별도 Node 실행과도 일치한다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r037-web-s2-w02",
+      "lineageId": "r037-web-template-content-location-identifies-selected-representation-not-redirection",
+      "learningGoalId": "r037-web-template-content-location-identifies-selected-representation-not-redirection",
+      "subjectId": "s2",
+      "type": "written",
+      "questionId": "r037-web-s2-w02",
+      "revision": 1,
+      "templateId": "r037-web-template-content-location-identifies-selected-representation-not-redirection",
+      "authorId": "round037-web-and-script-at-authors",
+      "evidence": [
+        {
+          "sourceId": "r035-primary-src-written-scope",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론의 URL·WWW; HTML 문서 구조·구현; CSS/스크립트의 객체·함수 등 기초문법; 정보접근성의 보조공학 서비스 종류·역할·이용방식",
+          "checkedAt": "2026-10-08T19:22:53.376175+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트(SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 추출문을 다시 대조했다. 해당 영역 안의 자체 응용 학습이며 세부 API나 제품 단축키가 독립 출제항목이라는 뜻은 아니다. 새 HWP 취득으로 보고하지 않는다.",
+          "rights": "1차 자료의 규칙을 간결하게 의역하고 지문·코드·선택지·해설은 독자 작성했다. 공식 시험 샘플이나 교재 문항·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 각 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r037-web-src-content-location",
+          "title": "RFC 9110: HTTP Semantics",
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html#section-8.7",
+          "version": "RFC 9110, June 2022",
+          "location": "§8.7 Content-Location; §10.2.2 Location",
+          "checkedAt": "2026-10-09T03:03:39.103666+00:00",
+          "summary": "Content-Location은 메시지 콘텐츠에 대응하는 표현의 자원 식별자이며 요청 대상 URI를 교체하지 않는다. GET의 2xx 응답에서 다른 URI를 가리키면 협상하여 선택한 표현의 더 구체적인 식별자임을 나타낸다. RFC Editor 고정 원문을 새로 내려받아 확인했다.",
+          "rights": "고정판 1차 자료의 규칙을 간결하게 의역하고 지문·가상 코드·선택지·해설을 독자 작성했다. 공식 시험 샘플·유료 문제집·표준 예제나 원문 전문을 복제하지 않았다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-09T03:56:24.539Z",
+          "finishedAt": "2026-10-09T04:06:14.256808Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "키 접근 전에 확정한 C003의 D가 해당 개정판의 유일 정답과 일치한다. 200 GET 응답에서 다른 Content-Location URI는 선택된 한국어 표현의 구체적인 식별자이다. 리디렉션이나 상대 링크 기준을 지정하지 않는다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "고정판 1차 원문과 보존 공식 범위 원본을 독립 확인했다. RFC 9110 §8.7의 다른 URI인 2xx GET과 같은 자원 소유자 조건을 직접 확인했다. 선택된 표현 식별이며 Location 대체나 자동 리디렉션이 아니다. 기술 사실의 짧은 한국어 의역과 독자 가상 코드·선택지이며 표준 전문이나 공식 시험 예제를 배포하지 않는다. 원문 권리를 포괄 재배포 허락으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-content-location"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "200 GET 응답에서 다른 Content-Location URI는 선택된 한국어 표현의 구체적인 식별자이다. 리디렉션이나 상대 링크 기준을 지정하지 않는다. 조건을 유지하는 대안 정답은 없다. 1353개 실제 변형(옵션 연결 완전1350/부분3), 별도92개 요약,989개 역사 예약의 모든 학습 필드를 검색하고 가까운 목표의 원문을 대조했다. 전 학습 필드에서 Content-Location 직접 중복은 없었다. 기존 Location/리디렉션·참조 헤더 문항과 달리 협상된 표현의 구체적 자원 식별을 평가한다. 022의19개 격리와023의19개 예약을 유지하며,109후보/113개정 누락 원문을 복원했다고 주장하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-content-location"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "네 선택지를 각각 근거·상황 적용·오개념·병렬 형식·정답 단서로 검토했다. 지문/가정/자료와 실제 해설이 분리되고 정답만 유난히 길거나 문법적으로 두드러지는 단서는 없다. 해설 필드 자체가 규칙과 적용 결과를 제시하며 중복 contextExplanation은 없다. 전부 단일 필기 문항으로 실기 후속 부분 누출은 해당하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-content-location"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "정확한 동결 SHA 개정판에 validateBank, 인메모리 출판 투영 validateBankForPublication, validateExplanationAuthoring, 단일키·4보기·보기 지시문 검사를 실제 실행해 통과했다. s4 두 코드는 별도 Node 실행과도 일치한다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r037-web-s3-w01",
+      "lineageId": "r037-web-template-srcdoc-fallback-base-inherits-embedding-document-base-url",
+      "learningGoalId": "r037-web-template-srcdoc-fallback-base-inherits-embedding-document-base-url",
+      "subjectId": "s3",
+      "type": "written",
+      "questionId": "r037-web-s3-w01",
+      "revision": 1,
+      "templateId": "r037-web-template-srcdoc-fallback-base-inherits-embedding-document-base-url",
+      "authorId": "round037-web-and-script-at-authors",
+      "evidence": [
+        {
+          "sourceId": "r035-primary-src-written-scope",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론의 URL·WWW; HTML 문서 구조·구현; CSS/스크립트의 객체·함수 등 기초문법; 정보접근성의 보조공학 서비스 종류·역할·이용방식",
+          "checkedAt": "2026-10-08T19:22:53.376175+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트(SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 추출문을 다시 대조했다. 해당 영역 안의 자체 응용 학습이며 세부 API나 제품 단축키가 독립 출제항목이라는 뜻은 아니다. 새 HWP 취득으로 보고하지 않는다.",
+          "rights": "1차 자료의 규칙을 간결하게 의역하고 지문·코드·선택지·해설은 독자 작성했다. 공식 시험 샘플이나 교재 문항·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 각 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r037-web-src-srcdoc-fallback-base",
+          "title": "HTML 5.2: Common infrastructure",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/infrastructure.html#fallback-base-url",
+          "version": "HTML 5.2, W3C Recommendation 2017-12-14",
+          "location": "§2.5.1 Terminology: fallback base URL and document base URL; §2.5.2 Parsing URLs",
+          "checkedAt": "2026-10-09T03:06:28.734080+00:00",
+          "summary": "srcdoc 문서의 fallback base URL은 해당 iframe을 포함한 문서의 document base URL이다. 내부에 href가 있는 base 요소가 없으면 이 fallback을 문서 기준 URL로 사용한다. 고정 W3C 원문을 새로 내려받아 확인했다.",
+          "rights": "고정판 1차 자료의 규칙을 간결하게 의역하고 지문·가상 코드·선택지·해설을 독자 작성했다. 공식 시험 샘플·유료 문제집·표준 예제나 원문 전문을 복제하지 않았다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-09T03:56:24.539Z",
+          "finishedAt": "2026-10-09T04:06:14.256808Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "키 접근 전에 확정한 C001의 D가 해당 개정판의 유일 정답과 일치한다. srcdoc 문서의 fallback base URL은 포함 문서의 document base URL이다. 바깥 base의 /assets/에 diagrams/map.svg를 결합한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "고정판 1차 원문과 보존 공식 범위 원본을 독립 확인했다. 고정 HTML 5.2 §2.5.1의 srcdoc fallback은 포함 문서의 document base URL이며, 내부 base가 없으면 이 값이 기준이다. §2.5.2로 경로를 해석한다. 현재 생활 표준 규칙으로 판본을 대체하지 않았다. 기술 사실의 짧은 한국어 의역과 독자 가상 코드·선택지이며 표준 전문이나 공식 시험 예제를 배포하지 않는다. 원문 권리를 포괄 재배포 허락으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-srcdoc-fallback-base"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "srcdoc 문서의 fallback base URL은 포함 문서의 document base URL이다. 바깥 base의 /assets/에 diagrams/map.svg를 결합한다. 조건을 유지하는 대안 정답은 없다. 1353개 실제 변형(옵션 연결 완전1350/부분3), 별도92개 요약,989개 역사 예약의 모든 학습 필드를 검색하고 가까운 목표의 원문을 대조했다. r004-internet-html-w20의 srcdoc 우선순위와 r008-internet-html-w15의 첫 base 선택, r020-html-css-practical-s3-w05의 action IDL 특례를 대조했다. 이번은 srcdoc 내부 문서가 포함 문서의 처리된 기준 URL을 상속하는 경계이며 단순 URL 이름 변경이 아니다. 022의19개 격리와023의19개 예약을 유지하며,109후보/113개정 누락 원문을 복원했다고 주장하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-srcdoc-fallback-base"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "네 선택지를 각각 근거·상황 적용·오개념·병렬 형식·정답 단서로 검토했다. 지문/가정/자료와 실제 해설이 분리되고 정답만 유난히 길거나 문법적으로 두드러지는 단서는 없다. 해설 필드 자체가 규칙과 적용 결과를 제시하며 중복 contextExplanation은 없다. 전부 단일 필기 문항으로 실기 후속 부분 누출은 해당하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-web-src-srcdoc-fallback-base"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "정확한 동결 SHA 개정판에 validateBank, 인메모리 출판 투영 validateBankForPublication, validateExplanationAuthoring, 단일키·4보기·보기 지시문 검사를 실제 실행해 통과했다. s4 두 코드는 별도 Node 실행과도 일치한다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r037-script-at-s4-w01",
+      "lineageId": "r037-script-at-template-object-assign-reads-accessor-value-without-copying-getter",
+      "learningGoalId": "r037-script-at-template-object-assign-reads-accessor-value-without-copying-getter",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r037-script-at-s4-w01",
+      "revision": 1,
+      "templateId": "r037-script-at-template-object-assign-reads-accessor-value-without-copying-getter",
+      "authorId": "round037-web-and-script-at-authors",
+      "evidence": [
+        {
+          "sourceId": "r035-primary-src-written-scope",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론의 URL·WWW; HTML 문서 구조·구현; CSS/스크립트의 객체·함수 등 기초문법; 정보접근성의 보조공학 서비스 종류·역할·이용방식",
+          "checkedAt": "2026-10-08T19:22:53.376175+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트(SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 추출문을 다시 대조했다. 해당 영역 안의 자체 응용 학습이며 세부 API나 제품 단축키가 독립 출제항목이라는 뜻은 아니다. 새 HWP 취득으로 보고하지 않는다.",
+          "rights": "1차 자료의 규칙을 간결하게 의역하고 지문·코드·선택지·해설은 독자 작성했다. 공식 시험 샘플이나 교재 문항·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 각 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r037-script-at-src-assign",
+          "title": "ECMAScript 2015 Language Specification",
+          "url": "https://262.ecma-international.org/6.0/#sec-object.assign",
+          "version": "ECMA-262 6th edition, June 2015",
+          "location": "§19.1.2.1 Object.assign 단계5.c.iii.1–4; §9.1.8 [[Get]]; §9.1.9 [[Set]]",
+          "checkedAt": "2026-10-09T03:03:21.135073+00:00",
+          "summary": "Object.assign은 열거 가능한 자체 속성마다 원본에서 Get으로 값을 구하고 대상에 Set한다. 접근자 자체나 속성 기술자를 복제하지 않으므로 새 일반 객체에는 읽어 온 값이 저장된다.",
+          "rights": "고정판 1차 자료의 규칙을 짧게 의역했다. 한국어 지문·보기 코드·선택지·해설은 독자 작성하며 공식 시험 샘플·유료 문제·표준 예제나 긴 원문을 복제하지 않는다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-09T03:56:24.539Z",
+          "finishedAt": "2026-10-09T04:06:14.256808Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "키 접근 전에 확정한 C002의 B가 해당 개정판의 유일 정답과 일치한다. Object.assign은 getter를 한 번 읽어 값 2를 데이터 속성으로 복사한다. 이후 source.value를 읽으면 9이며 reads는 2이다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "고정판 1차 원문과 보존 공식 범위 원본을 독립 확인했다. ECMA-262 제6판 §19.1.2.1의 열거 가능한 자체 속성에 대한 Get 후 Set 및 §9.1.8/9.1.9를 확인했다. 원본 getter 호출 결과를 새 일반 대상의 데이터 속성에 넣으며 getter 기술자를 복제하지 않는다. 기술 사실의 짧은 한국어 의역과 독자 가상 코드·선택지이며 표준 전문이나 공식 시험 예제를 배포하지 않는다. 원문 권리를 포괄 재배포 허락으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-assign"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "Object.assign은 getter를 한 번 읽어 값 2를 데이터 속성으로 복사한다. 이후 source.value를 읽으면 9이며 reads는 2이다. 조건을 유지하는 대안 정답은 없다. 1353개 실제 변형(옵션 연결 완전1350/부분3), 별도92개 요약,989개 역사 예약의 모든 학습 필드를 검색하고 가까운 목표의 원문을 대조했다. 가장 가까운 r006-css-script-w09의 얕은 복사/중첩 참조 공유와 r018-html-css-practical-s4-w04의 직접 getter 재계산을 전체 코드·선택지·해설로 대조했다. 이번은 Object.assign이 속성 기술자를 복사하는지 Get 결과를 저장하는지가 필수 분기다. 직접 getter 읽기만 아는 경우 복사본 getter 여부를 결정할 수 없으므로 별도 판별 목표로 인정한다. 022의19개 격리와023의19개 예약을 유지하며,109후보/113개정 누락 원문을 복원했다고 주장하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-assign"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "네 선택지를 각각 근거·상황 적용·오개념·병렬 형식·정답 단서로 검토했다. 지문/가정/자료와 실제 해설이 분리되고 정답만 유난히 길거나 문법적으로 두드러지는 단서는 없다. 해설 필드 자체가 규칙과 적용 결과를 제시하며 중복 contextExplanation은 없다. 전부 단일 필기 문항으로 실기 후속 부분 누출은 해당하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-assign"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "정확한 동결 SHA 개정판에 validateBank, 인메모리 출판 투영 validateBankForPublication, validateExplanationAuthoring, 단일키·4보기·보기 지시문 검사를 실제 실행해 통과했다. s4 두 코드는 별도 Node 실행과도 일치한다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r037-script-at-s4-w02",
+      "lineageId": "r037-script-at-template-map-update-retains-position-delete-reinsert-appends",
+      "learningGoalId": "r037-script-at-template-map-update-retains-position-delete-reinsert-appends",
+      "subjectId": "s4",
+      "type": "written",
+      "questionId": "r037-script-at-s4-w02",
+      "revision": 1,
+      "templateId": "r037-script-at-template-map-update-retains-position-delete-reinsert-appends",
+      "authorId": "round037-web-and-script-at-authors",
+      "evidence": [
+        {
+          "sourceId": "r035-primary-src-written-scope",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론의 URL·WWW; HTML 문서 구조·구현; CSS/스크립트의 객체·함수 등 기초문법; 정보접근성의 보조공학 서비스 종류·역할·이용방식",
+          "checkedAt": "2026-10-08T19:22:53.376175+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트(SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 추출문을 다시 대조했다. 해당 영역 안의 자체 응용 학습이며 세부 API나 제품 단축키가 독립 출제항목이라는 뜻은 아니다. 새 HWP 취득으로 보고하지 않는다.",
+          "rights": "1차 자료의 규칙을 간결하게 의역하고 지문·코드·선택지·해설은 독자 작성했다. 공식 시험 샘플이나 교재 문항·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 각 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r037-script-at-src-map",
+          "title": "ECMAScript 2015 Language Specification",
+          "url": "https://262.ecma-international.org/6.0/#sec-map.prototype.set",
+          "version": "ECMA-262 6th edition, June 2015",
+          "location": "§23.1.3.9 Map.prototype.set 단계5–8; §23.1.3.3 delete 단계5; §23.1.3.5 forEach 단계7",
+          "checkedAt": "2026-10-09T03:03:21.135073+00:00",
+          "summary": "set은 기존 키의 레코드 값을 제자리에서 갱신한다. delete는 해당 항목을 비우고, 그 키를 다시 set하면 새로운 항목을 뒤에 추가한다. forEach는 살아 있는 항목을 키 삽입 순서로 방문한다.",
+          "rights": "고정판 1차 자료의 규칙을 짧게 의역했다. 한국어 지문·보기 코드·선택지·해설은 독자 작성하며 공식 시험 샘플·유료 문제·표준 예제나 긴 원문을 복제하지 않는다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-09T03:56:24.539Z",
+          "finishedAt": "2026-10-09T04:06:14.256808Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "키 접근 전에 확정한 C004의 A가 해당 개정판의 유일 정답과 일치한다. 기존 a 값 갱신은 순서를 유지한다. b 삭제 후 재삽입은 끝에 추가하므로 a:4, c:3, b:5 순서다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "고정판 1차 원문과 보존 공식 범위 원본을 독립 확인했다. ECMA-262 제6판 §23.1.3.9의 기존 레코드 값 갱신/새 레코드 끝 추가, §23.1.3.3의 삭제 표식, §23.1.3.5의 삽입 순서 방문을 직접 대조했다. 기술 사실의 짧은 한국어 의역과 독자 가상 코드·선택지이며 표준 전문이나 공식 시험 예제를 배포하지 않는다. 원문 권리를 포괄 재배포 허락으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-map"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "기존 a 값 갱신은 순서를 유지한다. b 삭제 후 재삽입은 끝에 추가하므로 a:4, c:3, b:5 순서다. 조건을 유지하는 대안 정답은 없다. 1353개 실제 변형(옵션 연결 완전1350/부분3), 별도92개 요약,989개 역사 예약의 모든 학습 필드를 검색하고 가까운 목표의 원문을 대조했다. Map 키 갱신/삭제/재삽입의 순서 목표는 역사 학습 필드에서 발견되지 않았다. 배열 map/forEach, DOM 삽입, 이미지 map은 이름만 겹치며 다른 규칙이다. 022의19개 격리와023의19개 예약을 유지하며,109후보/113개정 누락 원문을 복원했다고 주장하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-map"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "네 선택지를 각각 근거·상황 적용·오개념·병렬 형식·정답 단서로 검토했다. 지문/가정/자료와 실제 해설이 분리되고 정답만 유난히 길거나 문법적으로 두드러지는 단서는 없다. 해설 필드 자체가 규칙과 적용 결과를 제시하며 중복 contextExplanation은 없다. 전부 단일 필기 문항으로 실기 후속 부분 누출은 해당하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-map"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "정확한 동결 SHA 개정판에 validateBank, 인메모리 출판 투영 validateBankForPublication, validateExplanationAuthoring, 단일키·4보기·보기 지시문 검사를 실제 실행해 통과했다. s4 두 코드는 별도 Node 실행과도 일치한다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    },
+    {
+      "candidateId": "r037-script-at-s5-w01",
+      "lineageId": "r037-script-at-template-braille-viewer-routing-requires-completed-hover-delay",
+      "learningGoalId": "r037-script-at-template-braille-viewer-routing-requires-completed-hover-delay",
+      "subjectId": "s5",
+      "type": "written",
+      "questionId": "r037-script-at-s5-w01",
+      "revision": 1,
+      "templateId": "r037-script-at-template-braille-viewer-routing-requires-completed-hover-delay",
+      "authorId": "round037-web-and-script-at-authors",
+      "evidence": [
+        {
+          "sourceId": "r035-primary-src-written-scope",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP 보존본",
+          "location": "인터넷 개론의 URL·WWW; HTML 문서 구조·구현; CSS/스크립트의 객체·함수 등 기초문법; 정보접근성의 보조공학 서비스 종류·역할·이용방식",
+          "checkedAt": "2026-10-08T19:22:53.376175+00:00",
+          "summary": "보존된 공식 HWP 80,896바이트(SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 추출문을 다시 대조했다. 해당 영역 안의 자체 응용 학습이며 세부 API나 제품 단축키가 독립 출제항목이라는 뜻은 아니다. 새 HWP 취득으로 보고하지 않는다.",
+          "rights": "1차 자료의 규칙을 간결하게 의역하고 지문·코드·선택지·해설은 독자 작성했다. 공식 시험 샘플이나 교재 문항·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 각 원 저작권자에게 있다."
+        },
+        {
+          "sourceId": "r037-script-at-src-braille-viewer",
+          "title": "NVDA 2026.1 User Guide",
+          "url": "https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html#BrailleViewer",
+          "version": "NVDA 2026.1",
+          "location": "Extra Tools → Braille Viewer: Hover for cell routing; Speech Viewer: hover/focus pauses text updates",
+          "checkedAt": "2026-10-09T03:03:23.636152+00:00",
+          "summary": "셀 위 포인터로 라우팅하는 기능은 우발적 실행을 막기 위해 지연한다. 셀은 연한 노랑·주황을 거쳐 녹색이 되며 포인터를 녹색이 될 때까지 유지해야 명령이 실행된다. 실제 하드웨어나 Windows/NVDA 실행 측정으로 보고하지 않는다. 포인터를 올려 텍스트 갱신을 멈추는 안내는 별도 음성 뷰어 항목의 동작이다.",
+          "rights": "고정판 1차 자료의 규칙을 짧게 의역했다. 한국어 지문·보기 코드·선택지·해설은 독자 작성하며 공식 시험 샘플·유료 문제·표준 예제나 긴 원문을 복제하지 않는다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "attemptCount": 1,
+      "lineageAttemptCount": 1,
+      "reopenCount": 0,
+      "priorCandidateRefs": [],
+      "reopeningEvidence": [],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-09T03:56:24.539Z",
+          "finishedAt": "2026-10-09T04:06:14.256808Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "키 접근 전에 확정한 C005의 D가 해당 개정판의 유일 정답과 일치한다. 셀 라우팅은 지연 실행되며 포인터를 셀이 녹색이 될 때까지 유지해야 한다. 주황색 단계에서 떠나면 실행되지 않는다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "고정판 1차 원문과 보존 공식 범위 원본을 독립 확인했다. 고정 NVDA 2026.1 가이드 Braille Viewer의 녹색까지 포인터 유지/지연 조건과 Speech Viewer의 별도 갱신 정지 동작을 직접 대조했다. 실제 Windows나 NVDA 조작 결과로 확대하지 않는다. 기술 사실의 짧은 한국어 의역과 독자 가상 코드·선택지이며 표준 전문이나 공식 시험 예제를 배포하지 않는다. 원문 권리를 포괄 재배포 허락으로 확대하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-braille-viewer"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "셀 라우팅은 지연 실행되며 포인터를 셀이 녹색이 될 때까지 유지해야 한다. 주황색 단계에서 떠나면 실행되지 않는다. 조건을 유지하는 대안 정답은 없다. 1353개 실제 변형(옵션 연결 완전1350/부분3), 별도92개 요약,989개 역사 예약의 모든 학습 필드를 검색하고 가까운 목표의 원문을 대조했다. r027-policy-assistive-s5-w02의 음성 뷰어 갱신 중단, r026-policy-assistive-s5-w01의 점자 연동 후 커서 이동, r026-policy-assistive-s5-w04의 메시지 라우팅 해제를 대조했다. 이번은 점자 뷰어의 포인터 대기 완료 전 취소 조건으로 별도 목표다. 022의19개 격리와023의19개 예약을 유지하며,109후보/113개정 누락 원문을 복원했다고 주장하지 않는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-braille-viewer"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "네 선택지를 각각 근거·상황 적용·오개념·병렬 형식·정답 단서로 검토했다. 지문/가정/자료와 실제 해설이 분리되고 정답만 유난히 길거나 문법적으로 두드러지는 단서는 없다. 해설 필드 자체가 규칙과 적용 결과를 제시하며 중복 contextExplanation은 없다. 전부 단일 필기 문항으로 실기 후속 부분 누출은 해당하지 않는다. 색 변화는 텍스트로 명시되어 화면 색상 식별에 의존하지 않으며 가이드 규칙을 묻는다.",
+              "evidenceRefs": [
+                "r035-primary-src-written-scope",
+                "r037-script-at-src-braille-viewer"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "reviewer-r037-b01",
+              "summary": "정확한 동결 SHA 개정판에 validateBank, 인메모리 출판 투영 validateBankForPublication, validateExplanationAuthoring, 단일키·4보기·보기 지시문 검사를 실제 실행해 통과했다. s4 두 코드는 별도 Node 실행과도 일치한다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다."
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "정확한 개정판의 독립 풀이·1차 출처·반례·문안·구조 검사를 통과했다.",
+      "publishedBankVersion": null
+    }
+  ],
+  "counts": {
+    "registered": 6,
+    "accepted": 6,
+    "rejected": 0,
+    "pending": 0,
+    "publishedRegularWrittenBySubject": {
+      "s1": 0,
+      "s2": 0,
+      "s3": 0,
+      "s4": 0,
+      "s5": 0
+    },
+    "publishedRegularPractical": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 198,
+      "s3": 178,
+      "s4": 201,
+      "s5": 153
+    },
+    "regularPractical": 80,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.09-regular.37",
+    "bankSha256": "a5d0795c291d818781038bc0fdae8acc1412520b6636077e4b190221e50814fc",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [
+    {
+      "check": "후보 독립 검토·정확한 해설 필드",
+      "result": "pass",
+      "summary": "후보 6개·시작 검토 6회를 기한 안에 종결했다. 모든 채택 문항은 같은 개정판의 다섯 검사와 문항 전체 해설의 실제 풀이 규칙·적용 근거 검토를 통과했다.",
+      "reportPath": "docs/rounds/round-037.md"
+    },
+    {
+      "check": "실제 브라우저·Windows/NVDA",
+      "result": "not_run",
+      "summary": "새 콘텐츠의 실제 브라우저·보조기술 조작/출력 및 사용자 학습 기록 관찰은 수행하지 않았다.",
+      "reportPath": "docs/NVDA-CHECKLIST.md"
+    }
+  ],
+  "nextRoundGaps": [
+    {
+      "gapId": "round-037-gap-01",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s1"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "표준 과목의 새 고유 목표를 확인하지 못했으며 기존 규칙의 기관·화면 사례만 바꿔 후보 수를 늘리지 않았다.",
+      "neededEvidenceOrCounterexample": "53개 교재 절과 33개 KWCAG 검사항목을 구별한 고정판 원문과 전체 확보 학습 필드",
+      "nextAction": "기존 조건·예외·선택지에서 이미 가르친 내용을 제외하고 독립 적용 경계가 있는 경우에만 계획한다.",
+      "completionCriterion": "새 판단 규칙·확인된 범위·그럴듯한 오답·기존 이력과의 차이가 함께 입증되어야 한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-037-gap-02",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s2"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "HTTP의 약한 엔터티 태그 비교와 Content-Location의 표현 식별을 각각 독립 규칙으로 조사했다.",
+      "neededEvidenceOrCounterexample": "RFC9110의 비교 함수·선행조건 평가·표현 메타데이터에 대한 고정 절",
+      "nextAction": "ETag 문자열·언어·URL 이름만 바꾼 변형은 제외하고 새 규칙이 필요한지 먼저 대조한다.",
+      "completionCriterion": "새 판단 규칙·확인된 범위·그럴듯한 오답·기존 이력과의 차이가 함께 입증되어야 한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-037-gap-03",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s3"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "srcdoc 문서의 fallback base와 외부 문서 base 처리의 연결을 조사했다. Canvas 재크기 지정은 고정 HTML5.2와 참조 문서의 필요한 알고리즘 연결을 충분히 확인하지 못해 등록 전 제외했다.",
+      "neededEvidenceOrCounterexample": "고정 HTML5.2의 정확한 참조 대상과 상태 초기화 규칙 원문",
+      "nextAction": "현재 브라우저 지식으로 지정판 근거를 대체하지 않으며 제외된 canvas 조사도 원문 연결이 확인될 때만 다시 검토한다.",
+      "completionCriterion": "새 판단 규칙·확인된 범위·그럴듯한 오답·기존 이력과의 차이가 함께 입증되어야 한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-037-gap-04",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s4"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "Object.assign의 접근자 읽기와 Map의 갱신·삭제·재삽입 순서를 조사했다.",
+      "neededEvidenceOrCounterexample": "ECMAScript2015의 Get/Set 및 Map 레코드 알고리즘",
+      "nextAction": "숫자·키·삽입 순서만 바꿔 같은 학습 목표를 늘리지 않는다. Proxy나 대상 setter를 추가하면 범위와 별개 목표 여부부터 검토한다.",
+      "completionCriterion": "새 판단 규칙·확인된 범위·그럴듯한 오답·기존 이력과의 차이가 함께 입증되어야 한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-037-gap-05",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s5"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "NVDA 점자 뷰어의 셀 라우팅 지연을 문서상 동작으로 한정했다.",
+      "neededEvidenceOrCounterexample": "정확한 NVDA판 가이드와 실제 환경에서 별도로 얻은 관측 근거",
+      "nextAction": "문서의 색상 단계는 텍스트로 제공하며 실제 실행·지연시간·점자 장치 결과를 측정한 것으로 바꾸지 않는다.",
+      "completionCriterion": "새 판단 규칙·확인된 범위·그럴듯한 오답·기존 이력과의 차이가 함께 입증되어야 한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-037-gap-06",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "practical"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "기존80개 실기 목표와 다른 실패 원인·개선·재점검 조합을 확인하지 못하여 수량을 채우지 않았다.",
+      "neededEvidenceOrCounterexample": "국내 실기 수행준거와 KWCAG2.2의 고정판 1차 자료",
+      "nextAction": "새 실패 원인과 유일한 고정답, 세부 항목 간 답안 비노출이 함께 성립할 때만 등록한다.",
+      "completionCriterion": "새 판단 규칙·확인된 범위·그럴듯한 오답·기존 이력과의 차이가 함께 입증되어야 한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    },
+    {
+      "gapId": "round-037-gap-07",
+      "category": "primary_evidence",
+      "subjectIds": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "practical"
+      ],
+      "learningGoalIds": [],
+      "candidateIds": [],
+      "finding": "22회차 격리19목표와23회차 증거소실19후보·20시작개정판, 과거109후보·113시작개정판 원문 미확보 한계를 유지한다.",
+      "neededEvidenceOrCounterexample": "원래 해시와 대조할 수 있는 실제 원문과 전체 검토 증거",
+      "nextAction": "원문을 재작성하여 복구한 것으로 취급하지 않고 예약·탈락 목표의 새ID 재생성을 막는다.",
+      "completionCriterion": "새 발행 대상에 예약된 목표와 별칭이 없고 실제 검증 범위가 정확히 구별되어야 한다.",
+      "priority": "medium",
+      "reopenEligible": false
+    }
+  ],
+  "noGapExplanation": null,
+  "summary": "정규 37회차 후보 6개 중 6개 채택·0개 탈락·미결정 0개. 새 누적 일반 945개·시드 14개이며 공개 확인 전 신규 공개 수는 0개다. 전달 검증된 regular.36의 전체 문항·선택지·출처와 과거 편집 정정·격리·발행 차단·검토 이력을 보존한다."
+}
