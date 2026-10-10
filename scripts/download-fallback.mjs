@@ -312,6 +312,7 @@ function checkSnapshot(snapshot) {
   }
 }
 function contentProvenance(snapshot) {
+  if(snapshot.manifest?.roundId==='round-041'||snapshot.manifest?.selectionReference)fail('Selected041 requires the explicitly supported normal release route, not legacy download provenance');
   if (!needsContent(snapshot.manifest)) return null;
   const ledgers = snapshot.files.filter(f => /^docs\/(?:rounds\/round-\d+|corrections\/editorial-\d+)\.json$/.test(f.path));
   const active=ledgers.filter(f=>JSON.parse(f.raw).roundId===snapshot.manifest.roundId||JSON.parse(f.raw).correctionRoundId===snapshot.manifest.roundId);

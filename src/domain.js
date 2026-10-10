@@ -1,3 +1,4 @@
+import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.9&pool=priority-001';
 import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.9';
 import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.9';
 import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.9';
@@ -137,10 +138,13 @@ export function presentQuestion(bank,q,count=5,random=Math.random,instanceId=q.q
 }
 const activeCorrections=(corrections=[],now=Date.now())=>corrections.filter(c=>!c.effectiveAt||Date.parse(c.effectiveAt)<=now);
 export function isPublishedQuestion(bank,q,now=Date.now()){return q.verificationStatus==='published'&&!activeCorrections(bank.corrections||[],now).some(c=>c.kind==='invalid'&&c.questionId===q.questionId&&c.revision===q.revision);}
+/** Only fresh selection changes; saved sessions and publication history stay intact. */
+export function isNewSessionQuestion(bank,q,now=Date.now()){const excluded=isPriorityPoolExcluded(q,now);return isPublishedQuestion(bank,q,now)&&!excluded;}
 export function eligibleQuestions(bank,config,history=[]) {
   const seen=new Set(),wrong=new Set();
   for(const a of allAttempts(history)) {seen.add(a.key);if(['wrong','partial','unanswered'].includes(a.grade.status))wrong.add(a.questionId);}
-  return bank.questions.filter(q=>isPublishedQuestion(bank,q)&&q.type===config.type&&(config.subjectId==='all'||q.subjectId===config.subjectId)&&(q.type!=='written'||q.supportedOptionCounts.includes(config.kind==='mock'?5:config.optionCount))&&(!config.family||config.family==='all'||q.family===config.family)&&(config.pool!=='new'||!seen.has(`${q.templateId}@${q.learningGoalRevision}`))&&(config.pool!=='wrong'||wrong.has(q.questionId))&&(config.kind!=='mock'||!q.testOnly));
+  const now=Date.now();
+  return bank.questions.filter(q=>isNewSessionQuestion(bank,q,now)&&q.type===config.type&&(config.subjectId==='all'||q.subjectId===config.subjectId)&&(q.type!=='written'||q.supportedOptionCounts.includes(config.kind==='mock'?5:config.optionCount))&&(!config.family||config.family==='all'||q.family===config.family)&&(config.pool!=='new'||!seen.has(`${q.templateId}@${q.learningGoalRevision}`))&&(config.pool!=='wrong'||wrong.has(q.questionId))&&(config.kind!=='mock'||!q.testOnly));
 }
 export function planQuestions(bank,config,history=[],random=Math.random) {
   assert(['timed','untimed'].includes(config.mode)&&['written','practical'].includes(config.type),'학습 모드를 확인하세요.');

@@ -1,3 +1,4 @@
+import {retainHistoricalSelectionPrefix,useEmptySyntheticSelectionPrefix} from './selection-fixtures.mjs';
 /** Test-only isolation of disposable historical copies, never live authority. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -53,6 +54,7 @@ export async function pruneHistoricalFixtureHistory(root,{temporaryRoot,maxRound
 export async function retainHistoricalQuarantinePrefix(root,at) {
   const resolved=await fs.realpath(root),temporary=await fs.realpath(os.tmpdir())+path.sep;
   if(resolved===await fs.realpath(path.resolve(import.meta.dirname,'..'))||!resolved.startsWith(temporary)||!Number.isFinite(at))throw Error('Historical fixture must be a disposable temporary directory with an explicit clock');
+  if(at<Date.parse('2026-10-10T11:52:01.012Z'))await retainHistoricalSelectionPrefix(resolved,at);
   // Isolate future publication authority only in this already-checked disposable
   // historical fixture; later evidence cannot authenticate its synthetic sources.
   const publicationModule=path.join(resolved,'scripts/publication-sync.mjs');
@@ -100,6 +102,7 @@ export async function createSyntheticValidator() {
     await fs.writeFile(path.join(root,'docs/release-blocks/trust.json'),JSON.stringify({schemaVersion:1,kind:'reviewed_evidence_loss_blocks',events:[]},null,2)+'\n');
     await fs.mkdir(path.join(root,'docs/quarantines'),{recursive:true});
     await fs.writeFile(path.join(root,'docs/quarantines/trust.json'),JSON.stringify({schemaVersion:1,kind:'reviewed_prepublication_quarantines',audits:[]},null,2)+'\n');
+    await useEmptySyntheticSelectionPrefix(root);
     const {pathToFileURL}=await import('node:url');
     return {round:await import(pathToFileURL(path.join(root,'scripts/validate-round.mjs'))),delivery:await import(pathToFileURL(path.join(root,'scripts/download-fallback.mjs'))),cleanup:()=>fs.rm(root,{recursive:true,force:true})};
   }catch(error){await fs.rm(root,{recursive:true,force:true});throw error;}

@@ -208,6 +208,7 @@ function checkOpen({now,publicationState,manifest}){
  if(publicationState?.finalized!==false||manifest?.finalRelease!==false)fail('Both persistent freeze markers must be present and false');
 }
 function inspectSuccessor(p,previous,source){
+ if(source?.roundId==='round-041'||p.completeManifest?.sourceRelease?.selectionReference||p.deltaManifest?.selectionReference)fail('Selected041 cannot use legacy continuation proof');
  keys(p,['schemaVersion','kind','rootProofSha256','predecessor','priorTrustSha256','deltaArtifactSha256','completeArtifactSha256','libraryReceiptSha256','attachmentReceiptSha256','attachmentAcceptedAt','verifiedAt','userOpenOrDownloadObserved','deltaManifest','completeManifest','runtimeManifestRaw','origin']);
  keys(p.predecessor,['roundId','artifactSha256','proofSha256']);
  if(p.schemaVersion!==1||p.kind!=='delivered_release_backup_checkpoint'||p.rootProofSha256!==NORMAL_BACKUP_PROOF_SHA256||!equal(p.origin,previous.origin)||!equal(p.predecessor,{roundId:previous.roundId,artifactSha256:previous.artifactSha256,proofSha256:previous.proofSha256})||![p.priorTrustSha256,p.deltaArtifactSha256,p.completeArtifactSha256,p.libraryReceiptSha256,p.attachmentReceiptSha256].every(v=>hex.test(v))||p.userOpenOrDownloadObserved!==false)fail('Invalid checkpoint, predecessor or original uncertainty origin');

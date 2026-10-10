@@ -1,5 +1,5 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {eligibleQuestions,isPublishedQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.9';
+import {eligibleQuestions,isNewSessionQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.9&pool=priority-001';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
   return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:2,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides};
@@ -31,7 +31,7 @@ export function quickConfig(bank,type,history=[],overrides={}) {
   return {...config,count:Math.min(config.count,availableCount(bank,config,history))};
 }
 export function mockAvailability(bank) {
-  const counts=SUBJECTS.map(s=>({id:s.id,name:s.name,count:new Set((bank?.questions||[]).filter(q=>q.subjectId===s.id&&isPublishedQuestion(bank,q)&&!q.testOnly&&q.supportedOptionCounts?.includes(5)).map(q=>q.templateId)).size}));
+  const counts=SUBJECTS.map(s=>({id:s.id,name:s.name,count:new Set((bank?.questions||[]).filter(q=>q.subjectId===s.id&&isNewSessionQuestion(bank,q)&&!q.testOnly&&q.supportedOptionCounts?.includes(5)).map(q=>q.templateId)).size}));
   return {ready:counts.every(s=>s.count>=20),counts};
 }
 const goalKey=item=>`${item.templateId}@${item.learningGoalRevision}`;

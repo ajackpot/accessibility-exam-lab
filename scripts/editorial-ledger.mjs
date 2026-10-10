@@ -1,3 +1,4 @@
+import {resolvePublicationIdentity, assertPublicationSelectionReference} from './publication-selection.mjs';
 import {validateEvidenceLossCampaign,assertEvidenceLossProvenance} from './evidence-loss-block.mjs';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
@@ -99,9 +100,13 @@ function decisionRecord(record) {
 }
 
 /** Shared cumulative ordering. Offline evidence permits staging, never Git authorization. */
-export function validateCampaignBaselines(ledgers, {editorials=[], now=null, activeBankVersion=null, offlineBases=new Map(), ledgerSources=new Map(), synchronizations=[], banks=new Map(), publicationState=null}={}) {
-  const sync=validatePublicationSynchronizations(synchronizations,{ledgers,banks,ledgerSources,now,publicationState,activeBankVersion});
+export function validateCampaignBaselines(ledgers, {editorials=[], now=null, activeBankVersion=null, offlineBases=new Map(), ledgerSources=new Map(), synchronizations=[], banks=new Map(), publicationState=null, publicationSelections=null, deliveryCheckpointSources=new Map()}={}) {
+  const sync=validatePublicationSynchronizations(synchronizations,{ledgers,banks,ledgerSources,now,publicationState,activeBankVersion,publicationSelections,deliveryCheckpointSources});
   const errors=[...sync.errors,...validateEvidenceLossCampaign(ledgers,{banks,ledgerSources,now,publicationState,offlineBases,manifest:activeBankVersion?{bankVersion:activeBankVersion}:null}).errors],all=[...ledgers,...editorials],verified=[...all.filter(r=>r.publication?.status==='verified'&&Number.isFinite(Date.parse(r.publication.verifiedAt))),...sync.history];
+  const identities=new Map();
+  try { if(publicationSelections)for(const ledger of ledgers) identities.set(ledger,resolvePublicationIdentity(ledger,publicationSelections)); }
+  catch(error) { return {ok:false,errors:[...errors,error.message]}; }
+  const identityOf=record=>identities.get(record)||{effectiveBankVersion:record.publication?.bankVersion,effectiveBankSha256:record.publication?.bankSha256};
   const delivered=[];
   if(!(offlineBases instanceof Map))errors.push('offline baselines must be a validated evidence Map');
   else for(const [artifact,evidence] of offlineBases) {
@@ -119,7 +124,9 @@ export function validateCampaignBaselines(ledgers, {editorials=[], now=null, act
     try {original=JSON.parse(raw.toString());}catch {fail('invalid original ledger bytes');continue;}
     const recorded=Date.parse(evidence.recordedAt),eligible=Date.parse(evidence.eligibleAt),source=sources[0];
     if(!original||!Array.isArray(original.candidates)||editorialHash(raw)!==evidence.ledgerSha256 || original.roundId!==evidence.roundId || !equal(decisionRecord(original),decisionRecord(source))) {fail('original ledger hash or immutable decision/review history differs from loaded campaign');continue;}
-    if(original.status!=='closed'||original.publication?.status==='verified'||original.publication?.verifiedAt!==null||original.publication?.bankVersion!==evidence.bankVersion||original.publication?.bankSha256!==evidence.bankSha256||original.candidates?.some(c=>c.decision==='pending'||c.publishedBankVersion!==null)||Object.values(original.counts?.publishedRegularWrittenBySubject||{}).some(n=>n!==0)||original.counts?.publishedRegularPractical!==0) {fail('original source must be a closed unpublished ledger for the exact delivered bank');continue;}
+    let identity;
+    try { identity=resolvePublicationIdentity(source,publicationSelections);assertPublicationSelectionReference(evidence.selectionReference,identity); } catch(error) {fail(error.message);continue;}
+    if(original.status!=='closed'||original.publication?.status==='verified'||original.publication?.verifiedAt!==null||identity.effectiveBankVersion!==evidence.bankVersion||identity.effectiveBankSha256!==evidence.bankSha256||original.candidates?.some(c=>c.decision==='pending'||c.publishedBankVersion!==null)||Object.values(original.counts?.publishedRegularWrittenBySubject||{}).some(n=>n!==0)||original.counts?.publishedRegularPractical!==0) {fail('original source must be a closed unpublished ledger for the exact delivered bank');continue;}
     if(!Number.isFinite(recorded)||!Number.isFinite(eligible)||eligible<recorded||recorded<Date.parse(original.closedAt)||eligible>=FREEZE_AT||now!==null&&eligible>now) {fail('delivery evidence must follow closure and reconciliation eligibility, precede freeze and not be in the future');continue;}
     if(delivered.some(d=>d.roundId===evidence.roundId)) {fail('multiple delivered artifacts for one predecessor are ambiguous');continue;}
     delivered.push({...evidence,artifactSha256:artifact,source});
@@ -139,7 +146,7 @@ export function validateCampaignBaselines(ledgers, {editorials=[], now=null, act
       while(ancestor&&!seen.has(ancestor)) {
         seen.add(ancestor);
         if(ancestor.baseline?.bankVersion===latest?.publication.bankVersion&&ancestor.baseline?.bankSha256===latest?.publication.bankSha256)return true;
-        ancestor=all.find(r=>r.publication?.bankVersion===ancestor.baseline?.bankVersion&&r.publication?.bankSha256===ancestor.baseline?.bankSha256);
+        ancestor=all.find(r=>identityOf(r).effectiveBankVersion===ancestor.baseline?.bankVersion&&identityOf(r).effectiveBankSha256===ancestor.baseline?.bankSha256);
       }
       return false;
     }
@@ -164,17 +171,17 @@ export function validateCampaignBaselines(ledgers, {editorials=[], now=null, act
   for(const r of all) {
     requireLatest(r,Date.parse(r.startedAt),'round-start');
     if(r.publication?.status==='verified')requireLatest(r,Date.parse(r.publication.verifiedAt),'publication-order');
-    if(r.publication?.bankVersion===activeBankVersion && r.publication.status!=='verified' && now!==null && !sync.history.some(h=>h.publication.bankVersion===activeBankVersion&&h.synchronizedRoundIds.includes(r.roundId)))requireLatest(r,now,'active-release');
+    if(identityOf(r).effectiveBankVersion===activeBankVersion && r.publication.status!=='verified' && now!==null && !sync.history.some(h=>h.publication.bankVersion===activeBankVersion&&h.synchronizedRoundIds.includes(r.roundId)))requireLatest(r,now,'active-release');
   }
   if(activeBankVersion && now!==null) {
-    const active=all.find(r=>r.publication?.bankVersion===activeBankVersion),latest=verified.filter(r=>Date.parse(r.publication.verifiedAt)<=now).sort((a,b)=>Date.parse(b.publication.verifiedAt)-Date.parse(a.publication.verifiedAt))[0];
+    const active=all.find(r=>identityOf(r).effectiveBankVersion===activeBankVersion),latest=verified.filter(r=>Date.parse(r.publication.verifiedAt)<=now).sort((a,b)=>Date.parse(b.publication.verifiedAt)-Date.parse(a.publication.verifiedAt))[0];
     if((!active || active.publication.status==='verified' || sync.history.some(h=>h.synchronizedRoundIds.includes(active?.roundId))) && latest && latest.publication.bankVersion!==activeBankVersion)errors.push('release: active verified manifest is older than the latest verified cumulative bank');
   }
   return {ok:errors.length===0,errors};
 }
 /** All identity, lifecycle and gate records are checked even before publication is attempted. */
-export function validateEditorialHistory(editorials, {ledgers=[], banks=new Map(), schema, now=null, nextRoundAt=null, publicationState=null, availableFiles=null, reviewPackages=new Map(), synchronizations=[], ledgerSources=new Map()}={}, helpers) {
-  const sync=validatePublicationSynchronizations(synchronizations,{ledgers,banks,ledgerSources,now,publicationState});
+export function validateEditorialHistory(editorials, {ledgers=[], banks=new Map(), schema, now=null, nextRoundAt=null, publicationState=null, availableFiles=null, reviewPackages=new Map(), synchronizations=[], ledgerSources=new Map(), publicationSelections=null, deliveryCheckpointSources=new Map()}={}, helpers) {
+  const sync=validatePublicationSynchronizations(synchronizations,{ledgers,banks,ledgerSources,now,publicationState,publicationSelections,deliveryCheckpointSources});
   const errors=[...sync.errors], fail=(id,message) => errors.push(`${id || 'editorial'}: ${message}`);
   if (!Array.isArray(editorials)) return {ok:false,errors:['editorial ledgers must be an array']};
   for (const e of editorials) for (const error of helpers.validateJsonSchema(e,schema)) fail(e?.correctionRoundId,error);
@@ -195,6 +202,7 @@ export function validateEditorialHistory(editorials, {ledgers=[], banks=new Map(
     for (const v of e.validation) if (v.reportPath!==null && (!safePath(v.reportPath) || availableFiles && !availableFiles.has(v.reportPath))) error(`unsafe or missing validation report ${v.reportPath}`);
     const latestVerified=[...ledgers,...editorials,...sync.history].filter(r=>r.publication?.status==='verified' && Date.parse(r.publication.verifiedAt)<=start).sort((a,b)=>Date.parse(b.publication.verifiedAt)-Date.parse(a.publication.verifiedAt))[0];
     if(!latestVerified || latestVerified.publication.bankVersion!==e.baseline.bankVersion || latestVerified.publication.bankSha256!==e.baseline.bankSha256)error('baseline must be the latest verified cumulative campaign bank at editorial start; stale baselines cannot roll back other corrections');
+    if(latestVerified?.evidence?.rounds.some(s=>s.selectionReference)&&Date.parse(latestVerified.publication.verifiedAt)>=start)error('selected publication must be genuinely verified strictly before editorial start');
     const baseline=bankAt(banks,e.baseline.bankVersion,error);
     if (baseline) {
       if (baseline.hash!==e.baseline.bankSha256 || /^0+$/.test(e.baseline.sourceCommit)) error('baseline hash/commit is not verified');
@@ -215,8 +223,14 @@ export function validateEditorialHistory(editorials, {ledgers=[], banks=new Map(
       const prior=originalRound?.candidates.find(p=>p.candidateId===ref.candidateId)||editorialRound?.corrections.find(p=>p.correctionId===ref.candidateId);
       const priorPath=originalRound?`docs/rounds/${ref.roundId}.json`:`docs/corrections/${ref.roundId}.json`;
       const original=bankAt(banks,ref.bankVersion,bad), before=baseline?.bank.questions.find(q=>q.questionId===c.questionId);
-      const synchronizedPrior=sync.history.some(h=>Date.parse(h.publication.verifiedAt)<=start&&h.evidence.rounds.some(s=>s.roundId===ref.roundId&&s.bankVersion===ref.bankVersion&&s.bankSha256===ref.bankSha256));
-      if (!prior || prior.decision!=='accepted' || priorRound.status!=='closed' || (!synchronizedPrior && (priorRound.publication.status!=='verified' || prior.publishedBankVersion!==ref.bankVersion)) || priorRound.publication.bankSha256!==ref.bankSha256 || ref.ledgerPath!==priorPath || priorRound===e || Date.parse(priorRound.publication.verifiedAt)>start) bad('priorAcceptedRef must match a genuinely accepted, verified earlier expansion/editorial decision');
+      let priorIdentity;
+      try { priorIdentity=originalRound?resolvePublicationIdentity(originalRound,publicationSelections):null; }
+      catch(error) { bad(error.message); }
+      const selectedPrior=!!priorIdentity?.selectionReference;
+      const synchronizedPrior=sync.history.some(h=>(selectedPrior?Date.parse(h.publication.verifiedAt)<start:Date.parse(h.publication.verifiedAt)<=start)&&h.evidence.rounds.some(s=>s.roundId===ref.roundId&&s.bankVersion===ref.bankVersion&&s.bankSha256===ref.bankSha256&&(!selectedPrior||equal(s.selectionReference,priorIdentity.selectionReference))));
+      const priorHash=selectedPrior?priorIdentity.effectiveBankSha256:priorRound?.publication.bankSha256;
+      if(selectedPrior&&(!priorIdentity.eligibleCandidateIds.includes(ref.candidateId)||ref.bankVersion!==priorIdentity.effectiveBankVersion||!synchronizedPrior))bad('selected priorAcceptedRef requires an unchanged retained candidate and genuine earlier selected publication');
+      if (!prior || prior.decision!=='accepted' || priorRound.status!=='closed' || (!synchronizedPrior && (priorRound.publication.status!=='verified' || prior.publishedBankVersion!==ref.bankVersion)) || priorHash!==ref.bankSha256 || ref.ledgerPath!==priorPath || priorRound===e || Date.parse(priorRound.publication.verifiedAt)>start) bad('priorAcceptedRef must match a genuinely accepted, verified earlier expansion/editorial decision');
       if (prior && (prior.questionId!==c.questionId || prior.templateId!==c.templateId || prior.learningGoalId!==c.learningGoalId || prior.revision!==ref.questionRevision || prior.type!==c.type || prior.subjectId!==c.subjectId)) bad('prior accepted identity/revision mismatch');
       if (original && (original.hash!==ref.bankSha256 || editorialContentHash(original.bank,c.questionId)!==ref.contentSha256)) bad('prior accepted content hash mismatch');
       if (!before || before.testOnly!==false || before.verificationStatus!=='published' || before.templateId!==c.templateId || before.learningGoalRevision!==c.learningGoalRevision || before.type!==c.type || before.subjectId!==c.subjectId) bad('correction must preserve an existing published regular learning goal');

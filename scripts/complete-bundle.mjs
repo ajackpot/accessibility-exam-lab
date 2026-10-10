@@ -1,3 +1,4 @@
+import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference,assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {completeManifestFormat,encodeSevenZip,decodeSevenZip,verifyArchiveFormat} from './archive-format.mjs';
 import {validateNormalBackupChainSnapshot} from './normal-backup-chain.mjs';
 import {validateNormalBackupRootSnapshot} from './normal-backup-root.mjs';
@@ -46,7 +47,7 @@ async function readPublic(root, relative) {
 // A packaging-only overlay cannot alter runtime, data, original history or reports.
 const policyPath = p => ['AGENTS.md','README.md','PUBLICATION-MANIFEST.txt','docs/PRD.md','docs/OPERATIONS.md','docs/DATA-CONTRACT.md','scripts/download-fallback.mjs','scripts/complete-bundle.mjs','tests/complete-bundle.test.mjs','scripts/blob-retry.mjs','tests/blob-retry.test.mjs','scripts/archive-format.mjs','scripts/sevenz-codec.py','scripts/release-bundle.mjs','scripts/release-backup-continuation.mjs','scripts/normal-backup-root.mjs','scripts/normal-backup-chain.mjs','scripts/offline-chain-continuation.mjs','tests/archive-format.test.mjs','tests/sevenz-codec.test.mjs','tests/release-bundle.test.mjs','tests/release-bundle-closure.test.mjs','tests/independent-offline-chains.test.mjs','tests/manual-round-eleven.test.mjs','tests/release-backup-successors.test.mjs','tests/normal-backup-continuation.test.mjs','tests/normal-backup-root.test.mjs','docs/packaging/packaging-policy-002.md'].includes(p);
 function checkSource(source) {
-  keys(source, ['roundId','deltaArtifactSha256','deltaManifestSha256','baseCommit','bankVersion','bankSha256','ledgerPath','ledgerSha256'], 'source release');
+  keys(source, ['roundId','deltaArtifactSha256','deltaManifestSha256','baseCommit','bankVersion','bankSha256','ledgerPath','ledgerSha256',...(Object.hasOwn(source,'selectionReference')?['selectionReference']:[])], 'source release');
   if (!/^(round|editorial)-\d+$/.test(source.roundId) || !/^[A-Za-z0-9_.-]+$/.test(source.bankVersion) || !/^[a-f0-9]{40}$/.test(source.baseCommit) || /^0+$/.test(source.baseCommit) || ![source.deltaArtifactSha256,source.deltaManifestSha256,source.bankSha256,source.ledgerSha256].every(v => hex.test(v)) || source.ledgerPath !== `docs/${source.roundId.startsWith('editorial-') ? 'corrections' : 'rounds'}/${source.roundId}.json`) fail('Invalid release identity');
 }
 function checkOverlay(base, files, policy) {
@@ -57,6 +58,26 @@ function checkOverlay(base, files, policy) {
   if (!changes.length) { if (policy !== null) fail('Unnecessary packaging revision'); return; }
   keys(policy, ['revisionId','files'], 'packaging revision');
   if (!/^packaging-policy-\d+$/.test(policy.revisionId) || !equal(policy.files,changes) || changes.some(f => !policyPath(f.path))) fail('Packaging revision may change only exact reviewed support files');
+}
+/** Exact current policy dependency check; no publication or learner authority. */
+export function checkNewSessionEligibilitySnapshot(files) {
+  if(!Array.isArray(files))fail('Policy snapshot files required');
+  const byPath=new Map(files.map(f=>[f.path,f]));
+  if(byPath.size!==files.length)fail('Duplicate policy snapshot path');
+  const policy='src/new-session-eligibility.js',report='docs/analysis/2026-10-10-existing-bank-value-terminal-decisions.json';
+  const domain=byPath.get('src/domain.js')?.raw?.toString()??'';
+  const manifestRaw=byPath.get('data/manifest.json')?.raw;
+  const manifest=manifestRaw?JSON.parse(manifestRaw):null;
+  const modern=domain.includes('new-session-eligibility.js')||byPath.has(policy)||byPath.has('docs/publication-selections/round-041-selection-001.json')||manifest?.bankVersion==='2026.10.10-regular.41-selection.1';
+  if(!modern)return {feature:'historical_pre_policy'};
+  const allow=byPath.get('PUBLICATION-MANIFEST.txt')?.raw;
+  if(!allow)fail('Current policy allowlist required');
+  const listed=new Set(parsePublicAllowlist(allow.toString()));
+  for(const [p,digest]of [[policy,'a92cc9bd407741089027cc7d3a3fd2a060bcfa3b1f4d02b84ebd36865336a6cc'],[report,'c4443769d90c4b45a1d7e3a075f776744149e78733dacb6ee8493b6ceafc78f3']]){
+    const raw=byPath.get(p)?.raw;if(!Buffer.isBuffer(raw)||!listed.has(p)||sha(raw)!==digest)fail('Exact new-session policy dependency required: '+p);
+  }
+  if(!domain.includes('new-session-eligibility.js'))fail('Current selected source must integrate new-session policy');
+  return {feature:'existing-priority-001'};
 }
 function checkComplete(snapshot,now=null) {
   keys(snapshot, ['manifest','files'], 'complete snapshot');
@@ -70,6 +91,7 @@ function checkComplete(snapshot,now=null) {
     keys(f, ['path','sha256','bytes','raw'], 'complete frozen file');
     if (!Buffer.isBuffer(f.raw) || sha(f.raw) !== f.sha256 || f.raw.length !== f.bytes || !equal(entries[i],{path:f.path,sha256:f.sha256,bytes:f.bytes})) fail('Frozen complete bytes changed');
   }
+  checkNewSessionEligibilitySnapshot(files);
   const byPath = new Map(files.map(f => [f.path,f]));
   const allow = byPath.get('PUBLICATION-MANIFEST.txt');
   if (!allow || !equal(parsePublicAllowlist(allow.raw.toString()).sort(), entries.map(e=>e.path).sort())) fail('Complete inventory must equal entire publication allowlist');
@@ -80,7 +102,11 @@ function checkComplete(snapshot,now=null) {
   const bank=byPath.get(`data/releases/${release.bankVersion}/bank.json`), ledger=byPath.get(release.ledgerPath);
   if (!manifest || manifest.bankVersion !== release.bankVersion || manifest.sha256 !== release.bankSha256 || manifest.file !== `releases/${release.bankVersion}/bank.json` || bank?.sha256 !== release.bankSha256 || ledger?.sha256 !== release.ledgerSha256) fail('Complete runtime manifest/bank/ledger identity mismatch');
   const b=JSON.parse(bank.raw), l=JSON.parse(ledger.raw);
-  if (b.bankVersion !== release.bankVersion || (l.roundId || l.correctionRoundId) !== release.roundId || l.status !== 'closed' || l.publication.bankVersion !== release.bankVersion || l.publication.bankSha256 !== release.bankSha256) fail('Complete release has no matching closed ledger');
+  const selectionAuthority=validatePublicationSelectionSnapshot(files,{now:now??Date.now()}),identity=resolvePublicationIdentity(l,selectionAuthority);
+  if(identity.selectionReference)assertPublicationSelectionReference(release.selectionReference,identity);else if(Object.hasOwn(release,'selectionReference'))fail('Unexpected selected source reference');
+  if(identity.selectionReference&&(m.deliveryMode!=='release_backup'||format!=='7z'))fail('Selected COMPLETE requires release_backup schema-v2 7z');
+  assertNoPublicationExcludedContent(b,selectionAuthority);
+  if (b.bankVersion !== release.bankVersion || (l.roundId || l.correctionRoundId) !== release.roundId || l.status !== 'closed' || identity.effectiveBankVersion !== release.bankVersion || identity.effectiveBankSha256 !== release.bankSha256) fail('Complete release has no matching closed ledger');
   validateNormalBackupRootSnapshot(files,{now});
   validateNormalBackupChainSnapshot(files,{now,requireCurrentEligibility:true});
   validateEvidenceLossSnapshot(files,{now});
@@ -145,6 +171,9 @@ export async function writeOfflineDeliveryPair({deltaSnapshot, workRoot, reviewe
   for (const name of [deltaOutputPath,completeOutputPath]) { try { await fs.lstat(name); fail('Output already exists; preserve immutable artifacts'); } catch(e) { if(e.code!=='ENOENT') throw e; } }
   // Check complete review bytes before creating either output.
   const entries=inventory(reviewedInventory);
+  const selectedAuthority=await loadPublicationSelections(workRoot,{now});
+  const currentManifest=JSON.parse(await readPublic(workRoot,'data/manifest.json'));
+  for(const e of entries.filter(e=>/^docs\/rounds\/round-\d+\.json$/.test(e.path))){const id=resolvePublicationIdentity(JSON.parse(await readPublic(workRoot,e.path)),selectedAuthority);if(id.selectionReference&&id.effectiveBankVersion===currentManifest.bankVersion)fail('Selected release requires normal release_backup pair, not legacy timeout delivery');}
   for(const e of entries) { const raw=await readPublic(workRoot,e.path); if(sha(raw)!==e.sha256 || raw.length!==e.bytes) fail(`Reviewed complete bytes mismatch: ${e.path}`); }
   const entryMap=new Map(entries.map(e=>[e.path,e]));
   for(const e of deltaSnapshot.manifest.files) if(entryMap.get(e.path)?.sha256!==e.sha256 || entryMap.get(e.path)?.bytes!==e.bytes) fail('Delta and complete release bytes differ');

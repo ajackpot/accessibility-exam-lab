@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.09-regular.39",
-  "releasedAt": "2026-10-09T12:24:26.046Z",
-  "file": "releases/2026.10.09-regular.39/bank.json",
-  "sha256": "42cc772d52de759ee9c292f2d47bd71aa5e0371c8679fa7992a218ee68cda919",
-  "changeSummary": "39회차 검증 누적본: 신규 필기 5개·실기 0개, 누적 일반 956개·기존 시드14개. 실제 전달과 등록이 검증된 38회차를 오프라인 선행자로 삼아 기존 문항과 예약 이력을 보존했다. 새 문항의 전체 해설에는 실제 풀이 규칙과 적용 결과를 담았다. Git/Pages 공개 여부는 별도 확인한다.",
+  "bankVersion": "2026.10.10-regular.41-selection.1",
+  "releasedAt": "2026-10-10T13:14:51.726Z",
+  "file": "releases/2026.10.10-regular.41-selection.1/bank.json",
+  "sha256": "de4397ef9e0fb1d717bfc21dcc43a41c257a37b3c0f22e6c6e326544e7fca8f4",
+  "changeSummary": "41회차 공개 선택 누적본: 기존 검토를 통과한 필기 1개를 학습 우선순위에 따라 선택했다. 일반 957개와 기존 시드14개를 포함한다. 원래 채택3개 대장과 최초 은행은 그대로 보존하며 나머지2개 목표는 공개 제외·예약 상태다. Git/Pages 공개는 실제 확인 전까지 주장하지 않는다.",
   "finalRelease": false
 }

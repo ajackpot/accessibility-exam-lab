@@ -1,0 +1,487 @@
+{
+  "schemaVersion": 1,
+  "planId": "2026-10-10-foundation-application-plan-v3",
+  "status": "research_only_public_projection_pending_final_review",
+  "researchOnly": true,
+  "formalClaims": 0,
+  "candidateCyclesStarted": 0,
+  "correctionCyclesStarted": 0,
+  "newIndependentGoalsEstablished": 0,
+  "priority": [
+    "기초 지식 누락·오류 확인과 보완",
+    "기존 핵심 개념의 적용·혼동 구별",
+    "중요하고 독립적인 공식 범위 공백이 입증된 경우만 새 범위 검토"
+  ],
+  "publicBaseline": {
+    "bankVersion": "2026.10.09-regular.39",
+    "bankPath": "data/releases/2026.10.09-regular.39/bank.json",
+    "bankSha256": "42cc772d52de759ee9c292f2d47bd71aa5e0371c8679fa7992a218ee68cda919"
+  },
+  "evidence": {
+    "privateProposalSha256": "9b836d112fbe4fa654da8142cc9918567ff8be7c8289a21e58e2f100fcd87345",
+    "independentReviewSha256": "912b998ca9ebe65d1d75f9354f7cb2d18fb9316f30677617e07dbf3f5bf80697",
+    "accessibilityProposalSha256": "dafb253ba28fa3ffdb9f57fc0621eddb2320ccaa5b20a7fa6eca90a544c0ff8c",
+    "accessibilityReviewSha256": "97aff180a6d28037f4054a08afa9551177b77b4376e90c5d93a0dd3b64ee3cdd"
+  },
+  "researchBundles": [
+    {
+      "proposalGoalId": "FAP-01",
+      "title": "일반 함수 생성자의 명시 반환값 해설 보완",
+      "priority": "P1",
+      "classification": "existing_goal_editorial_explanation_omission",
+      "existingQuestionIds": [
+        "r019-html-css-practical-s4-w07"
+      ],
+      "proposedDecisionRule": "일반 함수 생성자의 new 호출은 원시값 반환으로 새 인스턴스를 대체하지 않으며, 명시 반환한 객체는 호출 결과가 된다.",
+      "observedFinding": "기본 해설은 반환값 종류와 객체 독립성을 구분하라는 점검 지시만 한다. 실제 원시값 무시/객체 대체 규칙은 정답 선택지 해설에만 있다. 정답 오류나 목표 누락으로 판정하지 않는다.",
+      "value": "함수 반환과 생성자 반환의 핵심 혼동을 기존 문항의 기본 해설만 읽어도 해결하게 한다.",
+      "examScope": {
+        "officialScope": "Preserved official 2026-05-07 written-scope HWP: subject4, JavaScript 기초문법 (변수, 연산자, 제어문, 객체, 함수 등)",
+        "fixedRuleEdition": "ECMA-262 sixth edition / ECMAScript2015, June2015",
+        "scopeLimit": "The exam outline is broad JavaScript basics, not a declaration that every ES2015 algorithm detail is an exam topic. Keep familiar supplied examples and existing accepted goal boundaries."
+      },
+      "officialPrimarySources": [
+        {
+          "url": "https://262.ecma-international.org/6.0/#sec-ecmascript-function-objects-construct-argumentslist-newtarget",
+          "section": "§9.2.2 [[Construct]], steps13a–13b (ordinary base constructor)",
+          "verification": "Official fixed edition opened on web; exact algorithm read from preserved official HTML. Current question uses a preserved MDN source record; add an authenticated ECMA source only under the editorial path, never silently rewrite the old source/version record."
+        }
+      ],
+      "overlapRisk": "Existing r019 goal exactly owns this rule. Frozen041 bound-constructor rule is a separate already-accepted reservation; do not reuse it.",
+      "rejectionOrExclusionConditions": "Exclude any proposal changing answers, constructor code, derived-class behavior, bind construction, prototype semantics or learning-goal identity. If the current published successor already repairs the omission, close as no action.",
+      "provisionalSlot": "round-042"
+    },
+    {
+      "proposalGoalId": "FAP-02",
+      "title": "문자열 replace의 첫 일치와 원문 유지 설명",
+      "priority": "P1",
+      "classification": "existing_goal_editorial_explanation_omission",
+      "existingQuestionIds": [
+        "r005-css-script-w08"
+      ],
+      "proposedDecisionRule": "수정되지 않은 내장 메서드에 문자열 검색값을 주면 첫 일치 부분을 바꾼 새 문자열을 반환한다. 기존 변수의 문자열 값은 바뀌지 않는다.",
+      "observedFinding": "기본 해설은 처리 범위·반환값을 판단하라고만 한다. 첫 일치와 원문 유지의 결정 규칙/결과가 정답 선택지에만 있다.",
+      "value": "모든 일치 치환과 원문 변경이라는 흔한 두 오해를 직접 해소한다.",
+      "examScope": {
+        "officialScope": "Preserved official 2026-05-07 written-scope HWP: subject4, JavaScript 기초문법 (변수, 연산자, 제어문, 객체, 함수 등)",
+        "fixedRuleEdition": "ECMA-262 sixth edition / ECMAScript2015, June2015",
+        "scopeLimit": "The exam outline is broad JavaScript basics, not a declaration that every ES2015 algorithm detail is an exam topic. Keep familiar supplied examples and existing accepted goal boundaries."
+      },
+      "officialPrimarySources": [
+        {
+          "url": "https://262.ecma-international.org/6.0/#sec-string.prototype.replace",
+          "section": "§21.1.3.14 steps10,13–15",
+          "verification": "Official web section and preserved official HTML read; first occurrence, concatenated newString and return confirmed."
+        }
+      ],
+      "overlapRisk": "This is the exact r005 accepted rule. Renaming strings, adding replaceAll or a global RegExp would not establish a new goal.",
+      "rejectionOrExclusionConditions": "Exclude global-regex, custom Symbol.replace, replacement token minutiae, replaceAll/version expansion and code changes. Do not turn an explanation amendment into a new candidate.",
+      "provisionalSlot": "round-042"
+    },
+    {
+      "proposalGoalId": "FAP-03",
+      "title": "폼의 편집 제한·제출·검증 결과 구분 보완",
+      "priority": "P1_then_P2_application",
+      "classification": "existing_goals_editorial_explanation_and_application_boundary",
+      "existingQuestionIds": [
+        "r002-internet-html-w15",
+        "r016-dom-html-s3-w02"
+      ],
+      "proposedDecisionRule": "readonly 텍스트 입력은 편집이 제한되어도 이름·값 제출의 일반 제외 대상이 아니며 disabled 입력은 제출에서 제외된다. readonly의 검증 후보 제외는 사용자 지정 오류를 지우지 않는다. 후보가 아니면 checkValidity는 true를 반환한다.",
+      "observedFinding": "r002 기본 해설은 name/disabled 조건을 적용하라고 하지만 포함/제외 규칙이 없다. r016 기본 해설은 오류와 대상 여부가 다르다고만 설명하고 readonly 제외와 checkValidity의 실제 분기를 밝히지 않는다. 양쪽 정답 선택지에는 결정 규칙이 존재한다.",
+      "value": "화면에서 못 고치는 값, 서버로 보내는 값, 브라우저 검증 통과를 혼동하는 기본 폼 구현 오류를 바로잡는 적용 중심 보완이다.",
+      "examScope": {
+        "officialScope": "Preserved official 2026-05-07 written-scope HWP: subject3 HTML 구현, HTML 서식",
+        "fixedRuleEdition": "W3C HTML5.2 Recommendation 2017-12-14",
+        "scopeLimit": "Use the fixed historical edition; do not substitute the Living Standard or claim actual browser/assistive-technology measurement."
+      },
+      "officialPrimarySources": [
+        {
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#the-readonly-attribute",
+          "section": "§4.10.5.3.3",
+          "verification": "Retained official HTML exact section read: readonly input barred from constraint validation."
+        },
+        {
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#sec-constructing-the-form-data-set",
+          "section": "§4.10.21.4, control exclusion list",
+          "verification": "Retained official HTML read: disabled excluded; readonly is not a general exclusion."
+        },
+        {
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#the-constraint-validation-api",
+          "section": "§4.10.20.3, setCustomValidity/validity/checkValidity algorithms",
+          "verification": "Retained official HTML exact normative algorithm read. Fresh web section retrieval returned internal errors; no fresh section download claimed."
+        }
+      ],
+      "overlapRisk": "Two separate accepted goals already cover these branches. r004 fieldset-first-legend exception was also fully inspected and already states its rule; it is not a repair target.",
+      "rejectionOrExclusionConditions": "Exclude a combined new question counted as novelty, extra input-type exceptions, disabled fieldset variants, server-security claims, or any expansion beyond each existing question’s conditions. Treat each correction target independently with its own eligible predecessor and attempt history.",
+      "provisionalSlot": "round-043",
+      "applicationTransferResearch": {
+        "classification": "existing_goal_applied_improvement_not_novel",
+        "problemContext": "제출된 신청서에서 수정 불가한 참조번호가 빠진 원인을 조사하고, 같은 화면에서 읽기 전용 컨트롤의 checkValidity=true를 오류 메시지 해제로 오해한 진단을 구분한다.",
+        "judgmentTasks": [
+          "참조번호 누락 원인을 화면 편집 가능 여부만으로 추측하지 않고 실제 disabled/name/값 조건으로 진단한다.",
+          "검증 대상 제외와 오류 상태 보존을 분리해 willValidate, customError, valid, checkValidity 결과의 의미를 설명한다."
+        ],
+        "instructionalComparison": "기존 r002-w15는 readonly/disabled/hidden 제출을, r016-w02는 readonly 오류 상태/검사 반환을 각각 갖춘다. 두 목표 사이의 오개념 연결을 명료하게 가르칠 가치가 있으며 둘을 합친 것을 독립 신규 목표로 세지 않는다.",
+        "boundedDeliverable": "기존 두 문항 각각의 기본 해설이 결정 규칙과 실제 결과를 자립적으로 설명하는지 검토하고, 필요한 경우 기존 조건 안에서 설명 연결을 제안한다.",
+        "routeRestriction": "지문·자료 코드·정답을 바꾸는 새 시나리오 재작성은 이 계획이나 accepted_content_editorial 경로가 허가하지 않는다. 그런 변경이 필요하면 별도 허용 경로와 goal/attempt 보존을 먼저 확인하고, 없으면 보류한다."
+      }
+    },
+    {
+      "proposalGoalId": "FAP-04",
+      "title": "map·filter 결과와 Boolean 반환의 적용 해설 점검",
+      "priority": "P2_conditional",
+      "classification": "existing_goals_application_quality_audit_not_new_goal",
+      "existingQuestionIds": [
+        "r003-css-script-w08",
+        "r003-css-script-w09"
+      ],
+      "proposedDecisionRule": "map은 콜백 결과들을 결과 배열로 만들고 filter는 참으로 판정한 기존 원소들을 남긴다. forEach 반환값은 undefined이며 some/every는 Boolean이다.",
+      "observedFinding": "전체 공유 선택지 정의와 contextExplanation에는 규칙과 실제 결과가 이미 있다. w09 기본 해설도 조건을 만족하는 기존 값을 남긴다는 관계를 말하므로 자동으로 결함 판정하지 않는다. 기본 해설의 독립적인 풀이 충분성과 불필요한 중복 없이 필요한 적용 결과를 전달하는지에 한정해 점검한다.",
+      "value": "메서드 이름 암기보다 변환/선별/판정 결과의 차이를 익히게 하되 이미 충실한 설명은 그대로 둔다.",
+      "examScope": {
+        "officialScope": "Preserved official 2026-05-07 written-scope HWP: subject4, JavaScript 기초문법 (변수, 연산자, 제어문, 객체, 함수 등)",
+        "fixedRuleEdition": "ECMA-262 sixth edition / ECMAScript2015, June2015",
+        "scopeLimit": "The exam outline is broad JavaScript basics, not a declaration that every ES2015 algorithm detail is an exam topic. Keep familiar supplied examples and existing accepted goal boundaries."
+      },
+      "officialPrimarySources": [
+        {
+          "url": "https://262.ecma-international.org/6.0/#sec-array.prototype.map",
+          "section": "§22.1.3.15",
+          "verification": "Official web and retained HTML read."
+        },
+        {
+          "url": "https://262.ecma-international.org/6.0/#sec-array.prototype.filter",
+          "section": "§22.1.3.7",
+          "verification": "Official web and retained HTML read."
+        },
+        {
+          "url": "https://262.ecma-international.org/6.0/#sec-properties-of-the-array-prototype-object",
+          "section": "§22.1.3.5 every; §22.1.3.10 forEach; §22.1.3.23 some",
+          "verification": "Existing primary-source record retained; exact secondary branches must be rechecked if edited."
+        }
+      ],
+      "overlapRisk": "All five method definitions are already shared and reserved. A new scenario, swapped numbers or new multiple-choice packaging would duplicate the existing family.",
+      "rejectionOrExclusionConditions": "Close without correction if independent reading finds the current concise explanation sufficient. If shared definitions change, review all member questions; prefer question-local explanation/context only where a concrete defect is established. Do not add sparse-array/prototype/custom-species edge cases or create new questions.",
+      "provisionalSlot": "round-044",
+      "applicationTransferResearch": {
+        "classification": "existing_goal_applied_improvement_not_novel",
+        "problemContext": "처리할 목록에서 각 값에 보정값을 더한 새 목록이 필요한 작업과, 조건을 통과한 원래 값만 남겨야 하는 작업, 통과 항목 존재 여부만 필요한 작업을 구분한다.",
+        "judgmentTasks": [
+          "콜백이 숫자를 반환한다는 사실만으로 filter를 변환 연산으로 오해하지 않는다.",
+          "Boolean 판정값을 담은 map 결과와 그 조건으로 기존 값을 남기는 filter 결과를 구별한다.",
+          "목록이 필요한지 true/false가 필요한지에 따라 map/filter와 some/every의 반환 계약을 대조한다."
+        ],
+        "instructionalComparison": "r003-w08의 value+3과 r003-w09의 value>=6을 전체 공유 보기·문항별 해설까지 대조했다. 정확한 대비가 이미 설명되어 있으므로 전이 적용은 가치가 있지만 새 지식 공백이라는 주장은 성립하지 않는다.",
+        "boundedDeliverable": "기존 코드와 답을 유지하며 왜 이 요구에 이 반환 계약이 맞는지 기본 해설에 충분히 드러나는지 판정한다. 새 자료 작성 없이도 이미 충분하면 no_change로 종결한다.",
+        "routeRestriction": "공유 선택지의 정의를 바꾸면 모든 영향 문항을 검토한다. 새 상황·코드·정답 변경은 현재 편집 정정 경로 밖이며 별도 허용 경로 확인 전 보류한다."
+      }
+    },
+    {
+      "proposalGoalId": "ACP-01",
+      "status": "provisional_existing_goal_explanation_audit_only",
+      "title": "점검 결과의 해당 없음·판단 불가·미실시 해설 보완",
+      "priority": "P1_first",
+      "classification": "existing_goal_editorial_explanation_omission_lead",
+      "existingQuestionIds": [
+        "r019-policy-assistive-s5-w05"
+      ],
+      "proposedDecisionRule": "ㄱ은 inapplicable, ㄴ은 cantTell, ㄷ은 untested다. 적용성 확인 결과와 판정 미완료 및 평가 미실시를 구분한다.",
+      "observedFinding": "question.explanation은 세 상황을 서로 구분하라고만 지시한다. 정확한 영문 결과명과 ㄱ·ㄴ·ㄷ 대응은 정답·오답 선택지에서만 제공한다. 정답 오류나 새로운 내용 공백이 아니라 기본 해설의 결정 규칙 누락이다.",
+      "value": "미실시·판단 불가·해당 없음을 통과나 실패로 읽는 실무 보고 혼동을 기본 해설만으로 해소한다.",
+      "exclusions": [
+        "새 ACT 규칙/스키마/매핑 출제 금지",
+        "새 국제 성공기준별 판정 문항으로 확대 금지",
+        "원 지문·notes·키·선택지 의미·목표 유지",
+        "검사 미실시를 통과로 바꾸거나 사이트 전체 적합성으로 일반화 금지"
+      ],
+      "executionGate": "별도 독립 검토에서 실제 결함과 최신 공개 accepted 선행자·정정 가능 경로·모든 과거 정정 시도 및 남은 한도를 확인한 뒤에만 accepted_content_editorial 검토를 시작할 수 있다. 이 계획은 검토를 시작하거나 정정을 승인하지 않는다. 충분하거나 이미 보완됐으면 조치 없음으로 닫는다.",
+      "provisionalSlot": "round-045",
+      "officialPrimarySources": [
+        {
+          "sourceId": "ACT11",
+          "url": "https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#outcome",
+          "edition": "ACT Rules Format 1.1, W3C Recommendation, 2026-02-05",
+          "sectionsInspected": [
+            "§9 Definitions: Outcome, all five definitions and explanatory paragraph"
+          ],
+          "examBoundary": "기존 문항의 점검 결과 상태 설명만 검토. ACT 규칙 저작·결과 매핑·스키마 또는 국제 성공기준 세부사항을 새 시험 목표로 만들지 않는다."
+        }
+      ]
+    },
+    {
+      "proposalGoalId": "ACP-02",
+      "status": "provisional_existing_goal_explanation_audit_only",
+      "title": "탐색 읽기·발화·키 전달 해설 보완",
+      "priority": "P1_second_if_same_slot_capacity",
+      "classification": "existing_goal_editorial_explanation_omission_lead",
+      "existingQuestionIds": [
+        "r019-policy-assistive-s5-w01"
+      ],
+      "proposedDecisionRule": "현재 문서의 한 글자 탐색을 끄면 웹앱 문자 단축키를 사용하면서 탐색 모드 방향키 읽기를 유지한다. 발화 끔은 NVDA 명령 처리까지 끄지 않는다.",
+      "observedFinding": "question.explanation은 읽기·발화·키 처리를 같은 설정으로 취급하지 말라고만 한다. 어떤 설정을 바꾸고 어떤 읽기 기능을 유지하는지의 실제 해결 규칙은 선택지에만 있다. 현재 정답과 오답 해설의 오류는 확인하지 못했다.",
+      "value": "소리 출력 중단, 입력 전달, 탐색 모드 유지의 흔한 혼동을 실제 기존 정답 동작에 연결한다.",
+      "exclusions": [
+        "기존 NVDA2026.1·현재 문서·탐색 모드 조건 유지",
+        "키보드 단축키 암기 문항이나 새 설정명 조사로 확대 금지",
+        "r035-primary-s5-w01의 다음 키 한 번 통과 목표 재사용 금지",
+        "리뷰 커서와 탐색 모드 가상 커서를 같은 개념으로 일반화 금지"
+      ],
+      "executionGate": "별도 독립 검토에서 실제 결함과 최신 공개 accepted 선행자·정정 가능 경로·모든 과거 정정 시도 및 남은 한도를 확인한 뒤에만 accepted_content_editorial 검토를 시작할 수 있다. 이 계획은 검토를 시작하거나 정정을 승인하지 않는다. 충분하거나 이미 보완됐으면 조치 없음으로 닫는다.",
+      "provisionalSlot": "round-045",
+      "officialPrimarySources": [
+        {
+          "sourceId": "NVDA2026.1",
+          "url": "https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html",
+          "edition": "NVDA 2026.1 fixed release User Guide",
+          "sectionsInspected": [
+            "SingleLetterNavigation",
+            "ReviewingText",
+            "BrowseModeSettingsAutoPassThroughOnCaretMove",
+            "BrowseModeSettingsAutoPassThroughOnFocusChange",
+            "BasicNVDACommands",
+            "SpeechModes"
+          ],
+          "examBoundary": "보조공학 이용방식의 기존 응용 예시이며 제조사 단축키 전체가 독립 출제목록이라는 주장이 아니다. Windows/NVDA 실행·음성·점자 실측 없음."
+        }
+      ]
+    }
+  ],
+  "provisionalSlots": [
+    {
+      "label": "round-042",
+      "scheduledStartUtc": "2026-10-10T15:00:00Z",
+      "scheduledStartKst": "2026-10-11 00:00",
+      "purpose": "기본 풀이 규칙 누락 먼저 보완할지 확인",
+      "goalIds": [
+        "FAP-01",
+        "FAP-02"
+      ]
+    },
+    {
+      "label": "round-043",
+      "scheduledStartUtc": "2026-10-10T19:00:00Z",
+      "scheduledStartKst": "2026-10-11 04:00",
+      "purpose": "폼의 제출/검증을 혼동하는 적용 경계 보완",
+      "goalIds": [
+        "FAP-03"
+      ]
+    },
+    {
+      "label": "round-044",
+      "scheduledStartUtc": "2026-10-10T23:00:00Z",
+      "scheduledStartKst": "2026-10-11 08:00",
+      "purpose": "배열 적용 해설의 충분성만 조건부 점검",
+      "goalIds": [
+        "FAP-04"
+      ]
+    },
+    {
+      "label": "round-045",
+      "scheduledStartUtc": "2026-10-11T03:00:00Z",
+      "scheduledStartKst": "2026-10-11 12:00",
+      "goalIds": [
+        "ACP-01",
+        "ACP-02"
+      ],
+      "priorityOrder": [
+        "ACP-01",
+        "ACP-02"
+      ],
+      "purpose": "기존 s5 점검 결과·보조기술 기본 해설의 실제 해결 규칙 누락 여부를 한정 확인",
+      "status": "provisional_research_label_only",
+      "actualOccurrenceAvailabilityVerifiedByThisWorker": false,
+      "actualCorrectionRoundId": null,
+      "executionConditions": [
+        "소스 코디네이터가 시작 직전 발생분 미사용·현재 선행자·편집 정정 대장 유형을 확인",
+        "045는 확대 후보/정정 cycle/배포를 미리 주장하는 ID가 아님",
+        "독립 검토와 모든 정정 gate의 여력 안에서만 진행; 수량 목표 없음",
+        "이미 충분하거나 정정 요건이 없으면 수정 없이 닫음"
+      ]
+    }
+  ],
+  "entryConditions": [
+    "실행 때 미사용 예정 발생분과 현재 실제 공개 선행 은행을 재확인한다",
+    "기존 편집 대상의 실제 검토·수정·예약 이력을 확인한다",
+    "새 후보 또는 정정 검토는 해당 정식 절차에서만 시작한다",
+    "이미 충분한 설명이면 no_change로 종결하고 수량을 채우지 않는다"
+  ],
+  "scopeLimits": [
+    "전체 은행의 정확성 재검증이나 모든 과목의 공백 목록이 아니다",
+    "정답 오류로 확정한 항목은 없으며 설명 누락 및 적용 충분성의 조사 예약이다",
+    "세부 예외 확장, 기존 제외 목표 재개방, 신규 목표 수 부풀리기를 허용하지 않는다"
+  ],
+  "preservedPriorPlan": "docs/analysis/2026-10-07-pdf-gap-plan.md",
+  "round041Disposition": "원래 accepted 기록과 은행은 보존하며 변경된 우선순위에 따라 배포 보류 중이다",
+  "unsurveyedAreas": [
+    "s1의 나머지 국내검사항목: 대체 텍스트·미디어·표/선형구조·색/대비·키보드/타이밍/포인터·제목/링크·인증·마크업 등의 현 은행 전체 설명",
+    "s1의 국내 개정이력·표준화 기관·국가별 정책/국제 법률 전체",
+    "s5의 장애유형·이용환경·기초 보조기기 전체 및 제품별 설정/점자/음성 상세",
+    "s5의 국내 법령·권리구제·품질인증 및 최근 법령 시행 상태",
+    "s5의 표본/과정/사용자 평가·재현 기록 전체: 이번에 읽은 한정 앵커를 넘어선 문항은 미감사",
+    "s2 인터넷/주소/프로토콜/브라우저/검색/신기술 전역",
+    "s3 HTML 전역과 ARIA 역할/소유관계/이름 계산 전역: 이름·설명 한 문항만 중복 비교",
+    "s4 CSS/스크립트 전역: 기존042–044 계획은 별도 근거이며 이번 감사로 재인증하지 않음",
+    "실기 전체: 펼침·표시 동기화 한 과제만 중복 비교",
+    "모든 씨드의 품질/정규 전환, 특히 색상 전용 정규 범위 형태",
+    "소실된 역사적 후보·부분 linked-option 원본, 전체 정정 이력, 실제 브라우저·Windows·NVDA·점자 조합"
+  ],
+  "boundedSufficientCoverage": [
+    {
+      "anchor": "규범적 기준과 기법/구현 방식",
+      "questionIds": [
+        "r003-standards-s1-w10",
+        "r001-standards-s1-w03"
+      ],
+      "finding": "문서 등재·새 기술 채택 자체를 적합성으로 보지 않고 실제 요구 충족을 확인하는 규칙이 이미 있다. r003의 기본 해설도 자동 금지·승인이 아니라 실제 요구 대조라고 진술한다.",
+      "classification": "existing_goal_sufficient_for_inspected_anchor",
+      "defectEstablished": false,
+      "newGoalEstablished": false,
+      "additionalAllocation": null,
+      "sourceIds": [
+        "WCAG21_layers",
+        "WCAG21_techniques_snapshot",
+        "KWCAG22"
+      ]
+    },
+    {
+      "anchor": "준수 사실·개별 이용 경험·표본/점수의 증거 범위",
+      "questionIds": [
+        "r006-standards-s1-w04",
+        "r004-standards-s5-w06",
+        "r004-standards-s5-w07"
+      ],
+      "finding": "개별 어려움은 준수와 양립하며, 표본은 전체 보증이 아니고, 점수는 산정법 공개가 필요하다는 실질 관계가 이미 기본 해설에 있다. 이 세 문항에는 새 결함이나 새 목표를 확립하지 않았다.",
+      "classification": "existing_goal_sufficient_for_inspected_anchor",
+      "defectEstablished": false,
+      "newGoalEstablished": false,
+      "additionalAllocation": null,
+      "sourceIds": [
+        "KWCAG22",
+        "WCAG_EM10"
+      ]
+    },
+    {
+      "anchor": "리뷰로 읽는 위치와 편집 커서·탐색/초점 모드 전환",
+      "questionIds": [
+        "r020-policy-assistive-s5-w03",
+        "r026-policy-assistive-s5-w03"
+      ],
+      "finding": "r020 기본 해설은 리뷰가 편집 위치를 보존함을 실제로 설명하며, 고정 조건과 모든 선택지 해설은 C 뒤 삽입 결과를 분명히 한다. 결과 문자열이 기본 해설에 없다는 사실만으로 결함을 판정하지 않는다. r026은 방향키 커서 이동과 Tab 초점 변경의 설정 차이를 기본 해설에서 직접 설명한다.",
+      "classification": "existing_goal_sufficient_for_inspected_anchor",
+      "defectEstablished": false,
+      "newGoalEstablished": false,
+      "additionalAllocation": null,
+      "sourceIds": [
+        "NVDA2026.1"
+      ],
+      "scopeCaution": "모든 스크린리더·모든 탐색 위치가 시스템 초점과 독립이라는 일반 명제를 확립한 것은 아니다."
+    },
+    {
+      "anchor": "명칭·역할·상태·값, 레이블·네임, 이름·설명 및 표시/상태 동기화",
+      "questionIds": [
+        "r001-standards-s1-w08",
+        "r002-standards-s1-w08",
+        "r003-internet-html-w13",
+        "r003-css-script-p02"
+      ],
+      "finding": "플랫폼 접근성 정보 전달, 보이는 이름 포함, 이름과 추가 설명의 구분, 펼침 상태와 실제 표시의 양방향 동기화가 필기와 실기로 이미 다뤄진다. 구체적으로 본 이 앵커들에서 결함 또는 새 학습 목표를 확립하지 않았다.",
+      "classification": "existing_goal_sufficient_for_inspected_anchor",
+      "defectEstablished": false,
+      "newGoalEstablished": false,
+      "additionalAllocation": null,
+      "sourceIds": [
+        "KWCAG22",
+        "ARIA12",
+        "ACCNAME11"
+      ],
+      "scopeCaution": "모든 ARIA 역할·이름 계산·브라우저/보조기술 조합을 검증한 것이 아니다."
+    },
+    {
+      "anchor": "한 번만 키 전달",
+      "questionIds": [
+        "r035-primary-s5-w01"
+      ],
+      "finding": "실제 다음 키 한 번 통과와 지속 한 글자 탐색 전환은 기존035 목표로 명시되어 있다. ACP-02를 새 비교 문제로 합성하거나035 목표를 복제하지 않는다.",
+      "classification": "existing_reserved_goal_no_reallocation",
+      "defectEstablished": false,
+      "newGoalEstablished": false,
+      "additionalAllocation": null,
+      "sourceIds": [
+        "NVDA2026.1"
+      ]
+    }
+  ],
+  "unallocatedSlot": "round-046: 추가 배정 없음. 수량을 채우기 위한 연구를 만들지 않는다.",
+  "primarySourceReferences": {
+    "ACT11": {
+      "url": "https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#outcome",
+      "edition": "ACT Rules Format 1.1, W3C Recommendation, 2026-02-05",
+      "sectionsInspected": [
+        "§9 Definitions: Outcome, all five definitions and explanatory paragraph"
+      ]
+    },
+    "NVDA2026.1": {
+      "url": "https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html",
+      "edition": "NVDA 2026.1 fixed release User Guide",
+      "sectionsInspected": [
+        "SingleLetterNavigation",
+        "ReviewingText",
+        "BrowseModeSettingsAutoPassThroughOnCaretMove",
+        "BrowseModeSettingsAutoPassThroughOnFocusChange",
+        "BasicNVDACommands",
+        "SpeechModes"
+      ]
+    },
+    "KWCAG22": {
+      "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+      "edition": "KS X OT0003:2022 / 2022-12-28",
+      "sectionsInspected": [
+        "개요의 기술 중립성",
+        "§4 준수와 개별 접근 한계",
+        "§6.5.3 레이블과 네임",
+        "§8.2.1 웹 애플리케이션 접근성 준수"
+      ]
+    },
+    "WCAG21_layers": {
+      "url": "https://www.w3.org/TR/2018/REC-WCAG21-20180605/#wcag-2-layers-of-guidance",
+      "edition": "WCAG 2.1, W3C Recommendation, 2018-06-05",
+      "sectionsInspected": [
+        "§0.2 WCAG 2 Layers of Guidance"
+      ]
+    },
+    "WCAG21_techniques_snapshot": {
+      "url": "https://www.w3.org/WAI/WCAG21/Techniques/about",
+      "edition": "Retained official page checked 2026-10-02; not a dated normative Recommendation",
+      "sectionsInspected": [
+        "Techniques are not required",
+        "Techniques for specific technologies"
+      ]
+    },
+    "WCAG_EM10": {
+      "url": "https://www.w3.org/TR/2014/NOTE-WCAG-EM-20140710/",
+      "edition": "WCAG-EM 1.0, W3C Working Group Note, 2014-07-10",
+      "sectionsInspected": [
+        "Relation to WCAG 2.0 Conformance Claims",
+        "Step5.c",
+        "Step5.d"
+      ]
+    },
+    "ARIA12": {
+      "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-expanded",
+      "edition": "WAI-ARIA 1.2, W3C Recommendation, 2023-06-06",
+      "sectionsInspected": [
+        "aria-expanded",
+        "aria-describedby"
+      ]
+    },
+    "ACCNAME11": {
+      "url": "https://www.w3.org/TR/2018/REC-accname-1.1-20181218/#mapping_additional_nd_description",
+      "edition": "Accessible Name and Description Computation 1.1, W3C Recommendation, 2018-12-18",
+      "sectionsInspected": [
+        "§4.2 Description Computation",
+        "§4.3 name/description distinction as supporting reading"
+      ]
+    }
+  }
+}

@@ -1,8 +1,9 @@
+import {resolvePublicationIdentity, assertPublicationSelectionReference} from './publication-selection.mjs';
 /** Append-only, reviewed external publication evidence. No Git, network or history writes. */
 import {RECONCILED_NORMAL_CHAIN_PUBLICATION_KIND,isReconciledNormalChainPublication,validateReconciledNormalChainMembership} from './normal-chain-publication-event.mjs';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
-import {isNormalPublication, isNormalChainPublication, NORMAL_SOURCE_KEYS, NORMAL_CHAIN_SOURCE_KEYS, validateNormalPublication, validateNormalBankTransition,normalPublicationTree} from './normal-publication.mjs';
+import {isNormalPublication, isNormalChainPublication, NORMAL_SOURCE_KEYS, SELECTED_NORMAL_SOURCE_KEYS, NORMAL_CHAIN_SOURCE_KEYS, validateNormalPublication, validateNormalBankTransition,normalPublicationTree} from './normal-publication.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 import normalRootTrust from '../docs/deliveries/normal-backup-root-trust.json' with {type:'json'};
 import normalChainTrust from '../docs/deliveries/normal-backup-chain-trust.json' with {type:'json'};
@@ -74,7 +75,7 @@ export function validateSynchronizationDeliveryProof(record, source, raw) {
     if (!r || hash(json(r))!==source.receiptSha256 || r.status!=='delivered' || r.recordedAt!==p.attachmentAcceptedAt || r.roundId!==source.roundId || r.artifactSha256!==source.artifactSha256 || r.manifestSha256!==source.manifestSha256 || r.content?.roundId!==source.roundId || r.content?.ledgerPath!==release.ledgerPath || r.content?.ledgerSha256!==source.originalLedgerSha256 || r.content?.bankVersion!==source.bankVersion || r.content?.bankSha256!==source.bankSha256 || release.deltaArtifactSha256!==p.deltaArtifactSha256 || release.deltaManifestSha256!==source.manifestSha256 || p.completeManifest.kind!=='complete_project_not_learner_import' || p.completeManifest.deliveryMode!=='download_only' || !/^[a-f0-9]{64}$/.test(p.completeArtifactSha256) || !equal(p.completeManifest.files,p.completeManifest.frozenSourceInventory)) throw Error('Independent publication must bind its exact delivered receipt and complete artifact');
     // Delivered protection evidence is immutable even when the later payload adds
     // its own source checkpoint. Do not demand future evidence from old archives.
-    for (const f of p.completeManifest.files.filter(f=>!f.path.endsWith('/trust.json')&&(f.path.startsWith('data/releases/') || /^data\/seed-bank(?:-v\d+)?\.json$/.test(f.path) || /^docs\/(?:rounds\/round-\d+\.(?:json|md)|corrections\/|publications\/|quarantines\/|release-blocks\/|incidents\/)/.test(f.path) || f.path.startsWith('docs/deliveries/')&&!f.path.endsWith('trust.json')))) {
+    for (const f of p.completeManifest.files.filter(f=>!f.path.endsWith('/trust.json')&&(f.path.startsWith('data/releases/') || /^data\/seed-bank(?:-v\d+)?\.json$/.test(f.path) || /^docs\/(?:rounds\/round-\d+\.(?:json|md)|corrections\/|publications\/|publication-selections\/|quarantines\/|release-blocks\/|incidents\/)/.test(f.path) || f.path.startsWith('docs/deliveries/')&&!f.path.endsWith('trust.json')))) {
       if (!equal(inventory.get(f.path),f)) throw Error('Published inventory must preserve exact immutable history, quarantine and release-block evidence');
     }
   }
@@ -106,7 +107,7 @@ function validateNormalChainDeliveryProof(record,source,p,raw){
  if(!equal(Object.keys(ref).sort(),['path','sha256'])||!equal(Object.keys(source).sort(),[...NORMAL_CHAIN_SOURCE_KEYS].sort())||source.kind!=='normal_delivered_checkpoint'||!['delivered_normal_release_root_checkpoint','delivered_normal_release_successor_checkpoint'].includes(p.kind)||!pin||pin.sha256!==ref.sha256||pin.roundId!==source.roundId||!equal(raw,Buffer.from(json(p)))||!release||release.roundId!==source.roundId||release.ledgerPath!==source.ledgerPath||release.ledgerSha256!==source.originalLedgerSha256||release.bankVersion!==source.bankVersion||release.bankSha256!==source.bankSha256||p.deltaArtifactSha256!==source.artifactSha256||hash(json(p.deltaManifest))!==source.manifestSha256||p.attachmentAcceptedAt!==source.deliveredAt||p.verificationCompletedAt!==source.deliveryVerifiedAt||p.privateEvidence.attachmentReceiptSha256!==source.attachmentReceiptSha256||!Number.isFinite(Date.parse(p.verificationCompletedAt))||Date.parse(pin.eligibleAt)>Date.parse(record.verifiedAt)||Date.parse(p.verificationCompletedAt)>Date.parse(pin.eligibleAt)||!root&&(pin.rootProofSha256!==p.rootProofSha256||pin.previousProofSha256!==p.previousProofSha256))throw Error('Normal-chain publication requires exact reviewed delivered proof, receipt hash and chronology');
  const inventory=checkedInventory(record),remote=new Map(record.remoteInventory.map(f=>[f.path,f]));
  for(const [path,bytes,sha256]of [[ref.path,raw,ref.sha256]])if(inventory.get(path)?.sha256!==sha256||inventory.get(path)?.bytes!==bytes.length||remote.get(path)?.gitBlob!==createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${bytes.length}\0`),bytes])).digest('hex'))throw Error('Normal-chain publication must preserve exact delivered proof bytes');
- for(const f of p.completeManifest.files.filter(f=>/^data\/(?:releases\/|seed-bank)/.test(f.path)||/^docs\/(?:rounds\/round-\d+\.(?:json|md)$|corrections\/|publications\/|deliveries\/|quarantines\/|release-blocks\/|incidents\/)/.test(f.path)&&!f.path.endsWith('trust.json')))if(!equal(inventory.get(f.path),f))throw Error('Normal-chain publication must retain all immutable delivered history');
+ for(const f of p.completeManifest.files.filter(f=>/^data\/(?:releases\/|seed-bank)/.test(f.path)||/^docs\/(?:rounds\/round-\d+\.(?:json|md)$|corrections\/|publications\/|publication-selections\/|deliveries\/|quarantines\/|release-blocks\/|incidents\/)/.test(f.path)&&!f.path.endsWith('trust.json')))if(!equal(inventory.get(f.path),f))throw Error('Normal-chain publication must retain all immutable delivered history');
  for(const [path,registry,key]of [['docs/quarantines/trust.json',quarantineTrust,'audits'],['docs/release-blocks/trust.json',blockTrust,'events'],['docs/deliveries/offline-chain-trust.json',independentTrust,'checkpoints'],['docs/deliveries/release-backup-trust.json',backupTrust,'checkpoints'],['docs/deliveries/normal-backup-root-trust.json',normalRootTrust,'roots'],['docs/deliveries/normal-backup-chain-trust.json',normalChainTrust,'checkpoints']]){
   const original=p.completeManifest.files.find(f=>f.path===path),prefixes=Array.from({length:registry[key].length+1},(_,n)=>({...registry,[key]:registry[key].slice(0,n)}));
   const matches=(f,v)=>f?.sha256===hash(json(v))&&f?.bytes===Buffer.byteLength(json(v));
@@ -154,11 +155,20 @@ export async function validateIndependentSynchronizationSources(synchronizations
     if (!chain || hash(json(chain.anchor))!==p.anchorSha256 || !chain.receipts.some(r=>equal(r,p.receipt)) || !equal(chain.manifests.get(p.deltaArtifactSha256),p.deltaManifest)) throw Error('Publication source is not a member of its fully validated independent chain');
   }
 }
-function validateIndependentPublicationCounts(record, {ledgers,banks,ledgerSources}, previousPublication) {
+function validateIndependentPublicationCounts(record, {ledgers,banks,ledgerSources,publicationSelections=null}, previousPublication) {
   const independent=record.rounds.some(s=>s.deliveryProof?.path?.startsWith('docs/deliveries/chains/') || independentTrust.checkpoints.some(pin=>pin.roundId===s.roundId||pin.sha256===s.deliveryProof?.sha256));
   const chain=isNormalChainPublication(record),normal=isNormalPublication(record)||chain;
+  const identities=new Map();
+  for(const source of record.rounds){
+    const ledger=ledgers.find(l=>l.roundId===source.roundId),identity=ledger?resolvePublicationIdentity(ledger,publicationSelections):null;
+    identities.set(source,identity);
+    if(identity?.selectionReference){
+      if(!isNormalPublication(record))throw Error('Selected source cannot masquerade as legacy, chain or reconciled publication');
+      assertPublicationSelectionReference(source.selectionReference,identity);
+    }
+  }
   if (!independent && !normal) return;
-  if (!previousPublication || record.rounds.some(s=>!equal(Object.keys(s).sort(),[...(chain?NORMAL_CHAIN_SOURCE_KEYS:normal?NORMAL_SOURCE_KEYS:sourceKeys)].sort()))) throw Error('Independent publication requires complete source fields and a linked prior verified publication');
+  if (!previousPublication || record.rounds.some(s=>!equal(Object.keys(s).sort(),[...(identities.get(s)?.selectionReference?SELECTED_NORMAL_SOURCE_KEYS:chain?NORMAL_CHAIN_SOURCE_KEYS:normal?NORMAL_SOURCE_KEYS:sourceKeys)].sort()))) throw Error('Independent publication requires complete source fields and a linked prior verified publication');
   const quarantine=validateQuarantineCampaign(ledgers,{banks,ledgerSources});
   if (!quarantine.ok) throw Error(quarantine.errors.join('; '));
   const bank=version=>JSON.parse(banks.get(version)?.raw ?? 'null');
@@ -167,9 +177,10 @@ function validateIndependentPublicationCounts(record, {ledgers,banks,ledgerSourc
     assertEvidenceLossProvenance(source);
     if (sources.has(source.roundId)) throw Error('Duplicate independent publication source');
     sources.add(source.roundId);
-    const ledger=ledgers.find(l=>l.roundId===source.roundId),current=bank(source.bankVersion),baseline=bank(ledger?.baseline?.bankVersion),d=quarantine.dispositions.get(source.roundId);
+    const ledger=ledgers.find(l=>l.roundId===source.roundId),current=bank(source.bankVersion),baseline=bank(ledger?.baseline?.bankVersion),identity=identities.get(source),d=identity?.selectionReference?identity:quarantine.dispositions.get(source.roundId);
     if (!ledger || !current || !baseline || !d || source.originalPublicationStatus!==ledger.publication.status || source.accepted!==d.counts.accepted || source.quarantined!==d.counts.quarantined || source.eligible!==d.counts.eligible) throw Error('Publication accepted, quarantined and eligible counts must retain original validated dispositions');
-    if (normal) validateNormalBankTransition(record,ledger,current,baseline,d);
+    if(identity?.selectionReference&&(source.publicationExcluded!==identity.counts.publicationExcluded||source.bankVersion!==identity.effectiveBankVersion||source.bankSha256!==identity.effectiveBankSha256))throw Error('Selected publication exclusion count and bank identity must match the sealed selection');
+    if (normal) validateNormalBankTransition(record,ledger,current,baseline,d,publicationSelections);
     if (previous && (ledger.baseline.bankVersion!==previous.bankVersion || ledger.baseline.bankSha256!==previous.bankSha256)) throw Error('Independent publication sources must retain their exact cumulative order');
     const priorIds=new Set(baseline.questions.map(q=>q.questionId)),added=current.questions.filter(q=>!q.testOnly&&!priorIds.has(q.questionId));
     const eligible=ledger.candidates.filter(c=>d.eligibleCandidateIds.includes(c.candidateId));
@@ -187,9 +198,17 @@ function validateIndependentPublicationCounts(record, {ledgers,banks,ledgerSourc
   if (!equal(record.counts,counts) || !equal(record.writtenBySubject,subjects) || !equal([...newIds].sort(),actualNew.map(q=>q.questionId).sort()) || [...anchorIds].some(id=>!regular.some(q=>q.questionId===id))) throw Error('Publication totals and newly-public count must match exact cumulative bank content');
 }
 
+/** Pure semantic evidence checks for review/tests. This never authenticates a pin,
+ * creates history, resolves delivery, or grants publication/editorial authority. */
+export function validatePublicationSynchronizationSemantics(record,context,previousPublication) {
+  if(isNormalPublication(record)||isNormalChainPublication(record))validateNormalPublication(record,{...context,inventory:checkedInventory(record),previousPublication});
+  validateIndependentPublicationCounts(record,context,previousPublication);
+  return {ok:true,currentReleaseClearance:false,canStartNewContent:false};
+}
+
 /** Original history remains authoritative. Only a separate post-verification event
  * is added to cumulative ordering; old ledgers/counters are never synthesized. */
-export function validatePublicationSynchronizations(synchronizations = [], {ledgers = [], banks = new Map(), ledgerSources = new Map(), now = null, publicationState = null, activeBankVersion = null} = {}) {
+export function validatePublicationSynchronizations(synchronizations = [], {ledgers = [], banks = new Map(), ledgerSources = new Map(), now = null, publicationState = null, activeBankVersion = null, publicationSelections = null, deliveryCheckpointSources = new Map()} = {}) {
   const errors = [], history = [], seen = new Set();
   try { validatePublicationEvidenceOrder(synchronizations); } catch(error) { return {ok:false, errors:[error.message], history}; }
   for (const record of synchronizations) {
@@ -214,7 +233,7 @@ export function validatePublicationSynchronizations(synchronizations = [], {ledg
       if (!bankRaw || hash(bankRaw) !== source.bankSha256) errors.push(`${source.roundId}: synchronization requires exact immutable bank bytes`);
       if (Date.parse(source.deliveredAt) > at || matches[0] && Date.parse(matches[0].closedAt) > at) errors.push(`${source.roundId}: synchronization must follow delivery and decision closure`);
     }
-    try { if(isNormalPublication(record)||isNormalChainPublication(record)) validateNormalPublication(record,{ledgers,banks,ledgerSources,inventory:checkedInventory(record),previousPublication:synchronizations.find(prior=>hash(json(prior))===record.previousSynchronizationSha256)}); validateIndependentPublicationCounts(record,{ledgers,banks,ledgerSources},synchronizations.find(prior=>hash(json(prior))===record.previousSynchronizationSha256)); } catch(error) { errors.push(error.message); }
+    try { validatePublicationSynchronizationSemantics(record,{ledgers,banks,ledgerSources,publicationSelections,deliveryCheckpointSources},synchronizations.find(prior=>hash(json(prior))===record.previousSynchronizationSha256)); } catch(error) { errors.push(error.message); }
     if (errors.length !== before || now !== null && at > now) continue;
     history.push({syncId:record.syncId, synchronizedRoundIds:record.rounds.map(s => s.roundId), publication:{status:'verified', verifiedAt:record.verifiedAt, bankVersion:record.manifest.bankVersion, bankSha256:record.manifest.sha256, commit:record.commit, url:record.siteUrl}, evidence:record});
   }

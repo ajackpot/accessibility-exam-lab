@@ -1,3 +1,4 @@
+import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference,assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {assertNoEvidenceLossContent,loadEvidenceLossDependencies} from './evidence-loss-block.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -7,6 +8,7 @@ import {readHistoricalExplanationBaseline} from './explanation-authoring.mjs';
 
 /** An ordinary build validates the currently selected release, never a seed fallback. */
 export async function readBankInput(root,input) {
+  const publicationSelections=await loadPublicationSelections(root);
   // The root's current evidence registry is required even for an explicit bank input.
   let validator='';try{validator=await fs.readFile(path.join(root,'scripts/validate-round.mjs'),'utf8');}catch(error){if(error.code!=='ENOENT')throw error;}
   let loader='',hasRegistry=false;try{loader=await fs.readFile(path.join(root,'scripts/bank-io.mjs'),'utf8');}catch(error){if(error.code!=='ENOENT')throw error;}
@@ -23,6 +25,7 @@ export async function readBankInput(root,input) {
     try { await fs.access(path.join(root,'data/manifest.json')); }
     catch(error) { if(error.code==='ENOENT')hasBaseline=false;else throw error; }
     const baseline=hasBaseline?(await readBankInput(root)).bank:null;
+    assertNoPublicationExcludedContent(bank,publicationSelections,raw);
     validateExplanationAuthoring(bank,baseline);
     return {raw,bank,manifest:null};
   }
@@ -34,6 +37,7 @@ export async function readBankInput(root,input) {
   const bank=assertNoEvidenceLossContent(assertNoQuarantinedContent(validateBankForPublication(JSON.parse(raw))));
   if(bank.changeSummary!==manifest.changeSummary)throw new Error('Active manifest change summary mismatch.');
   if(bank.bankVersion!==manifest.bankVersion||bank.releasedAt!==manifest.releasedAt)throw new Error('Active manifest version or release time mismatch.');
+  assertNoPublicationExcludedContent(bank,publicationSelections,raw);
   validateExplanationAuthoring(bank,await readHistoricalExplanationBaseline(root));
   return {raw,bank,manifest};
 }

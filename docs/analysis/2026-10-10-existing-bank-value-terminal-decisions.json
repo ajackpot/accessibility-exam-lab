@@ -1,0 +1,620 @@
+{
+  "schemaVersion": 1,
+  "kind": "existing_bank_pedagogical_terminal_decisions",
+  "status": "terminal_all_12",
+  "completedAt": "2026-10-10T13:27:33.797986+00:00",
+  "bank": {
+    "bankVersion": "2026.10.09-regular.39",
+    "sha256": "42cc772d52de759ee9c292f2d47bd71aa5e0371c8679fa7992a218ee68cda919",
+    "manifestRelativePath": "data/manifest.json",
+    "bankRelativePath": "data/releases/2026.10.09-regular.39/bank.json",
+    "questionTotal": 970,
+    "regularTotal": 956,
+    "testOnlySeeds": 14,
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 207,
+      "s5": 159
+    },
+    "regularPractical": 80,
+    "optionRecords": 4332,
+    "sourceRecords": 1320
+  },
+  "firstAudit": {
+    "path": "docs/analysis/2026-10-10-existing-bank-value-audit.json",
+    "sha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999"
+  },
+  "firstReport": {
+    "path": "docs/analysis/2026-10-10-existing-bank-value-audit.md",
+    "sha256": "4e67eb6ee4dce9555b0ca55cef37551bc401a382001b162e5d4b1e8368d59cb5"
+  },
+  "secondReviewStart": {
+    "sha256": "187341d6a247c9715e39be531c30e5b5f4be5de04c2254ccf8b286cc32a27f9a",
+    "startedAt": "2026-10-10T13:22:35.641898+00:00"
+  },
+  "policy": {
+    "maximumActualReviewsPerItem": 2,
+    "maximumHoldsPerItem": 1,
+    "allowedTerminalDecisions": [
+      "retain",
+      "exclude"
+    ],
+    "pending": 0,
+    "thirdReviewOrRoutineReopeningAllowed": false,
+    "newCandidateCyclePolicyChanged": false
+  },
+  "counts": {
+    "inspectedInDepth": 12,
+    "retain": 7,
+    "exclude": 5,
+    "pending": 0,
+    "secondReviewed": 7,
+    "firstReviewRetainsPreserved": 5
+  },
+  "decisions": [
+    {
+      "questionId": "r019-policy-assistive-s1-w03",
+      "revision": 1,
+      "title": "캐나다 접근성 계획의 형식별 제공 기한",
+      "itemBundleCanonicalSha256": "50d32d72e518ba966226efb652eeb509d999e6afb690f3a6209efe71fa2f7007",
+      "terminalDecision": "exclude",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "confidence": "high",
+      "reviewCount": 2,
+      "holdCount": 1,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "held_for_final_value_decision",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Original first review did not persist its exact start timestamp; no replacement start is invented."
+        },
+        {
+          "cycle": 2,
+          "reviewer": "independent-bank-value-second-review",
+          "startedAt": "2026-10-10T13:22:35.641898+00:00",
+          "completedAt": "2026-10-10T13:27:33.797986+00:00",
+          "status": "exclude"
+        }
+      ],
+      "rationaleKo": "기관·형식 조건을 이미 정해 놓고 15·20·45일 조합을 고르게 하므로 특정 국가 행정기한의 기억이 주된 변별 요소다. 접근 가능한 형식 제공이라는 원칙의 교육 가치는 있지만, 현재 문항의 점수는 그 원칙 적용보다 숫자 기억에 좌우된다.",
+      "optionalFutureWorkKo": "형식 제공 원칙이나 제공된 규정 표를 적용하는 문항은 별도 미래 연구로 가능하다.",
+      "sourceKeyFinding": "No newly established answer-key error; decision concerns pedagogical priority.",
+      "fixedExamScopeRelevance": "s1의 국가별 웹 접근성 표준 정책과 연결되지만, 2026-05-07 기준은 정책·수용 범위 이해를 요구한다. 특정 기관 범주에 적용되는 제8조의 일수 암기가 독립 평가내용으로 명시되어 있지는 않다. 국제표준 기술 내용 제외를 이 법률에 기계적으로 적용한 범위 밖 판정은 아니다.",
+      "sources": [
+        {
+          "id": "r019-policy-assistive-src-canada-plan-format-deadlines",
+          "title": "Accessible Canada Regulations: accessibility plan requests",
+          "url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2021-241/FullText.html",
+          "version": "SOR/2021-241, 2021-12-13 등록; 공식 통합본 current to 2026-09-21",
+          "checkedAt": "2026-10-05T19:06:34.819221+00:00",
+          "location": "Section 8(2), 8(3)(a), 8(3)(b)(i)–(iii)",
+          "evidence": "접근성 계획의 요청 형식에는 큰글자와 점자가 포함된다. 가능한 한 신속하게 제공하되 점자·오디오는 요청을 받은 날 이후 45일이 상한이다. 그 밖의 형식에서 법 제7조제1항(a)~(d) 기관은 15일이 상한이며, 일정 민간 사업자의 99명 이하 범주에 적용되는 20일과 구별한다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문·선택지·해설은 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "inspectedFields": [
+        "complete stem",
+        "notes",
+        "materials and code",
+        "all options",
+        "answer key",
+        "question explanation",
+        "all option explanations",
+        "linked source records",
+        "fixed exam scope evidence"
+      ]
+    },
+    {
+      "questionId": "r017-policy-accessibility-s1-w02",
+      "revision": 2,
+      "title": "EAA 과도한 부담 평가 자료의 보관 기산점",
+      "itemBundleCanonicalSha256": "1228b526317a4305aec3136bf30d107e2b92a6d6584166503339c655ebd395ba",
+      "terminalDecision": "exclude",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "confidence": "medium_high",
+      "reviewCount": 2,
+      "holdCount": 1,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "held_for_final_value_decision",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Original first review did not persist its exact start timestamp; no replacement start is invented."
+        },
+        {
+          "cycle": 2,
+          "reviewer": "independent-bank-value-second-review",
+          "startedAt": "2026-10-10T13:22:35.641898+00:00",
+          "completedAt": "2026-10-10T13:27:33.797986+00:00",
+          "status": "exclude"
+        }
+      ],
+      "rationaleKo": "계속 제공되는 서비스와 평가서 작성일을 구별하는 논리는 있으나, 현재 지문에서 결정적인 근거는 EAA 평가기록 보관기간의 특수한 기산점이다. 정책 범위·적용 의무·예외 판단에 비해 이 정확한 행정기록 기산점 암기의 공통 훈련 효용이 낮다.",
+      "optionalFutureWorkKo": "제품·서비스의 적용 범위와 과도한 부담 평가 책임을 비교하는 별도 문제를 우선한다.",
+      "sourceKeyFinding": "No newly established answer-key error; decision concerns pedagogical priority.",
+      "fixedExamScopeRelevance": "s1 국가별 접근성 정책의 넓은 범위에 연결된다. 다만 정책의 대상·수용 범위보다 사업자의 세부 기록 보관 절차에 가깝다. 공식 기준에 이 기산점이 직접 열거되지는 않는다.",
+      "sources": [
+        {
+          "id": "r017-policy-accessibility-src-eaa-assessment-retention",
+          "title": "Directive (EU) 2019/882 on accessibility requirements for products and services",
+          "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+          "version": "2019-04-17 지침 / OJ L 151, 2019-06-07 고정 본문",
+          "checkedAt": "2026-10-05T11:10:29.457304+00:00",
+          "location": "Article 14(3); OJ L151/92, PDF 23쪽",
+          "evidence": "평가 관련 결과는 제품의 마지막 시장 제공 또는 서비스의 마지막 제공부터 5년간 보관한다. 평가 작성일이나 첫 제공일로 기산하지 않는다. EUR-Lex 직접 열람은 이번 요청에서 봇 확인 화면/빈 202 응답이었으므로 룩셈부르크 정부가 제공하는 같은 EU 관보 영어 PDF를 직접 수신·확인했다.",
+          "rights": "공식 1차 자료의 사실을 짧게 요약했다. 지문과 선택지는 독자 작성했으며 공식 시험 샘플·유료 문제·원문 전문을 복제하지 않았다. 원문 권리와 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "inspectedFields": [
+        "complete stem",
+        "notes",
+        "materials and code",
+        "all options",
+        "answer key",
+        "question explanation",
+        "all option explanations",
+        "linked source records",
+        "fixed exam scope evidence"
+      ]
+    },
+    {
+      "questionId": "r037-script-at-s5-w01",
+      "revision": 1,
+      "title": "NVDA 점자 뷰어의 주황색 대기 단계",
+      "itemBundleCanonicalSha256": "bbd14160ca1633d9965c5a4f1b73da6c9881c9000e0b99aecbc552c91ca3c7d2",
+      "terminalDecision": "exclude",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "confidence": "high",
+      "reviewCount": 2,
+      "holdCount": 1,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "held_for_final_value_decision",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Original first review did not persist its exact start timestamp; no replacement start is invented."
+        },
+        {
+          "cycle": 2,
+          "reviewer": "independent-bank-value-second-review",
+          "startedAt": "2026-10-10T13:22:35.641898+00:00",
+          "completedAt": "2026-10-10T13:27:33.797986+00:00",
+          "status": "exclude"
+        }
+      ],
+      "rationaleKo": "점자 셀 라우팅의 목적은 유용하지만 현재 답을 결정하는 단서는 특정 NVDA 뷰어의 주황·초록 표시와 대기 단계다. 이름·역할·상태나 초점 이동의 접근성 문제를 진단하는 훈련보다 제품 UI 색상 절차 기억에 치우친다.",
+      "optionalFutureWorkKo": "라우팅과 실제 초점·캐럿 이동의 차이를 관찰 가능한 정보로 제시하는 별도 응용은 가능하다.",
+      "sourceKeyFinding": "No newly established answer-key error; decision concerns pedagogical priority.",
+      "fixedExamScopeRelevance": "s5 보조공학 이용방식·점검 도구와 느슨하게 연결된다. NVDA 2026.1을 명시했으나 공식 기준은 특정 뷰어의 색상별 실행 단계 암기를 요구하지 않는다.",
+      "sources": [
+        {
+          "id": "r037-script-at-src-braille-viewer",
+          "title": "NVDA 2026.1 User Guide",
+          "url": "https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html#BrailleViewer",
+          "version": "NVDA 2026.1",
+          "checkedAt": "2026-10-09T03:03:23.636152+00:00",
+          "location": "Extra Tools → Braille Viewer: Hover for cell routing; Speech Viewer: hover/focus pauses text updates",
+          "evidence": "셀 위 포인터로 라우팅하는 기능은 우발적 실행을 막기 위해 지연한다. 셀은 연한 노랑·주황을 거쳐 녹색이 되며 포인터를 녹색이 될 때까지 유지해야 명령이 실행된다. 실제 하드웨어나 Windows/NVDA 실행 측정으로 보고하지 않는다. 포인터를 올려 텍스트 갱신을 멈추는 안내는 별도 음성 뷰어 항목의 동작이다.",
+          "rights": "고정판 1차 자료의 규칙을 짧게 의역했다. 한국어 지문·보기 코드·선택지·해설은 독자 작성하며 공식 시험 샘플·유료 문제·표준 예제나 긴 원문을 복제하지 않는다. 원문의 권리는 각 권리자에게 있다."
+        }
+      ],
+      "inspectedFields": [
+        "complete stem",
+        "notes",
+        "materials and code",
+        "all options",
+        "answer key",
+        "question explanation",
+        "all option explanations",
+        "linked source records",
+        "fixed exam scope evidence"
+      ]
+    },
+    {
+      "questionId": "r027-policy-assistive-s5-w07",
+      "revision": 1,
+      "title": "NVDA 들여쓰기 톤의 탭 환산",
+      "itemBundleCanonicalSha256": "08b14fed14b40e0709bf9dd9f836a66bae64b0ffdc0511cbc6d9b2b511349c7a",
+      "terminalDecision": "exclude",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "confidence": "high",
+      "reviewCount": 2,
+      "holdCount": 1,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "held_for_final_value_decision",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Original first review did not persist its exact start timestamp; no replacement start is invented."
+        },
+        {
+          "cycle": 2,
+          "reviewer": "independent-bank-value-second-review",
+          "startedAt": "2026-10-10T13:22:35.641898+00:00",
+          "completedAt": "2026-10-10T13:27:33.797986+00:00",
+          "status": "exclude"
+        }
+      ],
+      "rationaleKo": "들여쓰기의 청각적 인지는 유용하지만 현재 문제의 정답은 탭 하나를 공백 네 칸 높이로 처리한다는 숨겨진 제품 상수를 알아야 정해진다. 6·6·8의 비교 자체는 단순하며 코드 구조를 진단하거나 설정을 선택하는 응용이 아니다.",
+      "optionalFutureWorkKo": "설정 설명을 제공하고 들여쓰기 변화로 구조를 해석하게 하는 별도 문항을 검토할 수 있다.",
+      "sourceKeyFinding": "No newly established answer-key error; decision concerns pedagogical priority.",
+      "fixedExamScopeRelevance": "s5 보조공학의 역할·이용방식에 속한다. 다만 특정 제품의 탭 1개=공백 4개 환산은 광범위한 이용방식 이해보다 한 단계 깊은 설정 세부다.",
+      "sources": [
+        {
+          "id": "r027-policy-assistive-src-s5-w07-indentation-tones",
+          "title": "NVDA 2026.1: indentation tone conversion for tabs and spaces",
+          "url": "https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html#DocumentFormattingSettingsLineIndentation",
+          "version": "NVDA 2026.1 고정 배포판 사용자 가이드",
+          "checkedAt": "2026-10-07T03:17:01.088511+00:00",
+          "location": "Line indentation reporting",
+          "evidence": "들여쓰기 톤은 공백마다 음높이가 증가하며 탭 하나는 공백 네 개와 같은 음높이 증가로 처리한다. 따라서 탭1개+공백2개와 공백6개는 같은 높이, 탭2개는 더 높은 톤으로 비교된다. 일반 편집기의 시각적 탭 폭이나 공백 문자 개수만으로 비교하지 않는다.",
+          "rights": "공식 1차 자료의 적용 조건을 독자적인 한국어 문항으로 설명했다. 가상 사례·선택지·해설은 새로 작성했으며 공식 시험 샘플·유료 문항·원문 예제·소프트웨어 코드를 복제하지 않았다. 원문 권리는 각 권리자에게 있다."
+        }
+      ],
+      "inspectedFields": [
+        "complete stem",
+        "notes",
+        "materials and code",
+        "all options",
+        "answer key",
+        "question explanation",
+        "all option explanations",
+        "linked source records",
+        "fixed exam scope evidence"
+      ]
+    },
+    {
+      "questionId": "r011-dom-form-s3-w04",
+      "revision": 1,
+      "title": "HTML form의 과거 이름 맵",
+      "itemBundleCanonicalSha256": "67ae7f4301fc72d27a8bc194dcd57ba308828a75f635f611bc0dcf03ac5b3dc8",
+      "terminalDecision": "retain",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "confidence": "medium_high",
+      "reviewCount": 2,
+      "holdCount": 1,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "held_for_final_value_decision",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Original first review did not persist its exact start timestamp; no replacement start is invented."
+        },
+        {
+          "cycle": 2,
+          "reviewer": "independent-bank-value-second-review",
+          "startedAt": "2026-10-10T13:22:35.641898+00:00",
+          "completedAt": "2026-10-10T13:27:33.797986+00:00",
+          "status": "retain"
+        }
+      ],
+      "rationaleKo": "완전한 코드와 세 API의 비교가 제공되어 이름 변경 후의 기존 객체 참조, 폼의 과거 이름 맵, 현재 컬렉션 조회를 구별한다. 레거시 규칙을 사용하지만 단일 상수 암기보다 DOM 상태와 서로 다른 조회 API의 차이를 추론하는 훈련이 이미 포함되어 있다.",
+      "optionalFutureWorkKo": "현재 형태 유지로 확정한다. 향후 명시적 요소 참조와 이름 기반 조회의 주의점을 보강할 수 있으나 유지 결정의 조건이나 보류 사유가 아니다.",
+      "sourceKeyFinding": "No newly established answer-key error; decision concerns pedagogical priority.",
+      "fixedExamScopeRelevance": "s3 HTML 서식·구현과 지정 HTML 5.2에 직접 연결된다. 형식상 무관한 주제는 아니나 현재 이름 조회를 배우는 기초 범위에서 레거시 이름 보존 알고리즘까지 묻는다.",
+      "sources": [
+        {
+          "id": "r011-dom-form-src-form-past-names",
+          "title": "HTML 5.2",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#past-names-map",
+          "version": "W3C Recommendation, 2017-12-14",
+          "checkedAt": "2026-10-04T13:13:58.835608+00:00",
+          "location": "4.10.3 The form element: named property retrieval and past names map",
+          "evidence": "폼의 이름 기반 속성 조회가 요소 하나를 반환하면 이름을 과거 이름 맵에 기억한다. 컨트롤의 이름만 바뀐 뒤에도 그 옛 이름의 조회가 가능하며 컬렉션의 현재 이름 조회와 구별된다.",
+          "rights": "표준의 규칙을 짧게 요약하고 공식 원문에 연결하였다. 지문·보기 코드·선택지·해설은 독자 작성했으며 공식 시험 샘플이나 표준 예제를 복제하지 않았다. 원문의 권리는 각 원 저작권자에게 있다."
+        },
+        {
+          "id": "r011-dom-form-src-form-nameditem",
+          "title": "HTML 5.2",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/infrastructure.html#dom-htmlformcontrolscollection-nameditem",
+          "version": "W3C Recommendation, 2017-12-14",
+          "checkedAt": "2026-10-04T13:14:59.914240+00:00",
+          "location": "2.7.2.2 HTMLFormControlsCollection: namedItem algorithm",
+          "evidence": "같은 id 또는 name의 일치 요소가 하나이면 그 요소, 여러 개이면 트리 순서의 RadioNodeList, 없으면 null을 반환한다. id 일치를 name 일치보다 우선해 하나만 고르는 규칙이 아니다.",
+          "rights": "표준의 규칙을 짧게 요약하고 공식 원문에 연결하였다. 지문·보기 코드·선택지·해설은 독자 작성했으며 공식 시험 샘플이나 표준 예제를 복제하지 않았다. 원문의 권리는 각 원 저작권자에게 있다."
+        }
+      ],
+      "inspectedFields": [
+        "complete stem",
+        "notes",
+        "materials and code",
+        "all options",
+        "answer key",
+        "question explanation",
+        "all option explanations",
+        "linked source records",
+        "fixed exam scope evidence"
+      ]
+    },
+    {
+      "questionId": "r014-dom-html-s3-w05",
+      "revision": 1,
+      "title": "ismap 클릭 좌표의 URL 직렬화",
+      "itemBundleCanonicalSha256": "106d27a6368e059d958456388ed3ba8120641d08f1e43cd5df8f0825984090af",
+      "terminalDecision": "exclude",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "confidence": "high",
+      "reviewCount": 2,
+      "holdCount": 1,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "held_for_final_value_decision",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Original first review did not persist its exact start timestamp; no replacement start is invented."
+        },
+        {
+          "cycle": 2,
+          "reviewer": "independent-bank-value-second-review",
+          "startedAt": "2026-10-10T13:22:35.641898+00:00",
+          "completedAt": "2026-10-10T13:27:33.797986+00:00",
+          "status": "exclude"
+        }
+      ],
+      "rationaleKo": "좌표가 주어지고 ?x,y 직렬화 형식을 선택하는 것이 전부다. 서버 측 이미지 맵의 키보드 대안·목적 전달·대체 텍스트 문제를 다루지 않아 현재 형태의 전이 가치는 제한된다.",
+      "optionalFutureWorkKo": "이미지 맵의 키보드 사용과 동등한 링크 대안을 진단하는 별도 문항이 더 유용하다.",
+      "sourceKeyFinding": "No newly established answer-key error; decision concerns pedagogical priority.",
+      "fixedExamScopeRelevance": "s3 HTML 임베디드·링크와 지정 HTML 5.2의 명시적 규칙이므로 오래되거나 드물다는 이유만으로 범위 밖이라고 할 수 없다.",
+      "sources": [
+        {
+          "id": "r014-dom-html-src-ismap-activation",
+          "title": "HTML 5.2: 4.5. Text-level semantics",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/textlevel-semantics.html#the-a-element",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "checkedAt": "2026-10-04T23:12:31Z",
+          "location": "§4.5.1 The a element: activation behavior, server-side image map processing",
+          "evidence": "실제 포인팅 장치가 ismap 이미지에서 발생시킨 클릭은 이미지의 왼쪽·위쪽 기준 CSS 픽셀 좌표로 ?x,y 형식의 하이퍼링크 접미부를 만든다.",
+          "rights": "표준의 사실을 독자적으로 요약하고 지문·선택지·보기 코드를 새로 작성했다. 공식 시험 샘플·표준 예제·원문 전문을 복제하지 않았으며 원문의 권리는 원 저작권자에게 있다."
+        }
+      ],
+      "inspectedFields": [
+        "complete stem",
+        "notes",
+        "materials and code",
+        "all options",
+        "answer key",
+        "question explanation",
+        "all option explanations",
+        "linked source records",
+        "fixed exam scope evidence"
+      ]
+    },
+    {
+      "questionId": "r009-web-tech-s2-w03",
+      "revision": 1,
+      "title": "SMTP DATA의 점 추가 처리",
+      "itemBundleCanonicalSha256": "6cc35d977b6663692ea707fccd3895ddbb74c339843e096e2a457aaeb0365c0c",
+      "terminalDecision": "retain",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "confidence": "medium",
+      "reviewCount": 2,
+      "holdCount": 1,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "held_for_final_value_decision",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Original first review did not persist its exact start timestamp; no replacement start is invented."
+        },
+        {
+          "cycle": 2,
+          "reviewer": "independent-bank-value-second-review",
+          "startedAt": "2026-10-10T13:22:35.641898+00:00",
+          "completedAt": "2026-10-10T13:27:33.797986+00:00",
+          "status": "retain"
+        }
+      ],
+      "rationaleKo": "SMTP 세부를 다루지만 본문 종료 구분자와 사용자 데이터의 충돌을 이스케이프하고 수신 시 복원하는 원리가 현재 해설에 직접 연결된다. 삭제·공백·백슬래시 등 선택지를 통해 원문 보존과 가역적 프레이밍을 구별하므로 드문 주제라는 이유만으로 제거하지 않는다.",
+      "optionalFutureWorkKo": "현재 형태 유지로 확정한다. 향후 송신·수신의 왕복 복원 예시를 더할 수 있으나 추가 검토나 수정이 유지의 전제는 아니다.",
+      "sourceKeyFinding": "No newly established answer-key error; decision concerns pedagogical priority.",
+      "fixedExamScopeRelevance": "s2 인터넷 응용 서비스 중 이메일에 연결되지만 공식 평가내용은 정의·기본 개념 이해다. SMTP 전송 구현의 줄 단위 이스케이프 절차는 기본 서비스 이해보다 깊다.",
+      "sources": [
+        {
+          "id": "r009-web-tech-src-smtp",
+          "title": "RFC 5321: Simple Mail Transfer Protocol",
+          "url": "https://www.rfc-editor.org/rfc/rfc5321.txt",
+          "version": "2008-10",
+          "checkedAt": "2026-10-04T09:01:02Z",
+          "location": "4.5.2 Transparency",
+          "evidence": "SMTP DATA에서 송신자는 점으로 시작하는 줄 앞에 점 하나를 추가하며 수신자는 종료 표식이 아닌 그러한 줄의 첫 점을 제거한다.",
+          "rights": "문항·보기·해설은 독자 작성했다. 공식 샘플이나 표준 전문을 복제하지 않고 규칙을 짧게 요약하여 원문에 연결한다."
+        }
+      ],
+      "inspectedFields": [
+        "complete stem",
+        "notes",
+        "materials and code",
+        "all options",
+        "answer key",
+        "question explanation",
+        "all option explanations",
+        "linked source records",
+        "fixed exam scope evidence"
+      ]
+    },
+    {
+      "questionId": "r029-aria-s3-w01",
+      "revision": 1,
+      "title": "초점 가능한 separator의 현재값 요구",
+      "itemBundleCanonicalSha256": "eff09bbce13c672e1448ea9966046f5e2e6f802b458ea9f3c481a91f2f8c3594",
+      "terminalDecision": "retain",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "reviewCount": 1,
+      "holdCount": 0,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "retain",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Exact original start timestamp unavailable."
+        }
+      ],
+      "rationaleKo": "같은 역할도 조작 가능 조건에 따라 제공할 상태가 달라짐을 적용한다. 고정 경계와 조절 위젯을 혼동하거나 이름이 현재값을 대신한다고 생각하는 구현 오류를 막는다."
+    },
+    {
+      "questionId": "r036-s4-w02",
+      "revision": 1,
+      "title": "UTF 16 인덱스와 codePointAt의 경계",
+      "itemBundleCanonicalSha256": "92802a5ae94372e8fdea5458927c3b141ae805143e5512e2d4a2d17f4727f19f",
+      "terminalDecision": "retain",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "reviewCount": 1,
+      "holdCount": 0,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "retain",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Exact original start timestamp unavailable."
+        }
+      ],
+      "rationaleKo": "글자 하나를 코드 단위 하나로 생각해 생기는 다국어·이모지 처리 오류를 설명한다. 16진수와 유효한 서로게이트 쌍이 이미 제공되어 핵심은 임의 상수 암기가 아닌 인덱싱 단위다."
+    },
+    {
+      "questionId": "r024-html-css-practical-s4-w03",
+      "revision": 1,
+      "title": "기본 매개변수 클로저의 범위",
+      "itemBundleCanonicalSha256": "7606cf4b5fdaa11db68636ac8bba681b2ee4cda4c888cd1872a5bbe88908703c",
+      "terminalDecision": "retain",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "reviewCount": 1,
+      "holdCount": 0,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "retain",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Exact original start timestamp unavailable."
+        }
+      ],
+      "rationaleKo": "호출 시점이 아닌 생성된 어휘 환경이 참조 범위를 정한다는 재사용 가능한 규칙을 검사한다. 매개변수와 본문 환경이라는 어려운 경계가 있으나 단순 기호·버전 이름 암기는 아니다."
+    },
+    {
+      "questionId": "r026-policy-assistive-s5-w04",
+      "revision": 1,
+      "title": "점자 메시지 닫기와 다시 표시",
+      "itemBundleCanonicalSha256": "14b98fe160888db797fd76329db1e23028bf4d33cdc6906102333c2d12a14df4",
+      "terminalDecision": "retain",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "reviewCount": 1,
+      "holdCount": 0,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "retain",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Exact original start timestamp unavailable."
+        }
+      ],
+      "rationaleKo": "현재 메시지를 닫은 행동과 기능을 영구히 끈 상태를 구별한다. 실제 점자 출력 이용의 회복 가능한 작업이고 이유 설명도 있다."
+    },
+    {
+      "questionId": "r039-assistive-s5-w02",
+      "revision": 1,
+      "title": "점자 문단 단위 읽기",
+      "itemBundleCanonicalSha256": "b296dc037f482e517e65f9d1d7689eb8498a1ff70c21a4d5bc14c97f161ae20c",
+      "terminalDecision": "retain",
+      "decisionScope": "existing_exact_form_active_pool_priority",
+      "reviewCount": 1,
+      "holdCount": 0,
+      "reviewHistory": [
+        {
+          "cycle": 1,
+          "reviewer": "existing-bank-value-first-review",
+          "status": "retain",
+          "evidenceSha256": "0ec2dba856f4177ae62036ab8e7b9e728cd20001ba8b4285c6ca4235eb8cb999",
+          "startedAt": null,
+          "completedReportAt": "2026-10-10T13:13:55.890404+00:00",
+          "timestampLimitation": "Exact original start timestamp unavailable."
+        }
+      ],
+      "rationaleKo": "짧은 줄 때문에 빈 점자 셀이 생기는 문제를 해결하며 표시 단위와 탐색 단위가 함께 달라짐을 이해하게 한다. 구체적인 사용자 필요가 있어 뷰어 색 순서 암기와 성격이 다르다."
+    }
+  ],
+  "reviewerIndependence": "Second reviewer differs from first item-audit author. The earlier input/scope authentication was not a third substantive item-value review.",
+  "applicationStatus": "terminal_content_decisions_only; active-bank exclusion implementation pending separately reviewed historical-preserving eligibility route",
+  "limits": [
+    "All 970 items received coarse stem/metadata screening; only these 12 received deep review. This is not an exhaustive or representative full-bank quality audit.",
+    "No new wrong-key claim, test-score effect, examination-frequency claim, actual NVDA/browser measurement or acceptance-history rewrite.",
+    "Official 2026-05-07 syllabus evidence and fixed source-edition scope are bound to the first audit. HTML5.2 sec-forms web parser failed on second review; first audit exact official-source retrieval record is reused rather than claimed freshly fetched.",
+    "RFC Editor fetch failed during this second review; official IETF RFC5321 HTML succeeded. Canada official consolidation still states current to 2026-09-21."
+  ],
+  "secondPrimaryChecks": [
+    {
+      "url": "https://laws-lois.justice.gc.ca/eng/regulations/SOR-2021-241/FullText.html",
+      "location": "section8(3)",
+      "finding": "15/45-day key supported; exclusion is value judgment"
+    },
+    {
+      "url": "https://accessibilite-produits-services.public.lu/dam-assets/lgislation/celex-32019l0882-en-txt-1.pdf",
+      "location": "Article14(3), PDF page22",
+      "finding": "service last provided start supported"
+    },
+    {
+      "url": "https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html",
+      "location": "Braille Viewer; Line indentation reporting",
+      "finding": "green routing threshold and four-space tab tone supported"
+    },
+    {
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/textlevel-semantics.html",
+      "location": "a element activation algorithm",
+      "finding": "ismap x,y suffix supported"
+    },
+    {
+      "url": "https://datatracker.ietf.org/doc/html/rfc5321#section-4.5.2",
+      "location": "4.5.2 Transparency",
+      "finding": "sending added period and receiving restoration supported"
+    }
+  ],
+  "policyAuthority": {
+    "adoptedAt": "2026-10-10T13:21:14Z",
+    "summaryKo": "기존 문항의 교육 가치 검토는 최대 두 번, 보류는 한 번이며 마지막에는 유지 또는 제외로 종결한다. 이 결정 집합은 후보 작성의 기존 검토 이력과 독립적이다."
+  },
+  "projection": {
+    "kind": "public_privacy_projection_of_terminal_decisions",
+    "originalTerminalEvidenceSha256": "90bc86e81afa99d663dc55ed27cb788e4de636041e7e20c60cb460b0b8c7c2e4",
+    "projectedAt": "2026-10-10T13:41:33.699892+00:00",
+    "changes": [
+      "Private conversation identifier omitted; public policy summary supplied.",
+      "First-review references use actual public source-relative paths.",
+      "Private start-journal path omitted; exact start time and evidence digest retained."
+    ],
+    "decisionsAndReviewHistoryUnchanged": true
+  }
+}
