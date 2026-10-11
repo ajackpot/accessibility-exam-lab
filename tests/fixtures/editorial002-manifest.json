@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "bankVersion": "2026.10.11-editorial.2",
+  "releasedAt": "2026-10-10T23:49:58.529Z",
+  "file": "releases/2026.10.11-editorial.2/bank.json",
+  "sha256": "a752fd3714ca62e0f0067af778a547f430690f60d6c2da831af4330a162c2c18",
+  "changeSummary": "기존 채택 문항 해설 2개를 독립 검토한 정확한 개정판으로 정정했다. 신규 일반 문항0개, 누적 일반957개와 시드14개를 유지하며 실제 Git/Pages 공개 전이다.",
+  "finalRelease": false
+}

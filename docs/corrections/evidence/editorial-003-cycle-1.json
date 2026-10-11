@@ -1,0 +1,251 @@
+{
+  "evidenceSchemaVersion": 1,
+  "purpose": "immutable_editorial_review_input",
+  "correctionRoundId": "editorial-003",
+  "cycle": 1,
+  "items": [
+    {
+      "correctionId": "e003-form-submission",
+      "question": {
+        "questionId": "r002-internet-html-w15",
+        "revision": 2,
+        "templateId": "r002-internet-html-t-w15",
+        "learningGoalRevision": 1,
+        "type": "written",
+        "subjectId": "s3",
+        "topicIds": [
+          "r002-internet-html-topic-readonly-disabled-formdata"
+        ],
+        "stem": "다음 보기의 코드를 읽고, 전송 버튼으로 제출할 때 폼 데이터에 포함되는 이름과 값의 조합을 고르시오.",
+        "notes": [
+          "표시된 값과 속성은 바뀌지 않으며 제출을 취소하는 스크립트나 다른 컨트롤은 없다."
+        ],
+        "explanation": "이 보기의 텍스트·hidden 입력은 name이 있고 disabled가 아니면 이름과 값이 폼 데이터에 포함된다. readonly는 편집을 제한할 뿐 제출을 막지 않으므로 record=R17과 token=T9가 포함된다. region은 disabled라 제외되고, 전송 버튼은 name이 없어 항목을 만들지 않는다.",
+        "sourceRefs": [
+          "r002-internet-html-src-readonly"
+        ],
+        "verificationStatus": "published",
+        "testOnly": false,
+        "contentStage": "regular",
+        "standardVersion": "HTML 5.2 (W3C Recommendation, 2017-12-14)",
+        "difficulty": "적용",
+        "optionMode": "exclusive",
+        "supportedOptionCounts": [
+          4,
+          5
+        ],
+        "links": [
+          {
+            "optionId": "r002-internet-html-w15-o01",
+            "optionRevision": 1,
+            "role": "correct",
+            "compatibilitySetId": "r002-internet-html-w15-set01"
+          },
+          {
+            "optionId": "r002-internet-html-w15-o02",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r002-internet-html-w15-set01"
+          },
+          {
+            "optionId": "r002-internet-html-w15-o03",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r002-internet-html-w15-set01"
+          },
+          {
+            "optionId": "r002-internet-html-w15-o04",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r002-internet-html-w15-set01"
+          },
+          {
+            "optionId": "r002-internet-html-w15-o05",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r002-internet-html-w15-set01"
+          }
+        ],
+        "materials": [
+          {
+            "filename": "w15.html",
+            "content": "<form action=\"/save\" method=\"post\">\n  <input name=\"record\" value=\"R17\" readonly>\n  <input name=\"region\" value=\"west\" disabled>\n  <input type=\"hidden\" name=\"token\" value=\"T9\">\n  <button type=\"submit\">전송</button>\n</form>",
+            "purpose": "question",
+            "instruction": "다음 보기의 코드를 읽고, 전송 버튼으로 제출할 때 폼 데이터에 포함되는 이름과 값의 조합을 고르시오."
+          }
+        ],
+        "reviewNote": "자체 제작 비공식 일반 학습 문항. round-002 검토 1회차에서 독립 풀이·1차 출처·단일 정답/반례·문안/접근성·자동 구조 검사를 통과했다. 공개 판정과 근거: docs/rounds/round-002.json (r002-internet-html-w15, 개정 1)."
+      },
+      "options": [
+        {
+          "optionId": "r002-internet-html-w15-o01",
+          "revision": 1,
+          "content": "record=R17, token=T9",
+          "explanation": "readonly인 record는 제출 대상에서 제외되지 않고 hidden인 token도 이름·값을 가진다. disabled인 region은 제외된다.",
+          "memberQuestionIds": [
+            "r002-internet-html-w15"
+          ]
+        },
+        {
+          "optionId": "r002-internet-html-w15-o02",
+          "revision": 1,
+          "content": "record=R17, region=west, token=T9",
+          "explanation": "region은 disabled이므로 세 입력값을 모두 포함하는 결과가 아니다.",
+          "memberQuestionIds": [
+            "r002-internet-html-w15"
+          ]
+        },
+        {
+          "optionId": "r002-internet-html-w15-o03",
+          "revision": 1,
+          "content": "region=west, token=T9",
+          "explanation": "disabled인 region은 제외되고 readonly인 record는 포함되므로 두 입력의 취급이 뒤바뀌었다.",
+          "memberQuestionIds": [
+            "r002-internet-html-w15"
+          ]
+        },
+        {
+          "optionId": "r002-internet-html-w15-o04",
+          "revision": 1,
+          "content": "token=T9",
+          "explanation": "readonly는 입력 편집을 제한하지만 record를 제출 데이터에서 제외하지 않는다.",
+          "memberQuestionIds": [
+            "r002-internet-html-w15"
+          ]
+        },
+        {
+          "optionId": "r002-internet-html-w15-o05",
+          "revision": 1,
+          "content": "record=R17",
+          "explanation": "type=hidden인 token도 폼 데이터에 포함되므로 화면에 보이는 record만 남기지 않는다.",
+          "memberQuestionIds": [
+            "r002-internet-html-w15"
+          ]
+        }
+      ]
+    },
+    {
+      "correctionId": "e003-readonly-validation",
+      "question": {
+        "questionId": "r016-dom-html-s3-w02",
+        "revision": 2,
+        "templateId": "r016-dom-html-template-readonly-barring-does-not-clear-validity-but-checkvalidity-succeeds",
+        "learningGoalId": "r016-dom-html-template-readonly-barring-does-not-clear-validity-but-checkvalidity-succeeds",
+        "learningGoalRevision": 1,
+        "type": "written",
+        "subjectId": "s3",
+        "topicIds": [
+          "r016-dom-html-topic-readonly-barring-does-not-clear-validity-but-checkvalidity-succeeds"
+        ],
+        "stem": "다음 보기의 코드를 읽고, result 배열의 값을 고르시오.",
+        "notes": [
+          "제시된 요소를 모두 파싱한 뒤 코드를 한 번 실행하며, 다른 스크립트·사용자 조작·API 변경은 없다."
+        ],
+        "explanation": "readonly가 적용된 텍스트 input은 제약 검증 대상에서 제외되므로 willValidate는 false이다. setCustomValidity에 비어 있지 않은 메시지를 지정하면 customError는 true, valid는 false이며 readonly가 이 오류를 지우지는 않는다. checkValidity()는 검증 대상이 아닌 요소에서 true를 반환하므로 result는 [false, true, false, true]이다.",
+        "sourceRefs": [
+          "r016-dom-html-src-scope-written",
+          "r016-dom-html-src-readonly-validation",
+          "r016-dom-html-src-validation-api"
+        ],
+        "verificationStatus": "published",
+        "testOnly": false,
+        "contentStage": "regular",
+        "standardVersion": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "difficulty": "적용",
+        "materials": [
+          {
+            "filename": "case.html",
+            "content": "<input id=\"reference\" type=\"text\" value=\"확인 중\" readonly>\n<script>\nvar box = document.getElementById(\"reference\");\nbox.setCustomValidity(\"검토가 필요합니다.\");\nvar result = [box.willValidate, box.validity.customError,\n              box.validity.valid, box.checkValidity()];\n</script>",
+            "purpose": "question",
+            "instruction": "다음 보기의 코드를 읽고, result 배열의 값을 고르시오."
+          }
+        ],
+        "optionMode": "exclusive",
+        "supportedOptionCounts": [
+          4,
+          5
+        ],
+        "links": [
+          {
+            "optionId": "r016-dom-html-s3-w02-o1",
+            "optionRevision": 1,
+            "role": "correct",
+            "compatibilitySetId": "r016-dom-html-s3-w02-set"
+          },
+          {
+            "optionId": "r016-dom-html-s3-w02-o2",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r016-dom-html-s3-w02-set"
+          },
+          {
+            "optionId": "r016-dom-html-s3-w02-o3",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r016-dom-html-s3-w02-set"
+          },
+          {
+            "optionId": "r016-dom-html-s3-w02-o4",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r016-dom-html-s3-w02-set"
+          },
+          {
+            "optionId": "r016-dom-html-s3-w02-o5",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r016-dom-html-s3-w02-set"
+          }
+        ],
+        "reviewNote": "자체 제작 비공식 일반 학습 문항. round-016 검토 1회차에서 독립 풀이·1차 출처·단일 정답/반례·문안/접근성·자동 구조 검사를 통과했다. 공개 판정과 근거: docs/rounds/round-016.json (r016-dom-html-s3-w02, 개정 1)."
+      },
+      "options": [
+        {
+          "optionId": "r016-dom-html-s3-w02-o1",
+          "revision": 1,
+          "content": "[false, true, false, true]",
+          "explanation": "읽기 전용이라 검증 후보는 아니지만 지정한 오류는 남아 customError=true, valid=false이다. 후보가 아닌 checkValidity 호출은 true를 반환한다.",
+          "memberQuestionIds": [
+            "r016-dom-html-s3-w02"
+          ]
+        },
+        {
+          "optionId": "r016-dom-html-s3-w02-o2",
+          "revision": 1,
+          "content": "[false, true, false, false]",
+          "explanation": "검증 제외는 이해했지만 checkValidity를 valid와 같다고 보았다. 후보가 아닌 요소는 오류 상태와 별개로 이 검사에서 true를 반환한다.",
+          "memberQuestionIds": [
+            "r016-dom-html-s3-w02"
+          ]
+        },
+        {
+          "optionId": "r016-dom-html-s3-w02-o3",
+          "revision": 1,
+          "content": "[false, false, true, true]",
+          "explanation": "readonly가 사용자 지정 오류를 지운다고 가정했다. setCustomValidity에 비어 있지 않은 메시지를 주었으므로 오류 상태는 남는다.",
+          "memberQuestionIds": [
+            "r016-dom-html-s3-w02"
+          ]
+        },
+        {
+          "optionId": "r016-dom-html-s3-w02-o4",
+          "revision": 1,
+          "content": "[true, true, false, false]",
+          "explanation": "readonly 컨트롤도 검증 후보라고 보았다. 이 속성이 적용된 텍스트 input은 후보에서 제외된다.",
+          "memberQuestionIds": [
+            "r016-dom-html-s3-w02"
+          ]
+        },
+        {
+          "optionId": "r016-dom-html-s3-w02-o5",
+          "revision": 1,
+          "content": "[true, false, true, true]",
+          "explanation": "readonly를 유효한 값을 보장하는 기능으로 해석했다. readonly는 사용자 편집을 막고 검증에서 제외할 뿐 메시지로 설정한 오류를 해제하지 않는다.",
+          "memberQuestionIds": [
+            "r016-dom-html-s3-w02"
+          ]
+        }
+      ]
+    }
+  ]
+}

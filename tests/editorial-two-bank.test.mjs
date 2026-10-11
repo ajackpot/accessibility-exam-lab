@@ -15,7 +15,7 @@ import {readHistoricalExplanationBaseline} from '../scripts/explanation-authorin
 const root=new URL('../',import.meta.url),raw=p=>fs.readFileSync(new URL(p,root),'utf8'),read=p=>JSON.parse(raw(p));
 const hash=x=>createHash('sha256').update(x).digest('hex'),persist=x=>JSON.parse(JSON.stringify(x));
 const ledger=read('docs/corrections/editorial-002.json'),beforeRaw=raw('data/releases/2026.10.10-regular.41-selection.1/bank.json'),before=JSON.parse(beforeRaw);
-const bankRaw=raw(`data/releases/${ledger.publication.bankVersion}/bank.json`),bank=JSON.parse(bankRaw),manifest=read('data/manifest.json');
+const bankRaw=raw(`data/releases/${ledger.publication.bankVersion}/bank.json`),bank=JSON.parse(bankRaw),manifest=read('tests/fixtures/editorial002-manifest.json');
 const ids=['r019-html-css-practical-s4-w07','r005-css-script-w08'],sourceId='editorial002-src-es2015-ordinary-constructor-return';
 const revised=ledger.corrections.filter(c=>c.decision==='accepted').map(c=>c.questionId);
 const oldById=new Map(before.questions.map(q=>[q.questionId,q])),byId=new Map(bank.questions.map(q=>[q.questionId,q]));
@@ -26,6 +26,7 @@ function completed(session,correct,at){let out=d.startSession(session,at);const 
 
  test('editorial002 closure binds only the actual accepted immutable snapshots',()=>{
  assert.equal(hash(beforeRaw),'de4397ef9e0fb1d717bfc21dcc43a41c257a37b3c0f22e6c6e326544e7fca8f4');
+ assert.equal(hash(raw('tests/fixtures/editorial002-manifest.json')),'e3e2e3f9cc551a586dca75c61034e6e89e7e17d61c935d7e138c5aac30f040d7','Exact historical registered371 editorial002 manifest bytes');
  assert.equal(ledger.status,'closed');assert.equal(ledger.correctionRoundId,'editorial-002');assert.equal(ledger.kind,'accepted_content_editorial');
  assert.equal(ledger.decisionDeadline,'2026-10-11T02:00:00Z');assert(Date.parse(ledger.closedAt)<=Date.parse(ledger.decisionDeadline));
  assert(revised.length>=1&&revised.length<=2);assert.deepEqual(ledger.counts,{registered:2,accepted:revised.length,rejected:2-revised.length,pending:0,newRegular:0,revisedRegular:revised.length,publishedRevisedRegular:ledger.publication.status==='verified'?revised.length:0});
@@ -77,7 +78,7 @@ function completed(session,correct,at){let out=d.startSession(session,at);const 
  test('synthetic pre-edit prepared sessions survive actual bank update, start, grading and persisted JSON backup unchanged',async()=>{
  for(const id of ids)for(const count of [4,5])for(const correct of [true,false]){
   const old=persist(prepared(before,id,count,37,`synthetic-old-${ids.indexOf(id)}-${count}-${correct}`)),oldSessionBytes=JSON.stringify(old),oldItemBytes=JSON.stringify(old.items),oldHash=await d.snapshotHash(old.items[0]);validateSession(old);
-  const storedSessions=new Map([[old.sessionId,old]]),metas=new Map([['bank',{manifest:read('data/manifest.json'),bank:before}]]);
+  const storedSessions=new Map([[old.sessionId,old]]),metas=new Map([['bank',{manifest:read('tests/fixtures/editorial002-manifest.json'),bank:before}]]);
   // Real updateBank API stores only bank metadata. The session store fixture is JSON-persisted before use.
   metas.set('bank',{manifest:{...manifest,bankVersion:before.bankVersion,sha256:hash(beforeRaw)},bank:before});
   const fakeStore={meta:async key=>metas.get(key),putMeta:async(key,value)=>metas.set(key,value)};

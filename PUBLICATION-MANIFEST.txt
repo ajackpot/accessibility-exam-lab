@@ -398,3 +398,9 @@ scripts/editorial-publication.mjs
 tests/editorial-publication.test.mjs
 tests/editorial-publication-consumers.test.mjs
 docs/publications/editorial-002.json
+docs/corrections/editorial-003.json
+docs/corrections/editorial-003.md
+docs/corrections/evidence/editorial-003-cycle-1.json
+data/releases/2026.10.11-editorial.3/bank.json
+tests/editorial-three-bank.test.mjs
+tests/fixtures/editorial002-manifest.json

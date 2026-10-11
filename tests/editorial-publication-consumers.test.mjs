@@ -55,6 +55,37 @@ function projectHistoricalPublications(sourceFiles,sourcePins){
 
 // Non-authorizing test data reconstruction. These are exact stored fields and
 // the production clock formulas, not loadRoundContext-validated chain authority.
+// Test-owned exact editorial002 context. Actual003 remains immutable on disk.
+// Only the reviewed four003 files may be removed from this private raw map.
+function projectEditorial002Context(projection){
+ const files=new Map(projection.files),fixturePath='tests/fixtures/editorial002-manifest.json';
+ const historicalRaw=files.get(fixturePath);assert(Buffer.isBuffer(historicalRaw),'exact historical002 manifest fixture required');
+ assert.equal(H(historicalRaw),'e3e2e3f9cc551a586dca75c61034e6e89e7e17d61c935d7e138c5aac30f040d7');
+ const historical=JSON.parse(historicalRaw),activeRaw=files.get('data/manifest.json');assert(Buffer.isBuffer(activeRaw));
+ assert.equal(historical.bankVersion,'2026.10.11-editorial.2');assert.equal(historical.sha256,'a752fd3714ca62e0f0067af778a547f430690f60d6c2da831af4330a162c2c18');
+ assert.equal(H(files.get('data/'+historical.file)),historical.sha256);
+ const rows=[{"path":"docs/corrections/editorial-003.json","bytes":23410,"sha256":"3f20e644742ef546f7867a9149e2b1afdc7d0c20961842ce4db14ce18c5195e9"},{"path":"docs/corrections/editorial-003.md","bytes":1132,"sha256":"60d5b1a649dbf54d3a4e51fa9c65a7ad6bc2690f5a9ba00005a284b05f98f480"},{"path":"docs/corrections/evidence/editorial-003-cycle-1.json","bytes":11235,"sha256":"f7d3bec6e6e56533129ae4997fdecc37552f3f677b0139fa1a388fd3773984e3"},{"path":"data/releases/2026.10.11-editorial.3/bank.json","bytes":6256177,"sha256":"4a262a70eaa25bba13d4dd6b73d01896876d81913e4b19fdfbe406de0683b672"}];
+ const editorialPaths=[...files.keys()].filter(p=>/^docs\/corrections\/editorial-\d+\.json$/.test(p)).sort();
+ const previousPaths=['docs/corrections/editorial-001.json','docs/corrections/editorial-002.json'];
+ if(H(activeRaw)===H(historicalRaw)){
+  assert.deepEqual(editorialPaths,previousPaths);for(const row of rows)assert(!files.has(row.path),'unexpected003 bytes under historical manifest');
+  return {...projection,files};
+ }
+ assert.equal(H(activeRaw),'fda7c462d90a57a75346cef169585b1e405573b20f0da9540315a25ba78e2893','only the exact actual003 active manifest may be projected');
+ assert.deepEqual(editorialPaths,[...previousPaths,'docs/corrections/editorial-003.json']);
+ for(const row of rows){const raw=files.get(row.path);assert(Buffer.isBuffer(raw),'missing exact003 fixture dependency '+row.path);assert.equal(raw.length,row.bytes);assert.equal(H(raw),row.sha256);}
+ const ledger=JSON.parse(files.get(rows[0].path)),pkg=JSON.parse(files.get(rows[2].path)),bank=JSON.parse(files.get(rows[3].path)),active=JSON.parse(activeRaw);
+ assert.equal(ledger.kind,'accepted_content_editorial');assert.equal(ledger.correctionRoundId,'editorial-003');assert.equal(ledger.status,'closed');assert.equal(ledger.closedAt,'2026-10-11T11:30:53.405Z');
+ assert.equal(ledger.baseline.bankVersion,historical.bankVersion);assert.equal(ledger.baseline.bankSha256,historical.sha256);
+ assert.equal(ledger.publication.bankVersion,bank.bankVersion);assert.equal(ledger.publication.bankSha256,rows[3].sha256);assert.equal(active.bankVersion,bank.bankVersion);assert.equal(active.sha256,rows[3].sha256);assert.equal(bank.editorialRoundId,'editorial-003');
+ assert.deepEqual(ledger.changedQuestionIds,['r002-internet-html-w15','r016-dom-html-s3-w02']);assert.equal(ledger.counts.accepted,2);assert.equal(ledger.counts.pending,0);assert.equal(ledger.counts.newRegular,0);assert.equal(pkg.correctionRoundId,'editorial-003');assert.equal(pkg.cycle,1);
+ for(const correction of ledger.corrections){assert.equal(correction.decision,'accepted');assert.equal(correction.cycles.length,1);const cycle=correction.cycles[0];assert.equal(cycle.reviewPackagePath,rows[2].path);assert.equal(cycle.reviewPackageSha256,rows[2].sha256);const item=pkg.items.find(i=>i.correctionId===correction.correctionId);assert(item);assert.deepEqual(bank.questions.find(q=>q.questionId===correction.questionId),item.question);}
+ const lines=files.get('PUBLICATION-MANIFEST.txt').toString().split('\n');for(const row of rows)assert.equal(lines.filter(p=>p===row.path).length,1,'exact003 allowlist entry required');
+ const removed=new Set(rows.map(row=>row.path));files.set('PUBLICATION-MANIFEST.txt',Buffer.from(lines.filter(p=>!removed.has(p)).join('\n')));for(const p of removed)files.delete(p);
+ files.set('data/manifest.json',Buffer.from(historicalRaw));
+ return {...projection,files,removedPaths:[...projection.removedPaths,...removed]};
+}
+
 function fixtureOfflineBases(files,prior){
   const inventory=new Map(prior.remoteInventory.map(f=>[f.path,f])),offlineBases=new Map(),deliveryCheckpointSources=new Map(),derivation=[];
   function authenticated(p){const raw=files.get(p),entry=inventory.get(p);assert(raw&&entry,`missing actual publication dependency ${p}`);assert.equal(H(raw),entry.sha256);assert.equal(raw.length,entry.bytes);return JSON.parse(raw);}
@@ -95,7 +126,7 @@ function fixtureOfflineBases(files,prior){
 before(async()=>{
   const sourceFiles=new Map();
   for(const p of (await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).map(p=>p.trim()).filter(p=>p&&!p.startsWith('#')))sourceFiles.set(p,await read(p));
-  const fixtureProjection=projectHistoricalPublications(sourceFiles,PUBLICATION_SYNCHRONIZATIONS),{files,pins:historicalPins,events}=fixtureProjection;
+  const fixtureProjection=projectEditorial002Context(projectHistoricalPublications(sourceFiles,PUBLICATION_SYNCHRONIZATIONS)),{files,pins:historicalPins,events}=fixtureProjection;
   const prior=events.at(-1),e=JSON.parse(files.get('docs/corrections/editorial-002.json'));
   originalEditorialRaw=files.get('docs/corrections/editorial-002.json');
   originalSelectedRaw=files.get(`data/releases/${e.baseline.bankVersion}/bank.json`);
@@ -110,7 +141,7 @@ before(async()=>{
   directory=await fs.mkdtemp(path.join(os.tmpdir(),'editorial-publication-consumers-'));
   await fs.cp(root,directory,{recursive:true});
   for(const p of fixtureProjection.removedPaths)await fs.rm(path.join(directory,p));
-  for(const p of ['PUBLICATION-MANIFEST.txt','scripts/publication-sync.mjs'])await fs.writeFile(path.join(directory,p),files.get(p));
+  for(const p of ['PUBLICATION-MANIFEST.txt','scripts/publication-sync.mjs','data/manifest.json'])await fs.writeFile(path.join(directory,p),files.get(p));
   const eventPath=`docs/publications/${event.syncId}.json`;
   await fs.writeFile(path.join(directory,eventPath),J(event));
   await fs.appendFile(path.join(directory,'PUBLICATION-MANIFEST.txt'),eventPath+'\n');

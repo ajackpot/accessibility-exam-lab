@@ -1,0 +1,344 @@
+{
+  "ledgerSchemaVersion": 1,
+  "kind": "accepted_content_editorial",
+  "campaignId": "2026-exam-final",
+  "correctionRoundId": "editorial-003",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-11T11:10:24.993Z",
+  "decisionDeadline": "2026-10-11T14:00:00Z",
+  "closedAt": "2026-10-11T11:30:53.405Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxRoundHours": 4,
+    "newKnowledgeItems": 0
+  },
+  "baseline": {
+    "sourceCommit": "4059837e90420f3ea4025badf85b01635634043e",
+    "bankVersion": "2026.10.11-editorial.2",
+    "bankSha256": "a752fd3714ca62e0f0067af778a547f430690f60d6c2da831af4330a162c2c18",
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80
+  },
+  "changedQuestionIds": [
+    "r002-internet-html-w15",
+    "r016-dom-html-s3-w02"
+  ],
+  "changedOptionIds": [],
+  "changedPracticalChoiceIds": [],
+  "corrections": [
+    {
+      "correctionId": "e003-form-submission",
+      "issueId": "explanation-fap-03",
+      "questionId": "r002-internet-html-w15",
+      "templateId": "r002-internet-html-t-w15",
+      "learningGoalId": "r002-internet-html-t-w15",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s3",
+      "priorAcceptedRef": {
+        "roundId": "round-002",
+        "candidateId": "r002-internet-html-w15",
+        "ledgerPath": "docs/rounds/round-002.json",
+        "bankVersion": "2026.10.02-regular.2",
+        "bankSha256": "c79139eaee12943dc65b8cbcaeda37b62254b379ef367ab9a57c2fded3beed54",
+        "questionRevision": 1,
+        "contentSha256": "5e4ddcb4944ed4af20ea29d4b45282748980c3f7a27c313ece021e2515610585"
+      },
+      "defect": "question.explanation은 편집 가능 여부와 제출 조건을 구별하라고만 설명하고, name이 있는 해당 입력의 포함 규칙·disabled 및 이름 없는 버튼의 제외와 실제 제출 결과를 밝히지 않는다. 정답 선택지에 의존하던 핵심 규칙과 적용 결과를 문항 해설에서 자립적으로 설명한다.",
+      "revision": 2,
+      "authorId": "e003-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r002-internet-html-src-readonly",
+          "title": "HTML 5.2: The readonly attribute and constructing the form data set",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#sec-constructing-the-form-data-set",
+          "version": "HTML 5.2 (W3C Recommendation, 2017-12-14)",
+          "location": "4.10.5.3.3 The readonly attribute; 4.10.21.4 Constructing the form data set",
+          "checkedAt": "2026-10-11T11:03:12.197Z",
+          "summary": "보존된 2017-12-14 HTML 5.2 공식 원문(4701847바이트, SHA-256 95f948847f6e90487545a02e999bd90f60ee08527779501bf049db63e151985d)과 관련 절을 다시 읽었다. 원 취득 기록은 2026-10-02 HTTP 200이며 이번 checkedAt은 보존판 재대조 기록 시각이다. 기존 조사에서 최신 웹 열기가 용량 제한으로 실패했으므로 새 다운로드로 주장하지 않는다. 폼 데이터 구성은 disabled 컨트롤과 이 보기의 name 없는 버튼을 제외한다. name이 있는 텍스트 및 hidden 입력은 이름·값을 추가하며 readonly는 제출 제외 사유가 아니므로 record=R17과 token=T9가 남는다.",
+          "rights": "지정 1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·코드·선택지를 보존하고 문항 해설만 수정한다. 공식 시험 샘플·유료 문제 문구·원문 전문·비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 2,
+          "startedAt": "2026-10-11T11:12:27.523Z",
+          "finishedAt": "2026-10-11T11:22:31.413810Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "Before key authorization, independently chose C: record=R17 and token=T9. The readonly named text input is submitted; the disabled region and nameless button contribute no entry. This original answer matches the sole registered correct option.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "Independently hashed and reread the preserved official 2017-12-14 HTML 5.2 original, sections 4.10.5.3.3 and 4.10.21.4. The actual form-data algorithm supports every inclusion and exclusion; the 2026-05-07 scope original also includes HTML forms and HTML 5.2. Technical facts are paraphrased in original Korean prose. This is a preserved-fixed-edition check, not a fresh download or latest-site claim.",
+              "evidenceRefs": [
+                "r002-internet-html-src-readonly"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "Exactly one option gives the complete set record=R17, token=T9. The question fixes values/attributes, names the submit button and excludes extra controls or cancelling scripts. No dirname, image-button, checkbox, datalist or charset-token special branch applies. Each other option omits a submitted field or includes the disabled field; comma notation denotes the requested name/value set rather than wire encoding.",
+              "evidenceRefs": []
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "The short Korean stem identifies the code and task, and the note supplies conditions without revealing the result. Plain-text code and parallel name/value-list options require no color, visual position or hidden interaction. All distractors express plausible distinctions among readonly, disabled and hidden controls; no claim of measured learner frequency is made. The correct two-entry option is not uniquely long or elaborated. Required attributes/operators and submission assumptions remain unchanged. The question explanation is self-contained and does not copy the entire option rationale set; no redundant link context is introduced. This is an authoring review, not browser or assistive-technology execution.",
+              "evidenceRefs": []
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "Pass from the one bounded genuine source-API invocation on this exact revision: registered content/blind/component hashes and original answer/key match; only question.explanation and revision differ from the pinned baseline; every linked option, code, key, goal and sourceRef is unchanged. validateBankForPublication, including validateBank, and validateExplanationAuthoring without a historical exemption passed. The tool terminated with exit 0. This is not a full campaign, build, browser, assistive-technology or publication check.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "Accepted revision 2: the complete question explanation independently states the inclusion/exclusion rule and the exact submitted pair. Original blind answer C is uniquely correct. All five same-revision gates pass, with code, key, goal, all five options and sourceRefs preserved.",
+          "contentSha256": "a9ad31a806f5733c1f2f362c886c7814b1053350b9da99e3c2fa0a1134d90eb1",
+          "blindPackageSha256": "13f17eeb10c3e1d4d6c1d76a86f95a29d342b3ff401e892dd7ad3487bba49cd3",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-003-cycle-1.json",
+          "reviewPackageSha256": "f7d3bec6e6e56533129ae4997fdecc37552f3f677b0139fa1a388fd3773984e3",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r002-internet-html-w15-o01",
+              "revision": 1,
+              "contentSha256": "cb724641b17ff8496cd0b8524fa88e9a3e3e296c27e0a180942a4660cd576803"
+            },
+            {
+              "kind": "written_option",
+              "id": "r002-internet-html-w15-o02",
+              "revision": 1,
+              "contentSha256": "016b7ade7f8fb4697bc0c98a4e90a1957d17319175027363ef8aa560c093c8b0"
+            },
+            {
+              "kind": "written_option",
+              "id": "r002-internet-html-w15-o03",
+              "revision": 1,
+              "contentSha256": "d7276d1b2355fdfee1f6256e7ef05eed614169f2dd782ce058f82767899e633e"
+            },
+            {
+              "kind": "written_option",
+              "id": "r002-internet-html-w15-o04",
+              "revision": 1,
+              "contentSha256": "4f9c0257887a420360f6e93528ee7f2e4c942c4ef7935f07d5514592eab24171"
+            },
+            {
+              "kind": "written_option",
+              "id": "r002-internet-html-w15-o05",
+              "revision": 1,
+              "contentSha256": "0c5f6447633b7cf6f2b476e5dc185d4d5832b5ddba6cc52c6d8e24200796d8fa"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "Accepted revision 2: the complete question explanation independently states the inclusion/exclusion rule and the exact submitted pair. Original blind answer C is uniquely correct. All five same-revision gates pass, with code, key, goal, all five options and sourceRefs preserved.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r002-internet-html-w15/explanation"
+      ]
+    },
+    {
+      "correctionId": "e003-readonly-validation",
+      "issueId": "explanation-fap-03",
+      "questionId": "r016-dom-html-s3-w02",
+      "templateId": "r016-dom-html-template-readonly-barring-does-not-clear-validity-but-checkvalidity-succeeds",
+      "learningGoalId": "r016-dom-html-template-readonly-barring-does-not-clear-validity-but-checkvalidity-succeeds",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s3",
+      "priorAcceptedRef": {
+        "roundId": "round-016",
+        "candidateId": "r016-dom-html-s3-w02",
+        "ledgerPath": "docs/rounds/round-016.json",
+        "bankVersion": "2026.10.05-regular.16",
+        "bankSha256": "882dc4987352e03c117b481c582ffb4e5e1e73630e5c61a004085076285b31df",
+        "questionRevision": 1,
+        "contentSha256": "236d4d310618943fa3bc04bc3f47927ba763efa098adf0d96845263068874dbb"
+      },
+      "defect": "question.explanation은 오류 상태와 검증 대상 여부가 다르다는 주의만 제시하고, readonly의 검증 제외·비어 있지 않은 사용자 지정 오류의 유지·비대상 checkValidity 반환 분기와 실제 result 배열을 설명하지 않는다. 정답 선택지에 의존하던 결정 규칙과 결과를 문항 해설에서 자립적으로 설명한다.",
+      "revision": 2,
+      "authorId": "e003-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r016-dom-html-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML 개론: HTML 표·서식·임베디드·링크; CSS/스크립트 개론: 선택자·미디어 쿼리·표·레이아웃 상세·JavaScript 객체와 함수",
+          "checkedAt": "2026-10-11T11:03:12.197Z",
+          "summary": "보존된 공식 2026-05-07 필기 출제기준 HWP(80896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)를 새로 본문 추출하여 HTML 서식과 HTML 5.2 참조, JavaScript 객체·함수 범위를 다시 읽었다. 원 2026-10-02 HTTP 200 취득 기록 및 현재 OPERATIONS의 고정판 해시와 일치한다. 이번 checkedAt은 보존판 재대조 기록 시각이다. 현재 공식 안내 페이지 열기는 502였으므로 새 취득이나 최신 게시판 변경 여부 확인으로 주장하지 않는다.",
+          "rights": "지정 1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·코드·선택지를 보존하고 문항 해설만 수정한다. 공식 시험 샘플·유료 문제 문구·원문 전문·비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r016-dom-html-src-readonly-validation",
+          "title": "HTML 5.2: readonly and validation eligibility",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#the-readonly-attribute",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.10.5.3.3 The readonly attribute",
+          "checkedAt": "2026-10-11T11:03:12.197Z",
+          "summary": "보존된 2017-12-14 HTML 5.2 공식 원문(4701847바이트, SHA-256 95f948847f6e90487545a02e999bd90f60ee08527779501bf049db63e151985d)과 관련 절을 다시 읽었다. 원 취득 기록은 2026-10-02 HTTP 200이며 이번 checkedAt은 보존판 재대조 기록 시각이다. 기존 조사에서 최신 웹 열기가 용량 제한으로 실패했으므로 새 다운로드로 주장하지 않는다. §4.10.5.3.3에서 readonly가 지정된 이 텍스트 input은 제약 검증 대상에서 제외되므로 willValidate=false이다. 읽기 전용 속성은 사용자 지정 오류 메시지를 지우는 연산이 아니다.",
+          "rights": "지정 1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·코드·선택지를 보존하고 문항 해설만 수정한다. 공식 시험 샘플·유료 문제 문구·원문 전문·비공개 조사 자료는 배포하지 않는다."
+        },
+        {
+          "sourceId": "r016-dom-html-src-validation-api",
+          "title": "HTML 5.2: constraint validation API",
+          "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#the-constraint-validation-api",
+          "version": "HTML 5.2, W3C Recommendation, 2017-12-14",
+          "location": "§4.10.20.3 The constraint validation API",
+          "checkedAt": "2026-10-11T11:03:12.197Z",
+          "summary": "보존된 2017-12-14 HTML 5.2 공식 원문(4701847바이트, SHA-256 95f948847f6e90487545a02e999bd90f60ee08527779501bf049db63e151985d)과 관련 절을 다시 읽었다. 원 취득 기록은 2026-10-02 HTTP 200이며 이번 checkedAt은 보존판 재대조 기록 시각이다. 기존 조사에서 최신 웹 열기가 용량 제한으로 실패했으므로 새 다운로드로 주장하지 않는다. §4.10.20.3의 실제 알고리즘과 §4.10.20.1의 정의에 따르면 비어 있지 않은 setCustomValidity 메시지는 customError=true 및 valid=false를 만든다. 검증 대상이 아닌 요소의 checkValidity는 true를 반환한다. 네 결과는 [false, true, false, true]이다.",
+          "rights": "지정 1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·코드·선택지를 보존하고 문항 해설만 수정한다. 공식 시험 샘플·유료 문제 문구·원문 전문·비공개 조사 자료는 배포하지 않는다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 2,
+          "startedAt": "2026-10-11T11:12:27.523Z",
+          "finishedAt": "2026-10-11T11:22:31.413810Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "Before key authorization, independently chose D: [false, true, false, true]. A readonly text input is barred from constraint validation, retains the nonempty custom error and reports valid=false, while checkValidity returns true for a noncandidate. The original answer matches the sole registered correct option.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "Independently hashed and extracted the preserved official 2026-05-07 written-scope HWP and reread HTML forms, HTML 5.2 references and JavaScript objects/functions. Independently reread preserved official HTML 5.2 sections 4.10.5.3.3, 4.10.20.1 and 4.10.20.3, including the operative checkValidity algorithm rather than only its abbreviated API synopsis. Every sourceRef is checked; fixed-edition support and original paraphrasing are established without a current-download or latest-syllabus claim.",
+              "evidenceRefs": [
+                "r016-dom-html-src-scope-written",
+                "r016-dom-html-src-readonly-validation",
+                "r016-dom-html-src-validation-api"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "The displayed nonempty message sets customError regardless of candidacy; valid is false because that state is true. readonly applies to the specified text input, making willValidate false. The normative checkValidity branch returns true for a noncandidate without clearing the error. One execution after parsing, with no external scripts or API changes, excludes races, null lookup and overriding methods. Exactly one offered Boolean tuple satisfies all four properties.",
+              "evidenceRefs": []
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "The Korean stem names the exact result array and the note fixes parsing and execution conditions. Code and five parallel four-Boolean tuples are readable as text, with no reliance on color or screen position. Distractors plausibly confuse validity state with validation eligibility, treat readonly as clearing an error, or equate checkValidity with valid. They are hypotheses about conceptual confusion, not measured learner errors. Every Boolean and necessary code condition is preserved; the correct tuple receives no extra qualifying prose. The complete question explanation supplies the rule and actual result independently of option explanations and introduces no duplicated context field. This is an authoring review, not browser or assistive-technology execution.",
+              "evidenceRefs": []
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e003-independent-primary-v1",
+              "summary": "Pass from the one bounded genuine source-API invocation on this exact revision: registered content/blind/component hashes and original answer/key match; only question.explanation and revision differ from the pinned baseline; every linked option, code, key, goal and sourceRef is unchanged. validateBankForPublication, including validateBank, and validateExplanationAuthoring without a historical exemption passed. The tool terminated with exit 0. This is not a full campaign, build, browser, assistive-technology or publication check.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "Accepted revision 2: the full question explanation derives all four array entries from validation eligibility, custom-error state and the checkValidity branch. Original blind answer D is uniquely correct. All five same-revision gates pass, with code, key, goal, all five options and all three sourceRefs preserved.",
+          "contentSha256": "1d05bfa9341b479896fbac80e1c3c657fe0ff52bb415d414db3ecf88b6e66897",
+          "blindPackageSha256": "addd7187ebddd7de8d99282a94a33d05dd94110b9f348f47f1e00129b9496c1a",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-003-cycle-1.json",
+          "reviewPackageSha256": "f7d3bec6e6e56533129ae4997fdecc37552f3f677b0139fa1a388fd3773984e3",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r016-dom-html-s3-w02-o1",
+              "revision": 1,
+              "contentSha256": "28b61234beca41b49da2d82579c622470ab6cfd44945c75e681aa6486b87cd33"
+            },
+            {
+              "kind": "written_option",
+              "id": "r016-dom-html-s3-w02-o2",
+              "revision": 1,
+              "contentSha256": "9692ee56d172eb476e917774fffd629b5716d9b7487480879690ee36aa18b2aa"
+            },
+            {
+              "kind": "written_option",
+              "id": "r016-dom-html-s3-w02-o3",
+              "revision": 1,
+              "contentSha256": "0f9c1051c9c08f0a5328273635d7c188b154f0f6bf5ca0dac969012e7b8b42c0"
+            },
+            {
+              "kind": "written_option",
+              "id": "r016-dom-html-s3-w02-o4",
+              "revision": 1,
+              "contentSha256": "b065672295612180db39e9dcf21e1eae8e196ad7c1ae59de34ad6d5390e3f5ce"
+            },
+            {
+              "kind": "written_option",
+              "id": "r016-dom-html-s3-w02-o5",
+              "revision": 1,
+              "contentSha256": "ab62e0b8d6f5e1edfbde69c4875b46cec3c379be3714e05976d5975b0b9b940a"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "Accepted revision 2: the full question explanation derives all four array entries from validation eligibility, custom-error state and the checkValidity branch. Original blind answer D is uniquely correct. All five same-revision gates pass, with code, key, goal, all five options and all three sourceRefs preserved.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r016-dom-html-s3-w02/explanation"
+      ]
+    }
+  ],
+  "counts": {
+    "registered": 2,
+    "accepted": 2,
+    "rejected": 0,
+    "pending": 0,
+    "newRegular": 0,
+    "revisedRegular": 2,
+    "publishedRevisedRegular": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.11-editorial.3",
+    "bankSha256": "4a262a70eaa25bba13d4dd6b73d01896876d81913e4b19fdfbe406de0683b672",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [],
+  "nextAction": "채택된 정확한 해설 정정 개정판은 별도로 검증하는 전체·변경분 전달 준비로 진행한다. 새 학습 목표·다음 회차·Git/Pages 공개 완료를 뜻하지 않는다.",
+  "summary": "기존 두 문항의 해설 결함만 정정하며 신규 지식·문항·선택지를 추가하지 않는다."
+}
