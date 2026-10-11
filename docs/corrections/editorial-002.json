@@ -1,0 +1,345 @@
+{
+  "ledgerSchemaVersion": 1,
+  "kind": "accepted_content_editorial",
+  "campaignId": "2026-exam-final",
+  "correctionRoundId": "editorial-002",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-10T23:22:10.151Z",
+  "decisionDeadline": "2026-10-11T02:00:00Z",
+  "closedAt": "2026-10-10T23:49:58.142Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxRoundHours": 4,
+    "newKnowledgeItems": 0
+  },
+  "baseline": {
+    "sourceCommit": "44646bb0427164d13fe8b604dd6c7325e7808938",
+    "bankVersion": "2026.10.10-regular.41-selection.1",
+    "bankSha256": "de4397ef9e0fb1d717bfc21dcc43a41c257a37b3c0f22e6c6e326544e7fca8f4",
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80
+  },
+  "changedQuestionIds": [
+    "r019-html-css-practical-s4-w07",
+    "r005-css-script-w08"
+  ],
+  "changedOptionIds": [],
+  "changedPracticalChoiceIds": [],
+  "corrections": [
+    {
+      "correctionId": "e002-constructor-return",
+      "issueId": "explanation-fap-01",
+      "questionId": "r019-html-css-practical-s4-w07",
+      "templateId": "r019-html-css-practical-template-new-constructor-ignores-primitive-return-but-uses-explicit-object-return",
+      "learningGoalId": "r019-html-css-practical-template-new-constructor-ignores-primitive-return-but-uses-explicit-object-return",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s4",
+      "priorAcceptedRef": {
+        "roundId": "round-019",
+        "candidateId": "r019-html-css-practical-s4-w07",
+        "ledgerPath": "docs/rounds/round-019.json",
+        "bankVersion": "2026.10.05-regular.19",
+        "bankSha256": "8fc3b284231a86473f9cbbed63ce45e6eba6ac1f887e565995101949d034062a",
+        "questionRevision": 1,
+        "contentSha256": "3514e04711d8b0412640c10a8139a027706aee73da0b616d2d4e2b94923e9605"
+      },
+      "defect": "question.explanation은 반환 종류와 객체 독립성을 판단하라는 점검 지시만 제시하고, 일반 함수 생성자의 원시값 반환 무시·객체 반환 대체 규칙과 제시 코드의 실제 result 배열을 설명하지 않는다. 정답 선택지에만 있던 결정 규칙을 기본 해설에서 자립적으로 설명한다.",
+      "revision": 2,
+      "authorId": "e002-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r019-html-css-practical-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07",
+          "location": "HTML: 링크·메타데이터·표·서식·상호작용; CSS: 선택자·글꼴·사용자 인터페이스; JavaScript 기초문법",
+          "checkedAt": "2026-10-10T23:16:49.491491+00:00",
+          "summary": "2026-05-07 고정 출제기준의 보존 HWP 원문(80896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)을 다시 대조했다. 2026-10-09 실제 HTTP 200 취득 기록과 원문 결박 추출 검증을 확인했으며, JavaScript 기초문법의 변수·연산자·제어문·객체·함수 범위를 확인했다. 이번 웹 도구의 HWP 열기는 Internal Error였으므로 새 다운로드로 주장하지 않는다.",
+          "rights": "지정 1차 자료의 규범상 사실을 짧게 요약하고 지문·코드·선택지·해설을 독자 작성했다. 공식 시험 샘플이나 유료 문제 문구를 복제하지 않았으며 원문 전문은 배포하지 않는다."
+        },
+        {
+          "sourceId": "r019-html-css-practical-src-constructor-return",
+          "title": "MDN JavaScript Reference: new",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new#description",
+          "version": "MDN JavaScript Reference, 2026-10-05 확인",
+          "location": "Description: constructor return result",
+          "checkedAt": "2026-10-10T23:16:49.491491+00:00",
+          "summary": "이번에 읽을 수 있었던 MDN new의 Description은 일반 함수 생성자 호출의 객체 반환 시 반환 객체 사용, 원시값 반환 시 생성한 인스턴스 사용을 설명한다. 이 기존 참고자료의 URL·기록된 version·location은 보존하고, ECMA-262 제6판 §9.2.2를 별도 1차 규범 근거로 연결한다. 현재 페이지 관측을 과거 2026-10-05 페이지 원문 동일성 증명으로 취급하지 않는다.",
+          "rights": "지정 1차 자료의 규범상 사실을 짧게 요약하고 지문·코드·선택지·해설을 독자 작성했다. 공식 시험 샘플이나 유료 문제 문구를 복제하지 않았으며 원문 전문은 배포하지 않는다."
+        },
+        {
+          "sourceId": "editorial002-src-es2015-ordinary-constructor-return",
+          "title": "ECMAScript 2015 Language Specification — ECMAScript Function Objects [[Construct]]",
+          "url": "https://262.ecma-international.org/6.0/#sec-ecmascript-function-objects-construct-argumentslist-newtarget",
+          "version": "ECMA-262 제6판, ECMAScript 2015, 2015-06",
+          "location": "§9.2.2 [[Construct]], 단계 5, 8, 13a–13b (일반 함수의 base 생성자)",
+          "checkedAt": "2026-10-10T23:05:44Z",
+          "summary": "일반 함수의 생성자 호출은 새 객체를 this로 사용한다. 명시 반환값이 객체이면 그 객체를 결과로 반환하고, base 생성자의 반환값이 객체가 아니면 처음 만든 객체를 결과로 반환한다.",
+          "rights": "고정판 표준의 관련 규칙을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·코드·선택지는 보존하며 원문 전문이나 공식 시험 문항은 배포하지 않는다. 원문 저작권은 원 저작권자에게 있다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 2,
+          "startedAt": "2026-10-10T23:23:23.344Z",
+          "finishedAt": "2026-10-10T23:34:13.661Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "정답·해설·출처 공개 전에 확정한 E는 [\"object\", \"원본\", \"대체\"]이며, 공개 후 대조한 유일한 정답과 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "ECMA-262 제6판 §9.2.2의 객체 생성·this 바인딩·반환 분기를 직접 확인했다. 현재 MDN 설명도 일치한다. 고정 출제기준은 보존 HWP를 직접 해독해 범위를 확인했으며 신규 취득으로 표시하지 않는다. 현재 MDN 관측은 과거 페이지 동일성 증명이 아니다.",
+              "evidenceRefs": [
+                "r019-html-css-practical-src-scope-written",
+                "r019-html-css-practical-src-constructor-return",
+                "editorial002-src-es2015-ordinary-constructor-return"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "주어진 일반 함수와 두 독립 new 호출에서는 원시값 반환을 무시하고 객체 반환을 사용한다. 엄격 모드 여부로 값이 달라지지 않으며 5개 보기는 서로 다르고 E만 성립한다. 조건을 바꾸지 않고 성립하는 반례나 복수 정답이 없다.",
+              "evidenceRefs": []
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "지문은 실행 결과 배열을 명시하며 코드가 텍스트 자료로 완결되어 있다. 한국어 문자열과 세 배열 요소가 구별되고 색상·이미지·위치에 의존하지 않는다. 기본 해설은 규칙과 코드 적용을 모두 포함한다. 문항 콘텐츠 수준의 접근성 검토이며 화면 렌더링이나 보조기기 실행 검사는 포함하지 않는다.",
+              "evidenceRefs": []
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "등록 개정·본문 해시·독립 풀이 패키지 해시·선택지 구성요소 해시를 재계산해 일치시켰다. 연결·출처·고유성·4/5지선다 구성 및 엄격 공개 스키마를 검사했고 역사적 예외 없이 해설 저작 검사를 통과했다. 변경은 등록된 해설과 출처 연결 추가로 한정된다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "개정 2의 독립 풀이 E가 정답 선택지와 일치한다. 일반 함수 생성자의 반환 규칙과 실제 result를 기본 해설에서 자립적으로 설명하며, 연결된 선택지 5개와 출처 3개를 모두 대조했다. 다섯 게이트를 통과했다.",
+          "contentSha256": "c849989420186473b04e453fc33ac7d421c5297f1042f56f9be0a18040809384",
+          "blindPackageSha256": "f7dbd02b5cc0a6c1db4acd6439bcd84bebaf699cb02f04e9fe87dbf61308bbf7",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-002-cycle-1.json",
+          "reviewPackageSha256": "a3dbc13bc7c39e011f58cfb772b6d43a35abe47b22db4bf188f37da11737054a",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r019-html-css-practical-s4-w07-o1",
+              "revision": 1,
+              "contentSha256": "91ba395e1e62ea24b0051bbc2310fd0ab70f70969bb0fb631a450d5c776b0bd9"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-html-css-practical-s4-w07-o2",
+              "revision": 1,
+              "contentSha256": "3fb8ad8ba74f3f5bf08444452ec29533165ee426636d980e9e02315709f4951e"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-html-css-practical-s4-w07-o3",
+              "revision": 1,
+              "contentSha256": "dc5eef8fbfcf4496da9d018b4e50c7cf78b61fe2f33db48f2ea967ef4c15ccd4"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-html-css-practical-s4-w07-o4",
+              "revision": 1,
+              "contentSha256": "0099c3785da8eb6922275037aefa76b9990cc10706f8e1923dfb1ae943709a36"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-html-css-practical-s4-w07-o5",
+              "revision": 1,
+              "contentSha256": "5e34e6e5b0fe981fed456faf39537a2955435b140f2b2007dcbece810dac7a8e"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "개정 2의 독립 풀이 E가 정답 선택지와 일치한다. 일반 함수 생성자의 반환 규칙과 실제 result를 기본 해설에서 자립적으로 설명하며, 연결된 선택지 5개와 출처 3개를 모두 대조했다. 다섯 게이트를 통과했다.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r019-html-css-practical-s4-w07/explanation",
+        "/questions/r019-html-css-practical-s4-w07/sourceRefs/2"
+      ]
+    },
+    {
+      "correctionId": "e002-string-replace",
+      "issueId": "explanation-fap-02",
+      "questionId": "r005-css-script-w08",
+      "templateId": "r005-css-script-template-js-string-replace-first-occurrence-new-value",
+      "learningGoalId": "r005-css-script-template-js-string-replace-first-occurrence-new-value",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s4",
+      "priorAcceptedRef": {
+        "roundId": "round-005",
+        "candidateId": "r005-css-script-w08",
+        "ledgerPath": "docs/rounds/round-005.json",
+        "bankVersion": "2026.10.04-regular.5",
+        "bankSha256": "77a312eb775786ccd069a5f1ec77d4ec96df8141eca657f0f594f02ac30820e1",
+        "questionRevision": 1,
+        "contentSha256": "fc4e9a4c1a1b941453b85a881f67145fee4b7c7141a40c012acdfa055f3e3ad0"
+      },
+      "defect": "question.explanation은 replace의 처리 범위와 반환값·기존 문자열을 구분하라고만 지시하고, 문자열 검색값의 첫 일치 치환·새 문자열 반환·원문 유지 규칙과 제시 코드의 실제 두 변수 값을 설명하지 않는다. 정답 판단이나 기존 목표는 바꾸지 않는다.",
+      "revision": 2,
+      "authorId": "e002-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r005-css-script-src-es-replace",
+          "title": "ECMAScript 2015 Language Specification — String.prototype.replace",
+          "url": "https://262.ecma-international.org/6.0/#sec-string.prototype.replace",
+          "version": "ECMA-262 제6판, ECMAScript 2015, 2015-06",
+          "location": "§21.1.3.14 String.prototype.replace, 단계 10 및 13–15",
+          "checkedAt": "2026-10-10T23:05:44Z",
+          "summary": "공식 고정판 §21.1.3.14를 다시 열람했다. 단계 10은 문자열의 첫 일치를 찾고, 단계 13–15는 접두부·치환값·나머지를 결합한 새 문자열을 반환한다. 제시 코드에서 text는 red red이고 result는 blue red이다.",
+          "rights": "표준의 사실을 필요한 범위에서 독자적으로 요약했다. 문항·선택지·예제 코드는 새로 작성했으며 표준 예제·공식 시험 샘플·원문 전문을 복제하지 않았다. 원문 저작권과 이용 조건은 원 저작권자에게 있다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 2,
+          "startedAt": "2026-10-10T23:23:23.344Z",
+          "finishedAt": "2026-10-10T23:34:13.661Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "정답·해설·출처 공개 전에 확정한 A는 text=\"red red\", result=\"blue red\"이며, 공개 후 대조한 유일한 정답과 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "공식 ECMA-262 제6판 §21.1.3.14를 직접 열람했다. 단계 10의 첫 일치 선택 및 13–15의 새 문자열 구성·반환이 기본 해설과 실제 결과를 뒷받침한다.",
+              "evidenceRefs": [
+                "r005-css-script-src-es-replace"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "검색 인수가 정규식이 아닌 문자열임이 코드에 명시되어 있다. 첫 red만 치환되고 text는 재할당되지 않는다. 엄격 모드 여부로 값이 달라지지 않으며 서로 다른 5개 보기 중 A만 성립한다. 실제 제시 조건에서 복수 정답이나 유효한 반례가 없다.",
+              "evidenceRefs": []
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "지문이 text와 result의 순서를 명시하며 짧은 코드와 모든 값이 텍스트로 제공된다. red/blue는 문자열 값이므로 실제 색 지각이 필요하지 않다. 기본 해설은 처리 범위·반환·원문 유지와 두 변수의 값을 자립적으로 설명한다. 문항 콘텐츠 수준의 접근성 검토이며 화면 렌더링이나 보조기기 실행 검사는 포함하지 않는다.",
+              "evidenceRefs": []
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e002-independent-primary-v1",
+              "summary": "등록 개정·본문 해시·독립 풀이 패키지 해시·선택지 구성요소 해시를 재계산해 일치시켰다. 연결·출처·고유성·4/5지선다 구성 및 엄격 공개 스키마를 검사했고 역사적 예외 없이 해설 저작 검사를 통과했다. 변경은 등록된 기본 해설에만 한정된다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "개정 2의 독립 풀이 A가 정답 선택지와 일치한다. 기본 해설은 문자열 검색 인수의 첫 일치 치환·새 문자열 반환·원문 유지를 실제 text/result 값에 적용한다. 연결된 선택지 5개와 출처 1개를 모두 대조했으며 다섯 게이트를 통과했다.",
+          "contentSha256": "e31e859feb798ccf6a774662cbe4b1ed22364c4d23c19ad9f39fc989441feefb",
+          "blindPackageSha256": "abc8ebef0356a1b27e04ec7d3f4c7389cd0e57aea940197603719da0ce53c485",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-002-cycle-1.json",
+          "reviewPackageSha256": "a3dbc13bc7c39e011f58cfb772b6d43a35abe47b22db4bf188f37da11737054a",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r005-css-script-w08-o1",
+              "revision": 1,
+              "contentSha256": "986e55ebe8cdbdcbac97b8358fce27891cd62ac6b74155e333ba46d7017716b4"
+            },
+            {
+              "kind": "written_option",
+              "id": "r005-css-script-w08-o2",
+              "revision": 1,
+              "contentSha256": "f85b009370787ba3f119b63f3dff2e6f7f6f753915f9e5e6adeb7890cd4cbde1"
+            },
+            {
+              "kind": "written_option",
+              "id": "r005-css-script-w08-o3",
+              "revision": 1,
+              "contentSha256": "82832363aba364b14597fbf99f1cbe6ac41fdb2dac7964d29f15bdf4664eb0d9"
+            },
+            {
+              "kind": "written_option",
+              "id": "r005-css-script-w08-o4",
+              "revision": 1,
+              "contentSha256": "ea6c0c4b93284f9e6d93f651f44c53a4a38b20f9ae794276ca5e63ba25918d18"
+            },
+            {
+              "kind": "written_option",
+              "id": "r005-css-script-w08-o5",
+              "revision": 1,
+              "contentSha256": "a7b51bab647508cd7d8ed06d2c4bfa13c3ded302256ab8cc1a8c188bd5d053a4"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "개정 2의 독립 풀이 A가 정답 선택지와 일치한다. 기본 해설은 문자열 검색 인수의 첫 일치 치환·새 문자열 반환·원문 유지를 실제 text/result 값에 적용한다. 연결된 선택지 5개와 출처 1개를 모두 대조했으며 다섯 게이트를 통과했다.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r005-css-script-w08/explanation"
+      ]
+    }
+  ],
+  "counts": {
+    "registered": 2,
+    "accepted": 2,
+    "rejected": 0,
+    "pending": 0,
+    "newRegular": 0,
+    "revisedRegular": 2,
+    "publishedRevisedRegular": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.11-editorial.2",
+    "bankSha256": "a752fd3714ca62e0f0067af778a547f430690f60d6c2da831af4330a162c2c18",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [],
+  "nextAction": "연구042의 실제 종결 판정을 보존한다. 다음 연구043의 폼 편집 가능성·제출·검증은 아직 시작하지 않은 조사 배정이며 새 목표 등록·검토·발행을 뜻하지 않는다. 기존 가치 검토 및 공개 제외 판정은 종결 상태를 유지한다.",
+  "summary": "기존 두 문항의 해설 결함만 정정하며 신규 지식·문항·선택지를 추가하지 않는다."
+}

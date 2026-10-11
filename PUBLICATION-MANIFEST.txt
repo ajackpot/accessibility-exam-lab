@@ -386,3 +386,14 @@ docs/analysis/2026-10-10-existing-bank-value-final-decisions.md
 src/new-session-eligibility.js
 tests/new-session-eligibility.test.mjs
 docs/publications/normal-041-selection-001.json
+docs/corrections/editorial-002.json
+docs/corrections/editorial-002.md
+docs/corrections/evidence/editorial-002-cycle-1.json
+data/releases/2026.10.11-editorial.2/bank.json
+tests/editorial-two-bank.test.mjs
+tests/editorial-release-bundle.test.mjs
+scripts/campaign-validation-primitives.mjs
+scripts/editorial-history-core.mjs
+scripts/editorial-publication.mjs
+tests/editorial-publication.test.mjs
+tests/editorial-publication-consumers.test.mjs

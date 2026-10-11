@@ -5,6 +5,10 @@ import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
 import {isNormalPublication, isNormalChainPublication, NORMAL_SOURCE_KEYS, SELECTED_NORMAL_SOURCE_KEYS, NORMAL_CHAIN_SOURCE_KEYS, validateNormalPublication, validateNormalBankTransition,normalPublicationTree} from './normal-publication.mjs';
 import {FREEZE_AT} from '../src/domain.js';
+import {readFileSync} from 'node:fs';
+import {validateCampaignJsonSchema,regularCoverage,nextScheduledRoundAt,FINAL_DECISION_AT} from './campaign-validation-primitives.mjs';
+import {EDITORIAL_PUBLICATION_KIND,EDITORIAL_SOURCE_KIND,isEditorialPublication,validateEditorialPublication} from './editorial-publication.mjs';
+import {validateEditorialHistorySemantics} from './editorial-history-core.mjs';
 import normalRootTrust from '../docs/deliveries/normal-backup-root-trust.json' with {type:'json'};
 import normalChainTrust from '../docs/deliveries/normal-backup-chain-trust.json' with {type:'json'};
 import backupTrust from '../docs/deliveries/release-backup-trust.json' with {type:'json'};
@@ -15,6 +19,8 @@ import {validateQuarantineCampaign} from './prepublication-quarantine.mjs';
 import {assertEvidenceLossProvenance, assertEvidenceLossPayload} from './evidence-loss-block.mjs';
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const json = value => JSON.stringify(value, null, 2) + '\n';
+const editorialSchema=JSON.parse(readFileSync(new URL('../docs/corrections/editorial-ledger.schema.json',import.meta.url),'utf8'));
+const editorialHelpers=Object.freeze({validateJsonSchema:validateCampaignJsonSchema,regularCoverage,nextScheduledRoundAt,FINAL_DECISION_AT});
 // Adding another publication requires independently verified external evidence and
 // a reviewed pin. Caller-supplied booleans, Maps, timestamps or checksums are not proof.
 export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze([
@@ -138,6 +144,7 @@ export async function validateNormalChainSynchronizationSources(synchronizations
  * omit later delivery dependencies. This does not activate or resolve an event.
  * Current/release/source-complete contexts and default callers remain strict. */
 export function requiresSynchronizationDeliveryDependencies(record, {ledgers = [], now = null, release = true} = {}) {
+  if(isEditorialPublication(record))return false;
   const at=Date.parse(record.verifiedAt);
   return !(release===false && Number.isFinite(now) && now<at &&
     !record.rounds.every(s=>ledgers.some(r=>r.roundId===s.roundId)) &&
@@ -157,6 +164,7 @@ export async function validateIndependentSynchronizationSources(synchronizations
   }
 }
 function validateIndependentPublicationCounts(record, {ledgers,banks,ledgerSources,publicationSelections=null}, previousPublication) {
+  if(isEditorialPublication(record))return;
   const independent=record.rounds.some(s=>s.deliveryProof?.path?.startsWith('docs/deliveries/chains/') || independentTrust.checkpoints.some(pin=>pin.roundId===s.roundId||pin.sha256===s.deliveryProof?.sha256));
   const chain=isNormalChainPublication(record),normal=isNormalPublication(record)||chain;
   const identities=new Map();
@@ -202,20 +210,41 @@ function validateIndependentPublicationCounts(record, {ledgers,banks,ledgerSourc
 /** Pure semantic evidence checks for review/tests. This never authenticates a pin,
  * creates history, resolves delivery, or grants publication/editorial authority. */
 export function validatePublicationSynchronizationSemantics(record,context,previousPublication) {
-  if(isNormalPublication(record)||isNormalChainPublication(record))validateNormalPublication(record,{...context,inventory:checkedInventory(record),previousPublication});
+  if(!isEditorialPublication(record)&&record?.rounds?.some(s=>s.kind===EDITORIAL_SOURCE_KIND||Object.hasOwn(s,'correctionRoundId')||/^editorial-/.test(s.roundId)))throw Error('Editorial source cannot masquerade as another publication dialect');
+  if(isEditorialPublication(record))validateEditorialPublication(record,{...context,inventory:checkedInventory(record),previousPublication});
+  else if(isNormalPublication(record)||isNormalChainPublication(record))validateNormalPublication(record,{...context,inventory:checkedInventory(record),previousPublication});
   validateIndependentPublicationCounts(record,context,previousPublication);
   return {ok:true,currentReleaseClearance:false,canStartNewContent:false};
 }
 
 /** Original history remains authoritative. Only a separate post-verification event
  * is added to cumulative ordering; old ledgers/counters are never synthesized. */
-export function validatePublicationSynchronizations(synchronizations = [], {ledgers = [], banks = new Map(), ledgerSources = new Map(), now = null, publicationState = null, activeBankVersion = null, publicationSelections = null, deliveryCheckpointSources = new Map()} = {}) {
-  const errors = [], history = [], seen = new Set();
+function admitEditorialPublication(record,context,priorHistory,priorRecords) {
+  // This function is module-private. Only the loop below creates this prefix;
+  // caller context fields, semantic passes and fabricated history are ignored.
+  if(priorHistory.length!==priorRecords.length||priorHistory.some((h,i)=>h.evidence!==priorRecords[i])||!priorHistory.length||hash(json(priorHistory.at(-1).evidence))!==record.previousSynchronizationSha256)throw Error('Editorial publication requires the complete internally authenticated prior history');
+  // Raw proof validation authenticates this publication prefix only. Full
+  // independent/normal chain membership and current-release clearance remain
+  // mandatory in loadRoundContext; this is not an offline authority shortcut.
+  for(const prior of priorRecords)for(const source of prior.rounds)if(source.deliveryProof)validateSynchronizationDeliveryProof(prior,source,context.deliveryCheckpointSources.get(source.roundId));
+  const at=Date.parse(record.verifiedAt),asOf=context.editorials.filter(e=>Date.parse(e.startedAt)<=at),ledgers=context.ledgers.filter(l=>Date.parse(l.startedAt)<=at);
+  const result=validateEditorialHistorySemantics(asOf,{...context,ledgers,schema:context.editorialSchema,now:at},context.editorialHelpers,priorHistory);
+  if(!result.ok)throw Error(result.errors.join('; '));
+}
+export function validatePublicationSynchronizations(synchronizations = [], {ledgers = [], banks = new Map(), ledgerSources = new Map(), now = null, publicationState = null, activeBankVersion = null, publicationSelections = null, deliveryCheckpointSources = new Map(), editorials = [], editorialSources = new Map(), editorialReports = new Map(), reviewPackages = new Map(), availableFiles = null} = {}) {
+  const errors = [], history = [], authenticatedHistory = [], seen = new Set();
+  const context={ledgers,banks,ledgerSources,now,publicationState,activeBankVersion,publicationSelections,deliveryCheckpointSources,editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,availableFiles,editorialHelpers};
   try { validatePublicationEvidenceOrder(synchronizations); } catch(error) { return {ok:false, errors:[error.message], history}; }
-  for (const record of synchronizations) {
+  const relevant=record=>activeBankVersion!==null&&(now===null||Date.parse(record.verifiedAt)<=now)||record.rounds.every(s=>isEditorialPublication(record)?editorials.some(e=>e.correctionRoundId===s.correctionRoundId):ledgers.some(r=>r.roundId===s.roundId))||[...ledgers,...editorials].some(r=>Date.parse(r.startedAt)>=Date.parse(record.verifiedAt));
+  // An admitted sibling needs every older source, even if a caller supplied an
+  // otherwise historical subset. Missing evidence cannot be hidden by slicing.
+  const requiredPrefix=Math.max(-1,...synchronizations.map((record,i)=>isEditorialPublication(record)&&Array.isArray(record.rounds)&&relevant(record)?i:-1));
+  for (const [index,record] of synchronizations.entries()) {
     if (!trusted(record)) { errors.push('publication synchronization proof is absent, unreviewed or tampered'); continue; }
     if (!Array.isArray(record.rounds) || !record.rounds.length) { errors.push('Publication synchronization requires original delivered sources'); continue; }
-    if (!['verified_cumulative_publication','verified_normal_publication','verified_normal_chain_publication',RECONCILED_NORMAL_CHAIN_PUBLICATION_KIND].includes(record.kind) || !isNormalPublication(record) && record.rounds.some(s=>s.kind==='normal_frozen_ledger' || !isNormalChainPublication(record)&&s.kind==='normal_delivered_checkpoint' || record.previousSynchronizationSha256 && (!s.deliveryProof || !safePath(s.deliveryProof.path) || !/^[a-f0-9]{64}$/.test(s.deliveryProof.sha256)))) { errors.push('Unknown or mismatched publication event/source kind'); continue; }
+    const editorial=isEditorialPublication(record);
+    if (!['verified_cumulative_publication','verified_normal_publication','verified_normal_chain_publication',RECONCILED_NORMAL_CHAIN_PUBLICATION_KIND,EDITORIAL_PUBLICATION_KIND].includes(record.kind) || editorial&&record.rounds.some(s=>s.kind!==EDITORIAL_SOURCE_KIND)||!editorial&&record.rounds.some(s=>s.kind===EDITORIAL_SOURCE_KIND||Object.hasOwn(s,'correctionRoundId')) || !editorial&&!isNormalPublication(record) && record.rounds.some(s=>s.kind==='normal_frozen_ledger' || !isNormalChainPublication(record)&&s.kind==='normal_delivered_checkpoint' || record.previousSynchronizationSha256 && (!s.deliveryProof || !safePath(s.deliveryProof.path) || !/^[a-f0-9]{64}$/.test(s.deliveryProof.sha256)))) { errors.push('Unknown or mismatched publication event/source kind'); continue; }
+    if(editorial&&record.rounds.some(source=>ledgers.some(ledger=>ledger.roundId===source.correctionRoundId||ledger.correctionRoundId===source.correctionRoundId))){errors.push('Editorial publication source must be supplied only in the editorial collection');continue;}
     if (seen.has(record.syncId)) { errors.push('duplicate publication synchronization'); continue; }
     seen.add(record.syncId);
     const at = Date.parse(record.verifiedAt);
@@ -223,20 +252,25 @@ export function validatePublicationSynchronizations(synchronizations = [], {ledg
     if (!Number.isFinite(at) || at >= FREEZE_AT || publicationState?.finalizedAt && at > Date.parse(publicationState.finalizedAt)) { errors.push('publication synchronization violates final cutoff or persistent freeze'); continue; }
     // Future evidence is authenticated, but cannot authorize an earlier round.
     // A complete supplied source is still byte-checked before it becomes active.
-    const relevant = activeBankVersion !== null && (now === null || at <= now) || record.rounds.every(s => ledgers.some(r => r.roundId === s.roundId)) || ledgers.some(r => Date.parse(r.startedAt) >= at);
-    if (!relevant) continue; // unrelated earlier subset audit
+    if(index>requiredPrefix&&!relevant(record))continue;
     const before = errors.length;
     for (const source of record.rounds) {
-      const matches = ledgers.filter(r => r.roundId === source.roundId);
-      const raw = ledgerSources instanceof Map ? ledgerSources.get(source.roundId) : null;
+      const id=editorial?source.correctionRoundId:source.roundId;
+      const matches = editorial?editorials.filter(e=>e.correctionRoundId===id):ledgers.filter(r=>r.roundId===id);
+      const sources=editorial?editorialSources:ledgerSources,raw=sources instanceof Map?sources.get(id):null;
       const bankRaw = (banks instanceof Map ? banks.get(source.bankVersion) : banks?.[source.bankVersion])?.raw;
-      if (!raw || hash(raw) !== source.originalLedgerSha256 || matches.length !== 1 || !equal(JSON.parse(raw.toString()), matches[0])) errors.push(`${source.roundId}: synchronization requires exact original closed ledger and unchanged review history`);
-      if (!bankRaw || hash(bankRaw) !== source.bankSha256) errors.push(`${source.roundId}: synchronization requires exact immutable bank bytes`);
-      if (Date.parse(source.deliveredAt) > at || matches[0] && Date.parse(matches[0].closedAt) > at) errors.push(`${source.roundId}: synchronization must follow delivery and decision closure`);
+      if (!raw || hash(raw) !== source.originalLedgerSha256 || matches.length !== 1 || !equal(JSON.parse(raw.toString()), matches[0])) errors.push(`${id}: synchronization requires exact original closed ledger and unchanged review history`);
+      if (!bankRaw || hash(bankRaw) !== source.bankSha256) errors.push(`${id}: synchronization requires exact immutable bank bytes`);
+      if (Date.parse(source.deliveredAt) > at || matches[0] && Date.parse(matches[0].closedAt) > at) errors.push(`${id}: synchronization must follow delivery and decision closure`);
     }
-    try { validatePublicationSynchronizationSemantics(record,{ledgers,banks,ledgerSources,publicationSelections,deliveryCheckpointSources},synchronizations.find(prior=>hash(json(prior))===record.previousSynchronizationSha256)); } catch(error) { errors.push(error.message); }
-    if (errors.length !== before || now !== null && at > now) continue;
-    history.push({syncId:record.syncId, synchronizedRoundIds:record.rounds.map(s => s.roundId), publication:{status:'verified', verifiedAt:record.verifiedAt, bankVersion:record.manifest.bankVersion, bankSha256:record.manifest.sha256, commit:record.commit, url:record.siteUrl}, evidence:record});
+    try {
+      validatePublicationSynchronizationSemantics(record,context,synchronizations.find(prior=>hash(json(prior))===record.previousSynchronizationSha256));
+      if(editorial)admitEditorialPublication(record,context,authenticatedHistory,synchronizations.slice(0,index));
+    } catch(error) { errors.push(error.message); }
+    if (errors.length !== before) continue;
+    const item={syncId:record.syncId,synchronizedRoundIds:editorial?[]:record.rounds.map(s=>s.roundId),...(editorial?{synchronizedEditorialIds:record.rounds.map(s=>s.correctionRoundId)}:{}),publication:{status:'verified',verifiedAt:record.verifiedAt,bankVersion:record.manifest.bankVersion,bankSha256:record.manifest.sha256,commit:record.commit,url:record.siteUrl},evidence:record};
+    authenticatedHistory.push(item);
+    if(now===null||at<=now)history.push(item);
   }
   return {ok:errors.length === 0, errors, history};
 }
@@ -248,7 +282,7 @@ export function resolveSynchronizedArtifacts(receipts, {synchronizations = [], .
   const resolvedArtifacts = new Set(), errors = [...result.errors];
   if (!Array.isArray(receipts)) return {ok:false, errors:['receipt array required'], resolvedArtifacts};
   for (const receipt of receipts) {
-    const proof = result.history.flatMap(h => h.evidence.rounds).find(s => !['normal_frozen_ledger','normal_delivered_checkpoint'].includes(s.kind) && typeof s.artifactSha256==='string' && s.artifactSha256 === receipt?.artifactSha256);
+    const proof = result.history.flatMap(h => h.evidence.rounds).find(s => !['normal_frozen_ledger','normal_delivered_checkpoint',EDITORIAL_SOURCE_KIND].includes(s.kind) && typeof s.artifactSha256==='string' && s.artifactSha256 === receipt?.artifactSha256);
     if (!proof) continue;
     if (hash(json(receipt)) !== proof.receiptSha256 || receipt.manifestSha256 !== proof.manifestSha256) errors.push('synchronized artifact receipt is not the exact original delivered evidence');
     else resolvedArtifacts.add(proof.artifactSha256);

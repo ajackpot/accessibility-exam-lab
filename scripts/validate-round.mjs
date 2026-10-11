@@ -1,5 +1,8 @@
 import {loadPublicationSelections, resolvePublicationIdentity, assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {isNormalPublication} from './normal-publication.mjs';
+import {isEditorialPublication} from './editorial-publication.mjs';
+import {validateCampaignJsonSchema, validDateTime, regularCoverage, nextScheduledRoundAt, FOUR_HOUR_CADENCE_AT, FINAL_DECISION_AT} from './campaign-validation-primitives.mjs';
+export {regularCoverage, FOUR_HOUR_CADENCE_AT, CAMPAIGN_SCHEDULE_VERSIONS, nextScheduledRoundAt, FINAL_DECISION_AT} from './campaign-validation-primitives.mjs';
 import {validateEvidenceLossCampaign,loadEvidenceLossDependencies} from './evidence-loss-block.mjs';
 import fs from 'node:fs/promises';
 import {readFileSync} from 'node:fs';
@@ -7,7 +10,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual} from 'node:util';
-import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion, presentQuestion} from '../src/domain.js';
+import {FREEZE_AT, validateBank, validateBankForPublication, validateExplanationAuthoring, isPublishedQuestion} from '../src/domain.js';
 
 import {parseImmutableBank, withBankParsingSession, validateQuarantineCampaign, loadQuarantineDependencies} from './prepublication-quarantine.mjs';
 import {historicalExplanationBaseline} from './explanation-authoring.mjs';
@@ -16,7 +19,6 @@ import {validateEditorialHistory, validateEditorialTransition, validateCampaignB
 export {editorialHash, editorialContent, editorialContentHash, editorialBlindPackage, editorialChangedPaths, editorialComponentStates} from './editorial-ledger.mjs';
 
 const ROOT = path.resolve(import.meta.dirname, '..');
-export const FINAL_DECISION_AT = Date.parse('2026-10-16T23:00:00+09:00');
 const DEFAULT_SCHEMA = JSON.parse(readFileSync(path.join(ROOT, 'docs/rounds/round-ledger.schema.json'), 'utf8'));
 const EDITORIAL_SCHEMA = JSON.parse(readFileSync(path.join(ROOT, 'docs/corrections/editorial-ledger.schema.json'), 'utf8'));
 const SUBJECTS = ['s1', 's2', 's3', 's4', 's5'];
@@ -28,90 +30,9 @@ const own = (value, key) => Object.hasOwn(value, key);
 const meaningful = value => typeof value === 'string' && value.trim().length > 0;
 const safeRelative = value => meaningful(value) && !path.isAbsolute(value) && !value.includes('\\') && !value.split('/').some(p => !p || p === '.' || p === '..');
 
-// Deliberately scoped to the checked-in schema, not a general JSON Schema implementation.
-// An unimplemented keyword, format, external reference or schema change fails closed.
-const KEYWORDS = new Set(['$schema', '$defs', '$ref', 'title', 'description', 'type', 'const', 'enum',
-  'properties', 'required', 'additionalProperties', 'items', 'contains', 'minItems', 'maxItems',
-  'uniqueItems', 'minimum', 'maximum', 'minLength', 'pattern', 'format', 'allOf', 'anyOf', 'if', 'then', 'else']);
-function inspectSchema(schema, root, at = '#', stack = new Set()) {
-  if (typeof schema === 'boolean') return;
-  if (!object(schema)) throw new Error(`${at}: invalid schema node`);
-  for (const key of Object.keys(schema)) if (!KEYWORDS.has(key)) throw new Error(`${at}: unsupported schema keyword ${key}`);
-  if (schema.$schema && schema.$schema !== 'https://json-schema.org/draft/2020-12/schema') throw new Error(`${at}: unsupported schema dialect`);
-  if (schema.format && !['date-time', 'uri'].includes(schema.format)) throw new Error(`${at}: unsupported format ${schema.format}`);
-  if (schema.type && ![schema.type].flat().every(t => ['object', 'array', 'string', 'integer', 'number', 'null', 'boolean'].includes(t))) throw new Error(`${at}: unsupported type`);
-  if (schema.pattern) new RegExp(schema.pattern, 'u');
-  if (schema.$ref) {
-    if (!/^#\/\$defs\/[^/]+$/.test(schema.$ref) || !own(root.$defs || {}, schema.$ref.slice(8))) throw new Error(`${at}: unsupported or unresolved reference ${schema.$ref}`);
-    if (stack.has(schema.$ref)) throw new Error(`${at}: recursive schema references are unsupported`);
-    inspectSchema(root.$defs[schema.$ref.slice(8)], root, schema.$ref, new Set([...stack, schema.$ref]));
-  }
-  for (const key of ['properties', '$defs']) for (const [name, child] of Object.entries(schema[key] || {})) inspectSchema(child, root, `${at}/${key}/${name}`, stack);
-  for (const key of ['items', 'contains', 'if', 'then', 'else', 'additionalProperties']) if (own(schema, key)) inspectSchema(schema[key], root, `${at}/${key}`, stack);
-  for (const key of ['allOf', 'anyOf']) for (const [i, child] of (schema[key] || []).entries()) inspectSchema(child, root, `${at}/${key}/${i}`, stack);
-}
-function validDateTime(value) {
-  // Operational timestamps are ordinary RFC3339 civil instants. Leap-second spellings
-  // are rejected rather than silently normalized by Date.parse.
-  const m = /^(\d{4})-(\d{2})-(\d{2})[Tt](\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(?:[Zz]|([+-])(\d{2}):(\d{2}))$/.exec(value);
-  if (!m) return false;
-  const [, y, month, day, hour, minute, second, , offsetHour = '0', offsetMinute = '0'] = m;
-  const year = Number(y), mon = Number(month), d = Number(day);
-  const leap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-  const days = [31, leap ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-  return mon >= 1 && mon <= 12 && d >= 1 && d <= days[mon - 1] && Number(hour) < 24 && Number(minute) < 60 && Number(second) < 60 && Number(offsetHour) < 24 && Number(offsetMinute) < 60 && Number.isFinite(Date.parse(value));
-}
-function matchesType(value, type) {
-  return type === 'null' ? value === null : type === 'object' ? object(value) : type === 'array' ? Array.isArray(value) : type === 'integer' ? Number.isInteger(value) : type === 'number' ? typeof value === 'number' && Number.isFinite(value) : typeof value === type;
-}
-function evaluate(value, schema, root, at, errors) {
-  const fail = message => errors.push(`${at}: ${message}`);
-  if (schema === true) return;
-  if (schema === false) return fail('value is forbidden');
-  if (schema.$ref) evaluate(value, root.$defs[schema.$ref.slice(8)], root, at, errors);
-  if (schema.type && ![schema.type].flat().some(type => matchesType(value, type))) fail(`expected type ${[schema.type].flat().join('|')}`);
-  if (own(schema, 'const') && !isDeepStrictEqual(value, schema.const)) fail(`expected constant ${JSON.stringify(schema.const)}`);
-  if (schema.enum && !schema.enum.some(item => isDeepStrictEqual(value, item))) fail(`expected one of ${schema.enum.join(', ')}`);
-  if (typeof value === 'number') {
-    if (own(schema, 'minimum') && value < schema.minimum) fail(`minimum ${schema.minimum}`);
-    if (own(schema, 'maximum') && value > schema.maximum) fail(`maximum ${schema.maximum}`);
-  }
-  if (typeof value === 'string') {
-    if (own(schema, 'minLength') && [...value].length < schema.minLength) fail(`minimum length ${schema.minLength}`);
-    if (schema.pattern && !new RegExp(schema.pattern, 'u').test(value)) fail(`does not match ${schema.pattern}`);
-    if (schema.format === 'date-time' && !validDateTime(value)) fail('invalid RFC3339 date-time');
-    if (schema.format === 'uri') {
-      try { if (/\s|%(?![A-Fa-f0-9]{2})/.test(value) || !/^[A-Za-z][A-Za-z0-9+.-]*:/.test(value)) throw new Error(); new URL(value); }
-      catch { fail('invalid absolute URI'); }
-    }
-  }
-  if (object(value)) {
-    for (const key of schema.required || []) if (!own(value, key)) fail(`missing required property ${key}`);
-    for (const [key, item] of Object.entries(value)) {
-      if (own(schema.properties || {}, key)) evaluate(item, schema.properties[key], root, `${at}/${key}`, errors);
-      else if (own(schema, 'additionalProperties')) evaluate(item, schema.additionalProperties, root, `${at}/${key}`, errors);
-    }
-  }
-  if (Array.isArray(value)) {
-    if (own(schema, 'minItems') && value.length < schema.minItems) fail(`minimum items ${schema.minItems}`);
-    if (own(schema, 'maxItems') && value.length > schema.maxItems) fail(`maximum items ${schema.maxItems}`);
-    if (schema.uniqueItems && value.some((item, i) => value.slice(0, i).some(other => isDeepStrictEqual(item, other)))) fail('items must be unique');
-    if (own(schema, 'items')) value.forEach((item, i) => evaluate(item, schema.items, root, `${at}/${i}`, errors));
-    if (schema.contains && !value.some(item => { const e = []; evaluate(item, schema.contains, root, at, e); return e.length === 0; })) fail('no item satisfies contains');
-  }
-  for (const child of schema.allOf || []) evaluate(value, child, root, at, errors);
-  if (schema.anyOf && !schema.anyOf.some(child => { const e = []; evaluate(value, child, root, at, e); return e.length === 0; })) fail('no anyOf branch matches');
-  if (schema.if) {
-    const condition = []; evaluate(value, schema.if, root, at, condition);
-    const branch = condition.length ? schema.else : schema.then;
-    if (branch !== undefined) evaluate(value, branch, root, at, errors);
-  }
-}
+/** Preserve the public omitted/undefined default while the acyclic engine requires a schema. */
 export function validateJsonSchema(value, schema = DEFAULT_SCHEMA) {
-  const errors = [];
-  try { inspectSchema(schema, schema); evaluate(value, schema, schema, '$', errors); }
-  catch (error) { errors.push(`schema: ${error.message}`); }
-  return errors;
+  return validateCampaignJsonSchema(value, schema);
 }
 
 export const MANUAL_CHECKS = [
@@ -122,41 +43,6 @@ export const MANUAL_CHECKS = [
   'The effective-dated campaign schedule is a fixed bound: legacy 08:00/20:00 Asia/Seoul before 2026-10-03 00:00 KST, then every four hours at 00/04/08/12/16/20 KST. An earlier actual scheduled start must be supplied with --next-round-at. No live scheduler is queried.'
 ];
 
-/** Actual published regular unique templates, with constructible five-choice mock eligibility. */
-export function regularCoverage(bank, at = Date.parse(bank.releasedAt)) {
-  const written = emptySubjects(), fiveChoice = emptySubjects();
-  const seen = new Set(), fiveSeen = new Set(); let practical = 0;
-  for (const q of bank.questions) {
-    if (q.testOnly !== false || !isPublishedQuestion(bank, q, at)) continue;
-    if (!seen.has(q.templateId)) { seen.add(q.templateId); if (q.type === 'written') written[q.subjectId]++; else practical++; }
-    if (q.type === 'written' && !fiveSeen.has(q.templateId) && q.supportedOptionCounts?.includes(5)) {
-      try { presentQuestion(bank, q, 5, () => 0); fiveSeen.add(q.templateId); fiveChoice[q.subjectId]++; } catch { /* Not constructible, so not mock eligible. */ }
-    }
-  }
-  return {regularWrittenBySubject: written, regularPractical: practical, mockEligible: SUBJECTS.every(id => fiveChoice[id] >= 20)};
-}
-
-/** Occurrence versions are effective-dated; do not reinterpret immutable Oct 2 history. */
-export const FOUR_HOUR_CADENCE_AT = Date.parse('2026-10-03T00:00:00+09:00');
-export const CAMPAIGN_SCHEDULE_VERSIONS = Object.freeze([
-  Object.freeze({version: 'legacy-12h', effectiveFrom: Date.parse('2026-10-02T20:00:00+09:00'), effectiveUntil: FOUR_HOUR_CADENCE_AT, hours: Object.freeze([8, 20])}),
-  Object.freeze({version: 'four-hour-v2', effectiveFrom: FOUR_HOUR_CADENCE_AT, effectiveUntil: FREEZE_AT, hours: Object.freeze([0, 4, 8, 12, 16, 20])})
-]);
-const scheduledRoundStarts = CAMPAIGN_SCHEDULE_VERSIONS.flatMap(version => {
-  const starts = [];
-  for (let day = 2; day <= 16; day++) for (const hour of version.hours) {
-    const at = Date.parse(`2026-10-${String(day).padStart(2, '0')}T${String(hour).padStart(2, '0')}:00:00+09:00`);
-    if (at >= version.effectiveFrom && at < version.effectiveUntil) starts.push(at);
-  }
-  return starts;
-}).sort((a, b) => a - b);
-// The finalizer is a bound only, never another content-expansion occurrence.
-const campaignBounds = [...scheduledRoundStarts, Date.parse('2026-10-16T23:30:00+09:00')];
-export function nextScheduledRoundAt(startedAt) {
-  const start = Date.parse(startedAt);
-  if (!Number.isFinite(start)) return NaN;
-  return campaignBounds.find(at => at > start) ?? FREEZE_AT;
-}
 const evidenceIdentity = e => `${e.url.replace(/#.*$/, '')}|${e.version.trim()}|${e.location.trim()}`;
 function walkStrings(value, visit, at = '$') {
   if (typeof value === 'string') visit(value, at);
@@ -168,7 +54,7 @@ function walkStrings(value, visit, at = '$') {
  * Pass ALL campaign ledgers, not only a reopened candidate's selected ancestors.
  * now is optional for reproducible historical validation; the CLI always supplies the real current clock.
  */
-export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null, editorials = [], offlineBases = new Map(), ledgerSources = new Map(), synchronizations = [], deliveryCheckpointSources = new Map(), publicationSelections = null} = {}) {
+export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = new Map(), now = null, nextRoundAt = null, publicationState = null, availableFiles = null, editorials = [], editorialSources = new Map(), editorialReports = new Map(), editorialSchema = EDITORIAL_SCHEMA, reviewPackages = new Map(), offlineBases = new Map(), ledgerSources = new Map(), synchronizations = [], deliveryCheckpointSources = new Map(), publicationSelections = null} = {}) {
   const errors = [], rounds = [], warnings = [...MANUAL_CHECKS];
   const fail = (round, at, message) => errors.push(`${round?.roundId || '<unknown-round>'}${at}: ${message}`);
   if (!Array.isArray(ledgers)) return {ok: false, errors: ['ledgers must be an array'], warnings, rounds};
@@ -460,7 +346,7 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
     if (!isDeepStrictEqual(actualNew.written, round.counts.publishedRegularWrittenBySubject) || actualNew.practical !== round.counts.publishedRegularPractical) fail(round, '/counts', 'new public counts differ from verified accepted regular unique templates');
     let actualBank = publication || (!published ? baseline : null);
     if (!published && round.baseline.offlinePredecessor) {
-      const synchronizedHistory=validatePublicationSynchronizations(synchronizations,{ledgers:rounds,banks,ledgerSources,now:close??start,publicationState,publicationSelections,deliveryCheckpointSources}).history;
+      const synchronizedHistory=validatePublicationSynchronizations(synchronizations,{ledgers:rounds,banks,ledgerSources,now:close??start,publicationState,publicationSelections,deliveryCheckpointSources,editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,availableFiles}).history;
       const latestVerified = [...rounds,...editorials,...synchronizedHistory].filter(r=>r.publication?.status==='verified'&&Date.parse(r.publication.verifiedAt)<=(close??start)).sort((a,b)=>Date.parse(b.publication.verifiedAt)-Date.parse(a.publication.verifiedAt))[0];
       if (latestVerified) actualBank=bankRecord(latestVerified.publication.bankVersion,round,'/coverageAfter');
       else {
@@ -477,7 +363,7 @@ export function validateRoundLedgers(ledgers, {schema = DEFAULT_SCHEMA, banks = 
       if (!isDeepStrictEqual(round.coverageAfter, coverage)) fail(round, '/coverageAfter', 'coverage/mock eligibility differs from actual verified bank');
     }
   }
-  errors.push(...validateCampaignBaselines(rounds,{editorials,now,offlineBases,ledgerSources,synchronizations,banks,publicationState,publicationSelections,deliveryCheckpointSources}).errors);
+  errors.push(...validateCampaignBaselines(rounds,{editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,availableFiles,now,offlineBases,ledgerSources,synchronizations,banks,publicationState,publicationSelections,deliveryCheckpointSources}).errors);
   return {ok: errors.length === 0, errors, warnings, rounds: rounds.map(r => ({roundId: r.roundId, status: r.status, candidates: r.candidates.length, publication: r.publication.status}))};
 }
 export function validateRoundLedger(ledger, options = {}) {
@@ -487,7 +373,7 @@ export function validateRoundLedger(ledger, options = {}) {
 /** Pre-publication gate: no hosted-verification claim is manufactured for a staged release. */
 export function validateEditorialLedgers(editorials, options = {}) {
   const result = validateEditorialHistory(editorials, {...options, schema: options.editorialSchema || EDITORIAL_SCHEMA}, {validateJsonSchema, regularCoverage, nextScheduledRoundAt, FINAL_DECISION_AT});
-  result.errors.push(...validateCampaignBaselines(options.ledgers||[],{editorials,now:options.now??null,offlineBases:options.offlineBases,ledgerSources:options.ledgerSources,synchronizations:options.synchronizations,banks:options.banks,publicationState:options.publicationState,publicationSelections:options.publicationSelections,deliveryCheckpointSources:options.deliveryCheckpointSources}).errors); result.ok=result.errors.length===0; return result;
+  result.errors.push(...validateCampaignBaselines(options.ledgers||[],{editorials,editorialSources:options.editorialSources,editorialReports:options.editorialReports,editorialSchema:options.editorialSchema||EDITORIAL_SCHEMA,reviewPackages:options.reviewPackages,availableFiles:options.availableFiles,now:options.now??null,offlineBases:options.offlineBases,ledgerSources:options.ledgerSources,synchronizations:options.synchronizations,banks:options.banks,publicationState:options.publicationState,publicationSelections:options.publicationSelections,deliveryCheckpointSources:options.deliveryCheckpointSources}).errors); result.ok=result.errors.length===0; return result;
 }
 export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), editorials = [], editorialSchema = EDITORIAL_SCHEMA, ...historyOptions} = {}) {
   const errors = [], fail = message => errors.push(`release: ${message}`);
@@ -502,7 +388,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   if (bank.changeSummary !== manifest.changeSummary) fail('active manifest change summary does not match bank');
   if (bank.bankVersion !== manifest.bankVersion || bank.releasedAt !== manifest.releasedAt || digest(active.raw) !== manifest.sha256) fail('active manifest version/release/hash does not match bank bytes');
   try { validateExplanationAuthoring(bank, historicalExplanationBaseline(banks)); } catch(error) { fail(`explanation authoring: ${error.message}`); }
-  errors.push(...validateCampaignBaselines(ledgers,{editorials,now:historyOptions.now??null,activeBankVersion:bank.bankVersion,offlineBases:historyOptions.offlineBases,ledgerSources:historyOptions.ledgerSources,synchronizations:historyOptions.synchronizations,banks,publicationState:historyOptions.publicationState,publicationSelections:historyOptions.publicationSelections,deliveryCheckpointSources:historyOptions.deliveryCheckpointSources}).errors);
+  errors.push(...validateCampaignBaselines(ledgers,{editorials,editorialSources:historyOptions.editorialSources,editorialReports:historyOptions.editorialReports,editorialSchema,reviewPackages:historyOptions.reviewPackages,availableFiles:historyOptions.availableFiles,now:historyOptions.now??null,activeBankVersion:bank.bankVersion,offlineBases:historyOptions.offlineBases,ledgerSources:historyOptions.ledgerSources,synchronizations:historyOptions.synchronizations,banks,publicationState:historyOptions.publicationState,publicationSelections:historyOptions.publicationSelections,deliveryCheckpointSources:historyOptions.deliveryCheckpointSources}).errors);
   errors.push(...validateEvidenceLossCampaign(ledgers,{banks,...historyOptions,manifest}).errors);
   const quarantine=validateQuarantineCampaign(ledgers,{banks,...historyOptions,manifest});
   errors.push(...quarantine.errors);
@@ -538,10 +424,10 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   if(round.baseline?.offlinePredecessor || historyOptions.synchronizations?.length) {
     // The offline staging entry point is also a full-history gate. A caller must
     // not bypass review counters/lineages by invoking only validateReleaseLedger.
-    errors.push(...validateRoundLedgers(ledgers,{banks,editorials,...historyOptions}).errors);
+    errors.push(...validateRoundLedgers(ledgers,{banks,editorials,editorialSchema,...historyOptions}).errors);
   }
   if (round.status !== 'closed' || round.candidates.some(c => c.decision === 'pending')) fail('active regular bank requires a closed ledger with no pending decisions');
-  const sync=validatePublicationSynchronizations(historyOptions.synchronizations,{ledgers,banks,...historyOptions,activeBankVersion:bank.bankVersion});
+  const sync=validatePublicationSynchronizations(historyOptions.synchronizations,{ledgers,banks,editorials,editorialSchema,...historyOptions,activeBankVersion:bank.bankVersion});
   errors.push(...sync.errors);
   const synchronized=sync.history.some(h=>h.publication.bankVersion===bank.bankVersion&&h.publication.bankSha256===manifest.sha256&&h.synchronizedRoundIds.includes(round.roundId));
   if (!synchronized && (['blocked', 'skipped'].includes(round.publication.status) || round.publication.blockers.length)) fail('active regular bank has unresolved publication blockers');
@@ -591,6 +477,37 @@ async function readOfflinePublicFile(root, relative) {
   return fs.readFile(current);
 }
 
+/** Read typed editorial input bytes and declared dependencies. This returns data,
+ * never a validation result, authenticated history or release authority. Actual
+ * discovered/input paths preserve external draft validation behavior. */
+export async function readEditorialDependencies(root, editorialPaths) {
+  const editorialDirectory=path.join(root,'docs/corrections');
+  const editorials=[],editorialSources=new Map(),editorialReports=new Map(),availableFiles=new Set();
+  for (const file of editorialPaths.sort()) {
+    const raw=await fs.readFile(file),e=JSON.parse(raw.toString());
+    if(path.dirname(file)===editorialDirectory && path.basename(file)!==`${e.correctionRoundId}.json`)throw new Error(`Editorial filename does not match correctionRoundId: ${file}`);
+    editorials.push(e);
+    // External draft inputs remain available to semantic validation, but cannot
+    // stand in for the canonical frozen source of a direct publication.
+    if(path.dirname(file)===editorialDirectory)editorialSources.set(e.correctionRoundId,raw);
+  }
+  let editorialSchema=EDITORIAL_SCHEMA;
+  try {editorialSchema=JSON.parse(await fs.readFile(path.join(editorialDirectory,'editorial-ledger.schema.json'),'utf8'));}
+  catch(error) {if(error.code!=='ENOENT')throw error;}
+  const reviewPackages=new Map();
+  for(const file of new Set(editorials.flatMap(e=>e.corrections.flatMap(c=>c.cycles.map(cycle=>cycle.reviewPackagePath))).filter(Boolean))) {
+    if(!safeRelative(file)||!/^docs\/corrections\/evidence\/[^/]+-cycle-[123]\.json$/.test(file))throw new Error(`Unsafe editorial review package path: ${file}`);
+    try{reviewPackages.set(file,{raw:await fs.readFile(path.join(root,file))});}catch(error){if(error.code!=='ENOENT')throw error;}
+  }
+  for(const file of new Set(editorials.flatMap(e=>[`docs/corrections/${e.correctionRoundId}.md`,...((e.validation||[]).map(v=>v.reportPath).filter(Boolean))]))) {
+    if(!safeRelative(file))continue;
+    try {if((await fs.stat(path.join(root,file))).isFile())editorialReports.set(file,await fs.readFile(path.join(root,file)));}
+    catch(error) {if(error.code!=='ENOENT')throw error;}
+  }
+  for(const file of editorialReports.keys())availableFiles.add(file);
+  return {editorials,editorialSources,editorialSchema,reviewPackages,editorialReports,availableFiles};
+}
+
 export async function loadRoundContext(root = ROOT, input = null, options = {}) {
   return withBankParsingSession(root, () => loadContext(root,input,options));
 }
@@ -618,7 +535,7 @@ async function auditHistoricalReleaseInSession(root) {
   for(const pin of PUBLICATION_SYNCHRONIZATIONS) {
     const raw=await readOfflinePublicFile(ROOT,pin.path);
     if(digest(raw)!==pin.sha256)throw new Error('Publication authority proof hash mismatch');
-    const event=JSON.parse(raw);if(!event.previousSynchronizationSha256 || isNormalPublication(event))continue;
+    const event=JSON.parse(raw);if(!event.previousSynchronizationSha256 || isNormalPublication(event) || isEditorialPublication(event))continue;
     for(const source of event.rounds) {
       const sourceRaw=await readOfflinePublicFile(ROOT,source.deliveryProof.path);
       const proof=validateSynchronizationDeliveryProof(event,source,sourceRaw),inventory=proof.completeManifest.files;
@@ -652,17 +569,13 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     const data=JSON.parse(await fs.readFile(path.resolve(input),'utf8'));
     (data.kind==='accepted_content_editorial'?editorialPaths:paths).push(path.resolve(input));
   }
-  const ledgers = [], editorials=[],ledgerSources=new Map();
+  const ledgers = [],ledgerSources=new Map();
   for (const file of paths.sort()) {
     const raw=await fs.readFile(file),round = JSON.parse(raw.toString());
     if (path.dirname(file) === directory && path.basename(file) !== `${round.roundId}.json`) throw new Error(`Ledger filename does not match roundId: ${file}`);
     ledgers.push(round); ledgerSources.set(round.roundId,raw);
   }
-  for (const file of editorialPaths.sort()) {
-    const e=JSON.parse(await fs.readFile(file,'utf8'));
-    if(path.dirname(file)===editorialDirectory && path.basename(file)!==`${e.correctionRoundId}.json`)throw new Error(`Editorial filename does not match correctionRoundId: ${file}`);
-    editorials.push(e);
-  }
+  const {editorials,editorialSources,editorialSchema,reviewPackages,editorialReports,availableFiles}=await readEditorialDependencies(root,editorialPaths);
   const schema = JSON.parse(await fs.readFile(path.join(directory, 'round-ledger.schema.json'), 'utf8'));
   const manifest = release ? JSON.parse(await fs.readFile(path.join(root, 'data/manifest.json'), 'utf8')) : null;
   const banks = new Map();
@@ -677,13 +590,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
   }
   const publicationSelections=await loadPublicationSelections(root,{now});
   const quarantineDispositions=await loadQuarantineDependencies(root,{ledgers,banks,ledgerSources,now,publicationState:JSON.parse(await fs.readFile(path.join(root,'data/publication-state.json'),'utf8')),manifest});
-  const reviewPackages=new Map();
-  for(const file of new Set(editorials.flatMap(e=>e.corrections.flatMap(c=>c.cycles.map(cycle=>cycle.reviewPackagePath))).filter(Boolean))) {
-    if(!safeRelative(file)||!/^docs\/corrections\/evidence\/[^/]+-cycle-[123]\.json$/.test(file))throw new Error(`Unsafe editorial review package path: ${file}`);
-    try{reviewPackages.set(file,{raw:await fs.readFile(path.join(root,file))});}catch(error){if(error.code!=='ENOENT')throw error;}
-  }
-  const availableFiles = new Set();
-  for (const file of new Set([...ledgers.flatMap(r => [`docs/rounds/${r.roundId}.md`, ...((r.validation || []).map(v => v.reportPath).filter(Boolean))]), ...editorials.flatMap(e=>[`docs/corrections/${e.correctionRoundId}.md`, ...((e.validation||[]).map(v=>v.reportPath).filter(Boolean))])])) {
+  for (const file of new Set(ledgers.flatMap(r => [`docs/rounds/${r.roundId}.md`, ...((r.validation || []).map(v => v.reportPath).filter(Boolean))]))) {
     if (!safeRelative(file)) continue;
     try { if ((await fs.stat(path.join(root, file))).isFile()) availableFiles.add(file); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   }
@@ -699,7 +606,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     if(!listed.has(pin.path))throw new Error('Publication synchronization dependency missing from reviewed allowlist');
     const record=JSON.parse(raw.toString());
     const relevant=requiresSynchronizationDeliveryDependencies(record,{ledgers,now,release});
-    if(record.previousSynchronizationSha256&&relevant&&!isNormalPublication(record))for(const source of record.rounds) {
+    if(record.previousSynchronizationSha256&&relevant&&!isNormalPublication(record)&&!isEditorialPublication(record))for(const source of record.rounds) {
       if(!listed.has(source.deliveryProof?.path))throw new Error('Publication delivery proof dependency missing from reviewed allowlist');
       validateSynchronizationDeliveryProof(record,source,await readOfflinePublicFile(root,source.deliveryProof.path));
     }
@@ -744,32 +651,36 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
     // Ordinary ledger loads also need the real current manifest freeze marker.
     // Do not confuse release:false (output selection) with permission to ignore it.
     const continuationManifest=manifest??JSON.parse(await readOfflinePublicFile(root,'data/manifest.json'));
-    const normal=validateNormalBackupContinuation(parseNormalBackupProof(normalRaw),{now,publicationState,manifest:continuationManifest,ledgers,ledgerSources,banks,offlineBases});
+    const normalProof=parseNormalBackupProof(normalRaw);
+    const normal=validateNormalBackupContinuation(normalProof,{now,publicationState,manifest:continuationManifest,ledgers,ledgerSources,banks,offlineBases});
     if(normal.offlineBase)offlineBases.set(normal.artifactSha256,normal.offlineBase);
     if(modernContinuation) {
-      const continuation=await loadReleaseBackupContinuations(root,{now,publicationState,manifest:continuationManifest,ledgers,ledgerSources,banks,offlineBases,schema,availableFiles,editorials,reviewPackages,synchronizations,publicationSelections});
+      const continuation=await loadReleaseBackupContinuations(root,{now,publicationState,manifest:continuationManifest,ledgers,ledgerSources,banks,offlineBases,schema,availableFiles,editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,synchronizations,publicationSelections});
       offlineBases=continuation.offlineBases;deliveryCheckpointSources=continuation.deliveryCheckpointSources;
     }
+    const originalRoundId=normalProof.completeManifest.sourceRelease.roundId;
+    if(deliveryCheckpointSources.has(originalRoundId)&&!isDeepStrictEqual(deliveryCheckpointSources.get(originalRoundId),normalRaw))throw new Error('Conflicting original normal-backup synchronization proof bytes');
+    deliveryCheckpointSources.set(originalRoundId,normalRaw);
   }
   const {loadIndependentOfflineChains}=await import('./offline-chain-continuation.mjs');
-  const independent=await loadIndependentOfflineChains(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources,publicationSelections});
+  const independent=await loadIndependentOfflineChains(root,{now,publicationState,manifest,ledgers,editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,availableFiles,ledgerSources,banks,offlineBases,deliveryCheckpointSources,publicationSelections});
   offlineBases=independent.offlineBases;deliveryCheckpointSources=independent.deliveryCheckpointSources;
   const {loadNormalBackupRoots}=await import('./normal-backup-root.mjs');
-  const normalRoots=await loadNormalBackupRoots(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources,publicationSelections});
+  const normalRoots=await loadNormalBackupRoots(root,{now,publicationState,manifest,ledgers,editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,availableFiles,ledgerSources,banks,offlineBases,deliveryCheckpointSources,publicationSelections});
   offlineBases=normalRoots.offlineBases;deliveryCheckpointSources=normalRoots.deliveryCheckpointSources;
   const {loadNormalBackupChains}=await import('./normal-backup-chain.mjs');
-  const normalChain=await loadNormalBackupChains(root,{now,publicationState,manifest,ledgers,editorials,ledgerSources,banks,offlineBases,deliveryCheckpointSources,publicationSelections});
+  const normalChain=await loadNormalBackupChains(root,{now,publicationState,manifest,ledgers,editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,availableFiles,ledgerSources,banks,offlineBases,deliveryCheckpointSources,publicationSelections});
   offlineBases=normalChain.offlineBases;deliveryCheckpointSources=normalChain.deliveryCheckpointSources;
   await validateIndependentSynchronizationSources(synchronizations,independent.chains,deliveryCheckpointSources,{ledgers,now,release});
-  if(indexRaw||normalRaw||independent.chains.size||normalRoots.roots.size||synchronizations.some(isNormalPublication)) {
-    const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources,publicationSelections});
-    const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,offlineBases,ledgerSources,synchronizations,publicationSelections,deliveryCheckpointSources});
+  if(indexRaw||normalRaw||independent.chains.size||normalRoots.roots.size||synchronizations.some(event=>isNormalPublication(event)||isEditorialPublication(event))) {
+    const complete=validateRoundLedgers(ledgers,{schema,banks,now,publicationState,availableFiles,editorials,editorialSources,editorialReports,editorialSchema,reviewPackages,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources,publicationSelections});
+    const editorial=validateEditorialLedgers(editorials,{ledgers,banks,now,publicationState,availableFiles,reviewPackages,editorialSources,editorialReports,editorialSchema,offlineBases,ledgerSources,synchronizations,publicationSelections,deliveryCheckpointSources});
     if(!complete.ok||!editorial.ok)throw new Error(`Offline evidence requires the full valid campaign history: ${[...complete.errors,...editorial.errors].join('; ')}`);
   }
   await validateNormalChainSynchronizationSources(synchronizations,normalChain.chains,deliveryCheckpointSources,{ledgers,ledgerSources,now,release});
   // Resolve only after current full-campaign validation. Keep every anchor's
   // original receipts/manifests separate and never feed resolutions to inspectProof.
-  const campaignContext={ledgers,editorials,schema,banks,reviewPackages,availableFiles,publicationState,manifest,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources,publicationSelections};
+  const campaignContext={ledgers,editorials,editorialSources,editorialReports,editorialSchema,schema,banks,reviewPackages,availableFiles,publicationState,manifest,offlineBases,ledgerSources,synchronizations,deliveryCheckpointSources,publicationSelections};
   const {validateDeliveryChain}=await import('./download-fallback.mjs');
   for(const chain of [legacyChain,...independent.chains.values()].filter(Boolean)) {
     const resolution=resolveSynchronizedArtifacts(chain.receipts,{...campaignContext,now});
@@ -780,7 +691,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
       for(const artifact of resolution.resolvedArtifacts)resolvedArtifacts.add(artifact);
     }
   }
-  return {ledgers, editorials, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, normalBackupRoots:normalRoots.roots, normalBackupChains:normalChain.chains, quarantineDispositions, publicationSelections};
+  return {ledgers, editorials, editorialSources, editorialReports, editorialSchema, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, normalBackupRoots:normalRoots.roots, normalBackupChains:normalChain.chains, quarantineDispositions, publicationSelections};
 }
 export async function main(args = process.argv.slice(2)) {
   return withBankParsingSession(ROOT, () => runMain(args));

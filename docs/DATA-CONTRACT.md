@@ -552,3 +552,23 @@ parentObservation은 정확한 repository·refs/heads/main·commit·tree·전체
 선택 은행의 누적 일반 문항 객체는 957개(전체 971개, 시드 14개)다. 새 세션에서 선택 가능한 일반 문항은 952개(필기 872개·실기 80개)이며 필기 과목별 121·205·181·208·157개다. 모의시험 가능 여부는 이 숫자가 아니라 과목별 선택 가능한 서로 다른 templateId 20개 이상으로 검사한다. 역사적 발행 수와 현재 출제 가능 수를 혼동하지 않는다.
 
 새 앱 코드와 정책 파일을 받으려면 정상적인 새로고침이 필요하다. 이미 열려 있는 이전 코드 탭이나 저장된 세션을 원격으로 수정했다고 주장하지 않는다. 배포 시 정책 모듈과 원 판정 보고서의 정확한 해시·허용 목록·새 모듈 캐시 URL을 검사하고 전체본 및 변경분 재구성에서 같은 출제 가능 수를 확인한다.
+
+
+### 2026-10-10 온라인 기준 편집 정정의 정상 전달 백업
+
+`writeReleaseDeliveryPair`는 `round-N`과 `editorial-N`을 구분한다. 확대 대장은 `context.ledgers`의 roundId, 편집 대장은 `context.editorials`의 kind=accepted_content_editorial 및 correctionRoundId로 정확히 하나만 해석하며 서로 충돌하는 식별자·중복 소유자는 거부한다. 편집 원문 경로는 `docs/corrections/<id>.json`이고, 기존 sourceRelease의 roundId 필드에는 그 editorial 식별자를 기록한다. closed 상태, 현재 manifest와의 은행 버전·해시 일치, 전체 캠페인 및 선택 제외·학습 대상 정책 검증은 그대로 필요하다. 기존 원본 은행과 종결 대장은 수정하지 않는다. 이 확장은 온라인 공개 기준의 release_backup 변경분 ZIP·독립 전체 7z에 한정되며 편집 정정의 오프라인 선행자나 normal-root/chain 등록을 허용하지 않는다. 파일 준비·전달 자체의 신규 공개 수는 0이다.
+
+
+## 동결 편집 대장의 직접 공개 이벤트 (2026-10-11)
+
+`verified_normal_editorial_publication`은 기존 정상 직접 공개 envelope와 길이 1의 `rounds`를 쓰되, 유일한 source는 `editorial_frozen_ledger`다. source의 허용 키는 `kind`, `correctionRoundId`, `ledgerPath`, `originalLedgerSha256`, `bankVersion`, `bankSha256`, `baseline`, `originalPublicationStatus`, `accepted`, `publishedRevisedRegular`, `newlyPublicRegular`다. baseline은 원 `sourceCommit`·`bankVersion`·`bankSha256`이며 ledgerPath는 `docs/corrections/<correctionRoundId>.json`이다. `roundId` 별칭·후보/격리/eligible 수·selectionReference·전달/영수증/offlinePredecessor 필드를 허용하지 않는다.
+
+원 소유 대장은 정확히 하나인 `accepted_content_editorial`이고 closed·미결 없음·차단 없음이어야 한다. 원문 해시·원 은행·not_attempted 상태와 publication에 결박된 bankVersion·bankSha256, 공개 수 0 및 null commit·verifiedAt·url을 보존한다. 이벤트의 accepted와 publishedRevisedRegular는 실제 accepted 정정 수이며 newlyPublicRegular와 전체 newlyPublicFromAnchor는 0이다. 누적 정규/필기/실기/시드/전체 및 과목 수는 실제 은행에서 검증한다. 원 대장의 공개 필드를 이벤트 값으로 덮어쓰지 않는다.
+
+전체 검증은 schema·시작/종결/마감·동시 실행·선행 accepted 근거·모든 시작한 cycle과 원 검토 패키지·독립성/키 노출·다섯 gate·정확한 accepted snapshot을 포함한다. 기존 편집 transition의 보호 필드·정답·배점·옵션·시드·출처 보존을 유지하고 승인된 변경 집합과 실제 변경이 같아야 한다. source가 후속 은행의 역사적 선행자가 된 뒤에도 이 검사를 반복하며 현재 active 은행 검사만으로 대신하지 않는다.
+
+직접 payload 부모는 원 baseline.sourceCommit과 같아야 한다. 이전 공개 이벤트·불변 은행/대장/정정/검토/신뢰 prefix를 보존한 전체 Git inventory/tree, 정확한 manifest와 양쪽 동결, cutoff·실제 Pages 성공·live HTTP 200 바이트를 검증한다. 원 편집 대장과 모든 시작한 reviewPackage, 공개 보고서 및 명시된 validation 보고서의 원문도 inventory와 필요한 live 집합에 결박한다. 기존 정규 normal/selected/chain/reconciled 종류의 predicate와 전이는 확대하지 않는다.
+
+loader는 정규 ledgerSources와 별도인 editorialSources에 원문을 보관하고 해당 typed evidence를 전파한다. 성공한 실제 synchronization만 `synchronizedEditorialIds`에 소유 ID를 넣으며 `synchronizedRoundIds`는 빈 배열이다. 자기 공개 이벤트는 원 대장의 시작 기준으로 오인하지 않는다. 후속 정정의 priorAcceptedRef는 실제 선행 이벤트·은행 해시·accepted correction ID·문항 revision/내용 및 후속 baseline의 같은 원문과 일치하고, verifiedAt은 후속 startedAt보다 엄격히 앞서야 한다.
+
+편집 이력의 순수 predicate는 synchronization 아래의 비권한 계층으로 분리한다. 실제 admission은 synchronization 루프 내부에서 이미 검증한 시간순 앞선 이력만 사용하며 재귀적으로 같은 공개 wrapper를 호출하지 않는다. canonical schema/coverage/schedule helper와 내부 고정 schema를 사용하고 외부 callback·history prefix·Boolean으로 권한을 대체하지 않는다. 이 이벤트는 deliveryProof를 요구하거나 전달 artifact를 해소하지 않으며 오프라인 편집 baseline 또는 root/chain 자격을 만들지 않는다.
