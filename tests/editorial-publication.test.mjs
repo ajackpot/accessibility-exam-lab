@@ -18,9 +18,42 @@ const blob=raw=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${raw
 const read=p=>fs.readFile(path.join(root,p));
 const helpers={validateJsonSchema:validateCampaignJsonSchema,regularCoverage,nextScheduledRoundAt,FINAL_DECISION_AT};
 const at=Date.parse('2026-10-11T01:00:00Z');
+
+// Test-owned historical projection only; this never authenticates new publication
+// authority. A later real editorial002 registration must not become the synthetic
+// fixture's predecessor. Keep this bounded projection identical in both tests.
+function projectHistoricalPublications(sourceFiles,sourcePins){
+  assert(Array.isArray(sourcePins));
+  const pins=sourcePins.slice(0,8),suffix=sourcePins.slice(8),files=new Map(sourceFiles),removedPaths=[];
+  assert.equal(H(J(pins)),'b91fb0d6f084a4a8005e077f449d928f0615ce54892daba764e0502d8942c1a4','fixture requires the exact eight-pin historical prefix');
+  assert(suffix.length<=1,'unexpected publication suffix requires an explicit fixture review');
+  function authenticated(pin){const raw=sourceFiles.get(pin.path);assert(Buffer.isBuffer(raw),`missing pinned fixture event ${pin.path}`);assert.equal(H(raw),pin.sha256);const event=JSON.parse(raw);assert.deepEqual(raw,J(event));return event;}
+  const events=pins.map(authenticated),eventPath='docs/publications/editorial-002.json';
+  assert.equal(events.at(-1).syncId,'normal-041-selection-001');
+  assert(!files.has('docs/publications/editorial-002.md'),'unexpected publication report requires an explicit fixture review');
+  if(suffix.length){
+    const pin=suffix[0];assert.deepEqual(Object.keys(pin).sort(),['path','sha256']);assert.equal(pin.path,eventPath);
+    const event=authenticated(pin);
+    assert.equal(event.syncId,'editorial-002');assert.equal(event.kind,'verified_normal_editorial_publication');
+    assert.equal(event.rounds.length,1);assert.equal(event.rounds[0].kind,'editorial_frozen_ledger');assert.equal(event.rounds[0].correctionRoundId,'editorial-002');assert.equal(event.rounds[0].ledgerPath,'docs/corrections/editorial-002.json');
+    assert.equal(event.previousSynchronizationSha256,pins.at(-1).sha256);
+    assert(Date.parse(event.verifiedAt)>Date.parse('2026-10-11T01:00:00Z'),'real suffix must be later than both fixed synthetic fixture times');
+    const code=files.get('scripts/publication-sync.mjs').toString(),appendedPin=`,\n  Object.freeze({path:'${eventPath}', sha256:'${pin.sha256}'})`;
+    assert.equal(code.split(appendedPin).length,2,'only the exact registration pin append may be projected');
+    files.set('scripts/publication-sync.mjs',Buffer.from(code.replace(appendedPin,'')));
+    const lines=files.get('PUBLICATION-MANIFEST.txt').toString().split('\n');
+    assert.equal(lines.filter(line=>line===eventPath).length,1,'only one exact suffix allowlist line may be projected');
+    files.set('PUBLICATION-MANIFEST.txt',Buffer.from(lines.filter(line=>line!==eventPath).join('\n')));
+    files.delete(eventPath);removedPaths.push(eventPath);
+  }else assert(!files.has(eventPath),'unregistered suffix event is not fixture history');
+  assert.equal(H(files.get('scripts/publication-sync.mjs')),'4cdeed574bf4fd80ea9e80e7c1067e052dca7c19a937e35d7a803ab0dcbe2e7a','projected module must equal the frozen pre-registration source');
+  return {files,pins,events,removedPaths};
+}
+
 const project={ledgers:[],ledgerSources:new Map(),editorials:[],editorialSources:new Map(),editorialReports:new Map(),reviewPackages:new Map(),banks:new Map(),deliveryCheckpointSources:new Map(),synchronizations:[],now:at};
-const files=new Map();
-for(const p of (await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(p=>p&&!p.startsWith('#')))files.set(p,await read(p));
+const sourceFiles=new Map();
+for(const p of (await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(p=>p&&!p.startsWith('#')))sourceFiles.set(p,await read(p));
+const fixtureProjection=projectHistoricalPublications(sourceFiles,PUBLICATION_SYNCHRONIZATIONS),{files}=fixtureProjection;
 for(const [p,raw]of files){
  if(/^docs\/rounds\/round-\d+\.json$/.test(p)){const l=JSON.parse(raw);project.ledgers.push(l);project.ledgerSources.set(l.roundId,raw);}
  if(/^docs\/corrections\/editorial-\d+\.json$/.test(p)){const e=JSON.parse(raw);project.editorials.push(e);project.editorialSources.set(e.correctionRoundId,raw);}
@@ -28,7 +61,7 @@ for(const [p,raw]of files){
  if(/^docs\/corrections\/evidence\//.test(p))project.reviewPackages.set(p,{raw});
 }
 for(const e of project.editorials)for(const p of new Set([`docs/corrections/${e.correctionRoundId}.md`,...e.validation.map(v=>v.reportPath).filter(Boolean)]))project.editorialReports.set(p,files.get(p));
-for(const pin of PUBLICATION_SYNCHRONIZATIONS)project.synchronizations.push(JSON.parse(files.get(pin.path)));
+project.synchronizations.push(...fixtureProjection.events);
 for(const event of project.synchronizations)for(const source of event.rounds)if(source.deliveryProof)project.deliveryCheckpointSources.set(source.roundId,files.get(source.deliveryProof.path));
 for(const pin of JSON.parse(files.get('docs/deliveries/normal-backup-root-trust.json')).roots)project.deliveryCheckpointSources.set(pin.roundId,files.get(pin.path));
 project.editorialSchema=JSON.parse(files.get('docs/corrections/editorial-ledger.schema.json'));project.publicationState=JSON.parse(files.get('data/publication-state.json'));project.availableFiles=new Set(files.keys());
@@ -93,7 +126,9 @@ test('editorial sibling semantics preserve all source, envelope, transition and 
 test('only disposable pinned sibling history activates editorial identity and ignores caller authority',async t=>{
  project.publicationSelections??=await loadPublicationSelections(root,{now:at});
  const f=fixture();refreshEvent(f.event,f.contents);const dir=await fs.mkdtemp(path.join(os.tmpdir(),'editorial-publication-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
- const code=(await read('scripts/publication-sync.mjs')).toString();await fs.writeFile(path.join(dir,'scripts/publication-sync.mjs'),repin(code,f.event));
+ for(const p of fixtureProjection.removedPaths)await fs.rm(path.join(dir,p));
+ for(const p of ['PUBLICATION-MANIFEST.txt','scripts/publication-sync.mjs'])await fs.writeFile(path.join(dir,p),files.get(p));
+ const code=files.get('scripts/publication-sync.mjs').toString();await fs.writeFile(path.join(dir,'scripts/publication-sync.mjs'),repin(code,f.event));
  const api=await import(pathToFileURL(path.join(dir,'scripts/publication-sync.mjs')).href),selection=await import(pathToFileURL(path.join(dir,'scripts/publication-selection.mjs')).href);f.context.publicationSelections=await selection.loadPublicationSelections(dir,{now:at});
  const records=[...project.synchronizations,f.event],result=api.validatePublicationSynchronizations(records,f.context);assert.equal(result.ok,true,result.errors.join('\n'));
  assert.deepEqual(result.history.slice(0,-1),priorHistory,'ordinary/selected historical projections remain unchanged');

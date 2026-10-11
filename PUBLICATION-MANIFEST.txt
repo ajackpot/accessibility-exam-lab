@@ -397,3 +397,4 @@ scripts/editorial-history-core.mjs
 scripts/editorial-publication.mjs
 tests/editorial-publication.test.mjs
 tests/editorial-publication-consumers.test.mjs
+docs/publications/editorial-002.json

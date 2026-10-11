@@ -22,6 +22,37 @@ const read=p=>fs.readFile(path.join(root,p));
 const now=Date.parse('2026-10-11T01:00:00Z');
 let directory,api,validator,editorialApi,context,event,originalEditorialRaw,originalSelectedRaw,roundSchema,editorialSchema,sourceBank;
 
+// Test-owned historical projection only; this never authenticates new publication
+// authority. A later real editorial002 registration must not become the synthetic
+// fixture's predecessor. Keep this bounded projection identical in both tests.
+function projectHistoricalPublications(sourceFiles,sourcePins){
+  assert(Array.isArray(sourcePins));
+  const pins=sourcePins.slice(0,8),suffix=sourcePins.slice(8),files=new Map(sourceFiles),removedPaths=[];
+  assert.equal(H(J(pins)),'b91fb0d6f084a4a8005e077f449d928f0615ce54892daba764e0502d8942c1a4','fixture requires the exact eight-pin historical prefix');
+  assert(suffix.length<=1,'unexpected publication suffix requires an explicit fixture review');
+  function authenticated(pin){const raw=sourceFiles.get(pin.path);assert(Buffer.isBuffer(raw),`missing pinned fixture event ${pin.path}`);assert.equal(H(raw),pin.sha256);const event=JSON.parse(raw);assert.deepEqual(raw,J(event));return event;}
+  const events=pins.map(authenticated),eventPath='docs/publications/editorial-002.json';
+  assert.equal(events.at(-1).syncId,'normal-041-selection-001');
+  assert(!files.has('docs/publications/editorial-002.md'),'unexpected publication report requires an explicit fixture review');
+  if(suffix.length){
+    const pin=suffix[0];assert.deepEqual(Object.keys(pin).sort(),['path','sha256']);assert.equal(pin.path,eventPath);
+    const event=authenticated(pin);
+    assert.equal(event.syncId,'editorial-002');assert.equal(event.kind,'verified_normal_editorial_publication');
+    assert.equal(event.rounds.length,1);assert.equal(event.rounds[0].kind,'editorial_frozen_ledger');assert.equal(event.rounds[0].correctionRoundId,'editorial-002');assert.equal(event.rounds[0].ledgerPath,'docs/corrections/editorial-002.json');
+    assert.equal(event.previousSynchronizationSha256,pins.at(-1).sha256);
+    assert(Date.parse(event.verifiedAt)>Date.parse('2026-10-11T01:00:00Z'),'real suffix must be later than both fixed synthetic fixture times');
+    const code=files.get('scripts/publication-sync.mjs').toString(),appendedPin=`,\n  Object.freeze({path:'${eventPath}', sha256:'${pin.sha256}'})`;
+    assert.equal(code.split(appendedPin).length,2,'only the exact registration pin append may be projected');
+    files.set('scripts/publication-sync.mjs',Buffer.from(code.replace(appendedPin,'')));
+    const lines=files.get('PUBLICATION-MANIFEST.txt').toString().split('\n');
+    assert.equal(lines.filter(line=>line===eventPath).length,1,'only one exact suffix allowlist line may be projected');
+    files.set('PUBLICATION-MANIFEST.txt',Buffer.from(lines.filter(line=>line!==eventPath).join('\n')));
+    files.delete(eventPath);removedPaths.push(eventPath);
+  }else assert(!files.has(eventPath),'unregistered suffix event is not fixture history');
+  assert.equal(H(files.get('scripts/publication-sync.mjs')),'4cdeed574bf4fd80ea9e80e7c1067e052dca7c19a937e35d7a803ab0dcbe2e7a','projected module must equal the frozen pre-registration source');
+  return {files,pins,events,removedPaths};
+}
+
 // Non-authorizing test data reconstruction. These are exact stored fields and
 // the production clock formulas, not loadRoundContext-validated chain authority.
 function fixtureOfflineBases(files,prior){
@@ -62,9 +93,9 @@ function fixtureOfflineBases(files,prior){
 }
 
 before(async()=>{
-  const files=new Map();
-  for(const p of (await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).map(p=>p.trim()).filter(p=>p&&!p.startsWith('#')))files.set(p,await read(p));
-  const events=await Promise.all(PUBLICATION_SYNCHRONIZATIONS.map(async p=>JSON.parse(await read(p.path))));
+  const sourceFiles=new Map();
+  for(const p of (await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).map(p=>p.trim()).filter(p=>p&&!p.startsWith('#')))sourceFiles.set(p,await read(p));
+  const fixtureProjection=projectHistoricalPublications(sourceFiles,PUBLICATION_SYNCHRONIZATIONS),{files,pins:historicalPins,events}=fixtureProjection;
   const prior=events.at(-1),e=JSON.parse(files.get('docs/corrections/editorial-002.json'));
   originalEditorialRaw=files.get('docs/corrections/editorial-002.json');
   originalSelectedRaw=files.get(`data/releases/${e.baseline.bankVersion}/bank.json`);
@@ -78,11 +109,13 @@ before(async()=>{
   event={schemaVersion:1,syncId:'synthetic-editorial-002-consumers',kind:'verified_normal_editorial_publication',previousSynchronizationSha256:H(J(prior)),verifiedAt:'2026-10-11T00:55:00Z',repository:prior.repository,commit:'a'.repeat(40),parent:e.baseline.sourceCommit,tree:normalPublicationTree(inventory),commitUrl:`https://github.com/${prior.repository}/commit/${'a'.repeat(40)}`,pages:{runId:1,headSha:'a'.repeat(40),status:'completed',conclusion:'success',url:`https://github.com/${prior.repository}/actions/runs/1`},siteUrl:prior.siteUrl,manifest,manifestSha256:H(files.get('data/manifest.json')),runtimeManifestRaw:files.get('data/manifest.json').toString(),publicationStateRaw:files.get('data/publication-state.json').toString(),counts:{...prior.counts,newlyPublicFromAnchor:0},writtenBySubject:prior.writtenBySubject,rounds:[source],remoteInventory:inventory,liveAssets:inventory.map(f=>({path:f.path,url:new URL(f.path,prior.siteUrl).href,http:200,bytes:f.bytes,sha256:f.sha256})),limitations:['Synthetic consumer fixture only; never actual publication evidence']};
   directory=await fs.mkdtemp(path.join(os.tmpdir(),'editorial-publication-consumers-'));
   await fs.cp(root,directory,{recursive:true});
+  for(const p of fixtureProjection.removedPaths)await fs.rm(path.join(directory,p));
+  for(const p of ['PUBLICATION-MANIFEST.txt','scripts/publication-sync.mjs'])await fs.writeFile(path.join(directory,p),files.get(p));
   const eventPath=`docs/publications/${event.syncId}.json`;
   await fs.writeFile(path.join(directory,eventPath),J(event));
   await fs.appendFile(path.join(directory,'PUBLICATION-MANIFEST.txt'),eventPath+'\n');
-  const pins=[...PUBLICATION_SYNCHRONIZATIONS,{path:eventPath,sha256:H(J(event))}];
-  const sourceCode=(await read('scripts/publication-sync.mjs')).toString();
+  const pins=[...historicalPins,{path:eventPath,sha256:H(J(event))}];
+  const sourceCode=files.get('scripts/publication-sync.mjs').toString();
   const declaration=/export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze\(\[[\s\S]*?\n\]\);/;
   assert.match(sourceCode,declaration,'the disposable authority patch must be exact and bounded');
   await fs.writeFile(path.join(directory,'scripts/publication-sync.mjs'),sourceCode.replace(declaration,`export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze([\n${pins.map(p=>`  Object.freeze(${JSON.stringify(p)})`).join(',\n')}\n]);`));
