@@ -15,7 +15,7 @@ import {readHistoricalExplanationBaseline} from '../scripts/explanation-authorin
 const root=new URL('../',import.meta.url),raw=p=>fs.readFileSync(new URL(p,root),'utf8'),read=p=>JSON.parse(raw(p));
 const hash=x=>createHash('sha256').update(x).digest('hex'),persist=x=>JSON.parse(JSON.stringify(x));
 const ledger=read('docs/corrections/editorial-003.json'),beforeRaw=raw('data/releases/2026.10.11-editorial.2/bank.json'),before=JSON.parse(beforeRaw);
-const bankRaw=raw(`data/releases/${ledger.publication.bankVersion}/bank.json`),bank=JSON.parse(bankRaw),manifest=read('data/manifest.json');
+const bankRaw=raw(`data/releases/${ledger.publication.bankVersion}/bank.json`),bank=JSON.parse(bankRaw),manifest=read('tests/fixtures/editorial003-manifest.json');
 const ids=['r002-internet-html-w15','r016-dom-html-s3-w02'];
 const revised=ledger.corrections.filter(c=>c.decision==='accepted').map(c=>c.questionId);
 const oldById=new Map(before.questions.map(q=>[q.questionId,q])),byId=new Map(bank.questions.map(q=>[q.questionId,q]));
@@ -26,6 +26,7 @@ function completed(session,correct,at){let out=d.startSession(session,at);const 
 
  test('editorial003 closure binds only the actual accepted immutable snapshots',()=>{
  assert.equal(hash(beforeRaw),'a752fd3714ca62e0f0067af778a547f430690f60d6c2da831af4330a162c2c18');
+ assert.equal(hash(raw('tests/fixtures/editorial003-manifest.json')),'fda7c462d90a57a75346cef169585b1e405573b20f0da9540315a25ba78e2893','Exact historical registered378 editorial003 manifest bytes');
  assert.equal(ledger.status,'closed');assert.equal(ledger.correctionRoundId,'editorial-003');assert.equal(ledger.kind,'accepted_content_editorial');
  assert.equal(ledger.decisionDeadline,'2026-10-11T14:00:00Z');assert(Date.parse(ledger.closedAt)<=Date.parse(ledger.decisionDeadline));
  assert(revised.length>=1&&revised.length<=2);assert.deepEqual(ledger.corrections.map(c=>c.questionId).sort(),[...ids].sort());assert(revised.every(id=>ids.includes(id)));assert.deepEqual(ledger.counts,{registered:2,accepted:revised.length,rejected:2-revised.length,pending:0,newRegular:0,revisedRegular:revised.length,publishedRevisedRegular:ledger.publication.status==='verified'?revised.length:0});
@@ -77,7 +78,7 @@ function completed(session,correct,at){let out=d.startSession(session,at);const 
  test('synthetic pre-edit prepared sessions survive actual bank update, start, grading and persisted JSON backup unchanged',async()=>{
  for(const id of revised)for(const count of [4,5])for(const correct of [true,false]){
   const old=persist(prepared(before,id,count,37,`synthetic-old-${ids.indexOf(id)}-${count}-${correct}`)),oldSessionBytes=JSON.stringify(old),oldItemBytes=JSON.stringify(old.items),oldHash=await d.snapshotHash(old.items[0]);validateSession(old);
-  const storedSessions=new Map([[old.sessionId,old]]),metas=new Map([['bank',{manifest:read('data/manifest.json'),bank:before}]]);
+  const storedSessions=new Map([[old.sessionId,old]]),metas=new Map([['bank',{manifest:read('tests/fixtures/editorial003-manifest.json'),bank:before}]]);
   // Real updateBank API stores only bank metadata. The session store fixture is JSON-persisted before use.
   metas.set('bank',{manifest:{...manifest,bankVersion:before.bankVersion,sha256:hash(beforeRaw)},bank:before});
   const fakeStore={meta:async key=>metas.get(key),putMeta:async(key,value)=>metas.set(key,value)};

@@ -405,3 +405,9 @@ data/releases/2026.10.11-editorial.3/bank.json
 tests/editorial-three-bank.test.mjs
 tests/fixtures/editorial002-manifest.json
 docs/publications/editorial-003.json
+docs/corrections/editorial-004.json
+docs/corrections/editorial-004.md
+docs/corrections/evidence/editorial-004-cycle-1.json
+data/releases/2026.10.12-editorial.4/bank.json
+tests/editorial-four-bank.test.mjs
+tests/fixtures/editorial003-manifest.json

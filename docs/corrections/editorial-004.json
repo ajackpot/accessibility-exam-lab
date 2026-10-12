@@ -1,0 +1,348 @@
+{
+  "ledgerSchemaVersion": 1,
+  "kind": "accepted_content_editorial",
+  "campaignId": "2026-exam-final",
+  "correctionRoundId": "editorial-004",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-12T03:18:27.754Z",
+  "decisionDeadline": "2026-10-12T06:00:00Z",
+  "closedAt": "2026-10-12T03:56:56.940Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxRoundHours": 4,
+    "newKnowledgeItems": 0
+  },
+  "baseline": {
+    "sourceCommit": "a8900a5095ca3e386fd9b60e3e2954db4586aa9c",
+    "bankVersion": "2026.10.11-editorial.3",
+    "bankSha256": "4a262a70eaa25bba13d4dd6b73d01896876d81913e4b19fdfbe406de0683b672",
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80
+  },
+  "changedQuestionIds": [
+    "r019-policy-assistive-s5-w05",
+    "r019-policy-assistive-s5-w01"
+  ],
+  "changedOptionIds": [],
+  "changedPracticalChoiceIds": [],
+  "corrections": [
+    {
+      "correctionId": "e004-act-outcome-explanation",
+      "issueId": "explanation-acp-01",
+      "questionId": "r019-policy-assistive-s5-w05",
+      "templateId": "r019-policy-assistive-template-act-outcomes-distinguish-inapplicable-canttell-untested",
+      "learningGoalId": "r019-policy-assistive-template-act-outcomes-distinguish-inapplicable-canttell-untested",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s5",
+      "priorAcceptedRef": {
+        "roundId": "round-019",
+        "candidateId": "r019-policy-assistive-s5-w05",
+        "ledgerPath": "docs/rounds/round-019.json",
+        "bankVersion": "2026.10.05-regular.19",
+        "bankSha256": "8fc3b284231a86473f9cbbed63ce45e6eba6ac1f887e565995101949d034062a",
+        "questionRevision": 1,
+        "contentSha256": "2ab047abe1fd27c3bcb4a04b4cad137ac1106255d32f864c2bc8f495a1212d69"
+      },
+      "defect": "question.explanation은 세 관찰을 구분하라는 설명만 남기고, 각 관찰을 ACT의 inapplicable·cantTell·untested 결과에 연결하는 실제 판단 규칙을 밝히지 않는다. 기존 정답 판단과 선택지는 유지하고 문항 해설에 조건별 결과와 이유를 명시한다.",
+      "revision": 2,
+      "authorId": "e004-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r019-policy-assistive-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국가별 웹 접근성 표준 정책; 정보접근성 개론: 보조공학 종류·역할·이용방식, 장애 특성별 정보이용 환경, 점검 도구·결과의 한계",
+          "checkedAt": "2026-10-12T03:04:39.389273+00:00",
+          "summary": "보존된 공식2026-05-07 필기 출제기준 HWP(80896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 기존 추출 본문을 대조하여 정보접근성 개론의 보조공학 종류·역할·이용방식 및 점검 방식·도구·결과의 한계 범위를 다시 읽었다. 이번 checkedAt은 보존 자료 재대조 시각이며 새 취득·새 추출이나 최신 법령 확인이 아니다. 국제 성공기준 세부 내용·규칙 저작을 새 목표로 확대하지 않는다.",
+          "rights": "지정1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·선택지를 보존하고 문항 해설만 수정한다. 공식 샘플·유료 문제·원문 전문·비공개 조사 자료를 배포하지 않는다."
+        },
+        {
+          "sourceId": "r019-policy-assistive-src-act-report-outcomes",
+          "title": "Accessibility Conformance Testing (ACT) Rules Format 1.1: Outcome",
+          "url": "https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#outcome",
+          "version": "W3C Recommendation, 2026-02-05 고정판",
+          "location": "§9 Definitions → Outcome",
+          "checkedAt": "2026-10-12T03:04:39.389273+00:00",
+          "summary": "2026-10-11 조사 때 읽은 ACT Rules Format1.1의2026-02-05 고정 Recommendation 공식 웹 도구 캡처 §9 Outcome을 다시 읽었다. 적용 대상 없음이 확인된 ㄱ은 inapplicable, 적용 여부를 결정하지 못한 ㄴ은 cantTell, 해당 규칙 평가를 하지 않은 ㄷ은 untested다. passed·failed는 평가 대상의 기대 조건 충족 여부에 관한 결과다. 이번 checkedAt은 보존 캡처 재대조 시각이며 새 원문 HTML 취득·HTTP200 관찰이 아니다.",
+          "rights": "지정1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·선택지를 보존하고 문항 해설만 수정한다. 공식 샘플·유료 문제·원문 전문·비공개 조사 자료를 배포하지 않는다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 2,
+          "startedAt": "2026-10-12T03:22:42.185Z",
+          "finishedAt": "2026-10-12T03:33:48.527004Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "출처·키·해설·의미 식별자가 없는 등록 패킷만으로 독립 풀이하고 첫 답을 저장한 뒤 정식 lock 이후 키를 대조했다. C001의 첫 답 C가 등록 정답과 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "정확한 고정판 1차 자료의 보존 캡처와 공식 범위 추출본을 독립 재독하여 사실·범위·권리를 확인했다. 기존 checkedAt은 역사로 보존하며 이번 재독을 새 취득이나 AT 실행으로 주장하지 않는다.",
+              "evidenceRefs": [
+                "r019-policy-assistive-src-scope-written",
+                "r019-policy-assistive-src-act-report-outcomes"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "다섯 조합 중 ㄱ·ㄴ·ㄷ를 모두 충족하는 것은 o04뿐이다. 대상 없음에 따른 성공기준 준수와 ACT passed를 혼동하는 반례는 notes의 결과명 한정으로 배제된다. cantTell의 다른 사용 가능성도 제시된 적용 여부 미결정 상태를 바꾸지 않는다.",
+              "evidenceRefs": [
+                "r019-policy-assistive-src-act-report-outcomes"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "다섯 선택지가 동일한 ㄱ/ㄴ/ㄷ 순서와 한국어·영문 결과명 구조를 쓴다. 오답은 결과 정의의 실제 혼동 가설이며 무관한 채움이 없다. 정답만 긴 설명·온건한 표현으로 드러나지 않고, 적용 대상 없음·시도 후 미결정·미평가 조건이 보존된다. 색·위치·이미지 의존 정보가 없고 ㄱ·ㄴ·ㄷ는 지문에서 완결적으로 설명된다. 문항 해설만 읽어도 실제 해법과 적용이 완결되며 선택지별 이유 전체를 복제하지 않는다.",
+              "evidenceRefs": []
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "등록 원문·맹검·첫 답·lock·구성요소 해시를 다시 계산했고, revision 외에는 question.explanation 두 필드만 바뀌었음을 확인했다. 한정 source API 실행에서 validateBankForPublication 및 기본 예외 없이 두 문항·열 선택지에 적용한 validateExplanationAuthoring이 통과했다. 전체 campaign·test suite·build는 이번 gate에서 미실시다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "개정2의 다섯 gate를 통과했다. 독립 첫 답 C는 o04와 일치하며 문항 해설 자체가 세 ACT 결과의 도출 규칙과 적용을 설명한다. 조건·정답·선택지·기존 출처는 보존되었다.",
+          "contentSha256": "6fec5d845627293fe6346d3a9a3f9c4a52b6a04068adf97f59f9064defc74e83",
+          "blindPackageSha256": "dbcb29d36d14e2923e3e4ce8cb0856fd30cb5346ae4f593da9b160913f8ccc98",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-004-cycle-1.json",
+          "reviewPackageSha256": "a4240fe1887f4d6ac69c580a96dc0bbd49d514ad16ae994b8954f8d0d1ebc7b9",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w05-o01",
+              "revision": 1,
+              "contentSha256": "9362945a6e585cec70115af02cf6b5cd78d694b19be1e793b5e14a74620e667c"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w05-o02",
+              "revision": 1,
+              "contentSha256": "edfd0dbc32352b1da2869273ad1d3c565e81bdceabfee97f084deacf2cf5bf6e"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w05-o03",
+              "revision": 1,
+              "contentSha256": "4791645ed6b73340407646299561284e859b4a3f3def528ae42e6071f79d016b"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w05-o04",
+              "revision": 1,
+              "contentSha256": "876b230bc1fcc28d99c5b56245ba8154d9e198bed8f2228d1c84dac0c6141d31"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w05-o05",
+              "revision": 1,
+              "contentSha256": "2680c0574596ee469eb6a33ec590f59a8599349dd4913d01507e609f3adc1777"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "개정2의 다섯 gate를 통과했다. 독립 첫 답 C는 o04와 일치하며 문항 해설 자체가 세 ACT 결과의 도출 규칙과 적용을 설명한다. 조건·정답·선택지·기존 출처는 보존되었다.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r019-policy-assistive-s5-w05/explanation"
+      ]
+    },
+    {
+      "correctionId": "e004-nvda-key-handling-explanation",
+      "issueId": "explanation-acp-02",
+      "questionId": "r019-policy-assistive-s5-w01",
+      "templateId": "r019-policy-assistive-template-nvda-single-letter-navigation-toggle-preserves-browse-arrow-reading",
+      "learningGoalId": "r019-policy-assistive-template-nvda-single-letter-navigation-toggle-preserves-browse-arrow-reading",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s5",
+      "priorAcceptedRef": {
+        "roundId": "round-019",
+        "candidateId": "r019-policy-assistive-s5-w01",
+        "ledgerPath": "docs/rounds/round-019.json",
+        "bankVersion": "2026.10.05-regular.19",
+        "bankSha256": "8fc3b284231a86473f9cbbed63ce45e6eba6ac1f887e565995101949d034062a",
+        "questionRevision": 1,
+        "contentSha256": "37734f0f253fa8d06057a572b7c9fa7eb3983a1bb3744b3a0b7427ffa279de02"
+      },
+      "defect": "question.explanation은 읽기·발화·키 처리가 다르다는 주의만 제시하고, 현재 문서의 한 글자 탐색을 끄면서 탐색 모드를 유지하는 조작과 두 요구사항의 관계를 설명하지 않는다. 기존 조건과 정답·선택지는 보존하고 해설의 실제 해결 규칙을 보완한다.",
+      "revision": 2,
+      "authorId": "e004-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r019-policy-assistive-src-scope-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "2026-05-07 공식 HWP",
+          "location": "웹접근성 표준 개론: 국가별 웹 접근성 표준 정책; 정보접근성 개론: 보조공학 종류·역할·이용방식, 장애 특성별 정보이용 환경, 점검 도구·결과의 한계",
+          "checkedAt": "2026-10-12T03:04:39.389273+00:00",
+          "summary": "보존된 공식2026-05-07 필기 출제기준 HWP(80896바이트, SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314)와 기존 추출 본문을 대조하여 정보접근성 개론의 보조공학 종류·역할·이용방식 및 점검 방식·도구·결과의 한계 범위를 다시 읽었다. 이번 checkedAt은 보존 자료 재대조 시각이며 새 취득·새 추출이나 최신 법령 확인이 아니다. 국제 성공기준 세부 내용·규칙 저작을 새 목표로 확대하지 않는다.",
+          "rights": "지정1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·선택지를 보존하고 문항 해설만 수정한다. 공식 샘플·유료 문제·원문 전문·비공개 조사 자료를 배포하지 않는다."
+        },
+        {
+          "sourceId": "r019-policy-assistive-src-nvda-browse-single-letter",
+          "title": "NVDA 2026.1 User Guide",
+          "url": "https://download.nvaccess.org/releases/2026.1/documentation/en/userGuide.html",
+          "version": "NVDA 2026.1 고정 배포판 사용자 가이드",
+          "location": "Browse Mode → Single Letter Navigation; Basic NVDA commands; Speech modes",
+          "checkedAt": "2026-10-12T03:04:39.389273+00:00",
+          "summary": "2026-10-11 조사 때 읽은 NVDA2026.1 고정 사용자 가이드 공식 웹 도구 캡처의 Single Letter Navigation·Browse Mode·Basic NVDA commands·Speech modes·Input Help Mode를 다시 읽었다. 현재 문서의 한 글자 탐색을 끄고 탐색 모드를 유지하면 문자 단축키 전달과 방향키 읽기를 함께 이용할 수 있다. 발화 끔은 명령 처리를 끄지 않으며 입력 도움말·앱 절전·초점 모드는 제시된 두 조건의 대안이 아니다. 이번 checkedAt은 보존 캡처 재대조 시각이며 새 HTTP 취득이나 실제 Windows/NVDA 조작 결과가 아니다.",
+          "rights": "지정1차 자료의 관련 사실을 필요한 범위에서 독자적으로 요약했다. 기존 독자 지문·선택지를 보존하고 문항 해설만 수정한다. 공식 샘플·유료 문제·원문 전문·비공개 조사 자료를 배포하지 않는다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 2,
+          "startedAt": "2026-10-12T03:22:42.185Z",
+          "finishedAt": "2026-10-12T03:33:48.527004Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "출처·키·해설·의미 식별자가 없는 등록 패킷만으로 독립 풀이하고 첫 답을 저장한 뒤 정식 lock 이후 키를 대조했다. C002의 첫 답 B가 등록 정답과 일치한다.",
+              "evidenceRefs": []
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "정확한 고정판 1차 자료의 보존 캡처와 공식 범위 추출본을 독립 재독하여 사실·범위·권리를 확인했다. 기존 checkedAt은 역사로 보존하며 이번 재독을 새 취득이나 AT 실행으로 주장하지 않는다.",
+              "evidenceRefs": [
+                "r019-policy-assistive-src-scope-written",
+                "r019-policy-assistive-src-nvda-browse-single-letter"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "제시된 다섯 설정 중 o01만 문자 단축키 전달과 탐색 모드 방향키 읽기를 함께 유지한다. 초점 모드의 입력란 커서 읽기는 탐색 모드 읽기와 다르며, 발화 끔의 점자 가능성도 키 처리 문제를 해결하지 않는다. 별도의 일회성 다음 키 전달은 선택지에 없으므로 가능한 모든 조작 중 유일하다는 과장을 하지 않는다.",
+              "evidenceRefs": [
+                "r019-policy-assistive-src-nvda-browse-single-letter"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "다섯 선택지는 현재 문서·앱에서 한 설정을 바꾸는 동일한 행위 수준이다. 입력 도움말·발화 끔·초점 모드·앱 절전은 관련 기능의 그럴듯한 혼동이며 임의 오답이 아니다. 세 선택지가 탐색 모드 유지라는 문형을 공유해 정답 문형만 노출되지 않는다. 판·현재 상태·단축키의 정상 동작 전제를 보존하고 위치·색·이미지나 특정 키보드 배치에 의존하지 않는다. 문항 해설만 읽어도 실제 해법과 적용이 완결되며 선택지별 이유 전체를 복제하지 않는다.",
+              "evidenceRefs": []
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e004-independent-primary-v1",
+              "summary": "등록 원문·맹검·첫 답·lock·구성요소 해시를 다시 계산했고, revision 외에는 question.explanation 두 필드만 바뀌었음을 확인했다. 한정 source API 실행에서 validateBankForPublication 및 기본 예외 없이 두 문항·열 선택지에 적용한 validateExplanationAuthoring이 통과했다. 전체 campaign·test suite·build는 이번 gate에서 미실시다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "개정2의 다섯 gate를 통과했다. 독립 첫 답 B는 o01과 일치하며 문항 해설 자체가 한 글자 탐색 해제와 탐색 읽기 유지의 관계를 설명한다. 조건·정답·선택지·기존 출처는 보존되었다.",
+          "contentSha256": "fea2e836be9e7993e3641bf54928a1d1f1fb6a14e1400649e89dc4a1097e19b5",
+          "blindPackageSha256": "ea922d4d95b70c2b6202807694c547b406b971879539e72b68ad36383a3d5eea",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-004-cycle-1.json",
+          "reviewPackageSha256": "a4240fe1887f4d6ac69c580a96dc0bbd49d514ad16ae994b8954f8d0d1ebc7b9",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w01-o01",
+              "revision": 1,
+              "contentSha256": "3522fb12919606685cca5f14f6f390fa56a29f32a1620f89ead71a6256893bc4"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w01-o02",
+              "revision": 1,
+              "contentSha256": "a80904abd6a3c492be7f8ff043404d0d123169af0dee871fea40bd138904b7fa"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w01-o03",
+              "revision": 1,
+              "contentSha256": "3cc72e7f89f8c6099e108858e44fa59c322969ca62969af22a03420e966cfb8d"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w01-o04",
+              "revision": 1,
+              "contentSha256": "8a637a65d34f2820e8ce87a1e0b81742674fff4e1a6a6fdd6d7bd876e89fe04e"
+            },
+            {
+              "kind": "written_option",
+              "id": "r019-policy-assistive-s5-w01-o05",
+              "revision": 1,
+              "contentSha256": "60104965a2c1583e20a86167b5165e0537d09274a2d3c809f5037405c2102c18"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "개정2의 다섯 gate를 통과했다. 독립 첫 답 B는 o01과 일치하며 문항 해설 자체가 한 글자 탐색 해제와 탐색 읽기 유지의 관계를 설명한다. 조건·정답·선택지·기존 출처는 보존되었다.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r019-policy-assistive-s5-w01/explanation"
+      ]
+    }
+  ],
+  "counts": {
+    "registered": 2,
+    "accepted": 2,
+    "rejected": 0,
+    "pending": 0,
+    "newRegular": 0,
+    "revisedRegular": 2,
+    "publishedRevisedRegular": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.12-editorial.4",
+    "bankSha256": "5245cb2217ca7816b4c9b9dbe5b85d9e266e5415a05e84e86ced51d1f089b47f",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [],
+  "nextAction": "채택된 정확한 해설 정정 개정판은 별도로 검증하는 전체·변경분 전달 준비로 진행한다. 새 학습 목표·다음 회차·Git/Pages 공개 완료를 뜻하지 않는다.",
+  "summary": "기존 두 문항의 해설 결함만 정정하며 신규 지식·문항·선택지를 추가하지 않는다."
+}
