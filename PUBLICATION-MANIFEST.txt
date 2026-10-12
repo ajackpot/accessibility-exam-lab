@@ -404,3 +404,4 @@ docs/corrections/evidence/editorial-003-cycle-1.json
 data/releases/2026.10.11-editorial.3/bank.json
 tests/editorial-three-bank.test.mjs
 tests/fixtures/editorial002-manifest.json
+docs/publications/editorial-003.json

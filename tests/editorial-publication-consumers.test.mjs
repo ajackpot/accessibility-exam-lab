@@ -23,67 +23,88 @@ const now=Date.parse('2026-10-11T01:00:00Z');
 let directory,api,validator,editorialApi,context,event,originalEditorialRaw,originalSelectedRaw,roundSchema,editorialSchema,sourceBank;
 
 // Test-owned historical projection only; this never authenticates new publication
-// authority. A later real editorial002 registration must not become the synthetic
-// fixture's predecessor. Keep this bounded projection identical in both tests.
+// authority. Require registered editorial suffixes and keep the frozen eight-pin
+// predecessor. Keep this bounded projection identical in both tests.
 function projectHistoricalPublications(sourceFiles,sourcePins){
-  assert(Array.isArray(sourcePins));
+  assert(sourceFiles instanceof Map);assert(Array.isArray(sourcePins));
   const pins=sourcePins.slice(0,8),suffix=sourcePins.slice(8),files=new Map(sourceFiles),removedPaths=[];
   assert.equal(H(J(pins)),'b91fb0d6f084a4a8005e077f449d928f0615ce54892daba764e0502d8942c1a4','fixture requires the exact eight-pin historical prefix');
-  assert(suffix.length<=1,'unexpected publication suffix requires an explicit fixture review');
-  function authenticated(pin){const raw=sourceFiles.get(pin.path);assert(Buffer.isBuffer(raw),`missing pinned fixture event ${pin.path}`);assert.equal(H(raw),pin.sha256);const event=JSON.parse(raw);assert.deepEqual(raw,J(event));return event;}
-  const events=pins.map(authenticated),eventPath='docs/publications/editorial-002.json';
+  assert(suffix.length,'fixture requires the registered actual002 anchor');
+  const safe=p=>typeof p==='string'&&/^[A-Za-z0-9._/-]+$/.test(p)&&!p.startsWith('/')&&!p.split('/').some(v=>!v||v==='.'||v==='..');
+  const lines=files.get('PUBLICATION-MANIFEST.txt').toString().split('\n'),paths=lines.filter(p=>p&&!p.startsWith('#'));
+  assert(paths.every(safe));assert.equal(new Set(paths).size,paths.length,'duplicate fixture allowlist path');
+  assert.deepEqual([...sourceFiles.keys()].sort(),[...paths].sort(),'fixture files must equal the complete allowlist');
+  function authenticated(pin){assert.deepEqual(Object.keys(pin).sort(),['path','sha256']);assert(safe(pin.path));assert(/^[a-f0-9]{64}$/.test(pin.sha256));const raw=sourceFiles.get(pin.path);assert(Buffer.isBuffer(raw),`missing pinned fixture event ${pin.path}`);assert.equal(H(raw),pin.sha256);const event=JSON.parse(raw);assert.deepEqual(raw,J(event));return event;}
+  assert.equal(new Set(sourcePins.map(pin=>pin.path)).size,sourcePins.length,'duplicate publication pin');
+  const events=pins.map(authenticated),suffixEvents=[],owners=new Set(events.map(event=>event.syncId));
   assert.equal(events.at(-1).syncId,'normal-041-selection-001');
-  assert(!files.has('docs/publications/editorial-002.md'),'unexpected publication report requires an explicit fixture review');
-  if(suffix.length){
-    const pin=suffix[0];assert.deepEqual(Object.keys(pin).sort(),['path','sha256']);assert.equal(pin.path,eventPath);
+  assert.deepEqual(suffix[0],{path:'docs/publications/editorial-002.json',sha256:'b873b9e8e9043e36892fe34414b4cc8edbba2a57d2ad11ed04ba9fc485df50cf'});
+  let previous=events.at(-1),previousPin=pins.at(-1),code=files.get('scripts/publication-sync.mjs').toString();
+  for(const pin of suffix){
     const event=authenticated(pin);
-    assert.equal(event.syncId,'editorial-002');assert.equal(event.kind,'verified_normal_editorial_publication');
-    assert.equal(event.rounds.length,1);assert.equal(event.rounds[0].kind,'editorial_frozen_ledger');assert.equal(event.rounds[0].correctionRoundId,'editorial-002');assert.equal(event.rounds[0].ledgerPath,'docs/corrections/editorial-002.json');
-    assert.equal(event.previousSynchronizationSha256,pins.at(-1).sha256);
-    assert(Date.parse(event.verifiedAt)>Date.parse('2026-10-11T01:00:00Z'),'real suffix must be later than both fixed synthetic fixture times');
-    const code=files.get('scripts/publication-sync.mjs').toString(),appendedPin=`,\n  Object.freeze({path:'${eventPath}', sha256:'${pin.sha256}'})`;
-    assert.equal(code.split(appendedPin).length,2,'only the exact registration pin append may be projected');
-    files.set('scripts/publication-sync.mjs',Buffer.from(code.replace(appendedPin,'')));
-    const lines=files.get('PUBLICATION-MANIFEST.txt').toString().split('\n');
-    assert.equal(lines.filter(line=>line===eventPath).length,1,'only one exact suffix allowlist line may be projected');
-    files.set('PUBLICATION-MANIFEST.txt',Buffer.from(lines.filter(line=>line!==eventPath).join('\n')));
-    files.delete(eventPath);removedPaths.push(eventPath);
-  }else assert(!files.has(eventPath),'unregistered suffix event is not fixture history');
+    assert.deepEqual(Object.keys(event).sort(),['schemaVersion','syncId','kind','previousSynchronizationSha256','verifiedAt','repository','commit','parent','tree','commitUrl','pages','siteUrl','manifest','manifestSha256','runtimeManifestRaw','publicationStateRaw','counts','writtenBySubject','rounds','remoteInventory','liveAssets','limitations'].sort());
+    assert.equal(event.schemaVersion,1);assert.equal(event.kind,'verified_normal_editorial_publication');assert(/^editorial-\d+$/.test(event.syncId));assert.equal(pin.path,`docs/publications/${event.syncId}.json`);
+    assert(!owners.has(event.syncId),'duplicate editorial suffix owner');owners.add(event.syncId);
+    assert(Array.isArray(event.rounds));assert.equal(event.rounds.length,1);const source=event.rounds[0];
+    assert.deepEqual(Object.keys(source).sort(),['kind','correctionRoundId','ledgerPath','originalLedgerSha256','bankVersion','bankSha256','baseline','originalPublicationStatus','accepted','publishedRevisedRegular','newlyPublicRegular'].sort());
+    assert.equal(source.kind,'editorial_frozen_ledger');assert.equal(source.correctionRoundId,event.syncId);assert.equal(source.ledgerPath,`docs/corrections/${event.syncId}.json`);
+    assert(typeof source.bankVersion==='string'&&/^[A-Za-z0-9._-]+$/.test(source.bankVersion)&&!['.','..'].includes(source.bankVersion),'canonical single-segment bank version required');assert.deepEqual(Object.keys(source.baseline).sort(),['bankSha256','bankVersion','sourceCommit']);
+    assert.equal(event.previousSynchronizationSha256,previousPin.sha256);assert.equal(event.repository,previous.repository);assert.equal(event.siteUrl,previous.siteUrl);
+    const verifiedAt=Date.parse(event.verifiedAt);assert(Number.isFinite(verifiedAt)&&verifiedAt>Date.parse(previous.verifiedAt)&&verifiedAt>Date.parse('2026-10-11T01:00:00Z'),'suffix must follow its predecessor and both fixed fixture clocks');
+    const appendedPin=`,\n  Object.freeze({path:'${pin.path}', sha256:'${pin.sha256}'})`;
+    assert.equal(code.split(appendedPin).length,2,'only the exact registration pin append may be projected');code=code.replace(appendedPin,'');
+    assert.equal(lines.filter(p=>p===pin.path).length,1,'one exact suffix allowlist entry required');
+    files.delete(pin.path);removedPaths.push(pin.path);suffixEvents.push(event);previous=event;previousPin=pin;
+  }
+  files.set('scripts/publication-sync.mjs',Buffer.from(code));
   assert.equal(H(files.get('scripts/publication-sync.mjs')),'4cdeed574bf4fd80ea9e80e7c1067e052dca7c19a937e35d7a803ab0dcbe2e7a','projected module must equal the frozen pre-registration source');
-  return {files,pins,events,removedPaths};
+  const removed=new Set(removedPaths);files.set('PUBLICATION-MANIFEST.txt',Buffer.from(lines.filter(p=>!removed.has(p)).join('\n')));
+  return {files,pins,events,removedPaths,suffixEvents};
 }
 
 // Non-authorizing test data reconstruction. These are exact stored fields and
 // the production clock formulas, not loadRoundContext-validated chain authority.
-// Test-owned exact editorial002 context. Actual003 remains immutable on disk.
-// Only the reviewed four003 files may be removed from this private raw map.
+// Test-owned exact editorial002 context. Only registered later editorial-owned
+// dependencies are projected out; unknown production drift fails closed.
 function projectEditorial002Context(projection){
- const files=new Map(projection.files),fixturePath='tests/fixtures/editorial002-manifest.json';
- const historicalRaw=files.get(fixturePath);assert(Buffer.isBuffer(historicalRaw),'exact historical002 manifest fixture required');
- assert.equal(H(historicalRaw),'e3e2e3f9cc551a586dca75c61034e6e89e7e17d61c935d7e138c5aac30f040d7');
- const historical=JSON.parse(historicalRaw),activeRaw=files.get('data/manifest.json');assert(Buffer.isBuffer(activeRaw));
- assert.equal(historical.bankVersion,'2026.10.11-editorial.2');assert.equal(historical.sha256,'a752fd3714ca62e0f0067af778a547f430690f60d6c2da831af4330a162c2c18');
- assert.equal(H(files.get('data/'+historical.file)),historical.sha256);
- const rows=[{"path":"docs/corrections/editorial-003.json","bytes":23410,"sha256":"3f20e644742ef546f7867a9149e2b1afdc7d0c20961842ce4db14ce18c5195e9"},{"path":"docs/corrections/editorial-003.md","bytes":1132,"sha256":"60d5b1a649dbf54d3a4e51fa9c65a7ad6bc2690f5a9ba00005a284b05f98f480"},{"path":"docs/corrections/evidence/editorial-003-cycle-1.json","bytes":11235,"sha256":"f7d3bec6e6e56533129ae4997fdecc37552f3f677b0139fa1a388fd3773984e3"},{"path":"data/releases/2026.10.11-editorial.3/bank.json","bytes":6256177,"sha256":"4a262a70eaa25bba13d4dd6b73d01896876d81913e4b19fdfbe406de0683b672"}];
- const editorialPaths=[...files.keys()].filter(p=>/^docs\/corrections\/editorial-\d+\.json$/.test(p)).sort();
- const previousPaths=['docs/corrections/editorial-001.json','docs/corrections/editorial-002.json'];
- if(H(activeRaw)===H(historicalRaw)){
-  assert.deepEqual(editorialPaths,previousPaths);for(const row of rows)assert(!files.has(row.path),'unexpected003 bytes under historical manifest');
-  return {...projection,files};
- }
- assert.equal(H(activeRaw),'fda7c462d90a57a75346cef169585b1e405573b20f0da9540315a25ba78e2893','only the exact actual003 active manifest may be projected');
- assert.deepEqual(editorialPaths,[...previousPaths,'docs/corrections/editorial-003.json']);
- for(const row of rows){const raw=files.get(row.path);assert(Buffer.isBuffer(raw),'missing exact003 fixture dependency '+row.path);assert.equal(raw.length,row.bytes);assert.equal(H(raw),row.sha256);}
- const ledger=JSON.parse(files.get(rows[0].path)),pkg=JSON.parse(files.get(rows[2].path)),bank=JSON.parse(files.get(rows[3].path)),active=JSON.parse(activeRaw);
- assert.equal(ledger.kind,'accepted_content_editorial');assert.equal(ledger.correctionRoundId,'editorial-003');assert.equal(ledger.status,'closed');assert.equal(ledger.closedAt,'2026-10-11T11:30:53.405Z');
- assert.equal(ledger.baseline.bankVersion,historical.bankVersion);assert.equal(ledger.baseline.bankSha256,historical.sha256);
- assert.equal(ledger.publication.bankVersion,bank.bankVersion);assert.equal(ledger.publication.bankSha256,rows[3].sha256);assert.equal(active.bankVersion,bank.bankVersion);assert.equal(active.sha256,rows[3].sha256);assert.equal(bank.editorialRoundId,'editorial-003');
- assert.deepEqual(ledger.changedQuestionIds,['r002-internet-html-w15','r016-dom-html-s3-w02']);assert.equal(ledger.counts.accepted,2);assert.equal(ledger.counts.pending,0);assert.equal(ledger.counts.newRegular,0);assert.equal(pkg.correctionRoundId,'editorial-003');assert.equal(pkg.cycle,1);
- for(const correction of ledger.corrections){assert.equal(correction.decision,'accepted');assert.equal(correction.cycles.length,1);const cycle=correction.cycles[0];assert.equal(cycle.reviewPackagePath,rows[2].path);assert.equal(cycle.reviewPackageSha256,rows[2].sha256);const item=pkg.items.find(i=>i.correctionId===correction.correctionId);assert(item);assert.deepEqual(bank.questions.find(q=>q.questionId===correction.questionId),item.question);}
- const lines=files.get('PUBLICATION-MANIFEST.txt').toString().split('\n');for(const row of rows)assert.equal(lines.filter(p=>p===row.path).length,1,'exact003 allowlist entry required');
- const removed=new Set(rows.map(row=>row.path));files.set('PUBLICATION-MANIFEST.txt',Buffer.from(lines.filter(p=>!removed.has(p)).join('\n')));for(const p of removed)files.delete(p);
- files.set('data/manifest.json',Buffer.from(historicalRaw));
- return {...projection,files,removedPaths:[...projection.removedPaths,...removed]};
+  const files=new Map(projection.files),anchor=projection.suffixEvents[0],fixturePath='tests/fixtures/editorial002-manifest.json';
+  const opaque=new Set(['tests/editorial-publication.test.mjs','tests/editorial-publication-consumers.test.mjs','tests/editorial-two-bank.test.mjs','tests/editorial-three-bank.test.mjs',fixturePath]);
+  const support=new Set(['tests/editorial-three-bank.test.mjs',fixturePath]),removed=new Set();
+  const safe=p=>typeof p==='string'&&/^[A-Za-z0-9._/-]+$/.test(p)&&!p.startsWith('/')&&!p.split('/').some(v=>!v||v==='.'||v==='..');
+  function inventory(event){assert(Array.isArray(event.remoteInventory));const rows=new Map();for(const row of event.remoteInventory){assert.deepEqual(Object.keys(row).sort(),['bytes','gitBlob','path','sha256']);assert(safe(row.path));assert(!rows.has(row.path),'duplicate publication inventory path');assert(Number.isSafeInteger(row.bytes)&&row.bytes>=0);assert(/^[a-f0-9]{64}$/.test(row.sha256));assert(/^[a-f0-9]{40}$/.test(row.gitBlob));rows.set(row.path,row);}return rows;}
+  function exact(p,rows){const raw=files.get(p),row=rows.get(p);assert(Buffer.isBuffer(raw)&&row,`missing exact fixture dependency ${p}`);assert.equal(raw.length,row.bytes,p);assert.equal(H(raw),row.sha256,p);assert.equal(createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${raw.length}\0`),raw])).digest('hex'),row.gitBlob,p);return raw;}
+  const historical=inventory(anchor),historicalRaw=files.get(fixturePath);assert(Buffer.isBuffer(historicalRaw),'exact historical002 manifest fixture required');
+  assert.equal(H(historicalRaw),'e3e2e3f9cc551a586dca75c61034e6e89e7e17d61c935d7e138c5aac30f040d7');
+  assert.deepEqual(historicalRaw,Buffer.from(anchor.runtimeManifestRaw));assert.deepEqual(JSON.parse(historicalRaw),anchor.manifest);
+  assert.equal(anchor.manifest.bankVersion,'2026.10.11-editorial.2');assert.equal(anchor.manifest.sha256,'a752fd3714ca62e0f0067af778a547f430690f60d6c2da831af4330a162c2c18');
+  assert.equal(H(exact('data/'+anchor.manifest.file,historical)),anchor.manifest.sha256);
+  const latest=projection.suffixEvents.at(-1),latestInventory=inventory(latest),activeRaw=exact('data/manifest.json',latestInventory);
+  assert.deepEqual(activeRaw,Buffer.from(latest.runtimeManifestRaw));assert.equal(H(activeRaw),latest.manifestSha256);assert.deepEqual(JSON.parse(activeRaw),latest.manifest);
+  const lines=files.get('PUBLICATION-MANIFEST.txt').toString().split('\n');
+  for(const p of support){assert(Buffer.isBuffer(files.get(p)),`missing required fixture support ${p}`);assert.equal(lines.filter(line=>line===p).length,1,'one exact support allowlist entry required');}
+  for(const event of projection.suffixEvents.slice(1)){
+    const source=event.rounds[0],id=source.correctionRoundId,rows=inventory(event),owned=new Map();
+    function own(p,sha256=null){assert(safe(p));assert(!historical.has(p)&&!opaque.has(p),'later owner cannot remove historical or support bytes');assert(!removed.has(p),'duplicate ownership across editorial events');const raw=exact(p,rows);if(sha256!==null)assert.equal(H(raw),sha256,p);if(owned.has(p))assert.equal(owned.get(p),H(raw),'ambiguous owned dependency');owned.set(p,H(raw));return raw;}
+    const ledgerRaw=own(source.ledgerPath,source.originalLedgerSha256),ledger=JSON.parse(ledgerRaw);assert.deepEqual(ledgerRaw,J(ledger));
+    assert.equal(ledger.kind,'accepted_content_editorial');assert.equal(ledger.correctionRoundId,id);assert.equal(ledger.status,'closed');
+    assert.equal(ledger.publication.bankVersion,source.bankVersion);assert.equal(ledger.publication.bankSha256,source.bankSha256);
+    assert.equal(event.manifest.bankVersion,source.bankVersion);assert.equal(event.manifest.sha256,source.bankSha256);assert.equal(event.manifest.file,`releases/${source.bankVersion}/bank.json`);
+    own(`data/releases/${source.bankVersion}/bank.json`,source.bankSha256);const reportPath=`docs/corrections/${id}.md`;own(reportPath);
+    for(const correction of ledger.corrections)for(const cycle of correction.cycles){
+      assert(Number.isSafeInteger(cycle.cycle)&&cycle.cycle>0);assert.equal(cycle.reviewPackagePath,`docs/corrections/evidence/${id}-cycle-${cycle.cycle}.json`);
+      const raw=own(cycle.reviewPackagePath,cycle.reviewPackageSha256),pkg=JSON.parse(raw);assert.deepEqual(raw,J(pkg));assert.equal(pkg.evidenceSchemaVersion,1);assert.equal(pkg.purpose,'immutable_editorial_review_input');assert.equal(pkg.correctionRoundId,id);assert.equal(pkg.cycle,cycle.cycle);
+    }
+    for(const entry of ledger.validation)if(entry.reportPath)assert(owned.has(entry.reportPath),'unknown validation report requires explicit fixture review');
+    for(const p of owned.keys()){assert.equal(lines.filter(line=>line===p).length,1,'one exact owned allowlist entry required');removed.add(p);}
+  }
+  for(const p of removed)files.delete(p);files.set('data/manifest.json',Buffer.from(historicalRaw));
+  const projectedLines=lines.filter(p=>!removed.has(p)),historicalAllowlist=Buffer.from(projectedLines.filter(p=>!support.has(p)).join('\n'));
+  files.set('PUBLICATION-MANIFEST.txt',historicalAllowlist);exact('PUBLICATION-MANIFEST.txt',historical);
+  for(const p of historical.keys())if(!opaque.has(p))exact(p,historical);else assert(Buffer.isBuffer(files.get(p)),`missing opaque historical test ${p}`);
+  for(const p of files.keys())assert(historical.has(p)||support.has(p),`unknown fixture addition ${p}`);
+  files.set('PUBLICATION-MANIFEST.txt',Buffer.from(projectedLines.join('\n')));
+  const publicPaths=projectedLines.filter(p=>p&&!p.startsWith('#')),expectedPaths=[...historical.keys(),...support];assert.equal(new Set(expectedPaths).size,expectedPaths.length);assert.deepEqual([...files.keys()].sort(),expectedPaths.sort());assert.equal(new Set(publicPaths).size,publicPaths.length);assert.deepEqual([...files.keys()].sort(),[...publicPaths].sort());
+  return {...projection,files,removedPaths:[...projection.removedPaths,...removed]};
 }
 
 function fixtureOfflineBases(files,prior){
