@@ -572,3 +572,12 @@ parentObservation은 정확한 repository·refs/heads/main·commit·tree·전체
 loader는 정규 ledgerSources와 별도인 editorialSources에 원문을 보관하고 해당 typed evidence를 전파한다. 성공한 실제 synchronization만 `synchronizedEditorialIds`에 소유 ID를 넣으며 `synchronizedRoundIds`는 빈 배열이다. 자기 공개 이벤트는 원 대장의 시작 기준으로 오인하지 않는다. 후속 정정의 priorAcceptedRef는 실제 선행 이벤트·은행 해시·accepted correction ID·문항 revision/내용 및 후속 baseline의 같은 원문과 일치하고, verifiedAt은 후속 startedAt보다 엄격히 앞서야 한다.
 
 편집 이력의 순수 predicate는 synchronization 아래의 비권한 계층으로 분리한다. 실제 admission은 synchronization 루프 내부에서 이미 검증한 시간순 앞선 이력만 사용하며 재귀적으로 같은 공개 wrapper를 호출하지 않는다. canonical schema/coverage/schedule helper와 내부 고정 schema를 사용하고 외부 callback·history prefix·Boolean으로 권한을 대체하지 않는다. 이 이벤트는 deliveryProof를 요구하거나 전달 artifact를 해소하지 않으며 오프라인 편집 baseline 또는 root/chain 자격을 만들지 않는다.
+
+
+## 검증 coverage 선택지 인덱스 재사용 (validation-efficiency-003)
+
+한 `regularCoverage` 호출 안에서만 private 선택지 인덱스를 재사용한다. Node의 native Proxy 검사를 통과한 일반 배열이며 배열과 각 일반 선택지 객체가 동결되고 `optionId`가 문자열 data property인 경우로 제한한다. 배열의 자체 map/constructor, 배열 매핑·species 또는 Map 생성자 변경은 재사용을 허용하지 않는다. 공개 `presentQuestion` API와 mutable·Proxy·getter 등 특수 입력은 기존처럼 인덱스를 다시 만든다. 기본 Proxy 판별 인자가 없는 factory도 재사용하지 않는다.
+
+문항 선택 계획·snapshot·정답 검증 결과·의미/이력/trust/현재 시각/동결 판정을 캐시하지 않는다. 각 호출의 선택 계획, 오류 순서, RNG 소비, 새 snapshot 생성과 전체 검증 범위를 유지한다. 은행·문항·선택지·개정판·불변 대장과 실제 공개/전달 이벤트는 바꾸지 않는다. 실제 공개 main의 원문 module closure와 결과·오류·snapshot·RNG differential을 별도 시험하며 prototype 성능을 전체 gate 시간이나 새 후보의 검증 성공으로 보고하지 않는다.
+
+같은 은행을 유지하는 이 successor의 앱 버전은 `0.2.10`이다. package/lockfile과 실행·QA 모듈 query 버전을 함께 맞추고 기존 `pool=priority-001`의 정확한 네 import 관계 및 앱 진입 URL을 보존한다. 선택 알고리즘과 seeded snapshot의 의미가 같으므로 generator `2`, schema `1`과 은행 버전은 유지한다. 이 문서는 Git 쓰기·공개나 full gate 시작 권한이 아니다.

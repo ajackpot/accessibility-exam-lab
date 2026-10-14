@@ -1,7 +1,7 @@
-import {APP_VERSION,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,isNewSessionQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.9&pool=priority-001';
-import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.9';
-import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.9&pool=priority-001';
-import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.9';
+import {APP_VERSION,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,isNewSessionQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.10&pool=priority-001';
+import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.10';
+import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.10&pool=priority-001';
+import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.10';
 const $=id=>document.getElementById(id);
 const state={bankLoading:true,noticeGeneration:0,starting:false,section:'home',route:null,restoring:false,openGeneration:0,store:null,bank:null,bundle:null,sessions:[],session:null,editor:null,view:'home',queue:Promise.resolve(),storageFailed:false,unsaved:null,anchor:null,warningKeys:new Set(),settings:{timerWarnings:true}};
 const subjectName=id=>SUBJECTS.find(s=>s.id===id)?.name||'웹접근성 실기중급';

@@ -1,7 +1,7 @@
 /** Unchanged pure campaign primitives, shared below synchronization admission.
  * Explicit inputs are data only; this module cannot authenticate history. */
-import {isDeepStrictEqual} from 'node:util';
-import {FREEZE_AT,isPublishedQuestion,presentQuestion} from '../src/domain.js';
+import {isDeepStrictEqual,types} from 'node:util';
+import {FREEZE_AT,isPublishedQuestion,createCoveragePresenter} from '../src/domain.js';
 export const FINAL_DECISION_AT = Date.parse('2026-10-16T23:00:00+09:00');
 const SUBJECTS = ['s1', 's2', 's3', 's4', 's5'];
 const emptySubjects = () => Object.fromEntries(SUBJECTS.map(id => [id, 0]));
@@ -99,11 +99,12 @@ export function validateCampaignJsonSchema(value, schema) {
 export function regularCoverage(bank, at = Date.parse(bank.releasedAt)) {
   const written = emptySubjects(), fiveChoice = emptySubjects();
   const seen = new Set(), fiveSeen = new Set(); let practical = 0;
+  const present = createCoveragePresenter(bank, types.isProxy);
   for (const q of bank.questions) {
     if (q.testOnly !== false || !isPublishedQuestion(bank, q, at)) continue;
     if (!seen.has(q.templateId)) { seen.add(q.templateId); if (q.type === 'written') written[q.subjectId]++; else practical++; }
     if (q.type === 'written' && !fiveSeen.has(q.templateId) && q.supportedOptionCounts?.includes(5)) {
-      try { presentQuestion(bank, q, 5, () => 0); fiveSeen.add(q.templateId); fiveChoice[q.subjectId]++; } catch { /* Not constructible, so not mock eligible. */ }
+      try { present(q, 5, () => 0); fiveSeen.add(q.templateId); fiveChoice[q.subjectId]++; } catch { /* Not constructible, so not mock eligible. */ }
     }
   }
   return {regularWrittenBySubject: written, regularPractical: practical, mockEligible: SUBJECTS.every(id => fiveChoice[id] >= 20)};

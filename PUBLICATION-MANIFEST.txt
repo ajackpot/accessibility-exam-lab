@@ -411,3 +411,14 @@ docs/corrections/evidence/editorial-004-cycle-1.json
 data/releases/2026.10.12-editorial.4/bank.json
 tests/editorial-four-bank.test.mjs
 tests/fixtures/editorial003-manifest.json
+docs/publications/editorial-004.json
+tests/coverage-index-differential.test.mjs
+tests/fixtures/coverage-successor-delta.json
+tests/fixtures/public-main-9ae76b4/scripts/campaign-validation-primitives.mjs
+tests/fixtures/public-main-9ae76b4/src/domain.js
+tests/fixtures/public-main-9ae76b4/src/legacy-materials.js
+tests/fixtures/public-main-9ae76b4/src/legacy-question-display.js
+tests/fixtures/public-main-9ae76b4/src/new-session-eligibility.js
+tests/fixtures/public-main-9ae76b4/src/reviewed-option-explanations.js
+tests/successor-projection.mjs
+tests/successor-projection.test.mjs

@@ -1,9 +1,9 @@
-import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.9&pool=priority-001';
-import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.9';
-import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.9';
-import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.9';
+import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.10&pool=priority-001';
+import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.10';
+import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.10';
+import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.10';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
-export const APP_VERSION = '0.2.9';
+export const APP_VERSION = '0.2.10';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
 export const BANK_SCHEMA_VERSION = 3;
 export const GENERATOR_VERSION = '2'; // Practical single/multi choice permutations join the seeded snapshot.
@@ -120,11 +120,49 @@ function choicePlans(q,optionMap,count) {
   }
   return plans;
 }
+const arrayMap=Array.prototype.map;
+const arrayConstructor=Array,arrayPrototype=Array.prototype,arraySpecies=Object.getOwnPropertyDescriptor(Array,Symbol.species).get;
+function ordinaryArrayMapping() {
+  return Array===arrayConstructor&&Object.getOwnPropertyDescriptor(arrayPrototype,'map')?.value===arrayMap&&Object.getOwnPropertyDescriptor(arrayPrototype,'constructor')?.value===arrayConstructor&&Object.getOwnPropertyDescriptor(arrayConstructor,Symbol.species)?.get===arraySpecies;
+}
+const buildOptionIndex=options=>new Map(options.map(o=>[o.optionId,o]));
+function fixedOptionKeys(options,isProxy) {
+  if(isProxy(options)||!Array.isArray(options)||Object.getPrototypeOf(options)!==arrayPrototype||!Object.isFrozen(options)||Object.hasOwn(options,'map')||Object.hasOwn(options,'constructor'))return false;
+  for(let i=0;i<options.length;i++) {
+    const entry=Object.getOwnPropertyDescriptor(options,String(i));
+    if(!entry||!Object.hasOwn(entry,'value'))return false;
+    const option=entry.value;
+    if(!option||isProxy(option)||Object.getPrototypeOf(option)!==Object.prototype||!Object.isFrozen(option))return false;
+    const key=Object.getOwnPropertyDescriptor(option,'optionId');
+    if(!key||!Object.hasOwn(key,'value')||typeof key.value!=='string')return false;
+  }
+  return true;
+}
+/** One coverage invocation owns this index. No question, plan or snapshot is cached.
+ * The server supplies its trap-free Proxy detector; without one, reuse is off. */
+export function createCoveragePresenter(bank,isProxy=()=>true) {
+  let indexedOptions,index,constructor;
+  const optionsFor=options=>{
+    if(options===indexedOptions&&Map===constructor&&ordinaryArrayMapping())return index;
+    const next=buildOptionIndex(options);
+    // Retain only ordinary frozen arrays/keys; mutable and special inputs still
+    // construct their Map at the original point on every presentation.
+    indexedOptions=undefined;index=undefined;constructor=undefined;
+    try {
+      if(ordinaryArrayMapping()&&fixedOptionKeys(options,isProxy)) {indexedOptions=options;index=next;constructor=Map;}
+    } catch { /* An introspection failure must not replace the original result. */ }
+    return next;
+  };
+  return (q,count=5,random=Math.random,instanceId=q.questionId)=>presentWithOptions(bank,q,count,random,instanceId,optionsFor);
+}
 export function presentQuestion(bank,q,count=5,random=Math.random,instanceId=q.questionId) {
+  return presentWithOptions(bank,q,count,random,instanceId,buildOptionIndex);
+}
+function presentWithOptions(bank,q,count,random,instanceId,optionsFor) {
   const snapshot=copy(q);snapshot.instanceId=instanceId;snapshot.bankVersion=bank.bankVersion;snapshot.bankSchemaVersion=bank.schemaVersion;snapshot.sources=q.sourceRefs.map(id=>copy(bank.sources.find(s=>s.id===id)));
   if(q.type==='written') {
     assert(q.supportedOptionCounts.includes(count),'이 문항은 선택한 선택지 수를 지원하지 않습니다.');
-    const omap=new Map(bank.options.map(o=>[o.optionId,o]));const plans=choicePlans(q,omap,count);
+    const omap=optionsFor(bank.options);const plans=choicePlans(q,omap,count);
     assert(plans.length>0,'검토된 선택지 후보가 부족해 출제하지 않습니다.','INSUFFICIENT');
     const p=plans[Math.floor(random()*plans.length)];const links=shuffled([p.correct,...shuffled(p.candidates,random).slice(0,count-1)],random);
     snapshot.options=links.map(l=>({...copy(omap.get(l.optionId)),contextExplanation:l.contextExplanation,role:l.role}));snapshot.correctOptionId=p.correct.optionId;

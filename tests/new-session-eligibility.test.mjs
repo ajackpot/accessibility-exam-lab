@@ -48,7 +48,7 @@ test('one frozen policy binds the terminal five exact forms and unchanged origin
   assert.deepEqual(policy.excluded,actual);
   for(const target of policy.excluded){assert.deepEqual(Object.keys(target).sort(),['questionId','revision','itemBundleCanonicalSha256'].sort());for(const bank of [baseline,selected]){const q=bank.questions.find(q=>q.questionId===target.questionId);assert.equal(q.revision,target.revision);assert.equal(contentHash(bank,q),target.itemBundleCanonicalSha256);}}
   assert.throws(()=>{policy.excluded[0].questionId='changed';},TypeError);assert.throws(()=>policy.excluded.pop(),TypeError);
-  assert.equal(d.APP_VERSION,'0.2.9');assert.equal(d.SCHEMA_VERSION,1);assert.equal(d.GENERATOR_VERSION,'2');
+  assert.equal(d.APP_VERSION,'0.2.10');assert.equal(d.SCHEMA_VERSION,1);assert.equal(d.GENERATOR_VERSION,'2');
 });
 
 test('effective time changes new-session priority without rewriting publication validity; invalid time cannot opt out',()=>{
@@ -141,7 +141,7 @@ test('synthetic prepared, active and completed historical sessions retain snapsh
 test('cache keys, current UI predicates and public distribution include the new policy without a schema migration',async()=>{
   const read=p=>fs.readFile(new URL('../'+p,import.meta.url),'utf8');
   const [app,domain,workflows,html,allow,checks]=await Promise.all(['src/app.js','src/domain.js','src/workflows.js','index.html','PUBLICATION-MANIFEST.txt','scripts/source-checks.mjs'].map(read));
-  const suffix='?v=0.2.9&pool=priority-001';
+  const suffix='?v=0.2.10&pool=priority-001';
   assert.ok(html.includes('src/app.js'+suffix));assert.ok(app.includes('domain.js'+suffix));assert.ok(app.includes('workflows.js'+suffix));assert.ok(workflows.includes('domain.js'+suffix));assert.ok(domain.includes('new-session-eligibility.js'+suffix));
   assert.match(app,/function updateContentNotice\(\).*isNewSessionQuestion/);assert.match(app,/현재 새 연습 일반 학습/);assert.match(app,/일반 학습 누적 \$\{cumulativeRegular\}문항 · 새 연습 출제 가능 \$\{selectableRegular\}문항/);
   assert.match(workflows,/function mockAvailability\(bank\)[\s\S]*?isNewSessionQuestion/);
