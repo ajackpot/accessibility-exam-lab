@@ -1,8 +1,9 @@
-/** Pure, non-authorizing sibling event checks. No pin, delivery or Git authority. */
+/** Non-authorizing sibling event checks. No pin, delivery or Git authority. */
 import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import {isDeepStrictEqual as equal} from 'node:util';
 import {FREEZE_AT,validateBank} from '../src/domain.js';
+import {EDITORIAL005_COMPLETION,currentCutoffBlocks} from './editorial005-completion.mjs';
 import {regularCoverage} from './campaign-validation-primitives.mjs';
 import {normalPublicationTree} from './normal-publication.mjs';
 import {validateEditorialTransition} from './editorial-history-core.mjs';
@@ -24,16 +25,34 @@ export const EDITORIAL_PUBLICATION_KIND='verified_normal_editorial_publication';
 export const EDITORIAL_SOURCE_KIND='editorial_frozen_ledger';
 export const EDITORIAL_SOURCE_KEYS=Object.freeze(['kind','correctionRoundId','ledgerPath','originalLedgerSha256','bankVersion','bankSha256','baseline','originalPublicationStatus','accepted','publishedRevisedRegular','newlyPublicRegular']);
 export const isEditorialPublication=record=>record?.kind===EDITORIAL_PUBLICATION_KIND;
+// Date policy only: the immutable accepted payload may be registered by its
+// later support commit. Full pin, evidence and private admission checks remain.
+const editorial005PayloadTree='eaf77c21a738f98b92b9669aec8b39e016f82a7b';
+export function publicationCutoffBlocks(record,publicationState=null) {
+ const at=Date.parse(record?.verifiedAt);
+ if(!Number.isFinite(at))return true;
+ if(at<FREEZE_AT)return false;
+ const id=EDITORIAL005_COMPLETION,s=record?.rounds?.[0];
+ if(!isEditorialPublication(record)||record.syncId!==id.roundId||!Array.isArray(record.rounds)||record.rounds.length!==1||!s||!equal(Object.keys(s).sort(),[...EDITORIAL_SOURCE_KEYS].sort())||s.kind!==EDITORIAL_SOURCE_KIND||s.correctionRoundId!==id.roundId||s.ledgerPath!==id.ledgerPath||s.originalLedgerSha256!==id.ledgerSha256||s.bankVersion!==id.bankVersion||s.bankSha256!==id.bankSha256||s.baseline?.sourceCommit!==id.baseCommit||record.parent!==id.baseCommit||record.tree!==editorial005PayloadTree||record.manifestSha256!==id.manifestSha256)return true;
+ try {
+  if(typeof record.runtimeManifestRaw!=='string'||hash(record.runtimeManifestRaw)!==id.manifestSha256||!record.manifest||typeof record.publicationStateRaw!=='string')return true;
+  const state=JSON.parse(record.publicationStateRaw);
+  if(state===null)return true;
+  // Use the event's real time, never a consumer's historical now. This also
+  // requires the existing live ALS scope and rereads both physical roots.
+  return currentCutoffBlocks(at,{roundId:s.correctionRoundId,baseCommit:record.parent,manifest:record.manifest,publicationState:state})||publicationState!==null&&currentCutoffBlocks(at,{publicationState});
+ }catch{return true;}
+}
 const editorialSchemaRaw=readFileSync(new URL('../docs/corrections/editorial-ledger.schema.json',import.meta.url));
 const eventKeys=['schemaVersion','syncId','kind','previousSynchronizationSha256','verifiedAt','repository','commit','parent','tree','commitUrl','pages','siteUrl','manifest','manifestSha256','runtimeManifestRaw','publicationStateRaw','counts','writtenBySubject','rounds','remoteInventory','liveAssets','limitations'];
 
 /** Check the exact typed source, complete payload and transition. Lifecycle checks
  * are performed separately by the synchronization loop using its private prefix.
  * Calling this function, even successfully, never authenticates any history. */
-export function validateEditorialPublication(record,{ledgers=[],editorials=[],banks=new Map(),ledgerSources=new Map(),editorialSources=new Map(),reviewPackages=new Map(),editorialReports=new Map(),inventory,previousPublication,publicationSelections=null}) {
+export function validateEditorialPublication(record,{ledgers=[],editorials=[],banks=new Map(),ledgerSources=new Map(),editorialSources=new Map(),reviewPackages=new Map(),editorialReports=new Map(),inventory,previousPublication,publicationSelections=null,publicationState=null}) {
  if(!isEditorialPublication(record)||!equal(Object.keys(record).sort(),[...eventKeys].sort())||record.schemaVersion!==1||!previousPublication||record.repository!==previousPublication.repository||record.siteUrl!==previousPublication.siteUrl||![record.commit,record.parent,record.tree].every(v=>sha.test(v)&&v!=='0'.repeat(40))||record.commit===record.parent||record.commitUrl!==`https://github.com/${record.repository}/commit/${record.commit}`)throw Error('Editorial publication requires exact sibling event fields and actual payload identity');
  const at=Date.parse(record.verifiedAt),p=record.pages;
- if(!Number.isFinite(at)||at>=FREEZE_AT||!p||!equal(Object.keys(p).sort(),['conclusion','headSha','runId','status','url'])||!Number.isSafeInteger(p.runId)||p.runId<=0||p.headSha!==record.commit||p.status!=='completed'||p.conclusion!=='success'||p.url!==`https://github.com/${record.repository}/actions/runs/${p.runId}`)throw Error('Editorial publication requires exact-head successful Pages before cutoff');
+ if(publicationCutoffBlocks(record,publicationState)||!p||!equal(Object.keys(p).sort(),['conclusion','headSha','runId','status','url'])||!Number.isSafeInteger(p.runId)||p.runId<=0||p.headSha!==record.commit||p.status!=='completed'||p.conclusion!=='success'||p.url!==`https://github.com/${record.repository}/actions/runs/${p.runId}`)throw Error('Editorial publication requires exact-head successful Pages within the permitted publication window');
  if(!Array.isArray(record.rounds)||record.rounds.length!==1)throw Error('Editorial publication requires exactly one typed frozen source');
  const s=record.rounds[0];
  if(!s||!equal(Object.keys(s).sort(),[...EDITORIAL_SOURCE_KEYS].sort())||s.kind!==EDITORIAL_SOURCE_KIND||!/^editorial-\d+$/.test(s.correctionRoundId)||s.ledgerPath!==`docs/corrections/${s.correctionRoundId}.json`)throw Error('Editorial publication source kind, owner, fields and canonical path must be exact');

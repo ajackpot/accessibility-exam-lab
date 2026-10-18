@@ -416,6 +416,7 @@ data/releases/2026.10.12-editorial.4/bank.json
 tests/editorial-four-bank.test.mjs
 tests/fixtures/editorial003-manifest.json
 docs/publications/editorial-004.json
+docs/publications/editorial-005.json
 tests/coverage-index-differential.test.mjs
 tests/fixtures/coverage-successor-delta.json
 tests/fixtures/public-main-9ae76b4/scripts/campaign-validation-primitives.mjs

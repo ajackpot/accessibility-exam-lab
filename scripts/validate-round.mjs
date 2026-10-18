@@ -695,7 +695,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
   return {ledgers, editorials, editorialSources, editorialReports, editorialSchema, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, normalBackupRoots:normalRoots.roots, normalBackupChains:normalChain.chains, quarantineDispositions, publicationSelections};
 }
 export async function main(args = process.argv.slice(2)) {
-  return withBankParsingSession(ROOT, () => runMain(args));
+  return withEditorial005Completion({root:ROOT}, () => withBankParsingSession(ROOT, () => runMain(args)));
 }
 async function runMain(args) {
   let input = null, nextRoundAt = null, release = false;
@@ -716,5 +716,5 @@ async function runMain(args) {
   return result;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  main().catch(error => { console.error(JSON.stringify({status: 'FAIL', errors: [error.message]})); process.exitCode = 1; });
+  main().catch(error => { console.error(JSON.stringify({status: 'FAIL', errors: [error.message], diagnostic:error.validationDiagnostic??null, stack:error.stack??null})); process.exitCode = 1; });
 }

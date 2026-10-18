@@ -6,14 +6,15 @@
 import {createHash} from 'node:crypto';
 import {isDeepStrictEqual as equal} from 'node:util';
 import {normalPublicationTree} from './normal-publication.mjs';
+import {publicationCutoffBlocks} from './editorial-publication.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 export const ANCESTOR_PUBLICATION_TRANSITION='verified_normal_chain_ancestor_publication';
 const G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
 const H=b=>createHash('sha256').update(b).digest('hex'),J=v=>Buffer.from(JSON.stringify(v,null,2)+'\n');
 const sha=/^(?!0{40}$)[a-f0-9]{40}$/,hex=/^(?!0{64}$)[a-f0-9]{64}$/;
-const fail=m=>{throw Error('Normal-chain ancestry: '+m);};
+const fail=(m,diagnostic=null)=>{const error=Error('Normal-chain ancestry: '+m);if(diagnostic)error.validationDiagnostic=diagnostic;throw error;};
 function keys(v,expected){if(!v||Array.isArray(v)||!equal(Object.keys(v).sort(),[...expected].sort()))fail('unexpected fields');}
-function time(v){const n=Date.parse(v);if(typeof v!=='string'||!Number.isFinite(n)||n>=FREEZE_AT)fail('invalid chronology or final cutoff');return n;}
+function time(v){const n=Date.parse(v);if(typeof v!=='string'||!Number.isFinite(n)||n>=FREEZE_AT)fail('invalid chronology or final cutoff',{boundary:'normal-chain-ancestry.historical-time',operand:typeof v==='string'?v.slice(0,96):null,operandType:typeof v,cutoff:new Date(FREEZE_AT).toISOString()});return n;}
 const descriptors=rows=>rows.map(({path,bytes,sha256})=>({path,bytes,sha256})).sort((a,b)=>a.path.localeCompare(b.path));
 function inventory(rows,tree){
  if(!Array.isArray(rows)||!rows.length)fail('complete actual commit inventory required');const seen=new Set();
@@ -43,7 +44,17 @@ export function validateNormalChainAncestorTransition(t,{beforeAnchor,afterAncho
  for(const a of [beforeAnchor,afterAnchor])if(JSON.parse(a.manifestRaw).finalRelease!==false||JSON.parse(a.publicationStateRaw).finalized!==false)fail('frozen historical or new anchor');
  if(!source||source.status!=='closed'||time(source.closedAt)<time(source.startedAt)||time(source.closedAt)>time(source.decisionDeadline)||time(source.startedAt)<time(previous.pin.eligibleAt)||time(source.closedAt)>now)fail('original candidate window or predecessor eligibility changed');
  const known=new Map();
- for(const [i,p]of publicationRecords.entries()){const pin=publicationPins[i];if(!pin||pin.path!==`docs/publications/${p.syncId}.json`||H(J(p))!==pin.sha256||i&&(p.previousSynchronizationSha256!==publicationPins[i-1].sha256||time(p.verifiedAt)<=time(publicationRecords[i-1].verifiedAt)))fail('missing, forged or reordered imported publication history');known.set(pin.sha256,p);}
+ for(const [i,p]of publicationRecords.entries()){
+  const pin=publicationPins[i],prior=publicationRecords[i-1];
+  const diagnostic={boundary:'normal-chain-ancestry.imported-publication',index:i,syncId:p?.syncId??null,pinPath:pin?.path??null,verifiedAt:p?.verifiedAt??null,previousVerifiedAt:prior?.verifiedAt??null,historicalNow:new Date(now).toISOString(),cutoff:new Date(FREEZE_AT).toISOString()};
+  if(!p||!pin||pin.path!==`docs/publications/${p.syncId}.json`||H(J(p))!==pin.sha256)fail('missing, forged or reordered imported publication history',{...diagnostic,condition:'exact-imported-pin'});
+  // Authenticate the complete imported history before using any historical
+  // ancestry member. Only the existing exact editorial-005 date policy may
+  // admit a later registration; it never advances this old anchor's clock.
+  if(typeof p.verifiedAt!=='string'||publicationCutoffBlocks(p))fail('invalid chronology or final cutoff',{...diagnostic,condition:'publication-date-policy'});
+  if(i&&(p.previousSynchronizationSha256!==publicationPins[i-1].sha256||Date.parse(p.verifiedAt)<=Date.parse(prior.verifiedAt)))fail('missing, forged or reordered imported publication history',{...diagnostic,condition:'linked-strict-order'});
+  known.set(pin.sha256,p);
+ }
  if(publicationRecords.length!==publicationPins.length)fail('complete imported publication history required');
  const seen=new Set(),observed=[];let prior=null,priorInventory=null;
  for(const [i,c]of e.commits.entries()){

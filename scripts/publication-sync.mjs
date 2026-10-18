@@ -7,7 +7,7 @@ import {isNormalPublication, isNormalChainPublication, NORMAL_SOURCE_KEYS, SELEC
 import {FREEZE_AT} from '../src/domain.js';
 import {readFileSync} from 'node:fs';
 import {validateCampaignJsonSchema,regularCoverage,nextScheduledRoundAt,FINAL_DECISION_AT} from './campaign-validation-primitives.mjs';
-import {EDITORIAL_PUBLICATION_KIND,EDITORIAL_SOURCE_KIND,isEditorialPublication,validateEditorialPublication} from './editorial-publication.mjs';
+import {EDITORIAL_PUBLICATION_KIND,EDITORIAL_SOURCE_KIND,isEditorialPublication,validateEditorialPublication,publicationCutoffBlocks} from './editorial-publication.mjs';
 import {validateEditorialHistorySemantics} from './editorial-history-core.mjs';
 import normalRootTrust from '../docs/deliveries/normal-backup-root-trust.json' with {type:'json'};
 import normalChainTrust from '../docs/deliveries/normal-backup-chain-trust.json' with {type:'json'};
@@ -34,7 +34,8 @@ export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze([
   Object.freeze({path:'docs/publications/normal-041-selection-001.json', sha256:'dee684344d60e4b48fd54c21a72ad12323781514907a86d34dfb66f92319499c'}),
   Object.freeze({path:'docs/publications/editorial-002.json', sha256:'b873b9e8e9043e36892fe34414b4cc8edbba2a57d2ad11ed04ba9fc485df50cf'}),
   Object.freeze({path:'docs/publications/editorial-003.json', sha256:'c65124f164c9ea8db81d78bf49efef6bd8560cdcbe88e625233ba202ad72a74b'}),
-  Object.freeze({path:'docs/publications/editorial-004.json', sha256:'c2dd280a0f197ba92a5cee172d7f1a95c936946fddbfec49f8ba086f3382747a'})
+  Object.freeze({path:'docs/publications/editorial-004.json', sha256:'c2dd280a0f197ba92a5cee172d7f1a95c936946fddbfec49f8ba086f3382747a'}),
+  Object.freeze({path:'docs/publications/editorial-005.json', sha256:'1b5003cb1ba1873f3943f3424cbe9291197b86e719bc947088cab62418c13e0f'})
 ]);
 function trusted(record) {
   return record && PUBLICATION_SYNCHRONIZATIONS.some(pin => hash(json(record)) === pin.sha256);
@@ -252,7 +253,7 @@ export function validatePublicationSynchronizations(synchronizations = [], {ledg
     seen.add(record.syncId);
     const at = Date.parse(record.verifiedAt);
     try { assertEvidenceLossPayload(Buffer.from(json(record))); for(const source of record.rounds) assertEvidenceLossProvenance(source); } catch(error) { errors.push(error.message); continue; }
-    if (!Number.isFinite(at) || at >= FREEZE_AT || publicationState?.finalizedAt && at > Date.parse(publicationState.finalizedAt)) { errors.push('publication synchronization violates final cutoff or persistent freeze'); continue; }
+    if (publicationCutoffBlocks(record,publicationState) || publicationState?.finalizedAt && at > Date.parse(publicationState.finalizedAt)) { errors.push('publication synchronization violates final cutoff or persistent freeze'); continue; }
     // Future evidence is authenticated, but cannot authorize an earlier round.
     // A complete supplied source is still byte-checked before it becomes active.
     if(index>requiredPrefix&&!relevant(record))continue;
