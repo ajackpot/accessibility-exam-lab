@@ -1,3 +1,4 @@
+import {withEditorial005Completion,currentCutoffBlocks} from './editorial005-completion.mjs';
 import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference,assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {completeManifestFormat,encodeSevenZip,decodeSevenZip,verifyArchiveFormat} from './archive-format.mjs';
 import {validateNormalBackupChainSnapshot} from './normal-backup-chain.mjs';
@@ -114,8 +115,11 @@ function checkComplete(snapshot,now=null) {
   validateQuarantineSnapshot(files,{now});
   if (manifest.finalRelease || JSON.parse(byPath.get('data/publication-state.json')?.raw || 'null')?.finalized) fail('Persistent freeze blocks new complete packaging');
 }
-export async function freezeCompleteProject({workRoot, reviewedInventory, sourceRelease, frozenSourceInventory = reviewedInventory, packagingRevision = null, deliveryMode = 'download_only', archiveFormat = '7z', now = Date.now()}) {
-  if (!Number.isFinite(now) || now >= FREEZE_AT) fail('Final cutoff blocks new complete packaging');
+export async function freezeCompleteProject(options){
+  return withEditorial005Completion({root:options.workRoot,now:options.now??Date.now(),baseCommit:options.sourceRelease?.baseCommit,roundId:options.sourceRelease?.roundId},()=>freezeCompleteProjectInWindow(options));
+}
+async function freezeCompleteProjectInWindow({workRoot, reviewedInventory, sourceRelease, frozenSourceInventory = reviewedInventory, packagingRevision = null, deliveryMode = 'download_only', archiveFormat = '7z', now = Date.now()}) {
+  if (!Number.isFinite(now) || currentCutoffBlocks(now,{root:workRoot,baseCommit:sourceRelease?.baseCommit,roundId:sourceRelease?.roundId})) fail('Final cutoff blocks new complete packaging');
   if(!['7z','zip'].includes(archiveFormat))fail('Unsupported complete archive format');
   const entries=inventory(reviewedInventory), files=[];
   for (const e of entries) {
@@ -150,7 +154,10 @@ async function assertLiveCompleteFreeze(snapshot){
 }
 /** Current standalone transport. Verify the actual decoded bytes before writing. */
 export async function writeCompleteArchive(snapshot,outputPath,{now=Date.now()}={}){
-  if(!Number.isFinite(now)||now>=FREEZE_AT)fail('Final cutoff blocks new complete archive');
+  return withEditorial005Completion({root:completeSourceRoots.get(snapshot),now,baseCommit:snapshot?.manifest?.sourceRelease?.baseCommit,roundId:snapshot?.manifest?.sourceRelease?.roundId},()=>writeCompleteArchiveInWindow(snapshot,outputPath,{now}));
+}
+async function writeCompleteArchiveInWindow(snapshot,outputPath,{now}){
+  if(!Number.isFinite(now)||currentCutoffBlocks(now,{root:completeSourceRoots.get(snapshot)}))fail('Final cutoff blocks new complete archive');
   checkComplete(snapshot,now);
   if(completeManifestFormat(snapshot.manifest)!=='7z'||path.extname(outputPath).toLowerCase()!=='.7z')fail('Current COMPLETE requires schema-v2 7z and .7z output');
   try{await fs.lstat(outputPath);fail('EEXIST: preserve immutable complete archive');}catch(e){if(e.code!=='ENOENT')throw e;}
@@ -159,9 +166,9 @@ export async function writeCompleteArchive(snapshot,outputPath,{now=Date.now()}=
   const raw=encodeSevenZip(entries),decoded=decodeSevenZip(raw);verifyArchiveFormat(decoded,'7z');
   if(decoded.size!==entries.length||entries.some(e=>!decoded.get(e.name)?.equals(e.raw)))fail('Complete 7z exact decoded bytes differ');
   // Compression is potentially lengthy; recheck wall-clock and freeze after it.
-  const completedNow=Math.max(now,Date.now());if(completedNow>=FREEZE_AT)fail('Final cutoff crossed during complete packaging');checkComplete(snapshot,completedNow);
+  const completedNow=Math.max(now,Date.now());if(currentCutoffBlocks(completedNow,{root:completeSourceRoots.get(snapshot)}))fail('Final cutoff crossed during complete packaging');checkComplete(snapshot,completedNow);
   await assertLiveCompleteFreeze(snapshot);
-  if(Date.now()>=FREEZE_AT)fail('Final cutoff crossed at complete write boundary');
+  if(currentCutoffBlocks(Date.now(),{root:completeSourceRoots.get(snapshot)}))fail('Final cutoff crossed at complete write boundary');
   await fs.writeFile(outputPath,raw,{flag:'wx'});
   return {path:outputPath,archiveFormat:'7z',sha256:sha(raw),bytes:raw.length,manifestSha256:sha(json(snapshot.manifest)),fileCount:snapshot.files.length};
 }

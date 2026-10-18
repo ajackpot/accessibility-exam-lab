@@ -1,6 +1,7 @@
+import {createOwnedHistoricalAuthority,pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
 import {encodeSevenZip,decodeSevenZip,archiveSignature} from '../scripts/archive-format.mjs';
 import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -9,7 +10,7 @@ import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {inflateRawSync} from 'node:zlib';
 import {parsePublicAllowlist,zipStored} from '../scripts/download-fallback.mjs';
-import {loadRoundContext,validateRoundLedgers,regularCoverage,nextScheduledRoundAt} from '../scripts/validate-round.mjs';
+import {loadRoundContext,regularCoverage,nextScheduledRoundAt} from '../scripts/validate-round.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
 const now=Date.parse('2026-10-04T13:10:00Z'),startedAt='2026-10-04T13:08:49Z';
@@ -17,7 +18,14 @@ const hash=b=>createHash('sha256').update(b).digest('hex');
 const json=o=>Buffer.from(JSON.stringify(o,null,2)+'\n');
 const all=await loadRoundContext(root,null,{release:true});
 // Scheduling fixtures stop at010. Real later authoring/delivery is never a source.
-const context={...all,offlineBases:new Map([...all.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=10)),ledgers:all.ledgers.filter(r=>Number(r.roundId.slice(6))<=10)};
+const context={...all,offlineBases:new Map([...all.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=10)),ledgers:all.ledgers.filter(r=>Number(r.roundId.slice(6))<=10),editorials:all.editorials.filter(e=>Date.parse(e.startedAt)<=now),synchronizations:all.synchronizations.filter(s=>Date.parse(s.verifiedAt)<=now)};
+const fixtureAuthority=await createOwnedHistoricalAuthority({after});
+function validateRoundLedgers(ledgers,options={}) {
+ const historicalIds=new Set(context.ledgers.map(l=>l.roundId));
+ const binding=fixtureAuthority.bindSyntheticRoundSources({historicalLedgers:context.ledgers,historicalSources:context.ledgerSources,syntheticLedgers:ledgers.filter(l=>!historicalIds.has(l.roundId)),validationSources:options.ledgerSources??new Map(),at:now});
+ return fixtureAuthority.round.validateRoundLedgers(ledgers,{...options,...binding});
+}
+
 const template=JSON.parse(await fs.readFile(path.join(root,'docs/rounds/round-ledger.template.json')));
 const raw=context.banks.get('2026.10.04-regular.10').raw;
 const coverage=regularCoverage(JSON.parse(raw));
@@ -45,6 +53,7 @@ async function historicalTen(t,sourceRoot=root){
  if(paths.includes('docs/deliveries/offline-chain-trust.json'))await write(dir,'docs/deliveries/offline-chain-trust.json',json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  const trust=JSON.parse(await read(dir,'docs/deliveries/release-backup-trust.json'));trust.checkpoints=trust.checkpoints.filter(p=>Number(p.roundId.slice(6))<=10);await write(dir,'docs/deliveries/release-backup-trust.json',json(trust));
  await retainHistoricalQuarantinePrefix(dir,now);
+ await pruneFutureEditorialFixture(dir,{temporaryRoot:dir,at:now});
  const proof=JSON.parse(await read(dir,'docs/deliveries/checkpoints/round-010.json'));await write(dir,'data/manifest.json',proof.runtimeManifestRaw);
  return dir;
 }
@@ -94,7 +103,7 @@ test('manual011 does not consume15:00 or permit a duplicate round in the consume
 test('the loader obtains exact checkpoint bytes and rejects missing/tampered proof or either freeze marker',async t=>{
  assert.equal(hash(context.deliveryCheckpointSources.get('round-010')),'a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917');
  const dir=await historicalTen(t),v=await moduleAt(dir,'validate-round');
- await fs.writeFile(path.join(dir,'docs/rounds/round-011.json'),json(manual()));
+ await fs.writeFile(path.join(dir,'docs/rounds/round-011.json'),json(manual()));await allow(dir,['docs/rounds/round-011.json']);
  const checked=await v.loadRoundContext(dir,null,{release:true,now});assert.equal(check(checked.ledgers.find(r=>r.roundId==='round-011'),checked).ok,true);
  for(const [file,key] of [['data/manifest.json','finalRelease'],['data/publication-state.json','finalized']]){const target=path.join(dir,file),original=await fs.readFile(target),value=JSON.parse(original);value[key]=true;await fs.writeFile(target,json(value));await assert.rejects(v.loadRoundContext(dir,null,{release:true,now}),/freeze|cutoff/i);await fs.writeFile(target,original);}
  const proof=path.join(dir,'docs/deliveries/checkpoints/round-010.json'),original=await fs.readFile(proof);await fs.writeFile(proof,Buffer.concat([original,Buffer.from(' ')]));await assert.rejects(v.loadRoundContext(dir,null,{release:true,now}),/checkpoint|proof/i);await fs.rm(proof);await assert.rejects(v.loadRoundContext(dir,null,{release:true,now}),/ENOENT|checkpoint|proof/i);
@@ -140,5 +149,17 @@ test('exact manual011 can be checkpointed and followed by ordinary012 without an
  for(const release of [false,true]){const current=await v12.loadRoundContext(next,null,{release,now:Date.now()});assert.equal(hash(current.deliveryCheckpointSources.get('round-010')),'a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917');assert.equal(hash(current.deliveryCheckpointSources.get('round-011')),proposal.trustRecord.sha256);if(release){const result=v12.validateReleaseLedger(current.ledgers,{...current,now:Date.now()});assert.equal(result.ok,true,result.errors.join('\n'));}}
  assert.equal(hash(await read(next,'docs/rounds/round-010.json')),'d15cbd2e5d56f79893920cecc922d8a12709b928e572fa720da8b3bb5545a63b');assert.equal(hash(await read(next,'docs/rounds/round-011.json')),hash(await read(dir,'docs/rounds/round-011.json')));
  // Re-run the historical loader fixture with this genuinely later synthetic tree.
- const historical=await historicalTen(t,next),vh=await moduleAt(historical,'validate-round');await write(historical,'docs/rounds/round-011.json',json(manual()));const restored=await vh.loadRoundContext(historical,null,{release:true,now});assert.equal(restored.manifest.bankVersion,'2026.10.04-regular.10');assert.equal(restored.deliveryCheckpointSources.size,1);
+ const historical=await historicalTen(t,next),vh=await moduleAt(historical,'validate-round');await write(historical,'docs/rounds/round-011.json',json(manual()));await allow(historical,['docs/rounds/round-011.json']);
+ const restored=await vh.loadRoundContext(historical,null,{release:true,now});
+ assert.equal(restored.manifest.bankVersion,'2026.10.04-regular.10');
+ // The loader retains the original009 proof as well as the reviewed010 checkpoint.
+ // Check exact membership and original bytes, not merely a larger Map size.
+ assert.deepEqual([...restored.deliveryCheckpointSources.keys()].sort(),['round-009','round-010']);
+ for(const [roundId,proofPath]of [['round-009','docs/deliveries/normal-backup-009.json'],['round-010','docs/deliveries/checkpoints/round-010.json']]){
+  const original=await read(root,proofPath),retained=await read(historical,proofPath);
+  assert.deepEqual(retained,original,'Historical fixture preserves original proof: '+roundId);
+  assert.deepEqual(Buffer.from(restored.deliveryCheckpointSources.get(roundId)),original,'Loader binds exact original proof: '+roundId);
+  assert.equal(hash(original),roundId==='round-009'?'09d3204e96048f6d8ff57dd4616caa8c95d161690e2a4592e3fa090142604f9e':'a00f2b35b2a63a171097bf0535d7968584f6dc40a9411b401f432e1d884dd917');
+ }
+ assert.equal(restored.deliveryCheckpointSources.has('round-011'),false);
 });

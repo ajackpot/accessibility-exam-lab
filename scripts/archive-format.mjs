@@ -53,11 +53,29 @@ function unframe(raw){
  }
  if(at!==raw.length)fail('Trailing 7z codec response bytes');return entries;
 }
+export const ARCHIVE_CODEC_MAX_MS=30*60*1000;
+export const ARCHIVE_CODEC_RESERVE_MS=30*1000;
+/** A caller may only shorten this per-process cap. Owned packaging commands
+ * supply their actual fixed outer deadline through this explicit environment
+ * key; ordinary standalone readers retain the finite 30-minute default. */
+export function archiveCodecBudget({now=Date.now(),outerDeadline=process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS}={}){
+ if(!Number.isSafeInteger(now))fail('7z codec requires an actual finite millisecond clock');
+ if(outerDeadline===undefined)return {timeoutMs:ARCHIVE_CODEC_MAX_MS,outerDeadlineMs:null};
+ if(typeof outerDeadline!=='string'||!/^\d+$/.test(outerDeadline)||!Number.isSafeInteger(Number(outerDeadline)))fail('Invalid 7z outer deadline');
+ const outerDeadlineMs=Number(outerDeadline),remaining=outerDeadlineMs-now-ARCHIVE_CODEC_RESERVE_MS;
+ if(remaining<=0)fail('7z outer deadline reserve is exhausted; codec was not started');
+ return {timeoutMs:Math.min(ARCHIVE_CODEC_MAX_MS,remaining),outerDeadlineMs};
+}
 function codec(mode,input){
  const executable=process.platform==='win32'?'python':'python3';
- const result=spawnSync(executable,[path.join(import.meta.dirname,'sevenz-codec.py'),mode],{input,maxBuffer:ARCHIVE_LIMITS.totalBytes+ARCHIVE_LIMITS.headerBytes+4,timeout:180_000,windowsHide:true});
+  const startedAt=Date.now(),started=performance.now(),budget=archiveCodecBudget({now:startedAt});
+  process.stderr.write(JSON.stringify({event:'archive_codec_start',mode,startedAt:new Date(startedAt).toISOString(),...budget})+'\n');
+  const result=spawnSync(executable,[path.join(import.meta.dirname,'sevenz-codec.py'),mode],{input,maxBuffer:ARCHIVE_LIMITS.totalBytes+ARCHIVE_LIMITS.headerBytes+4,timeout:budget.timeoutMs,windowsHide:true});
+  const finishedAt=Date.now(),elapsedMs=performance.now()-started;
+  process.stderr.write(JSON.stringify({event:'archive_codec_end',mode,finishedAt:new Date(finishedAt).toISOString(),elapsedMs,status:result.status??null,signal:result.signal??null,errorCode:result.error?.code??null})+'\n');
  if(result.error)fail(`7z tooling requires Python 3 with its standard-library lzma module: ${result.error.message}`);
  if(result.status!==0)fail(`7z ${mode} validation failed: ${(result.stderr??Buffer.alloc(0)).toString('utf8').trim().slice(0,2000)}`);
+  if(elapsedMs>ARCHIVE_CODEC_MAX_MS||budget.outerDeadlineMs!==null&&finishedAt>=budget.outerDeadlineMs-ARCHIVE_CODEC_RESERVE_MS)fail('7z codec crossed its fixed deadline/reserve');
  return result.stdout;
 }
 export function encodeSevenZip(entries){const raw=codec('encode',frame(entries));if(archiveSignature(raw)!=='7z')fail('7z writer returned another format');return raw;}

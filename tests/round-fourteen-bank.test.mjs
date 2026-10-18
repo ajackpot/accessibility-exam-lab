@@ -49,7 +49,15 @@ test('round014 practical shuffle preserves part order, text boundaries, keys and
 test('round014 balanced100 mocks remain seedfree and insufficient selections never top up',()=>{
  assert.equal(w.mockAvailability(bank).ready,true);
  for(let seed=0;seed<16;seed++){const s=d.prepareSession(bank,w.practiceConfig('written',{kind:'mock',count:100}),[],seed,'r014-mock-'+seed);assert.equal(s.items.length,100);assert(s.items.every(q=>!q.testOnly&&q.type==='written'&&q.options.length===5));for(const id of ['s1','s2','s3','s4','s5'])assert.equal(s.items.filter(q=>q.subjectId===id).length,20);assert.equal(new Set(s.items.map(q=>q.templateId)).size,100);}
- for(const id of ['s1','s2','s3','s4','s5']){const n=bank.questions.filter(q=>q.subjectId===id&&!q.testOnly).length,c=w.practiceConfig('written',{subjectId:id,count:n+1}),selection=w.practiceSelection(bank,c);assert.equal(selection.count,n);assert.throws(()=>d.prepareSession(selection.bank,c,[],5,'r014-insufficient-'+id),e=>e.code==='INSUFFICIENT');}
+ // Availability is the current eligible unique-goal set, not immutable historical size.
+ // Keep all original questions; the separately reviewed priority policy can exclude
+ // a still-published historical item from fresh practice without adding a seed.
+ for(const id of ['s1','s2','s3','s4','s5']){
+  const eligible=bank.questions.filter(q=>q.type==='written'&&q.subjectId===id&&!q.testOnly&&q.supportedOptionCounts.includes(5)&&d.isNewSessionQuestion(bank,q));
+  const goals=new Set(eligible.map(q=>q.templateId)),n=goals.size,c=w.practiceConfig('written',{subjectId:id,count:n+1}),selection=w.practiceSelection(bank,c);
+  assert.equal(selection.count,n);assert.deepEqual(new Set(selection.bank.questions.map(q=>q.templateId)),goals);assert(selection.bank.questions.every(q=>!q.testOnly));
+  assert.throws(()=>d.prepareSession(selection.bank,c,[],5,'r014-insufficient-'+id),e=>e.code==='INSUFFICIENT');
+ }
 });
 test('round014 exact delivered013 predecessor and actual public008 coverage stay separate',()=>{
  assert.deepEqual(ledger.baseline.offlinePredecessor,{artifactSha256:'cc51766fb87e627037f99050330c391e1ee56743651f62ea0c47695a9b138bf6',manifestSha256:'422309d8368c78a58b0b4a151902c18818ac97cb27417047c9421adae2e669d4',ledgerSha256:'cbdb8d9d4ea3d7e8f790da64ca5e68bc0b258be66d4578f58972c8a43d021c80',roundId:'round-013'});

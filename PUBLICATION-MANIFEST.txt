@@ -15,6 +15,10 @@
 # Local-only permission-timeout delivery policy and regression tests
 # Ninth explicitly requested regular expansion
 # No other workspace paths, uploaded files, backups, secrets, or raw QA logs may be published.
+# Optional local runtime-output tooling; full project/history allow-list retained.
+docs/RUNTIME-OUTPUT.md
+scripts/build-runtime.mjs
+tests/runtime-output.test.mjs
 # Reviewed generic post-attachment successor checkpoints
 # Second regular expansion
 # Seventeenth scheduled expansion from exact delivered016
@@ -422,3 +426,11 @@ tests/fixtures/public-main-9ae76b4/src/new-session-eligibility.js
 tests/fixtures/public-main-9ae76b4/src/reviewed-option-explanations.js
 tests/successor-projection.mjs
 tests/successor-projection.test.mjs
+data/releases/2026.10.14-editorial.5/bank.json
+docs/corrections/editorial-005.json
+docs/corrections/editorial-005.md
+docs/corrections/evidence/editorial-005-cycle-1.json
+tests/historical-authority-fixtures.mjs
+tests/fixtures/editorial005-source-delta.json
+scripts/editorial005-completion.mjs
+tests/editorial005-completion.test.mjs

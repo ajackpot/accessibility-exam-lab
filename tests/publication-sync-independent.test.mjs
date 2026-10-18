@@ -1,3 +1,4 @@
+import {pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 /** Disposable synthetic publication authorities only. No network or production pin writes. */
 import test from 'node:test';
@@ -13,7 +14,12 @@ import {FREEZE_AT} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..'),J=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex');
 const read=p=>fs.readFile(path.join(root,p)),loaded=await loadRoundContext(root,null,{release:true});
 const trust=JSON.parse(await read('docs/deliveries/offline-chain-trust.json')),syncSource=(await read('scripts/publication-sync.mjs')).toString();
-const originalEvents=loaded.synchronizations.filter(e=>!e.rounds.some(s=>Object.hasOwn(s,'eligible')));
+// This scenario replaces the first independent cumulative publication. Keep
+// its exact earlier event prefix; later editorial source shapes also lack
+// eligible and cannot be mistaken for old delivered-publication evidence.
+const firstIndependentPublication=loaded.synchronizations.findIndex(e=>e.syncId==='cumulative-018-027');
+assert.ok(firstIndependentPublication>0,'The exact original independent event boundary is required');
+const originalEvents=loaded.synchronizations.slice(0,firstIndependentPublication);
 const dispositions=validateQuarantineCampaign(loaded.ledgers,loaded).dispositions;
 const sourceProofs=new Map();
 const rounds=await Promise.all(trust.checkpoints.map(async pin=>{
@@ -47,6 +53,7 @@ test('independent publication binds original31/19/12 disposition and all deliver
  const removedSet=new Set(removed),allowPath=path.join(dir,'PUBLICATION-MANIFEST.txt');
  await fs.writeFile(allowPath,(await fs.readFile(allowPath,'utf8')).split(/\r?\n/).filter(file=>!removedSet.has(file.trim())).join('\n'));
  await retainHistoricalQuarantinePrefix(dir,fixtureNow);
+ await pruneFutureEditorialFixture(dir,{temporaryRoot:dir,at:fixtureNow});
  const rootTrust=JSON.parse(await read('docs/deliveries/normal-backup-root-trust.json')),retainedRoot=rootTrust.roots.find(p=>p.roundId==='round-028');assert.ok(retainedRoot);
  const retainedPins=[retainedRoot,...chainTrust.checkpoints.filter(p=>p.rootProofSha256===retainedRoot.sha256&&Number(p.roundId.slice(6))<=31)];assert.equal(retainedPins.length,4);
  for(const pin of retainedPins){const actual=await fs.readFile(path.join(dir,pin.path));assert.equal(H(actual),pin.sha256);assert.deepEqual(actual,await read(pin.path));}

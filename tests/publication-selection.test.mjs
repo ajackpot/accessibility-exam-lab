@@ -20,7 +20,12 @@ let record,ledger,original,selected,baseline,files,now;
 
 before(async()=>{
   const paths=[PUBLICATION_SELECTION_PATH,ledgerPath,originalPath,selectedPath,baselinePath,'scripts/publication-selection.mjs','data/manifest.json'];
-  files=await Promise.all(paths.map(async p=>({path:p,raw:await fs.readFile(path.join(root,p))})));
+  // Bind this minimal selection-era fixture to its exact historical active
+  // manifest; a later active bank is outside this deliberately small inventory.
+  const publication=JSON.parse(await fs.readFile(path.join(root,'docs/publications/normal-041-selection-001.json')));
+  const manifestRaw=Buffer.from(publication.runtimeManifestRaw);
+  assert.equal(hash(manifestRaw),'b29a4bad461586035157cb8a527cc9852d59c0fa0aa59c632bf420c29cb0dedc');
+  files=await Promise.all(paths.map(async p=>({path:p,raw:p==='data/manifest.json'?manifestRaw:await fs.readFile(path.join(root,p))})));
   // A deliberately minimal complete dependency snapshot binds the real immutable
   // bytes. It never substitutes fabricated ledger or publication evidence.
   files.push({path:'PUBLICATION-MANIFEST.txt',raw:Buffer.from([...paths,'PUBLICATION-MANIFEST.txt'].sort().join('\n')+'\n')});

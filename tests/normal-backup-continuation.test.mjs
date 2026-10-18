@@ -1,3 +1,4 @@
+import {createOwnedHistoricalAuthority,pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
 import {decodeSevenZip} from '../scripts/archive-format.mjs';
 import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
 import test from 'node:test';
@@ -56,7 +57,15 @@ test('missing, duplicate, mutated or reserved original history cannot become a b
  failed(()=>validateNormalBackupContinuation(proof,{...withoutNormal,publicationState:null}),/Missing publication state/);
  failed(()=>validateNormalBackupContinuation(proof,{...withoutNormal,publicationState:{}}),/Missing publication state/);
 });
-test('round010 uses exact009 and retains actually public regular8 coverage with all existing guards',()=>{
+test('round010 uses exact009 and retains actually public regular8 coverage with all existing guards',async t=>{
+ const authority=await createOwnedHistoricalAuthority(t),fixtureAt=Date.parse('2026-10-04T12:00:00Z');
+ const editorials=context.editorials.filter(e=>Date.parse(e.startedAt)<=fixtureAt),synchronizations=context.synchronizations.filter(s=>Date.parse(s.verifiedAt)<=fixtureAt);
+ const historicalIds=new Set(context.ledgers.map(l=>l.roundId));
+ const boundOptions=(ledgers,input)=>({...input,editorials,synchronizations,...authority.bindSyntheticRoundSources({historicalLedgers:context.ledgers,historicalSources:context.ledgerSources,syntheticLedgers:ledgers.filter(l=>!historicalIds.has(l.roundId)),validationSources:input.ledgerSources,at:fixtureAt})});
+ // Same owned module cache, unchanged production predicates and negative inputs.
+ const validateRoundLedgers=(ledgers,input)=>authority.round.validateRoundLedgers(ledgers,boundOptions(ledgers,input));
+ const validateCampaignBaselines=(ledgers,input)=>authority.editorial.validateCampaignBaselines(ledgers,boundOptions(ledgers,input));
+
  const r=nextRound(),all=[...context.ledgers,r],result=validateRoundLedgers(all,options());assert.equal(result.ok,true,result.errors.join('\n'));
  const stale=clone(r);delete stale.baseline.offlinePredecessor;const bad=validateCampaignBaselines([...context.ledgers,stale],options());assert.equal(bad.ok,false);assert.match(bad.errors.join('\n'),/explicit offline predecessor/);
  const future=clone(r);future.startedAt='2026-10-04T10:05:00Z';assert.equal(validateRoundLedgers([...context.ledgers,future],options()).ok,false);
@@ -77,11 +86,15 @@ test('default loader and explicit release context accept real010 lineage without
  if(paths.includes('docs/deliveries/offline-chain-trust.json'))await fs.writeFile(path.join(dir,'docs/deliveries/offline-chain-trust.json'),json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  await fs.writeFile(path.join(dir,'docs/deliveries/release-backup-trust.json'),json({schemaVersion:1,rootProofSha256:hash(raw),checkpoints:[]}));
  await retainHistoricalQuarantinePrefix(dir,now);
+ await pruneFutureEditorialFixture(dir,{temporaryRoot:dir,at:now});
  const fixture=await import(pathToFileURL(path.join(dir,'scripts/validate-round.mjs')));
+ const {validateReleaseLedger,loadRoundContext}=fixture;
  const r=nextRound(),bank=JSON.parse(context.banks.get(r.baseline.bankVersion).raw);bank.bankVersion='2026.10.04-regular.10';bank.roundId=r.roundId;bank.releasedAt='2026-10-04T11:06:00Z';bank.changeSummary='Synthetic zero-addition bank; never a real release.';
  const b=json(bank);Object.assign(r.publication,{bankVersion:bank.bankVersion,bankSha256:hash(b)});
  const write=async(p,raw)=>{const f=path.join(dir,p);await fs.mkdir(path.dirname(f),{recursive:true});await fs.writeFile(f,raw);};
  await write('docs/rounds/round-010.json',json(r));await write('docs/rounds/round-010.md','Synthetic regression fixture.\n');await write(`data/releases/${bank.bankVersion}/bank.json`,b);await write('data/manifest.json',json({schemaVersion:1,bankVersion:bank.bankVersion,releasedAt:bank.releasedAt,file:`releases/${bank.bankVersion}/bank.json`,sha256:hash(b),changeSummary:bank.changeSummary,finalRelease:false}));
+ const allowlistPath=path.join(dir,'PUBLICATION-MANIFEST.txt'),fixturePaths=parsePublicAllowlist(await fs.readFile(allowlistPath,'utf8'));
+ await fs.writeFile(allowlistPath,[...new Set([...fixturePaths,'docs/rounds/round-010.json','docs/rounds/round-010.md',`data/releases/${bank.bankVersion}/bank.json`])].join('\n')+'\n');
  const c=await fixture.loadRoundContext(dir,null,{release:true,now});const release=validateReleaseLedger(c.ledgers,{...c,now});assert.equal(release.ok,true,release.errors.join('\n'));
  const explicit=await fixture.loadRoundContext(dir,path.join(dir,'docs/rounds/round-010.json'),{release:true,now});assert.equal(validateReleaseLedger(explicit.ledgers,{...explicit,now}).ok,true);
  assert.equal(hash(await fs.readFile(path.join(dir,'docs/rounds/round-009.json'))),NORMAL_BACKUP_PINS.ledger);

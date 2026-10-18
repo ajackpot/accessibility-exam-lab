@@ -5,6 +5,8 @@ import path from 'node:path';
 import os from 'node:os';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {pathToFileURL} from 'node:url';
+import {normalChainFixture} from './normal-backup-chain-fixtures.mjs';
 import {parsePublicAllowlist, main as fallbackMain} from '../scripts/download-fallback.mjs';
 import {freezeCompleteProject,writeCompleteArchive,writeCompleteZip,writeOfflineDeliveryPair,completeInstructions,createCompleteReceipt} from '../scripts/complete-bundle.mjs';
 const root=path.resolve(import.meta.dirname,'..');
@@ -34,10 +36,65 @@ async function fixture() {
 }
 async function temp(t) { const p=await fs.mkdtemp(path.join(os.tmpdir(),'complete-bundle-'));t.after(()=>fs.rm(p,{recursive:true,force:true}));return p; }
 const frozen=async()=>freezeCompleteProject({...await fixture(),archiveFormat:"zip"});
-test('current-tree fixture follows actual ledger chronology and retains the future-start rejection',async()=>{
+
+/** Packaging chronology fixtures are synthetic and confined to an owned temp tree.
+ * Current-tree positive tests still use fixture()/frozen() above unchanged. */
+async function syntheticCompleteFixture(t) {
+  const f=await normalChainFixture(t,{emptySyntheticSelection:true});
+  const add=async(p,raw)=>{
+    assert(Buffer.isBuffer(raw),`Synthetic complete requires raw bytes: ${p}`);
+    if(f.files.has(p)){assert.deepEqual(raw,f.files.get(p),`Do not replace synthetic history: ${p}`);return;}
+    f.files.set(p,Buffer.from(raw));await f.write(p,raw);
+  };
+  const addOwnedTree=async prefix=>{
+    for(const entry of await fs.readdir(path.join(f.dir,prefix),{withFileTypes:true})){
+      const p=prefix+'/'+entry.name;assert(!entry.isSymbolicLink(),`Synthetic module symlink: ${p}`);
+      if(entry.isDirectory())await addOwnedTree(p);
+      else {assert(entry.isFile(),`Synthetic module must be a regular file: ${p}`);await add(p,await fs.readFile(path.join(f.dir,p)));}
+    }
+  };
+  // The copied selection pin has already been projected before the chain API import.
+  // Read the owned tree so serialized and executed authority bytes are the same.
+  for(const prefix of ['scripts','src'])await addOwnedTree(prefix);
+  const support=['.nojekyll','README.md','AGENTS.md','package.json','package-lock.json','index.html','style.css',
+    'docs/PRD.md','docs/OPERATIONS.md','docs/DATA-CONTRACT.md','tests/complete-bundle.test.mjs',
+    'tests/archive-format.test.mjs','tests/sevenz-codec.test.mjs','qa/fixture.mjs',
+    'docs/analysis/2026-10-10-existing-bank-value-terminal-decisions.json'];
+  for(const p of support)await add(p,await fs.readFile(path.join(root,p)));
+  for(const [p,digest] of [
+    ['src/new-session-eligibility.js','a92cc9bd407741089027cc7d3a3fd2a060bcfa3b1f4d02b84ebd36865336a6cc'],
+    ['docs/analysis/2026-10-10-existing-bank-value-terminal-decisions.json','c4443769d90c4b45a1d7e3a075f776744149e78733dacb6ee8493b6ceafc78f3']
+  ])assert.equal(sha(f.files.get(p)),digest,'Exact current policy dependency');
+  assert(f.files.get('src/domain.js').includes(Buffer.from('new-session-eligibility.js')));
+  assert(f.files.get('scripts/publication-selection.mjs').includes(Buffer.from('export const PUBLICATION_SELECTION_PIN=Object.freeze({path:PUBLICATION_SELECTION_PATH,sha256:null});')));
+  const latest=f.chain.sources.at(-1),sourceRelease=structuredClone(latest.proof.completeManifest.sourceRelease);
+  const refresh=async()=>{
+    const allow=Buffer.from([...new Set([...f.files.keys(),'PUBLICATION-MANIFEST.txt'])].sort().join('\n')+'\n');
+    f.files.set('PUBLICATION-MANIFEST.txt',allow);await f.write('PUBLICATION-MANIFEST.txt',allow);
+    const reviewedInventory=[...f.files].map(([path,raw])=>({path,sha256:sha(raw),bytes:raw.length})).sort((a,b)=>a.path.localeCompare(b.path));
+    // A fresh complete fixture, with no retroactive packaging overlay/history rewrite.
+    return {workRoot:f.dir,reviewedInventory,sourceRelease:structuredClone(sourceRelease),now:Date.parse(latest.pin.registeredAt),archiveFormat:'7z'};
+  };
+  const input=await refresh();
+  const api=await import(pathToFileURL(path.join(f.dir,'scripts/complete-bundle.mjs')).href);
+  return {...f,completeApi:api,latest,sourceRelease,input,refresh,add};
+}
+test('current-tree fixture follows actual ledger chronology and retains the future-start rejection',async t=>{
   assert.ok(ledgerActualTimes.every(time=>now>=time+60_000));
+  const f=await syntheticCompleteFixture(t),priorEvidenceTime=Date.parse(f.latest.pin.registeredAt);
+  const latestIncludedStart=priorEvidenceTime+60_000,closedAt=latestIncludedStart+1_000;
   assert.ok(latestIncludedStart-1>priorEvidenceTime,'Chronology negative must remain after prior evidence registration');
-  await assert.rejects(freezeCompleteProject({...await fixture(),now:latestIncludedStart-1}),/Normal-chain successor requires exact registered predecessor and current eligible chronology/);
+  const b=f.latest.offlineBase,p=f.latest.proof;
+  const future={roundId:'round-1001',status:'closed',startedAt:new Date(latestIncludedStart).toISOString(),closedAt:new Date(closedAt).toISOString(),
+    baseline:{sourceCommit:b.baseCommit,bankVersion:b.bankVersion,bankSha256:b.bankSha256,
+      offlinePredecessor:{roundId:f.latest.roundId,artifactSha256:p.deltaArtifactSha256,manifestSha256:b.manifestSha256,ledgerSha256:b.ledgerSha256}},
+    publication:{status:'not_attempted',commit:null,verifiedAt:null,bankVersion:null,bankSha256:null}};
+  const preserved=[...f.files].filter(([p])=>p.startsWith('data/releases/')||p.startsWith('docs/')).map(([p,raw])=>[p,sha(raw)]);
+  await f.add('docs/rounds/round-1001.json',json(future));const input=await f.refresh();
+  await assert.rejects(f.completeApi.freezeCompleteProject({...input,now:latestIncludedStart-1}),/Normal-chain successor requires exact registered predecessor and current eligible chronology/);
+  const accepted=await f.completeApi.freezeCompleteProject({...input,now:closedAt+1});
+  assert.deepEqual(accepted.manifest.sourceRelease,f.sourceRelease);
+  for(const [p,digest]of preserved)assert.equal(sha(f.files.get(p)),digest,'Synthetic predecessor history remains exact: '+p);
 });
 test('complete snapshot contains the exact allowlist and has no installation predecessor',async()=>{
   const s=await frozen(); assert.deepEqual(s.manifest.prerequisiteArtifacts,[]);
@@ -115,7 +172,16 @@ test('symlink roots and directory traversal inventories are rejected',async t=>{
   f.reviewedInventory.push({path:'../secret.txt',sha256:'a'.repeat(64),bytes:0});await assert.rejects(freezeCompleteProject(f),/Unsafe/);
 });
 
-test('new complete packaging cannot predate an included delivered checkpoint registration',async()=>{const f=await fixture(),latest=Math.max(...normalPins.map(p=>Date.parse(p.registeredAt)));if(normalPins.length)await assert.rejects(freezeCompleteProject({...f,now:latest-1}),/registration|eligible/);});
+test('new complete packaging cannot predate an included delivered checkpoint registration',async t=>{
+  const f=await syntheticCompleteFixture(t),latest=Date.parse(f.latest.pin.registeredAt);
+  assert.equal(f.latest.roundId,'round-1000');assert.equal(f.latest.pin.registeredAt,f.latest.pin.eligibleAt);
+  const preserved=[...f.files].map(([p,raw])=>[p,sha(raw)]);
+  await assert.rejects(f.completeApi.freezeCompleteProject({...f.input,now:latest-1}),/New packaging cannot predate included normal delivery registration/);
+  const accepted=await f.completeApi.freezeCompleteProject({...f.input,now:latest});
+  assert.deepEqual(accepted.manifest.sourceRelease,f.sourceRelease);
+  assert.equal(accepted.manifest.sourceRelease.bankSha256,f.latest.offlineBase.bankSha256);
+  for(const [p,digest]of preserved)assert.equal(sha(f.files.get(p)),digest,'Synthetic complete boundary leaves bytes unchanged: '+p);
+});
 
 test('current snapshot defaults to explicit 7z and refuses legacy writer, extension confusion or overwrite',async t=>{
  const s=await freezeCompleteProject(await fixture());assert.equal(s.manifest.schemaVersion,2);assert.equal(s.manifest.archiveFormat,'7z');assert.match(completeInstructions(s.manifest),/일반 압축 해제 도구/);assert.match(completeInstructions(s.manifest),/전용 복원 스크립트나 이전 압축 파일은 필요하지/);

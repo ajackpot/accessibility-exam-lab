@@ -1,3 +1,4 @@
+import {currentCutoffBlocks} from './editorial005-completion.mjs';
 import {completeManifestFormat,archiveSignature,decodeSevenZip,verifyArchiveFormat,ARCHIVE_LIMITS} from './archive-format.mjs';
 /** Narrow bridge from exact delivered normal backups. Never rewrites manifests or performs Git. */
 import fs from 'node:fs/promises';
@@ -61,7 +62,7 @@ function inspectArchive(entries,manifest,prefix){
  for(const f of manifest.files){const b=entries.get(prefix+f.path);if(b.length!==f.bytes||hash(b)!==f.sha256)fail('ZIP file hash differs: '+f.path);}
 }
 function timing(proof,now,publicationState){
- if(!Number.isFinite(now)||now>=FREEZE_AT||publicationState?.finalized)fail('Final cutoff or persistent freeze blocks normal-backup continuation');
+ if(!Number.isFinite(now)||currentCutoffBlocks(now,{publicationState})||publicationState?.finalized)fail('Final cutoff or persistent freeze blocks normal-backup continuation');
  const terminal=proof.terminal;
  keys(terminal,['permissionWait','gitOutcome','reconciliation','sourceEvidenceSha256','sourceTerminalSha256','sourceObservationSha256','sourceReconciliationSha256']);
  const wait=terminal.permissionWait,outcome=terminal.gitOutcome,reconciliation=terminal.reconciliation;
@@ -110,7 +111,7 @@ export function validateNormalBackupContinuation(proof,{now=Date.now(),publicati
  if([...offlineBases].some(([artifact,e])=>artifact===NORMAL_BACKUP_PINS.delta||e.roundId===source.roundId))fail('Duplicate or conflicting normal-backup baseline');
  if(!state.eligible)return {canStartNewContent:false,canPublish:false,eligibleAt:state.eligibleAt,offlineBase:null};
  const offlineBase={roundId:source.roundId,bankVersion:source.bankVersion,bankSha256:source.bankSha256,ledgerSha256:source.ledgerSha256,manifestSha256:NORMAL_BACKUP_PINS.deltaManifest,baseCommit:source.baseCommit,recordedAt:proof.attachmentAcceptedAt,eligibleAt:state.eligibleAt};
- return {canStartNewContent:true,canPublish:false,eligibleAt:state.eligibleAt,offlineBase,artifactSha256:NORMAL_BACKUP_PINS.delta,newlyPublishedRegular:0,reservedLearningGoalIds:sources[0].candidates.filter(c=>c.decision==='accepted').map(c=>c.learningGoalId).sort()};
+ return {canStartNewContent:now<FREEZE_AT,canPublish:false,eligibleAt:state.eligibleAt,offlineBase,artifactSha256:NORMAL_BACKUP_PINS.delta,newlyPublishedRegular:0,reservedLearningGoalIds:sources[0].candidates.filter(c=>c.decision==='accepted').map(c=>c.learningGoalId).sort()};
 }
 /** Archive-only fallback cannot authorize current work. Verify the importing
  * authority at the real current boundary before and after an exact historical
@@ -204,7 +205,7 @@ async function publicBytes(root,relative){
 }
 function beforeTrust(index){return {...trusted,checkpoints:trusted.checkpoints.slice(0,index)};}
 function checkOpen({now,publicationState,manifest}){
- if(!Number.isFinite(now)||now>=FREEZE_AT)fail('Final cutoff blocks delivered continuation');
+ if(!Number.isFinite(now)||currentCutoffBlocks(now,{manifest,publicationState}))fail('Final cutoff blocks delivered continuation');
  if(publicationState?.finalized!==false||manifest?.finalRelease!==false)fail('Both persistent freeze markers must be present and false');
 }
 function inspectSuccessor(p,previous,source){

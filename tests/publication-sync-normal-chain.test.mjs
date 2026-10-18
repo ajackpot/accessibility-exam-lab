@@ -1,3 +1,4 @@
+import {pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 /** Real immutable delivery inputs; synthetic publication authority stays disposable. */
 import test from 'node:test';
@@ -34,6 +35,7 @@ test('synthetic legacy authority binds exact032-033 lineage without changing sto
  const removedSet=new Set(removed),allowPath=path.join(dir,'PUBLICATION-MANIFEST.txt');
  await fs.writeFile(allowPath,(await fs.readFile(allowPath,'utf8')).split(/\r?\n/).filter(file=>!removedSet.has(file.trim())).join('\n'));
  await retainHistoricalQuarantinePrefix(dir,historicalAt);
+ await pruneFutureEditorialFixture(dir,{temporaryRoot:dir,at:historicalAt});
  const allEvents=await Promise.all(PUBLICATION_SYNCHRONIZATIONS.map(async p=>JSON.parse(await read(p.path)))),anchorManifest=JSON.parse(proofs[0].sourceAnchor.manifestRaw),priorIndex=allEvents.findLastIndex(e=>e.manifest.bankVersion===anchorManifest.bankVersion&&e.manifest.sha256===anchorManifest.sha256);assert.ok(priorIndex>=0,'exact root public bank must have verified prior event');
  const events=allEvents.slice(0,priorIndex+1),previous=events.at(-1),sourceCode=(await read('scripts/publication-sync.mjs')).toString();
  const files=new Map();for(const p of (await fs.readFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),'utf8')).split(/\r?\n/).filter(p=>p&&!p.startsWith('#')))files.set(p,await fs.readFile(path.join(dir,p)));

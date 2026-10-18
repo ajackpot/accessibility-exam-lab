@@ -1,3 +1,4 @@
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -63,7 +64,8 @@ test('unrelated024 may follow exact022 while accepted023 goals remain reserved a
 });
 
 test('explicit build path refuses reserved023 before writing any new manifest or immutable bank',async t=>{
- const root=await fs.mkdtemp(path.join(os.tmpdir(),'evidence-loss-build-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));await fs.mkdir(path.join(root,'data'));const input=path.join(root,'renamed-input.json');await fs.writeFile(input,json({...bank22,bankVersion:event.reservedBank.bankVersion}));await assert.rejects(buildBank(root,input),/evidence-loss.*reserved bankVersion/);await assert.rejects(fs.access(path.join(root,'data/manifest.json')),/ENOENT/);
+ const {buildBank}=await createOwnedHistoricalAuthority(t);
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'evidence-loss-build-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));await fs.mkdir(path.join(root,'data'));await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'PUBLICATION-MANIFEST.txt\n');const input=path.join(root,'renamed-input.json');await fs.writeFile(input,json({...bank22,bankVersion:event.reservedBank.bankVersion}));await assert.rejects(buildBank(root,input),/evidence-loss.*reserved bankVersion/);await assert.rejects(fs.access(path.join(root,'data/manifest.json')),/ENOENT/);
 });
 
 async function synthetic(t,recordedAt='2026-10-06T09:10:00Z',extraStateFields={}){
@@ -100,7 +102,7 @@ test('a warm exact-byte denial cache never masks subsequent authority tampering 
 function emptyNext(){
  const r=clone(ledger);Object.assign(r,{roundId:'round-024',startedAt:'2026-10-06T15:00:00Z',decisionDeadline:'2026-10-06T18:30:00Z',closedAt:'2026-10-06T15:05:00Z',candidates:[],validation:[],nextRoundGaps:[],noGapExplanation:'Synthetic test only: independently scoped source survey found no candidate ready for release.',summary:'Synthetic next-occurrence simulation. No real content authored or reviewed.'});Object.assign(r.counts,{registered:0,accepted:0,rejected:0,pending:0});r.publication={status:'not_attempted',bankVersion:null,bankSha256:null,commit:null,verifiedAt:null,url:null,blockers:[]};return r;
 }
-test('complete campaign accepts an unrelated next scheduled024 from actual delivered022',async()=>{
+test('complete campaign accepts an unrelated next scheduled024 from actual delivered022',async t=>{
  const c=await context(),next=emptyNext(),fixtureNow=Date.parse('2026-10-06T15:30:00Z');
  // Explicit historical simulation, not a reload of the current source at a past clock.
  // Derive the active manifest and bank inventory from the verified delivered predecessor.
@@ -111,7 +113,10 @@ test('complete campaign accepts an unrelated next scheduled024 from actual deliv
  const bankEntries=predecessor.completeManifest.files.filter(f=>/^data\/releases\/[^/]+\/bank\.json$/.test(f.path)),banks=new Map();
  for(const entry of bankEntries){const version=entry.path.split('/')[2],bank=c.banks.get(version);assert(bank);assert.equal(sha(bank.raw),entry.sha256);assert.equal(bank.raw.length,entry.bytes);banks.set(version,bank);}
  const ledgers=[...historical,next],ledgerSources=new Map([...c.ledgerSources].filter(([id])=>historicalIds.has(id)));ledgerSources.set(next.roundId,json(next));
- const args={...c,manifest,banks,now:fixtureNow,ledgerSources,editorials:c.editorials.filter(e=>Date.parse(e.startedAt)<=fixtureNow),synchronizations:c.synchronizations.filter(s=>Date.parse(s.verifiedAt)<=fixtureNow),offlineBases:new Map([...c.offlineBases].filter(([,b])=>Date.parse(b.eligibleAt)<=fixtureNow)),deliveryCheckpointSources:new Map([...c.deliveryCheckpointSources].filter(([,raw])=>Date.parse(JSON.parse(raw).verifiedAt)<=fixtureNow)),publicationState:JSON.parse(predecessor.publicationStateRaw),availableFiles:new Set([...c.availableFiles,'docs/rounds/round-024.md'])};
+ const authority=await createOwnedHistoricalAuthority(t),{validateRoundLedgers,validateReleaseLedger}=authority.round;
+ const editorials=c.editorials.filter(e=>Date.parse(e.startedAt)<=fixtureNow);
+ const publicationSelections=authority.bindHistoricalSelection({ledgers,ledgerSources,editorials,editorialSources:c.editorialSources,manifest,now:fixtureNow});
+ const args={...c,manifest,banks,now:fixtureNow,ledgerSources,publicationSelections,editorials,synchronizations:c.synchronizations.filter(s=>Date.parse(s.verifiedAt)<=fixtureNow),offlineBases:new Map([...c.offlineBases].filter(([,b])=>Date.parse(b.eligibleAt)<=fixtureNow)),deliveryCheckpointSources:new Map([...c.deliveryCheckpointSources].filter(([,raw])=>Date.parse(JSON.parse(raw).verifiedAt)<=fixtureNow)),publicationState:JSON.parse(predecessor.publicationStateRaw),availableFiles:new Set([...c.availableFiles,'docs/rounds/round-024.md'])};
  const result=validateRoundLedgers(ledgers,args);assert.equal(result.ok,true,result.errors.join('\n'));const release=validateReleaseLedger(ledgers,args);assert.equal(release.ok,true,release.errors.join('\n'));assert.equal(next.baseline.offlinePredecessor.roundId,'round-022');
 });
 test('first024 content delta may carry exact reservation-only023 history beside its one active ledger',()=>{

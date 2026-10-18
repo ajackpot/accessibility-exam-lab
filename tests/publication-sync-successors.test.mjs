@@ -1,13 +1,12 @@
 /** Real reviewed publication evidence; synthetic successor inputs are never executed or published. */
-import test from 'node:test';
+import test, {after} from 'node:test';
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {loadRoundContext,validateRoundLedgers,validateReleaseLedger,regularCoverage,auditHistoricalRelease} from '../scripts/validate-round.mjs';
-import {validateCampaignBaselines} from '../scripts/editorial-ledger.mjs';
-import {validatePublicationSynchronizations,validatePublicationEvidenceOrder,validateSynchronizationDeliveryProof} from '../scripts/publication-sync.mjs';
+import {loadRoundContext,regularCoverage,auditHistoricalRelease} from '../scripts/validate-round.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..'),hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>JSON.stringify(o,null,2)+'\n';
 const loaded=await loadRoundContext(root,null,{release:true}),proof=loaded.synchronizations.find(e=>e.syncId==='cumulative-009-017'),now=Date.now();
@@ -24,6 +23,19 @@ loaded.ledgers=loaded.ledgers.filter(l=>!excludedFixtureRounds.has(l.roundId));
 const fixtureTip=loaded.ledgers.filter(l=>l.publication?.bankVersion&&l.publication.status==='not_attempted').sort((a,b)=>Date.parse(a.startedAt)-Date.parse(b.startedAt)).at(-1),fixtureBank=JSON.parse(loaded.banks.get(fixtureTip.publication.bankVersion).raw);
 loaded.manifest={...loaded.manifest,bankVersion:fixtureBank.bankVersion,releasedAt:fixtureBank.releasedAt,file:`releases/${fixtureBank.bankVersion}/bank.json`,sha256:fixtureTip.publication.bankSha256,changeSummary:fixtureBank.changeSummary};
 
+// The existing event prefix retains its independent offline descendants but
+// ends before later editorial authorities. This boundary binds fixture inputs;
+// it never replaces any production validator's existing now argument.
+const fixtureBoundary=Math.max(Date.parse(proof.verifiedAt),...loaded.ledgers.map(l=>Date.parse(l.startedAt)));
+loaded.editorials=loaded.editorials.filter(e=>Date.parse(e.startedAt)<=fixtureBoundary);
+const authority=await createOwnedHistoricalAuthority({after});
+const {validateRoundLedgers,validateReleaseLedger}=authority.round;
+const {validatePublicationSynchronizations,validatePublicationEvidenceOrder,validateSynchronizationDeliveryProof}=authority.publication;
+loaded.publicationSelections=authority.bindHistoricalSelection({...loaded,now:fixtureBoundary});
+function validateCampaignBaselines(ledgers,options) {
+ const binding=authority.bindSyntheticRoundSources({historicalLedgers:loaded.ledgers,historicalSources:loaded.ledgerSources,syntheticLedgers:ledgers.filter(r=>r.roundId==='round-publication-baseline-fixture'),validationSources:options.ledgerSources,at:fixtureBoundary});
+ return authority.editorial.validateCampaignBaselines(ledgers,{...options,...binding});
+}
 const publicationPath=`docs/publications/${proof.syncId}.json`;
 function failed(result,pattern){assert.equal(result.ok,false);if(pattern)assert.match(result.errors.join('\n'),pattern);}
 function successor(start=new Date(Date.parse(proof.verifiedAt)+1).toISOString()){

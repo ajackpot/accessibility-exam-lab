@@ -1,3 +1,4 @@
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 import {createSyntheticValidator} from './quarantine-fixtures.mjs';
 import test, {after} from 'node:test';
 import assert from 'node:assert/strict';
@@ -122,14 +123,18 @@ test('the published round and editorial history remains byte-identical and passe
   assert.equal(history.ok, true, history.errors.join('\n'));
 });
 
-test('round-003 at midnight follows the actual round-002 without rewriting any historical record', async () => {
+test('round-003 at midnight follows the actual round-002 without rewriting any historical record', async t => {
   const context = await historicalContext();
   const activeRaw = context.banks.get('2026.10.02-regular.2').raw;
   const coverage = regularCoverage(JSON.parse(activeRaw.toString()));
   const r = round();
   Object.assign(r.baseline, {bankVersion: '2026.10.02-regular.2', bankSha256: hash(activeRaw), regularWrittenBySubject: coverage.regularWrittenBySubject, regularPractical: coverage.regularPractical});
   r.coverageAfter = coverage;
-  const checked = validateRoundLedgers([...context.ledgers, r], {...context, availableFiles: null, now: FOUR_HOUR_CADENCE_AT + 120000});
+  const authority=await createOwnedHistoricalAuthority(t),{validateRoundLedgers}=authority.round;
+  const ledgers=[...context.ledgers,r],ledgerSources=new Map(context.ledgers.map(l=>[l.roundId,context.ledgerSources.get(l.roundId)]));
+  ledgerSources.set(r.roundId,Buffer.from(JSON.stringify(r,null,2)+'\n'));
+  const publicationSelections=authority.bindHistoricalSelection({ledgers,ledgerSources,editorials:context.editorials,editorialSources:context.editorialSources,manifest:context.manifest,now:FOUR_HOUR_CADENCE_AT+120000});
+  const checked = validateRoundLedgers([...context.ledgers, r], {...context, ledgerSources,publicationSelections,availableFiles: null, now: FOUR_HOUR_CADENCE_AT + 120000});
   assert.equal(checked.ok, true, checked.errors.join('\n'));
 });
 

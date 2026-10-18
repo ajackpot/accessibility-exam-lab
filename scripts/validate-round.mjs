@@ -1,3 +1,4 @@
+import {withEditorial005Completion,assertEditorial005CompletionInput} from './editorial005-completion.mjs';
 import {loadPublicationSelections, resolvePublicationIdentity, assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {isNormalPublication} from './normal-publication.mjs';
 import {isEditorialPublication} from './editorial-publication.mjs';
@@ -388,7 +389,7 @@ export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), edi
   if (bank.changeSummary !== manifest.changeSummary) fail('active manifest change summary does not match bank');
   if (bank.bankVersion !== manifest.bankVersion || bank.releasedAt !== manifest.releasedAt || digest(active.raw) !== manifest.sha256) fail('active manifest version/release/hash does not match bank bytes');
   try { validateExplanationAuthoring(bank, historicalExplanationBaseline(banks)); } catch(error) { fail(`explanation authoring: ${error.message}`); }
-  errors.push(...validateCampaignBaselines(ledgers,{editorials,editorialSources:historyOptions.editorialSources,editorialReports:historyOptions.editorialReports,editorialSchema,reviewPackages:historyOptions.reviewPackages,availableFiles:historyOptions.availableFiles,now:historyOptions.now??null,activeBankVersion:bank.bankVersion,offlineBases:historyOptions.offlineBases,ledgerSources:historyOptions.ledgerSources,synchronizations:historyOptions.synchronizations,banks,publicationState:historyOptions.publicationState,publicationSelections:historyOptions.publicationSelections,deliveryCheckpointSources:historyOptions.deliveryCheckpointSources}).errors);
+  errors.push(...validateCampaignBaselines(ledgers,{editorials,editorialSources:historyOptions.editorialSources,editorialReports:historyOptions.editorialReports,editorialSchema,reviewPackages:historyOptions.reviewPackages,availableFiles:historyOptions.availableFiles,now:historyOptions.now??null,activeBankVersion:bank.bankVersion,manifest,offlineBases:historyOptions.offlineBases,ledgerSources:historyOptions.ledgerSources,synchronizations:historyOptions.synchronizations,banks,publicationState:historyOptions.publicationState,publicationSelections:historyOptions.publicationSelections,deliveryCheckpointSources:historyOptions.deliveryCheckpointSources}).errors);
   errors.push(...validateEvidenceLossCampaign(ledgers,{banks,...historyOptions,manifest}).errors);
   const quarantine=validateQuarantineCampaign(ledgers,{banks,...historyOptions,manifest});
   errors.push(...quarantine.errors);
@@ -509,7 +510,7 @@ export async function readEditorialDependencies(root, editorialPaths) {
 }
 
 export async function loadRoundContext(root = ROOT, input = null, options = {}) {
-  return withBankParsingSession(root, () => loadContext(root,input,options));
+  return withEditorial005Completion({root,now:options.now??Date.now()},()=>{assertEditorial005CompletionInput(input,options.now??Date.now());return withBankParsingSession(root, () => loadContext(root,input,options));});
 }
 /** Read-only reconstruction of an exact original delivered source. No supplied
  * date/Boolean/Map selects this exception and no current release context escapes.

@@ -1,3 +1,4 @@
+import {currentCutoffBlocks} from './editorial005-completion.mjs';
 /** One reviewed post-materialization selection. Candidate decisions are never projected.
  * Raw immutable files and the reviewed pin are the authority; diagnostics and caller
  * objects cannot authorize publication, omit dependencies, or reactivate exclusions. */
@@ -46,7 +47,7 @@ function freeze(value) {
 function time(value,label) {
   const at=Date.parse(value);if(typeof value!=='string'||!Number.isFinite(at)||at>=FREEZE_AT)fail(`invalid ${label} time or final cutoff`);return at;
 }
-function current(now) {if(!Number.isFinite(now)||now>=FREEZE_AT)fail('current time must precede final cutoff');}
+function current(now,files) {if(!Number.isFinite(now)||currentCutoffBlocks(now,{files}))fail('current time must precede final cutoff');}
 function plainRaw(raw) {
   if(typeof raw==='string')return Buffer.from(raw);
   if(Buffer.isBuffer(raw)&&Object.getPrototypeOf(raw)===Buffer.prototype)return Buffer.from(raw);
@@ -136,7 +137,7 @@ function exactHistoricalSnapshot(files) {
   return false;
 }
 function inspectRecord(raw,files,now) {
-  current(now);const record=JSON.parse(raw);
+  current(now,files);const record=JSON.parse(raw);
   keys(record,['schemaVersion','kind','selectionId','roundId','decidedAt','reasonCode','directive','originalLedger','originalBank','baseline','originalProducer','nonDeliveryEvidence','retained','excluded','selectedBank','independentAssessment']);
   if(!equal(raw,json(record))||record.schemaVersion!==1||record.kind!=='post_materialization_pre_delivery_selection'||record.selectionId!=='round-041-selection-001'||record.roundId!=='round-041'||record.reasonCode!=='user_learning_priority_change')fail('noncanonical or unsupported selection record');
   keys(record.originalLedger,['path','sha256'],'original ledger');
@@ -256,7 +257,7 @@ export function validatePublicationSelectionSnapshot(files,{now=Date.now()}={}) 
   if(selectionPaths.some(p=>p!==PUBLICATION_SELECTION_PATH))fail('unknown or unreviewed selection file');
   if(!byPath.has(PUBLICATION_SELECTION_PATH)&&hex.test(PUBLICATION_SELECTION_PIN.sha256??'')&&exactHistoricalSnapshot(byPath))return state([],byPath);
   if(!requiresSelection(byPath))return state([],byPath);
-  current(now);
+  current(now,byPath);
   if(!hex.test(PUBLICATION_SELECTION_PIN.sha256??''))fail('selection pin is pending independent exact-record review');
   const raw=boundFile(byPath,PUBLICATION_SELECTION_PATH,PUBLICATION_SELECTION_PIN.sha256,'reviewed selection record');
   const listed=manifestPaths(byPath.get('PUBLICATION-MANIFEST.txt'));
@@ -308,7 +309,7 @@ export async function loadPublicationSelections(root,{now=Date.now()}={}) {
   // Keep exact source ledgers and selection dependencies. Previously published
   // bank bytes are hash-checked against the reviewed observation inventory and
   // discarded; the normal campaign gate still validates their full semantics.
-  const required=new Set([MODULE_PATH,PUBLICATION_SELECTION_PATH,ORIGINAL_LEDGER_PATH,ORIGINAL_BANK_PATH,BASELINE_PATH,SELECTED_BANK_PATH,'data/manifest.json','scripts/bank-io.mjs','scripts/validate-round.mjs']);
+  const required=new Set([MODULE_PATH,PUBLICATION_SELECTION_PATH,ORIGINAL_LEDGER_PATH,ORIGINAL_BANK_PATH,BASELINE_PATH,SELECTED_BANK_PATH,'data/manifest.json','data/publication-state.json','scripts/bank-io.mjs','scripts/validate-round.mjs']);
   for(const p of listed){
     if(p==='PUBLICATION-MANIFEST.txt')continue;
     if(!required.has(p)&&!/^docs\/(?:rounds|corrections)\/.+\.json$/.test(p)&&!/^data\/releases\/[^/]+\/bank\.json$/.test(p)&&!p.startsWith('docs/publication-selections/'))continue;

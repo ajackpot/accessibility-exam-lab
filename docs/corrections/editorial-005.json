@@ -1,0 +1,375 @@
+{
+  "ledgerSchemaVersion": 1,
+  "kind": "accepted_content_editorial",
+  "campaignId": "2026-exam-final",
+  "correctionRoundId": "editorial-005",
+  "prdVersion": "1.9",
+  "timezone": "Asia/Seoul",
+  "status": "closed",
+  "startedAt": "2026-10-14T03:27:03.668Z",
+  "decisionDeadline": "2026-10-14T07:00:00Z",
+  "closedAt": "2026-10-14T04:52:58.491Z",
+  "policy": {
+    "maxCycles": 3,
+    "maxRoundHours": 4,
+    "newKnowledgeItems": 0
+  },
+  "baseline": {
+    "sourceCommit": "5fb79453e1bd2942353c8a15f3942352aa3baa3b",
+    "bankVersion": "2026.10.12-editorial.4",
+    "bankSha256": "5245cb2217ca7816b4c9b9dbe5b85d9e266e5415a05e84e86ced51d1f089b47f",
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80
+  },
+  "changedQuestionIds": [
+    "r003-standards-s1-w04",
+    "r006-standards-s1-w02"
+  ],
+  "changedOptionIds": [],
+  "changedPracticalChoiceIds": [],
+  "corrections": [
+    {
+      "correctionId": "e005-control-diagonal-explanation",
+      "issueId": "kwcag22-control-diagonal-rule-omission",
+      "questionId": "r003-standards-s1-w04",
+      "templateId": "r003-standards-template-recommended-control-diagonal",
+      "learningGoalId": "r003-standards-template-recommended-control-diagonal",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s1",
+      "priorAcceptedRef": {
+        "roundId": "round-003",
+        "candidateId": "r003-standards-s1-w04",
+        "ledgerPath": "docs/rounds/round-003.json",
+        "bankVersion": "2026.10.03-regular.3",
+        "bankSha256": "bfd499128280d67ebafbdd1f401bf8a12ff85d89373bd3284d9dfb12ae150c48",
+        "questionRevision": 1,
+        "contentSha256": "b869ad849674e86e674c82551694b4f33c95a05c8585ce54add6ddfe054af63e"
+      },
+      "defect": "문항 해설이 측정 방향은 말하지만 대각선 길이 6.0mm 이상이라는 실제 권고 기준을 밝히지 않아 선택지 해설을 빌려야 한다.",
+      "revision": 2,
+      "authorId": "e005-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r003-standards-src-control-size",
+          "title": "한국형 웹 콘텐츠 접근성 지침 2.2",
+          "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+          "version": "KS X OT0003:2022 / 2022-12-28",
+          "location": "6.1.3 조작 가능 / 콘트롤의 크기; 공식 첨부 한국형웹콘텐츠접근성지침2.2.docx",
+          "checkedAt": "2026-10-14T04:48:05.775780Z",
+          "summary": "KS X OT0003:2022(2022-12-28) §6.1.3의 원문 발췌를 독립 대조했다. 원문 조사자는 2026-10-14T03:33:25.956043Z HTTP200으로 받은 DOCX 276866바이트·SHA-256 3b56208351db475edc460a59b158c8cb205918148d418e28501d5245fd250aa4의 XML과 렌더한 15·16쪽을 확인했다. 전체 콘트롤 대각선 길이 6.0mm 이상, 테두리 안쪽 1픽셀 이상과 해당 여백의 위치 지정 도구 조작 비반응은 각각 권고다. 이번 checkedAt은 전달된 검증 원문 발췌의 재대조이며 새 다운로드·원본 전체 열람이 아니다.",
+          "rights": "공식 1차 자료의 관련 규칙을 독자적인 간결한 한국어 해설로 요약한다. 원 지문·선택지·키·목표를 유지하며 표준 전문·공식 시험 샘플을 복제하지 않는다. 새 이용허락이나 구현 실측을 주장하지 않는다."
+        },
+        {
+          "sourceId": "r006-standards-src-syllabus-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "공식 출제기준 / 2026-05-07 파일",
+          "location": "웹접근성 표준 개론·정보접근성 개론; 참고 5-4·5-8",
+          "checkedAt": "2026-10-14T04:48:05.775780Z",
+          "summary": "location은 보존된 은행 출처 레코드의 식별 표기다. 이번 실제 대조 위치는 첫 과목 웹접근성 표준 개론(20문항)의 국내표준 행 및 참고 1-1이다. 공식 2026-05-07 HWP의 국내표준 세부지침·준수방법, KWCAG 구성·용어와 참고1-1 원문 발췌를 독립 대조했다. 원문 조사자는 2026-10-14T03:33:31.398791Z HTTP200으로 받은 80896바이트·SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314의 OLE본문과 내장 첫쪽 이미지를 확인했다. 이번 확인은 전달된 검증 원문 발췌의 재대조이며 새 다운로드가 아니다. 국내 KWCAG 범위를 유지하고 국제표준 자체의 1급 범위로 넓히지 않는다.",
+          "rights": "공식 1차 자료의 관련 규칙을 독자적인 간결한 한국어 해설로 요약한다. 원 지문·선택지·키·목표를 유지하며 표준 전문·공식 시험 샘플을 복제하지 않는다. 새 이용허락이나 구현 실측을 주장하지 않는다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 2,
+          "startedAt": "2026-10-14T04:38:45.214Z",
+          "finishedAt": "2026-10-14T04:52:58.491Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e005-independent-blind-v1",
+              "summary": "키·해설·출처 결론을 받기 전 잠근 최초 답 B가 기존 키 B와 일치했다. 이후 원문 발췌와 모든 선택지를 대조하여 복수 정답·정답 없음·정보 부족을 발견하지 않았다.",
+              "evidenceRefs": [
+                "r003-standards-src-control-size"
+              ]
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e005-independent-source-v1",
+              "summary": "KS X OT0003:2022(2022-12-28) §6.1.3의 콘트롤 크기 원문 발췌와 대조했다. 대각선 방향 6.0mm 이상을 바람직한 권고로 제시한 규칙과 일치한다. 이웃한 콘트롤의 충분한 크기라는 상위 요구 자체를 선택 사항으로 바꾸지 않고, 이 수치 권고의 성격만 설명한다. 2026-05-07 필기 국내표준 세부지침·준수방법 및 KWCAG 구성 범위에 해당하며 국제표준 1급 범위로 확대하지 않는다. 기존 sourceRefs와 레코드는 보존되었다. 기술적 사실·수치의 짧은 설명과 독자 선택지로, 공식 시험 샘플·표준 전문을 복제하지 않았고 원문의 무제한 이용허락을 주장하지 않는다.",
+              "evidenceRefs": [
+                "r003-standards-src-control-size",
+                "r006-standards-src-syllabus-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e005-independent-source-v1",
+              "summary": "정답은 r003-standards-s1-w04-o1 하나다. 질문은 원문이 제시한 측정 대상과 권고 수치의 연결을 묻는다. 다른 측정량을 사용한 일부 도형이 우연히 대각선 권고를 충족할 수 있다는 사실은 그 측정량을 원문 권고로 바꾸지 않는다.",
+              "evidenceRefs": [
+                "r003-standards-src-control-size"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e005-independent-source-v1",
+              "summary": "question.explanation 자체가 측정 대상·수치·권고의 성격을 모두 진술하여 선택지 해설 없이 규칙을 알 수 있다. 안쪽 여백과의 관계도 명확하다. 모든 선택지는 측정량+동일 수치의 평행한 명사구로, 정답만 길거나 온건한 표현이 아니고 위치 단서도 없다. 폭·높이·둘레·여백의 혼동은 같은 목표의 오개념이다. 해설은 다섯 선택지별 이유를 재복제하지 않으며 기본 규칙의 필수 공유는 자립적 설명에 필요하다. 지문 2문장과 빈 notes, 원래 보기·정답 역할·참조·필수 수치 및 부정 조건을 유지한다. 의미는 읽기 순서나 색·이미지에 의존하지 않는다. 글자 수나 한정어를 기계적으로 바꾸지 않았다.",
+              "evidenceRefs": [
+                "r003-standards-src-control-size"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e005-independent-structural-v1",
+              "summary": "독립 구조 검토 9항목 통과. 정확한 내용·맹검·패키지·구성요소 해시와 선행 채택 대장을 대조했다. 변경은 해설·revision·reviewNote뿐이며 엄격한 해설 검사, 512개 순열 비교·2304개 ID 채점, 합성 은행 업데이트16건·백업 복원64건을 확인했다. 검토 스크립트 오류가 있었던 첫 두 실행의 실패 기록은 보존하고 필요한 실패 항목만 바로잡아 재검사했다. 문항 cycle은 추가하지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "첫 cycle의 같은 개정판에서 독립 풀이 및 잠금 뒤 원문 대조·출처·단일 정답성·문안·구조 검토를 완료했다. 최초 맹검 답과 실제 비교 결과를 보존한다.",
+          "contentSha256": "3bde0a0f2452954ad6df2ca967fc821a5813beca7ba804ddd23ac1fd2a0ebaa8",
+          "blindPackageSha256": "c7a30f8fba3b487683602d4dc3dc3eb67da901c5ef79dd2bc944289334204ba7",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-005-cycle-1.json",
+          "reviewPackageSha256": "2b95ec62b1aa52671d018e5a513631cb796db044cf3dd871d86e39268ef3197d",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r003-standards-s1-w04-o1",
+              "revision": 1,
+              "contentSha256": "30da48316e08e67efd786495b7affd0240a18c1e2b12c611ea179592b6538747"
+            },
+            {
+              "kind": "written_option",
+              "id": "r003-standards-s1-w04-o2",
+              "revision": 1,
+              "contentSha256": "0bbe4788570fe53c5dd16630595a7dde99203372b792c99b5b56bffdb2e78788"
+            },
+            {
+              "kind": "written_option",
+              "id": "r003-standards-s1-w04-o3",
+              "revision": 1,
+              "contentSha256": "f996c7e1350e3c2ea579ed961402d8b66d65191ed8be60755acc0c7c506f6aa7"
+            },
+            {
+              "kind": "written_option",
+              "id": "r003-standards-s1-w04-o4",
+              "revision": 1,
+              "contentSha256": "56745755815a668dfa27cfcab4e407e1c7206aa7661df04a37fa4da4a23970cf"
+            },
+            {
+              "kind": "written_option",
+              "id": "r003-standards-s1-w04-o5",
+              "revision": 1,
+              "contentSha256": "997ac8e9915b5e0cd5338e160dab28542764336a223c964ef830608d3224dfbb"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "문항 해설 자체에 대각선 길이 6.0mm 이상과 권고 성격을 명시한 개정2를 채택했다. 기존 조건·키·선택지·목표·출처는 유지한다.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r003-standards-s1-w04/explanation"
+      ]
+    },
+    {
+      "correctionId": "e005-inner-margin-explanation",
+      "issueId": "kwcag22-inner-margin-rule-omission",
+      "questionId": "r006-standards-s1-w02",
+      "templateId": "r006-standards-template-recommended-nonreactive-inner-margin",
+      "learningGoalId": "r006-standards-template-recommended-nonreactive-inner-margin",
+      "learningGoalRevision": 1,
+      "type": "written",
+      "subjectId": "s1",
+      "priorAcceptedRef": {
+        "roundId": "round-006",
+        "candidateId": "r006-standards-s1-w02",
+        "ledgerPath": "docs/rounds/round-006.json",
+        "bankVersion": "2026.10.04-regular.6",
+        "bankSha256": "14058752f728e9653aa5df025134953fafba50795213784ea27deafc295f9437",
+        "questionRevision": 3,
+        "contentSha256": "793802fc03c517290b437815f00d07c9adce696cf56ac80d3e8c5f1823a19257"
+      },
+      "defect": "문항 해설이 크기와 여백의 차이만 말하고 테두리 안쪽·1픽셀 이상·위치 지정 도구 조작에 비반응이라는 실제 권고 조건을 밝히지 않는다.",
+      "revision": 4,
+      "authorId": "e005-explanation-author-v1",
+      "evidence": [
+        {
+          "sourceId": "r006-standards-src-control-inner-margin",
+          "title": "한국형 웹 콘텐츠 접근성 지침 2.2",
+          "url": "https://www.rra.go.kr/FileDownSvl?file_parentseq=5247&file_seq=1&file_type=notice",
+          "version": "KS X OT0003:2022 / 2022-12-28 개정",
+          "location": "§6.1.3 조작 가능: 링크, 사용자 입력, 기타 콘트롤 등의 안쪽 여백",
+          "checkedAt": "2026-10-14T04:48:05.775780Z",
+          "summary": "KS X OT0003:2022(2022-12-28) §6.1.3의 원문 발췌를 독립 대조했다. 원문 조사자는 2026-10-14T03:33:25.956043Z HTTP200으로 받은 DOCX 276866바이트·SHA-256 3b56208351db475edc460a59b158c8cb205918148d418e28501d5245fd250aa4의 XML과 렌더한 15·16쪽을 확인했다. 전체 콘트롤 대각선 길이 6.0mm 이상, 테두리 안쪽 1픽셀 이상과 해당 여백의 위치 지정 도구 조작 비반응은 각각 권고다. 이번 checkedAt은 전달된 검증 원문 발췌의 재대조이며 새 다운로드·원본 전체 열람이 아니다.",
+          "rights": "공식 1차 자료의 관련 규칙을 독자적인 간결한 한국어 해설로 요약한다. 원 지문·선택지·키·목표를 유지하며 표준 전문·공식 시험 샘플을 복제하지 않는다. 새 이용허락이나 구현 실측을 주장하지 않는다."
+        },
+        {
+          "sourceId": "r006-standards-src-syllabus-written",
+          "title": "2026년 웹접근성전문가 2급(필기) 출제기준 및 참고자료",
+          "url": "http://www.ualab.or.kr/assets/download/%EC%9B%B9%EC%A0%91%EA%B7%BC%EC%84%B1%EC%A0%84%EB%AC%B8%EA%B0%80%20%ED%95%84%EA%B8%B0%20%EC%B6%9C%EC%A0%9C%EA%B8%B0%EC%A4%80%20%EB%B0%8F%20%EC%B0%B8%EA%B3%A0%EC%9E%90%EB%A3%8C_2026.05.07.hwp",
+          "version": "공식 출제기준 / 2026-05-07 파일",
+          "location": "웹접근성 표준 개론·정보접근성 개론; 참고 5-4·5-8",
+          "checkedAt": "2026-10-14T04:48:05.775780Z",
+          "summary": "location은 보존된 은행 출처 레코드의 식별 표기다. 이번 실제 대조 위치는 첫 과목 웹접근성 표준 개론(20문항)의 국내표준 행 및 참고 1-1이다. 공식 2026-05-07 HWP의 국내표준 세부지침·준수방법, KWCAG 구성·용어와 참고1-1 원문 발췌를 독립 대조했다. 원문 조사자는 2026-10-14T03:33:31.398791Z HTTP200으로 받은 80896바이트·SHA-256 e947c9915b4063738d66f394b8dcedd48555b5b2a896a1d9020f23be9902a314의 OLE본문과 내장 첫쪽 이미지를 확인했다. 이번 확인은 전달된 검증 원문 발췌의 재대조이며 새 다운로드가 아니다. 국내 KWCAG 범위를 유지하고 국제표준 자체의 1급 범위로 넓히지 않는다.",
+          "rights": "공식 1차 자료의 관련 규칙을 독자적인 간결한 한국어 해설로 요약한다. 원 지문·선택지·키·목표를 유지하며 표준 전문·공식 시험 샘플을 복제하지 않는다. 새 이용허락이나 구현 실측을 주장하지 않는다."
+        }
+      ],
+      "optionChanges": [],
+      "practicalChoiceChanges": [],
+      "attemptCount": 1,
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 4,
+          "startedAt": "2026-10-14T04:38:45.214Z",
+          "finishedAt": "2026-10-14T04:52:58.491Z",
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "e005-independent-blind-v1",
+              "summary": "키·해설·출처 결론을 받기 전 잠근 최초 답 B는 기존 키 C와 불일치했다. 최초 답을 보존하고 잠금 뒤 원문 발췌와 모든 선택지를 대조하여 여백 반응 조건에 관한 풀이자의 기억 오류임을 확인했다. 복수 정답·정답 없음·정보 부족은 없었다. PRD 13.1 역할4의 최초 풀이와 이후 비교를 완료한 gate 통과이며 최초 정답 일치로 소급 기록하지 않는다.",
+              "evidenceRefs": [
+                "r006-standards-src-control-inner-margin"
+              ]
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "e005-independent-source-v1",
+              "summary": "동일 고정판 §6.1.3의 안쪽 여백 원문 발췌와 대조했다. 링크·사용자 입력·기타 콘트롤, 테두리 안쪽, 1픽셀 이상, 그 여백에서 위치 지정 도구 조작에 비반응이라는 조건과 바람직한 구현이라는 권고 성격을 모두 보존한다. 마우스 등은 기존 notes의 위치 지정 도구 조건과 일치하며 키보드 조작까지 금지한다고 확대하지 않는다. 전체 대각선 크기 권고와 분리한 설명도 원문의 두 항목에 부합한다. 2026-05-07 필기의 국내표준 세부지침·준수방법 범위에 해당한다. 기존 출처 레코드·권리 고지를 바꾸지 않고 제한된 기술적 사실을 설명하며 표준 전문이나 공식 시험문항을 복제하지 않는다.",
+              "evidenceRefs": [
+                "r006-standards-src-control-inner-margin",
+                "r006-standards-src-syllabus-written"
+              ]
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "e005-independent-source-v1",
+              "summary": "정답은 r006-standards-s1-w02-o03 하나다. 위치·크기·반응의 세 조건을 동시에 만족하는 선택지로 유일하다. notes가 위치 지정 도구 조작으로 판단 범위를 고정하므로 비반응을 모든 입력 방식의 금지로 읽을 이유가 없다.",
+              "evidenceRefs": [
+                "r006-standards-src-control-inner-margin"
+              ]
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "e005-independent-source-v1",
+              "summary": "question.explanation만으로 대상·위치·최소 여백·위치 지정 도구 비반응 및 권고의 성격을 알 수 있어 자립성을 충족한다. 크기/여백 구별을 설명하되 모든 선택지 이유를 복제하지 않는다. 다섯 선택지는 위치·수치·반응의 동일한 문장 틀이고 정답만 긴 예외 설명이나 말투 단서가 없다. 정답을 포함해 수치·안/밖·반응/비반응이라는 필수 조건을 보존했으며, 오답은 같은 규칙의 적용 오류다. stem의 안쪽 여백은 질문 대상의 필요한 조건으로서 정답 말투 단서가 아니다. 지문→notes→선택지의 의미가 일치하고 notes가 조작 범위를 보완한다. 텍스트만으로 의미를 이해할 수 있고 색·배치·순서에 의존하지 않는다.",
+              "evidenceRefs": [
+                "r006-standards-src-control-inner-margin"
+              ]
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "e005-independent-structural-v1",
+              "summary": "독립 구조 검토 9항목 통과. 정확한 내용·맹검·패키지·구성요소 해시와 선행 채택 대장을 대조했다. 변경은 해설·revision·reviewNote뿐이며 엄격한 해설 검사, 512개 순열 비교·2304개 ID 채점, 합성 은행 업데이트16건·백업 복원64건을 확인했다. 검토 스크립트 오류가 있었던 첫 두 실행의 실패 기록은 보존하고 필요한 실패 항목만 바로잡아 재검사했다. 문항 cycle은 추가하지 않았다.",
+              "evidenceRefs": []
+            }
+          },
+          "outcome": "accepted",
+          "summary": "첫 cycle의 같은 개정판에서 독립 풀이 및 잠금 뒤 원문 대조·출처·단일 정답성·문안·구조 검토를 완료했다. 최초 맹검 답과 실제 비교 결과를 보존한다.",
+          "contentSha256": "cd7bb76055a6a71f9f3fde25b855def145b8151b7e42d93732951ecf012db895",
+          "blindPackageSha256": "8c24fb0ee8e105855bd1da782feee98680b7c3315b334a4d509c5996380f50c6",
+          "reviewPackagePath": "docs/corrections/evidence/editorial-005-cycle-1.json",
+          "reviewPackageSha256": "2b95ec62b1aa52671d018e5a513631cb796db044cf3dd871d86e39268ef3197d",
+          "componentStates": [
+            {
+              "kind": "written_option",
+              "id": "r006-standards-s1-w02-o01",
+              "revision": 1,
+              "contentSha256": "6da522604edecc19f9ace8770f4369d156e7703a7ecace36ee0c9acb5de3fb74"
+            },
+            {
+              "kind": "written_option",
+              "id": "r006-standards-s1-w02-o02",
+              "revision": 1,
+              "contentSha256": "a3bbd151324eecb72e68a59b9c5495b5403d22b534bf32c8effc0e2edb490a32"
+            },
+            {
+              "kind": "written_option",
+              "id": "r006-standards-s1-w02-o03",
+              "revision": 1,
+              "contentSha256": "b653b7663b195a4148b323828fd705da40b50422165d784860e67ede3896ddce"
+            },
+            {
+              "kind": "written_option",
+              "id": "r006-standards-s1-w02-o04",
+              "revision": 1,
+              "contentSha256": "81a9ea9acf96c16c8836c4aca05f1aaa90e7a5cbba269b3f32c6fd3c3d74ef5b"
+            },
+            {
+              "kind": "written_option",
+              "id": "r006-standards-s1-w02-o05",
+              "revision": 1,
+              "contentSha256": "569b596e4bcecf8b0c80c92725fb01af06a96ebfd1e67489eeaf91daa8aeba32"
+            }
+          ]
+        }
+      ],
+      "decision": "accepted",
+      "reasonCodes": [
+        "accepted_all_gates"
+      ],
+      "decisionSummary": "문항 해설 자체에 테두리 안쪽·1픽셀 이상·위치 지정 도구 비반응 및 권고 성격을 명시한 개정4를 채택했다. 최초 맹검 오답은 기억 오류로 확인했으며 원 답과 비교 기록을 보존한다.",
+      "publishedBankVersion": null,
+      "targetPaths": [
+        "/questions/r006-standards-s1-w02/explanation"
+      ]
+    }
+  ],
+  "counts": {
+    "registered": 2,
+    "accepted": 2,
+    "rejected": 0,
+    "pending": 0,
+    "newRegular": 0,
+    "revisedRegular": 2,
+    "publishedRevisedRegular": 0
+  },
+  "coverageAfter": {
+    "regularWrittenBySubject": {
+      "s1": 123,
+      "s2": 205,
+      "s3": 182,
+      "s4": 208,
+      "s5": 159
+    },
+    "regularPractical": 80,
+    "mockEligible": true
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "bankVersion": "2026.10.14-editorial.5",
+    "bankSha256": "42c3eed6dea79a03f78226b1887b93c71f11f0d3fb6fa63b5ba3c298a823edf2",
+    "verifiedAt": null,
+    "url": null,
+    "blockers": []
+  },
+  "validation": [
+    {
+      "check": "exact_revision_independent_review",
+      "result": "pass",
+      "summary": "두 개정판의 다섯 gate를 첫 cycle에서 완료했다. 최초 맹검 정답 일치1/2, 이후 원문 대조에 따른 키 타당성 확인2/2를 구별한다. 엄격 해설 검사를 적용했다.",
+      "reportPath": "docs/corrections/editorial-005.md"
+    },
+    {
+      "check": "focused_data_and_saved_session_regressions",
+      "result": "pass",
+      "summary": "512개 순열 비교·2304개 ID 채점·16개 합성 업데이트·64개 백업 복원 통과. 검토 harness 초기 실패와 필요한 항목의 정정 재실행을 원시 기록에 보존한다. 전체 suite·브라우저·NVDA 실측은 포함하지 않는다.",
+      "reportPath": "docs/corrections/editorial-005.md"
+    },
+    {
+      "check": "consolidated_release_validation_attempt_1",
+      "result": "fail",
+      "summary": "2026-10-14T05:22:02.024861Z에 원 실행이 exit1로 종료했다. 유일한 오류는 syllabus evidence.location과 기존 source 식별값의 불일치였다. 원 대장·보고서·로그를 보존하고 식별 location과 실제 확인 위치의 요약 표기를 구분했다. 문항·출처 레코드·검토 판정·시각·cycle은 보존하며 재검사 결과는 별도 실행 기록으로 판단한다.",
+      "reportPath": "docs/corrections/editorial-005.md"
+    }
+  ],
+  "nextAction": "채택된 동일 문항 원문으로 새 불변 은행 후보를 명시적 발행 검사하고 전체 캠페인·현재 릴리스 검증 결과를 확인한다. Git/Pages 공개와 전체7z·변경분ZIP 전달은 실제 검증·권한·수락 증거로 별도 판단한다. 중단된 전송 경로를 재시도하지 않는다.",
+  "summary": "기존 s1 두 문항의 해설만 첫 cycle에서 채택했다. 신규 정규0개·수정 채택2개·실제 수정 공개0개이며 고정 시작·마감과 역사적 판정·은행·키·선택지를 보존한다."
+}

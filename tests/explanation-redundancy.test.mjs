@@ -1,12 +1,12 @@
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import * as d from '../src/domain.js';
 import {exportBackup,parseBackup} from '../src/backup.js';
-import {readBankInput} from '../scripts/bank-io.mjs';
-import {buildBank} from '../scripts/build.mjs';
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
+const {readBankInput,buildBank}=await createOwnedHistoricalAuthority({after});
 import {validateReleaseLedger,loadRoundContext} from '../scripts/validate-round.mjs';
 import {REVIEWED_OPTION_EXPLANATIONS} from '../src/reviewed-option-explanations.js';
 const root=path.resolve(import.meta.dirname,'..');
@@ -20,6 +20,7 @@ const clean=source=>{const b=d.copy(source);for(const q of b.questions.filter(q=
 async function fixture(t,{baseline=true}={}) {
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'exam-explanation-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.mkdir(path.join(dir,'data'),{recursive:true});
  if(baseline){await fs.mkdir(path.join(dir,'data/releases',manifest.bankVersion),{recursive:true});await fs.writeFile(path.join(dir,'data',manifest.file),raw);await fs.writeFile(path.join(dir,'data/manifest.json'),JSON.stringify(manifest));}
+ await fs.writeFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',...(baseline?['data/manifest.json',`data/${manifest.file}`]:[])].sort().join('\n')+'\n');
  return dir;
 }
 async function candidate(dir,body){const file=path.join(dir,'candidate.json');await fs.writeFile(file,JSON.stringify(body,null,2)+'\n');return file;}

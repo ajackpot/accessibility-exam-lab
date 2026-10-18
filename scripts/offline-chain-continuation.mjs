@@ -1,3 +1,4 @@
+import {currentCutoffBlocks,completionHistoryReadable} from './editorial005-completion.mjs';
 import {completeManifestFormat} from './archive-format.mjs';
 /** Reviewed independent offline chains. Read-only; a proposal is never delivery authority. */
 import fs from 'node:fs/promises';
@@ -15,7 +16,7 @@ const hex=/^[a-f0-9]{64}$/,commit=/^(?!0{40}$)[a-f0-9]{40}$/,name=/^[a-z0-9][a-z
 const fail=m=>{throw Error(m);},number=r=>/^round-\d+$/.test(r)?Number(r.slice(6)):NaN;
 function keys(o,list){if(!o||Array.isArray(o)||!equal(Object.keys(o).sort(),[...list].sort()))fail('Unexpected independent-chain proof fields');}
 function time(s){const n=Date.parse(s);if(typeof s!=='string'||!Number.isFinite(n)||n>=FREEZE_AT)fail('Invalid independent-chain chronology or final cutoff');return n;}
-function open({now,manifest,publicationState}){if(!Number.isFinite(now)||now>=FREEZE_AT)fail('Final cutoff blocks independent continuation');if(manifest?.finalRelease!==false||publicationState?.finalized!==false)fail('Both persistent freeze markers must be explicit false');}
+function open({now,manifest,publicationState}){if(!Number.isFinite(now)||currentCutoffBlocks(now,{manifest,publicationState}))fail('Final cutoff blocks independent continuation');if(manifest?.finalRelease!==false||publicationState?.finalized!==false)fail('Both persistent freeze markers must be explicit false');}
 async function bytes(root,p){parsePublicAllowlist(p);for(let d=path.resolve(root);;d=path.dirname(d)){if((await fs.lstat(d)).isSymbolicLink())fail('Independent-chain root cannot be a symlink');if(d===path.dirname(d))break;}let d=path.resolve(root);for(const [i,v] of p.split('/').entries()){d=path.join(d,v);const s=await fs.lstat(d);if(s.isSymbolicLink()||(i===p.split('/').length-1?!s.isFile():!s.isDirectory()))fail('Independent-chain proof requires regular public files');}return fs.readFile(d);}
 function inventory(files){if(!Array.isArray(files)||!files.length)fail('Exact source inventory required');parsePublicAllowlist(files.map(f=>f.path).join('\n'));for(const f of files){keys(f,['path','sha256','bytes']);if(!hex.test(f.sha256)||!Number.isSafeInteger(f.bytes)||f.bytes<0)fail('Invalid source inventory');}return new Map(files.map(f=>[f.path,f]));}
 const immutable=p=>p.startsWith('data/releases/')||/^data\/seed-bank(?:-v\d+)?\.json$/.test(p)||/^docs\/(?:rounds\/round-\d+\.(?:json|md)|corrections\/|publications\/)/.test(p)||(p.startsWith('docs/deliveries/')&&p!==OFFLINE_CHAIN_TRUST_PATH)||/^docs\/quarantines\/(?!trust\.json)[^/]+\.json$/.test(p);
@@ -47,7 +48,7 @@ function inspectProof(p,pin,previous,context,prior){
  const expectedTrust=hash(json(prior));if(inv.has(OFFLINE_CHAIN_TRUST_PATH)){if(inv.get(OFFLINE_CHAIN_TRUST_PATH).sha256!==expectedTrust||p.priorTrustSha256!==expectedTrust)fail('Source must preserve exact prior independent-chain trust prefix');}else if(previous||prior.checkpoints.length||p.priorTrustSha256!==null)fail('Missing predecessor trust registry in delivered source');
  const receipts=[...(previous?.receipts??[]),r],manifests=new Map(previous?.manifests??[]);manifests.set(r.artifactSha256,d);
  const folded=foldDeliveryInventory(anchor.remoteInventory,receipts,manifests);if(!equal([...folded].sort(),[...inv].map(([p,f])=>[p,f.sha256]).sort()))fail('Complete inventory differs from exact remote anchor plus delta chain');
- const checked=validateOfflineContinuation(receipts,{manifests,ledgers:new Map(ledgerSources),banks:new Map([...context.banks].map(([v,e])=>[v,e.raw])),now,publicationState:context.publicationState,reconciliationHistory:[u.wait]});if(!checked.ok||!checked.canStartNewContent)fail('Invalid independent offline chain: '+[...checked.errors,...checked.continuationBlockers].join('; '));
+ const checked=validateOfflineContinuation(receipts,{manifests,ledgers:new Map(ledgerSources),banks:new Map([...context.banks].map(([v,e])=>[v,e.raw])),now,publicationState:context.publicationState,reconciliationHistory:[u.wait]});if(!checked.ok||!checked.canStartNewContent&&!completionHistoryReadable(checked,now,{manifest:context.manifest,publicationState:context.publicationState}))fail('Invalid independent offline chain: '+[...checked.errors,...checked.continuationBlockers].join('; '));
  return {pin,proof:p,anchor,receipts,manifests,checked,eligibleAt:Math.max(time(p.verifiedAt),time(u.wait.skippedAt))};
 }
 // A returned Map is an observation from this validator, never caller authority.

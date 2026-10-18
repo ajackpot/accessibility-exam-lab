@@ -1,3 +1,4 @@
+import {withEditorial005Completion,currentCutoffBlocks} from './editorial005-completion.mjs';
 import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference,assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {assertEvidenceLossPayload,assertEvidenceLossProvenance} from './evidence-loss-block.mjs';
 /** Exact reviewed normal-release backups. Never synthesizes Git waits or publication. */
@@ -37,8 +38,11 @@ export function resolveReleaseDeliveryOwner(context,roundId) {
  if(ledger.status!=='closed'||!context.manifest||identity.effectiveBankVersion!==context.manifest.bankVersion||identity.effectiveBankSha256!==context.manifest.sha256)throw Error('Exact closed current release required');
  return {ledger,ledgerPath,identity};
 }
-export async function writeReleaseDeliveryPair({baseRoot,workRoot,baseCommit,baseVerifiedAt,baseInventory,reviewedInventory,roundId,deltaOutputPath,completeOutputPath,now=Date.now()}){
- if(!Number.isFinite(now)||now>=FREEZE_AT||!/^[a-f0-9]{40}$/.test(baseCommit)||/^0+$/.test(baseCommit)||!Number.isFinite(Date.parse(baseVerifiedAt))||Date.parse(baseVerifiedAt)>now||!/^(round|editorial)-\d+$/.test(roundId))throw Error('Invalid release baseline/time/identity');
+export async function writeReleaseDeliveryPair(options){
+ return withEditorial005Completion({root:options.workRoot,now:options.now??Date.now(),baseCommit:options.baseCommit,roundId:options.roundId},()=>writeReleaseDeliveryPairInWindow(options));
+}
+async function writeReleaseDeliveryPairInWindow({baseRoot,workRoot,baseCommit,baseVerifiedAt,baseInventory,reviewedInventory,roundId,deltaOutputPath,completeOutputPath,now=Date.now()}){
+ if(!Number.isFinite(now)||currentCutoffBlocks(now,{root:workRoot,baseCommit,roundId})||!/^[a-f0-9]{40}$/.test(baseCommit)||/^0+$/.test(baseCommit)||!Number.isFinite(Date.parse(baseVerifiedAt))||Date.parse(baseVerifiedAt)>now||!/^(round|editorial)-\d+$/.test(roundId))throw Error('Invalid release baseline/time/identity');
  if(path.resolve(deltaOutputPath)===path.resolve(completeOutputPath))throw Error('Distinct artifact paths required');
  for(const p of [deltaOutputPath,completeOutputPath]){try{await fs.lstat(p);throw Error('Output exists; preserve artifacts');}catch(e){if(e.code!=='ENOENT')throw e;}}
  if(path.extname(deltaOutputPath).toLowerCase()!=='.zip'||path.extname(completeOutputPath).toLowerCase()!=='.7z')throw Error('Delivery pair requires DELTA.zip and COMPLETE.7z');
@@ -69,6 +73,7 @@ export async function writeReleaseDeliveryPair({baseRoot,workRoot,baseCommit,bas
  const delta={path:deltaOutputPath,sha256:sha(deltaRaw),bytes:deltaRaw.length,manifestSha256:sha(json(manifest)),fileCount:changed.length};
  const sourceRelease={roundId,deltaArtifactSha256:delta.sha256,deltaManifestSha256:delta.manifestSha256,baseCommit,bankVersion:m.bankVersion,bankSha256:m.sha256,ledgerPath,ledgerSha256:current.get(ledgerPath).sha256,...(identity.selectionReference?{selectionReference:identity.selectionReference}:{})};
  const completeSnapshot=await freezeCompleteProject({workRoot,reviewedInventory:files.map(f=>({path:f.path,sha256:f.sha256,bytes:f.bytes})),sourceRelease,deliveryMode:'release_backup',now});
+ if(currentCutoffBlocks(Date.now(),{root:workRoot,baseCommit,roundId}))throw Error('Current completion/freeze boundary blocks DELTA write');
  await fs.writeFile(deltaOutputPath,deltaRaw,{flag:'wx'});
  const complete=await writeCompleteArchive(completeSnapshot,completeOutputPath,{now});
  return {status:'prepared_not_delivered',deliveryMode:'release_backup',delta,complete,deltaManifest:manifest,completeManifest:completeSnapshot.manifest};

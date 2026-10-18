@@ -17,9 +17,10 @@ function decisionRecord(record) {
 }
 
 /** Shared cumulative ordering. Offline evidence permits staging, never Git authorization. */
-export function validateCampaignBaselines(ledgers, {editorials=[], now=null, activeBankVersion=null, offlineBases=new Map(), ledgerSources=new Map(), synchronizations=[], banks=new Map(), publicationState=null, publicationSelections=null, deliveryCheckpointSources=new Map(), editorialSources=new Map(), editorialReports=new Map(), editorialSchema, reviewPackages=new Map(), availableFiles=null}={}) {
+export function validateCampaignBaselines(ledgers, {editorials=[], now=null, activeBankVersion=null, manifest=null, offlineBases=new Map(), ledgerSources=new Map(), synchronizations=[], banks=new Map(), publicationState=null, publicationSelections=null, deliveryCheckpointSources=new Map(), editorialSources=new Map(), editorialReports=new Map(), editorialSchema, reviewPackages=new Map(), availableFiles=null}={}) {
   const sync=validatePublicationSynchronizations(synchronizations,{ledgers,editorials,banks,ledgerSources,editorialSources,editorialReports,editorialSchema,reviewPackages,availableFiles,now,publicationState,activeBankVersion,publicationSelections,deliveryCheckpointSources});
-  const errors=[...sync.errors,...validateEvidenceLossCampaign(ledgers,{banks,ledgerSources,now,publicationState,offlineBases,manifest:activeBankVersion?{bankVersion:activeBankVersion}:null}).errors],all=[...ledgers,...editorials],verified=[...all.filter(r=>r.publication?.status==='verified'&&Number.isFinite(Date.parse(r.publication.verifiedAt))),...sync.history];
+  const errors=[...sync.errors,...validateEvidenceLossCampaign(ledgers,{banks,ledgerSources,now,publicationState,offlineBases,manifest:manifest??(activeBankVersion?{bankVersion:activeBankVersion}:null)}).errors],all=[...ledgers,...editorials],verified=[...all.filter(r=>r.publication?.status==='verified'&&Number.isFinite(Date.parse(r.publication.verifiedAt))),...sync.history];
+  if(manifest!==null&&activeBankVersion!==null&&manifest.bankVersion!==activeBankVersion)errors.push('release: active manifest and active bank version differ');
   const identities=new Map();
   try { if(publicationSelections)for(const ledger of ledgers) identities.set(ledger,resolvePublicationIdentity(ledger,publicationSelections)); }
   catch(error) { return {ok:false,errors:[...errors,error.message]}; }

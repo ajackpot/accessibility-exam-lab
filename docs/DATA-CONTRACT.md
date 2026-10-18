@@ -581,3 +581,10 @@ loader는 정규 ledgerSources와 별도인 editorialSources에 원문을 보관
 문항 선택 계획·snapshot·정답 검증 결과·의미/이력/trust/현재 시각/동결 판정을 캐시하지 않는다. 각 호출의 선택 계획, 오류 순서, RNG 소비, 새 snapshot 생성과 전체 검증 범위를 유지한다. 은행·문항·선택지·개정판·불변 대장과 실제 공개/전달 이벤트는 바꾸지 않는다. 실제 공개 main의 원문 module closure와 결과·오류·snapshot·RNG differential을 별도 시험하며 prototype 성능을 전체 gate 시간이나 새 후보의 검증 성공으로 보고하지 않는다.
 
 같은 은행을 유지하는 이 successor의 앱 버전은 `0.2.10`이다. package/lockfile과 실행·QA 모듈 query 버전을 함께 맞추고 기존 `pool=priority-001`의 정확한 네 import 관계 및 앱 진입 URL을 보존한다. 선택 알고리즘과 seeded snapshot의 의미가 같으므로 generator `2`, schema `1`과 은행 버전은 유지한다. 이 문서는 Git 쓰기·공개나 full gate 시작 권한이 아니다.
+
+
+## 이미 종결한 editorial-005의 한정된 완료
+
+2026-10-18의 명시적 후속 승인에 따라 기존 editorial-005와 공개 기준 커밋 `5fb79453e1bd2942353c8a15f3942352aa3baa3b`의 완료만 원 캠페인 cutoff 뒤에 진행할 수 있다. `scripts/editorial005-completion.mjs`는 정확한 manifest·은행·종결 대장 바이트와 양쪽 실제 동결 상태를 매 현재 경계에서 다시 확인한다. 역사적 시작·판정·종결·발행 시각, 신규 회차·신규 콘텐츠·Git 권한·기존 영구 중단은 바꾸지 않는다. 이 예외는 검증 통과 증거나 캐시가 아니며 다른 은행·기준·회차로 전이되지 않는다.
+
+정상 `writeReleaseDeliveryPair`의 내부 전체 의미 검증을 그대로 수행한다. 같은 입력의 별도 전체 `validate-release`를 바로 앞에서 반복하지 않는다. 수정된 정책·codec 계약의 좁은 검사와 ordinary build, 실제 포장·일반 도구 복원·독립 재구성·smoke 결과는 각각 구분하여 기록한다. 기존 99파일 증거는 정확히 변경되지 않은 계약에만 원 범위로 재사용하며 새 전체 suite PASS로 표시하지 않는다. codec은 최대 30분이며 관리 실행은 `ACCESSIBILITY_ARCHIVE_DEADLINE_MS`에 실제 고정 outer deadline을 전달하여 그 30초 전까지로 더 줄인다. deadline 갱신·자동 재시도·실패 후 다른 형식 우회는 허용하지 않는다.

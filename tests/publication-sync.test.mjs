@@ -1,18 +1,28 @@
-import test from 'node:test';
+import test, {after} from 'node:test';
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {loadRoundContext, validateRoundLedgers, validateReleaseLedger, regularCoverage} from '../scripts/validate-round.mjs';
-import {validateCampaignBaselines} from '../scripts/editorial-ledger.mjs';
-import {validatePublicationSynchronizations, resolveSynchronizedArtifacts} from '../scripts/publication-sync.mjs';
-import {validateSynchronizedDeliveryChain, validateOfflineContinuation} from '../scripts/download-fallback.mjs';
+import {loadRoundContext, regularCoverage} from '../scripts/validate-round.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..'),currentNow=Math.max(Date.now(),Date.parse('2026-10-04T12:00:00Z')),now=Date.parse('2026-10-04T12:00:00Z');
 const loaded=await loadRoundContext(root,null,{release:true,now:currentNow});
 const proof=loaded.synchronizations[0], clone=structuredClone;
+const authority=await createOwnedHistoricalAuthority({after});
+const {validateRoundLedgers,validateReleaseLedger}=authority.round;
+const {validatePublicationSynchronizations,resolveSynchronizedArtifacts}=authority.publication;
+const {validateSynchronizedDeliveryChain,validateOfflineContinuation}=authority.delivery;
 // This is the immutable006–008 synchronization fixture, not a moving latest release.
-const context={...loaded,ledgerSources:new Map([...loaded.ledgerSources].filter(([id])=>Number(id.slice(6))<=8)),synchronizations:[proof],offlineBases:new Map([...loaded.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:loaded.ledgers.filter(r=>Number(r.roundId.slice(6))<=8),manifest:proof.manifest};
+const context={...loaded,editorials:loaded.editorials.filter(e=>Date.parse(e.startedAt)<=now),ledgerSources:new Map([...loaded.ledgerSources].filter(([id])=>Number(id.slice(6))<=8)),synchronizations:[proof],offlineBases:new Map([...loaded.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:loaded.ledgers.filter(r=>Number(r.roundId.slice(6))<=8),manifest:proof.manifest};
+context.publicationSelections=authority.bindHistoricalSelection({...context,now});
+// Bind only this fixture's new successor raw bytes. Kept historical bytes are
+// checked against their original sources; caller-supplied missing/tampered maps
+// and every negative candidate field still reach the original production API.
+function validateCampaignBaselines(ledgers,options) {
+  const binding=authority.bindSyntheticRoundSources({historicalLedgers:context.ledgers,historicalSources:context.ledgerSources,syntheticLedgers:ledgers.filter(r=>r.roundId==='round-sync-test-009'),validationSources:options.ledgerSources,at:now});
+  return authority.editorial.validateCampaignBaselines(ledgers,{...options,...binding});
+}
 const index=JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/offline-chain.json')));
 function successor(start='2026-10-04T11:00:00Z') {
   const bank=JSON.parse(context.banks.get(proof.manifest.bankVersion).raw),coverage=regularCoverage(bank);

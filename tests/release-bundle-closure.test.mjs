@@ -1,4 +1,5 @@
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
+import {pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -28,7 +29,9 @@ async function fixture(t){
  await write(baseRoot,'docs/deliveries/release-backup-trust.json',json({schemaVersion:1,rootProofSha256:hash(await fs.readFile(path.join(baseRoot,'docs/deliveries/normal-backup-009.json'))),checkpoints:[]}));
  const bank8Raw=await fs.readFile(path.join(baseRoot,'data/releases/2026.10.04-regular.8/bank.json')),bank8=JSON.parse(bank8Raw),coverage=regularCoverage(bank8);
  const manifest8={schemaVersion:1,bankVersion:bank8.bankVersion,releasedAt:bank8.releasedAt,file:`releases/${bank8.bankVersion}/bank.json`,sha256:hash(bank8Raw),changeSummary:bank8.changeSummary,finalRelease:false};
- await write(baseRoot,'data/manifest.json',json(manifest8));await write(baseRoot,'PUBLICATION-MANIFEST.txt',paths.join('\n')+'\n');await retainHistoricalQuarantinePrefix(baseRoot,now);paths=parsePublicAllowlist(await fs.readFile(path.join(baseRoot,'PUBLICATION-MANIFEST.txt'),'utf8'));await fs.cp(baseRoot,workRoot,{recursive:true});
+ await write(baseRoot,'data/manifest.json',json(manifest8));await write(baseRoot,'PUBLICATION-MANIFEST.txt',paths.join('\n')+'\n');
+ // The through008 fixture predates later editorial inputs as well as later rounds.
+ await pruneFutureEditorialFixture(baseRoot,{temporaryRoot:dir,at:now});await retainHistoricalQuarantinePrefix(baseRoot,now);paths=parsePublicAllowlist(await fs.readFile(path.join(baseRoot,'PUBLICATION-MANIFEST.txt'),'utf8'));await fs.cp(baseRoot,workRoot,{recursive:true});
  const r=JSON.parse(await fs.readFile(path.join(baseRoot,'docs/rounds/round-ledger.template.json')));
  Object.assign(r,{roundId:'round-009',status:'closed',startedAt:'2026-10-04T08:54:06Z',decisionDeadline:'2026-10-04T10:30:00Z',closedAt:'2026-10-04T09:00:00Z',summary:'Synthetic regression fixture; no real acceptance, publication or delivery claim.',baseline:{sourceCommit:'50fd2807a0ff8fc2c10cbf2628f65d0ca53065c2',bankVersion:bank8.bankVersion,bankSha256:hash(bank8Raw),regularWrittenBySubject:coverage.regularWrittenBySubject,regularPractical:coverage.regularPractical},coverageAfter:coverage,noGapExplanation:'Synthetic regression examines artifact dependency closure, not real question coverage.',validation:[{check:'synthetic report dependency',result:'pass',summary:'Fixture only',reportPath}],manualStartException:{kind:'explicit_user_requested_next_round',requestedAt:'2026-10-04T08:54:06Z',previousRoundId:'round-008',previousClosedAt:'2026-10-04T07:56:30.743478+00:00',nextScheduledStart:'2026-10-04T11:00:00Z',reason:'Synthetic exact authorization fixture; no real content work.'}});
  const bank9={...bank8,bankVersion:'2026.10.04-regular.9',roundId:r.roundId,releasedAt:r.closedAt,changeSummary:'Synthetic packaging regression with no content additions.'},bank9Raw=json(bank9);

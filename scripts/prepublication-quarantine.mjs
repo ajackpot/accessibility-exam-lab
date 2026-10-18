@@ -1,3 +1,4 @@
+import {currentCutoffBlocks} from './editorial005-completion.mjs';
 /** Prospective first-release exclusions. Never changes review decisions or repairs content. */
 import fs from 'node:fs/promises';
 import {AsyncLocalStorage} from 'node:async_hooks';
@@ -233,7 +234,7 @@ export function validateQuarantineCampaign(ledgers,{banks=new Map(),ledgerSource
       if(!source||source.campaignId!==a.campaignId)fail('missing original source round in campaign');
       if(quarantineDecisionHash(source)!==a.sourceDecisionSha256)fail('original source closure or terminal decision history changed');
       if(now!==null&&(!Number.isFinite(now)||now<time(a.recordedAt)))fail('future audit cannot authorize an earlier release');
-      if(now!==null&&(now>=FREEZE_AT||publicationState?.finalized||manifest?.finalRelease))fail('current freeze or cutoff blocks quarantine eligibility');
+      if(now!==null&&(currentCutoffBlocks(now,{manifest,publicationState})||publicationState?.finalized||manifest?.finalRelease))fail('current freeze or cutoff blocks quarantine eligibility');
       if(time(a.boundary.observedAt)<Date.parse(source.startedAt))fail('boundary observation predates this round');
       for(const f of a.boundary.priorFiles){
         let raw;

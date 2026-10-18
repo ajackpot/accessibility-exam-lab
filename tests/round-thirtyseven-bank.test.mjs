@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import * as d from '../src/domain.js';
 import * as w from '../src/workflows.js';
-import {exportBackup,parseBackup} from '../src/backup.js';
+import {exportBackup,parseBackup,validateSession} from '../src/backup.js';
 import {nextScheduledRoundAt,validateJsonSchema} from '../scripts/validate-round.mjs';
 import {assertNoEvidenceLossContent} from '../scripts/evidence-loss-block.mjs';
 import {assertNoQuarantinedContent} from '../scripts/prepublication-quarantine.mjs';
@@ -90,15 +90,28 @@ test('round037 written and practical presentations shuffle by stable IDs and gra
  assert.equal(JSON.stringify(bank),serialized);
 });
 
+// Exact historical item snapshots remain valid even when fresh selection excludes
+// an item. This is a synthetic saved-session fixture, not a newly eligible item
+// or evidence of actual past execution. Keep all original clocks and question bytes.
+function prepareSnapshotFixture(q,config,tag){
+ const scoped={...bank,questions:[q]};
+ if(d.isNewSessionQuestion(bank,q))return d.prepareSession(scoped,config,[],97,tag);
+ assert.equal(d.isPublishedQuestion(bank,q),true,'The stored fixture must still be valid published historical content');
+ assert.throws(()=>d.prepareSession(scoped,config,[],97,tag),e=>e.code==='INSUFFICIENT');
+ const envelope=d.prepareSession(bank,config,[],97,tag);
+ const item={...d.presentQuestion(bank,q,config.optionCount,d.rng(97),`${tag}:1`),previouslyExposed:false};
+ return validateSession({...envelope,items:[item]});
+}
+
 test('round037 snapshots, exact user text, timers and AI disclosure remain unchanged by new data',async()=>{
  for(const q of added)for(const optionCount of q.type==='written'?q.supportedOptionCounts:[5]){
-  const cfg=w.practiceConfig(q.type,{count:1,subjectId:q.subjectId,optionCount});let s=d.startSession(d.prepareSession({...bank,questions:[q]},cfg,[],97,q.questionId+'-qa-'+optionCount),1000);
+  const cfg=w.practiceConfig(q.type,{count:1,subjectId:q.subjectId,optionCount});let s=d.startSession(prepareSnapshotFixture(q,cfg,q.questionId+'-qa-'+optionCount),1000);
   const item=s.items[0],snapshot=JSON.stringify(item),sha=await d.snapshotHash(item),prose='  원문\n Ａ 한글 <script>텍스트</script>  ';
   assert(!d.canShowExplanation(s,item));if(q.type==='practical')assert.throws(()=>d.createPrompt(s,item,{includeReference:true}));
   s=d.setAnswer(s,item.instanceId,q.type==='practical'?{...answer(item),freeResponse:prose}:answer(item),1001);
   if(q.type==='practical'){const prompt=d.createPrompt(s,item,{includeReference:false});assert(prompt.includes(prose));assert(!prompt.includes('고정 답안 참고 키 시작'));}
   s=d.confirmAnswer(s,item.instanceId,1002);assert.deepEqual(d.confirmAnswer(s,item.instanceId,1003),s);const restored=parseBackup(exportBackup([s])).sessions[0];assert.equal(JSON.stringify(restored),JSON.stringify(s));assert.equal(JSON.stringify(restored.items[0]),snapshot);assert.equal(await d.snapshotHash(restored.items[0]),sha);
-  let timed=d.startSession(d.prepareSession({...bank,questions:[q]},{...cfg,mode:'timed',minutes:1},[],97,q.questionId+'-timed-'+optionCount),1000);timed=d.setAnswer(timed,timed.items[0].instanceId,answer(timed.items[0]),1001);if(q.type==='practical')for(const includeReference of [true,false])assert.throws(()=>d.createPrompt(timed,timed.items[0],{includeReference}));
+  let timed=d.startSession(prepareSnapshotFixture(q,{...cfg,mode:'timed',minutes:1},q.questionId+'-timed-'+optionCount),1000);timed=d.setAnswer(timed,timed.items[0].instanceId,answer(timed.items[0]),1001);if(q.type==='practical')for(const includeReference of [true,false])assert.throws(()=>d.createPrompt(timed,timed.items[0],{includeReference}));
   const changed=d.convertToUntimed(timed,q.questionId+'-untimed-'+optionCount,1002);assert.deepEqual(changed.next.items,timed.items);assert.deepEqual(changed.next.answers,timed.answers);const expired=d.finalize(timed,'expired',61001);assert.equal(expired.endedAt,timed.expiresAt);assert.deepEqual(d.finalize(expired,'expired',99999),expired);
  }
 });

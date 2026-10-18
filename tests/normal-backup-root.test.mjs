@@ -6,6 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
+import {useEmptySyntheticSelectionPrefix} from './selection-fixtures.mjs';
 import {inspectNormalBackupRootProof,validateNormalBackupRootDependencies,proposeNormalBackupRootRegistration,prepareNormalBackupRoot} from '../scripts/normal-backup-root.mjs';
 const root=path.resolve(import.meta.dirname,'..'),H=b=>createHash('sha256').update(b).digest('hex'),J=x=>JSON.stringify(x,null,2)+'\n',clone=structuredClone;
 function fixture(){
@@ -57,10 +58,15 @@ test('modern dependency loss and self-pinned registries are rejected without alt
 test('isolated reviewed authority loads a root and fails closed for late or corrupted successors',async t=>{
  const tmp=await fs.mkdtemp(path.join(os.tmpdir(),'normal-root-authority-'));t.after(()=>fs.rm(tmp,{recursive:true,force:true}));const write=async(p,raw)=>{await fs.mkdir(path.dirname(path.join(tmp,p)),{recursive:true});await fs.writeFile(path.join(tmp,p),raw);};
  for(const folder of ['scripts','src'])await fs.cp(path.join(root,folder),path.join(tmp,folder),{recursive:true});await write('package.json',await fs.readFile(path.join(root,'package.json')));
+ // Imported publication helpers read this exact schema before fixture API evaluation.
+ await write('docs/corrections/editorial-ledger.schema.json',await fs.readFile(path.join(root,'docs/corrections/editorial-ledger.schema.json')));
  for(const p of ['docs/deliveries/release-backup-trust.json','docs/deliveries/offline-chain-trust.json','docs/deliveries/normal-backup-chain-trust.json','docs/quarantines/trust.json','docs/release-blocks/trust.json'])await write(p,await fs.readFile(path.join(root,p)));
  const {proof,source,files,remote}=fixture(),proofRaw=Buffer.from(J(proof)),registeredAt=new Date().toISOString(),pin={roundId:proof.roundId,path:`docs/deliveries/normal-roots/${proof.roundId}.json`,sha256:H(proofRaw),sourceAnchorSha256:H(J(proof.sourceAnchor)),continuationAnchorSha256:H(J(proof.continuationAnchor)),registeredAt,eligibleAt:registeredAt},trust={schemaVersion:1,kind:'reviewed_normal_release_roots',roots:[pin]};
  for(const [p,raw]of files)await write(p,raw);await write('docs/analysis/synthetic.md',remote.get('docs/analysis/synthetic.md'));await write(pin.path,proofRaw);await write('docs/deliveries/normal-backup-root-trust.json',J(trust));
  const names=[...files.keys(),'docs/analysis/synthetic.md','scripts/normal-backup-root.mjs','scripts/validate-round.mjs','scripts/bank-io.mjs','docs/deliveries/normal-backup-root-trust.json',pin.path];await write('PUBLICATION-MANIFEST.txt',names.join('\n')+'\n');
+ // The wholly synthetic source has no real041 selection history. Project only
+ // this owned copy's selection pin before its first module import.
+ await useEmptySyntheticSelectionPrefix(tmp);
  const api=await import(pathToFileURL(path.join(tmp,'scripts/normal-backup-root.mjs'))),context={now:Date.now(),manifest:{finalRelease:false},publicationState:{finalized:false},ledgers:[source],editorials:[],ledgerSources:new Map([[source.roundId,Buffer.from(J(source))]]),banks:new Map([['synthetic.delivered',{raw:Buffer.from(files.get('data/releases/synthetic.delivered/bank.json'))}]]),offlineBases:new Map(),deliveryCheckpointSources:new Map()};
  const loaded=await api.loadNormalBackupRoots(tmp,context);assert.equal(loaded.roots.size,1);assert.equal(loaded.offlineBases.get(proof.deltaArtifactSha256).baseCommit,proof.continuationAnchor.baseCommit);assert.equal(loaded.offlineBases.get(proof.deltaArtifactSha256).eligibleAt,pin.eligibleAt);assert.equal(context.offlineBases.size,0);assert.equal((await api.loadNormalBackupRoots(tmp,{...context,now:Date.parse(registeredAt)-1})).offlineBases.size,0);
  const snapshot=await Promise.all(names.map(async p=>({path:p,raw:await fs.readFile(path.join(tmp,p))})));assert.equal(api.validateNormalBackupRootSnapshot(snapshot).roots,1);

@@ -1,3 +1,4 @@
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -24,7 +25,7 @@ function fixture() {
   Object.assign(r,{roundId:'round-offline-007',status:'closed',startedAt:'2026-10-04T03:05:00Z',decisionDeadline:'2026-10-04T06:30:00Z',closedAt:'2026-10-04T03:10:00Z',summary:'Synthetic offline campaign regression fixture, never a publication.',noGapExplanation:'The synthetic fixture checks offline predecessor integrity without adding learning goals.'});
   r.baseline={sourceCommit:evidence.baseCommit,bankVersion:bank.bankVersion,bankSha256:evidence.bankSha256,regularWrittenBySubject:regularCoverage(bank).regularWrittenBySubject,regularPractical:regularCoverage(bank).regularPractical,offlinePredecessor:{artifactSha256:artifact,manifestSha256:manifestHash,ledgerSha256:evidence.ledgerSha256,roundId:source.roundId}};
   r.coverageAfter=clone(source.coverageAfter);ledgers.push(r);
-  return {ledgers,r,source,bank,evidence,options:{banks:new Map(allBanks),editorials:clone(editorials),offlineBases:new Map([[artifact,evidence]]),ledgerSources:new Map(sources),now}};
+  return {ledgers,r,source,bank,evidence,options:{banks:new Map(allBanks),editorials:clone(editorials.filter(e=>Date.parse(e.startedAt)<=now)),offlineBases:new Map([[artifact,evidence]]),ledgerSources:new Map(sources),now}};
 }
 function check(f){return validateRoundLedgers(f.ledgers,f.options);}
 function pass(f){const result=check(f);assert.equal(result.ok,true,result.errors.join('\n'));}
@@ -91,7 +92,10 @@ test('offline evidence does not relax final freeze, deadline, or review history 
   const g=fixture();g.r.decisionDeadline='2026-10-04T07:00:01Z';fail(g,/four hours|next round/);
   const h=fixture();h.source.candidates[0].attemptCount=4;fail(h,/maximum 3|immutable decision\/review history/);
 });
-test('offline context rejects untrusted index shape and traversal before consulting evidence',async()=>{
+test('offline context rejects untrusted index shape and traversal before consulting evidence',async t=>{
+  // This malformed pre-selection index owns its copied code authority; the
+  // actual current loader and its installed selection pin remain unchanged.
+  const {round:{loadRoundContext}}=await createOwnedHistoricalAuthority(t);
   const temp=await fs.mkdtemp(path.join(os.tmpdir(),'offline-context-'));
   try {
     await fs.mkdir(path.join(temp,'docs/rounds'),{recursive:true});await fs.mkdir(path.join(temp,'docs/deliveries'),{recursive:true});await fs.mkdir(path.join(temp,'data'),{recursive:true});

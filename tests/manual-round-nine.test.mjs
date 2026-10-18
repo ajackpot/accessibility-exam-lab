@@ -1,13 +1,21 @@
-import test from 'node:test';
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {loadRoundContext,validateRoundLedgers,regularCoverage,nextScheduledRoundAt} from '../scripts/validate-round.mjs';
+import {loadRoundContext,regularCoverage,nextScheduledRoundAt} from '../scripts/validate-round.mjs';
 const root=path.resolve(import.meta.dirname,'..'),now=Date.parse('2026-10-04T09:00:00Z');
 const all=await loadRoundContext(root,null,{release:true});
 // Historical scheduling fixtures stop at008; later real delivery evidence is not their source.
-const context={...all,offlineBases:new Map([...all.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:all.ledgers.filter(r=>Number(r.roundId.slice(6))<=8)};
+const context={...all,offlineBases:new Map([...all.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:all.ledgers.filter(r=>Number(r.roundId.slice(6))<=8),editorials:all.editorials.filter(e=>Date.parse(e.startedAt)<=now),synchronizations:all.synchronizations.filter(s=>Date.parse(s.verifiedAt)<=now)};
+const fixtureAuthority=await createOwnedHistoricalAuthority({after});
+function validateRoundLedgers(ledgers,options={}) {
+ const historicalIds=new Set(context.ledgers.map(l=>l.roundId));
+ const binding=fixtureAuthority.bindSyntheticRoundSources({historicalLedgers:context.ledgers,historicalSources:context.ledgerSources,syntheticLedgers:ledgers.filter(l=>!historicalIds.has(l.roundId)),validationSources:options.ledgerSources??new Map(),at:now});
+ return fixtureAuthority.round.validateRoundLedgers(ledgers,{...options,...binding});
+}
+
 const template=JSON.parse(await fs.readFile(path.join(root,'docs/rounds/round-ledger.template.json')));
 const raw=context.banks.get('2026.10.04-regular.8').raw,coverage=regularCoverage(JSON.parse(raw));
 function manual(){

@@ -1,3 +1,4 @@
+import {pruneFutureEditorialFixture,bindSyntheticRoundSources} from './historical-authority-fixtures.mjs';
 import {encodeSevenZip,decodeSevenZip,archiveSignature} from '../scripts/archive-format.mjs';
 import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
 /** Synthetic archives/receipts only. No network, external attachment or publication. */
@@ -32,6 +33,7 @@ test('independent public anchor carries delivered018 into synthetic019 and020 wi
  await pruneHistoricalFixtureHistory(source,{temporaryRoot:tmp,maxRound:18,at:Date.now(),checkpoints:'none'});
  await write(source,trust,J({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
  await retainHistoricalQuarantinePrefix(source,Date.now());
+ await pruneFutureEditorialFixture(source,{temporaryRoot:tmp,at:Date.now()});
  const source18BankRaw=await read(source,'data/releases/2026.10.05-regular.18/bank.json'),source18Bank=JSON.parse(source18BankRaw);
  await write(source,'data/manifest.json',J({schemaVersion:1,bankVersion:source18Bank.bankVersion,releasedAt:source18Bank.releasedAt,file:`releases/${source18Bank.bankVersion}/bank.json`,sha256:H(source18BankRaw),changeSummary:source18Bank.changeSummary,finalRelease:false}));
 
@@ -112,7 +114,8 @@ test('independent public anchor carries delivered018 into synthetic019 and020 wi
  await assert.rejects(v.loadRoundContext(final,null,{release:true,now:FREEZE_AT}),/cutoff|freeze/i);
  const next=JSON.parse(await read(final,'docs/rounds/round-ledger.template.json')),tip=c.offlineBases.get(prior.proof.deltaArtifactSha256),tipBank=JSON.parse(c.banks.get(tip.bankVersion).raw);
  Object.assign(next,{roundId:'round-021',status:'closed',startedAt:'2026-10-06T03:00:00Z',decisionDeadline:'2026-10-06T06:30:00Z',closedAt:'2026-10-06T03:01:00Z',summary:'Synthetic undelivered successor baseline check.',noGapExplanation:'Synthetic only.'});next.baseline={sourceCommit:tip.baseCommit,bankVersion:tip.bankVersion,bankSha256:tip.bankSha256,regularWrittenBySubject:v.regularCoverage(tipBank).regularWrittenBySubject,regularPractical:v.regularCoverage(tipBank).regularPractical,offlinePredecessor:{artifactSha256:prior.proof.deltaArtifactSha256,manifestSha256:tip.manifestSha256,ledgerSha256:tip.ledgerSha256,roundId:tip.roundId}};next.coverageAfter=structuredClone(c.ledgers.at(-1).coverageAfter);
- const checkNext=r=>v.validateRoundLedgers([...c.ledgers,r],{...c,availableFiles:new Set([...c.availableFiles,'docs/rounds/round-021.md']),now:Date.parse('2026-10-06T03:02:00Z')});const validNext=checkNext(next);assert.equal(validNext.ok,true,validNext.errors.join('\n'));
+ const selection=await api(final,'publication-selection');
+ const checkNext=r=>{const binding=bindSyntheticRoundSources(selection,{historicalLedgers:c.ledgers,historicalSources:c.ledgerSources,syntheticLedgers:[r],at:Date.parse('2026-10-06T03:02:00Z')});return v.validateRoundLedgers([...c.ledgers,r],{...c,...binding,availableFiles:new Set([...c.availableFiles,'docs/rounds/round-021.md']),now:Date.parse('2026-10-06T03:02:00Z')});};const validNext=checkNext(next);assert.equal(validNext.ok,true,validNext.errors.join('\n'));
  for(const [label,mutate] of [
   ['stale successor predecessor',r=>{const b=c.offlineBases.get(proposals[0].proof.deltaArtifactSha256);r.baseline={...r.baseline,bankVersion:b.bankVersion,bankSha256:b.bankSha256,offlinePredecessor:{artifactSha256:proposals[0].proof.deltaArtifactSha256,manifestSha256:b.manifestSha256,ledgerSha256:b.ledgerSha256,roundId:b.roundId}};}],
   ['foreign successor predecessor',r=>{r.baseline.offlinePredecessor.artifactSha256='f'.repeat(64);}],

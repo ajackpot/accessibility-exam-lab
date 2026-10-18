@@ -1,3 +1,4 @@
+import {pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 /** Synthetic authorities exist only in disposable test copies; no real pin writes. */
 import test from 'node:test';
@@ -33,8 +34,10 @@ test('normal frozen-ledger publication has independent authority and never inven
  const fixtureRead=p=>fs.readFile(path.join(dir,p)),future=[];
  for(const name of await fs.readdir(path.join(dir,'docs/rounds'))){const match=name.match(/^round-(\d+)\.(?:json|md)$/);if(match&&Number(match[1])>27)future.push('docs/rounds/'+name);}
  for(const version of await fs.readdir(path.join(dir,'data/releases'))){const match=version.match(/-regular\.(\d+)$/);if(match&&Number(match[1])>27)future.push('data/releases/'+version+'/bank.json');}
- for(const file of future)await fs.rm(path.join(dir,file));
+ // Earlier historical projection may already remove an explicitly listed future bank.
+ for(const file of future)await fs.rm(path.join(dir,file),{force:true});
  const removed=new Set(future);await fs.writeFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),(await fixtureRead('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(file=>!removed.has(file.trim())).join('\n'));
+ await pruneFutureEditorialFixture(dir,{temporaryRoot:dir,at});
  assert.ok((await fs.readdir(path.join(dir,'docs/rounds'))).every(name=>{const match=name.match(/^round-(\d+)\.(?:json|md)$/);return !match||Number(match[1])<=27;}));
  const bank=JSON.parse(loaded.banks.get(prior.manifest.bankVersion).raw);bank.bankVersion='synthetic-normal-publication';bank.releasedAt='2026-10-07T11:01:00Z';const bankRaw=J(bank),bankPath=`data/releases/${bank.bankVersion}/bank.json`;
  const ledger=structuredClone(loaded.ledgers.find(l=>l.roundId==='round-027'));

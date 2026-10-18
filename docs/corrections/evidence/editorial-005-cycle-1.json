@@ -1,0 +1,232 @@
+{
+  "evidenceSchemaVersion": 1,
+  "purpose": "immutable_editorial_review_input",
+  "correctionRoundId": "editorial-005",
+  "cycle": 1,
+  "items": [
+    {
+      "correctionId": "e005-control-diagonal-explanation",
+      "question": {
+        "questionId": "r003-standards-s1-w04",
+        "revision": 2,
+        "templateId": "r003-standards-template-recommended-control-diagonal",
+        "learningGoalRevision": 1,
+        "type": "written",
+        "subjectId": "s1",
+        "topicIds": [
+          "r003-standards-topic-recommended-control-diagonal"
+        ],
+        "stem": "KWCAG 2.2의 조작 가능 항목에서 제시하는 콘트롤 크기 권고를 적용하려고 한다. 측정 대상과 권고 기준을 바르게 연결한 것을 고르시오.",
+        "notes": [],
+        "explanation": "콘트롤 크기는 대각선 방향의 길이를 기준으로 하며 6.0mm 이상으로 제공하는 것이 바람직하다. 안쪽 여백에 관한 별도 권고와 구별하고, 이 크기 권고를 강제 최소치로 해석하지 않는다.",
+        "sourceRefs": [
+          "r003-standards-src-control-size"
+        ],
+        "verificationStatus": "published",
+        "testOnly": false,
+        "contentStage": "regular",
+        "standardVersion": "KS X OT0003:2022 / 2022-12-28",
+        "difficulty": "적용",
+        "optionMode": "exclusive",
+        "supportedOptionCounts": [
+          4,
+          5
+        ],
+        "links": [
+          {
+            "optionId": "r003-standards-s1-w04-o1",
+            "optionRevision": 1,
+            "role": "correct",
+            "compatibilitySetId": "r003-standards-s1-w04-set"
+          },
+          {
+            "optionId": "r003-standards-s1-w04-o2",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r003-standards-s1-w04-set"
+          },
+          {
+            "optionId": "r003-standards-s1-w04-o3",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r003-standards-s1-w04-set"
+          },
+          {
+            "optionId": "r003-standards-s1-w04-o4",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r003-standards-s1-w04-set"
+          },
+          {
+            "optionId": "r003-standards-s1-w04-o5",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r003-standards-s1-w04-set"
+          }
+        ],
+        "reviewNote": "자체 제작 비공식 일반 학습 문항. round-003 검토 1회차에서 독립 풀이·1차 출처·단일 정답/반례·문안/접근성·자동 구조 검사를 통과했다. 공개 판정과 근거: docs/rounds/round-003.json (r003-standards-s1-w04, 개정 1). 편집 정정 개정 2의 범위와 검토 기록: docs/corrections/editorial-005.json (문항 해설만 보완)."
+      },
+      "options": [
+        {
+          "optionId": "r003-standards-s1-w04-o1",
+          "revision": 1,
+          "content": "대각선 길이 6.0mm 이상",
+          "explanation": "6.1.3의 콘트롤 크기 설명은 대각선 방향의 길이6.0mm 이상을 바람직한 기준으로 제시한다.",
+          "memberQuestionIds": [
+            "r003-standards-s1-w04"
+          ]
+        },
+        {
+          "optionId": "r003-standards-s1-w04-o2",
+          "revision": 1,
+          "content": "가로 길이 6.0mm 이상",
+          "explanation": "가로 길이가 아니라 대각선 길이를 측정하도록 기술한다.",
+          "memberQuestionIds": [
+            "r003-standards-s1-w04"
+          ]
+        },
+        {
+          "optionId": "r003-standards-s1-w04-o3",
+          "revision": 1,
+          "content": "세로 길이 6.0mm 이상",
+          "explanation": "세로 길이에 대한 독립적인6.0mm 권고로 바꾸어 읽으면 원문과 다르다.",
+          "memberQuestionIds": [
+            "r003-standards-s1-w04"
+          ]
+        },
+        {
+          "optionId": "r003-standards-s1-w04-o4",
+          "revision": 1,
+          "content": "둘레 길이 6.0mm 이상",
+          "explanation": "둘레는 테두리 전체 길이이며 해당 권고의 측정량이 아니다.",
+          "memberQuestionIds": [
+            "r003-standards-s1-w04"
+          ]
+        },
+        {
+          "optionId": "r003-standards-s1-w04-o5",
+          "revision": 1,
+          "content": "안쪽 여백 6.0mm 이상",
+          "explanation": "콘트롤 안쪽 여백에 대한 설명과 전체 크기의 대각선 권고를 혼동한 것이다.",
+          "memberQuestionIds": [
+            "r003-standards-s1-w04"
+          ]
+        }
+      ]
+    },
+    {
+      "correctionId": "e005-inner-margin-explanation",
+      "question": {
+        "questionId": "r006-standards-s1-w02",
+        "revision": 4,
+        "templateId": "r006-standards-template-recommended-nonreactive-inner-margin",
+        "learningGoalId": "r006-standards-template-recommended-nonreactive-inner-margin",
+        "learningGoalRevision": 1,
+        "type": "written",
+        "subjectId": "s1",
+        "topicIds": [
+          "r006-standards-topic-recommended-nonreactive-inner-margin"
+        ],
+        "stem": "KWCAG 2.2의 ‘조작 가능’에서 콘트롤의 안쪽 여백을 설계할 때 권고하는 위치·크기·반응 방식을 고르시오.",
+        "notes": [
+          "여백의 반응 여부는 마우스 등 위치 지정 도구의 조작을 기준으로 판단한다."
+        ],
+        "explanation": "링크·사용자 입력·기타 콘트롤은 테두리 안쪽으로 1픽셀 이상의 여백을 두고, 그 여백에서는 마우스 등 위치 지정 도구의 조작에 반응하지 않도록 구현하는 것이 바람직하다. 이는 콘트롤 전체 크기의 대각선 길이 권고와 별개이며, 여백 권고를 의무 수치로 해석하지 않는다.",
+        "sourceRefs": [
+          "r006-standards-src-control-inner-margin",
+          "r006-standards-src-syllabus-written"
+        ],
+        "verificationStatus": "published",
+        "testOnly": false,
+        "contentStage": "regular",
+        "standardVersion": "KS X OT0003:2022 / 2022-12-28 개정",
+        "difficulty": "적용",
+        "optionMode": "exclusive",
+        "supportedOptionCounts": [
+          4,
+          5
+        ],
+        "links": [
+          {
+            "optionId": "r006-standards-s1-w02-o01",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r006-standards-s1-w02-set"
+          },
+          {
+            "optionId": "r006-standards-s1-w02-o02",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r006-standards-s1-w02-set"
+          },
+          {
+            "optionId": "r006-standards-s1-w02-o03",
+            "optionRevision": 1,
+            "role": "correct",
+            "compatibilitySetId": "r006-standards-s1-w02-set"
+          },
+          {
+            "optionId": "r006-standards-s1-w02-o04",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r006-standards-s1-w02-set"
+          },
+          {
+            "optionId": "r006-standards-s1-w02-o05",
+            "optionRevision": 1,
+            "role": "distractor",
+            "compatibilitySetId": "r006-standards-s1-w02-set"
+          }
+        ],
+        "reviewNote": "자체 제작 비공식 일반 학습 문항. round-006 검토 3회차에서 독립 풀이·1차 출처·단일 정답/반례·문안/접근성·자동 구조 검사를 통과했다. 공개 판정과 근거: docs/rounds/round-006.json (r006-standards-s1-w02, 개정 3). 편집 정정 개정 4의 범위와 검토 기록: docs/corrections/editorial-005.json (문항 해설만 보완)."
+      },
+      "options": [
+        {
+          "optionId": "r006-standards-s1-w02-o01",
+          "revision": 1,
+          "content": "테두리 바깥쪽에 1픽셀 이상 두고, 그 여백은 조작에 반응하지 않게 한다.",
+          "explanation": "1픽셀 수치는 같지만 표준이 말하는 위치는 테두리 바깥쪽이 아니라 안쪽이다.",
+          "memberQuestionIds": [
+            "r006-standards-s1-w02"
+          ]
+        },
+        {
+          "optionId": "r006-standards-s1-w02-o02",
+          "revision": 1,
+          "content": "테두리 안쪽에 1픽셀 이상 두고, 그 여백도 콘트롤 조작에 반응하게 한다.",
+          "explanation": "위치와 크기는 일치하지만 해당 여백에서는 위치 지정 도구 조작에 반응하지 않게 하는 권고와 다르다.",
+          "memberQuestionIds": [
+            "r006-standards-s1-w02"
+          ]
+        },
+        {
+          "optionId": "r006-standards-s1-w02-o03",
+          "revision": 1,
+          "content": "테두리 안쪽에 1픽셀 이상 두고, 그 여백은 조작에 반응하지 않게 한다.",
+          "explanation": "안쪽 여백의 위치·최소 크기·비반응 조건을 함께 반영한다.",
+          "memberQuestionIds": [
+            "r006-standards-s1-w02"
+          ]
+        },
+        {
+          "optionId": "r006-standards-s1-w02-o04",
+          "revision": 1,
+          "content": "테두리 바깥쪽에 6.0mm 이상 두고, 그 여백은 조작에 반응하지 않게 한다.",
+          "explanation": "6.0mm는 콘트롤 대각선 길이 권고로, 바깥 여백을 정하는 수치가 아니다.",
+          "memberQuestionIds": [
+            "r006-standards-s1-w02"
+          ]
+        },
+        {
+          "optionId": "r006-standards-s1-w02-o05",
+          "revision": 1,
+          "content": "테두리 안쪽에 6.0mm 이상 두고, 그 여백도 콘트롤 조작에 반응하게 한다.",
+          "explanation": "대각선 크기를 안쪽 여백과 혼동했고 여백의 반응 조건도 다르다.",
+          "memberQuestionIds": [
+            "r006-standards-s1-w02"
+          ]
+        }
+      ]
+    }
+  ]
+}

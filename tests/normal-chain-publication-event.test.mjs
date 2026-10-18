@@ -95,6 +95,11 @@ test('early original-window transition source: public036-shaped synthetic regres
  const dir=fs.mkdtempSync(path.join(tmpdir(),'synthetic-early-transition-'));
  t.after(()=>fs.rmSync(dir,{recursive:true,force:true}));
  for(const p of ['scripts','src','docs','package.json'])fs.cpSync(path.join(root,p),path.join(dir,p),{recursive:true});
+ // Keep the installed selection exclusion authority intact. Its legacy bank
+ // transition guard reads this exact immutable source of denial fingerprints.
+ const exclusionBankPath='data/releases/2026.10.10-regular.41/bank.json';
+ fs.mkdirSync(path.dirname(path.join(dir,exclusionBankPath)),{recursive:true});
+ fs.writeFileSync(path.join(dir,exclusionBankPath),read(exclusionBankPath),{flag:'wx'});
  const clone=structuredClone,trustPath='docs/deliveries/normal-backup-chain-trust.json',newPath='docs/deliveries/normal-chains/round-032/round-036.json';
  const public35=allEvents.find(e=>e.syncId==='reconciled-033-035');assert.ok(public35,'exact public035 event required');
  const originalTrust=JSON.parse(read(trustPath)),pastPins=originalTrust.checkpoints.filter(p=>p.rootProofSha256!==rootPin.sha256||['round-033','round-034','round-035'].includes(p.roundId));

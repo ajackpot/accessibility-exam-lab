@@ -1,3 +1,4 @@
+import {currentCutoffBlocks} from './editorial005-completion.mjs';
 /** Denial-only reservations after evidence loss. Never certifies review, delivery or publication. */
 import fs from 'node:fs/promises';
 import {readFileSync} from 'node:fs';
@@ -87,7 +88,7 @@ export function validateEvidenceLossCampaign(ledgers,{banks=new Map(),ledgerSour
    const matches=ledgers.filter(r=>r.roundId===e.roundId),raw=ledgerSources.get(e.roundId);
    if(matches.length!==1||!raw||hash(raw)!==e.sourceLedger.sha256||!equal(matches[0],JSON.parse(raw)))fail('missing or changed full original source ledger');
    const r=matches[0];if(r.campaignId!==e.campaignId||r.status!=='closed'||Date.parse(e.recordedAt)<Date.parse(r.closedAt)||r.publication?.status!=='not_attempted'||r.publication?.verifiedAt!==null||r.publication.bankVersion!==e.reservedBank.bankVersion||r.publication.bankSha256!==e.reservedBank.sha256||r.candidates.length!==e.targets.length)fail('source reservation differs from original terminal ledger');
-   if(now!==null&&(now<Date.parse(e.recordedAt)||now>=FREEZE_AT||manifest?.finalRelease||publicationState?.finalized))fail('current time or freeze blocks reservation-only continuation');
+   if(now!==null&&(now<Date.parse(e.recordedAt)||currentCutoffBlocks(now,{manifest,publicationState})||manifest?.finalRelease||publicationState?.finalized))fail('current time or freeze blocks reservation-only continuation');
    for(const t of e.targets){const c=r.candidates.find(c=>c.candidateId===t.candidateId);if(!c||!equal(c.cycles.map(s=>s.revision),t.contentStates.map(s=>s.revision))||quarantineHash(c)!==t.candidateHistorySha256||['questionId','learningGoalId','templateId','lineageId','revision','decision','attemptCount'].some(k=>c[k]!==t[k]))fail('candidate identity or complete review history changed');}
    for(const other of ledgers){if(other!==r&&(other.candidates||[]).some(c=>e.targets.some(t=>identity(c,t)&&!(t.decision==='rejected'&&c.candidateId!==t.candidateId&&c.reopenCount===1&&c.reopeningEvidence?.length&&c.priorCandidateRefs?.some(ref=>ref.roundId===e.roundId&&ref.candidateId===t.candidateId)))))fail('reserved goal, template, lineage or candidate reintroduced');if(other.baseline?.bankVersion===e.reservedBank.bankVersion||other.baseline?.offlinePredecessor?.roundId===e.roundId)fail('blocked source cannot be a baseline');if(other!==r&&other.publication?.bankVersion===e.reservedBank.bankVersion)fail('reserved bankVersion reused');}
    if(hash(readFileSync(path.join(ROOT,e.incidentReport.path)))!==e.incidentReport.sha256)fail('missing or changed incident report');

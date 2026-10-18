@@ -13,7 +13,7 @@ async function inventory(root){return Promise.all(parsePublicAllowlist(await fs.
 async function fixture(t){
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'release-bundle-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));const baseRoot=path.join(dir,'base'),workRoot=path.join(dir,'work');await fs.cp(root,baseRoot,{recursive:true});await fs.cp(root,workRoot,{recursive:true});await fs.writeFile(path.join(workRoot,'docs/RELEASE-BACKUP-TEST.txt'),'Synthetic packaging fixture, no publication claim.\n');await fs.appendFile(path.join(workRoot,'PUBLICATION-MANIFEST.txt'),'\ndocs/RELEASE-BACKUP-TEST.txt\n');
  const m=JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))),b=JSON.parse(await fs.readFile(path.join(root,'data',m.file)));
- return {baseRoot,workRoot,baseCommit:'50fd2807a0ff8fc2c10cbf2628f65d0ca53065c2',baseVerifiedAt:'2026-10-04T08:51:19.196Z',baseInventory:await inventory(baseRoot),reviewedInventory:await inventory(workRoot),roundId:b.roundId,deltaOutputPath:path.join(dir,'delta.zip'),completeOutputPath:path.join(dir,'complete.7z'),now:Date.now()};
+ return {baseRoot,workRoot,baseCommit:'50fd2807a0ff8fc2c10cbf2628f65d0ca53065c2',baseVerifiedAt:'2026-10-04T08:51:19.196Z',baseInventory:await inventory(baseRoot),reviewedInventory:await inventory(workRoot),roundId:b.editorialRoundId??b.roundId,deltaOutputPath:path.join(dir,'delta.zip'),completeOutputPath:path.join(dir,'complete.7z'),now:Date.now()};
 }
 test('normal release emits truthful exact delta/full pair without invented permission wait or deployment',async t=>{
  const f=await fixture(t),r=await writeReleaseDeliveryPair(f);assert.equal(r.status,'prepared_not_delivered');assert.equal(r.deliveryMode,'release_backup');assert.equal(r.completeManifest.deliveryMode,'release_backup');assert.equal(r.deltaManifest.newlyPublishedByPackaging,0);assert.deepEqual(r.completeManifest.prerequisiteArtifacts,[]);assert.equal(r.completeManifest.sourceRelease.deltaArtifactSha256,r.delta.sha256);assert.equal(r.deltaManifest.permissionDeadlineAt,undefined);assert.equal(r.deltaManifest.gitStoppedAt,undefined);
@@ -31,7 +31,7 @@ test('normal release refuses changed historical banks, removed public files and 
  const allow=await fs.readFile(path.join(f.workRoot,'PUBLICATION-MANIFEST.txt'),'utf8');await fs.writeFile(path.join(f.workRoot,'PUBLICATION-MANIFEST.txt'),allow.split('\n').filter(x=>x!=='style.css').join('\n'));f.reviewedInventory=await inventory(f.workRoot);await assert.rejects(writeReleaseDeliveryPair(f),/does not delete/);
 });
 test('normal release obeys current time, final cutoff, persistent freeze and exact release identity',async t=>{
- const f=await fixture(t);await assert.rejects(writeReleaseDeliveryPair({...f,now:FREEZE_AT}),/Invalid release/);await assert.rejects(writeReleaseDeliveryPair({...f,baseVerifiedAt:new Date(f.now+1000).toISOString()}),/Invalid release/);await assert.rejects(writeReleaseDeliveryPair({...f,roundId:'round-999'}),/Exact closed/);
+ const f=await fixture(t);await assert.rejects(writeReleaseDeliveryPair({...f,now:FREEZE_AT}),/Invalid release/);await assert.rejects(writeReleaseDeliveryPair({...f,baseVerifiedAt:new Date(f.now+1000).toISOString()}),/Invalid release/);await assert.rejects(writeReleaseDeliveryPair({...f,roundId:'round-999'}),/^Error: Exactly one release owner required$/);
  await fs.writeFile(path.join(f.workRoot,'data/publication-state.json'),'{"finalized":true}\n');f.reviewedInventory=await inventory(f.workRoot);await assert.rejects(writeReleaseDeliveryPair(f),/Persistent freeze/);
 });
 

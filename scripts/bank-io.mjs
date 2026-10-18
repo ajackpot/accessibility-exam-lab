@@ -1,3 +1,4 @@
+import {withEditorial005Completion,assertEditorial005CompletionInput} from './editorial005-completion.mjs';
 import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference,assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {assertNoEvidenceLossContent,loadEvidenceLossDependencies} from './evidence-loss-block.mjs';
 import fs from 'node:fs/promises';
@@ -8,6 +9,9 @@ import {readHistoricalExplanationBaseline} from './explanation-authoring.mjs';
 
 /** An ordinary build validates the currently selected release, never a seed fallback. */
 export async function readBankInput(root,input) {
+  return withEditorial005Completion({root},()=>{assertEditorial005CompletionInput(input);return readBankInputInWindow(root,input);});
+}
+async function readBankInputInWindow(root,input) {
   const publicationSelections=await loadPublicationSelections(root);
   // The root's current evidence registry is required even for an explicit bank input.
   let validator='';try{validator=await fs.readFile(path.join(root,'scripts/validate-round.mjs'),'utf8');}catch(error){if(error.code!=='ENOENT')throw error;}

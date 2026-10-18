@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {readSuccessor,projectRegistration385,syntheticSuccessor,writeExactFiles,assertExactFiles} from './successor-projection.mjs';
+import {readSuccessor,projectRegistration385,syntheticSuccessor,writeExactFiles,assertExactFiles,readEditorial005Source,projectEditorial005To395} from './successor-projection.mjs';
 import {regularCoverage as oracleCoverage} from './fixtures/public-main-9ae76b4/scripts/campaign-validation-primitives.mjs';
 import {fixture} from '../qa/fixture.mjs';
 
@@ -56,4 +56,47 @@ test('checkout reader excludes only root Git metadata; disposable maps and other
   await assert.rejects(assertExactFiles(dir,source));
   await fs.rename(path.join(dir,'.git'),path.join(dir,'unlisted.txt'));
   await assert.rejects(readSuccessor(dir));
+});
+
+// Current editorial source is authenticated separately; historical projections
+// below are never evidence that the new release or its archives were published.
+const editorialCurrent=await readEditorial005Source(root);
+test('exact editorial005 current source reverses to historical395 without mutating any current byte',()=>{
+  const before=[...editorialCurrent.files].map(([p,raw])=>[p,hash(raw)]);
+  const restored=projectEditorial005To395(editorialCurrent.files,editorialCurrent.directories);
+  assert.equal(editorialCurrent.files.size,401);assert.equal(restored.size,395);
+  assert.deepEqual([...restored.keys()].sort(),[...source.keys()].sort());
+  for(const [p,raw] of source)assert.deepEqual(restored.get(p),raw,p);
+  assert.deepEqual([...editorialCurrent.files].map(([p,raw])=>[p,hash(raw)]),before);
+  assert.deepEqual(projectRegistration385(restored),original);
+});
+test('editorial transition rejects every changed and added input plus unrelated production and historical drift',()=>{
+  const control=JSON.parse(editorialCurrent.files.get('tests/fixtures/editorial005-source-delta.json'));
+  const paths=new Set([...control.changes.map(x=>x.path),...control.additions,'src/domain.js','docs/rounds/round-041.json','data/releases/2026.10.12-editorial.4/bank.json','tests/fixtures/coverage-successor-delta.json','tests/fixtures/public-main-9ae76b4/src/domain.js']);
+  for(const p of paths){
+    const files=new Map(editorialCurrent.files),raw=Buffer.from(files.get(p));assert(raw.length>0);raw[raw.length-1]^=1;files.set(p,raw);
+    assert.throws(()=>projectEditorial005To395(files,editorialCurrent.directories),undefined,p);
+  }
+});
+test('editorial source rejects missing controls, unknown/case/unsafe entries and extra or missing directories',()=>{
+  for(const p of ['tests/fixtures/editorial005-source-delta.json','tests/fixtures/coverage-successor-delta.json','src/app.js','docs/corrections/editorial-005.json']){
+    const files=new Map(editorialCurrent.files);files.delete(p);assert.throws(()=>projectEditorial005To395(files,editorialCurrent.directories),undefined,p);
+  }
+  for(const p of ['src/undeclared.js','SRC/app.js','../escape.js','.git/config']){
+    const files=new Map(editorialCurrent.files);files.set(p,Buffer.from('undeclared'));assert.throws(()=>projectEditorial005To395(files,editorialCurrent.directories),undefined,p);
+  }
+  const forged=new Map(editorialCurrent.files);forged.set('PUBLICATION-MANIFEST.txt',Buffer.concat([forged.get('PUBLICATION-MANIFEST.txt'),Buffer.from('src/undeclared.js\n')]));assert.throws(()=>projectEditorial005To395(forged,editorialCurrent.directories));
+  const extra=new Set(editorialCurrent.directories);extra.add('unlisted-empty-directory');assert.throws(()=>projectEditorial005To395(editorialCurrent.files,extra));
+  const missing=new Set(editorialCurrent.directories);missing.delete('src');assert.throws(()=>projectEditorial005To395(editorialCurrent.files,missing));
+});
+test('current disk routing rejects malformed or missing bootstrap and filesystem drift without legacy fallback',async t=>{
+  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'editorial005-source-boundary-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));
+  await writeExactFiles(dir,editorialCurrent.files);assert.deepEqual(await readSuccessor(dir),source);
+  const control='tests/fixtures/editorial005-source-delta.json',raw=editorialCurrent.files.get(control);
+  await fs.writeFile(path.join(dir,control),Buffer.concat([raw,Buffer.from(' ')]));await assert.rejects(readSuccessor(dir));
+  await fs.unlink(path.join(dir,control));await assert.rejects(readSuccessor(dir));await fs.writeFile(path.join(dir,control),raw);
+  await fs.mkdir(path.join(dir,'unlisted-empty-directory'));await assert.rejects(readSuccessor(dir));await fs.rmdir(path.join(dir,'unlisted-empty-directory'));
+  await fs.symlink(path.join(dir,'src/app.js'),path.join(dir,'unlisted-link'));await assert.rejects(readSuccessor(dir));await fs.unlink(path.join(dir,'unlisted-link'));
+  await fs.mkdir(path.join(dir,'src/.git'));await assert.rejects(readSuccessor(dir));await fs.rmdir(path.join(dir,'src/.git'));
+  assert.deepEqual(await readSuccessor(dir),source);
 });

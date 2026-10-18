@@ -1,12 +1,37 @@
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {buildBank} from '../scripts/build.mjs';
-import {readBankInput} from '../scripts/bank-io.mjs';
+import {buildBank as installedBuildBank} from '../scripts/build.mjs';
+import {pathToFileURL} from 'node:url';
+import {useEmptySyntheticSelectionPrefix} from './selection-fixtures.mjs';
+
 import {sha256} from '../src/domain.js';
 const seedRaw=await fs.readFile(new URL('../data/seed-bank-v4.json',import.meta.url),'utf8');
+// Minimal historical seed data cannot claim the installed modern selection
+// authority. Run unchanged build/reader code from an owned synthetic authority;
+// only its explicit selection pin is projected by the existing fixture helper.
+const authority=await fs.mkdtemp(path.join(os.tmpdir(),'build-authority-fixture-'));
+after(()=>fs.rm(authority,{recursive:true,force:true}));
+const liveRoot=path.resolve(import.meta.dirname,'..');
+const excluded=new Set(['docs/publication-selections/round-041-selection-001.json','docs/rounds/round-041.json','docs/rounds/round-041.md']);
+for(const folder of ['scripts','src','docs'])await fs.cp(path.join(liveRoot,folder),path.join(authority,folder),{recursive:true,filter:p=>!excluded.has(path.relative(liveRoot,p))});
+await fs.copyFile(path.join(liveRoot,'package.json'),path.join(authority,'package.json'));
+await useEmptySyntheticSelectionPrefix(authority);
+async function verifyAuthority(dir,prefix=''){
+ for(const entry of await fs.readdir(dir,{withFileTypes:true})){
+  const p=prefix+entry.name;assert(!entry.isSymbolicLink());
+  if(entry.isDirectory()){await verifyAuthority(path.join(dir,entry.name),p+'/');continue;}
+  assert(entry.isFile());const actual=await fs.readFile(path.join(dir,entry.name)),original=await fs.readFile(path.join(liveRoot,p));
+  const expected=p==='scripts/publication-selection.mjs'?Buffer.from(original.toString().replace(/export const PUBLICATION_SELECTION_PIN=Object\.freeze\(\{path:PUBLICATION_SELECTION_PATH,sha256:'[a-f0-9]{64}'\}\);/,'export const PUBLICATION_SELECTION_PIN=Object.freeze({path:PUBLICATION_SELECTION_PATH,sha256:null});')):original;
+  assert.deepEqual(actual,expected,`Only the owned synthetic selection pin may differ: ${p}`);
+ }
+}
+await verifyAuthority(authority);
+const {buildBank}=await import(pathToFileURL(path.join(authority,'scripts/build.mjs')));
+const {readBankInput}=await import(pathToFileURL(path.join(authority,'scripts/bank-io.mjs')));
+
 async function fixture(t) {
   const root=await fs.mkdtemp(path.join(os.tmpdir(),'exam-bank-build-'));
   t.after(()=>fs.rm(root,{recursive:true,force:true}));
@@ -17,6 +42,7 @@ async function fixture(t) {
   await fs.mkdir(path.join(root,'data/releases',bank.bankVersion),{recursive:true});
   await fs.writeFile(path.join(root,'data',file),seedRaw);
   await fs.writeFile(path.join(root,'data/manifest.json'),JSON.stringify({schemaVersion:1,bankVersion:bank.bankVersion,releasedAt:bank.releasedAt,file,sha256:await sha256(seedRaw),changeSummary:bank.changeSummary,finalRelease:false}));
+  await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt','data/seed-bank-v4.json',`data/${file}`,'data/manifest.json'].sort().join('\n')+'\n');
   return root;
 }
 test('default build preserves the manifest-selected cumulative release and all immutable bytes',async t=>{
@@ -57,3 +83,5 @@ test('default build refuses malformed manifest envelope without changing bytes',
     assert.equal(await fs.readFile(path.join(root,'data',manifest.file),'utf8'),seedRaw);
   }
 });
+
+test('installed modern authority still rejects a minimal historical seed-only root',async t=>{const root=await fixture(t);await assert.rejects(installedBuildBank(root),/reviewed selection record omitted from allowlist/);});

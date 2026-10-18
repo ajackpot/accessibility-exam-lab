@@ -1,3 +1,4 @@
+import {useEmptySyntheticSelectionPrefix} from './selection-fixtures.mjs';
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -47,6 +48,9 @@ async function fixture(t){
  // Static import identity only: no bootstrap proof or delivery checkpoints are supplied.
  await write(registrationRoot,'docs/deliveries/release-backup-trust.json',json({schemaVersion:1,rootProofSha256:normalBackupRootProofSha256,checkpoints:[]}));
  await write(registrationRoot,'docs/release-blocks/trust.json',json({schemaVersion:1,kind:'reviewed_evidence_loss_blocks',events:[]}));
+ // This owned synthetic authority has no actual041 history. Project its copied
+ // selection pin before first import; real installed authority stays unchanged.
+ await useEmptySyntheticSelectionPrefix(registrationRoot);
  const unregistered=await import(pathToFileURL(path.join(registrationRoot,'scripts/prepublication-quarantine.mjs')));
  const registration={sourceRoot,deliveredRoot:sourceRoot,ledger:clone(r),candidatePackages:packages,evidenceBytes,now:Date.parse('2026-10-02T05:48:00Z')};
  const proposed=await unregistered.reviewQuarantineProposal(audit,registration);assert.equal(proposed.ok,true,proposed.errors.join('\n'));assert.equal(proposed.registered,false);

@@ -7,6 +7,9 @@ import {readDeliveredArchive,validateDeliveredArchiveEntries} from '../scripts/r
 import {zipStored} from '../scripts/download-fallback.mjs';
 import {inspectNormalBackupRootProof} from '../scripts/normal-backup-root.mjs';
 import {normalRootFixture} from './normal-backup-chain-fixtures.mjs';
+import childProcess from 'node:child_process';
+import {syncBuiltinESMExports} from 'node:module';
+import {archiveCodecBudget,ARCHIVE_CODEC_MAX_MS} from '../scripts/archive-format.mjs';
 const hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>Buffer.from(JSON.stringify(o,null,2)+'\n');
 function fixture(version=2){
  const raw=Buffer.from('Exact UTF-8 content: 한글\n'),files=[{path:'README.md',sha256:hash(raw),bytes:raw.length},{path:'.nojekyll',sha256:hash(Buffer.alloc(0)),bytes:0}];
@@ -43,4 +46,26 @@ test('7z producer rejects unsafe, private, collision, invalid payload and size-l
 test('actual normal-root proof inspector accepts explicit v2 transport with unchanged lineage and rejects spoofed discriminator',()=>{
  const {proof,source}=normalRootFixture(),before=structuredClone(proof),legacy=inspectNormalBackupRootProof(proof,source);proof.completeManifest.schemaVersion=2;proof.completeManifest.archiveFormat='7z';const current=inspectNormalBackupRootProof(proof,source);assert.deepEqual(current,legacy);assert.deepEqual(proof.deltaManifest,before.deltaManifest);assert.deepEqual(proof.completeManifest.files,before.completeManifest.files);
  proof.completeManifest.archiveFormat='zip';assert.throws(()=>inspectNormalBackupRootProof(proof,source),/Unsupported/);
+});
+test('codec budget cannot exceed thirty minutes or consume the outer thirty-second reserve',t=>{
+ const previous=process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS;
+ delete process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS;
+ t.after(()=>{if(previous===undefined)delete process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS;else process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS=previous;});
+ const now=Date.parse('2026-10-18T00:00:00Z');
+ assert.equal(archiveCodecBudget({now,outerDeadline:undefined}).timeoutMs,ARCHIVE_CODEC_MAX_MS);
+ assert.equal(archiveCodecBudget({now,outerDeadline:String(now+3_600_000)}).timeoutMs,1_800_000);
+ assert.equal(archiveCodecBudget({now,outerDeadline:String(now+50_000)}).timeoutMs,20_000);
+ for(const deadline of ['', 'Infinity','NaN','1.5','-1',String(Number.MAX_SAFE_INTEGER+1),String(now+30_000),String(now-1)])assert.throws(()=>archiveCodecBudget({now,outerDeadline:deadline}),/deadline|reserve/);
+});
+test('codec passes the remaining deadline to the actual spawn boundary and refuses an expired launch',t=>{
+ const now=Date.parse('2026-10-18T00:00:00Z'),previous=process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS,calls=[];
+ t.mock.method(Date,'now',()=>now);
+ const mock=t.mock.method(childProcess,'spawnSync',(command,args,options)=>{calls.push({command,args,options});return {status:0,signal:null,stdout:Buffer.from('377abcaf271c','hex'),stderr:Buffer.alloc(0)};});
+ syncBuiltinESMExports();
+ t.after(()=>{mock.mock.restore();syncBuiltinESMExports();if(previous===undefined)delete process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS;else process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS=previous;});
+ process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS=String(now+50_000);
+ encodeSevenZip([{name:'README.md',raw:Buffer.from('fixture')}]);
+ assert.equal(calls.length,1);assert.equal(calls[0].options.timeout,20_000);assert.equal(calls[0].args.at(-1),'encode');
+ process.env.ACCESSIBILITY_ARCHIVE_DEADLINE_MS=String(now+30_000);
+ assert.throws(()=>encodeSevenZip([{name:'README.md',raw:Buffer.from('fixture')}]),/reserve.*not started/);assert.equal(calls.length,1);
 });
