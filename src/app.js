@@ -9,7 +9,56 @@ const statusName={active:'진행 중',prepared:'시작 전',submitted:'최종 �
 const outcomeName={unconfirmed:'미확정',correct:'정답 / 만점',wrong:'오답 / 0점',partial:'부분점수',unanswered:'미응답'};
 const fmt=n=>n===null||n===undefined?'계산할 응답 없음':`${(n*100).toFixed(1)}%`;
 const date=n=>new Date(n).toLocaleString('ko-KR');
-function node(tag,attrs={},...children){const el=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(k==='class')el.className=v;else if(k==='on')for(const[event,fn]of Object.entries(v))el.addEventListener(event,fn);else if(k==='text')el.textContent=v;else if(k==='value')el.value=v;else if(k==='checked'||k==='disabled'||k==='readOnly'||k==='hidden')el[k]=v;else if(v!==undefined&&v!==null)el.setAttribute(k,String(v));}for(const child of children.flat(Infinity))if(child!==null&&child!==undefined)el.append(child instanceof Node?child:document.createTextNode(String(child)));return el;}
+function node(tag,attrs={},...children){const el=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(k==='class')el.className=v;else if(k==='on')for(const[event,fn]of Object.entries(v))el.addEventListener(event,fn);else if(k==='text')el.textContent=v;else if(k==='value')el.value=v;else if(k==='checked'||k==='disabled'||k==='readOnly'||k==='hidden')el[k]=v;else if(v!==undefined&&v!==null)el.setAttribute(k,String(v));}for(const child of children.flat(Infinity))if(child!==null&&child!==undefined)el.append(child instanceof Node?child:document.createTextNode(String(child)));if(tag==='textarea'&&el.readOnly)el.addEventListener('keydown',navigateReadOnlyText);return el;}
+function navigateReadOnlyText(event){
+  const area=event.currentTarget,doc=area.ownerDocument;
+  if(event.defaultPrevented||event.isComposing||event.keyCode===229||event.altKey||event.ctrlKey||event.metaKey||!area.readOnly||area.disabled||doc.activeElement!==area)return;
+  const movement={ArrowLeft:['left','character'],ArrowRight:['right','character'],ArrowUp:['backward','line'],ArrowDown:['forward','line'],Home:['backward','lineboundary'],End:['forward','lineboundary']}[event.key];
+  if(!movement)return;
+  const selection=doc.getSelection(),parent=area.parentNode,index=Array.prototype.indexOf.call(parent.childNodes,area);
+  // Chromium exposes a textarea's shadow selection at this parent boundary.
+  // Leave engines with a separate text-control selection to their native keys.
+  const inControl=()=>selection.anchorNode===parent&&selection.focusNode===parent&&selection.anchorOffset===index&&selection.focusOffset===index;
+  if(typeof selection?.modify!=='function'||!inControl())return;
+  const before=[area.selectionStart,area.selectionEnd,area.selectionDirection];
+  // Retain native readonly semantics. The browser handles visual lines,
+  // grapheme clusters and bidirectional text; no editing is enabled.
+  selection.modify(event.shiftKey?'extend':'move',...movement);
+  event.preventDefault();
+  const anchor=before[2]==='backward'?before[1]:before[0],focus=before[2]==='backward'?before[0]:before[1];
+  const nextFocus=area.selectionDirection==='backward'?area.selectionStart:area.selectionEnd;
+  if(!inControl()||movement[0]==='forward'&&nextFocus<focus||movement[0]==='backward'&&nextFocus>focus){
+    const target=movement[1]==='character'?focus:movement[0]==='forward'?area.value.length:0;
+    area.setSelectionRange(0,area.value.length);
+    area.setSelectionRange(event.shiftKey?Math.min(anchor,target):target,event.shiftKey?Math.max(anchor,target):target,event.shiftKey&&target<anchor?'backward':'forward');
+  }else if(area.selectionStart===before[0]&&area.selectionEnd===before[1]){
+    // At an edge the shadow selection can escape while its public offsets
+    // stay unchanged. Re-establish the original selection inside the field.
+    const reset=before[0]===0&&before[1]===0?area.value.length:0;
+    area.setSelectionRange(reset,reset);
+    area.setSelectionRange(...before);
+  }
+  revealReadOnlyCaret(area);
+}
+function revealReadOnlyCaret(area){
+  if(area.scrollWidth<=area.clientWidth)return;
+  const doc=area.ownerDocument,style=doc.defaultView.getComputedStyle(area);
+  const caret=area.selectionDirection==='backward'?area.selectionStart:area.selectionEnd;
+  const start=caret===0?0:area.value.lastIndexOf('\n',caret-1)+1,end=area.value.indexOf('\n',caret);
+  // Measure just the active source line with browser text layout, including
+  // tabs, proportional glyphs and bidi runs. No code is parsed or executed.
+  const mirror=doc.createElement('span');mirror.setAttribute('aria-hidden','true');
+  Object.assign(mirror.style,{position:'fixed',visibility:'hidden',whiteSpace:'pre',left:'0',top:'0',padding:'0',margin:'0',border:'0',width:'max-content'});
+  for(const property of ['font','fontKerning','fontFeatureSettings','fontVariationSettings','letterSpacing','wordSpacing','tabSize','direction','unicodeBidi','textTransform'])mirror.style[property]=style[property];
+  const text=doc.createTextNode(area.value.slice(start,end<0?area.value.length:end));mirror.append(text);doc.body.append(mirror);
+  try{
+    const range=doc.createRange();range.setStart(text,caret-start);range.collapse(true);
+    const left=parseFloat(style.paddingLeft)||0,right=parseFloat(style.paddingRight)||0;
+    const x=range.getBoundingClientRect().left-mirror.getBoundingClientRect().left+left;
+    if(x<area.scrollLeft+left)area.scrollLeft=Math.max(0,x-left);
+    else if(x>area.scrollLeft+area.clientWidth-right-1)area.scrollLeft=x-area.clientWidth+right+1;
+  }finally{mirror.remove();}
+}
 function button(text,fn,opts={}){return node('button',{type:'button',...opts,on:{click:async event=>{state.routeRequest=(state.routeRequest||0)+1;state.restoring=false;try{await fn(event);}catch(error){if(state.reportedError!==error)showError(error);}}}},text);}
 function actions(...children){return node('div',{class:'actions'},...children);}
 // The persistent polite region reports actions, never routine successful writes.
