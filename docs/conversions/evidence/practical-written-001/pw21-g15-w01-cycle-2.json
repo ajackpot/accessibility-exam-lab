@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw21-g15-w01",
+  "cycle": 2,
+  "question": {
+    "questionId": "pw21-g15-w01",
+    "revision": 2,
+    "templateId": "pw21-template-g15",
+    "learningGoalId": "pw21-goal-g15",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s1",
+    "topicIds": [
+      "pw21-g15"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 스타일을 적용하지 않고 문서 순서로 읽어도 신청 절차를 이해하도록 세 문단을 재배치한 순서를 고르시오.",
+    "notes": [
+      "절차는 강좌 선택, 신청 전송, 완료 확인 순서로 진행한다. 세 문단의 문구는 그대로 유지한다."
+    ],
+    "explanation": "시각적 위치를 바꾸는 스타일은 문서에 적힌 내용 순서를 바꾸지 않는다. 절차의 의미를 보존하려면 문서에서도 선택, 전송, 확인 순서가 되도록 choose, send, done 문단을 배치해야 한다.",
+    "sourceRefs": [
+      "pw21-src-kw-order"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "KWCAG 2.2 (KS X OT0003:2022, 2022-12-28)",
+    "difficulty": "기초",
+    "reviewNote": "비공개 복제본 검토용. 정규 은행 미등록·미공개. 검토 중.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw21-g15-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g15-w01-set"
+      },
+      {
+        "optionId": "pw21-g15-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g15-w01-set"
+      },
+      {
+        "optionId": "pw21-g15-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g15-w01-set"
+      },
+      {
+        "optionId": "pw21-g15-w01-o4",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw21-g15-w01-set"
+      },
+      {
+        "optionId": "pw21-g15-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g15-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<div style=\"position:relative; height:9em\">\n  <p id=\"done\" style=\"position:absolute; top:6em\">접수 번호를 확인하세요.</p>\n  <p id=\"choose\" style=\"position:absolute; top:0\">원하는 강좌를 선택하세요.</p>\n  <p id=\"send\" style=\"position:absolute; top:3em\">신청 버튼으로 전송하세요.</p>\n</div>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 스타일을 적용하지 않고 문서 순서로 읽어도 신청 절차를 이해하도록 세 문단을 재배치한 순서를 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw21-g15-w01-o1",
+      "revision": 1,
+      "content": "send → choose → done",
+      "explanation": "전송할 강좌를 선택하기 전에 전송 단계를 읽게 된다."
+    },
+    {
+      "optionId": "pw21-g15-w01-o2",
+      "revision": 1,
+      "content": "done → choose → send",
+      "explanation": "현재 문서 순서를 유지하므로 마지막 확인 단계부터 읽게 된다."
+    },
+    {
+      "optionId": "pw21-g15-w01-o3",
+      "revision": 1,
+      "content": "done → send → choose",
+      "explanation": "완료, 전송, 선택의 역순으로 실제 절차와 맞지 않는다."
+    },
+    {
+      "optionId": "pw21-g15-w01-o4",
+      "revision": 1,
+      "content": "choose → send → done",
+      "explanation": "선택하고 전송한 뒤 접수 번호를 확인하는 절차와 일치한다."
+    },
+    {
+      "optionId": "pw21-g15-w01-o5",
+      "revision": 1,
+      "content": "choose → done → send",
+      "explanation": "선택 뒤 전송하기 전에 완료 정보를 확인하도록 순서가 뒤바뀐다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw21-src-kw-order",
+      "title": "NIA — 웹 접근성을 고려한 콘텐츠 제작기법 2.2 개정판",
+      "url": "https://nia-a11y.github.io/kwcag22tech/1/3/2/",
+      "version": "웹 접근성을 고려한 콘텐츠 제작기법 2.2 개정판 / NIA 2025-03 발행, 2025-03-31 업데이트",
+      "checkedAt": "2026-10-21T07:25:28.712508+00:00",
+      "location": "공식 해설 §1.3.2 ↔ KWCAG 2.2 §5.3.2",
+      "evidence": "순서가 의미를 갖는 콘텐츠는 스타일을 제거하고 문서 순서로 읽어도 의미가 유지되어야 한다. 시각 위치만 옮기는 CSS는 소스 문단 순서를 고치지 않으므로 주어진 절차대로 문서에 선택·전송·확인을 둔다.",
+      "rights": "문항·선택지·코드는 원본 실기의 지식을 바탕으로 별도 작성했다. 표준·공식 해설의 필요한 사실만 의역하고 출처를 표시한다. 공식 시험 샘플·유료 문제집·표준 예제·전문을 후보에 복제하지 않는다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

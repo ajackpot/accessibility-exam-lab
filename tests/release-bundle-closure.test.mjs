@@ -46,12 +46,16 @@ async function fixture(t){
 }
 async function noOutputs(f){for(const p of [f.deltaOutputPath,f.completeOutputPath])await assert.rejects(fs.stat(p),{code:'ENOENT'});}
 test('normal backup cannot validate a required report outside the exact packaged inventory',async t=>{
+ // This owned through008 fixture runs at its explicit historical packaging boundary.
+ t.mock.timers.enable({apis:['Date'],now});
  const f=await fixture(t);await assert.rejects(f.packagePair(f),/missing or unsafe reportPath/);await noOutputs(f);
  // The same fixture is valid once the dependency is part of the reviewed bytes.
  await fs.appendFile(path.join(f.workRoot,'PUBLICATION-MANIFEST.txt'),reportPath+'\n');f.reviewedInventory=await inventory(f.workRoot);
  const result=await f.packagePair(f);assert.equal(result.status,'prepared_not_delivered');assert.ok(result.completeManifest.files.some(e=>e.path===reportPath));
 });
 test('normal backup refuses an existing base manifest freeze even if its state marker is inconsistent',async t=>{
+ // This owned through008 fixture runs at its explicit historical packaging boundary.
+ t.mock.timers.enable({apis:['Date'],now});
  const f=await fixture(t);await fs.appendFile(path.join(f.workRoot,'PUBLICATION-MANIFEST.txt'),reportPath+'\n');f.reviewedInventory=await inventory(f.workRoot);
  const m=JSON.parse(await fs.readFile(path.join(f.baseRoot,'data/manifest.json')));m.finalRelease=true;await write(f.baseRoot,'data/manifest.json',json(m));f.baseInventory=await inventory(f.baseRoot);
  await assert.rejects(f.packagePair(f),/freeze/i);await noOutputs(f);

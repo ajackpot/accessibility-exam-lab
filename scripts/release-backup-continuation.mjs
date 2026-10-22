@@ -1,4 +1,4 @@
-import {currentCutoffBlocks} from './editorial005-completion.mjs';
+import {currentCutoffBlocks} from './current-release-authority.mjs';
 import {completeManifestFormat,archiveSignature,decodeSevenZip,verifyArchiveFormat,ARCHIVE_LIMITS} from './archive-format.mjs';
 /** Narrow bridge from exact delivered normal backups. Never rewrites manifests or performs Git. */
 import fs from 'node:fs/promises';

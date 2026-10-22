@@ -84,6 +84,7 @@ test('exact receipts resolve current content publication without rewriting histo
 test('normal context loader fails closed on missing or tampered proof bytes',async t=>{
   const dir=await fs.mkdtemp(path.join(os.tmpdir(),'publication-sync-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));
   await fs.cp(root,dir,{recursive:true});const p=path.join(dir,'docs/publications/cumulative-006-008.json');
-  await fs.appendFile(p,' ');await assert.rejects(loadRoundContext(dir,null,{release:true,now:currentNow}),/proof hash|immutable pre-quarantine history/);
+  // The current typed conversion authenticates these same immutable proof bytes before the inner loader.
+  await fs.appendFile(p,' ');await assert.rejects(loadRoundContext(dir,null,{release:true,now:currentNow}),/proof hash|immutable pre-quarantine history|^Error: Practical-written registration: Immutable baseline history changed: docs\/publications\/cumulative-006-008\.json$/);
   await fs.unlink(p);await assert.rejects(loadRoundContext(dir,null,{release:true,now:currentNow}),/ENOENT/);
 });

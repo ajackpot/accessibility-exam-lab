@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw21-g06-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw21-g06-w01",
+    "revision": 1,
+    "templateId": "pw21-template-g06",
+    "learningGoalId": "pw21-goal-g06",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s1",
+    "topicIds": [
+      "pw21-g06"
+    ],
+    "stem": "신청 인원 입력 오류를 이용자가 스스로 수정할 수 있도록 안내하려고 한다. 다음 중 오류 원인과 수정에 필요한 정보를 전달하는 메시지를 고르시오.",
+    "notes": [
+      "신청 인원은 1명 이상 4명 이하의 정수여야 하며, 이용자는 7을 입력했다. 다른 입력값에는 오류가 없고 입력 내용은 보존되어 있다."
+    ],
+    "explanation": "오류를 고치려면 문제가 있는 항목과 그 항목의 허용 조건을 알아야 한다. 신청 인원의 현재 값 7과 허용 범위 1~4명을 연결한 메시지는 필요한 수정 방향을 제공한다.",
+    "sourceRefs": [
+      "pw21-src-kw-error"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "KS X OT0003:2022, 2022-12-28 개정",
+    "difficulty": "기초",
+    "reviewNote": "비공개 복제본 검토용. 정규 은행 미등록·미공개. 검토 중.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw21-g06-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g06-w01-set"
+      },
+      {
+        "optionId": "pw21-g06-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g06-w01-set"
+      },
+      {
+        "optionId": "pw21-g06-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g06-w01-set"
+      },
+      {
+        "optionId": "pw21-g06-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g06-w01-set"
+      },
+      {
+        "optionId": "pw21-g06-w01-o5",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw21-g06-w01-set"
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw21-g06-w01-o1",
+      "revision": 1,
+      "content": "신청 인원은 숫자로 입력해야 합니다. 숫자 7을 입력해 다시 시도해 주세요.",
+      "explanation": "숫자가 아닌 형식 오류로 잘못 진단하며 허용 범위 밖인 값을 다시 제안한다."
+    },
+    {
+      "optionId": "pw21-g06-w01-o2",
+      "revision": 1,
+      "content": "신청 인원이 누락되었습니다. 인원 값을 입력한 뒤 다시 제출해 주세요.",
+      "explanation": "입력값 7이 존재하는데도 누락 오류로 잘못 설명한다."
+    },
+    {
+      "optionId": "pw21-g06-w01-o3",
+      "revision": 1,
+      "content": "신청 정보에 오류가 있습니다. 처음부터 입력한 내용을 살펴봐 주세요.",
+      "explanation": "실제 오류 항목과 허용 조건을 알려 주지 않아 이용자가 원인을 다시 찾아야 한다."
+    },
+    {
+      "optionId": "pw21-g06-w01-o4",
+      "revision": 1,
+      "content": "신청 인원 입력을 확인할 수 없습니다. 같은 값으로 다시 시도해 주세요.",
+      "explanation": "범위를 벗어난 값을 그대로 다시 입력하도록 안내하여 오류를 해결하지 못한다."
+    },
+    {
+      "optionId": "pw21-g06-w01-o5",
+      "revision": 1,
+      "content": "신청 인원 7명은 허용 범위를 벗어났습니다. 1~4명으로 입력해 주세요.",
+      "explanation": "오류 항목, 현재 값의 문제, 수정 가능한 범위를 함께 알린다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw21-src-kw-error",
+      "title": "한국형 웹 콘텐츠 접근성 지침 2.2",
+      "url": "https://www.rra.go.kr/ko/reference/kcsList_view.do?nb_seq=5247&nb_type=6",
+      "version": "KS X OT0003:2022, 2022-12-28 개정",
+      "checkedAt": "2026-10-02T05:42:53Z",
+      "location": "7.3.1 오류 정정: 사용자 입력 오류 안내",
+      "evidence": "입력 오류를 정정할 방법을 제공하며 오류 위치와 원인을 알려준다. 누락된 필드 등 사용자 입력 문제를 다루고 시스템·플랫폼 오류와 구분한다. 공식 게시물의 2.2 DOCX 첨부를 직접 내려받아 해당 절을 읽었다. 첨부 URL: https://www.rra.go.kr/FileDownSvl?file_parentseq=5247&file_seq=1&file_type=notice",
+      "rights": "국립전파연구원 게시물은 지식재산권을 “무”로 표시한다. 표준 원문 전체의 재배포 허락으로 확대 해석하지 않으며 독자 지문·코드·해설과 짧은 근거 요약만 작성한다.",
+      "provenanceSourceId": "r001-standards-src-error",
+      "currentReviewStatus": "pending_primary_check"
+    }
+  ]
+}

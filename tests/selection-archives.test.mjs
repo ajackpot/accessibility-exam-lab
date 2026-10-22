@@ -1,3 +1,6 @@
+import {readEditorial005Source} from './successor-projection.mjs';
+import {pathToFileURL} from 'node:url';
+import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
 /** Exact selected source bytes plus synthetic structural receipt hashes/times.
  * These fixtures do not represent actual archives, native delivery or publication. */
 import test, {after} from 'node:test';
@@ -18,8 +21,7 @@ let pending,ownedWorkRoot;
 after(async()=>{if(ownedWorkRoot)await fs.rm(ownedWorkRoot,{recursive:true,force:true});});
 function fixture(){return pending??=makeFixture();}
 async function makeFixture(){
- const authority=await loadPublicationSelections(root),source=JSON.parse(await read('docs/rounds/round-041.json')),identity=resolvePublicationIdentity(source,authority),files=new Map();
- for(const p of (await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(p=>p&&!p.startsWith('#')))files.set(p,await read(p));
+ const authority=await withCurrentReleaseAuthority({root},()=>loadPublicationSelections(root)),source=JSON.parse(await read('docs/rounds/round-041.json')),identity=resolvePublicationIdentity(source,authority),{files}=await readEditorial005Source(root);
  const bank=JSON.parse(files.get(`data/releases/${identity.effectiveBankVersion}/bank.json`)),baseline=JSON.parse(files.get(`data/releases/${source.baseline.bankVersion}/bank.json`));
  // This structural fixture packages the selected041 source, even when the
  // actual checkout has a later editorial bank. Preserve every original file;
@@ -37,7 +39,8 @@ async function makeFixture(){
  const delta={schemaVersion:1,kind:'developer_patch_not_learner_import',deliveryMode:'release_backup',roundId:source.roundId,baseCommit:source.baseline.sourceCommit,baseVerifiedAt:source.startedAt,preparedAt:iso(0),gitPublicationStatus:'not_attempted',publicationCommit:null,bankVersion:identity.effectiveBankVersion,bankSha256:identity.effectiveBankSha256,newlyPublishedByPackaging:0,prerequisiteArtifacts:[],selectionReference:identity.selectionReference,files:all.filter(f=>index.get(f.path)?.sha256!==f.sha256).map(f=>({...f,beforeSha256:index.get(f.path)?.sha256??null})),deletions:[]};
  const sourceRelease={roundId:source.roundId,deltaArtifactSha256:'a'.repeat(64),deltaManifestSha256:H(J(delta)),baseCommit:source.baseline.sourceCommit,bankVersion:identity.effectiveBankVersion,bankSha256:identity.effectiveBankSha256,ledgerPath:'docs/rounds/round-041.json',ledgerSha256:H(files.get('docs/rounds/round-041.json')),selectionReference:identity.selectionReference};
  const proof={schemaVersion:1,kind:'delivered_normal_release_root_checkpoint',roundId:source.roundId,deltaArtifactSha256:'a'.repeat(64),completeArtifactSha256:'b'.repeat(64),privateEvidence:{libraryReceiptSha256:'c'.repeat(64),attachmentReceiptSha256:'d'.repeat(64),uploadResultSha256:'e'.repeat(64),archiveAuditSha256:'f'.repeat(64),sourceCheckpointSha256:'1'.repeat(64),terminalEvidenceSha256:null},archiveVerifiedAt:iso(1000),attachmentAcceptedAt:iso(2000),verificationCompletedAt:iso(3000),newlyPublishedRegular:0,canPublish:false,userOpenOrDownloadObserved:false,sourceAnchor:anchor,continuationAnchor:structuredClone(anchor),anchorTransition:{parentCommit:source.baseline.sourceCommit,evidenceSha256:'2'.repeat(64),changedPaths:[]},priorTrustSha256:H(files.get('docs/deliveries/normal-backup-root-trust.json')),preservedRegistries:registries.map(path=>({path,raw:files.get(path).toString()})),deltaManifest:delta,completeManifest:{schemaVersion:2,archiveFormat:'7z',kind:'complete_project_not_learner_import',deliveryMode:'release_backup',newlyPublishedRegular:0,projectDirectory:'project',prerequisiteArtifacts:[],sourceRelease,frozenSourceInventory:structuredClone(all),packagingRevision:null,files:all},runtimeManifestRaw:files.get('data/manifest.json').toString(),publicationStateRaw:files.get('data/publication-state.json').toString(),sourceAllowlistRaw:files.get('PUBLICATION-MANIFEST.txt').toString(),stoppedPublisher:null};
- return {authority,source,identity,files,bank,proof,at,sourceRelease,all,workRoot};
+ const bankApi=await import(pathToFileURL(path.join(workRoot,'scripts/bank-io.mjs'))),archiveApi=await import(pathToFileURL(path.join(workRoot,'scripts/complete-bundle.mjs')));
+ return {authority,source,identity,files,bank,proof,at,sourceRelease,all,workRoot,bankApi,archiveApi};
 }
 function rebind(proof){proof.completeManifest.sourceRelease.deltaManifestSha256=H(J(proof.deltaManifest));}
 
@@ -59,8 +62,10 @@ test('selected root cannot omit the raw selection and original all3 historical i
  }
 });
 
-test('exact complete snapshot carries selection reference and rejects identity mismatch before archive writing',async()=>{
- const f=await fixture(),args={workRoot:f.workRoot,reviewedInventory:f.all,sourceRelease:f.sourceRelease,deliveryMode:'release_backup',now:f.at};
+test('exact complete snapshot carries selection reference and rejects identity mismatch before archive writing',async t=>{
+ const f=await fixture(),{freezeCompleteProject}=f.archiveApi;
+ t.mock.timers.enable({apis:['Date'],now:f.at});t.after(()=>t.mock.timers.reset());
+ const args={workRoot:f.workRoot,reviewedInventory:f.all,sourceRelease:f.sourceRelease,deliveryMode:'release_backup',now:f.at};
  const snapshot=await freezeCompleteProject(args);assert.deepEqual(snapshot.manifest.sourceRelease.selectionReference,f.identity.selectionReference);assert.equal(snapshot.manifest.sourceRelease.ledgerSha256,f.identity.originalLedgerSha256);
  await assert.rejects(freezeCompleteProject({...args,deliveryMode:'download_only'}));
  await assert.rejects(freezeCompleteProject({...args,archiveFormat:'zip'}));
@@ -68,7 +73,9 @@ test('exact complete snapshot carries selection reference and rejects identity m
 });
 
 test('ordinary and explicit bank inputs select retained041 and block exact original even at another path',async t=>{
- const f=await fixture(),root=f.workRoot,ordinary=await readBankInput(root),explicit=await readBankInput(root,path.join(root,`data/releases/${f.identity.effectiveBankVersion}/bank.json`));
+ const f=await fixture(),root=f.workRoot,{readBankInput}=f.bankApi;
+ t.mock.timers.enable({apis:['Date'],now:f.at});t.after(()=>t.mock.timers.reset());
+ const ordinary=await readBankInput(root),explicit=await readBankInput(root,path.join(root,`data/releases/${f.identity.effectiveBankVersion}/bank.json`));
  assert.equal(ordinary.bank.bankVersion,f.identity.effectiveBankVersion);assert.deepEqual(explicit.bank,ordinary.bank);
  await assert.rejects(readBankInput(root,path.join(root,`data/releases/${f.identity.originalBankVersion}/bank.json`)),/retired original|excluded|round041/);
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'selection-explicit-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));const alternate=path.join(dir,'renamed-original.json');await fs.writeFile(alternate,f.files.get(`data/releases/${f.identity.originalBankVersion}/bank.json`));await assert.rejects(readBankInput(root,alternate),/retired original|excluded|round041/);

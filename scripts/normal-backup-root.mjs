@@ -1,4 +1,4 @@
-import {currentCutoffBlocks} from './editorial005-completion.mjs';
+import {currentCutoffBlocks} from './current-release-authority.mjs';
 import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference} from './publication-selection.mjs';
 import {completeManifestFormat} from './archive-format.mjs';
 /** Reviewed normal-release roots, separate from the immutable009 and timeout chains.

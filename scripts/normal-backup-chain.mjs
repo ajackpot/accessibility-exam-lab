@@ -1,4 +1,4 @@
-import {currentCutoffBlocks} from './editorial005-completion.mjs';
+import {currentCutoffBlocks} from './current-release-authority.mjs';
 import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference} from './publication-selection.mjs';
 import {ANCESTOR_PUBLICATION_TRANSITION,validateNormalChainAncestorTransition} from './normal-chain-publication-ancestry.mjs';
 import {PUBLICATION_SYNCHRONIZATIONS} from './publication-sync.mjs';

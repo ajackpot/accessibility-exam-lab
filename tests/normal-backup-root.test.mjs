@@ -1,3 +1,4 @@
+import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 /** Synthetic normal-root structures; no external delivery or publication claims. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -23,6 +24,19 @@ function fixture(){
  const proof={schemaVersion:1,kind:'delivered_normal_release_root_checkpoint',roundId:source.roundId,deltaArtifactSha256:'a'.repeat(64),completeArtifactSha256:'b'.repeat(64),privateEvidence:{libraryReceiptSha256:'c'.repeat(64),attachmentReceiptSha256:'d'.repeat(64),uploadResultSha256:'e'.repeat(64),archiveAuditSha256:'f'.repeat(64),sourceCheckpointSha256:'1'.repeat(64),terminalEvidenceSha256:null},archiveVerifiedAt:'2026-10-07T12:02:00Z',attachmentAcceptedAt:'2026-10-07T12:03:00Z',verificationCompletedAt:'2026-10-07T15:00:00Z',newlyPublishedRegular:0,canPublish:false,userOpenOrDownloadObserved:false,sourceAnchor:anchor(old,oldCommit,delta.baseVerifiedAt),continuationAnchor:anchor(remote,newCommit,'2026-10-07T12:04:00Z'),anchorTransition:{parentCommit:oldCommit,evidenceSha256:'2'.repeat(64),changedPaths:inv(remote).filter(f=>before.get(f.path)?.sha256!==f.sha256).map(f=>({...f,beforeSha256:before.get(f.path)?.sha256??null}))},priorTrustSha256:null,preservedRegistries:[],deltaManifest:delta,completeManifest:{schemaVersion:1,kind:'complete_project_not_learner_import',deliveryMode:'release_backup',newlyPublishedRegular:0,projectDirectory:'project',prerequisiteArtifacts:[],sourceRelease:{roundId:source.roundId,deltaArtifactSha256:'a'.repeat(64),deltaManifestSha256:H(J(delta)),baseCommit:oldCommit,bankVersion:'synthetic.delivered',bankSha256:H(nextBank),ledgerPath:'docs/rounds/round-999.json',ledgerSha256:H(J(source))},frozenSourceInventory:clone(files),packagingRevision:null,files},runtimeManifestRaw:nextManifest,publicationStateRaw:state,sourceAllowlistRaw:delivered.get('PUBLICATION-MANIFEST.txt'),stoppedPublisher:null};
  return {proof,source,files:delivered,remote};
 }
+// Current-clock behavior is simulated only in this owned historical module root.
+async function ownedRootApi(t){
+ const owned=await createOwnedHistoricalAuthority(t),directory=owned.authorityRoot;
+ await fs.mkdir(path.join(directory,'data'),{recursive:true});
+ await fs.writeFile(path.join(directory,'data/manifest.json'),fixture().proof.runtimeManifestRaw);
+ await fs.writeFile(path.join(directory,'data/publication-state.json'),J({finalized:false}));
+ const api=await import(pathToFileURL(path.join(directory,'scripts/normal-backup-root.mjs')));
+ const fixtureAt=Date.parse('2026-10-08T10:00:00Z');
+ const originalRegistry=JSON.parse(await fs.readFile(path.join(directory,'docs/deliveries/normal-backup-root-trust.json')));
+ assert(originalRegistry.roots.every(pin=>Date.parse(pin.registeredAt)<fixtureAt),'Synthetic append must follow the unchanged original registry tail');
+ assert(fixtureAt<Date.parse('2026-10-15T15:00:00Z'),'Keep the existing future-registration negative meaningful');
+ t.mock.timers.enable({apis:['Date'],now:fixtureAt});t.after(()=>t.mock.timers.reset());return api;
+}
 test('normal public root preserves source anchor separately from continuation anchor and admits no public count',()=>{
  const {proof,source}=fixture(),before=J(proof),base=inspectNormalBackupRootProof(proof,source);assert.equal(base.baseCommit,'2'.repeat(40));assert.equal(base.sourceBaseCommit,'1'.repeat(40));assert.equal(base.eligibleAt,proof.verificationCompletedAt);assert.equal(base.recordedAt,proof.attachmentAcceptedAt);assert.equal(J(proof),before);assert.equal(proof.savedAt,undefined);assert.equal(proof.origin,undefined);assert.equal(proof.deltaManifest.permissionNotifiedAt,undefined);
 });
@@ -46,9 +60,10 @@ for(const [label,change,pattern] of [
  ['delta before hash changed',p=>p.deltaManifest.files[0].beforeSha256='9'.repeat(64),/identity|reconstruct/]
 ])test('normal root rejects '+label,()=>{const {proof,source}=fixture();change(proof);assert.throws(()=>inspectNormalBackupRootProof(proof,source),pattern);});
 test('normal root rejects offline successor relabeling and changed source decision',()=>{for(const patch of [{status:'open'},{publication:{status:'verified'}},{baseline:{offlinePredecessor:{roundId:'round-027'}}}]){const {proof,source}=fixture();Object.assign(source,patch);assert.throws(()=>inspectNormalBackupRootProof(proof,source),/closed unpublished/);}});
-test('registration is a separate current timestamp, never a historical eligibility input',()=>{const {proof}=fixture(),before=Date.now(),registered=proposeNormalBackupRootRegistration(Buffer.from(J(proof))),after=Date.now();assert.ok(Date.parse(registered.trustRecord.registeredAt)>=before&&Date.parse(registered.trustRecord.registeredAt)<=after);assert.equal(registered.trustRecord.eligibleAt,registered.trustRecord.registeredAt);assert.equal(registered.trustRecord.sha256,H(J(proof)));assert.equal(proof.registeredAt,undefined);assert.throws(()=>proposeNormalBackupRootRegistration(Buffer.from(J({...proof,verificationCompletedAt:'2026-10-15T15:00:00Z'}))),/current registration/);});
-test('private preparation refuses absent receipts, invented pair and future caller clock',async()=>{await assert.rejects(prepareNormalBackupRoot({}),/Exact original/);const empty=Buffer.from('{}'),args=Object.fromEntries(['deltaZip','completeZip','libraryReceiptRaw','attachmentReceiptRaw','uploadResultRaw','archiveAuditRaw','sourceCheckpointRaw','continuationEvidenceRaw'].map(k=>[k,empty]));await assert.rejects(prepareNormalBackupRoot({...args,now:Date.now()+60000}),/actual current/);await assert.rejects(prepareNormalBackupRoot(args),/original saved pair/);});
+test('registration is a separate current timestamp, never a historical eligibility input',async t=>{const {proposeNormalBackupRootRegistration}=await ownedRootApi(t);const {proof}=fixture(),before=Date.now(),registered=proposeNormalBackupRootRegistration(Buffer.from(J(proof))),after=Date.now();assert.ok(Date.parse(registered.trustRecord.registeredAt)>=before&&Date.parse(registered.trustRecord.registeredAt)<=after);assert.equal(registered.trustRecord.eligibleAt,registered.trustRecord.registeredAt);assert.equal(registered.trustRecord.sha256,H(J(proof)));assert.equal(proof.registeredAt,undefined);assert.throws(()=>proposeNormalBackupRootRegistration(Buffer.from(J({...proof,verificationCompletedAt:'2026-10-15T15:00:00Z'}))),/current registration/);});
+test('private preparation refuses absent receipts, invented pair and future caller clock',async t=>{const {prepareNormalBackupRoot}=await ownedRootApi(t);await assert.rejects(prepareNormalBackupRoot({}),/Exact original/);const empty=Buffer.from('{}'),args=Object.fromEntries(['deltaZip','completeZip','libraryReceiptRaw','attachmentReceiptRaw','uploadResultRaw','archiveAuditRaw','sourceCheckpointRaw','continuationEvidenceRaw'].map(k=>[k,empty]));await assert.rejects(prepareNormalBackupRoot({...args,now:Date.now()+60000}),/actual current/);await assert.rejects(prepareNormalBackupRoot(args),/original saved pair/);});
 test('modern dependency loss and self-pinned registries are rejected without altering authority',async t=>{
+ const {proposeNormalBackupRootRegistration}=await ownedRootApi(t);
  const tmp=await fs.mkdtemp(path.join(os.tmpdir(),'normal-root-dependencies-'));t.after(()=>fs.rm(tmp,{recursive:true,force:true}));await fs.mkdir(path.join(tmp,'scripts'),{recursive:true});await fs.mkdir(path.join(tmp,'docs/deliveries'),{recursive:true});await fs.writeFile(path.join(tmp,'scripts/validate-round.mjs'),'loadNormalBackupRoots');await assert.rejects(validateNormalBackupRootDependencies(tmp),/Missing normal-root trust/);
  const registryPath=path.join(tmp,'docs/deliveries/normal-backup-root-trust.json');await fs.writeFile(registryPath,await fs.readFile(path.join(root,'docs/deliveries/normal-backup-root-trust.json')));await fs.writeFile(path.join(tmp,'PUBLICATION-MANIFEST.txt'),'scripts/normal-backup-root.mjs\ndocs/deliveries/normal-backup-root-trust.json\n');await fs.writeFile(path.join(tmp,'scripts/normal-backup-root.mjs'),'fixture dependency bytes');
  // No synthetic entry can become authority through the candidate's own file.
@@ -56,6 +71,7 @@ test('modern dependency loss and self-pinned registries are rejected without alt
 });
 
 test('isolated reviewed authority loads a root and fails closed for late or corrupted successors',async t=>{
+ t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-10-07T15:01:00Z')});t.after(()=>t.mock.timers.reset());
  const tmp=await fs.mkdtemp(path.join(os.tmpdir(),'normal-root-authority-'));t.after(()=>fs.rm(tmp,{recursive:true,force:true}));const write=async(p,raw)=>{await fs.mkdir(path.dirname(path.join(tmp,p)),{recursive:true});await fs.writeFile(path.join(tmp,p),raw);};
  for(const folder of ['scripts','src'])await fs.cp(path.join(root,folder),path.join(tmp,folder),{recursive:true});await write('package.json',await fs.readFile(path.join(root,'package.json')));
  // Imported publication helpers read this exact schema before fixture API evaluation.

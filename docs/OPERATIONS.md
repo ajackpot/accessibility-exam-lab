@@ -606,3 +606,14 @@ PRD 13.1의 역할 구분과 AGENTS의 「검증 실행 통합」을 함께 적�
 2026-10-18의 명시적 후속 승인에 따라 기존 editorial-005와 공개 기준 커밋 `5fb79453e1bd2942353c8a15f3942352aa3baa3b`의 완료만 원 캠페인 cutoff 뒤에 진행할 수 있다. `scripts/editorial005-completion.mjs`는 정확한 manifest·은행·종결 대장 바이트와 양쪽 실제 동결 상태를 매 현재 경계에서 다시 확인한다. 역사적 시작·판정·종결·발행 시각, 신규 회차·신규 콘텐츠·Git 권한·기존 영구 중단은 바꾸지 않는다. 이 예외는 검증 통과 증거나 캐시가 아니며 다른 은행·기준·회차로 전이되지 않는다.
 
 정상 `writeReleaseDeliveryPair`의 내부 전체 의미 검증을 그대로 수행한다. 같은 입력의 별도 전체 `validate-release`를 바로 앞에서 반복하지 않는다. 수정된 정책·codec 계약의 좁은 검사와 ordinary build, 실제 포장·일반 도구 복원·독립 재구성·smoke 결과는 각각 구분하여 기록한다. 기존 99파일 증거는 정확히 변경되지 않은 계약에만 원 범위로 재사용하며 새 전체 suite PASS로 표시하지 않는다. codec은 최대 30분이며 관리 실행은 `ACCESSIBILITY_ARCHIVE_DEADLINE_MS`에 실제 고정 outer deadline을 전달하여 그 30초 전까지로 더 줄인다. deadline 갱신·자동 재시도·실패 후 다른 형식 우회는 허용하지 않는다.
+
+
+## 2026-10-22 별도 필기 전환의 등록·검증
+
+`practical-written-001`은 종료된 확대/편집 캠페인의 새 회차가 아니다. 기준 `4536277093f80273dd9f5799b32990a74d260466`의 `editorial.5` 은행971개를 보존하는 단일 successor이며 실기84개는 바꾸지 않는다. P1 원 검토28회와 출처 갱신4건의 원 입력·판정·시각을 공개용 증빙에 연결한다. P2는 승인된18묶음 이내에서9개씩, 최대3회·4시간·2026-10-22T14:16:00.872564+00:00의 이른 마감으로 끝낸다.
+
+공개용 대장과 schema·모든 review snapshot을 허용 목록에 등록한 뒤 exact 후보를 검사한다. `node scripts/validate-bank.mjs <후보>`와 build는 같은 전환 계약을 적용하며, immutable bank를 쓴 뒤 일반 build도 활성 은행을 재검사한다. 통합 `npm run release:validate`는 새 전환과 고정된 마지막 역사 은행의 전체 기존 검증을 함께 수행한다. 같은 snapshot의 check/직접 대장 검사를 반복하지 않는다. 전체 테스트·필요한 브라우저 확인과 실제 공개 확인은 별도로 수행한다.
+
+릴리스 백업을 만들 때 `writeReleaseDeliveryPair`에는 `roundId` 대신 `registrationId:'practical-written-001'`을 지정한다. 전체7z의 sourceRelease는 `kind:'practical_written_registered_release'`와 registrationId를 가진 별도 variant이며 기존 round/editorial 형식은 보존한다. 변경분ZIP도 sourceKind와 registrationId로 출처를 구별한다. 이 포장은 옛 offline receipt/root/chain의 새 후속 자격이나 공개 성공을 만들지 않는다. 실제 공개는 일반 Git 단일 payload commit·비강제 push와 exact Pages/live 확인 절차를 따른다.
+
+전환 release pair는 exact frozen source에서 전체 campaign/release 의미 검사와 checkSources를 한 번씩 실행하고 source/runtime before-after를 대조한다. 이 경로를 사용하면 동일 snapshot의 별도 release:validate를 바로 앞뒤에서 실행하지 않는다. npm test와 격리 build는 먼저 수행하고 pair 뒤에는 일반 도구 복원·독립 재구성·smoke 및 실제 전송 경계를 확인한다. caller PASS/skip나 저장 증거 token을 입력받지 않는다.

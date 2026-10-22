@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw22-g32-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw22-g32-w01",
+    "revision": 1,
+    "templateId": "pw22-template-g32",
+    "learningGoalId": "pw22-goal-g32",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s3",
+    "topicIds": [
+      "pw22-g32"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 목록의 허용 선택 방식과 현재 선택된 항목을 바르게 연결한 것을 고르시오.",
+    "notes": [
+      "스크립트는 사용자가 기존 선택을 유지하면서 항목을 추가하거나 개별 항목을 해제하도록 구현되어 있다. 초점·키보드 처리는 정상이며, 보기의 속성은 현재 상태이다."
+    ],
+    "explanation": "aria-multiselectable=true는 여러 항목을 함께 선택할 수 있다는 뜻이지 현재 여러 항목이 선택되었다는 뜻이 아니다. 두 option의 aria-selected가 모두 false이므로 현재 선택된 항목은 없다. aria-activedescendant가 가리키는 초점 항목과 선택 상태도 구별한다.",
+    "sourceRefs": [
+      "pw22b-src-aria-multiple"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06 고정판)",
+    "difficulty": "응용",
+    "reviewNote": "별도 필기 전환 후보 초안. 독립 풀이·출처·정답 유일성·문안·구조의 검토 전이며 등록·공개하지 않았다.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw22-g32-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g32-w01-set"
+      },
+      {
+        "optionId": "pw22-g32-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g32-w01-set"
+      },
+      {
+        "optionId": "pw22-g32-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g32-w01-set"
+      },
+      {
+        "optionId": "pw22-g32-w01-o4",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw22-g32-w01-set"
+      },
+      {
+        "optionId": "pw22-g32-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g32-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<div role=\"listbox\" aria-label=\"관심 분야\" tabindex=\"0\"\n     aria-multiselectable=\"true\" aria-activedescendant=\"music\">\n  <div id=\"music\" role=\"option\" aria-selected=\"false\">음악</div>\n  <div id=\"art\" role=\"option\" aria-selected=\"false\">미술</div>\n</div>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 목록의 허용 선택 방식과 현재 선택된 항목을 바르게 연결한 것을 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw22-g32-w01-o1",
+      "revision": 1,
+      "content": "허용 방식: 단일 선택 · 현재 선택: 없음",
+      "explanation": "현재 선택이 없다는 사실이 목록의 다중선택 가능성을 단일선택으로 바꾸지는 않는다."
+    },
+    {
+      "optionId": "pw22-g32-w01-o2",
+      "revision": 1,
+      "content": "허용 방식: 복수 선택 · 현재 선택: 음악",
+      "explanation": "aria-activedescendant는 활성 초점 항목을 연결하며 음악의 false인 선택 상태를 true로 바꾸지 않는다."
+    },
+    {
+      "optionId": "pw22-g32-w01-o3",
+      "revision": 1,
+      "content": "허용 방식: 단일 선택 · 현재 선택: 음악",
+      "explanation": "초점 항목 하나를 현재 선택 및 단일선택 방식으로 동시에 잘못 해석했다."
+    },
+    {
+      "optionId": "pw22-g32-w01-o4",
+      "revision": 1,
+      "content": "허용 방식: 복수 선택 · 현재 선택: 없음",
+      "explanation": "컨테이너는 다중선택을 허용하지만 각 항목의 현재 선택 상태는 모두 false이다."
+    },
+    {
+      "optionId": "pw22-g32-w01-o5",
+      "revision": 1,
+      "content": "허용 방식: 복수 선택 · 현재 선택: 음악과 미술",
+      "explanation": "다중선택을 허용한다는 선언은 두 항목을 자동으로 선택하는 동작이 아니다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw22b-src-aria-multiple",
+      "title": "WAI-ARIA 1.2 — 선택 방식과 선택 상태",
+      "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-multiselectable",
+      "version": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06 고정판)",
+      "checkedAt": "2026-10-22T11:28:12.371780+00:00",
+      "location": "§6.7 aria-multiselectable, aria-selected; §5.4 listbox",
+      "evidence": "aria-multiselectable은 동시에 여러 항목을 선택할 수 있는 방식이고, aria-selected는 개별 항목의 현재 선택을 나타낸다. 초점 위치와 현재 선택은 별개이며 다중선택 모드에서도 현재 선택이 없을 수 있다.",
+      "rights": "지정된 공식 자료의 필요한 사실을 의역하고, 실기 원본의 지식을 바탕으로 지문·선택지·코드를 독립 작성했다. 표준 예제·전문·공식 시험 샘플·유료 문제집 문구를 복제하지 않았다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

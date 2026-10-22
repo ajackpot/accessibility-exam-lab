@@ -1,0 +1,4383 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_to_written_registration",
+  "registrationId": "practical-written-001",
+  "authorization": {
+    "authorizedAt": "2026-10-22T11:09:39.404937+00:00",
+    "scope": "p1_registration_p2_review_and_public_release",
+    "practicalChangesAllowed": false
+  },
+  "baseline": {
+    "sourceCommit": "4536277093f80273dd9f5799b32990a74d260466",
+    "bankVersion": "2026.10.14-editorial.5",
+    "bankSha256": "42c3eed6dea79a03f78226b1887b93c71f11f0d3fb6fa63b5ba3c298a823edf2",
+    "manifestSha256": "5d16fd0e2ff104f3a57b1a8b6ff3b431599475cdb0f1589125c065f11836596f"
+  },
+  "status": "closed",
+  "registeredAt": "2026-10-22T11:50:31.755715+00:00",
+  "batches": [
+    {
+      "batchId": "p1-reuse",
+      "origin": "p1_reused",
+      "startedAt": "2026-10-21T07:02:30.820847+00:00",
+      "decisionDeadline": "2026-10-21T09:02:30.820847+00:00",
+      "closedAt": "2026-10-21T07:33:23.121095+00:00",
+      "candidateIds": [
+        "pw21-g01-w01",
+        "pw21-g02-w01",
+        "pw21-g03-w01",
+        "pw21-g04-w01",
+        "pw21-g05-w01",
+        "pw21-g06-w01",
+        "pw21-g07-w01",
+        "pw21-g09-w01",
+        "pw21-g10-w01",
+        "pw21-g11-w01",
+        "pw21-g12-w01",
+        "pw21-g14-w01",
+        "pw21-g15-w01",
+        "pw21-g17-w01",
+        "pw21-g18-w01",
+        "pw21-g19-w01"
+      ]
+    },
+    {
+      "batchId": "p2-a",
+      "origin": "p2_reviewed",
+      "startedAt": "2026-10-22T11:16:00.872564+00:00",
+      "decisionDeadline": "2026-10-22T14:16:00.872564+00:00",
+      "closedAt": "2026-10-22T11:42:15.969394+00:00",
+      "candidateIds": [
+        "pw22-g08-w01",
+        "pw22-g13-w01",
+        "pw22-g16-w01",
+        "pw22-g20-w01",
+        "pw22-g21-w01",
+        "pw22-g22-w01",
+        "pw22-g24-w01",
+        "pw22-g25-w01",
+        "pw22-g26-w01"
+      ]
+    },
+    {
+      "batchId": "p2-b",
+      "origin": "p2_reviewed",
+      "startedAt": "2026-10-22T11:16:00.872564+00:00",
+      "decisionDeadline": "2026-10-22T14:16:00.872564+00:00",
+      "closedAt": "2026-10-22T11:41:50.488065+00:00",
+      "candidateIds": [
+        "pw22-g27-w01",
+        "pw22-g28-w01",
+        "pw22-g29-w01",
+        "pw22-g30-w01",
+        "pw22-g31-w01",
+        "pw22-g32-w01",
+        "pw22-g33-w01",
+        "pw22-g37-w01",
+        "pw22-g40-w01"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "candidateId": "pw21-g01-w01",
+      "groupId": "G01",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g01-w01",
+      "templateId": "pw21-template-g01",
+      "learningGoalId": "pw21-goal-g01",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r005-standards-p02",
+          "revision": 1,
+          "sha256": "31151610578e0023b7b9e941f5941db478747a4998ea2f3d55c3567327345ef2"
+        }
+      ],
+      "priorWrittenIds": [
+        "r003-standards-s1-w06",
+        "r011-dom-form-s3-w06",
+        "r015-dom-html-s3-w04",
+        "seed-w05"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g01-w01-cycle-1.json",
+            "sha256": "4ae245db51baf940e5dcc4c21f963d09879435cb801ce8c0d4954e32bfaec554"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g01-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "label의 for는 대상 input의 id와 일치해야 한다. 두 번째 input의 id를 office로 바꾸면 중복 id가 사라지고 자택·회사 레이블이 각각 올바른 입력란을 가리킨다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "for와 고유 id의 대응을 유지하면서 두 입력란을 서로 다르게 연결해야 한다. 둘째 input의 id=office 수정만 자택/homePhone과 회사/workPhone의 의도된 연결을 함께 복구한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "다섯 수정안이 한 속성의 변경/추가라는 같은 관점이다. 정답만 장황하거나 특별한 예외를 덧붙이지 않는다. 입력 순서와 name 정보가 두 전화 입력란의 정체성을 고정한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g01-w01-cycle-2.json",
+            "sha256": "ea02e1b44a32a6d5f599aad4b24172d14f2d59ff73729443024994469c652a6e"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g01-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "label의 for는 대응 input의 id와 연결된다. 회사 전화 입력란의 id를 office로 바꾸면 자택은 home, 회사는 office로 각각 연결되고 중복 id도 없어진다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "HTML id·title 출처가 추가되었고 고정판 표기가 정확해졌다. 지문·선택지는 동일하다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "명시적 label-for와 고유 id의 대응에서 둘째 input id만 office로 바꾸면 두 입력란의 의도된 연결이 모두 복구된다. name 변경·title 추가·for 통합·첫째 id 변경은 각각 연결 실패 또는 입력란 교환을 남긴다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "본문·보기·다섯 선택지의 의미는 그대로이며 추가 sourceRefs/지정판 표기가 질문 해석을 바꾸지 않는다. 각 선택지는 단일 속성 변경/추가로 평행하고 정답 길이 단서가 없다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g02-w01",
+      "groupId": "G02",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g02-w01",
+      "templateId": "pw21-template-g02",
+      "learningGoalId": "pw21-goal-g02",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "seed-p02",
+          "revision": 4,
+          "sha256": "2a0621e083e571b2074e7454c7f60c8132261f62348428d64bd6a6800e64483e"
+        }
+      ],
+      "priorWrittenIds": [
+        "r002-internet-html-w19",
+        "seed-w06"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g02-w01-cycle-1.json",
+            "sha256": "f782d5c4411e88b28770e47310e70f778261f28260f4948261e2de0a7902ad4f"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g02-w01-o5"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "이름을 유지하는 토글 버튼의 켜짐 상태는 aria-pressed=\"true\"로 반영한다. 시각 표현을 바꾸는 paint(saved)만으로 aria-pressed 값이 갱신되지는 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "고정된 이름의 native button에 이미 aria-pressed=false가 있고 saved=true인 상태로 바뀌었으므로 눌림 상태를 true로 갱신한다. current/selected/checked/expanded는 이 토글의 눌림 상태를 대신하지 않는다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "속성=값 형태와 정보량이 평행하다. aria-pressed가 코드에 이미 있어 속성 찾기 난도는 낮지만, 승인된 기초 상태 동기화 보완 과제이다. 속성 식별 자체를 신규 성취로 주장하면 안 된다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다.",
+      "sourceRefresh": {
+        "input": {
+          "path": "docs/conversions/evidence/practical-written-001/pw21-g02-w01-cycle-1-source-refresh.json",
+          "sha256": "1f2a40d49905e9ca98cfd93862a2ab0a1d9ad31cbeba295b644a950924632bb5"
+        },
+        "reviewerId": "source-p1",
+        "completedAt": "2026-10-21T07:29:34.958609+00:00",
+        "priorQuestionAndOptionsUnchanged": true,
+        "originArtifactSha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc",
+        "result": "pass",
+        "summary": "문항·연결 선택지는 원 cycle1과 정확히 같다. 원 최종 출처 검토에서 교체된 출처 카드와 같은 문항 개정판의 결박을 확인했으며 새로운 후보 풀이 cycle로 세지 않았다."
+      }
+    },
+    {
+      "candidateId": "pw21-g03-w01",
+      "groupId": "G03",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g03-w01",
+      "templateId": "pw21-template-g03",
+      "learningGoalId": "pw21-goal-g03",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "seed-p03",
+          "revision": 4,
+          "sha256": "76c803422d17e2855782d8adcaeff0fb82d556d62b022f3a1ccbdbb81321114c"
+        }
+      ],
+      "priorWrittenIds": [
+        "r002-standards-s1-w06",
+        "r014-dom-html-s3-w05",
+        "r025-html-css-practical-s3-w01"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g03-w01-cycle-1.json",
+            "sha256": "8903e259448c55f6ea4c65d7c5a30d9a10c41dada5cb825b7abd2da80fc1f140"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g03-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "이미지가 링크의 유일한 내용이므로 대체 텍스트는 달력의 모양이나 파일명보다 이동 목적지인 강좌 일정을 전달해야 한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "링크의 유일한 내용인 이미지에는 링크로 얻을 정보인 강좌 일정을 이름으로 제공해야 한다. 그림의 색·모양·요소 종류·파일명은 이 목적을 전달하지 못한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "짧은 alt 문자열로 평행하고 정답이 최장 선택지가 아니다. 두 시각 묘사 오답은 비슷하지만 색 정보를 덧붙여도 목적이 생기지 않는다는 동일 원칙의 서로 다른 적용이다. 그림은 notes로 텍스트 설명되어 실제 이미지를 볼 필요가 없다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다.",
+      "sourceRefresh": {
+        "input": {
+          "path": "docs/conversions/evidence/practical-written-001/pw21-g03-w01-cycle-1-source-refresh.json",
+          "sha256": "b385d1a7d2667452c83c5fd79d88d9eecee4d4c2cd76ccffac2b2635403e0841"
+        },
+        "reviewerId": "source-p1",
+        "completedAt": "2026-10-21T07:29:34.958609+00:00",
+        "priorQuestionAndOptionsUnchanged": true,
+        "originArtifactSha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc",
+        "result": "pass",
+        "summary": "문항·연결 선택지는 원 cycle1과 정확히 같다. 원 최종 출처 검토에서 교체된 출처 카드와 같은 문항 개정판의 결박을 확인했으며 새로운 후보 풀이 cycle로 세지 않았다."
+      }
+    },
+    {
+      "candidateId": "pw21-g04-w01",
+      "groupId": "G04",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g04-w01",
+      "templateId": "pw21-template-g04",
+      "learningGoalId": "pw21-goal-g04",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r006-css-script-p02",
+          "revision": 1,
+          "sha256": "df397e4bc941204d354a14c7cbe0a32aa903074570b202c5142fa81b5be85028"
+        }
+      ],
+      "priorWrittenIds": [
+        "r002-internet-html-w13",
+        "r022-html-css-practical-s3-w02",
+        "r033-primary-s1-w01"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g04-w01-cycle-1.json",
+            "sha256": "b705b2bae83e1d45a4449852596990624d34af19664e5c325708c7d2db1e9cd9"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g04-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "Enter에서는 keydown 처리의 send.click() 한 번과 취소되지 않은 기본 click 한 번으로 count가 2가 된다. Space는 추가 처리 없이 기본 click 한 번, 포인터 클릭도 click 처리 한 번이다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p1",
+              "summary": "초안 카드의 label/button 소개만으로 중복 활성화 경로를 직접 뒷받침하지 못한다. Activation 절 카드로 교체."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "명시한 환경에서는 Enter keydown의 수동 click 1회와 취소되지 않은 기본 click 1회를 합해 2회다. Space와 포인터는 수동 Enter 분기를 실행하지 않아 각 1회다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "세 입력 방식과 횟수 조합이 완전히 평행하다. 키 반복과 기본 동작 취소 여부를 notes에서 고정했다. 실제 브라우저별 기본 이벤트 순서를 실측했다는 해석 없이 주어진 환경의 논리 결과를 판정한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g04-w01-cycle-2.json",
+            "sha256": "be33d97ea6195bade3172f970ee3a18bb7e6fa39d6a0475208084736f23999dd"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g04-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "Enter에서는 keydown 처리의 send.click()과 조건에 명시된 기본 click이 각각 한 번 발생하여 2회다. Space에는 추가 click을 호출하는 분기가 없어 1회이며 포인터 클릭도 1회다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "label 소개 카드에서 HTML5.2 Activation 근거로 교체되었다. 기본 click 횟수의 환경 전제를 유지하여 Enter2·Space1·포인터1 판단이 유지된다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "주어진 환경의 기본 click 1회와 Enter keydown 수동 click 1회를 합산하면 Enter=2, Space=1, 포인터=1이다. 다른 네 조합은 수동 분기의 적용 대상을 잘못 계산한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "정확한 지정판 표기로 바뀌었으며 세 입력 수단의 같은 결과 형식과 반복 키/기본 동작 취소 조건은 유지된다. 후보 코드를 실행하거나 특정 브라우저에서 재현한 결론이 아니다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g05-w01",
+      "groupId": "G05",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g05-w01",
+      "templateId": "pw21-template-g05",
+      "learningGoalId": "pw21-goal-g05",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-standards-p01",
+          "revision": 2,
+          "sha256": "853ef088dcaf6a9208504e39ed575eb8a1b980881cde30cfd3844c35ce9cf8cc"
+        }
+      ],
+      "priorWrittenIds": [
+        "r004-css-script-w03",
+        "r004-standards-s1-w04",
+        "r005-standards-s1-w01"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g05-w01-cycle-1.json",
+            "sha256": "f1fa4a726b07c764e5d045201c15e3af44f164a7f682586e9119a529fe530f2a"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g05-w01-o5"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "정보나 기능이 없는 장식 이미지는 빈 alt를 사용하고, 다른 곳에 없는 점검 안내는 오늘 14~16시 서비스 이용 불가라는 실제 정보를 대체 텍스트로 제공한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "정보·기능이 없는 장식은 빈 alt로 처리하고, 다른 텍스트에 없는 안내의 이용 불가 시간과 내용을 정보 이미지의 alt로 보존한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "두 이미지에 대한 값 조합이라는 관점이 일치하며 일부 오답도 정답과 같은 긴 안내문을 포함하여 길이 단서가 없다. 안내 이미지의 실제 문구를 notes에서 제공하여 시각 자료 의존을 제거했다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다.",
+      "sourceRefresh": {
+        "input": {
+          "path": "docs/conversions/evidence/practical-written-001/pw21-g05-w01-cycle-1-source-refresh.json",
+          "sha256": "0dfd5c8ecc99b48f9b635d79d75af3cff1e6fac2f4950250f834bc7ae6dcd74b"
+        },
+        "reviewerId": "source-p1",
+        "completedAt": "2026-10-21T07:29:34.958609+00:00",
+        "priorQuestionAndOptionsUnchanged": true,
+        "originArtifactSha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc",
+        "result": "pass",
+        "summary": "문항·연결 선택지는 원 cycle1과 정확히 같다. 원 최종 출처 검토에서 교체된 출처 카드와 같은 문항 개정판의 결박을 확인했으며 새로운 후보 풀이 cycle로 세지 않았다."
+      }
+    },
+    {
+      "candidateId": "pw21-g06-w01",
+      "groupId": "G06",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g06-w01",
+      "templateId": "pw21-template-g06",
+      "learningGoalId": "pw21-goal-g06",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-standards-p02",
+          "revision": 2,
+          "sha256": "dbb8d5d8f60ebe17f4bdd8d2be0d7bb0d2417c968d9b6917f263cbd188e91204"
+        }
+      ],
+      "priorWrittenIds": [
+        "r003-internet-html-w13",
+        "r005-standards-s1-w04",
+        "r010-network-html-s3-w02"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g06-w01-cycle-1.json",
+            "sha256": "41cacde7179f015b486658d9edb0faeb3b938223bb8eac55b44d1e55129ba421"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g06-w01-o5"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "7은 누락이나 숫자 형식 문제가 아니라 허용 인원 범위를 초과한 값이다. o5만 잘못된 값·오류 원인·수정할 범위 1~4명을 함께 알려 준다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "현재 오류는 입력값이 없거나 숫자 형식이 잘못된 것이 아니라 7이 1~4명 범위를 벗어난 것이다. 오류 항목과 허용 범위를 함께 알리는 o5가 유일하게 수정에 필요한 정보를 제공한다."
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "semantic-p1",
+              "summary": "메시지 형식과 길이는 대체로 평행하지만 o1의 “숫자 7을 입력해”와 o4의 “같은 값”은 이미 틀렸다고 주어진 값을 반복하도록 하여 개념보다 명백한 모순으로 제거된다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g06-w01-cycle-2.json",
+            "sha256": "d471e4dcf2ca05eab282a9f4e886c0b5916107d1782b53bff73571c3d190739b"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g06-w01-o5"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "입력값 7은 숫자이면서 누락되지 않았지만 허용 범위 1~4를 넘었다. o5가 오류 항목·현재 잘못된 값·수정 가능한 범위를 함께 알려 준다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "지문이 오류 항목과 허용 조건을 구체적으로 요구한다. o1은 숫자 형식으로 오진하며 o4는 7을 거절하지만 허용 범위를 주지 않는다. o5만 현재 오류와 1~4명 수정 범위를 연결한다. 기존 정답 유지."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "숫자 7은 존재하는 정수이지만 1~4명 범위를 벗어난다. 수정 지문은 오류 항목과 허용 조건을 구체적으로 요구하므로, o4는 현재 값의 문제를 알려도 범위를 제공하지 않아 정답이 아니다. o5만 항목과 허용 범위를 함께 제공한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "o1은 숫자 형식과 범위의 혼동을 남기면서 잘못된 값 7의 재입력 지시를 제거했다. o4는 같은 값 재시도 대신 그럴듯하지만 범위가 빠진 정정 안내가 되었다. 다섯 메시지가 두 문장 형태로 평행하며, o4도 현재 값 7을 포함하여 정답만 자세해 보이는 단서를 줄였다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g07-w01",
+      "groupId": "G07",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g07-w01",
+      "templateId": "pw21-template-g07",
+      "learningGoalId": "pw21-goal-g07",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-css-script-p01",
+          "revision": 2,
+          "sha256": "46f0c7228d597d6b5a58f0559df713d13ed5a658286c042a6355bc4c311ee779"
+        }
+      ],
+      "priorWrittenIds": [
+        "r004-standards-s1-w07",
+        "r009-web-tech-s4-w01"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g07-w01-cycle-1.json",
+            "sha256": "825d73add7674846b0d0d59e0b3370321733091bf2fc73b13066697a0c5a0494"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g07-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "양수 tabindex는 작은 값부터 순차 초점 탐색 순서를 정하므로 1인 제출, 2인 신청자, 3인 강좌 순서다. 논리적인 업무 순서와 현재 코드의 실제 순서는 다르다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "양의 tabindex 1,2,3의 순서로 제출→신청자→강좌를 방문한다. 업무 흐름이나 DOM 순서를 그대로 택하면 주어진 양의 tabindex를 반영하지 못한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "다섯 순열의 문법과 정보량이 같다. 표시/활성 상태, 다른 초점 대상 부재, 처음부터 순차 탐색 조건이 있으므로 필요 조건을 보존했다. 화살표는 명명된 세 항목의 순서를 표현하며 색·위치 단서가 아니다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g07-w01-cycle-2.json",
+            "sha256": "62d664d4676b71351da1234fd16d92de448e92b90f8117aa989f769cf17c2729"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g07-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "주어진 순차 탐색 규칙에서는 양의 tabindex가 작은 순서로 탐색한다. 제출 1, 신청자 2, 강좌 3이므로 제출 → 신청자 → 강좌다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "플랫폼 고유 순서 변경 없이 HTML5.2 tabindex 규칙을 적용한다는 새 조건이면 §5.4.3의 should·플랫폼 관례 차이를 충분히 제한한다. 답의 오름차순 자체를 notes에 알려 주지 않고도 제출→신청자→강좌가 유일하다. KWCAG2.2 논리적 초점과 HTML 순서 근거가 함께 연결되었다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "모든 대상이 활성화되고 처음부터 시작하며 HTML 5.2의 순차 탐색 규칙을 적용하는 조건에서 tabindex 1 제출→2 신청자→3 강좌가 유일하다. 업무 흐름을 실제 초점 순서로 오인한 나머지 순열은 틀리다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "새 note는 플랫폼별 순서 변경이 없다는 적용 환경만 한정한다. 숫자 오름차순이나 정답의 요소 순서를 직접 제공하지 않는다. 다섯 순열의 정보량과 원래 업무 흐름 조건을 유지한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g09-w01",
+      "groupId": "G09",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g09-w01",
+      "templateId": "pw21-template-g09",
+      "learningGoalId": "pw21-goal-g09",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-css-script-p03",
+          "revision": 2,
+          "sha256": "f60ee88159281af6f5a82492d9ab61aeec598e99c1f0c1749960e9f765cfc0cf"
+        }
+      ],
+      "priorWrittenIds": [
+        "r004-standards-s1-w07",
+        "r006-standards-s1-w03",
+        "r020-html-css-practical-s3-w10"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g09-w01-cycle-1.json",
+            "sha256": "428c3af877d7c41fe98936857276f5e441ef5d24b65b4ee3b7bb0c4b4e67694c"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g09-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "목록에서는 값을 선택하고 비교할 수 있게 두고, 이용자가 별도 이동 버튼을 실행할 때 선택 주소로 이동하면 선택 과정의 예고 없는 페이지 변경을 막을 수 있다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p1",
+              "summary": "KWCAG2.2 대신 WAI인지장애 교육자료 fallback이 연결되어 판·조항이 맞지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "fail",
+              "reviewerId": "semantic-p1",
+              "summary": "비교하는 동안 값만 선택하게 하고 페이지 이동은 별도 버튼의 명시적 실행으로 분리해야 한다. 현재 o2는 의도상 이 개선이지만 “선택값 변경은 유지”만으로 기존 onchange 자동 이동 제거까지 명시하지 않는다."
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "semantic-p1",
+              "summary": "다섯 개선안의 형태·길이는 평행하고 오답 개념은 타당하다. 다만 정답의 첫 절이 코드의 change 처리 자체를 유지하라는 뜻으로도 읽혀 해설의 자동 이동 분리와 정확히 맞지 않는다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g09-w01-cycle-2.json",
+            "sha256": "001b5833f0ad1bbd10fe085564dbbd63f2b65b94a4c6673dc11aaf5a0f0de183"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g09-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "자동 이동을 제거하고 별도 이동 버튼을 두면 선택값을 바꾸며 비교할 수 있고, 이동은 이용자의 명시적인 실행으로 발생한다. 나머지 선택지는 선택 변경이나 초점 이탈만으로 이동한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "정답 선택지에서 선택 변경의 자동 이동을 없앤다고 명시했다. 별도 이동 실행과 선택 비교를 분리한다는 근거가 더 정확해졌다. WAI 교육 fallback은 NIA KWCAG2.2 공식 해설로 교체되었다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "o2가 선택값 변경에 따른 자동 이동을 없앤다고 명시하므로 기존 onchange 유지 해석이 해소된다. 별도 버튼 실행으로 이동 시점을 분리하는 방법만 비교 후 이동이라는 요구를 충족한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "정답의 필수 동작 제거가 명시됐고 그 길이는 다른 두 절 개선안과 비슷하다. 새 창·배경색·초점 이탈·사후 안내는 각기 이동 실행 의사를 대체한다는 타당한 혼동을 남긴다. 해설의 분리 원리와 일치한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g10-w01",
+      "groupId": "G10",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g10-w01",
+      "templateId": "pw21-template-g10",
+      "learningGoalId": "pw21-goal-g10",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-internet-html-p01",
+          "revision": 2,
+          "sha256": "66a3fcfd25550df3d8d092ce269c9e2d24591f2a9e1c80e3d699fb77b03e88d9"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-internet-html-w18",
+        "r004-internet-html-w12"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g10-w01-cycle-1.json",
+            "sha256": "91cc36d848405c696fd879fd434441aca277facc2d3bdcb398e3843b208880e4"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g10-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "fail",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "fieldset으로 묶은 컨트롤들의 그룹 표제는 legend의 상담 방식이다. 전화·방문은 개별 라디오의 레이블이고 phone은 한 라디오의 값이다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "fail",
+              "reviewerId": "semantic-p1",
+              "summary": "fieldset의 첫 legend는 그룹의 캡션/공통 질문인 상담 방식을 제공한다. 그러나 라디오 그룹의 실제 공통 name 값도 contactWay이므로 현재 “그룹의 공통 이름”은 어느 이름을 묻는지 명확하지 않다."
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "semantic-p1",
+              "summary": "선택지 길이와 표현 형태는 평행하나 “이름”이라는 용어가 name 속성과 그룹 표제를 동시에 뜻한다. o5는 오답으로 가정한 해석에서만 틀리므로 질문 의미를 한정해야 한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g10-w01-cycle-2.json",
+            "sha256": "c14d4bba9ba06d1d8c775478abb2f803bcc746c589c1f6ca313310e58a372b42"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g10-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "fieldset의 legend는 묶인 입력 항목들의 공통 표제를 제공한다. legend의 텍스트는 상담 방식이며 전화·방문은 개별 라디오 항목의 레이블이다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "fieldset에 묶인 항목의 공통 질문을 나타내는 표제 텍스트로 질문을 한정하여 name 속성과의 혼동을 줄였다. 첫 legend의 상담 방식이 여전히 유일한 답이다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "지문이 fieldset의 공통 질문을 나타내는 표제 텍스트로 대상을 한정한다. legend의 상담 방식만 이에 해당하며 contactWay는 선택 그룹의 name 값이므로 더 이상 경쟁답이 아니다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "stem과 materials.instruction이 정확히 함께 바뀌었다. phone/value, contactWay/name, 두 개별 label과 그룹 표제의 구별이 명료하며 선택지는 원래의 짧고 평행한 텍스트 형식을 유지한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g11-w01",
+      "groupId": "G11",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g11-w01",
+      "templateId": "pw21-template-g11",
+      "learningGoalId": "pw21-goal-g11",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-internet-html-p02",
+          "revision": 1,
+          "sha256": "e741ecebfd752107835df06a7cf8b7c92bdd8b84e7eb7369c30d15fca6ecd1b3"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-internet-html-w17",
+        "r016-dom-html-s3-w01"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g11-w01-cycle-1.json",
+            "sha256": "234c1fa4dd96aa2fe27f0e2ffd622a894175dc5548cd4eba711565ac1d622e99"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g11-w01-o1"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "18은 서부 행의 두 번째 셀이다. scope=\"row\"인 서부가 행 제목이고 같은 열의 scope=\"col\"인 신청 수가 열 제목이다. caption은 표 전체 제목이다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "18은 서부 행의 두 번째 열 셀이다. scope=row인 서부와 scope=col인 신청 수가 적용되며 caption은 표 전체 제목이다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "행 제목·열 제목 조합으로 평행하다. 병합과 다른 headers 정보가 없음을 명시하여 대응이 유일하다. 표는 완전한 코드 텍스트로 제공되어 화면 좌표만으로 판단할 필요가 없다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다.",
+      "sourceRefresh": {
+        "input": {
+          "path": "docs/conversions/evidence/practical-written-001/pw21-g11-w01-cycle-1-source-refresh.json",
+          "sha256": "eb6301cdf6a195c292fb3197cda809d0998222bacafca4b047261c6890cb2890"
+        },
+        "reviewerId": "source-p1",
+        "completedAt": "2026-10-21T07:29:34.958609+00:00",
+        "priorQuestionAndOptionsUnchanged": true,
+        "originArtifactSha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc",
+        "result": "pass",
+        "summary": "문항·연결 선택지는 원 cycle1과 정확히 같다. 원 최종 출처 검토에서 교체된 출처 카드와 같은 문항 개정판의 결박을 확인했으며 새로운 후보 풀이 cycle로 세지 않았다."
+      }
+    },
+    {
+      "candidateId": "pw21-g12-w01",
+      "groupId": "G12",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g12-w01",
+      "templateId": "pw21-template-g12",
+      "learningGoalId": "pw21-goal-g12",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-internet-html-p03",
+          "revision": 2,
+          "sha256": "e953cb34936d2e011a9a72222bab87e62395cbc23a422cdb0a1672a5abf043bc"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-internet-html-w12",
+        "r010-dom-css-w07"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g12-w01-cycle-1.json",
+            "sha256": "54232ff04435f36272130091642959c86ed9349e51d74acd10d1fe681f370283"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g12-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "루트 html의 lang을 ko로 바꾸면 문서 전체의 기본 언어를 한국어로 선언한다. 실제 저장 인코딩과 일치하는 UTF-8 선언은 유지해야 한다. 특정 자손의 lang만 바꾸면 문서 전체의 선언이 되지 않는다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p1",
+              "summary": "KWCAG 주언어 카드 외에 코드의 lang 상속과 charset 구별에 대한 HTML 고정판 근거가 빠졌다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "기존 UTF-8 선언은 유지하고 html의 기본 언어를 ko로 바꾸어야 문서 전체 기본 언어를 한국어로 명시한다. title/p만의 선언은 국소 범위이고 charset 변경은 언어 선언이 아니다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "각 수정은 같은 범위의 코드 변경이며 정답만 길지 않다. 실제 파일 인코딩과 다른 언어 선언 부재를 고정했다. 문서 전체라는 한정은 title/p의 유효한 국소 선언을 경쟁답으로 만들지 않기 위해 필요하다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g12-w01-cycle-2.json",
+            "sha256": "9dc692f2c6eeef6203874b9a4fb271d623db9243d3a9a1ba4ec0c6fc78204d31"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g12-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "html의 lang을 ko로 바꾸면 문서의 기본 언어를 한국어로 선언하면서 실제 UTF-8 저장과 맞는 charset은 유지된다. title이나 p만 지정하면 문서 전체의 잘못된 기본 언어는 남는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "HTML lang 상속·루트 언어와 문자 인코딩 근거가 추가되어 모든 오답을 직접 설명할 수 있다. KWCAG2.2 적용판 표기가 정확하다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "문서 전체 언어를 한국어로 명시하려면 UTF-8 charset은 유지하고 html lang을 ko로 바꾼다. title/p만의 국소 지정이나 언어 속성 삭제는 문서 전체 선언이 아니며 EUC-KR 변경은 인코딩 불일치를 만든다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "새 HTML 언어/인코딩 sourceRef와 지정판 표기를 함께 읽어도 지문·선택지 해석은 같다. 문서 전체라는 한정은 유효한 국소 lang 대안을 배제하는 데 필요하다. 새 지식 대신 문서 루트 적용 보완이라는 1차 중복 판정을 유지한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g14-w01",
+      "groupId": "G14",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g14-w01",
+      "templateId": "pw21-template-g14",
+      "learningGoalId": "pw21-goal-g14",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r002-css-script-p02",
+          "revision": 2,
+          "sha256": "98bc4e52c7b7f2f018cc526febcb43ea1b0081fbaa7867c134c900621e64424f"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-css-script-w10",
+        "r033-primary-s1-w01"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g14-w01-cycle-1.json",
+            "sha256": "e75c7d02db215082aa1043ef5c6359fb17df5ed6491270b21fce61cdfe93d088"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g14-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "Tab과 Shift+Tab 모두 event.key가 Tab이므로 preventDefault()가 실행되어 양방향 순차 탐색이 취소된다. 일반 문자 키는 조건에 해당하지 않아 입력할 수 있다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p1",
+              "summary": "KWCAG 키보드 원칙만으로 코드의 key 토큰·수정키·기본처리 판단을 모두 연결하지 못한다. HTML 기본처리와 W3C key 보조근거를 추가."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "Shift를 함께 눌러도 event.key는 Tab이므로 두 방향 순차 탐색이 취소된다. 문자 키는 조건에 맞지 않아 입력 가능하고 Tab 기반 탈출은 막힌다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "Tab·Shift+Tab·문자 세 결과가 평행하다. 기본 동작 취소 환경, 대체 탈출 키 부재와 별도 편집 요구 부재를 고정해 예외를 배제했다. 실측 없이 제공된 조건에서의 논리 판단으로 한정한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g14-w01-cycle-2.json",
+            "sha256": "99ea90b14d92be867038f4940cfafa64a2375b3a21c00f34064554b8b973a40d"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g14-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "Shift를 눌러도 Tab 키의 event.key는 Tab이므로 두 순차 탐색 모두 preventDefault()로 취소된다. 일반 문자 키는 조건에 해당하지 않아 입력할 수 있다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "KWCAG2.2 키보드 함정 원칙에 HTML 키 기본 처리와 W3C named key 보조자료가 추가되었다. 보조 CR 문서를 새 시험 적용 규범으로 대체하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "Shift 여부를 별도로 검사하지 않으므로 두 Tab 탐색 모두 취소되고 문자 입력은 조건 밖이라 유지된다. 명시한 환경과 대체 탈출 키 부재에서 o2만 맞는다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "보완 출처 식별이 추가됐으나 풀이에 필요한 키/취소 조건과 다섯 결과 조합은 그대로다. 문자 입력 전체 차단이나 Shift+Tab 예외를 오답으로 그럴듯하게 비교하고 정답만 길거나 완곡하지 않다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g15-w01",
+      "groupId": "G15",
+      "origin": "p1_reused",
+      "subjectId": "s1",
+      "questionId": "pw21-g15-w01",
+      "templateId": "pw21-template-g15",
+      "learningGoalId": "pw21-goal-g15",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r002-css-script-p03",
+          "revision": 1,
+          "sha256": "e09ae93601a5b90e61b330732d5f468c65add9eed1e7241f347a6aabf866d987"
+        }
+      ],
+      "priorWrittenIds": [
+        "r028-kwcag-s1-w01",
+        "r029-aria-s3-w02"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g15-w01-cycle-1.json",
+            "sha256": "aee595b6b762402cbb272dc0d733bfe88c68d77fd5c84f94d3f5d51ac617780d"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g15-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "스타일 없이 문서 순서로 읽을 때도 강좌 선택, 신청 전송, 완료 확인이 되려면 choose, send, done 순서여야 한다. 절대 위치만으로 시각적 순서를 맞추어도 문서 순서는 바뀌지 않는다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p1",
+              "summary": "지정판KWCAG2.2가아닌2.1카드및question.standardVersion을사용했다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "절차 의미가 선택→전송→확인이므로 해당 문단의 DOM 순서를 choose→send→done으로 맞춘다. absolute top 값은 코드의 선형 순서를 바꾸지 않는다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "각 선택지가 동일한 세 id의 순열이라 평행하다. notes의 절차 순서는 실제 업무 요구를 고정하는 필수 조건이며 삭제하면 외부 업무 상식을 요구한다. 요구 순서가 명시되어 난도는 낮지만, id와 문단의 매핑·DOM 재배치 과제에 필요한 자료다. 스타일 실측을 주장하지 않는다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g15-w01-cycle-2.json",
+            "sha256": "09d22429c4051ef30eff7ea0697f99be5e619ddc69d772e36aada4cbfee1967f"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g15-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "문서 순서에서도 강좌 선택 → 신청 전송 → 완료 확인이 되려면 choose → send → done으로 문단을 배치해야 한다. 절대 위치의 top 값만으로는 원래 문서 순서가 바뀌지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "2.1 잘못된 출처와 standardVersion이 KWCAG2.2/NIA2.2로 교체되었다. 문서 순서와 절차 의미 판단은 동일하다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "선택→전송→확인이 필요한 절차이므로 문서의 세 문단 순서는 choose→send→done이다. 시각적 top 배치만으로 기존 DOM 순서를 바꿀 수 없다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "지정판 표기가 KWCAG 2.2로 정리됐고 문항 내용은 동일하다. 절차 note는 대상 업무의 의미를 고정하는 조건으로 유지해도 된다. 코드 id 순열 선택지의 길이·문법은 평행하다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g17-w01",
+      "groupId": "G17",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g17-w01",
+      "templateId": "pw21-template-g17",
+      "learningGoalId": "pw21-goal-g17",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r002-internet-html-p01",
+          "revision": 1,
+          "sha256": "ec22c880d0507f69f0ee005eedecf42103f2dcaaa289aeb89d64230dd3aa2a7f"
+        }
+      ],
+      "priorWrittenIds": [
+        "r003-standards-s1-w05",
+        "r012-policy-accessibility-s5-w06",
+        "r013-dom-html-s3-w05"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g17-w01-cycle-1.json",
+            "sha256": "8815f03e0697dc297922903304460a69b3fe13af932f06735f96977543b29e50"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g17-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "h2인 신청 방법의 하위 제목 신청 기간은 h3이고, 신청 방법과 같은 수준인 수강 안내는 h2다. 제공 조건은 h1부터 단계별 제목 요소로 직접 계층을 나타내도록 정했다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p1",
+              "summary": "네이티브h요소문항에ARIAheading카드와ARIAstandardVersion을잘못연결했다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "신청 방법 h2의 하위 신청 기간은 h3이고, 신청 방법과 동위인 수강 안내는 h2다. 명시된 h1부터의 단계 구조에서 A=h3/B=h2만 맞는다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "A/B에 들어갈 요소 쌍이 동일 형식이다. h1부터 직접 표현하고 구획/ARIA로 재해석하지 않는다는 조건은 동등 구현을 배제하기 위해 필요하다. 실제 문단도 있어 제목만 만든 빈 구조가 아니다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g17-w01-cycle-2.json",
+            "sha256": "665f61700c37ea34d8ff7343e179f3ec90a268a1e8743799ab2c78258aaed15e"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g17-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "신청 기간은 h2 신청 방법의 하위이므로 h3, 수강 안내는 신청 방법과 같은 수준이므로 h2다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "ARIA heading 대신 네이티브 h1~h6 등급을 규정한 HTML5.2가 연결되었다. h3/h2 정답과 모든 오답의 등급 판단은 유지된다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "h2 신청 방법 아래 신청 기간은 h3이고, 신청 방법과 같은 수준인 수강 안내는 h2다. 명시된 단계별 계층에서 A=h3/B=h2만 성립한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "표준 표기가 실제 h1~h6 제목 요소 목표에 맞는 HTML 5.2로 정리됐다. 구획/ARIA 수준 재정의 제외는 필요한 조건이며 다섯 A/B 조합의 평행성이 유지된다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g18-w01",
+      "groupId": "G18",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g18-w01",
+      "templateId": "pw21-template-g18",
+      "learningGoalId": "pw21-goal-g18",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r002-internet-html-p02",
+          "revision": 1,
+          "sha256": "1cfd59a5933aeaefe7c924564f84991c5be363d0906425f7eaa5d885a87fd375"
+        }
+      ],
+      "priorWrittenIds": [
+        "r005-internet-html-w11",
+        "r010-network-html-s3-w03",
+        "r010-network-html-s3-w05"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g18-w01-cycle-1.json",
+            "sha256": "1e624490e0ff0c789b5ca197185f16e71d4a4b67aaf098976dc750586cecd56c"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g18-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "required인 입력이 빈 문자열이면 필수값 부재인 값 누락이다. reader는 비어 있지 않지만 email 형식이 아니므로 형식 불일치다. 빈 문자열 자체를 email 형식 불일치로 분류하지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "빈 값은 required의 값 누락이며 비어 있지 않은 reader는 이메일 형식 불일치다. notes를 포함한 현 입력에서 유일한 분류는 o3이다."
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "semantic-p1",
+              "summary": "조합의 형식과 길이는 평행하나 두 번째 note가 값 누락=required 부재, 형식 불일치=비어 있지 않은 email 오류라는 평가 규칙을 직접 제공한다. 빈 문자열과 reader에 그 정의를 그대로 대입하면 답이 드러난다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g18-w01-cycle-2.json",
+            "sha256": "6ea2aebbf45fbca13e9d8c301d165065162b3325ba552a7089742b9a3e14d978"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g18-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "required인 입력의 빈 문자열은 값 누락이다. reader는 비어 있지 않아 값 누락은 아니지만 이메일 주소 형식에 맞지 않아 형식 불일치다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "답을 정의하던 notes가 삭제되었다. HTML5.2 email·required의 지정판 검색 발췌와 기존 세부 확인기록을 적용하면 빈 값은 누락, reader는 형식 불일치다. 전문 신규 열람 범위가 늘었다고 주장하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "required인 email 입력에서 빈 값은 값 누락, 비어 있지 않은 reader는 이메일 형식 불일치다. 정의 note가 없어도 두 제약을 구별하면 o3가 유일하게 맞는다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "평가 규칙을 미리 알려 주던 두 번째 note가 제거됐다. 검사 환경을 고정하는 첫 note는 유지되어 새 모호성은 없다. 다섯 조합의 정보량과 오개념 구분, 문항/선택지 해설의 정오 이유는 계속 일치한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw21-g19-w01",
+      "groupId": "G19",
+      "origin": "p1_reused",
+      "subjectId": "s3",
+      "questionId": "pw21-g19-w01",
+      "templateId": "pw21-template-g19",
+      "learningGoalId": "pw21-goal-g19",
+      "authorId": "author-p1",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r002-internet-html-p03",
+          "revision": 1,
+          "sha256": "8ee614fccce55bb56b75f64817a782290751fc03a50ff6c5c237920636684c63"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-standards-s1-w08",
+        "r004-internet-html-w11",
+        "r008-css-script-w05"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-21T07:13:16.503509+00:00",
+          "completedAt": "2026-10-21T07:27:23.231733+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g19-w01-cycle-1.json",
+            "sha256": "51f3c264865bd9fa3b3ce8199402463f57136ed5bed7418ded8eb4279e3bb6c2"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "0c734f2a8c6226000496bf44b4d9e880a891a0bbe0a7dd568decc430fc084322"
+            },
+            {
+              "label": "source-review",
+              "sha256": "005779883ae48a3d6b8ad5118fb93e81ecbfa0fb7bc50c8dad295393f7d3aa4e"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "56308f2b88ef078e5df72500e2ff34efa83069f17dd3d5d06378a39a73219d91"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "8b39b1221853b7573dd4a7ae81dee0c4dda01479a610e5636a8130412facf591"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "d29be8c10919f14ae63829392e595d099562ce870f25607b08b72973cae19095"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "14dab15dfd4b4fb6200fc7e9b899b8f3a95d27e69b1181d882657ee6322df442",
+            "answerSha256": "d164e2c0ff234e5dac0328658fc8eb14b15d02ec05bcf8d84e4914f67088f19a",
+            "selectedOptionId": "pw21-g19-w01-o1"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle1",
+              "summary": "조상의 aria-hidden=\"true\"는 자손도 접근성 트리에서 제외하며 자손의 aria-hidden=\"false\"로 취소할 수 없다. section의 숨김 속성을 제거하면 제시 조건에서 결과 텍스트를 포함시킬 수 있다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 확인한 1차 규칙과 기존 확인기록의 사용 범위 안에서 정답·오답 근거가 성립한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "aria-hidden=true인 조상 조건이 남아 있으면 자손의 false나 이름/역할/초점 대상 추가로 일반 콘텐츠 노출을 복구할 수 없다. 조상 section의 aria-hidden을 제거해야 한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "다섯 수정은 한 속성 제거/추가로 평행하다. 다른 숨김 원인·이름 참조·초점 이동 추가를 문제 범위에서 제외하여 숨김 이름 참조나 실제 초점 상태의 예외를 무리하게 일반화하지 않는다. 브라우저/보조기술 노출을 실측한 판정은 아니다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-21T07:27:23.231733+00:00",
+          "completedAt": "2026-10-21T07:33:23.121095+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw21-g19-w01-cycle-2.json",
+            "sha256": "355d9a2b797024c2a083f0fe49963b9fe2e63e9cdf893f6be9111f73349f4960"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "9299a736a4f168b8a89642e16161c76e85b4d2392100b64c8b8405883be80ff1"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4f30852e5d4e27ef5561d55f946a4e7c18b612bdb417c6425510ec28a99dcafc"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0c0684b0d736a7c4b5ddfe9e6a967d1aebcc2b7e1e39fa564f669f362a4cd7a5"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "825b76bb651decc5732861b48ae9ad62b23b3e897bd176b4702e797232e5a16d"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "92cc713be2bcf36dbd2b06d35f5032e165b231eba6a8b2822c6cd13308676664"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p1-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "07878fb2ce8faeb8a88d6eccf6adcd1569988a3993dd054c2e3f0610e4cb8c7a",
+            "answerSha256": "f705c406785b61339191ee49d43b6e248f98a0b44cf95e35a32ff2f76f4cea36",
+            "selectedOptionId": "pw21-g19-w01-o1"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p1-cycle2",
+              "summary": "조상 section의 aria-hidden=true는 자손에도 영향을 미치며 p의 aria-hidden=false로 이를 해제할 수 없다. 다른 숨김 조건이 없으므로 section의 aria-hidden을 제거하면 결과 내용이 접근성 트리에서 숨겨지는 원인을 없앤다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p1",
+              "summary": "현재 초점 없는 문단 조건이 명시되고 o4 해설도 tabindex 추가만으로 숨김 조상을 해제하지 못한다는 범위로 제한되었다. 실제 초점을 가진 요소의 §7.2 예외와 충돌하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "현재 결과 문단에 초점이 없고 새 초점 이동을 요구하지 않는다. tabindex=0 추가만으로 조상 aria-hidden=true가 사라지지 않으므로 조상 속성을 제거하는 o1이 유일한 수정이다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p1",
+              "summary": "현재 초점 없음이 notes에 명시되고 o4 해설도 그 조건으로 한정되어 실제 초점 요소의 포함 예외를 일반화하지 않는다. 다른 네 수정과 정보량이 평행하며 이름/역할 추가를 숨김 해제와 구별한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p1",
+              "summary": "원 구조 검사에서 schema3·ID·4/5지선다·엄격 해설 저작을 확인했다. 실제 앱·화면낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "원 검토의 정확한 문항·연결 선택지·최종 출처 확인을 재사용한다. 후보 검토 횟수와 원 실패 기록을 유지하며 등록 상태만 전환한다."
+    },
+    {
+      "candidateId": "pw22-g08-w01",
+      "groupId": "G08",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g08-w01",
+      "templateId": "pw22-template-g08",
+      "learningGoalId": "pw22-goal-g08",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r001-css-script-p02",
+          "revision": 2,
+          "sha256": "5ff00420f6bee429848e15344fc4d557f0031c21eeb1a71c922c022c5a0c07f1"
+        },
+        {
+          "questionId": "r005-css-script-p02",
+          "revision": 2,
+          "sha256": "03f6ca90a9045d126212f7aacf2026b1861cd9d48e82e576352f80e1f1f1e29a"
+        },
+        {
+          "questionId": "r017-dom-html-p01",
+          "revision": 1,
+          "sha256": "7a33added934d57b2e64156a8c502651260f68eefee1338ea8810023d23ca0a0"
+        }
+      ],
+      "priorWrittenIds": [
+        "r009-web-tech-s3-w04",
+        "r027-html-css-practical-s3-w01",
+        "r001-internet-html-w18",
+        "r016-dom-html-s3-w03",
+        "r002-internet-html-w19"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g08-w01-cycle-1.json",
+            "sha256": "ec68b0742e68c60e81f49cca275691de356e023ae6913973b0b1c55ef0e7655f"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g08-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "집계 체크박스에서 일부 선택인 A는 mixed, 모두 해제인 B는 false, 모두 선택인 C는 true이다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "checkbox와 aria-checked 값의 정의; 집계 mixed 적용 배열의 주어진 상태를 집계하는 적용 판단이며 모든 checkbox에 mixed 사용을 강제하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "집계 대상 세 항목이 고정되어 A만 일부 선택이다. B와 C의 모두 해제/선택까지 동시에 성립하는 조합은 o3이다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다섯 선택지는 같은 세 상태를 같은 순서로 대응한다. any/all 혼동, 혼합 상태의 범위와 참거짓 역전은 같은 목표의 오개념이다. 숫자·순서 조건을 지우면 목표가 바뀐다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g13-w01",
+      "groupId": "G13",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g13-w01",
+      "templateId": "pw22-template-g13",
+      "learningGoalId": "pw22-goal-g13",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r002-css-script-p01",
+          "revision": 1,
+          "sha256": "84be0b9b0dc030a8ffaff960eda021ecea97e1214d16f179ebbde0398e5f4b65"
+        },
+        {
+          "questionId": "r004-internet-html-p01",
+          "revision": 2,
+          "sha256": "5f51c91cd2ca8b64b1045af003affaebf57138846b34ac4d8059e6a3398dfba6"
+        }
+      ],
+      "priorWrittenIds": [
+        "r002-internet-html-w18",
+        "r029-aria-s3-w01"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g13-w01-cycle-1.json",
+            "sha256": "4cb2127e3f62016a2cce1965ae0434f642dcb23aa2de22668c3ab000301c7f43"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g13-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "값의 단위가 파일 개수이므로 현재 값은 완료한 30개이다. 30/120이 25%이며, 25는 이 범위에서 현재 파일 개수가 아니다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "progressbar 및 aria-valuenow/min/max의 범위 의미 알려진 값을 제공하고 시각 변화와 갱신하는 SHOULD를 실제 주어진 범위의 일치 판단에 적용한다. 모든 진행률을 백분율 값으로 넣어야 한다는 주장이 아니다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "범위 단위를 파일 개수로 고정하고 완료량30, 전체120을 제공했다. 현재 값30이 유일하며 25는 같은 단위의 수량이 아니다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다섯 수정은 수치 속성/표시 하나의 변경으로 평행하다. 현재량·남은량·비율·범위의 혼동을 다루며 문항 해설이 25%와 30개 관계를 직접 설명한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g16-w01",
+      "groupId": "G16",
+      "origin": "p2_reviewed",
+      "subjectId": "s1",
+      "questionId": "pw22-g16-w01",
+      "templateId": "pw22-template-g16",
+      "learningGoalId": "pw22-goal-g16",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r002-standards-p02",
+          "revision": 1,
+          "sha256": "e7c9d53f454b2e8d4ebdafced0ce5e36a2c10f002f3f64f6a5f34eb12584b3ee"
+        }
+      ],
+      "priorWrittenIds": [
+        "r005-standards-s1-w02"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g16-w01-cycle-1.json",
+            "sha256": "49a8a1c7f28b857cdf88bde49cf7298ab997c69a27216dcaf3c9c3be9c552396"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g16-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "누름 단계에서는 실행하지 않고 버튼 안에서 놓을 때 실행하며 밖에서 놓으면 취소하므로 완료 전 포인터 입력을 취소할 수 있다. 나머지는 되돌릴 수 없는 보관을 이미 실행한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "NIA 2.5.2 포인터 입력 취소: 완료 전 중지 또는 완료 후 되돌리기 down 필수 예외와 다른 되돌리기 수단을 지문에서 제외했다. 모든 입력을 up에서만 처리해야 한다는 과잉 일반화가 없다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "필수 다운 이벤트와 되돌리기 예외를 배제했다. 밖으로 놓아 확정 전에 취소할 수 있는 o4만 명시한 중지 경로를 제공한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다섯 보관 설계는 같은 동작 시점을 비교한다. 표시 제거·선택 잠금·완료 통지를 취소로 혼동하는 오답이며 정답의 추가 길이는 실제 취소 분기를 명시하는 데 필요하다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g20-w01",
+      "groupId": "G20",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g20-w01",
+      "templateId": "pw22-template-g20",
+      "learningGoalId": "pw22-goal-g20",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r003-css-script-p01",
+          "revision": 1,
+          "sha256": "88353b2326199567d5ab73e294780debd2955a4ce53ffba95fb0d8ff753c14e5"
+        },
+        {
+          "questionId": "r005-css-script-p01",
+          "revision": 1,
+          "sha256": "9e100b251282f8545cdd78bc5ee554ce8f67d158512de537a81bc9aeb4489021"
+        },
+        {
+          "questionId": "r008-internet-html-p01",
+          "revision": 1,
+          "sha256": "5ae5bf0e011e47ccf2b3d2a0ca5eff8752c2eba271e1103f735bc3d70b118cf4"
+        },
+        {
+          "questionId": "r014-policy-accessibility-p01",
+          "revision": 1,
+          "sha256": "e03ddb4caaeeb0ba72df4c9aa2542081802f7aa4fbee9a6c8d9bb5da8302e059"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-standards-s1-w08"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g20-w01-cycle-1.json",
+            "sha256": "360ca87fdf81993a55a958b2ff4ed77baba1edc19618d3e3b6982d7d04093308"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g20-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "기존 status 요소의 텍스트를 갱신한다. status는 상태 변경을 전달하는 라이브 영역이며 그 갱신 자체는 키보드 초점을 옮기지 않으므로 검색 버튼의 초점이 유지된다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "ARIA status advisory/polite/atomic, 상태 변경 때문에 초점을 옮기지 말라는 SHOULD 설계 의미를 묻고 화면낭독기의 발화 시각·문구·횟수를 보장하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "주어진 정상 키보드 활성화 상황에서 코드는 상태 텍스트를 변경하며 초점을 옮기지 않는다. status의 라이브 의미와 키보드 초점을 분리한 o4가 맞다. 실제 발화 결과는 물음의 범위 밖이다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "선택지들은 상태 갱신과 초점/긴급도에 관한 판단이다. focus 강제, alert 강제, 다른 초점 때문에 라이브 의미 소실이라는 오개념을 구분한다. status가 유일한 구현이라고 요구하지 않는다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g21-w01",
+      "groupId": "G21",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g21-w01",
+      "templateId": "pw22-template-g21",
+      "learningGoalId": "pw22-goal-g21",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r003-css-script-p02",
+          "revision": 2,
+          "sha256": "0e3c41838775e4e992014f77e0d1f7bac2c493c03376e40a292e6d72d47c9a3a"
+        },
+        {
+          "questionId": "r011-dom-form-p01",
+          "revision": 1,
+          "sha256": "d08f044992c5de838768648358dc58ff9c00127c015c3f4f8e765206489a62e6"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-internet-html-w20"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g21-w01-cycle-1.json",
+            "sha256": "90eb772cda4398f2dcaa686bed2cbe11e7843062cbdbfff5f3492d4d9050951a"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g21-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "하위 항목이 없는 안내문에는 확장 상태를 부여하지 않아야 한다. 제출 자료에는 펼칠 수 있는 하위 그룹이 현재 접혀 있으므로 aria-expanded=false를 유지한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "aria-expanded false/true/undefined 기본값 정의 undefined/속성 생략은 펼칠 구조 없음, false는 실제 접힌 구조임을 구별한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "말단과 실제 접힌 하위 그룹의 존재를 명시했다. 말단의 속성 제거와 부모 false 유지 조합만 두 구조를 함께 반영한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "동일한 두 항목의 속성 처리를 평행하게 비교한다. false를 보편 기본값으로 오인하거나 true로 잘못 변경하는 오답이 같은 범위에 있다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g22-w01",
+      "groupId": "G22",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g22-w01",
+      "templateId": "pw22-template-g22",
+      "learningGoalId": "pw22-goal-g22",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r003-css-script-p03",
+          "revision": 1,
+          "sha256": "8fe385ea8d2051a0549b93c8281dc61348070db71aad2dea1958e422b6532d36"
+        },
+        {
+          "questionId": "r011-dom-form-p02",
+          "revision": 1,
+          "sha256": "f08c21e8fc1b125ad5792d1c5cafaca8c1b9166ecd04b26f69dd684bc4f45e40"
+        },
+        {
+          "questionId": "r031-accessibility-p01",
+          "revision": 1,
+          "sha256": "6f753e3dfe66498cf8f5b578be659720d0fefccf3f9048d17015bb21519cf461"
+        }
+      ],
+      "priorWrittenIds": [
+        "r010-network-html-s3-w07",
+        "r016-dom-html-s3-w07",
+        "r009-web-tech-s3-w08"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g22-w01-cycle-1.json",
+            "sha256": "70c228df3e727d63594b25d4a4d0bb9dd7c9e563b3fe68c55d1398258315b500"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            },
+            {
+              "label": "semantic-addendum",
+              "sha256": "7b671ee4f7173b525c240a9066c487259b33f5384bb0076bb5cdae4c263a4532"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g22-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "대화상자 외부를 계속 조작할 수 있는 동작은 비모달이다. aria-modal을 false로 바꾸거나 제거하면 실제 동작에 맞으며, controls나 hidden=false를 추가해도 잘못된 true 선언은 해결되지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "aria-modal의 외부 사용 제한 의미 및 false 기본값 외부 콘텐츠 inert SHOULD와 모달 내부 제어 가능 MUST를 비모달 사례에 혼합하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "외부 입력을 계속 조작하는 실제 동작을 유지해야 한다. false와 속성 생략의 동등성을 한 선택지 o3에 묶어 둘을 경쟁 정답으로 만들지 않았다."
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "semantic-p2",
+              "summary": "고치는 판단이라는 발문과 정답만 aria-modal 자체를 변경하는 선택지 구조가 약한 정답 단서를 만든다. 실제 동작에 맞는 선언 판단을 묻는 발문으로 바꾸어 수정 필요를 미리 확정하지 않아야 한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-22T11:39:13.126038+00:00",
+          "completedAt": "2026-10-22T11:42:15.969394+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g22-w01-cycle-2.json",
+            "sha256": "be2b047550881cf4d7ee016bfaacfead5a6c963cad2f10eb2ddf10a5ef25abbb"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "00c2ad7aac5fc92080745368c322e4d86c913f6fe8ef427b2bf18cc0e0872dd0"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4941f46d1eec9b45120bf881163ec006e8156d726d8dabba317fddc6ed02b339"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "fff6f27d19e69993f6c69d45909f571617e92abb778446619abb483193c250f6"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "1874580cdc1a22a4e50c480cab8b25127b49c314a15376f69cdd68a0a560172e"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "523151f3769e536a81db287f4d639d8c100cb4b489f59e111479b8935bea28c5"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "7bb4f9b84c83b5fd707141522d7a1dcddd0805e81abcc1e0004256d7efd6da70",
+            "answerSha256": "63ff691b3bbeb700f8abd4b8dc095a55096eb3bbd10560beb739373906bb9637",
+            "selectedOptionId": "pw22-g22-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle2",
+              "summary": "도움말을 연 동안에도 외부 본문 입력란을 키보드와 포인터로 계속 조작하는 동작이 명시되어 있으므로 이 대화상자는 비모달이다. aria-modal=true는 이러한 실제 조작 방식과 맞지 않으며 false로 바꾸거나 속성을 제거하는 설명이 타당하다. 표시 위치, 독립적인 닫기 기능, 본문과의 관련성, 보이는 상태는 모달 여부를 정하지 않는다. aria-controls나 aria-hidden=false를 추가해도 잘못된 모달 선언은 바로잡히지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "aria-modal의 외부 사용 제한 의미 및 false 기본값 외부 콘텐츠 inert SHOULD와 모달 내부 제어 가능 MUST를 비모달 사례에 혼합하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "외부 입력을 계속 조작하는 실제 동작을 유지해야 한다. false와 속성 생략의 동등성을 한 선택지 o3에 묶어 둘을 경쟁 정답으로 만들지 않았다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "발문은 실제 조작 방식에 비추어 선언을 판단하게 하며 수정 필요를 먼저 확정하지 않는다. false/생략 동등안은 한 선택지 안에 있고 다른 네 판단은 시각적 겹침·닫기·제어·노출을 모달성과 혼동한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g24-w01",
+      "groupId": "G24",
+      "origin": "p2_reviewed",
+      "subjectId": "s1",
+      "questionId": "pw22-g24-w01",
+      "templateId": "pw22-template-g24",
+      "learningGoalId": "pw22-goal-g24",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r003-standards-p02",
+          "revision": 2,
+          "sha256": "a02f2fa71a8eeb8b176c883d93e4f36f1e20212f5afbf32312859b952a255bf6"
+        }
+      ],
+      "priorWrittenIds": [
+        "r003-standards-s1-w05",
+        "r004-internet-html-w20"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g24-w01-cycle-1.json",
+            "sha256": "b5827df27965c0587094b2dec871edfd58055ff565cec9a481a10c5329c83307"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g24-w01-o5"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "유지되는 빈 프레임에도 내용이 없는 상태를 식별할 수 있는 프레임 제목을 제공해야 한다. 빈 title, 바깥 문서 제목이나 h1, src 파일명은 해당 프레임의 적절한 제목 제공을 대신하지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "NIA 제목 제공: 콘텐츠 없는 프레임도 빈 프레임 식별 제목 안내 공식 제작기법의 직접 안내이며 다른 명명/제거/숨김 해법은 범위 밖으로 명시했다. 특정 title 문자열만 정답으로 강제하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "빈 문서이지만 프레임은 유지하는 점검 범위이다. 바깥 제목·파일명·앞선 h1은 해당 프레임의 title을 제공하지 않으며 빈 상태를 식별하는 제목이 필요하다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "프레임 숨김/제거 또는 다른 이름 지정은 범위 밖임을 미리 명시했다. 정답만 긍정인 구조이지만 실질적 이유는 대상별 이름 제공의 구분이며 강제 부정어로 오답을 조작하지 않았다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g25-w01",
+      "groupId": "G25",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g25-w01",
+      "templateId": "pw22-template-g25",
+      "learningGoalId": "pw22-goal-g25",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r003-internet-html-p03",
+          "revision": 1,
+          "sha256": "65befca890ccc089c586b66b689c5d11a46af198181c9cfc567afb449b8dfead"
+        },
+        {
+          "questionId": "r022-html-css-practical-p02",
+          "revision": 1,
+          "sha256": "49d692600a38df540c8f41e6f56d3224498a8930bc334b2b40390bb41d284b2b"
+        }
+      ],
+      "priorWrittenIds": [
+        "r003-standards-s1-w02",
+        "r009-web-tech-s3-w06",
+        "r008-internet-html-w11"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g25-w01-cycle-1.json",
+            "sha256": "25b85751ea1c8d3304fc9cdb459ef0cadb87fec9a0fe5eae36c4423f683deb40"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            },
+            {
+              "label": "semantic-addendum",
+              "sha256": "7b671ee4f7173b525c240a9066c487259b33f5384bb0076bb5cdae4c263a4532"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g25-w01-o1"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "autoplay를 제거하고 controls를 제공해야 자동 재생 요청 없이 기본 조작부로 시작할 수 있다. autoplay=false도 불리언 속성이 존재하므로 자동 재생 요청이며, preload나 muted는 autoplay를 해제하지 않는다. 선택지 5에는 controls가 없다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p2",
+              "summary": "HTML5.2 autoplay, preload, controls 및 불리언 속성 controls는 작성자의 UA 조작부 요청이다. 속성 부재만으로 UA가 어떠한 UI도 제공하지 못한다고 단정할 수 없다. 보완 필요: [{\"code\": \"MEDIA_UI_ABSENCE_OVERCLAIM\", \"severity\": \"revise\", \"affected\": [\"stem\", \"pw22-g25-w01-o5.explanation\", \"pw22a-src-media.evidence\"], \"detail\": \"HTML5.2 §4.7.13.13는 controls가 없을 때도 UA가 재생 조작부를 제공할 수 있음을 허용한다. 현재 o5 해설의 제공하지 않는다는 단정을 요청하지 않는다로 좁히고 지문도 HTML에서 조작부를 명시적으로 요청하는 설계로 한정해야 한다. 핵심 정답 o1은 유지 가능하다.\", \"suggestedAction\": \"작성자가 controls로 UA 기본 조작부를 요청하는 의미로 문안·출처 요약을 정밀화하고 동일 개정에서 재검토한다.\"}]"
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "사용자 시작·기본 조작부 두 조건을 함께 만족하는 코드는 autoplay가 없고 controls가 있는 o1뿐이다. 브라우저 자동 재생 차단 정책으로 결과를 바꾸지 않도록 명시했다."
+            },
+            "authoringAccessibility": {
+              "result": "fail",
+              "reviewerId": "semantic-p2",
+              "summary": "독립 출처 검토에서 controls가 없어도 사용자 에이전트가 조작부를 제공할 수 있는 예외를 확인했다. 오답5의 조작부를 제공하지 않는다는 단정을 제공 요청이 없다는 의미로 한정하고 발문·해설도 일치시켜야 한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-22T11:39:13.126038+00:00",
+          "completedAt": "2026-10-22T11:42:15.969394+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g25-w01-cycle-2.json",
+            "sha256": "f10e140f401fe487e9e7f28b9967a3d92a65a88bc853c0404780c4a0b05ff029"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "00c2ad7aac5fc92080745368c322e4d86c913f6fe8ef427b2bf18cc0e0872dd0"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4941f46d1eec9b45120bf881163ec006e8156d726d8dabba317fddc6ed02b339"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "fff6f27d19e69993f6c69d45909f571617e92abb778446619abb483193c250f6"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "1874580cdc1a22a4e50c480cab8b25127b49c314a15376f69cdd68a0a560172e"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "523151f3769e536a81db287f4d639d8c100cb4b489f59e111479b8935bea28c5"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "7bb4f9b84c83b5fd707141522d7a1dcddd0805e81abcc1e0004256d7efd6da70",
+            "answerSha256": "63ff691b3bbeb700f8abd4b8dc095a55096eb3bbd10560beb739373906bb9637",
+            "selectedOptionId": "pw22-g25-w01-o1"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle2",
+              "summary": "o1은 autoplay를 제거해 자동 재생을 요청하지 않으며 controls로 브라우저의 기본 조작부를 요청한다. src도 유지한다. autoplay는 불리언 속성이므로 o2의 autoplay=false 표기도 속성이 존재한다는 사실 때문에 자동 재생을 끄지 못한다. o3의 preload=none과 o4의 muted는 autoplay 요청을 제거하지 않는다. o5에는 controls가 없어 요구한 기본 조작부를 요청하지 못한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "HTML5.2 autoplay/preload/controls 및 §2.4.2 Boolean attributes controls는 UA 조작부 제공을 요청하는 속성이다. 부재에도 UA가 자체 UI를 제공할 수 있음을 해설이 명시한다. 불리언 속성의 존재는 false 문자열과 구별한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "마크업으로 자동 재생을 요청하지 않으면서 기본 조작부 제공을 요청하는 조건이다. autoplay 없는 controls 조합 o1만 두 조건을 만족한다. controls 없는 UA 자체 제공 가능성은 요청 여부와 구별된다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "stem·instruction·문항 해설·선택지1/5 해설이 모두 명시적 제공 요청을 기준으로 일치한다. UA의 controls 없는 제공 가능성을 해설에 보존하여 오답5를 과도하게 단정하지 않는다. 선택지 원문과 정답은 동일하다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g26-w01",
+      "groupId": "G26",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g26-w01",
+      "templateId": "pw22-template-g26",
+      "learningGoalId": "pw22-goal-g26",
+      "authorId": "author-p2a",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r004-css-script-p01",
+          "revision": 2,
+          "sha256": "ad3a6f68aa0a31dfc9aa15e1c85849a1cf0e191464613aba1190e3e67b11d2f4"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-standards-s1-w08",
+        "r025-html-css-practical-s3-w03"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:28:25.184780+00:00",
+          "completedAt": "2026-10-22T11:38:09.657886+00:00",
+          "outcome": "revise",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g26-w01-cycle-1.json",
+            "sha256": "07d6cc6d8d3f087203c1e832e20f4d11546035f6ac431993ca3b3b2c052dcf3b"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "4aebbac43e5924a482f9da48bbd7f8feb676e5b0993c195824324426b437c858"
+            },
+            {
+              "label": "source-review",
+              "sha256": "381f89936791d2e3d987a2ad48df75aed1044bcc5d029eab074c1e956176d499"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "0337595d610e43c70c41909ce346b71372093d90394c7cc71a12ec15ef72632e"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "10f669683eedf37e45f324867af7b7c8cf06f8c3a8bde2d7020ae61f57bb9331"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "2f1af5aefc1ca25ad87aaae75c4cdb524669c51535c8c932fdf85d14064b455e"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "af6d4008986cf63c745f06c7edfa0b1371e5a8cfba6117d4add4e132fe8237ca",
+            "answerSha256": "baaea84e87dba2498751302a9b2d57a5e601e17992120c07674f025a3f16f0fa",
+            "selectedOptionId": "pw22-g26-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle1",
+              "summary": "속성값이 문자열 true인 경우에만 처리기에서 반환하면 비활성 실행을 막고 false일 때 action을 호출한다. 존재 검사와 문자열의 참·거짓 검사는 false에서도 차단하며, disabled 검사는 현재의 aria-disabled 상태를 읽지 않는다. 이 검사는 초점 가능성을 바꾸지 않는다."
+            },
+            "sourceCheck": {
+              "result": "fail",
+              "reviewerId": "source-p2",
+              "summary": "ARIA disabled 및 host-language non-interference; 보조 DOM/JS/HTML 의미 필요 ARIA 선언과 실제 실행 차단을 구별하는 목표는 s3 범위에 맞는다. 현재 선택지의 DOM/JS 세부를 유지한다면 보조 근거로 연결하고 새 지정 시험 범위로 확대하지 말아야 한다. 보완 필요: [{\"code\": \"MISSING_SUPPORTING_SEMANTICS\", \"severity\": \"revise\", \"affected\": [\"sourceRefs\", \"pw22-g26-w01-o1\", \"pw22-g26-w01-o4\", \"pw22-g26-w01-o5\"], \"detail\": \"ARIA 한 출처로는 hasAttribute/getAttribute 반환, 비어 있지 않은 false 문자열의 조건 평가, native button.disabled의 content attribute 반영을 입증하지 못한다. 선택지 논리 자체는 맞다.\", \"suggestedAction\": \"별도 proposed-sources-cycle-2.json의 고정 기술 보조 근거를 연결하거나, API 문법을 정답 단서로 요구하지 않는 접근성 개념 판단으로 좁힌다. 보조 DOM/ECMAScript를 새 시험 지정판으로 표시하지 않는다.\"}]"
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "값이 소문자 문자열 true/false이며 두 상태에서 초점을 유지한다고 명시했다. 정확한 true 비교만 비활성 실행을 막고 활성 실행을 허용한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다섯 조건문이 같은 검사 위치에 들어간다. 속성 존재·문자열 truthiness·역조건·네이티브 상태를 혼동하는 오답이며 code 구두점/따옴표를 보존했다. 문항 해설은 ARIA 선언과 실행 차단 책임을 연결한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        },
+        {
+          "cycle": 2,
+          "revision": 2,
+          "startedAt": "2026-10-22T11:39:13.126038+00:00",
+          "completedAt": "2026-10-22T11:42:15.969394+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g26-w01-cycle-2.json",
+            "sha256": "ea26572a0edb3589d251f4f6f380ac65e773f22f683356fcad8300d03b09b5d8"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "00c2ad7aac5fc92080745368c322e4d86c913f6fe8ef427b2bf18cc0e0872dd0"
+            },
+            {
+              "label": "source-review",
+              "sha256": "4941f46d1eec9b45120bf881163ec006e8156d726d8dabba317fddc6ed02b339"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "fff6f27d19e69993f6c69d45909f571617e92abb778446619abb483193c250f6"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "1874580cdc1a22a4e50c480cab8b25127b49c314a15376f69cdd68a0a560172e"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "523151f3769e536a81db287f4d639d8c100cb4b489f59e111479b8935bea28c5"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2a-cycle2",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "7bb4f9b84c83b5fd707141522d7a1dcddd0805e81abcc1e0004256d7efd6da70",
+            "answerSha256": "63ff691b3bbeb700f8abd4b8dc095a55096eb3bbd10560beb739373906bb9637",
+            "selectedOptionId": "pw22-g26-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2a-cycle2",
+              "summary": "o2는 aria-disabled가 문자열 true인 경우에만 처리기에서 반환하므로 비활성일 때 action 호출을 막고 false일 때는 호출한다. 버튼의 disabled 속성이나 tabindex를 바꾸지 않아 주어진 순차 초점 이동 조건도 유지한다. o1은 속성이 false일 때도 존재하므로 실행을 막고, o4도 비어 있지 않은 문자열 false를 참으로 평가해 실행을 막는다. o3은 요구한 분기를 반대로 구현한다. o5는 설정되지 않은 네이티브 disabled 상태를 검사하므로 aria-disabled=true인 경우를 차단하지 못한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "ARIA1.2 disabled/non-interference; 고정 DOM4 Element 메서드; 고정 ECMAScript2015 ToBoolean; HTML5.2 disabled/reflection ARIA 선언과 기능 제한 일치가 핵심 목표다. 보조 DOM/ECMAScript 카드에는 기술 보조 근거 및 newSyllabusClaim=false가 있고 질문의 시험 지정판은 확대되지 않았다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "값이 소문자 문자열 true/false이며 두 상태에서 초점을 유지한다고 명시했다. 정확한 true 비교만 비활성 실행을 막고 활성 실행을 허용한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다섯 조건문이 같은 검사 위치에 들어간다. 속성 존재·문자열 truthiness·역조건·네이티브 상태를 혼동하는 오답이며 code 구두점/따옴표를 보존했다. 문항 해설은 ARIA 선언과 실행 차단 책임을 연결한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g27-w01",
+      "groupId": "G27",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g27-w01",
+      "templateId": "pw22-template-g27",
+      "learningGoalId": "pw22-goal-g27",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r004-css-script-p02",
+          "revision": 2,
+          "sha256": "45a78035c28fb12b89f5be32dc0b6afd0d8186c362e0a55d22879b65857fa7ad"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-standards-s1-w08"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g27-w01-cycle-1.json",
+            "sha256": "24f98636bce8c1143fe3b7955fc9e5b29fabfdf96eaaab4ea1e4ca4204859a53"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g27-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "대여 수가 12→8→3으로 감소하므로 현재 정렬 열인 대여 수에 descending을 지정하고, 더 이상 정렬 기준이 아닌 자료명의 aria-sort는 제거한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "aria-sort 정의·값·한 헤더 적용 SHOULD 단일 기준을 지문에서 확정했고 한 헤더 권고를 MUST로 과장하지 않는다. 이전 none도 가능하나 별도 동등정답 선택지는 없다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "기준 열이 대여 수 하나이고 실제 12·8·3 내림차순이므로 이전 상태 제거와 해당 헤더 descending이 맞다. none과 제거를 경쟁 정답으로 중복 제공하지 않았다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "같은 두 헤더의 수정 조합이며 열·방향·other의 의미를 구분한다. 한 헤더 적용은 해설에서 권고로 정확히 표현한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g28-w01",
+      "groupId": "G28",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g28-w01",
+      "templateId": "pw22-template-g28",
+      "learningGoalId": "pw22-goal-g28",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r004-internet-html-p02",
+          "revision": 2,
+          "sha256": "1e432ba47d76f4d79b0c89c1dbc61528eaf85b5a18ce30d36441d56c028bf609"
+        }
+      ],
+      "priorWrittenIds": [
+        "r013-dom-html-s3-w05"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g28-w01-cycle-1.json",
+            "sha256": "d1c9ec8bba881992799ba074f9b15efb20a4c5338cae36b9b0c2bd5f74b08aa7"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g28-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "presentation은 콘텐츠를 숨기지 않고 표의 네이티브 의미를 제거한다. 필요한 자손 구조인 행과 셀에도 표현 역할 처리가 이어져 글자는 남고 표·행·셀 의미는 제거된다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "presentation 필수 구조 자손 처리와 의미 제거/내용 보존 초점 가능 요소·전역 ARIA·명시적 자손 역할의 충돌 예외를 notes로 제외했다. 데이터 표에서 presentation 적용을 권장하는 문제는 아니다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "presentation 무시 예외에 해당하는 초점/다른 ARIA 조건을 배제했다. 글자 노출과 표의 필수 자손 의미 제거를 함께 만족하는 o4가 맞다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "글자 콘텐츠/표 구조 처리의 같은 두 축을 비교한다. aria-hidden과 혼동하거나 상속 범위를 표에만 한정하는 오답이다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g29-w01",
+      "groupId": "G29",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g29-w01",
+      "templateId": "pw22-template-g29",
+      "learningGoalId": "pw22-goal-g29",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r005-standards-p01",
+          "revision": 1,
+          "sha256": "f4881501f0a727e239a45ef10c917377d146d2cacc9c8042139284d33a5476b6"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-standards-s1-w09",
+        "r020-html-css-practical-s3-w04"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g29-w01-cycle-1.json",
+            "sha256": "0b956984ddb129a49f2b6fb03817f316a4c7f8836ea516a5e748e44e07885244"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g29-w01-o1"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "기존 로그인 암호의 목적은 current-password이고, 새로 정하는 암호의 목적은 new-password이다. on은 두 입력의 구체적인 목적을 구별하지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "HTML5.2 autofill current-password/new-password/on 입력 목적 의미만 묻고 브라우저 저장·자동 채움 성공을 보장하지 않는다. Forms 전문 신규 열람은 크기 제한으로 실패, 현재 고정판 검색 발췌와 원 출처 기록을 대조했다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "기존 인증 암호와 새로 정하는 암호의 목적이 명확하므로 current-password/new-password 조합이 유일하다. 일반 on은 목적 구분을 충족하지 않는다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "두 입력에 넣을 토큰 조합을 평행하게 제시한다. 실제 비밀번호 관리자나 자동 채움 성공을 보장하지 않는 범위를 명시했다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g30-w01",
+      "groupId": "G30",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g30-w01",
+      "templateId": "pw22-template-g30",
+      "learningGoalId": "pw22-goal-g30",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r007-internet-html-p01",
+          "revision": 1,
+          "sha256": "737191e162cafd5fc3df118ad301a8f606d8da3d78865103e995c3f6b5a1992c"
+        }
+      ],
+      "priorWrittenIds": [
+        "r003-internet-html-w13"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g30-w01-cycle-1.json",
+            "sha256": "af93240031fd4c0573d26cf73ff7918af81fab2de690c1dce28c23f22f6988c4"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g30-w01-o5"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "aria-describedby가 참조한 summary는 그림의 평문 설명에 기여한다. aria-details는 제목과 목록 구조가 있는 detail을 확장 설명으로 연결하며 이를 그림의 이름이나 평문 설명 문자열로 합치지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "aria-describedby 설명, aria-details의 비평탄화 상세 관계 ARIA1.2는 details가 단일 ID 참조임을 명시하며 후보도 하나만 쓴다. 지원 환경에 따라 두 관계 동시 노출 제한이 있으므로 실제 발화/이동 실측으로 확대하지 않고 속성 관계 의미를 묻는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "describedby는 평문 설명, details는 구조 있는 확장 설명 관계이며 이름/설명 문자열에 합치지 않는다. 코드가 alt도 별도 제공하여 이름과의 혼동을 판별할 수 있다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다섯 선택지는 같은 summary/detail 관계를 비교한다. 접근 가능한 설명과 구조 있는 상세 내용의 차이를 묻고 특정 보조기술 기능 성공을 약속하지 않는다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g31-w01",
+      "groupId": "G31",
+      "origin": "p2_reviewed",
+      "subjectId": "s4",
+      "questionId": "pw22-g31-w01",
+      "templateId": "pw22-template-g31",
+      "learningGoalId": "pw22-goal-g31",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r008-css-script-p01",
+          "revision": 1,
+          "sha256": "5f87a8eb15cb4b1d0f8cd777826a542649a95444d6b23327029f550336a9d6e5"
+        }
+      ],
+      "priorWrittenIds": [
+        "r002-standards-s1-w03"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g31-w01-cycle-1.json",
+            "sha256": "4c995903687ce3155419efa08318ed252e127337c36d1fdbda545684d77ce909"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g31-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "activeElement는 memo이므로 viewer와의 동일성 비교는 false이고, memo는 viewer의 자손이므로 contains는 true이다. viewer 자체의 초점만 허용하려면 동일성인 same을 검사해야 한다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "NIA 문자 단축키; HTML5.2 activeElement; 고정 DOM4 contains 자손 입력과 구성요소 자체 초점을 구별하는 구현 판단으로 s4에 적합하다. DOM4는 기술 보조 근거이고 새 시험 지정판이 아니다. iframe/Shadow DOM 등 경계 예외는 명시적으로 제외했다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "memo가 실제 activeElement이며 viewer의 자손이다. false/true와 same 검사 조합만 자체 초점 제한을 만족한다. iframe/Shadow DOM 같은 추가 맥락을 배제했다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "세 값/검사를 같은 순서로 비교한다. 자손 포함과 동일성 검사의 범위 차이를 실제 문자 입력 방해 예방에 적용하며 코드와 조건을 보존한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g32-w01",
+      "groupId": "G32",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g32-w01",
+      "templateId": "pw22-template-g32",
+      "learningGoalId": "pw22-goal-g32",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r009-standards-p01",
+          "revision": 1,
+          "sha256": "d15afa79cefa13b8e4dd44d3d82bd7d662a844882a41c0514ab2f48a9cc2bcef"
+        },
+        {
+          "questionId": "r013-dom-html-p02",
+          "revision": 1,
+          "sha256": "65355b66bc803ba99ba1a8632223795c0e679fa6df8dd8d3f87bd9f3991af661"
+        }
+      ],
+      "priorWrittenIds": [
+        "r008-internet-html-w18",
+        "r002-internet-html-w20"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g32-w01-cycle-1.json",
+            "sha256": "2194566b99c2b768416b7717ddefa96857fc686a9b53b2abdec8859c1a4f6607"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g32-w01-o4"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "aria-multiselectable=true는 복수 선택 허용을 나타내고 두 option 모두 aria-selected=false이므로 현재 선택은 없다. aria-activedescendant=music은 활성 자손을 가리키며 선택을 뜻하지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "aria-multiselectable/selected/activedescendant 및 listbox 선택 방식·현재 선택·활성 초점 항목을 구별한다. 선언만으로 구현이 추가되거나 선택되는 것으로 설명하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다중선택 가능, 두 selected=false, 활성 초점 music을 분리하면 허용 방식은 복수/현재 선택 없음이다. active descendant를 선택으로 보는 보기들은 틀리다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "다섯 선택지는 허용 방식과 현재 선택의 조합이다. 컨테이너의 가능성·항목 선택·활성 초점을 독립적으로 읽어야 한다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g33-w01",
+      "groupId": "G33",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g33-w01",
+      "templateId": "pw22-template-g33",
+      "learningGoalId": "pw22-goal-g33",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r010-standards-p01",
+          "revision": 1,
+          "sha256": "f4adb30167cc7c137998be3a33b488e668f920a338a983b846450d2c76c2de62"
+        }
+      ],
+      "priorWrittenIds": [
+        "r002-internet-html-w15",
+        "r016-dom-html-s3-w02"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g33-w01-cycle-1.json",
+            "sha256": "93a7d425f3331a7186d3ff9a7583096a0f46d2408c2a3dd8ce47798cf8f86ee1"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g33-w01-o2"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "값은 편집할 수 없지만 탐색과 복사가 가능한 읽기 전용 상태이므로 aria-readonly=true, aria-disabled=false가 맞다. spinbutton은 aria-readonly를 지원하며, ARIA 선언과 실제 동작 구현은 별개이다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "aria-readonly와 aria-disabled 정의 및 spinbutton 지원 읽기 전용은 편집 불가지만 다른 조작 가능 상태다. disabled가 반드시 Tab 순서에서 제거된다고 주장하지 않고 실제 구현은 별도임을 명시한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "수정은 금지하지만 다른 조작은 허용한다는 ARIA 읽기 전용 의미에 o2가 맞다. 실제 변경 방지와 복사 구현은 별도라는 전제를 분명히 했다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "readonly/disabled 조합 네 개와 숨김 혼동 한 개를 비교한다. 마지막 선택지는 다른 속성 조합이지만 이용할 컨트롤의 숨김과 읽기 전용을 혼동하는 관련 오개념이다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g37-w01",
+      "groupId": "G37",
+      "origin": "p2_reviewed",
+      "subjectId": "s3",
+      "questionId": "pw22-g37-w01",
+      "templateId": "pw22-template-g37",
+      "learningGoalId": "pw22-goal-g37",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r019-html-css-practical-p01",
+          "revision": 1,
+          "sha256": "4615a9306ec7ae223a49e830d9a1a5ec8a9e657b1862168e2357930dbf1ffabb"
+        }
+      ],
+      "priorWrittenIds": [
+        "r005-internet-html-w15",
+        "r001-standards-s1-w04"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g37-w01-cycle-1.json",
+            "sha256": "4aa29db750f6c9114c252b10a1c485c8b4888f6a534c8f20a2d2fcf1047d2580"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g37-w01-o1"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "video 밖의 링크 B는 일반 본문 링크이다. video 내부의 링크 A는 video를 지원하지 않는 환경을 위한 대체 콘텐츠이며, 지원 환경에서 controls나 재생 완료가 이를 일반 본문 링크로 표시하지 않는다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "HTML5.2 video 내부 fallback 용도 및 본문 대본 링크 고정판의 should not show는 규범상 설계 의미이며 모든 UA에서 실제 표시가 절대로 불가능하다는 실측 명제가 아니다. 후보는 HTML5.2 지원과 정상 재생, 별도 노출 없음으로 한정한다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "video 지원과 정상 재생을 명시했다. 외부 B는 일반 본문이고 내부 A는 미지원 환경 대체 콘텐츠이며 재생 전/후나 취득 실패로 자동 교체되지 않는다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "대본 대상이 같아 링크의 정보 품질이 경쟁 조건이 되지 않는다. controls, 재생 완료, 로딩 실패, object fallback과의 오개념이 같은 목표 범위다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    },
+    {
+      "candidateId": "pw22-g40-w01",
+      "groupId": "G40",
+      "origin": "p2_reviewed",
+      "subjectId": "s1",
+      "questionId": "pw22-g40-w01",
+      "templateId": "pw22-template-g40",
+      "learningGoalId": "pw22-goal-g40",
+      "authorId": "author-p2b",
+      "originalPracticalRefs": [
+        {
+          "questionId": "r031-accessibility-p03",
+          "revision": 2,
+          "sha256": "9129caafe39f210ef6bc14ce3bde26990c826763fea30d87b8b15d04687e1002"
+        }
+      ],
+      "priorWrittenIds": [
+        "r001-internet-html-w19",
+        "r001-standards-s1-w04"
+      ],
+      "cycles": [
+        {
+          "cycle": 1,
+          "revision": 1,
+          "startedAt": "2026-10-22T11:32:09.958698+00:00",
+          "completedAt": "2026-10-22T11:41:50.488065+00:00",
+          "outcome": "accepted",
+          "input": {
+            "path": "docs/conversions/evidence/practical-written-001/pw22-g40-w01-cycle-1.json",
+            "sha256": "2d9c7a6dc862884a95c8fa872d5a0e03a0e1d0ec39708e5cc4b23e0585ff3db5"
+          },
+          "originArtifacts": [
+            {
+              "label": "review-input",
+              "sha256": "59ad4c5dc1bfbe707d68fa553677536fc6c205c8db63281b91840f0ad225b096"
+            },
+            {
+              "label": "source-review",
+              "sha256": "591baa98b2dc04183145e77bc3f5d776cdbf628749aca22da789f4e6d65d0246"
+            },
+            {
+              "label": "semantic-review",
+              "sha256": "8ccedee1dea119f5c0e251e8e9b80fc91d2758ac89c0b98eb4793418012d4992"
+            },
+            {
+              "label": "structural-review",
+              "sha256": "9a07600647a6ea907f1431108e014b56bb43de771876777394e475c5ad04da48"
+            },
+            {
+              "label": "blind-comparison",
+              "sha256": "0da74f8de88e2c2d15e7fd7cbd7b83f378428e5058824bddb4fc6bf184af5c14"
+            }
+          ],
+          "blind": {
+            "reviewerId": "blind-p2b-cycle1",
+            "keyExposedBeforeSolve": false,
+            "inputSha256": "e030ccc10e2ce03c3878eecb7eaee8400d01506584848ad8989f9a64137dcc3d",
+            "answerSha256": "edb816e11bccda6571af8bc54fbbaa30d70646e297e3bc1e89c73307887c1580",
+            "selectedOptionId": "pw22-g40-w01-o3"
+          },
+          "gates": {
+            "blindSolve": {
+              "result": "pass",
+              "reviewerId": "blind-p2b-cycle1",
+              "summary": "각 대사의 의미를 이해하려면 그 시점의 발화자를 알아야 하므로 해당 자막에 이름이나 역할을 함께 표시해야 한다. 명단·트랙 이름·소개 문단은 불규칙한 개별 발언의 발화자를 연결하지 못하며 숨긴 메타데이터도 전달 수단이 아니다."
+            },
+            "sourceCheck": {
+              "result": "pass",
+              "reviewerId": "source-p2",
+              "summary": "NIA 대체수단 제공의 화자 식별 사례 내용 이해에 필요한 화자·동기화가 이미 조건에 포함되며 WebVTT 문법·voice 태그 렌더링을 요구하지 않는다."
+            },
+            "ambiguityCheck": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "대사마다 발화자 식별이 필요하고 순서/다른 자료로 추론할 수 없다는 조건이다. 그 시점에 해당 발화자의 이름/역할을 표시하는 o3만 요구를 충족한다."
+            },
+            "authoringAccessibility": {
+              "result": "pass",
+              "reviewerId": "semantic-p2",
+              "summary": "명단·트랙명·숨은 메타데이터·일반 소개와 실제 시점별 정보를 구별한다. 정확한 표시 시점은 문제 해결에 필요한 제한이며 임의 WebVTT 문법을 묻지 않는다."
+            },
+            "structuralCheck": {
+              "result": "pass",
+              "reviewerId": "structural-p2",
+              "summary": "schema3·ID·4/5지선다·엄격 해설·연결 구조 검사를 통과했다. 실제 앱·화면 낭독기 검사는 포함하지 않는다."
+            }
+          }
+        }
+      ],
+      "decision": "accepted",
+      "reason": "대표 학습 목표 하나를 독립 필기 판단 문제로 가공했고 최종 개정판의 다섯 검사를 통과했다. 기존 실기 원본과 기존 필기 문항은 유지한다."
+    }
+  ],
+  "result": {
+    "bankVersion": "2026.10.22-practical-written.1",
+    "bankSha256": "86acf4a514a1f67ae23cc8019560b4c57359a7195433110214f70b7e8c488986",
+    "manifestSha256": "0ff0fb4e22120dc05e9bbff5e1f93d7de02ee069c2c20ea0ace4ef1f431ca6b6",
+    "acceptedQuestionIds": [
+      "pw21-g01-w01",
+      "pw21-g02-w01",
+      "pw21-g03-w01",
+      "pw21-g04-w01",
+      "pw21-g05-w01",
+      "pw21-g06-w01",
+      "pw21-g07-w01",
+      "pw21-g09-w01",
+      "pw21-g10-w01",
+      "pw21-g11-w01",
+      "pw21-g12-w01",
+      "pw21-g14-w01",
+      "pw21-g15-w01",
+      "pw21-g17-w01",
+      "pw21-g18-w01",
+      "pw21-g19-w01",
+      "pw22-g08-w01",
+      "pw22-g13-w01",
+      "pw22-g16-w01",
+      "pw22-g20-w01",
+      "pw22-g21-w01",
+      "pw22-g22-w01",
+      "pw22-g24-w01",
+      "pw22-g25-w01",
+      "pw22-g26-w01",
+      "pw22-g27-w01",
+      "pw22-g28-w01",
+      "pw22-g29-w01",
+      "pw22-g30-w01",
+      "pw22-g31-w01",
+      "pw22-g32-w01",
+      "pw22-g33-w01",
+      "pw22-g37-w01",
+      "pw22-g40-w01"
+    ]
+  },
+  "publication": {
+    "status": "not_attempted",
+    "commit": null,
+    "verifiedAt": null,
+    "url": null,
+    "newlyPublicRegular": 0
+  }
+}

@@ -1,4 +1,4 @@
-import {currentCutoffBlocks,completionHistoryReadable} from './editorial005-completion.mjs';
+import {currentCutoffBlocks,completionHistoryReadable} from './current-release-authority.mjs';
 import {completeManifestFormat} from './archive-format.mjs';
 /** Reviewed independent offline chains. Read-only; a proposal is never delivery authority. */
 import fs from 'node:fs/promises';

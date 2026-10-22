@@ -139,7 +139,72 @@ export function projectEditorial005To395(files,directories){
 }
 export async function readEditorial005Source(root){
   const directories=new Set(),files=await collectFiles(root,true,directories);
+  if(files.has(conversionFixturePath))return {files:projectPracticalWrittenToEditorial005(files,directories),directories:new Set(editorialDelta.currentDirectories)};
   verifyEditorial005Source(files,directories);return {files,directories};
+}
+
+// A test-only source transition, separately bound by the external run inventory.
+// The control excludes only itself from currentInventory: helper/tests are fully
+// inventoried. No hash of this control is embedded in an inventoried helper, so
+// there is no self-hash cycle and this cannot stand in for production authority.
+const conversionFixturePath='tests/fixtures/practical-written-source-delta.json';
+const conversionFixtureRaw=await fs.readFile(new URL('./fixtures/practical-written-source-delta.json',import.meta.url));
+const conversionDelta=JSON.parse(conversionFixtureRaw);
+assert.deepEqual(Object.keys(conversionDelta).sort(),['schemaVersion','kind','bootstrapPath','baselineCommit','trustBoundary','baselineInventory','baselineDirectories','baselineChanges','baselineAdditions','currentInventory','currentDirectories','currentChanges','currentAdditions'].sort());
+assert.equal(conversionDelta.schemaVersion,1);
+assert.equal(conversionDelta.kind,'test_only_exact_source_projection');
+assert.equal(conversionDelta.bootstrapPath,conversionFixturePath);
+assert.equal(conversionDelta.baselineCommit,'4536277093f80273dd9f5799b32990a74d260466');
+assert.equal(conversionDelta.trustBoundary,'Test setup only; external complete source and runtime evidence must independently bind this bootstrap and executed helper.');
+const conversionBaseline=rowsMap(conversionDelta.baselineInventory),conversionCurrent=rowsMap(conversionDelta.currentInventory);
+const source401=new Map(editorialCurrent);
+source401.set(editorialFixturePath,{path:editorialFixturePath,bytes:editorialFixtureRaw.length,sha256:hash(editorialFixtureRaw),gitBlob:blob(editorialFixtureRaw)});
+assert.equal(conversionBaseline.size,407);assert.equal(source401.size,401);assert(!conversionCurrent.has(conversionFixturePath));
+assert.deepEqual([...conversionDelta.baselineAdditions].sort(),['docs/RUNTIME-OUTPUT.md','docs/publications/editorial-005.json','scripts/build-runtime.mjs','scripts/editorial005-completion.mjs','tests/editorial005-completion.test.mjs','tests/runtime-output.test.mjs'].sort());
+function transition(from,to,changes,additions,controlPath=null){
+  const changed=new Set(),added=new Set(additions);
+  assert.equal(added.size,additions.length);assert(additions.every(safe));
+  for(const item of changes){
+    assert.deepEqual(Object.keys(item).sort(),['originalBase64','path']);assert(from.has(item.path)&&to.has(item.path)&&!changed.has(item.path));
+    const raw=Buffer.from(item.originalBase64,'base64');assert.equal(raw.toString('base64'),item.originalBase64);exact(raw,to.get(item.path));
+    assert.notEqual(from.get(item.path).sha256,to.get(item.path).sha256);changed.add(item.path);
+  }
+  sameKeys(from,[...to.keys(),...added].filter(p=>p!==controlPath));
+  for(const p of added)assert(!to.has(p)&&(from.has(p)||p===controlPath));
+  for(const [p,row]of to)if(!changed.has(p))assert.deepEqual(from.get(p),row,'Undeclared test source transition: '+p);
+  return {changes,added};
+}
+const completedEditorialTransition=transition(conversionBaseline,source401,conversionDelta.baselineChanges,conversionDelta.baselineAdditions);
+const conversionTransition=transition(conversionCurrent,conversionBaseline,conversionDelta.currentChanges,conversionDelta.currentAdditions,conversionFixturePath);
+assert(conversionTransition.added.has(conversionFixturePath));
+for(const [rows,dirs]of [[conversionBaseline,conversionDelta.baselineDirectories],[conversionCurrent,conversionDelta.currentDirectories]]){
+  assert.equal(new Set([...rows.keys()].map(p=>p.toLowerCase())).size,rows.size);
+  assert(Array.isArray(dirs)&&dirs.includes('')&&dirs.every(p=>p===''||safe(p)));
+  assert.deepEqual(dirs,[...new Set(dirs)].sort());assert.equal(new Set(dirs.map(p=>p.toLowerCase())).size,dirs.length);
+  for(const p of dirs)assert(!rows.has(p)&&p!==conversionFixturePath);
+}
+function verifyConversionBaseline(files){sameKeys(files,conversionBaseline.keys());for(const [p,row]of conversionBaseline)exact(files.get(p),row);allowlist(files);}
+export function verifyPracticalWrittenSource(files,directories){
+  assert(files instanceof Map&&directories instanceof Set);sameKeys(files,[...conversionCurrent.keys(),conversionFixturePath]);
+  assert.deepEqual(files.get(conversionFixturePath),conversionFixtureRaw,'Conversion source bootstrap differs from loaded control');
+  assert.deepEqual([...directories].sort(),conversionDelta.currentDirectories,'Exact converted source directories required');
+  for(const [p,row]of conversionCurrent)exact(files.get(p),row);allowlist(files);
+}
+function restoreTransition(files,step){
+  const restored=new Map([...files].map(([p,raw])=>[p,Buffer.from(raw)]));
+  for(const {path:p,originalBase64}of step.changes)restored.set(p,Buffer.from(originalBase64,'base64'));
+  for(const p of step.added)assert(restored.delete(p),'Missing exact transition addition: '+p);
+  return restored;
+}
+export function projectPracticalWrittenToBaseline407(files,directories){
+  verifyPracticalWrittenSource(files,directories);const restored=restoreTransition(files,conversionTransition);verifyConversionBaseline(restored);return restored;
+}
+export function projectPracticalWrittenToEditorial005(files,directories){
+  const baseline=projectPracticalWrittenToBaseline407(files,directories),restored=restoreTransition(baseline,completedEditorialTransition);
+  verifyEditorial005Source(restored,new Set(editorialDelta.currentDirectories));return restored;
+}
+export async function readPracticalWrittenSource(root){
+  const directories=new Set(),files=await collectFiles(root,true,directories);verifyPracticalWrittenSource(files,directories);return {files,directories};
 }
 
 async function collectFiles(root,allowRootGitMetadata=false,directories=null){
@@ -166,6 +231,7 @@ async function collectFiles(root,allowRootGitMetadata=false,directories=null){
 export async function readExactFiles(root){return collectFiles(root);}
 export async function readSuccessor(root){
   const directories=new Set(),files=await collectFiles(root,true,directories);
+  if(files.has(conversionFixturePath))return projectEditorial005To395(projectPracticalWrittenToEditorial005(files,directories),new Set(editorialDelta.currentDirectories));
   if(files.has(editorialFixturePath))return projectEditorial005To395(files,directories);
   verifySuccessor(files);return files;
 }

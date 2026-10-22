@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.14-editorial.5",
-  "releasedAt": "2026-10-14T04:52:58.492Z",
-  "file": "releases/2026.10.14-editorial.5/bank.json",
-  "sha256": "42c3eed6dea79a03f78226b1887b93c71f11f0d3fb6fa63b5ba3c298a823edf2",
-  "changeSummary": "기존 채택 문항 해설 2개에 KWCAG 2.2 콘트롤 크기·안쪽 여백의 실제 권고 규칙을 보완했다. 신규 정규 문항0개, 정규957개와 시드14개를 유지하며 실제 Git/Pages 공개 전이다.",
+  "bankVersion": "2026.10.22-practical-written.1",
+  "releasedAt": "2026-10-22T11:50:31.755715+00:00",
+  "file": "releases/2026.10.22-practical-written.1/bank.json",
+  "sha256": "86acf4a514a1f67ae23cc8019560b4c57359a7195433110214f70b7e8c488986",
+  "changeSummary": "실기 지식을 독립 필기 문항 34개로 전환했다. 기존 필기 887개와 실기 84개는 그대로 보존하며, 정규 필기 911개·정규 실기 80개·시드 14개를 제공한다.",
   "finalRelease": false
 }

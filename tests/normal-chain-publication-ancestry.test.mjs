@@ -1,3 +1,4 @@
+import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
 /** Synthetic structural reconciliation only. Never a real observation or pin. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -29,8 +30,9 @@ function fixture(){
  const after={baseCommit:head,observedAt:at,manifestRaw:p.runtimeManifestRaw,publicationStateRaw:p.publicationStateRaw,allowlistRaw:[...support.keys()].sort().join('\n')+'\n',remoteInventory:D(rows)};
  return {t:{kind:ANCESTOR_PUBLICATION_TRANSITION,sourceAnchorSha256:H(J(before)),evidence},c:{beforeAnchor:before,afterAnchor:after,chain,publicationPins:pins,publicationRecords:events,source:{status:'closed',startedAt:'2026-10-08T14:00:00Z',decisionDeadline:'2026-10-08T14:35:00Z',closedAt:'2026-10-08T14:30:00Z'},previous:chain.sources.at(-1),now:Date.parse('2026-10-08T14:45:00Z')}};
 }
+const scopedTest=(name,operation)=>test(name,t=>withCurrentReleaseAuthority({root},()=>operation(t)));
 const run=f=>validateNormalChainAncestorTransition(f.t,f.c);
-test('explicit ancestry contract binds original anchor and already-published delivered ancestor without granting publication',()=>{const f=fixture(),before=J(f);const r=run(f);assert.equal(r.status,'validated_exact_ancestor_publication_transition');assert.equal(r.canPublish,false);assert.deepEqual(J(f),before);});
+scopedTest('explicit ancestry contract binds original anchor and already-published delivered ancestor without granting publication',()=>{const f=fixture(),before=J(f);const r=run(f);assert.equal(r.status,'validated_exact_ancestor_publication_transition');assert.equal(r.canPublish,false);assert.deepEqual(J(f),before);});
 const cases=[
  ['wrong discriminator',f=>f.t.kind='caller_approved'],
  ['missing intermediate commit',f=>f.t.evidence.commits.splice(1,1)],
@@ -62,9 +64,9 @@ const cases=[
  ['forged endpoint marker Git blob',f=>{const c=f.t.evidence.commits[2];c.remoteInventory.find(r=>r.path==='PUBLICATION-MANIFEST.txt').gitBlob='f'.repeat(40);c.tree=normalPublicationTree(c.remoteInventory);} ],
  ['caller trusted boolean',f=>f.t.evidence.trusted=true]
 ];
-for(const [name,mutate]of cases)test('rejects '+name,()=>{const f=fixture();mutate(f);assert.throws(()=>run(f),/Normal-chain ancestry/);});
+for(const [name,mutate]of cases)scopedTest('rejects '+name,()=>{const f=fixture();mutate(f);assert.throws(()=>run(f),/Normal-chain ancestry/);});
 
-test('successor inspector composes the explicit transition without changing its historical ledger baseline (synthetic archive descriptors only)',async()=>{
+scopedTest('successor inspector composes the explicit transition without changing its historical ledger baseline (synthetic archive descriptors only)',async()=>{
  const {inspectNormalBackupSuccessor}=await import('../scripts/normal-backup-chain.mjs'),f=fixture(),previous=f.c.previous,chain=f.c.chain,rootEntry=chain.sources[0];
  for(const e of chain.sources)Object.assign(e.offlineBase,{manifestSha256:H(J(e.proof.deltaManifest)),baseCommit:(e.proof.publicAnchor??e.proof.continuationAnchor).baseCommit});
  Object.assign(chain,{rootProofSha256:rootEntry.proofSha256,sourceAnchor:rootEntry.proof.sourceAnchor,continuationAnchor:f.c.beforeAnchor});

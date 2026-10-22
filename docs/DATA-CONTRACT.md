@@ -588,3 +588,16 @@ loader는 정규 ledgerSources와 별도인 editorialSources에 원문을 보관
 2026-10-18의 명시적 후속 승인에 따라 기존 editorial-005와 공개 기준 커밋 `5fb79453e1bd2942353c8a15f3942352aa3baa3b`의 완료만 원 캠페인 cutoff 뒤에 진행할 수 있다. `scripts/editorial005-completion.mjs`는 정확한 manifest·은행·종결 대장 바이트와 양쪽 실제 동결 상태를 매 현재 경계에서 다시 확인한다. 역사적 시작·판정·종결·발행 시각, 신규 회차·신규 콘텐츠·Git 권한·기존 영구 중단은 바꾸지 않는다. 이 예외는 검증 통과 증거나 캐시가 아니며 다른 은행·기준·회차로 전이되지 않는다.
 
 정상 `writeReleaseDeliveryPair`의 내부 전체 의미 검증을 그대로 수행한다. 같은 입력의 별도 전체 `validate-release`를 바로 앞에서 반복하지 않는다. 수정된 정책·codec 계약의 좁은 검사와 ordinary build, 실제 포장·일반 도구 복원·독립 재구성·smoke 결과는 각각 구분하여 기록한다. 기존 99파일 증거는 정확히 변경되지 않은 계약에만 원 범위로 재사용하며 새 전체 suite PASS로 표시하지 않는다. codec은 최대 30분이며 관리 실행은 `ACCESSIBILITY_ARCHIVE_DEADLINE_MS`에 실제 고정 outer deadline을 전달하여 그 30초 전까지로 더 줄인다. deadline 갱신·자동 재시도·실패 후 다른 형식 우회는 허용하지 않는다.
+
+
+## 2026-10-22 별도 실기 지식→필기 등록 계약
+
+등록 kind는 `practical_to_written_registration`, registrationId는 `practical-written-001`이다. schema는 `docs/conversions/practical-written-registration.schema.json`이며 roundId/correctionRoundId로 가장하지 않는다. 승인 관측 `2026-10-22T11:09:39.404937+00:00`, 고정 기준 commit `4536277093f80273dd9f5799b32990a74d260466`과 은행·manifest 해시, P1/P2 범위, 실제 batch·cycle·판정 시각, 검토자 독립성·키 노출, 다섯 gate, 정확한 공개 입력 파일과 원 증거 hash를 결박한다. P1은4개1회·12개2회이며 unchanged4의 sourceRefresh는 문항/옵션 불변과 별도 최종 출처 검토를 증명하고 새 cycle로 세지 않는다.
+
+정규화 hash는 객체 키를 재귀 정렬한 UTF-8 compact JSON의 SHA-256이다. 배열 순서와 문자열·Unicode는 바꾸지 않는다. 원 source 검토가 question.sourceRefs 순서로 계산한 hash와 공개 snapshot의 원 bank.sources 필터 순서 hash는 각각 해당 순서로 계산한다. 원문 파일 hash와 소스 ID별 객체 일치를 함께 확인하며 두 배열 hash가 같다고 가정하지 않는다.
+
+후보→등록 질문은 verificationStatus와 reviewNote만 다를 수 있고 다른 전체 질문·연결 옵션·출처가 최종 검토 원문과 같아야 한다. published reviewNote는 공개 대장 경로와 candidateId를 참조한다. 새 누적은행은 기존971개와 accepted 필기의 정확한 합이며 기존 배열 prefix·실기84·선택지·출처·corrections·나머지 metadata를 보존한다. bankVersion/releasedAt/changeSummary/contentCounts는 새 값으로 검사하고 roundId/editorialRoundId는 제거하며 registrationId 하나를 추가한다. contentCounts는 실제 은행에서 재계산한다.
+
+현재 승인은 양쪽 실제 동결 상태·실제 현재 시간·exact 대장/manifest/은행을 매 경계 재확인한다. 전체 역사 파일209개의 고정 원문과 기존 campaign 검사는 마지막 역사 manifest의 내부 읽기 전용 view로 유지하며 source manifest나 역사 시각을 덮어쓰지 않는다. 새 active 은행은 별도 전환 검증을 추가 통과해야 한다. 종결 등록 대장의 publication은 not_attempted·공개0으로 보존하고 실제 Pages/live 성공은 별도 이벤트로 기록한다.
+
+최종 closed 전환 대장은 독립 검토 후 raw SHA-256을 코드에 고정한다. pending/null pin은 현재 등록·공개·포장을 거부한다. P2도 이 최종 pin 안에 모든 시작 cycle·실패·원 증거·최종 판정이 포함되며 같은 registrationId로 다시 작성하지 않는다. 선정 group별 대표·관련 실기 원본과 과목을 고정하고 출제자와 source/semantic 검토자의 독립성도 검사한다.

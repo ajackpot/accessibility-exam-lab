@@ -7,7 +7,7 @@ import * as d from '../src/domain.js';
 import {exportBackup,parseBackup} from '../src/backup.js';
 import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 const {readBankInput,buildBank}=await createOwnedHistoricalAuthority({after});
-import {validateReleaseLedger,loadRoundContext} from '../scripts/validate-round.mjs';
+import {validateReleaseLedger} from '../scripts/validate-round.mjs';
 import {REVIEWED_OPTION_EXPLANATIONS} from '../src/reviewed-option-explanations.js';
 const root=path.resolve(import.meta.dirname,'..');
 // Historical0.2.8 behavior and carry-forward exceptions are fixed to immutable regular.1.
@@ -18,6 +18,8 @@ const common='동등 비교 연산의 결과는 피연산자 자체가 아니라
 const paragraphs=(context,role='distractor',explanation=common)=>d.optionExplanationParagraphs({explanation,contextExplanation:context,role});
 const clean=source=>{const b=d.copy(source);for(const q of b.questions.filter(q=>q.type==='written'))for(const l of q.links)delete l.contextExplanation;return b;};
 async function fixture(t,{baseline=true}={}) {
+ // Simulate this immutable regular.1 fixture only; t.mock restores each test.
+ t.mock.timers.enable({apis:['Date'],now:Date.parse(manifest.releasedAt)+60000});
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'exam-explanation-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.mkdir(path.join(dir,'data'),{recursive:true});
  if(baseline){await fs.mkdir(path.join(dir,'data/releases',manifest.bankVersion),{recursive:true});await fs.writeFile(path.join(dir,'data',manifest.file),raw);await fs.writeFile(path.join(dir,'data/manifest.json'),JSON.stringify(manifest));}
  await fs.writeFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',...(baseline?['data/manifest.json',`data/${manifest.file}`]:[])].sort().join('\n')+'\n');
@@ -110,7 +112,11 @@ test('manually staged future manifest cannot bypass authoring lint through defau
  const badRaw=JSON.stringify(next),badManifest={...manifest,bankVersion:next.bankVersion,file:`releases/${next.bankVersion}/bank.json`,sha256:await d.sha256(badRaw)};
  await fs.mkdir(path.join(dir,'data/releases',next.bankVersion),{recursive:true});await fs.writeFile(path.join(dir,'data',badManifest.file),badRaw);await fs.writeFile(path.join(dir,'data/manifest.json'),JSON.stringify(badManifest));
  await assert.rejects(buildBank(dir),/공통 해설/);
- const context=await loadRoundContext(root,null,{release:true});context.banks.set(next.bankVersion,{raw:badRaw});const result=validateReleaseLedger(context.ledgers,{manifest:badManifest,banks:context.banks});assert.equal(result.ok,false);assert.match(result.errors.join(' '),/explanation authoring/);
+ // This negative reaches active-bank authoring validation before any ledger
+ // history is consumed. Bind the exact original raw bank, not a full campaign.
+ const exactBanks=new Map([[bank.bankVersion,{raw}], [next.bankVersion,{raw:badRaw}]]);
+ assert.equal(await d.sha256(raw),manifest.sha256);
+ const result=validateReleaseLedger([],{manifest:badManifest,banks:exactBanks});assert.equal(result.ok,false);assert.match(result.errors.join(' '),/explanation authoring/);
  const knownChanged=d.copy(bank);knownChanged.questions[0].revision++;const changedRaw=JSON.stringify(knownChanged);await fs.writeFile(path.join(dir,'data',manifest.file),changedRaw);await fs.writeFile(path.join(dir,'data/manifest.json'),JSON.stringify({...manifest,sha256:await d.sha256(changedRaw)}));await assert.rejects(buildBank(dir),/Historical explanation baseline hash mismatch/);
 });
 

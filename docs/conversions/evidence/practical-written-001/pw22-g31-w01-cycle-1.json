@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw22-g31-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw22-g31-w01",
+    "revision": 1,
+    "templateId": "pw22-template-g31",
+    "learningGoalId": "pw22-goal-g31",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s4",
+    "topicIds": [
+      "pw22-g31"
+    ],
+    "stem": "다음 보기의 코드를 읽고, memo에 초점이 있을 때 same과 inside의 값 및 viewer 자체의 초점을 판별할 검사를 고르시오.",
+    "notes": [
+      "같은 최상위 문서에서 memo 입력란에 초점이 있다. 대화상자·iframe·Shadow DOM·초점을 바꾸는 다른 코드는 없다.",
+      "문자 단축키는 viewer 자체에 초점이 있을 때 실행하고, 안쪽 memo에서 문자 입력 중에는 실행하지 않아야 한다."
+    ],
+    "explanation": "memo에 초점이 있으므로 activeElement는 viewer가 아닌 memo이다. 따라서 same은 false이고, memo가 viewer의 자손이므로 inside는 true이다. 구성요소 자체의 초점으로 단축키를 제한하려면 same 검사를 사용한다.",
+    "sourceRefs": [
+      "pw22b-src-kw-shortcuts",
+      "pw22b-src-html-activeelement",
+      "pw22b-src-dom-contains"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "KWCAG 2.2 (KS X OT0003:2022); HTML 5.2 (W3C Recommendation, 2017-12-14 고정판); DOM4 2015-11-19 기술 보조 근거",
+    "difficulty": "응용",
+    "reviewNote": "별도 필기 전환 후보 초안. 독립 풀이·출처·정답 유일성·문안·구조의 검토 전이며 등록·공개하지 않았다.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw22-g31-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g31-w01-set"
+      },
+      {
+        "optionId": "pw22-g31-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g31-w01-set"
+      },
+      {
+        "optionId": "pw22-g31-w01-o3",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw22-g31-w01-set"
+      },
+      {
+        "optionId": "pw22-g31-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g31-w01-set"
+      },
+      {
+        "optionId": "pw22-g31-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g31-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<div id=\"viewer\" tabindex=\"0\" role=\"region\" aria-label=\"사진 보기\">\n  <label for=\"memo\">사진 메모</label>\n  <input id=\"memo\" type=\"text\">\n</div>\n<script>\nconst viewer = document.getElementById(\"viewer\");\n// memo에 초점이 있는 시점에 아래 두 식을 평가한다.\nconst same = document.activeElement === viewer;\nconst inside = viewer.contains(document.activeElement);\n</script>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, memo에 초점이 있을 때 same과 inside의 값 및 viewer 자체의 초점을 판별할 검사를 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw22-g31-w01-o1",
+      "revision": 1,
+      "content": "same=false · inside=true · inside 검사 사용",
+      "explanation": "자손 포함 검사를 쓰면 memo에서 문자 입력 중에도 단축키 실행 조건이 참이 된다."
+    },
+    {
+      "optionId": "pw22-g31-w01-o2",
+      "revision": 1,
+      "content": "same=true · inside=true · same 검사 사용",
+      "explanation": "자손 입력란이 초점을 가졌다고 부모 viewer 자체가 activeElement가 되는 것은 아니다."
+    },
+    {
+      "optionId": "pw22-g31-w01-o3",
+      "revision": 1,
+      "content": "same=false · inside=true · same 검사 사용",
+      "explanation": "동일 요소 여부는 거짓이고 자손 포함은 참이다. 자체 초점을 요구하는 조건에는 동일성 검사가 맞는다."
+    },
+    {
+      "optionId": "pw22-g31-w01-o4",
+      "revision": 1,
+      "content": "same=false · inside=false · inside 검사 사용",
+      "explanation": "contains는 자손도 포함하므로 memo에 대한 inside를 거짓으로 볼 수 없다."
+    },
+    {
+      "optionId": "pw22-g31-w01-o5",
+      "revision": 1,
+      "content": "same=true · inside=false · same 검사 사용",
+      "explanation": "현재 초점을 부모로 잘못 판단하면서 자손 포함 관계도 반대로 해석한 조합이다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw22b-src-kw-shortcuts",
+      "title": "NIA — 문자 단축키",
+      "url": "https://nia-a11y.github.io/kwcag22tech/2/1/4/",
+      "version": "웹 접근성을 고려한 콘텐츠 제작기법 2.2 개정판 / NIA 2025-03 발행, 2025-03-31 업데이트",
+      "checkedAt": "2026-10-22T11:28:12.371780+00:00",
+      "location": "공식 해설 §2.1.4 ↔ KWCAG 2.2 §6.1.4",
+      "evidence": "문자 단축키는 끄기, 재설정 또는 해당 영역 초점 조건 등의 방법으로 우발적 실행을 방지한다. 이 문항은 구성요소 자체의 초점과 그 안쪽 입력칸의 초점을 구별하는 구현 조건을 평가한다.",
+      "rights": "지정된 공식 자료의 필요한 사실을 의역하고, 실기 원본의 지식을 바탕으로 지문·선택지·코드를 독립 작성했다. 표준 예제·전문·공식 시험 샘플·유료 문제집 문구를 복제하지 않았다. 원문 권리는 원저작권자에게 있다."
+    },
+    {
+      "id": "pw22b-src-html-activeelement",
+      "title": "HTML 5.2 — 현재 초점 요소",
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/editing.html#dom-document-activeelement",
+      "version": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+      "checkedAt": "2026-10-22T11:28:12.371780+00:00",
+      "location": "§5.4.6 Focus management APIs: Document.activeElement",
+      "evidence": "일반 문서 요소에 초점이 있는 제시 조건에서 document.activeElement는 그 요소를 가리킨다. 부모 컨테이너가 초점 가능하거나 자손을 포함한다는 사실은 부모 자체의 현재 초점과 다르다.",
+      "rights": "지정된 공식 자료의 필요한 사실을 의역하고, 실기 원본의 지식을 바탕으로 지문·선택지·코드를 독립 작성했다. 표준 예제·전문·공식 시험 샘플·유료 문제집 문구를 복제하지 않았다. 원문 권리는 원저작권자에게 있다."
+    },
+    {
+      "id": "pw22b-src-dom-contains",
+      "title": "W3C DOM4 — 자신과 자손 포함 검사",
+      "url": "https://www.w3.org/TR/2015/REC-dom-20151119/#dom-node-contains",
+      "version": "W3C DOM4 (W3C Recommendation, 2015-11-19; 기술 보조 근거)",
+      "checkedAt": "2026-10-22T11:28:12.371780+00:00",
+      "location": "§4.4 Node.contains; §2.1 inclusive descendant",
+      "evidence": "contains는 인수가 자신 또는 자손이면 참이다. 따라서 자손 입력란에 초점이 있을 때도 컨테이너의 contains 검사는 참일 수 있다. 이 보조 근거를 새로운 시험 지정판이라고 주장하지 않는다.",
+      "rights": "지정된 공식 자료의 필요한 사실을 의역하고, 실기 원본의 지식을 바탕으로 지문·선택지·코드를 독립 작성했다. 표준 예제·전문·공식 시험 샘플·유료 문제집 문구를 복제하지 않았다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw22-g37-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw22-g37-w01",
+    "revision": 1,
+    "templateId": "pw22-template-g37",
+    "learningGoalId": "pw22-goal-g37",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s3",
+    "topicIds": [
+      "pw22-g37"
+    ],
+    "stem": "다음 보기의 코드를 읽고, video를 지원하는 환경에서 일반 본문으로 제공되는 대본 링크와 내부 대체 콘텐츠의 용도를 고르시오.",
+    "notes": [
+      "HTML 5.2의 video를 지원하고 guide.mp4를 정상 재생할 수 있는 사용자 에이전트이다. CSS·스크립트로 내부 콘텐츠를 별도로 노출하지 않는다.",
+      "두 링크의 대상은 동일하며 영상 내용을 담은 정상적인 HTML 대본이다. 특정 브라우저나 화면낭독기의 실측 결과를 묻는 문제는 아니다."
+    ],
+    "explanation": "video 내부의 콘텐츠는 video를 지원하지 않는 구형 사용자 에이전트용 대체 콘텐츠이다. 지원 환경에서 대본으로 가는 일반 본문 경로는 video 밖의 링크 B이며, 링크 A를 재생 전이나 재생 실패 시 자동 표시되는 본문으로 보아서는 안 된다.",
+    "sourceRefs": [
+      "pw22b-src-html-video-fallback"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+    "difficulty": "응용",
+    "reviewNote": "별도 필기 전환 후보 초안. 독립 풀이·출처·정답 유일성·문안·구조의 검토 전이며 등록·공개하지 않았다.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw22-g37-w01-o1",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw22-g37-w01-set"
+      },
+      {
+        "optionId": "pw22-g37-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g37-w01-set"
+      },
+      {
+        "optionId": "pw22-g37-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g37-w01-set"
+      },
+      {
+        "optionId": "pw22-g37-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g37-w01-set"
+      },
+      {
+        "optionId": "pw22-g37-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g37-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<video controls src=\"guide.mp4\" aria-label=\"장치 안내 영상\">\n  <p><a href=\"transcript.html\">안내 대본 A</a></p>\n</video>\n<p><a href=\"transcript.html\">안내 대본 B</a></p>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, video를 지원하는 환경에서 일반 본문으로 제공되는 대본 링크와 내부 대체 콘텐츠의 용도를 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw22-g37-w01-o1",
+      "revision": 1,
+      "content": "일반 본문 경로는 링크 B이고, 링크 A는 video 미지원 환경용 대체 콘텐츠이다.",
+      "explanation": "video 바깥 링크와 미지원 환경에 대비한 내부 콘텐츠의 역할을 구별한 해석이다."
+    },
+    {
+      "optionId": "pw22-g37-w01-o2",
+      "revision": 1,
+      "content": "일반 본문 경로는 링크 A이고, 링크 B는 재생 완료 뒤 제공되는 대체 콘텐츠이다.",
+      "explanation": "바깥 p에는 재생 완료까지 기다려야 하는 조건이 없고, 내부 링크의 용도도 반대로 해석했다."
+    },
+    {
+      "optionId": "pw22-g37-w01-o3",
+      "revision": 1,
+      "content": "일반 본문 경로는 링크 A와 B이며, controls가 두 링크를 함께 표시한다.",
+      "explanation": "controls는 미디어 조작 기능을 제공하며 내부 대체 콘텐츠를 일반 본문으로 바꾸는 속성이 아니다."
+    },
+    {
+      "optionId": "pw22-g37-w01-o4",
+      "revision": 1,
+      "content": "일반 본문 경로는 재생 전 링크 A에서 재생 후 링크 B로 전환된다.",
+      "explanation": "HTML의 video 내부 대체 콘텐츠는 재생 전·후에 따라 본문 링크를 교체하는 구조가 아니다."
+    },
+    {
+      "optionId": "pw22-g37-w01-o5",
+      "revision": 1,
+      "content": "일반 본문 경로는 없으며, 두 링크는 guide.mp4 로딩 실패 때 제공된다.",
+      "explanation": "video 밖 링크 B는 미디어 로딩 성공 여부와 별개인 본문이다. 내부 콘텐츠도 단순 재생 실패용으로 해석할 수 없다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw22b-src-html-video-fallback",
+      "title": "HTML 5.2 — video 내부 대체 콘텐츠",
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/semantics-embedded-content.html#the-video-element",
+      "version": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+      "checkedAt": "2026-10-05T19:07:44.139693+00:00",
+      "location": "§4.7.10 The video element; fallback content",
+      "evidence": "video 내부 콘텐츠는 video 요소를 지원하지 않는 구형 브라우저를 위한 것으로, video 지원 사용자 에이전트가 사용자에게 표시할 콘텐츠가 아니다. HTML 5.2는 대본 같은 텍스트 대안의 링크를 video 가까이의 본문에 제공하는 방법을 설명한다.",
+      "rights": "지정된 공식 자료의 필요한 사실을 의역하고, 실기 원본의 지식을 바탕으로 지문·선택지·코드를 독립 작성했다. 표준 예제·전문·공식 시험 샘플·유료 문제집 문구를 복제하지 않았다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

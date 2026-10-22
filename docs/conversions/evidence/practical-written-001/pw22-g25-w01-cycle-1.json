@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw22-g25-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw22-g25-w01",
+    "revision": 1,
+    "templateId": "pw22-template-g25",
+    "learningGoalId": "pw22-goal-g25",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s3",
+    "topicIds": [
+      "pw22-g25"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 자동 재생 요청 없이 사용자가 기본 조작부에서 재생을 시작하도록 바꾼 audio 요소를 고르시오.",
+    "notes": [
+      "별도 재생 버튼이나 스크립트는 없으며 음성 파일 주소는 유지한다.",
+      "특정 브라우저의 자동 재생 차단 정책에 기대지 않고 HTML 속성의 의미로 판단한다."
+    ],
+    "explanation": "자동 재생 요청을 없애려면 autoplay 속성을 제거하고, 사용자가 재생·일시 정지할 기본 조작부를 제공하려면 controls를 둔다. preload는 취득 힌트이며 autoplay=\"false\"도 속성이 존재하므로 자동 재생 요청을 없애지 못한다.",
+    "sourceRefs": [
+      "pw22a-src-media"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+    "difficulty": "기초",
+    "reviewNote": "실기 지식의 필기 전환 검토 초안. 독립 풀이·근거·문안·구조 검토 전이며 정규 은행 미등록·미공개. 실제 브라우저·화면낭독기 실측 아님.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw22-g25-w01-o1",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw22-g25-w01-set"
+      },
+      {
+        "optionId": "pw22-g25-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g25-w01-set"
+      },
+      {
+        "optionId": "pw22-g25-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g25-w01-set"
+      },
+      {
+        "optionId": "pw22-g25-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g25-w01-set"
+      },
+      {
+        "optionId": "pw22-g25-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g25-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<audio src=\"welcome.ogg\" autoplay preload=\"metadata\"></audio>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 자동 재생 요청 없이 사용자가 기본 조작부에서 재생을 시작하도록 바꾼 audio 요소를 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw22-g25-w01-o1",
+      "revision": 1,
+      "content": "<audio src=\"welcome.ogg\" controls preload=\"metadata\"></audio>",
+      "explanation": "autoplay 없이 controls를 두어 사용자 시작과 기본 조작부 제공이라는 두 조건을 충족한다."
+    },
+    {
+      "optionId": "pw22-g25-w01-o2",
+      "revision": 1,
+      "content": "<audio src=\"welcome.ogg\" autoplay=\"false\" controls preload=\"metadata\"></audio>",
+      "explanation": "불리언 속성인 autoplay는 문자열 false를 넣어도 제거되지 않아 요청이 남는다."
+    },
+    {
+      "optionId": "pw22-g25-w01-o3",
+      "revision": 1,
+      "content": "<audio src=\"welcome.ogg\" autoplay controls preload=\"none\"></audio>",
+      "explanation": "preload의 취득 힌트를 바꾸는 것으로 autoplay에 의한 재생 요청을 없애지 못한다."
+    },
+    {
+      "optionId": "pw22-g25-w01-o4",
+      "revision": 1,
+      "content": "<audio src=\"welcome.ogg\" autoplay muted controls></audio>",
+      "explanation": "음소거 상태와 사용자 재생 시작은 다르며 autoplay가 남아 자동 재생 요청을 유지한다."
+    },
+    {
+      "optionId": "pw22-g25-w01-o5",
+      "revision": 1,
+      "content": "<audio src=\"welcome.ogg\" preload=\"auto\"></audio>",
+      "explanation": "자동 재생 요청은 없지만 controls도 없어 요구한 기본 조작부를 제공하지 않는다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw22a-src-media",
+      "title": "HTML 5.2 — 미디어 자동 재생과 조작부",
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/semantics-embedded-content.html#user-interface",
+      "version": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+      "checkedAt": "2026-10-02T15:08:19.692877+00:00",
+      "location": "§4.7.13.5 preload; §4.7.13.7 autoplay; §4.7.13.13 user interface",
+      "evidence": "autoplay는 존재 여부로 판단하는 불리언 속성이다. controls는 사용자 조작부를 제공하며 preload는 자원 취득의 힌트이다. 고정판 현재 검색 발췌와 원본 문항의 상세 근거 확인 기록을 함께 사용했다.",
+      "rights": "실기 원본의 학습 지식을 바탕으로 지문·상황·선택지·코드를 독립 작성했다. 표준의 사실은 필요한 범위에서 의역하며 원문·공식 시험 예제·유료 문항을 복제하지 않는다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

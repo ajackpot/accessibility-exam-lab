@@ -1,15 +1,16 @@
 /** Real reviewed publication evidence; synthetic successor inputs are never executed or published. */
 import test, {after} from 'node:test';
-import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
+import {createOwnedHistoricalAuthority,createOwnedHistoricalSource} from './historical-authority-fixtures.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {pathToFileURL} from 'node:url';
 import {loadRoundContext,regularCoverage,auditHistoricalRelease} from '../scripts/validate-round.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..'),hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>JSON.stringify(o,null,2)+'\n';
-const loaded=await loadRoundContext(root,null,{release:true}),proof=loaded.synchronizations.find(e=>e.syncId==='cumulative-009-017'),now=Date.now();
+const loaded=await loadRoundContext(root,null,{release:true}),proof=loaded.synchronizations.find(e=>e.syncId==='cumulative-009-017');
 const laterAuthorities=loaded.synchronizations.slice(loaded.synchronizations.indexOf(proof)+1);
 loaded.synchronizations=loaded.synchronizations.slice(0,loaded.synchronizations.indexOf(proof)+1);
 // This historical delivery fixture excludes later normal remote-backed rounds
@@ -26,7 +27,19 @@ loaded.manifest={...loaded.manifest,bankVersion:fixtureBank.bankVersion,released
 // The existing event prefix retains its independent offline descendants but
 // ends before later editorial authorities. This boundary binds fixture inputs;
 // it never replaces any production validator's existing now argument.
-const fixtureBoundary=Math.max(Date.parse(proof.verifiedAt),...loaded.ledgers.map(l=>Date.parse(l.startedAt)));
+// Every retained closed round and its delivered checkpoint must already exist
+// at this owned historical observation; the next authority is still excluded.
+const fixtureRoundIds=new Set(loaded.ledgers.map(l=>l.roundId));
+const fixtureTimes=[Date.parse(proof.verifiedAt),
+ ...loaded.ledgers.flatMap(l=>[l.startedAt,l.closedAt].filter(Boolean).map(Date.parse)),
+ ...[...loaded.offlineBases.values()].filter(e=>fixtureRoundIds.has(e.roundId)).flatMap(e=>[e.recordedAt,e.eligibleAt].map(Date.parse)),
+ ...[...loaded.deliveryCheckpointSources].filter(([id])=>fixtureRoundIds.has(id)).map(([,raw])=>Date.parse(JSON.parse(raw).verifiedAt))];
+assert(fixtureTimes.every(Number.isFinite),'Retained historical fixture timestamps must be finite');
+const fixtureBoundary=Math.max(...fixtureTimes);
+assert(fixtureBoundary<Math.min(...laterAuthorities.map(e=>Date.parse(e.verifiedAt))),'Retained delivery must precede the excluded next authority');
+assert(fixtureBoundary<Date.parse('2026-10-10T11:52:01.012Z'),'Historical fixture remains before the existing selection boundary');
+// Pure assertions below own this historical prefix; current-loader tests retain the actual clock.
+const now=fixtureBoundary;
 loaded.editorials=loaded.editorials.filter(e=>Date.parse(e.startedAt)<=fixtureBoundary);
 const authority=await createOwnedHistoricalAuthority({after});
 const {validateRoundLedgers,validateReleaseLedger}=authority.round;
@@ -47,14 +60,14 @@ test('reviewed successor publication preserves every original ledger, bank and u
  assert.ok(proof.previousSynchronizationSha256,'A genuinely reviewed successor event must be registered before this closure is complete');
  const before=loaded.ledgers.map(json),banks=[...loaded.banks].map(([v,e])=>[v,hash(e.raw)]);
  const result=validatePublicationSynchronizations(loaded.synchronizations,{...loaded,now});assert.equal(result.ok,true,result.errors.join('\n'));assert.equal(result.history.find(e=>e.syncId===proof.syncId).publication.bankVersion,proof.manifest.bankVersion);
- assert.equal(validateRoundLedgers(loaded.ledgers,{...loaded,now}).ok,true);assert.equal(validateReleaseLedger(loaded.ledgers,{...loaded,now}).ok,true);
+ const roundCheck=validateRoundLedgers(loaded.ledgers,{...loaded,now});assert.equal(roundCheck.ok,true,roundCheck.errors.join('\n'));const releaseCheck=validateReleaseLedger(loaded.ledgers,{...loaded,now});assert.equal(releaseCheck.ok,true,releaseCheck.errors.join('\n'));
  for(const s of proof.rounds){const ledger=loaded.ledgers.find(r=>r.roundId===s.roundId);assert.equal(ledger.publication.status,'not_attempted');assert.equal(ledger.publication.verifiedAt,null);assert(ledger.candidates.every(c=>c.publishedBankVersion===null));assert.equal(hash(loaded.ledgerSources.get(s.roundId)),s.originalLedgerSha256);assert.equal(hash(loaded.banks.get(s.bankVersion).raw),s.bankSha256);}
  const bank=JSON.parse(loaded.banks.get(proof.manifest.bankVersion).raw),regular=bank.questions.filter(q=>!q.testOnly),prior=loaded.synchronizations.find(e=>e.syncId==='cumulative-006-008');
  assert.equal(proof.counts.regular,regular.length);assert.equal(proof.counts.written,regular.filter(q=>q.type==='written').length);assert.equal(proof.counts.practical,regular.filter(q=>q.type==='practical').length);assert.equal(proof.counts.testOnly,bank.questions.filter(q=>q.testOnly).length);assert.equal(proof.counts.newlyPublicFromAnchor,regular.length-prior.counts.regular);assert.equal(proof.rounds.reduce((n,s)=>n+s.accepted,0),proof.counts.newlyPublicFromAnchor);
  assert.deepEqual(loaded.ledgers.map(json),before);assert.deepEqual([...loaded.banks].map(([v,e])=>[v,hash(e.raw)]),banks);
 });
 test('new normal baseline uses latest public bank only after actual verification',()=>{
- const r=successor(),base={...loaded,now};assert.equal(validateCampaignBaselines([...loaded.ledgers,r],base).ok,true);
+ const r=successor(),base={...loaded,now},baselineCheck=validateCampaignBaselines([...loaded.ledgers,r],base);assert.equal(baselineCheck.ok,true,baselineCheck.errors.join('\n'));
  failed(validateCampaignBaselines([...loaded.ledgers,r],{...base,synchronizations:loaded.synchronizations.slice(0,-1)}),/offline predecessor|latest verified/);
  failed(validateCampaignBaselines([...loaded.ledgers,successor(new Date(Date.parse(proof.verifiedAt)-1).toISOString())],base),/offline predecessor|latest verified/);
  const earlier={...loaded,now:Date.parse(proof.verifiedAt)-1};const future=validatePublicationSynchronizations(loaded.synchronizations,earlier);assert.equal(future.ok,true,future.errors.join('\n'));assert(!future.history.some(h=>h.syncId===proof.syncId));
@@ -76,14 +89,33 @@ test('original delivery checkpoints are byte-bound and preserve the fixed unknow
 });
 test('current loader requires all current proof dependencies and both freeze fields',async t=>{
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'publication-successor-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
+ // Every mutation is restored. The added typed error alternatives name the exact altered input.
  async function mutate(file,fn,re){const target=path.join(dir,file),original=await fs.readFile(target);try{await fn(target,original);await assert.rejects(loadRoundContext(dir,null,{release:true}),re);}finally{await fs.writeFile(target,original);}}
  await mutate(publicationPath,p=>fs.unlink(p),/ENOENT/);
- await mutate(publicationPath,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/proof hash|immutable pre-quarantine history changed: docs\/publications\/cumulative-009-017\.json/);
+ await mutate(publicationPath,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/proof hash|immutable pre-quarantine history changed: docs\/publications\/cumulative-009-017\.json|^Error: Practical-written registration: Immutable baseline history changed: docs\/publications\/cumulative-009-017\.json$/);
  await mutate(proof.rounds.at(-1).deliveryProof.path,p=>fs.unlink(p),/ENOENT|dependency/);
- await mutate(proof.rounds.at(-1).deliveryProof.path,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/tampered|immutable pre-quarantine history changed: docs\/deliveries\/checkpoints\/round-017\.json/);
+ await mutate(proof.rounds.at(-1).deliveryProof.path,(p,b)=>fs.writeFile(p,Buffer.concat([b,Buffer.from(' ')])),/tampered|immutable pre-quarantine history changed: docs\/deliveries\/checkpoints\/round-017\.json|^Error: Practical-written registration: Immutable baseline history changed: docs\/deliveries\/checkpoints\/round-017\.json$/);
  await mutate('PUBLICATION-MANIFEST.txt',(p,b)=>fs.writeFile(p,b.toString().split('\n').filter(v=>v!==publicationPath).join('\n')),/dependency/);
- for(const [file,key] of [['data/manifest.json','finalRelease'],['data/publication-state.json','finalized']])await mutate(file,(p,b)=>fs.writeFile(p,json({...JSON.parse(b),[key]:true})),/freeze/);
- await assert.rejects(loadRoundContext(dir,null,{release:true,now:FREEZE_AT}),/cutoff|freeze/);
+ // Current conversion ownership rejects the modified exact manifest before its inner freeze guard.
+ for(const [file,key,expected] of [
+  ['data/manifest.json','finalRelease',/^Error: Practical-written registration: Active manifest is outside this conversion$/],
+  ['data/publication-state.json','finalized',/^Error: Practical-written registration: Persistent freeze blocks conversion$/]
+ ])await mutate(file,(p,b)=>fs.writeFile(p,json({...JSON.parse(b),[key]:true})),expected);
+ // FREEZE_AT predates the new registration; this is the current typed chronology rejection.
+ await assert.rejects(loadRoundContext(dir,null,{release:true,now:FREEZE_AT}),{name:'Error',message:'Practical-written registration: Approval scope or actual chronology differs'});
+ // Preserve the separate legacy loader freeze/cutoff assertions on exact, test-owned
+ // pre-conversion source. An earlier outer rejection above is not inner execution.
+ const historical=await createOwnedHistoricalSource(t);
+ const historicalRound=await import(pathToFileURL(path.join(historical,'scripts/validate-round.mjs')).href);
+ const historicalManifest=JSON.parse(await fs.readFile(path.join(historical,'data/manifest.json')));
+ const historicalNow=Date.parse(historicalManifest.releasedAt)+1;
+ assert(historicalNow<FREEZE_AT,'Historical fixture must precede the unchanged cutoff');
+ for(const [file,key] of [['data/manifest.json','finalRelease'],['data/publication-state.json','finalized']]){
+  const target=path.join(historical,file),original=await fs.readFile(target);
+  try{await fs.writeFile(target,json({...JSON.parse(original),[key]:true}));await assert.rejects(historicalRound.loadRoundContext(historical,null,{release:true,now:historicalNow}),/freeze/);}
+  finally{await fs.writeFile(target,original);}
+ }
+ await assert.rejects(historicalRound.loadRoundContext(historical,null,{release:true,now:FREEZE_AT}),/cutoff|freeze/);
  // Separate membership rejection from the independently pinned inventory check.
  // The temporary exact copy intentionally contains only the stated public files;
  // real local-only history remains untouched in both root and this loader copy.

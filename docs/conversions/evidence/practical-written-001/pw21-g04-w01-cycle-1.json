@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw21-g04-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw21-g04-w01",
+    "revision": 1,
+    "templateId": "pw21-template-g04",
+    "learningGoalId": "pw21-goal-g04",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s3",
+    "topicIds": [
+      "pw21-g04"
+    ],
+    "stem": "다음 보기의 코드를 읽고, Enter·Space·포인터 클릭으로 각각 한 번 조작했을 때 실행 횟수를 바르게 연결한 선택지를 고르시오.",
+    "notes": [
+      "각 실험은 count가 0인 상태에서 시작하며, 키를 길게 누르지 않는다.",
+      "대상 환경에서는 기본 button이 Enter와 Space 조작마다 click을 한 번 발생시킨다. Enter의 keydown은 한 번 발생하며, 보기의 처리로 기본 동작을 취소하지 않는다."
+    ],
+    "explanation": "Enter에서는 keydown 처리에서 직접 호출한 click과 기본 활성화로 발생한 click이 각각 count를 증가시킨다. Space와 포인터에는 추가 호출 조건이 적용되지 않아 각각 한 번 증가한다. 기본 버튼에 중복 키 처리를 덧붙이지 않는 것이 이 문제의 개선 방향이다.",
+    "sourceRefs": [
+      "pw21-src-html-button"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "W3C Recommendation / 2017-12-14",
+    "difficulty": "기초",
+    "reviewNote": "비공개 복제본 검토용. 정규 은행 미등록·미공개. 검토 중.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw21-g04-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g04-w01-set"
+      },
+      {
+        "optionId": "pw21-g04-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g04-w01-set"
+      },
+      {
+        "optionId": "pw21-g04-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g04-w01-set"
+      },
+      {
+        "optionId": "pw21-g04-w01-o4",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw21-g04-w01-set"
+      },
+      {
+        "optionId": "pw21-g04-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g04-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<button id=\"send\" type=\"button\">신청</button>\n<script>\nlet count = 0;\nconst send = document.getElementById('send');\nsend.addEventListener('click', () => { count += 1; });\nsend.addEventListener('keydown', (event) => {\n  if (event.key === 'Enter') send.click();\n});\n</script>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, Enter·Space·포인터 클릭으로 각각 한 번 조작했을 때 실행 횟수를 바르게 연결한 선택지를 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw21-g04-w01-o1",
+      "revision": 1,
+      "content": "Enter 2회 · Space 2회 · 포인터 1회",
+      "explanation": "추가 처리의 조건은 Enter이므로 Space에는 두 번째 click이 없다."
+    },
+    {
+      "optionId": "pw21-g04-w01-o2",
+      "revision": 1,
+      "content": "Enter 2회 · Space 1회 · 포인터 2회",
+      "explanation": "포인터 클릭은 keydown의 Enter 조건을 실행하지 않는다."
+    },
+    {
+      "optionId": "pw21-g04-w01-o3",
+      "revision": 1,
+      "content": "Enter 1회 · Space 1회 · 포인터 1회",
+      "explanation": "keydown에서 추가한 click 호출을 누락한 계산이다."
+    },
+    {
+      "optionId": "pw21-g04-w01-o4",
+      "revision": 1,
+      "content": "Enter 2회 · Space 1회 · 포인터 1회",
+      "explanation": "Enter에만 수동 click이 더해져 총 두 번 처리된다."
+    },
+    {
+      "optionId": "pw21-g04-w01-o5",
+      "revision": 1,
+      "content": "Enter 1회 · Space 2회 · 포인터 1회",
+      "explanation": "추가 호출을 Space에 적용하고 실제 조건인 Enter에서는 빠뜨렸다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw21-src-html-button",
+      "title": "HTML 5.2 Forms",
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#the-label-element",
+      "version": "W3C Recommendation / 2017-12-14",
+      "checkedAt": "2026-10-01",
+      "location": "Forms: The label element; The button element",
+      "evidence": "label의 for 값은 같은 문서 안의 레이블을 붙일 수 있는 요소의 ID를 가리킨다. button은 활성화 시 동작을 실행하는 콘트롤이며 type=button은 제출·초기화 기본 동작을 하지 않는다.",
+      "rights": "문제·선택지·코드는 새로 작성. 원문 전문 또는 공식 샘플 문제를 재배포하지 않음.",
+      "provenanceSourceId": "html52-forms",
+      "currentReviewStatus": "pending_primary_check"
+    }
+  ]
+}

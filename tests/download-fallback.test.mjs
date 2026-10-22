@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {createOwnedHistoricalSource} from './historical-authority-fixtures.mjs';
 import {GIT_PERMISSION_TIMEOUT_MS, startGitPermissionWait, advanceGitPermissionWait, assertGitWriteAllowed, reconcileGitOutcome, safePublicPath, parsePublicAllowlist, freezePublicDelta, writeDownloadZip, createDeliveryReceipt, validateDeliveryChain, samePublicDelta} from '../scripts/download-fallback.mjs';
 const begin = Date.parse('2026-10-04T00:00:00Z'), deadline = begin + GIT_PERMISSION_TIMEOUT_MS, now = deadline + 1000;
 const iso = n => new Date(n).toISOString();
@@ -66,13 +67,13 @@ test('freeze includes only exact reviewed changed files and ZIP preserves paths'
   assert.deepEqual(snapshot.files.map(f => f.path), ['README.md']);
   assert.equal(snapshot.manifest.newlyPublishedRegular, 0);
   await assert.rejects(writeDownloadZip(snapshot, path.join(root, 'late.zip'), {now: Date.parse('2026-10-16T15:00:00Z')}), /cutoff blocks creating a new ZIP/);
-  const output = path.join(root, 'round.zip'), artifact = await writeDownloadZip(snapshot, output);
+  const output = path.join(root, 'round.zip'), artifact = await writeDownloadZip(snapshot, output, {now});
   assert.equal(artifact.sha256, digest(await fs.readFile(output)));
   const listing = JSON.parse(execFileSync('python3', ['-c', 'import zipfile,json,sys; z=zipfile.ZipFile(sys.argv[1]); assert z.testzip() is None; print(json.dumps(z.namelist()))', output], {encoding: 'utf8'}));
   assert.deepEqual(listing, ['manifest.json', 'APPLY-KO.txt', 'files/README.md']);
-  await assert.rejects(writeDownloadZip(snapshot, output), /EEXIST/);
+  await assert.rejects(writeDownloadZip(snapshot, output, {now}), /EEXIST/);
   snapshot.files[0].raw[0] ^= 1;
-  await assert.rejects(writeDownloadZip(snapshot, path.join(root, 'bad.zip')), /Frozen file bytes/);
+  await assert.rejects(writeDownloadZip(snapshot, path.join(root, 'bad.zip'), {now}), /Frozen file bytes/);
 });
 test('a new allowlisted file and directory is included only with the exact reviewed allowlist', async t => {
   const {plan} = await fixture(t);
@@ -119,7 +120,7 @@ test('no-op, claimed unchanged pending write, missing reconciliation and late pa
   await assert.rejects(freezePublicDelta({...plan, now: Date.parse('2026-10-16T15:00:00Z')}), /cutoff/);
   await fs.writeFile(path.join(plan.workRoot, 'README.md'), 'old\n'); plan.reviewedSha256 = {};
   const snapshot = await freezePublicDelta(plan);
-  await assert.rejects(writeDownloadZip(snapshot, path.join(root, 'noop.zip')), /No changed files/);
+  await assert.rejects(writeDownloadZip(snapshot, path.join(root, 'noop.zip'), {now}), /No changed files/);
 });
 test('persistent freeze cannot be bypassed by making a download package', async t => {
   const {plan} = await fixture(t, {'data/publication-state.json': '{"finalized":true}\n'});
@@ -136,7 +137,7 @@ test('delivery status is separate; incomplete chain blocks content and reserves 
     plan.reviewedSha256[name] = digest(raw);
   }
   plan.reviewedSha256['PUBLICATION-MANIFEST.txt'] = digest(await fs.readFile(path.join(plan.workRoot, 'PUBLICATION-MANIFEST.txt')));
-  const snapshot = await freezePublicDelta(plan), artifact = await writeDownloadZip(snapshot, path.join(root, 'round.zip'));
+  const snapshot = await freezePublicDelta(plan), artifact = await writeDownloadZip(snapshot, path.join(root, 'round.zip'), {now});
   const receipt = createDeliveryReceipt({snapshot, artifact, status: 'delivery_failed', recordedAt: iso(now), content: {roundId: 'round-006', ledgerSha256: digest(ledger), bankVersion: 'regular.6', bankSha256: digest(bank), acceptedGoalIds: ['goal-6'], privateSecret: 'must be stripped'}});
   assert.equal(receipt.newlyPublishedRegular, 0); assert.equal(receipt.content.privateSecret, undefined);
   const automatic = createDeliveryReceipt({snapshot, artifact, recordedAt: iso(now)});
@@ -154,10 +155,10 @@ test('delivery status is separate; incomplete chain blocks content and reserves 
 
 test('receipt reconciliation is oldest-first and manifest/content provenance cannot be invented', async t => {
   const {root, plan} = await fixture(t);
-  const snapshot = await freezePublicDelta(plan), artifact = await writeDownloadZip(snapshot, path.join(root, 'one.zip'));
+  const snapshot = await freezePublicDelta(plan), artifact = await writeDownloadZip(snapshot, path.join(root, 'one.zip'), {now});
   const first = createDeliveryReceipt({snapshot, artifact, recordedAt: iso(now)});
   const nextSnapshot = {...snapshot, manifest: {...snapshot.manifest, roundId: 'round-007', parentDeliverySha256: artifact.sha256}};
-  const secondArtifact = await writeDownloadZip(nextSnapshot, path.join(root, 'two.zip'));
+  const secondArtifact = await writeDownloadZip(nextSnapshot, path.join(root, 'two.zip'), {now});
   const second = createDeliveryReceipt({snapshot: nextSnapshot, artifact: secondArtifact, recordedAt: iso(now)});
   const manifests = new Map([[artifact.sha256, snapshot.manifest], [secondArtifact.sha256, nextSnapshot.manifest]]);
   assert.equal(validateDeliveryChain([first, second], {manifests}).ok, true);
@@ -177,7 +178,7 @@ test('ZIP boundary rejects private/unknown fields and incomplete permission meta
   changed = clone(); changed.files[0].privateNote = 'private sentinel'; variants.push(changed);
   changed = clone(); delete changed.manifest.permissionNotifiedAt; variants.push(changed);
   changed = clone(); changed.manifest.deletions = [{path: 'docs/a.md', beforeSha256: 'a'.repeat(64), sha256: null, bytes: 0, privateNote: 'private sentinel'}]; variants.push(changed);
-  for (const [i, variant] of variants.entries()) await assert.rejects(writeDownloadZip(variant, path.join(root, `bad-${i}.zip`)), /Invalid or unrecognized/);
+  for (const [i, variant] of variants.entries()) await assert.rejects(writeDownloadZip(variant, path.join(root, `bad-${i}.zip`), {now}), /Invalid or unrecognized/);
   assert.deepEqual((await fs.readdir(root)).sort(), ['base', 'work']);
 });
 
@@ -202,10 +203,10 @@ test('reporting-only closure delivers four changed files without re-delivering t
   const snapshot = await freezePublicDelta(plan);
   assert.equal(snapshot.manifest.deliveryScope, 'reporting_only');
   await assert.rejects(freezePublicDelta({...plan, wait: {...plan.wait, roundId: 'round-999'}}), /original content round/);
-  await assert.rejects(writeDownloadZip({...snapshot, manifest: {...snapshot.manifest, roundId: 'round-999'}}, path.join(root, 'wrong-round.zip')), /original content round/);
+  await assert.rejects(writeDownloadZip({...snapshot, manifest: {...snapshot.manifest, roundId: 'round-999'}}, path.join(root, 'wrong-round.zip'), {now}), /original content round/);
   assert.equal(snapshot.files.length, 4);
   assert.equal(snapshot.files.some(f => f.path.endsWith('bank.json')), false);
-  const artifact = await writeDownloadZip(snapshot, path.join(root, 'closure.zip'));
+  const artifact = await writeDownloadZip(snapshot, path.join(root, 'closure.zip'), {now});
   const receipt = createDeliveryReceipt({snapshot, artifact, recordedAt: iso(now)});
   assert.equal(receipt.content, null); assert.equal(receipt.newlyPublishedRegular, 0);
   assert.equal(JSON.parse(snapshot.files.find(f => f.path.endsWith('round-006.json')).raw).counts.publishedRegularWrittenBySubject.s1, 1);
@@ -215,8 +216,8 @@ test('reporting-only closure delivers four changed files without re-delivering t
   await assert.rejects(freezePublicDelta(plan), /preserve accepted decisions/);
 });
 
-test('the complete real public allowlist can produce a changed-file-only package', async t => {
-  const repo = path.resolve(import.meta.dirname, '..');
+test('the exact historical public allowlist can produce a changed-file-only package', async t => {
+  const repo = await createOwnedHistoricalSource(t);
   const names = parsePublicAllowlist(await fs.readFile(path.join(repo, 'PUBLICATION-MANIFEST.txt'), 'utf8'));
   assert.ok(names.includes('src/backup.js'));
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'fallback-real-public-'));
@@ -248,7 +249,7 @@ test('resolved delivery may have a bounded later editorial successor but no unre
     const ledger = Buffer.from(JSON.stringify({...(editorial ? {kind: 'accepted_content_editorial', correctionRoundId: roundId, corrections: [record]} : {roundId, candidates: [record]}), status: 'closed', publication: {status: 'blocked', bankVersion: version, bankSha256: digest(bank)}}));
     const entries = [[`data/releases/${version}/bank.json`, bank], [`docs/${editorial ? 'corrections' : 'rounds'}/${roundId}.json`, ledger]].map(([name, raw]) => ({path: name, beforeSha256: null, sha256: digest(raw), bytes: raw.length, raw}));
     const snapshot = {manifest: {...template.manifest, roundId, executionId, deliveryScope: 'content', parentDeliverySha256: parent, files: entries.map(({raw, ...metadata}) => metadata)}, files: entries};
-    const artifact = await writeDownloadZip(snapshot, path.join(root, `${suffix}.zip`));
+    const artifact = await writeDownloadZip(snapshot, path.join(root, `${suffix}.zip`), {now});
     const receipt = createDeliveryReceipt({snapshot, artifact, recordedAt: iso(now)});
     return {snapshot, artifact, receipt, ledger, bank};
   }

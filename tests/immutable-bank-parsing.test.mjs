@@ -99,7 +99,7 @@ test('warm parse reuse does not conceal authority-file changes, manifest freeze,
  t.after(()=>fs.rm(isolated,{recursive:true,force:true}));
  const copy=async relative=>{await fs.mkdir(path.dirname(path.join(isolated,relative)),{recursive:true});await fs.copyFile(path.join(root,relative),path.join(isolated,relative));};
  await fs.cp(path.join(root,'src'),path.join(isolated,'src'),{recursive:true});
- for(const p of ['package.json','scripts/prepublication-quarantine.mjs','scripts/evidence-loss-block.mjs','docs/quarantines/trust.json','docs/release-blocks/trust.json'])await copy(p);
+ for(const p of ['scripts/current-release-authority.mjs','scripts/editorial005-completion.mjs','scripts/practical-written-registration.mjs','scripts/practical-written-baseline.mjs','scripts/campaign-validation-primitives.mjs','package.json','scripts/prepublication-quarantine.mjs','scripts/evidence-loss-block.mjs','docs/quarantines/trust.json','docs/release-blocks/trust.json'])await copy(p);
  const trust=JSON.parse(await fs.readFile(path.join(root,'docs/release-blocks/trust.json')));
  for(const pin of trust.events){
   await copy(pin.path);const event=JSON.parse(await fs.readFile(path.join(root,pin.path)));

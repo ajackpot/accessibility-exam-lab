@@ -47,7 +47,11 @@ test('synthetic legacy authority binds exact032-033 lineage without changing sto
  assert.throws(()=>validateSynchronizationDeliveryProof(event,rounds[0],J(proofs[0])),/unreviewed/);
  for(const [p,raw]of files){await fs.mkdir(path.dirname(path.join(dir,p)),{recursive:true});await fs.writeFile(path.join(dir,p),raw);}
  const eventPath=`docs/publications/${event.syncId}.json`;await fs.writeFile(path.join(dir,eventPath),J(event));await fs.appendFile(path.join(dir,'PUBLICATION-MANIFEST.txt'),eventPath+'\n');await fs.writeFile(path.join(dir,'scripts/publication-sync.mjs'),repin(event));
- const api=await import(pathToFileURL(path.join(dir,'scripts/publication-sync.mjs')).href),validator=await import(pathToFileURL(path.join(dir,'scripts/validate-round.mjs')).href),c=await validator.loadRoundContext(dir,null,{release:true,now});
+ const api=await import(pathToFileURL(path.join(dir,'scripts/publication-sync.mjs')).href),validator=await import(pathToFileURL(path.join(dir,'scripts/validate-round.mjs')).href);
+ // Nested snapshot readers use the clock of this owned historical fixture.
+ // Restore the real clock before current installed-authority assertions.
+ let c;t.mock.timers.enable({apis:['Date'],now:historicalAt});
+ try{c=await validator.loadRoundContext(dir,null,{release:true,now});}finally{t.mock.timers.reset();}
  const result=api.validatePublicationSynchronizations([...events,event],{...c,now});assert.equal(result.ok,true,result.errors.join('\n'));assert.equal(result.history.at(-1).publication.bankVersion,manifest.bankVersion);
  assert.equal(api.validatePublicationSynchronizations([...events,event],{...c,now:now-1}).history.some(h=>h.syncId===event.syncId),false);
  assert.equal(validator.validateReleaseLedger(c.ledgers,{...c,now}).ok,true);

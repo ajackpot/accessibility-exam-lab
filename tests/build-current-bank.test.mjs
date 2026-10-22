@@ -15,7 +15,7 @@ const seedRaw=await fs.readFile(new URL('../data/seed-bank-v4.json',import.meta.
 const authority=await fs.mkdtemp(path.join(os.tmpdir(),'build-authority-fixture-'));
 after(()=>fs.rm(authority,{recursive:true,force:true}));
 const liveRoot=path.resolve(import.meta.dirname,'..');
-const excluded=new Set(['docs/publication-selections/round-041-selection-001.json','docs/rounds/round-041.json','docs/rounds/round-041.md']);
+const excluded=new Set(['docs/publication-selections/round-041-selection-001.json','docs/rounds/round-041.json','docs/rounds/round-041.md','docs/conversions/practical-written-001.json']);
 for(const folder of ['scripts','src','docs'])await fs.cp(path.join(liveRoot,folder),path.join(authority,folder),{recursive:true,filter:p=>!excluded.has(path.relative(liveRoot,p))});
 await fs.copyFile(path.join(liveRoot,'package.json'),path.join(authority,'package.json'));
 await useEmptySyntheticSelectionPrefix(authority);
@@ -32,7 +32,8 @@ await verifyAuthority(authority);
 const {buildBank}=await import(pathToFileURL(path.join(authority,'scripts/build.mjs')));
 const {readBankInput}=await import(pathToFileURL(path.join(authority,'scripts/bank-io.mjs')));
 
-async function fixture(t) {
+async function fixture(t,{historicalClock=true}={}) {
+  if(historicalClock)t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-10-03T00:00:00Z')});
   const root=await fs.mkdtemp(path.join(os.tmpdir(),'exam-bank-build-'));
   t.after(()=>fs.rm(root,{recursive:true,force:true}));
   await fs.mkdir(path.join(root,'data'),{recursive:true});
@@ -84,4 +85,4 @@ test('default build refuses malformed manifest envelope without changing bytes',
   }
 });
 
-test('installed modern authority still rejects a minimal historical seed-only root',async t=>{const root=await fixture(t);await assert.rejects(installedBuildBank(root),/reviewed selection record omitted from allowlist/);});
+test('actual installed current authority rejects a minimal historical seed-only root',async t=>{const root=await fixture(t,{historicalClock:false});await assert.rejects(installedBuildBank(root),/PUBLICATION BLOCKED: current cutoff completion/);});

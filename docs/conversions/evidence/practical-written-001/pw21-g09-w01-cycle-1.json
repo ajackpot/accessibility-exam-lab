@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw21-g09-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw21-g09-w01",
+    "revision": 1,
+    "templateId": "pw21-template-g09",
+    "learningGoalId": "pw21-goal-g09",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s1",
+    "topicIds": [
+      "pw21-g09"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 강좌를 비교하며 선택하는 중에 예고 없이 페이지가 바뀌는 문제를 개선할 방법을 고르시오.",
+    "notes": [
+      "선택 목록 밖에는 이동 안내나 실행 버튼이 없다. 이용자는 여러 항목을 비교한 뒤 원하는 강좌로 이동하려고 한다."
+    ],
+    "explanation": "현재 코드는 선택값을 바꾸는 동작에 즉시 페이지 이동을 연결한다. 비교 후 명시적으로 이동하려는 요구에 맞추려면 선택 변경은 값을 유지하고, 별도 이동 버튼을 실행했을 때 선택한 주소로 이동하도록 분리한다.",
+    "sourceRefs": [
+      "pw21-src-kw-predictable"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "W3C WAI 교육자료, Updated 2024-06-25",
+    "difficulty": "기초",
+    "reviewNote": "비공개 복제본 검토용. 정규 은행 미등록·미공개. 검토 중.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw21-g09-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g09-w01-set"
+      },
+      {
+        "optionId": "pw21-g09-w01-o2",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw21-g09-w01-set"
+      },
+      {
+        "optionId": "pw21-g09-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g09-w01-set"
+      },
+      {
+        "optionId": "pw21-g09-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g09-w01-set"
+      },
+      {
+        "optionId": "pw21-g09-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g09-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<label for=\"lesson\">강좌 선택</label>\n<select id=\"lesson\" onchange=\"location.href = this.value\">\n  <option value=\"/lesson/a\">기초 강좌</option>\n  <option value=\"/lesson/b\">응용 강좌</option>\n</select>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 강좌를 비교하며 선택하는 중에 예고 없이 페이지가 바뀌는 문제를 개선할 방법을 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw21-g09-w01-o1",
+      "revision": 1,
+      "content": "선택값이 바뀌면 새 창으로 이동하고, 기존 페이지의 선택값을 유지한다.",
+      "explanation": "기존 선택을 보존하더라도 선택 중 새 창을 여는 예고 없는 동작이 남는다."
+    },
+    {
+      "optionId": "pw21-g09-w01-o2",
+      "revision": 1,
+      "content": "선택값 변경은 유지하고, 별도 이동 버튼을 실행할 때 선택한 주소로 이동한다.",
+      "explanation": "항목 선택과 이동 실행을 분리하여 이용자가 이동 시점을 결정할 수 있다."
+    },
+    {
+      "optionId": "pw21-g09-w01-o3",
+      "revision": 1,
+      "content": "선택값이 바뀌면 이동하고, 현재 선택 항목의 배경색을 눈에 띄게 바꾼다.",
+      "explanation": "선택의 시각적 구분은 좋아질 수 있으나 이동 시점을 제어하지 않는다."
+    },
+    {
+      "optionId": "pw21-g09-w01-o4",
+      "revision": 1,
+      "content": "선택 목록에서 초점이 빠져나가면 이동하고, 목록 아래에 강좌 목록을 표시한다.",
+      "explanation": "이동 실행 의사와 관계없는 초점 이탈에 화면 전환을 연결한다."
+    },
+    {
+      "optionId": "pw21-g09-w01-o5",
+      "revision": 1,
+      "content": "선택값이 바뀌면 이동하고, 도착한 페이지에서 이동 완료 메시지를 제공한다.",
+      "explanation": "사후 안내는 선택 도중 이미 일어난 예고 없는 이동을 막지 못한다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw21-src-kw-predictable",
+      "title": "Cognitive and learning",
+      "url": "https://www.w3.org/WAI/people-use-web/abilities-barriers/cognitive/",
+      "version": "W3C WAI 교육자료, Updated 2024-06-25",
+      "checkedAt": "2026-10-02T05:46:06Z",
+      "location": "Introduction; Examples of barriers for people with cognitive and learning disabilities",
+      "evidence": "명료한 구조·일관된 레이블·짧고 쉬운 문장·예측 가능한 상호작용이 도움이 된다. 복잡한 문장과 혼란스러운 내비게이션은 장벽이며 사용자의 필요와 선호는 다양하다.",
+      "rights": "공식 원문은 링크로만 제시한다. 사실과 기준을 독자 문장으로 요약하고 원문 표·예제·시험 문항은 복제하지 않는다.",
+      "provenanceSourceId": "r001-standards-src-wai-cognitive",
+      "currentReviewStatus": "pending_primary_check"
+    }
+  ]
+}

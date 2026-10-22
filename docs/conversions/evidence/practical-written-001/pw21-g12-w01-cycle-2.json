@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw21-g12-w01",
+  "cycle": 2,
+  "question": {
+    "questionId": "pw21-g12-w01",
+    "revision": 2,
+    "templateId": "pw21-template-g12",
+    "learningGoalId": "pw21-goal-g12",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s1",
+    "topicIds": [
+      "pw21-g12"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 올바른 문자 인코딩을 유지하면서 문서 전체의 기본 언어를 한국어로 선언하는 수정을 고르시오.",
+    "notes": [
+      "실제 파일은 UTF-8로 저장되어 있고 문서의 기본 언어는 한국어다. 서버의 언어 관련 응답 헤더와 보기 이외의 언어 선언은 없다."
+    ],
+    "explanation": "lang은 요소와 그 자손의 기본 언어를 나타내고 charset은 바이트를 문자로 해석할 인코딩을 지정한다. html의 lang을 ko로 바꾸면 기존 UTF-8 인코딩을 유지하면서 문서의 기본 언어를 한국어로 선언할 수 있다.",
+    "sourceRefs": [
+      "pw21-src-kw-language",
+      "pw21-src-html-lang"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "KWCAG 2.2 (KS X OT0003:2022, 2022-12-28)",
+    "difficulty": "기초",
+    "reviewNote": "비공개 복제본 검토용. 정규 은행 미등록·미공개. 검토 중.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw21-g12-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g12-w01-set"
+      },
+      {
+        "optionId": "pw21-g12-w01-o2",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw21-g12-w01-set"
+      },
+      {
+        "optionId": "pw21-g12-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g12-w01-set"
+      },
+      {
+        "optionId": "pw21-g12-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g12-w01-set"
+      },
+      {
+        "optionId": "pw21-g12-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g12-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<!doctype html>\n<html lang=\"en\">\n<head><meta charset=\"UTF-8\"><title>수강 안내</title></head>\n<body><p>이번 달 강좌를 안내합니다.</p></body>\n</html>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 올바른 문자 인코딩을 유지하면서 문서 전체의 기본 언어를 한국어로 선언하는 수정을 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw21-g12-w01-o1",
+      "revision": 1,
+      "content": "title에 lang=\"ko\"를 추가하고 나머지는 유지한다.",
+      "explanation": "제목의 언어만 바뀌고 본문이 상속할 루트의 기본 언어 en은 유지된다."
+    },
+    {
+      "optionId": "pw21-g12-w01-o2",
+      "revision": 1,
+      "content": "html의 lang=\"en\"을 lang=\"ko\"로 바꾼다.",
+      "explanation": "루트 요소에서 한국어를 선언하여 별도 언어 지정이 없는 문서 내용에 적용한다."
+    },
+    {
+      "optionId": "pw21-g12-w01-o3",
+      "revision": 1,
+      "content": "meta의 charset=\"UTF-8\"을 charset=\"EUC-KR\"로 바꾼다.",
+      "explanation": "실제 인코딩과 선언을 불일치시키며 기본 언어 선언 en도 남긴다."
+    },
+    {
+      "optionId": "pw21-g12-w01-o4",
+      "revision": 1,
+      "content": "p에 lang=\"ko\"를 추가하고 나머지는 유지한다.",
+      "explanation": "해당 문단의 언어는 지정하지만 문서 전체의 기본 언어는 en으로 남는다."
+    },
+    {
+      "optionId": "pw21-g12-w01-o5",
+      "revision": 1,
+      "content": "html의 lang 속성을 삭제하고 나머지는 유지한다.",
+      "explanation": "한국어 기본 언어를 명시할 정보가 사라지며 ko 선언을 제공하지 못한다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw21-src-kw-language",
+      "title": "NIA — 웹 접근성을 고려한 콘텐츠 제작기법 2.2 개정판",
+      "url": "https://nia-a11y.github.io/kwcag22tech/3/1/1/",
+      "version": "웹 접근성을 고려한 콘텐츠 제작기법 2.2 개정판 / NIA 2025-03 발행, 2025-03-31 업데이트",
+      "checkedAt": "2026-10-21T07:25:28.712508+00:00",
+      "location": "공식 해설 §3.1.1 ↔ KWCAG 2.2 §7.1.1",
+      "evidence": "문서의 주 사용 언어를 html의 lang으로 명시한다. 주 언어가 한국어인 문서에는 ko를 사용할 수 있으며 일부 자손에만 지정한 언어는 문서 전체 언어 선언을 대신하지 않는다.",
+      "rights": "문항·선택지·코드는 원본 실기의 지식을 바탕으로 별도 작성했다. 표준·공식 해설의 필요한 사실만 의역하고 출처를 표시한다. 공식 시험 샘플·유료 문제집·표준 예제·전문을 후보에 복제하지 않는다. 원문 권리는 원저작권자에게 있다."
+    },
+    {
+      "id": "pw21-src-html-lang",
+      "title": "HTML 5.2 — 기본 언어와 문자 인코딩",
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/dom.html#the-lang-and-xmllang-attributes",
+      "version": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+      "checkedAt": "2026-10-21T07:25:28.712508+00:00",
+      "location": "§3.2.5.2 lang; §4.2.5.3 Encoding declaration; §4.2.5.5 character encoding",
+      "evidence": "lang은 요소의 주 언어를 지정하고 가장 가까운 해당 조상의 선언을 따른다. html의 lang은 문서 주 언어다. charset은 문자 인코딩 선언이므로 UTF-8 파일의 언어를 한국어로 지정하는 대체 수단이 아니다.",
+      "rights": "문항·선택지·코드는 원본 실기의 지식을 바탕으로 별도 작성했다. 표준·공식 해설의 필요한 사실만 의역하고 출처를 표시한다. 공식 시험 샘플·유료 문제집·표준 예제·전문을 후보에 복제하지 않는다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

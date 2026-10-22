@@ -184,7 +184,7 @@ test('only exact historical inventory snapshots pass the read-only boundary; eve
   // Real record/bank authority is covered above; this never edits live pins and
   // cannot be represented as an actual delivery/publication verification.
   await fixtureRoot(async directory=>{
-    const dependencies=['package.json','scripts/prepublication-quarantine.mjs','src/domain.js','src/new-session-eligibility.js','src/legacy-materials.js','src/legacy-question-display.js','src/reviewed-option-explanations.js','docs/quarantines/trust.json'];
+    const dependencies=['scripts/current-release-authority.mjs','scripts/editorial005-completion.mjs','scripts/practical-written-registration.mjs','scripts/practical-written-baseline.mjs','scripts/campaign-validation-primitives.mjs','package.json','scripts/prepublication-quarantine.mjs','src/domain.js','src/new-session-eligibility.js','src/legacy-materials.js','src/legacy-question-display.js','src/reviewed-option-explanations.js','docs/quarantines/trust.json'];
     const proofPaths=record.nonDeliveryEvidence.registrySnapshots.filter(e=>e.path.startsWith('docs/deliveries/')).flatMap(e=>{const value=JSON.parse(e.raw);return (value.roots??value.checkpoints??[]).map(p=>p.path);});
     for(const p of [...dependencies,...proofPaths]){await fs.mkdir(path.dirname(path.join(directory,p)),{recursive:true});await fs.copyFile(path.join(root,p),path.join(directory,p));}
     const oldLedger={roundId:'round-001',publication:{bankVersion:'synthetic.old',bankSha256:'a'.repeat(64)},candidates:[]};

@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw21-g01-w01",
+  "cycle": 2,
+  "question": {
+    "questionId": "pw21-g01-w01",
+    "revision": 2,
+    "templateId": "pw21-template-g01",
+    "learningGoalId": "pw21-goal-g01",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s3",
+    "topicIds": [
+      "pw21-g01"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 두 레이블이 각각 자택 전화와 회사 전화 입력란에 연결되도록 하는 수정 하나를 고르시오.",
+    "notes": [
+      "보기 이외의 요소나 스크립트는 없으며, 각 레이블은 서로 다른 입력란을 가리켜야 한다."
+    ],
+    "explanation": "명시적 레이블은 for 값과 입력 요소의 고유한 id 값을 일치시켜 연결한다. 두 번째 input의 id를 office로 바꾸면 중복 id가 해소되고 두 레이블이 각각 자기 입력란을 가리킨다.",
+    "sourceRefs": [
+      "pw21-src-html-label",
+      "pw21-src-html-id-title"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+    "difficulty": "기초",
+    "reviewNote": "비공개 복제본 검토용. 정규 은행 미등록·미공개. 검토 중.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw21-g01-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g01-w01-set"
+      },
+      {
+        "optionId": "pw21-g01-w01-o2",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw21-g01-w01-set"
+      },
+      {
+        "optionId": "pw21-g01-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g01-w01-set"
+      },
+      {
+        "optionId": "pw21-g01-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g01-w01-set"
+      },
+      {
+        "optionId": "pw21-g01-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw21-g01-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<label for=\"home\">자택 전화</label>\n<input id=\"home\" name=\"homePhone\" type=\"tel\">\n<label for=\"office\">회사 전화</label>\n<input id=\"home\" name=\"workPhone\" type=\"tel\">",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 두 레이블이 각각 자택 전화와 회사 전화 입력란에 연결되도록 하는 수정 하나를 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw21-g01-w01-o1",
+      "revision": 1,
+      "content": "두 번째 input의 name을 office로 바꾼다.",
+      "explanation": "name은 제출되는 데이터의 이름이며, 레이블의 for가 참조하는 id를 고치지 못한다."
+    },
+    {
+      "optionId": "pw21-g01-w01-o2",
+      "revision": 1,
+      "content": "두 번째 input의 id를 office로 바꾼다.",
+      "explanation": "회사 전화 레이블의 for=\"office\"와 일치하는 고유한 입력 요소가 생긴다."
+    },
+    {
+      "optionId": "pw21-g01-w01-o3",
+      "revision": 1,
+      "content": "두 번째 label의 for를 home으로 바꾼다.",
+      "explanation": "두 레이블이 같은 id를 참조하게 되고 입력 요소의 중복 id도 남는다."
+    },
+    {
+      "optionId": "pw21-g01-w01-o4",
+      "revision": 1,
+      "content": "첫 번째 input의 id를 office로 바꾼다.",
+      "explanation": "두 id는 달라지지만 자택 전화 레이블은 두 번째 입력란을, 회사 전화 레이블은 첫 번째 입력란을 가리킨다."
+    },
+    {
+      "optionId": "pw21-g01-w01-o5",
+      "revision": 1,
+      "content": "두 번째 input에 title=\"회사 전화\"를 추가한다.",
+      "explanation": "보충 제목을 더해도 label의 for=\"office\"가 가리키는 입력 요소는 생기지 않는다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw21-src-html-label",
+      "title": "HTML 5.2 — label과 명시적 연결",
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/sec-forms.html#the-label-element",
+      "version": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+      "checkedAt": "2026-10-21T07:25:28.712508+00:00",
+      "location": "§4.10.4 label; §4.10.18.1 Naming form controls",
+      "evidence": "for는 같은 문서의 labelable 요소 id를 참조한다. 명시적 참조와 입력 요소의 name은 역할이 다르다. 다른 입력란을 각각 가리키려면 고유 id와 대응 for가 필요하다.",
+      "rights": "문항·선택지·코드는 원본 실기의 지식을 바탕으로 별도 작성했다. 표준·공식 해설의 필요한 사실만 의역하고 출처를 표시한다. 공식 시험 샘플·유료 문제집·표준 예제·전문을 후보에 복제하지 않는다. 원문 권리는 원저작권자에게 있다."
+    },
+    {
+      "id": "pw21-src-html-id-title",
+      "title": "HTML 5.2 — id와 title",
+      "url": "https://www.w3.org/TR/2017/REC-html52-20171214/dom.html#global-attributes",
+      "version": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+      "checkedAt": "2026-10-21T07:25:28.712508+00:00",
+      "location": "§3.2.5 Global attributes; §3.2.5.1 title",
+      "evidence": "id는 같은 요소 트리에서 고유해야 한다. title은 보충 정보이며 for가 지정한 참조 대상을 새로 만들지 않는다.",
+      "rights": "문항·선택지·코드는 원본 실기의 지식을 바탕으로 별도 작성했다. 표준·공식 해설의 필요한 사실만 의역하고 출처를 표시한다. 공식 시험 샘플·유료 문제집·표준 예제·전문을 후보에 복제하지 않는다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

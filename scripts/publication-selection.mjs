@@ -1,4 +1,4 @@
-import {currentCutoffBlocks} from './editorial005-completion.mjs';
+import {currentCutoffBlocks} from './current-release-authority.mjs';
 /** One reviewed post-materialization selection. Candidate decisions are never projected.
  * Raw immutable files and the reviewed pin are the authority; diagnostics and caller
  * objects cannot authorize publication, omit dependencies, or reactivate exclusions. */

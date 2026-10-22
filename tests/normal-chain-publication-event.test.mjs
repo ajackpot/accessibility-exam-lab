@@ -1,3 +1,4 @@
+import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
 /** Actual immutable source inputs; publication/ref values below are synthetic
  * unit fixtures, never observations, installed pins, or publication authority. */
 import test from 'node:test';
@@ -24,7 +25,8 @@ const bank=JSON.parse(banks.get('2026.10.08-regular.34').raw),baseline=JSON.pars
 // has advanced to035 or later. Do not mix a current active marker with bank34.
 const historicalMarkers=new Map([['data/manifest.json',Buffer.from(bridge.runtimeManifestRaw)],['data/publication-state.json',Buffer.from(bridge.publicationStateRaw)]]);
 for(const [name,raw]of historicalMarkers){const i=rows.findIndex(f=>f.path===name);assert.ok(i>=0);rows[i]={path:name,bytes:raw.length,sha256:H(raw),gitBlob:G(raw)};}
-const now=Date.now(),iso=n=>new Date(n).toISOString();
+// Synthetic event observations follow the exact delivered034 registration.
+const now=Date.parse(bridgePin.eligibleAt)+60_000,iso=n=>new Date(n).toISOString();
 function fixture(){
  const parent=bridge.anchorTransition.evidence.commits.at(-1),rounds=sources.map(({pin,proof})=>{const s=proof.completeManifest.sourceRelease,l=ledgers.find(l=>l.roundId===pin.roundId);return {kind:'normal_delivered_checkpoint',roundId:pin.roundId,ledgerPath:s.ledgerPath,originalLedgerSha256:s.ledgerSha256,bankVersion:s.bankVersion,bankSha256:s.bankSha256,accepted:l.counts.accepted,originalPublicationStatus:l.publication.status,quarantined:0,eligible:l.counts.accepted,newlyPublicRegular:l.counts.accepted,artifactSha256:proof.deltaArtifactSha256,manifestSha256:H(J(proof.deltaManifest)),deliveredAt:proof.attachmentAcceptedAt,deliveryVerifiedAt:proof.verificationCompletedAt,deliveryProof:{path:pin.path,sha256:pin.sha256},attachmentReceiptSha256:proof.privateEvidence.attachmentReceiptSha256};});
  const regular=bank.questions.filter(q=>!q.testOnly),oldIds=new Set(baseline.questions.map(q=>q.questionId)),commit='1'.repeat(40);
@@ -78,13 +80,13 @@ const cases=[
 for(const [name,mutate]of cases)test('rejects '+name,()=>{const e=fixture();mutate(e);assert.throws(()=>validateReconciledNormalPublication(e,context()),/Reconciled normal publication/);});
 test('normal publication still rejects wrong Pages head, missing live proof and finalized markers',()=>{for(const mutate of [e=>e.pages.headSha='a'.repeat(40),e=>e.liveAssets=e.liveAssets.filter(f=>f.path!==bridgePin.path),e=>e.publicationStateRaw='{"finalized":true}\n']){const e=fixture();mutate(e);assert.throws(()=>semantic(e));}});
 test('new kind still rejects duplicate learning templates in the original bank-transition gate',()=>{const e=fixture(),l=ledgers.find(l=>l.roundId==='round-034'),b=JSON.parse(banks.get(l.baseline.bankVersion).raw),current=structuredClone(bank),old=new Set(b.questions.map(q=>q.questionId));current.questions.find(q=>!old.has(q.questionId)).templateId=b.questions.find(q=>!q.testOnly).templateId;assert.throws(()=>validateNormalBankTransition(e,l,current,b,{eligibleCandidateIds:l.candidates.filter(c=>c.decision==='accepted').map(c=>c.candidateId)}),/exact eligible|unique regular/);});
-test('sealed chain phase reuses actual registered034 ancestry and refuses a caller Map at the aggregate boundary',async()=>{
- const loaded=await loadNormalBackupChains(root,{now,offlineBases:new Map(),deliveryCheckpointSources:new Map()}),chain=loaded.chains.get(bridgePin.rootProofSha256),e=fixture();
+test('sealed chain phase reuses actual registered034 ancestry and refuses a caller Map at the aggregate boundary',async()=>withCurrentReleaseAuthority({root},async()=>{
+ const loaded=await loadNormalBackupChains(root,{now:Date.now(),offlineBases:new Map(),deliveryCheckpointSources:new Map()}),chain=loaded.chains.get(bridgePin.rootProofSha256),e=fixture();
  const r=validateReconciledNormalChainMembership(e,{chain,positions:[1,2],synchronizations:events,ledgers,ledgerSources,treeFunction:normalPublicationTree});assert.equal(r.canPublish,false);
  await assert.rejects(validateNormalChainSynchronizationSources(events,new Map(loaded.chains),loaded.deliveryCheckpointSources,{ledgers,ledgerSources,now,release:true}),/untouched fully validated/);
  const longer=structuredClone(chain);longer.sources.push({roundId:'synthetic-unrelated-later-member'});assert.equal(validateReconciledNormalChainMembership(e,{chain:longer,positions:[1,2],synchronizations:events,ledgers,ledgerSources,treeFunction:normalPublicationTree}).canPublish,false,'later unrelated members do not rewrite an exact historical event prefix');
  const bad=structuredClone(chain);bad.sources[1].proofSha256='f'.repeat(64);assert.throws(()=>validateReconciledNormalChainMembership(e,{chain:bad,positions:[1,2],synchronizations:events,ledgers,ledgerSources,treeFunction:normalPublicationTree}),/fully validated registered chain/);
-});
+}));
 
 // Self-contained PUBLIC/SYNTHETIC regression. Original036 ledger chronology and
 // predecessor bank are public immutable inputs. Every later anchor observation,

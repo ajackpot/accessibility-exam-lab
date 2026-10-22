@@ -1,0 +1,617 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "One separately approved practical-to-written registration",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "kind": {
+      "const": "practical_to_written_registration"
+    },
+    "registrationId": {
+      "const": "practical-written-001"
+    },
+    "authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authorizedAt": {
+          "const": "2026-10-22T11:09:39.404937+00:00"
+        },
+        "scope": {
+          "const": "p1_registration_p2_review_and_public_release"
+        },
+        "practicalChangesAllowed": {
+          "const": false
+        }
+      },
+      "required": [
+        "authorizedAt",
+        "scope",
+        "practicalChangesAllowed"
+      ]
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sourceCommit": {
+          "const": "4536277093f80273dd9f5799b32990a74d260466"
+        },
+        "bankVersion": {
+          "const": "2026.10.14-editorial.5"
+        },
+        "bankSha256": {
+          "const": "42c3eed6dea79a03f78226b1887b93c71f11f0d3fb6fa63b5ba3c298a823edf2"
+        },
+        "manifestSha256": {
+          "const": "5d16fd0e2ff104f3a57b1a8b6ff3b431599475cdb0f1589125c065f11836596f"
+        }
+      },
+      "required": [
+        "sourceCommit",
+        "bankVersion",
+        "bankSha256",
+        "manifestSha256"
+      ]
+    },
+    "status": {
+      "const": "closed"
+    },
+    "registeredAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "batches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "batchId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "origin": {
+            "enum": [
+              "p1_reused",
+              "p2_reviewed"
+            ]
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "decisionDeadline": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "closedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "candidateIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "maxItems": 16
+          }
+        },
+        "required": [
+          "batchId",
+          "origin",
+          "startedAt",
+          "decisionDeadline",
+          "closedAt",
+          "candidateIds"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 3
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "candidateId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "groupId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "origin": {
+            "enum": [
+              "p1_reused",
+              "p2_reviewed"
+            ]
+          },
+          "subjectId": {
+            "enum": [
+              "s1",
+              "s2",
+              "s3",
+              "s4",
+              "s5"
+            ]
+          },
+          "questionId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "templateId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "learningGoalId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authorId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "originalPracticalRefs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "questionId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                }
+              },
+              "required": [
+                "questionId",
+                "revision",
+                "sha256"
+              ]
+            },
+            "minItems": 1
+          },
+          "priorWrittenIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "cycles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "cycle": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 3
+                },
+                "revision": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "startedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "completedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "outcome": {
+                  "enum": [
+                    "accepted",
+                    "revise",
+                    "rejected"
+                  ]
+                },
+                "input": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    }
+                  },
+                  "required": [
+                    "path",
+                    "sha256"
+                  ]
+                },
+                "originArtifacts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "label": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "sha256": {
+                        "type": "string",
+                        "pattern": "^[a-f0-9]{64}$"
+                      }
+                    },
+                    "required": [
+                      "label",
+                      "sha256"
+                    ]
+                  },
+                  "minItems": 1
+                },
+                "blind": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "reviewerId": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "keyExposedBeforeSolve": {
+                      "const": false
+                    },
+                    "inputSha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "answerSha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "selectedOptionId": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "reviewerId",
+                    "keyExposedBeforeSolve",
+                    "inputSha256",
+                    "answerSha256",
+                    "selectedOptionId"
+                  ]
+                },
+                "gates": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "blindSolve": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "result": {
+                          "enum": [
+                            "pass",
+                            "fail",
+                            "not_run"
+                          ]
+                        },
+                        "reviewerId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "summary": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "result",
+                        "reviewerId",
+                        "summary"
+                      ]
+                    },
+                    "sourceCheck": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "result": {
+                          "enum": [
+                            "pass",
+                            "fail",
+                            "not_run"
+                          ]
+                        },
+                        "reviewerId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "summary": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "result",
+                        "reviewerId",
+                        "summary"
+                      ]
+                    },
+                    "ambiguityCheck": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "result": {
+                          "enum": [
+                            "pass",
+                            "fail",
+                            "not_run"
+                          ]
+                        },
+                        "reviewerId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "summary": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "result",
+                        "reviewerId",
+                        "summary"
+                      ]
+                    },
+                    "authoringAccessibility": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "result": {
+                          "enum": [
+                            "pass",
+                            "fail",
+                            "not_run"
+                          ]
+                        },
+                        "reviewerId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "summary": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "result",
+                        "reviewerId",
+                        "summary"
+                      ]
+                    },
+                    "structuralCheck": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "result": {
+                          "enum": [
+                            "pass",
+                            "fail",
+                            "not_run"
+                          ]
+                        },
+                        "reviewerId": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "summary": {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      },
+                      "required": [
+                        "result",
+                        "reviewerId",
+                        "summary"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "blindSolve",
+                    "sourceCheck",
+                    "ambiguityCheck",
+                    "authoringAccessibility",
+                    "structuralCheck"
+                  ]
+                }
+              },
+              "required": [
+                "cycle",
+                "revision",
+                "startedAt",
+                "completedAt",
+                "outcome",
+                "input",
+                "originArtifacts",
+                "blind",
+                "gates"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 3
+          },
+          "decision": {
+            "enum": [
+              "accepted",
+              "rejected"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceRefresh": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "input": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  }
+                },
+                "required": [
+                  "path",
+                  "sha256"
+                ]
+              },
+              "reviewerId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "completedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "priorQuestionAndOptionsUnchanged": {
+                "const": true
+              },
+              "originArtifactSha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "result": {
+                "const": "pass"
+              },
+              "summary": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "input",
+              "reviewerId",
+              "completedAt",
+              "priorQuestionAndOptionsUnchanged",
+              "originArtifactSha256",
+              "result",
+              "summary"
+            ]
+          }
+        },
+        "required": [
+          "candidateId",
+          "groupId",
+          "origin",
+          "subjectId",
+          "questionId",
+          "templateId",
+          "learningGoalId",
+          "authorId",
+          "originalPracticalRefs",
+          "priorWrittenIds",
+          "cycles",
+          "decision",
+          "reason"
+        ]
+      },
+      "minItems": 16,
+      "maxItems": 34
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bankVersion": {
+          "const": "2026.10.22-practical-written.1"
+        },
+        "bankSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "manifestSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "acceptedQuestionIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 16,
+          "maxItems": 34
+        }
+      },
+      "required": [
+        "bankVersion",
+        "bankSha256",
+        "manifestSha256",
+        "acceptedQuestionIds"
+      ]
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "not_attempted"
+        },
+        "commit": {
+          "type": "null"
+        },
+        "verifiedAt": {
+          "type": "null"
+        },
+        "url": {
+          "type": "null"
+        },
+        "newlyPublicRegular": {
+          "const": 0
+        }
+      },
+      "required": [
+        "status",
+        "commit",
+        "verifiedAt",
+        "url",
+        "newlyPublicRegular"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "kind",
+    "registrationId",
+    "authorization",
+    "baseline",
+    "status",
+    "registeredAt",
+    "batches",
+    "candidates",
+    "result",
+    "publication"
+  ]
+}

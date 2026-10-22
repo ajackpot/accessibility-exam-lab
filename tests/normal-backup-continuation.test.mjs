@@ -1,7 +1,7 @@
 import {createOwnedHistoricalAuthority,pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
 import {decodeSevenZip} from '../scripts/archive-format.mjs';
 import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
@@ -15,10 +15,24 @@ import {validateCampaignBaselines} from '../scripts/editorial-ledger.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 const root=path.resolve(import.meta.dirname,'..'),hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),clone=structuredClone;
 const raw=await fs.readFile(path.join(root,NORMAL_BACKUP_PATH)),proof=parseNormalBackupProof(raw);
-const now=Math.max(Date.now(),Date.parse('2026-10-04T12:00:00Z')),loadedContext=await loadRoundContext(root,null,{release:true,now});
-// The successor cases below deliberately construct historical009 + synthetic010.
-// Real later rounds remain checked by the normal full-context release suite.
-const context={...loadedContext,offlineBases:new Map([...loadedContext.offlineBases].filter(([,b])=>Number(b.roundId.slice(6))<=9)),ledgers:loadedContext.ledgers.filter(r=>r.roundId<='round-009')};
+const now=Date.parse('2026-10-04T12:00:00Z');
+// Reconstruct only this test's exact original009 boundary in an owned root.
+// The same production loader still validates every retained historical input.
+const historicalRoot=await fs.mkdtemp(path.join(os.tmpdir(),'normal-backup-next-'));
+after(()=>fs.rm(historicalRoot,{recursive:true,force:true}));
+for(const p of parsePublicAllowlist(await fs.readFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'utf8'))){
+ await fs.mkdir(path.dirname(path.join(historicalRoot,p)),{recursive:true});await fs.copyFile(path.join(root,p),path.join(historicalRoot,p));
+}
+await pruneHistoricalFixtureHistory(historicalRoot,{temporaryRoot:historicalRoot,maxRound:9,at:now,checkpoints:'all'});
+await fs.writeFile(path.join(historicalRoot,'docs/deliveries/offline-chain-trust.json'),json({schemaVersion:1,kind:'reviewed_independent_offline_chains',checkpoints:[]}));
+await fs.writeFile(path.join(historicalRoot,'docs/deliveries/release-backup-trust.json'),json({schemaVersion:1,rootProofSha256:hash(raw),checkpoints:[]}));
+await retainHistoricalQuarantinePrefix(historicalRoot,now);
+await pruneFutureEditorialFixture(historicalRoot,{temporaryRoot:historicalRoot,at:now});
+const publicBankRaw=await fs.readFile(path.join(historicalRoot,'data/releases/2026.10.04-regular.8/bank.json')),publicBank=JSON.parse(publicBankRaw);
+await fs.writeFile(path.join(historicalRoot,'data/manifest.json'),json({schemaVersion:1,bankVersion:publicBank.bankVersion,releasedAt:publicBank.releasedAt,file:`releases/${publicBank.bankVersion}/bank.json`,sha256:hash(publicBankRaw),changeSummary:publicBank.changeSummary,finalRelease:false}));
+const historicalApi=await import(pathToFileURL(path.join(historicalRoot,'scripts/validate-round.mjs')));
+const context={...await historicalApi.loadRoundContext(historicalRoot,null,{release:true,now}),now};
+assert.deepEqual(context.ledgers.map(r=>r.roundId),Array.from({length:9},(_,i)=>'round-'+String(i+1).padStart(3,'0')));
 const withoutNormal={...context,offlineBases:new Map([...context.offlineBases].filter(([id])=>id!==NORMAL_BACKUP_PINS.delta)),now};
 const normal=validateNormalBackupContinuation(proof,withoutNormal),originals=context.ledgers.map(JSON.stringify);
 function failed(fn,re){assert.throws(fn,re);}
@@ -126,12 +140,16 @@ test('private preparation rejects invented receipts before touching artifact or 
 });
 
 test('manifest-only freeze blocks continuation in both release and ordinary context modes',async t=>{
+ const now=Date.now();
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'normal-backup-manifest-freeze-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));await fs.cp(root,dir,{recursive:true});
- const mp=path.join(dir,'data/manifest.json'),m=JSON.parse(await fs.readFile(mp));assert.equal(JSON.parse(await fs.readFile(path.join(dir,'data/publication-state.json'))).finalized,false);
+ const mp=path.join(dir,'data/manifest.json'),manifestRaw=await fs.readFile(mp),m=JSON.parse(manifestRaw);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'data/publication-state.json'))).finalized,false);
+ assert.equal(hash(manifestRaw),'0ff0fb4e22120dc05e9bbff5e1f93d7de02ee069c2c20ea0ace4ef1f431ca6b6');assert.equal(m.finalRelease,false);
  await fs.writeFile(mp,json({...m,finalRelease:true}));
- for(const release of [true,false])await assert.rejects(loadRoundContext(dir,null,{release,now}),/freeze/);
+ // This single freeze change invalidates the exact approved manifest first.
+ // Require that precise current-authority rejection in both context modes.
+ for(const release of [true,false])await assert.rejects(loadRoundContext(dir,null,{release,now}),{message:'Practical-written registration: Active manifest is outside this conversion'});
  // Both real markers false remains eligible in both modes, without altering output selection.
- await fs.writeFile(mp,json({...m,finalRelease:false}));
+ await fs.writeFile(mp,manifestRaw);
  for(const release of [true,false]){const c=await loadRoundContext(dir,null,{release,now});assert.ok(c.offlineBases.has(NORMAL_BACKUP_PINS.delta));if(!release)assert.equal(c.manifest,null);}
  const sp=path.join(dir,'data/publication-state.json');
  for(const state of [{finalized:true},{}]){await fs.writeFile(sp,json(state));for(const release of [true,false])await assert.rejects(loadRoundContext(dir,null,{release,now}),/freeze|publication state/);}

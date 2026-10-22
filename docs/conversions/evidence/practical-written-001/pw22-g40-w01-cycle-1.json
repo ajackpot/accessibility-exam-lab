@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw22-g40-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw22-g40-w01",
+    "revision": 1,
+    "templateId": "pw22-template-g40",
+    "learningGoalId": "pw22-goal-g40",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s1",
+    "topicIds": [
+      "pw22-g40"
+    ],
+    "stem": "두 사람이 화면 밖에서 말하는 안내 영상에 대사만 자막으로 표시된다. 각 시점의 발화자를 알아야 지시의 의미를 이해할 수 있을 때, 자막 개선으로 적절한 것을 고르시오.",
+    "notes": [
+      "자막은 유일한 음성 대체수단이고, 대사의 내용과 표시 시점은 정확하다. 화면이나 다른 자료에 발화자를 알 수 있는 정보는 없다.",
+      "두 사람의 발언 순서는 일정하지 않다. 각 자막이 표시될 때 발화자도 식별할 수 있어야 한다."
+    ],
+    "explanation": "필요한 발화자 정보가 빠지면 대사 텍스트가 정확해도 음성의 맥락을 동등하게 전달하지 못한다. 각 대사가 표시되는 시점에 해당 발화자의 이름이나 역할을 자막에 함께 표시하면 누가 한 말인지 구별할 수 있다.",
+    "sourceRefs": [
+      "pw22b-src-kw-captions"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "KWCAG 2.2 (KS X OT0003:2022); NIA 제작기법 2.2 공식 해설",
+    "difficulty": "응용",
+    "reviewNote": "별도 필기 전환 후보 초안. 독립 풀이·출처·정답 유일성·문안·구조의 검토 전이며 등록·공개하지 않았다.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw22-g40-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g40-w01-set"
+      },
+      {
+        "optionId": "pw22-g40-w01-o2",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g40-w01-set"
+      },
+      {
+        "optionId": "pw22-g40-w01-o3",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw22-g40-w01-set"
+      },
+      {
+        "optionId": "pw22-g40-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g40-w01-set"
+      },
+      {
+        "optionId": "pw22-g40-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g40-w01-set"
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw22-g40-w01-o1",
+      "revision": 1,
+      "content": "영상 시작 화면에 두 발화자의 이름을 명단으로 표시한다.",
+      "explanation": "전체 명단은 누가 참여했는지 알려 주지만 이후 각 대사의 발화자를 연결하지 못한다."
+    },
+    {
+      "optionId": "pw22-g40-w01-o2",
+      "revision": 1,
+      "content": "자막 선택 메뉴의 트랙 이름에 두 발화자의 이름을 표시한다.",
+      "explanation": "트랙 전체의 이름은 개별 발화 시점의 화자를 구분하는 자막 정보가 아니다."
+    },
+    {
+      "optionId": "pw22-g40-w01-o3",
+      "revision": 1,
+      "content": "각 대사가 표시될 때 해당 발화자의 이름이나 역할도 자막에 표시한다.",
+      "explanation": "발화 시점과 신원 정보를 연결하여 청각 없이도 대사의 주체를 식별하게 한다."
+    },
+    {
+      "optionId": "pw22-g40-w01-o4",
+      "revision": 1,
+      "content": "화면에 표시하지 않는 편집용 메타데이터에 발화자 이름을 기록한다.",
+      "explanation": "작성 도구에 저장된 정보라도 학습자에게 표시되지 않으면 자막을 통한 식별에 쓰이지 못한다."
+    },
+    {
+      "optionId": "pw22-g40-w01-o5",
+      "revision": 1,
+      "content": "영상 아래 소개 문단에 두 발화자의 이름과 담당 업무를 표시한다.",
+      "explanation": "일반 소개는 발화 시점과 연결되지 않으므로 순서가 일정하지 않은 각 대사의 주체를 알 수 없다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw22b-src-kw-captions",
+      "title": "NIA — 자막의 화자 식별",
+      "url": "https://nia-a11y.github.io/kwcag22tech/1/2/1/",
+      "version": "웹 접근성을 고려한 콘텐츠 제작기법 2.2 개정판 / NIA 2025-03 발행, 2025-03-31 업데이트",
+      "checkedAt": "2026-10-22T11:28:12.371780+00:00",
+      "location": "공식 해설 §1.2.1 ↔ KWCAG 2.2 §5.2.1; 적용 사례 1)a 및 개선 필요 사례 4)",
+      "evidence": "화면 밖에서 말하는 여러 사람의 구별이 내용 이해에 필요하면 자막에도 화자를 식별할 정보를 함께 제공한다. 단순한 출연자 명단이나 편집용 메타데이터의 보유는 발화 시점의 식별 정보를 대신하지 못한다.",
+      "rights": "지정된 공식 자료의 필요한 사실을 의역하고, 실기 원본의 지식을 바탕으로 지문·선택지·코드를 독립 작성했다. 표준 예제·전문·공식 시험 샘플·유료 문제집 문구를 복제하지 않았다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

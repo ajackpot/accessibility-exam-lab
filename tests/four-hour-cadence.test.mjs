@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
+import {serialize} from 'node:v8';
 import {CAMPAIGN_SCHEDULE_VERSIONS, FOUR_HOUR_CADENCE_AT, FINAL_DECISION_AT, nextScheduledRoundAt, validateRoundLedgers, validateEditorialLedgers, validateReleaseLedger, loadRoundContext, regularCoverage} from '../scripts/validate-round.mjs';
 import {FREEZE_AT} from '../src/domain.js';
 
@@ -28,17 +29,38 @@ function round(start = '2026-10-03T00:00:00+09:00', id = 'round-003', deadline =
 function result(rounds, options = {}) { return syntheticValidator.round.validateRoundLedgers(rounds, {banks, ...options}); }
 function pass(rounds, options) { const r = result(rounds, options); assert.equal(r.ok, true, r.errors.join('\n')); }
 function fail(rounds, pattern, options) { const r = result(rounds, options); assert.equal(r.ok, false, 'invalid schedule passed'); assert.match(r.errors.join('\n'), pattern); }
-async function historicalContext() {
-  const context = await loadRoundContext(fileURLToPath(root));
-  // Pin only the transition's real predecessors so later expansions do not turn
-  // this historical regression into a stale-current-bank or future-clock test.
-  const activeRaw = context.banks.get('2026.10.02-regular.2').raw, bank = JSON.parse(activeRaw.toString());
-  return {...context,
-    ledgers: context.ledgers.filter(r => ['round-001', 'round-002'].includes(r.roundId)),
-    editorials: context.editorials.filter(e => e.correctionRoundId === 'editorial-001'),
-    publicationState: {finalized: false},
-    manifest: {schemaVersion: 1, bankVersion: bank.bankVersion, releasedAt: bank.releasedAt, file: `releases/${bank.bankVersion}/bank.json`, sha256: hash(activeRaw), changeSummary: bank.changeSummary, finalRelease: false}
-  };
+async function historicalContext(t) {
+  // Exact Oct 2 source inputs only. This is a historical semantic regression,
+  // not a current full-campaign load or a saved validation result.
+  const authority=await createOwnedHistoricalAuthority(t);
+  const ledgerSources=new Map(['round-001','round-002'].map(id=>[id,Buffer.from(read(`docs/rounds/${id}.json`))]));
+  const ledgers=[...ledgerSources.values()].map(raw=>JSON.parse(raw));
+  const editorialSources=new Map([['editorial-001',Buffer.from(read('docs/corrections/editorial-001.json'))]]);
+  const editorials=[...editorialSources.values()].map(raw=>JSON.parse(raw));
+  const bankInputs=new Map(),availableFiles=new Set(),reviewPackages=new Map(),editorialReports=new Map();
+  for(const ledger of [...ledgers,...editorials])for(const ref of [ledger.baseline,ledger.publication,...(ledger.corrections??[]).map(c=>c.priorAcceptedRef)]){
+    if(!ref?.bankVersion)continue;
+    const p=`data/releases/${ref.bankVersion}/bank.json`,raw=Buffer.from(read(p));
+    assert.equal(hash(raw),ref.bankSha256,'Exact historical bank dependency: '+p);
+    bankInputs.set(ref.bankVersion,{raw});availableFiles.add(p);
+  }
+  for(const ledger of ledgers)for(const suffix of ['json','md'])availableFiles.add(`docs/rounds/${ledger.roundId}.${suffix}`);
+  for(const ledger of editorials){
+    for(const p of new Set([`docs/corrections/${ledger.correctionRoundId}.md`,...(ledger.validation??[]).map(v=>v.reportPath).filter(Boolean)])){
+      editorialReports.set(p,Buffer.from(read(p)));availableFiles.add(p);
+    }
+    for(const c of ledger.corrections)for(const cycle of c.cycles)if(cycle.reviewPackagePath){
+      const p=cycle.reviewPackagePath;reviewPackages.set(p,{raw:Buffer.from(read(p))});availableFiles.add(p);
+    }
+  }
+  const activeRaw=bankInputs.get('2026.10.02-regular.2').raw,bank=JSON.parse(activeRaw);
+  const manifest={schemaVersion:1,bankVersion:bank.bankVersion,releasedAt:bank.releasedAt,file:`releases/${bank.bankVersion}/bank.json`,sha256:hash(activeRaw),changeSummary:bank.changeSummary,finalRelease:false};
+  const context={ledgers,ledgerSources,editorials,editorialSources,banks:bankInputs,availableFiles,reviewPackages,editorialReports,
+    schema:JSON.parse(read('docs/rounds/round-ledger.schema.json')),editorialSchema:JSON.parse(read('docs/corrections/editorial-ledger.schema.json')),
+    publicationState:{finalized:false},manifest,offlineBases:new Map(),deliveryCheckpointSources:new Map(),synchronizations:[]};
+  context.publicationSelections=authority.bindHistoricalSelection({...context,now:Date.parse('2026-10-02T14:00:00Z')});
+  const original=serialize(context);t.after(()=>assert.deepEqual(serialize(context),original,'Historical input remains unchanged'));
+  return {context,authority};
 }
 
 test('schedule versions switch at midnight KST without moving the old Oct 2 bounds', () => {
@@ -105,7 +127,7 @@ test('the last regular round retains 23:00 decisions, 23:30 finalizer and midnig
   fail([round('2026-10-17T00:00:00+09:00', 'after-freeze', FREEZE_AT + 60000)], /at or after final freeze/);
 });
 
-test('the published round and editorial history remains byte-identical and passes the new guard', async () => {
+test('the published round and editorial history remains byte-identical and passes the new guard', async t => {
   const expected = {
     'docs/rounds/round-001.json': 'c75d8afae8bb42ee8892e6c755585d7d6240be0e004e7c2078af2e568424ecea',
     'docs/rounds/round-001.md': '32009e6899c5e79eb26b53926969804eb0f27ef113f1501dc2b788a850226e56',
@@ -118,19 +140,19 @@ test('the published round and editorial history remains byte-identical and passe
     'data/releases/2026.10.02-regular.2/bank.json': 'c79139eaee12943dc65b8cbcaeda37b62254b379ef367ab9a57c2fded3beed54'
   };
   for (const [file, sha256] of Object.entries(expected)) assert.equal(hash(read(file)), sha256, file);
-  const context = await historicalContext();
-  const history = validateReleaseLedger(context.ledgers, {...context, now: Date.parse('2026-10-02T14:00:00Z')});
+  const {context,authority}=await historicalContext(t);
+  const history = authority.round.validateReleaseLedger(context.ledgers, {...context, now: Date.parse('2026-10-02T14:00:00Z')});
   assert.equal(history.ok, true, history.errors.join('\n'));
 });
 
 test('round-003 at midnight follows the actual round-002 without rewriting any historical record', async t => {
-  const context = await historicalContext();
+  const {context,authority}=await historicalContext(t);
   const activeRaw = context.banks.get('2026.10.02-regular.2').raw;
   const coverage = regularCoverage(JSON.parse(activeRaw.toString()));
   const r = round();
   Object.assign(r.baseline, {bankVersion: '2026.10.02-regular.2', bankSha256: hash(activeRaw), regularWrittenBySubject: coverage.regularWrittenBySubject, regularPractical: coverage.regularPractical});
   r.coverageAfter = coverage;
-  const authority=await createOwnedHistoricalAuthority(t),{validateRoundLedgers}=authority.round;
+  const {validateRoundLedgers}=authority.round;
   const ledgers=[...context.ledgers,r],ledgerSources=new Map(context.ledgers.map(l=>[l.roundId,context.ledgerSources.get(l.roundId)]));
   ledgerSources.set(r.roundId,Buffer.from(JSON.stringify(r,null,2)+'\n'));
   const publicationSelections=authority.bindHistoricalSelection({ledgers,ledgerSources,editorials:context.editorials,editorialSources:context.editorialSources,manifest:context.manifest,now:FOUR_HOUR_CADENCE_AT+120000});
@@ -138,13 +160,13 @@ test('round-003 at midnight follows the actual round-002 without rewriting any h
   assert.equal(checked.ok, true, checked.errors.join('\n'));
 });
 
-test('editorial review shares the effective four-hour bound without changing historical ledgers', async () => {
-  const context = await historicalContext();
+test('editorial review shares the effective four-hour bound without changing historical ledgers', async t => {
+  const {context,authority}=await historicalContext(t);
   const activeRaw = context.banks.get('2026.10.02-regular.2').raw, coverage = regularCoverage(JSON.parse(activeRaw.toString()));
   const e = structuredClone(context.editorials[0]);
   Object.assign(e, {correctionRoundId: 'editorial-four-hour-fixture', startedAt: '2026-10-03T02:00:00+09:00', decisionDeadline: '2026-10-03T04:00:00+09:00', closedAt: '2026-10-03T02:01:00+09:00', changedQuestionIds: [], changedOptionIds: [], changedPracticalChoiceIds: [], corrections: [], counts: {registered: 0, accepted: 0, rejected: 0, pending: 0, newRegular: 0, revisedRegular: 0, publishedRevisedRegular: 0}, coverageAfter: coverage, publication: {status: 'not_attempted', commit: null, bankVersion: null, bankSha256: null, verifiedAt: null, url: null, blockers: []}, validation: [], summary: 'Synthetic empty editorial schedule fixture; no content or publication.'});
   Object.assign(e.baseline, {bankVersion: '2026.10.02-regular.2', bankSha256: hash(activeRaw), regularWrittenBySubject: coverage.regularWrittenBySubject, regularPractical: coverage.regularPractical});
-  const check = () => validateEditorialLedgers([...context.editorials, e], {...context, availableFiles: null});
+  const check = () => authority.round.validateEditorialLedgers([...context.editorials, e], {...context, availableFiles: null,now:Date.parse('2026-10-02T17:02:00Z')});
   const valid = check(); assert.equal(valid.ok, true, valid.errors.join('\n'));
   e.decisionDeadline = '2026-10-03T04:00:00.001+09:00';
   const invalid = check(); assert.equal(invalid.ok, false); assert.match(invalid.errors.join('\n'), /next round/);

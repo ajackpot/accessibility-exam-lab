@@ -1,4 +1,5 @@
-import {withEditorial005Completion,assertEditorial005CompletionInput} from './editorial005-completion.mjs';
+import {withCurrentReleaseAuthority,assertCurrentReleaseInput} from './current-release-authority.mjs';
+import {PRACTICAL_WRITTEN,hasPracticalWrittenRegistration,loadPracticalWrittenRegistration,refreshPracticalWrittenRegistration,practicalWrittenBaselineManifest} from './practical-written-registration.mjs';
 import {loadPublicationSelections, resolvePublicationIdentity, assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {isNormalPublication} from './normal-publication.mjs';
 import {isEditorialPublication} from './editorial-publication.mjs';
@@ -377,6 +378,19 @@ export function validateEditorialLedgers(editorials, options = {}) {
   result.errors.push(...validateCampaignBaselines(options.ledgers||[],{editorials,editorialSources:options.editorialSources,editorialReports:options.editorialReports,editorialSchema:options.editorialSchema||EDITORIAL_SCHEMA,reviewPackages:options.reviewPackages,availableFiles:options.availableFiles,now:options.now??null,offlineBases:options.offlineBases,ledgerSources:options.ledgerSources,synchronizations:options.synchronizations,banks:options.banks,publicationState:options.publicationState,publicationSelections:options.publicationSelections,deliveryCheckpointSources:options.deliveryCheckpointSources}).errors); result.ok=result.errors.length===0; return result;
 }
 export function validateReleaseLedger(ledgers, {manifest, banks = new Map(), editorials = [], editorialSchema = EDITORIAL_SCHEMA, ...historyOptions} = {}) {
+  if(manifest?.bankVersion===PRACTICAL_WRITTEN.bankVersion){
+    try{
+      const active=banks instanceof Map?banks.get(manifest.bankVersion):banks[manifest.bankVersion];
+      if(!active?.raw)throw Error('Missing registered immutable bank');
+      const fresh=refreshPracticalWrittenRegistration(historyOptions.practicalWritten,{bankRaw:active.raw,manifestRaw:Buffer.from(JSON.stringify(manifest,null,2)+'\n'),now:historyOptions.now??Date.now()});
+      // The full historical release path runs unchanged against its authenticated
+      // final baseline. This is a read-only view, never a rewritten source/time.
+      const historical=validateReleaseLedger(ledgers,{manifest:practicalWrittenBaselineManifest(),banks,editorials,editorialSchema,...historyOptions});
+      if(!historical.ok)return historical;
+      assertNoPublicationExcludedContent(fresh.bank,historyOptions.publicationSelections);
+      return {ok:true,errors:[],registrationId:PRACTICAL_WRITTEN.id,conversion:fresh.result};
+    }catch(error){return {ok:false,errors:[`release: ${error.message}`]};}
+  }
   const errors = [], fail = message => errors.push(`release: ${message}`);
   const get = version => banks instanceof Map ? banks.get(version) : banks[version];
   if (!manifest || manifest.schemaVersion !== 1 || typeof manifest.finalRelease !== 'boolean' || !meaningful(manifest.changeSummary)) return {ok: false, errors: ['release: invalid active manifest schema, summary or finalRelease']};
@@ -510,7 +524,13 @@ export async function readEditorialDependencies(root, editorialPaths) {
 }
 
 export async function loadRoundContext(root = ROOT, input = null, options = {}) {
-  return withEditorial005Completion({root,now:options.now??Date.now()},()=>{assertEditorial005CompletionInput(input,options.now??Date.now());return withBankParsingSession(root, () => loadContext(root,input,options));});
+  return withCurrentReleaseAuthority({root,now:options.now??Date.now()},async()=>{
+    assertCurrentReleaseInput(input,options.now??Date.now(),root);
+    const conversionInput=input&&path.resolve(input)===path.resolve(root,PRACTICAL_WRITTEN.ledgerPath);
+    const context=await withBankParsingSession(root, () => loadContext(root,conversionInput?null:input,options));
+    if(hasPracticalWrittenRegistration(root))context.practicalWritten=loadPracticalWrittenRegistration(root,{manifestRaw:context.manifest?.bankVersion===PRACTICAL_WRITTEN.bankVersion?Buffer.from(JSON.stringify(context.manifest,null,2)+'\n'):null,now:options.now??Date.now()});
+    return context;
+  });
 }
 /** Read-only reconstruction of an exact original delivered source. No supplied
  * date/Boolean/Map selects this exception and no current release context escapes.
@@ -695,7 +715,7 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
   return {ledgers, editorials, editorialSources, editorialReports, editorialSchema, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, normalBackupRoots:normalRoots.roots, normalBackupChains:normalChain.chains, quarantineDispositions, publicationSelections};
 }
 export async function main(args = process.argv.slice(2)) {
-  return withEditorial005Completion({root:ROOT}, () => withBankParsingSession(ROOT, () => runMain(args)));
+  return withCurrentReleaseAuthority({root:ROOT}, () => withBankParsingSession(ROOT, () => runMain(args)));
 }
 async function runMain(args) {
   let input = null, nextRoundAt = null, release = false;

@@ -1,3 +1,4 @@
+import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
 import {useEmptySyntheticSelectionPrefix} from './selection-fixtures.mjs';
 import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
 import test from 'node:test';
@@ -93,7 +94,8 @@ test('quarantined identities, renamed content, orphan/shared options and histori
   const checked=f.api.validateQuarantineCampaign([f.r],{...f.context,banks:entries});assert.equal(checked.ok,false,kind);assert.match(checked.errors.join('\n'),/held content|held exclusive/);
  }
  const alias=clone(f.r.candidates[0]);alias.candidateId='alias';alias.questionId='alias';const r=clone(f.r);r.candidates.push(alias);assert.match(f.api.validateQuarantineCampaign([r],f.context).errors.join('\n'),/reintroduced|terminal decision history/);
- const inputs=path.join(f.temp,'held-bank.json'),b=clone(f.bank);b.questions.push(f.held.question);b.options.push(...f.held.options);await fs.writeFile(inputs,json(b));await assert.rejects(f.bankApi.readBankInput(f.root,inputs),/held content/);
+ const inputs=path.join(f.temp,'held-bank.json'),b=clone(f.bank);b.questions.push(f.held.question);b.options.push(...f.held.options);await fs.writeFile(inputs,json(b));t.mock.timers.enable({apis:['Date'],now:f.context.now});
+ try{await assert.rejects(f.bankApi.readBankInput(f.root,inputs),/held content/);}finally{t.mock.timers.reset();}
 });
 
 test('unregistered proposal checks exact private evidence, shared options, previously released content and both freeze markers',async t=>{
@@ -153,7 +155,7 @@ test('frozen complete bytes require the same exact audit, original source and el
  const b=clone(f.bank);b.questions.push(f.held.question);b.options.push(...f.held.options);assert.throws(()=>f.api.validateQuarantineSnapshot(files.map(x=>x.path===`data/releases/${b.bankVersion}/bank.json`?{...x,raw:json(b)}:x),{now:f.context.now}),/held content/);
 });
 
-test('registered current source keeps full campaign context through legacy and independent delivery chains',async t=>{
+test('registered current source keeps full campaign context through legacy and independent delivery chains',async t=>withCurrentReleaseAuthority({root:ROOT},async()=>{
  const registry=JSON.parse(await read('docs/quarantines/trust.json'));
  if(!registry.audits.length){t.skip('No installed audit in this pre-integration synthetic baseline');return;}
  const {loadRoundContext,validateReleaseLedger}=await import('../scripts/validate-round.mjs');
@@ -168,7 +170,7 @@ test('registered current source keeps full campaign context through legacy and i
  const omitted=new Map(options.ledgers);omitted.delete(registry.audits.at(-1).roundId);assert.match(validateOfflineContinuation(index.receipts,{...options,ledgers:omitted}).errors.join('\n'),/missing original source round/);
  // The independent source chain is separately loaded from its own exact proofs.
  const independent=JSON.parse(await read('docs/deliveries/offline-chain-trust.json'));if(independent.checkpoints.length)assert.ok(context.independentOfflineChains.size>0);
-});
+}));
 
 
 test('historical fixture isolation retains exact earlier pins and never edits live authority',async t=>{

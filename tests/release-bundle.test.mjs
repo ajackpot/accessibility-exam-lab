@@ -1,14 +1,17 @@
-import test from 'node:test';
+import test,{after,beforeEach} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {readDeliveredArchive,validateDeliveredArchiveEntries} from '../scripts/release-backup-continuation.mjs';
-import {parsePublicAllowlist} from '../scripts/download-fallback.mjs';
-import {writeReleaseDeliveryPair} from '../scripts/release-bundle.mjs';
+import {pathToFileURL} from 'node:url';
+import {createOwnedHistoricalSource} from './historical-authority-fixtures.mjs';
 import {FREEZE_AT} from '../src/domain.js';
-const root=path.resolve(import.meta.dirname,'..'),hash=x=>createHash('sha256').update(x).digest('hex');
+const root=await createOwnedHistoricalSource({after}),hash=x=>createHash('sha256').update(x).digest('hex');
+const {readDeliveredArchive,validateDeliveredArchiveEntries}=await import(pathToFileURL(path.join(root,'scripts/release-backup-continuation.mjs')));
+const {parsePublicAllowlist}=await import(pathToFileURL(path.join(root,'scripts/download-fallback.mjs')));
+const {writeReleaseDeliveryPair}=await import(pathToFileURL(path.join(root,'scripts/release-bundle.mjs')));
+beforeEach(t=>t.mock.timers.enable({apis:['Date'],now:Date.parse('2026-10-15T00:00:00Z')}));
 async function inventory(root){return Promise.all(parsePublicAllowlist(await fs.readFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'utf8')).map(async p=>{const b=await fs.readFile(path.join(root,p));return {path:p,bytes:b.length,sha256:hash(b)};}));}
 async function fixture(t){
  const dir=await fs.mkdtemp(path.join(os.tmpdir(),'release-bundle-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));const baseRoot=path.join(dir,'base'),workRoot=path.join(dir,'work');await fs.cp(root,baseRoot,{recursive:true});await fs.cp(root,workRoot,{recursive:true});await fs.writeFile(path.join(workRoot,'docs/RELEASE-BACKUP-TEST.txt'),'Synthetic packaging fixture, no publication claim.\n');await fs.appendFile(path.join(workRoot,'PUBLICATION-MANIFEST.txt'),'\ndocs/RELEASE-BACKUP-TEST.txt\n');

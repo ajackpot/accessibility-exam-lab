@@ -1,15 +1,27 @@
 /** Current-window completion policy only; no campaign validation or release pair. */
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
+import {pathToFileURL} from 'node:url';
 import {FREEZE_AT,releaseAllowed} from '../src/domain.js';
-import {EDITORIAL005_COMPLETION as identity,withEditorial005Completion,currentCutoffBlocks,completionHistoryReadable,assertEditorial005CompletionInput} from '../scripts/editorial005-completion.mjs';
-import {assertCurrentReleaseWindow} from '../scripts/release-window.mjs';
-import {readBankInput} from '../scripts/bank-io.mjs';
-import {loadRoundContext} from '../scripts/validate-round.mjs';
-const source=path.resolve(import.meta.dirname,'..');
+import {EDITORIAL005_COMPLETION as identity} from '../scripts/editorial005-completion.mjs';
+import {PRACTICAL_WRITTEN_BASELINE_MANIFEST_RAW} from '../scripts/practical-written-baseline.mjs';
+// The installed active manifest can legitimately become the separate conversion.
+// Exercise exact005 from an isolated authority containing its original bytes,
+// without changing either production policy or the actual active manifest.
+const installed=path.resolve(import.meta.dirname,'..'),source=await fs.mkdtemp(path.join(os.tmpdir(),'editorial005-authority-'));
+after(()=>fs.rm(source,{recursive:true,force:true}));
+for(const folder of ['scripts','src','docs'])await fs.cp(path.join(installed,folder),path.join(source,folder),{recursive:true,filter:p=>path.relative(installed,p)!=='docs/conversions/practical-written-001.json'});
+await fs.copyFile(path.join(installed,'package.json'),path.join(source,'package.json'));
+for(const p of [identity.ledgerPath,`data/releases/${identity.bankVersion}/bank.json`]){await fs.mkdir(path.dirname(path.join(source,p)),{recursive:true});await fs.copyFile(path.join(installed,p),path.join(source,p));}
+await fs.writeFile(path.join(source,'data/manifest.json'),PRACTICAL_WRITTEN_BASELINE_MANIFEST_RAW);
+await fs.writeFile(path.join(source,'data/publication-state.json'),'{"finalized":false}\n');
+const {withEditorial005Completion,currentCutoffBlocks,completionHistoryReadable,assertEditorial005CompletionInput}=await import(pathToFileURL(path.join(source,'scripts/editorial005-completion.mjs')));
+const {assertCurrentReleaseWindow}=await import(pathToFileURL(path.join(source,'scripts/release-window.mjs')));
+const {readBankInput}=await import(pathToFileURL(path.join(source,'scripts/bank-io.mjs')));
+const {loadRoundContext}=await import(pathToFileURL(path.join(source,'scripts/validate-round.mjs')));
 const paths=['data/manifest.json','data/publication-state.json',identity.ledgerPath,`data/releases/${identity.bankVersion}/bank.json`];
 async function fixture(t){
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'editorial005-window-')),files=new Map();

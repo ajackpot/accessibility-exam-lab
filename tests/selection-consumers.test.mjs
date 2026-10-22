@@ -1,3 +1,4 @@
+import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
 /** Selection regression uses exact reviewed source bytes. Synthetic publication
  * pins and delivery proofs exist only in disposable copies, never the project. */
 import test from 'node:test';
@@ -20,7 +21,7 @@ function fixture(){return fixturePromise??=buildFixture();}
 async function buildFixture(){
  // API-only fixture: read exact public bytes. The separately reviewed pair owns
  // the single full campaign/release integration gate; do not duplicate it here.
- const context={ledgers:[],ledgerSources:new Map(),banks:new Map(),synchronizations:[],publicationState:JSON.parse(await read('data/publication-state.json')),publicationSelections:await loadPublicationSelections(root),deliveryCheckpointSources:new Map()};
+ const context={ledgers:[],ledgerSources:new Map(),banks:new Map(),synchronizations:[],publicationState:JSON.parse(await read('data/publication-state.json')),publicationSelections:await withCurrentReleaseAuthority({root},()=>loadPublicationSelections(root)),deliveryCheckpointSources:new Map()};
  for(const name of await fs.readdir(path.join(root,'docs/rounds')))if(/^round-\d+\.json$/.test(name)){const raw=await read('docs/rounds/'+name),ledger=JSON.parse(raw);context.ledgers.push(ledger);context.ledgerSources.set(ledger.roundId,raw);}
  for(const name of await fs.readdir(path.join(root,'data/releases')))context.banks.set(name,{raw:await read(`data/releases/${name}/bank.json`)});
  for(const pin of PUBLICATION_SYNCHRONIZATIONS)context.synchronizations.push(JSON.parse(await read(pin.path)));
@@ -64,7 +65,7 @@ async function isolated(t,f,{registerRoot=false}={}){
  for(const [p,raw]of files){await fs.mkdir(path.dirname(path.join(dir,p)),{recursive:true});await fs.writeFile(path.join(dir,p),raw);}
  const events=[...context.synchronizations,event],code=(await read('scripts/publication-sync.mjs')).toString().replace(/export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze\(\[[\s\S]*?\n\]\);/,`export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze([\n${events.map(e=>`Object.freeze({path:'docs/publications/${e.syncId}.json',sha256:'${H(J(e))}'})`).join(',\n')}\n]);`);
  await fs.writeFile(path.join(dir,'scripts/publication-sync.mjs'),code);
- const authority=await import(pathToFileURL(path.join(dir,'scripts/publication-selection.mjs')).href);context.publicationSelections=await authority.loadPublicationSelections(dir);
+ const authority=await import(pathToFileURL(path.join(dir,'scripts/publication-selection.mjs')).href);context.publicationSelections=await authority.loadPublicationSelections(dir,{now:f.at});
  const api=await import(pathToFileURL(path.join(dir,'scripts/publication-sync.mjs')).href),editorialApi=await import(pathToFileURL(path.join(dir,'scripts/editorial-ledger.mjs')).href);
  return {dir,files,event,context,api,editorialApi,events};
 }

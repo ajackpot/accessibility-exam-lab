@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw22-g26-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw22-g26-w01",
+    "revision": 1,
+    "templateId": "pw22-template-g26",
+    "learningGoalId": "pw22-goal-g26",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s3",
+    "topicIds": [
+      "pw22-g26"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 초점 탐색을 유지하면서 비활성일 때 action 실행을 막도록 검사 위치에 넣을 코드를 고르시오.",
+    "notes": [
+      "별도 기능은 aria-disabled 값을 소문자 문자열 true 또는 false로 갱신하며, 값에 맞춰 비활성 표시도 바꾼다.",
+      "버튼에 disabled 속성이나 다른 실행 차단은 없고, action은 이 click 처리기에서 호출된다.",
+      "true일 때는 실행을 막고 false일 때는 실행하며, 버튼은 두 상태 모두 순차 키보드 초점 이동 대상에 남긴다."
+    ],
+    "explanation": "aria-disabled 선언만으로 click 처리기의 JavaScript 실행이 차단되지는 않는다. 문자열 값이 \"true\"인 경우에 처리기를 종료하면 비활성 때 action을 막고 \"false\"일 때는 실행하며 네이티브 disabled를 추가하지 않아 초점 탐색을 유지한다.",
+    "sourceRefs": [
+      "pw22a-src-disabled"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06 고정판)",
+    "difficulty": "기초",
+    "reviewNote": "실기 지식의 필기 전환 검토 초안. 독립 풀이·근거·문안·구조 검토 전이며 정규 은행 미등록·미공개. 실제 브라우저·화면낭독기 실측 아님.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw22-g26-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g26-w01-set"
+      },
+      {
+        "optionId": "pw22-g26-w01-o2",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw22-g26-w01-set"
+      },
+      {
+        "optionId": "pw22-g26-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g26-w01-set"
+      },
+      {
+        "optionId": "pw22-g26-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g26-w01-set"
+      },
+      {
+        "optionId": "pw22-g26-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g26-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<button id=\"export\" type=\"button\" aria-disabled=\"true\">자료 내보내기</button>\n<script>\nconst button = document.getElementById(\"export\");\nbutton.addEventListener(\"click\", function () {\n  // 검사 위치\n  action();\n});\n</script>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 초점 탐색을 유지하면서 비활성일 때 action 실행을 막도록 검사 위치에 넣을 코드를 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw22-g26-w01-o1",
+      "revision": 1,
+      "content": "if (button.hasAttribute(\"aria-disabled\")) return;",
+      "explanation": "속성은 true와 false 두 상태에 모두 있으므로 활성 상태에서도 실행을 차단한다."
+    },
+    {
+      "optionId": "pw22-g26-w01-o2",
+      "revision": 1,
+      "content": "if (button.getAttribute(\"aria-disabled\") === \"true\") return;",
+      "explanation": "비활성이라는 정확한 문자열 값에서만 처리기를 끝내므로 요구한 두 상태의 실행을 구별한다."
+    },
+    {
+      "optionId": "pw22-g26-w01-o3",
+      "revision": 1,
+      "content": "if (button.getAttribute(\"aria-disabled\") === \"false\") return;",
+      "explanation": "활성 상태에서 차단하고 비활성 상태에서는 통과시켜 요구를 반대로 적용한다."
+    },
+    {
+      "optionId": "pw22-g26-w01-o4",
+      "revision": 1,
+      "content": "if (button.getAttribute(\"aria-disabled\")) return;",
+      "explanation": "true뿐 아니라 문자열 false도 비어 있지 않아 조건이 참이 되므로 두 상태 모두 차단한다."
+    },
+    {
+      "optionId": "pw22-g26-w01-o5",
+      "revision": 1,
+      "content": "if (button.disabled) return;",
+      "explanation": "네이티브 disabled 속성이 없으므로 이 검사는 ARIA에 선언한 비활성 상태를 읽어 내지 못한다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw22a-src-disabled",
+      "title": "WAI-ARIA 1.2 — 비활성 상태와 실제 동작",
+      "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-disabled",
+      "version": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06 고정판)",
+      "checkedAt": "2026-10-22T11:26:15.729384+00:00",
+      "location": "§6.7 aria-disabled; §3.1 Non-interference with the Host Language",
+      "evidence": "ARIA 상태는 호스트 언어의 실행 동작을 자동으로 바꾸지 않는다. 비활성 선언과 기능 제한이 일치하도록 구현한다.",
+      "rights": "실기 원본의 학습 지식을 바탕으로 지문·상황·선택지·코드를 독립 작성했다. 표준의 사실은 필요한 범위에서 의역하며 원문·공식 시험 예제·유료 문항을 복제하지 않는다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

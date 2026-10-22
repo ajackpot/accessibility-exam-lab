@@ -7,7 +7,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {PUBLICATION_SYNCHRONIZATIONS,validatePublicationSynchronizations,validatePublicationSynchronizationSemantics,requiresSynchronizationDeliveryDependencies} from '../scripts/publication-sync.mjs';
+import {validatePublicationSynchronizations,validatePublicationSynchronizationSemantics,requiresSynchronizationDeliveryDependencies} from '../scripts/publication-sync.mjs';
 import {isNormalPublication,isNormalChainPublication,normalPublicationTree,validateNormalPublication,validateNormalBankTransition} from '../scripts/normal-publication.mjs';
 import {isEditorialPublication} from '../scripts/editorial-publication.mjs';
 import {validateEditorialHistorySemantics,validateEditorialTransition} from '../scripts/editorial-history-core.mjs';
@@ -23,8 +23,16 @@ const at=Date.parse('2026-10-11T01:00:00Z');
 // Test-owned historical projection only; this never authenticates new publication
 // authority. Require registered editorial suffixes and keep the frozen eight-pin
 // predecessor. Keep this bounded projection identical in both tests.
-function projectHistoricalPublications(sourceFiles,sourcePins){
-  assert(sourceFiles instanceof Map);assert(Array.isArray(sourcePins));
+function projectHistoricalPublications(sourceFiles){
+  assert(sourceFiles instanceof Map);
+  // Read the registry from the same exact385 source as its event bytes. The
+  // installed current registry includes later events absent from this map.
+  const sourceCode=sourceFiles.get('scripts/publication-sync.mjs').toString();
+  assert.equal(H(Buffer.from(sourceCode)),'70507479f2e5ea3a4b2a168097e1ccb3e1d2979936a70da31589d38a273fd8f0');
+  const declarations=[...sourceCode.matchAll(/export const PUBLICATION_SYNCHRONIZATIONS = Object.freeze\(\[[\s\S]*?\n\]\);/g)];
+  assert.equal(declarations.length,1,'one exact historical registry declaration');
+  const sourcePins=[...declarations[0][0].matchAll(/Object.freeze\(\{path:'(docs\/publications\/[^']+)',\s*sha256:'([a-f0-9]{64})'\}\)/g)].map(([,path,sha256])=>({path,sha256}));
+  assert.equal(sourcePins.length,11,'exact385 includes the eight-pin prefix and editorial002–004 suffix');
   const pins=sourcePins.slice(0,8),suffix=sourcePins.slice(8),files=new Map(sourceFiles),removedPaths=[];
   assert.equal(H(J(pins)),'b91fb0d6f084a4a8005e077f449d928f0615ce54892daba764e0502d8942c1a4','fixture requires the exact eight-pin historical prefix');
   assert(suffix.length,'fixture requires the registered actual002 anchor');
@@ -112,7 +120,7 @@ function projectEditorial002Context(projection){
 
 const project={ledgers:[],ledgerSources:new Map(),editorials:[],editorialSources:new Map(),editorialReports:new Map(),reviewPackages:new Map(),banks:new Map(),deliveryCheckpointSources:new Map(),synchronizations:[],now:at};
 const successorFiles=await readSuccessor(root),sourceFiles=projectRegistration385(successorFiles);
-  const fixtureProjection=projectEditorial002Context(projectHistoricalPublications(sourceFiles,PUBLICATION_SYNCHRONIZATIONS));
+  const fixtureProjection=projectEditorial002Context(projectHistoricalPublications(sourceFiles));
   const files=syntheticSuccessor(fixtureProjection.files,successorFiles);
 for(const [p,raw]of files){
  if(/^docs\/rounds\/round-\d+\.json$/.test(p)){const l=JSON.parse(raw);project.ledgers.push(l);project.ledgerSources.set(l.roundId,raw);}

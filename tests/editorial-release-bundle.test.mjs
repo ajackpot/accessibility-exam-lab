@@ -7,6 +7,7 @@ import {createHash} from 'node:crypto';
 import {resolveReleaseDeliveryOwner} from '../scripts/release-bundle.mjs';
 import {freezeCompleteProject} from '../scripts/complete-bundle.mjs';
 import {loadPublicationSelections} from '../scripts/publication-selection.mjs';
+import {withCurrentReleaseAuthority,currentCutoffBlocks} from '../scripts/current-release-authority.mjs';
 // Synthetic owner/API fixtures only. The actual pair validates the complete campaign.
 const digest='a'.repeat(64),version='synthetic-editorial.998';
 function fixture(editorial=true){
@@ -23,6 +24,7 @@ test('ordinary pair owner keeps canonical regular path',()=>{
 });
 test('actual immutable041 owner resolves to its authenticated selected bank',async()=>{
  const root=path.resolve(import.meta.dirname,'..');
+ await withCurrentReleaseAuthority({root},async()=>{
  const publicationSelections=await loadPublicationSelections(root,{now:Date.now()});
  const ledger=JSON.parse(await fs.readFile(path.join(root,'docs/rounds/round-041.json'),'utf8'));
  const context={ledgers:[ledger],editorials:[],publicationSelections,manifest:{bankVersion:'2026.10.10-regular.41-selection.1',sha256:'de4397ef9e0fb1d717bfc21dcc43a41c257a37b3c0f22e6c6e326544e7fca8f4'}};
@@ -30,6 +32,8 @@ test('actual immutable041 owner resolves to its authenticated selected bank',asy
  assert.equal(r.ledger,ledger);assert.equal(r.ledgerPath,'docs/rounds/round-041.json');
  assert.deepEqual(r.identity.selectionReference,{path:'docs/publication-selections/round-041-selection-001.json',sha256:'8b6a937f4af4fc6513f1366277e6f0dfddb12cf1c53c78d824cf846199db3254'});
  assert.equal(r.identity.effectiveBankVersion,context.manifest.bankVersion);assert.equal(r.identity.effectiveBankSha256,context.manifest.sha256);
+ });assert.equal(currentCutoffBlocks(Date.now(),{root}),true,'current selection scope must not escape');
+ await assert.rejects(loadPublicationSelections(root,{now:Date.now()}),/current time must precede final cutoff/);
 });
 test('wrong owner collection, kind and conflicting aliases fail closed',()=>{
  for(const mutate of [c=>{c.ledgers=c.editorials;c.editorials=[];},c=>{c.editorials[0].kind='regular';},c=>{c.editorials[0].roundId='round-998';}]){const c=fixture();mutate(c);assert.throws(()=>resolveReleaseDeliveryOwner(c,'editorial-998'),/kind or identity/);}
@@ -52,5 +56,5 @@ test('existing COMPLETE schema rejects editorial source with regular ledger path
  const raw=Buffer.from('fixture');await fs.writeFile(path.join(root,'fixture.txt'),raw,{flag:'wx'});
  const entry={path:'fixture.txt',bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex')};
  const sourceRelease={roundId:'editorial-998',deltaArtifactSha256:digest,deltaManifestSha256:digest,baseCommit:'a'.repeat(40),bankVersion:version,bankSha256:digest,ledgerPath:'docs/rounds/editorial-998.json',ledgerSha256:digest};
- await assert.rejects(freezeCompleteProject({workRoot:root,reviewedInventory:[entry],sourceRelease,deliveryMode:'release_backup'}),/Invalid release identity/);
+ await assert.rejects(freezeCompleteProject({workRoot:root,reviewedInventory:[entry],sourceRelease,deliveryMode:'release_backup',now:Date.parse('2026-10-11T01:00:00Z')}),/Invalid release identity/);
 });

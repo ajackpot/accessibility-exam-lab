@@ -1,4 +1,4 @@
-import {withEditorial005Completion,currentCutoffBlocks} from './editorial005-completion.mjs';
+import {withCurrentReleaseAuthority,currentCutoffBlocks} from './current-release-authority.mjs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {releaseAllowed,FREEZE_AT} from '../src/domain.js';
@@ -6,7 +6,7 @@ import {releaseAllowed,FREEZE_AT} from '../src/domain.js';
 // This is only a fresh action-boundary check, never campaign validation or a
 // reusable authorization token. The clock cannot be supplied by its caller.
 export async function assertCurrentReleaseWindow(root) {
-  return withEditorial005Completion({root},()=>assertCurrentReleaseWindowInScope(root));
+  return withCurrentReleaseAuthority({root},()=>assertCurrentReleaseWindowInScope(root));
 }
 async function assertCurrentReleaseWindowInScope(root) {
   const state=JSON.parse(await fs.readFile(path.join(root,'data/publication-state.json'),'utf8'));

@@ -1,4 +1,4 @@
-import {withEditorial005Completion,assertEditorial005CompletionInput} from './editorial005-completion.mjs';
+import {withCurrentReleaseAuthority,assertCurrentReleaseInput} from './current-release-authority.mjs';
 import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference,assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {assertNoEvidenceLossContent,loadEvidenceLossDependencies} from './evidence-loss-block.mjs';
 import fs from 'node:fs/promises';
@@ -6,10 +6,11 @@ import path from 'node:path';
 import {validateBankForPublication,validateExplanationAuthoring,sha256} from '../src/domain.js';
 import {assertNoQuarantinedContent} from './prepublication-quarantine.mjs';
 import {readHistoricalExplanationBaseline} from './explanation-authoring.mjs';
+import {PRACTICAL_WRITTEN,hasPracticalWrittenRegistration,loadPracticalWrittenRegistration} from './practical-written-registration.mjs';
 
 /** An ordinary build validates the currently selected release, never a seed fallback. */
 export async function readBankInput(root,input) {
-  return withEditorial005Completion({root},()=>{assertEditorial005CompletionInput(input);return readBankInputInWindow(root,input);});
+  return withCurrentReleaseAuthority({root},()=>{assertCurrentReleaseInput(input,Date.now(),root);return readBankInputInWindow(root,input);});
 }
 async function readBankInputInWindow(root,input) {
   const publicationSelections=await loadPublicationSelections(root);
@@ -31,6 +32,7 @@ async function readBankInputInWindow(root,input) {
     const baseline=hasBaseline?(await readBankInput(root)).bank:null;
     assertNoPublicationExcludedContent(bank,publicationSelections,raw);
     validateExplanationAuthoring(bank,baseline);
+    if(hasPracticalWrittenRegistration(root))loadPracticalWrittenRegistration(root,{bankRaw:Buffer.from(raw)});
     return {raw,bank,manifest:null};
   }
   const manifest=JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'),'utf8'));
@@ -43,5 +45,6 @@ async function readBankInputInWindow(root,input) {
   if(bank.bankVersion!==manifest.bankVersion||bank.releasedAt!==manifest.releasedAt)throw new Error('Active manifest version or release time mismatch.');
   assertNoPublicationExcludedContent(bank,publicationSelections,raw);
   validateExplanationAuthoring(bank,await readHistoricalExplanationBaseline(root));
+  if(bank.bankVersion===PRACTICAL_WRITTEN.bankVersion)loadPracticalWrittenRegistration(root,{bankRaw:Buffer.from(raw),manifestRaw:await fs.readFile(path.join(root,'data/manifest.json'))});
   return {raw,bank,manifest};
 }

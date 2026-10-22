@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "kind": "practical_written_review_input",
+  "registrationId": "practical-written-001",
+  "candidateId": "pw22-g33-w01",
+  "cycle": 1,
+  "question": {
+    "questionId": "pw22-g33-w01",
+    "revision": 1,
+    "templateId": "pw22-template-g33",
+    "learningGoalId": "pw22-goal-g33",
+    "learningGoalRevision": 1,
+    "type": "written",
+    "subjectId": "s3",
+    "topicIds": [
+      "pw22-g33"
+    ],
+    "stem": "다음 보기의 코드를 읽고, 확정 수량을 수정하지 못하지만 탐색과 복사는 가능한 상태를 구별하여 제공하는 ARIA 속성 조합을 고르시오.",
+    "notes": [
+      "현재 수량은 4로 확정되어 값 변경은 막혀 있다. 사용자는 해당 컨트롤에 초점을 두고 값을 읽거나 복사할 수 있다.",
+      "이 동작들은 별도 스크립트로 구현되어 있다. ARIA 속성을 추가하면 편집 방지나 복사 기능이 자동 구현된다는 뜻은 아니다."
+    ],
+    "explanation": "값 편집을 금지하면서 다른 조작을 허용하는 의미는 aria-readonly=true이다. 이를 사용 불가인 aria-disabled=true로 나타내면 읽기 전용과 비활성 상태의 차이를 잃는다. 현재 허용된 탐색과 복사를 유지하면서 실제 변경 방지는 별도로 구현해야 한다.",
+    "sourceRefs": [
+      "pw22b-src-aria-readonly"
+    ],
+    "verificationStatus": "candidate",
+    "testOnly": false,
+    "standardVersion": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06 고정판)",
+    "difficulty": "응용",
+    "reviewNote": "별도 필기 전환 후보 초안. 독립 풀이·출처·정답 유일성·문안·구조의 검토 전이며 등록·공개하지 않았다.",
+    "optionMode": "exclusive",
+    "supportedOptionCounts": [
+      4,
+      5
+    ],
+    "links": [
+      {
+        "optionId": "pw22-g33-w01-o1",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g33-w01-set"
+      },
+      {
+        "optionId": "pw22-g33-w01-o2",
+        "optionRevision": 1,
+        "role": "correct",
+        "compatibilitySetId": "pw22-g33-w01-set"
+      },
+      {
+        "optionId": "pw22-g33-w01-o3",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g33-w01-set"
+      },
+      {
+        "optionId": "pw22-g33-w01-o4",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g33-w01-set"
+      },
+      {
+        "optionId": "pw22-g33-w01-o5",
+        "optionRevision": 1,
+        "role": "distractor",
+        "compatibilitySetId": "pw22-g33-w01-set"
+      }
+    ],
+    "materials": [
+      {
+        "filename": "case.html",
+        "content": "<span id=\"quantity-label\">확정 수량</span>\n<div role=\"spinbutton\" aria-labelledby=\"quantity-label\" tabindex=\"0\"\n     aria-valuemin=\"1\" aria-valuemax=\"8\" aria-valuenow=\"4\">4</div>",
+        "purpose": "question",
+        "instruction": "다음 보기의 코드를 읽고, 확정 수량을 수정하지 못하지만 탐색과 복사는 가능한 상태를 구별하여 제공하는 ARIA 속성 조합을 고르시오."
+      }
+    ]
+  },
+  "options": [
+    {
+      "optionId": "pw22-g33-w01-o1",
+      "revision": 1,
+      "content": "aria-readonly=\"true\" · aria-disabled=\"true\"",
+      "explanation": "편집 불가에 더해 다른 조작도 사용 불가라는 상태를 함께 선언하여 제시한 동작과 맞지 않는다."
+    },
+    {
+      "optionId": "pw22-g33-w01-o2",
+      "revision": 1,
+      "content": "aria-readonly=\"true\" · aria-disabled=\"false\"",
+      "explanation": "값은 읽기 전용이고 다른 조작은 사용 가능한 현재 상태를 구분하여 제공한다."
+    },
+    {
+      "optionId": "pw22-g33-w01-o3",
+      "revision": 1,
+      "content": "aria-readonly=\"false\" · aria-disabled=\"true\"",
+      "explanation": "현재 값을 편집 가능한 것으로 선언하면서 컨트롤을 사용 불가로 나타낸다."
+    },
+    {
+      "optionId": "pw22-g33-w01-o4",
+      "revision": 1,
+      "content": "aria-readonly=\"false\" · aria-disabled=\"false\"",
+      "explanation": "컨트롤을 사용 가능하다고는 하지만 값 수정이 금지된 상태를 잘못 나타낸다."
+    },
+    {
+      "optionId": "pw22-g33-w01-o5",
+      "revision": 1,
+      "content": "aria-readonly=\"false\" · aria-hidden=\"true\"",
+      "explanation": "값 변경 가능성을 잘못 선언하고 이용할 컨트롤을 접근성 정보에서 숨기는 조합이다."
+    }
+  ],
+  "sources": [
+    {
+      "id": "pw22b-src-aria-readonly",
+      "title": "WAI-ARIA 1.2 — 읽기 전용과 사용 불가",
+      "url": "https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-readonly",
+      "version": "WAI-ARIA 1.2 (W3C Recommendation, 2023-06-06 고정판)",
+      "checkedAt": "2026-10-22T11:28:12.371780+00:00",
+      "location": "§6.7 aria-readonly, aria-disabled; §5.4 spinbutton",
+      "evidence": "읽기 전용은 값 편집을 허용하지 않으면서 다른 조작은 가능한 상태다. 값 읽기·복사와 탐색을 일괄 금지하는 상태로 확대하지 않는다. ARIA 상태를 지정하는 것과 실제 값 변경을 막는 구현은 구별한다.",
+      "rights": "지정된 공식 자료의 필요한 사실을 의역하고, 실기 원본의 지식을 바탕으로 지문·선택지·코드를 독립 작성했다. 표준 예제·전문·공식 시험 샘플·유료 문제집 문구를 복제하지 않았다. 원문 권리는 원저작권자에게 있다."
+    }
+  ]
+}

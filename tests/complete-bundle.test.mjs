@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test,{after,beforeEach} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -7,10 +7,13 @@ import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {pathToFileURL} from 'node:url';
 import {normalChainFixture} from './normal-backup-chain-fixtures.mjs';
-import {parsePublicAllowlist, main as fallbackMain} from '../scripts/download-fallback.mjs';
-import {freezeCompleteProject,writeCompleteArchive,writeCompleteZip,writeOfflineDeliveryPair,completeInstructions,createCompleteReceipt} from '../scripts/complete-bundle.mjs';
-const root=path.resolve(import.meta.dirname,'..');
-// Simulated current-tree audit time follows actual included chronology, never scheduled deadlines.
+import {createOwnedHistoricalSource} from './historical-authority-fixtures.mjs';
+// These ZIP/legacy-owner regressions execute exact historical code and data.
+// Current typed registration boundaries are tested separately at actual time.
+const root=await createOwnedHistoricalSource({after});
+const {parsePublicAllowlist,main:fallbackMain}=await import(pathToFileURL(path.join(root,'scripts/download-fallback.mjs')));
+const {freezeCompleteProject,writeCompleteArchive,writeCompleteZip,writeOfflineDeliveryPair,completeInstructions,createCompleteReceipt}=await import(pathToFileURL(path.join(root,'scripts/complete-bundle.mjs')));
+// Explicit simulated audit time follows the exact included historical chronology.
 const blockPins=JSON.parse(await fs.readFile(path.join(root,'docs/release-blocks/trust.json'))).events;
 const normalPins=[...JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/normal-backup-root-trust.json'))).roots,...JSON.parse(await fs.readFile(path.join(root,'docs/deliveries/normal-backup-chain-trust.json'))).checkpoints];
 const includedLedgerPaths=parsePublicAllowlist(await fs.readFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'utf8')).filter(p=>/^docs\/(?:rounds\/round-\d+|corrections\/editorial-\d+)\.json$/.test(p));
@@ -21,6 +24,7 @@ const ledgerActualTimes=includedLedgers.flatMap(l=>[l.startedAt,...(l.closedAt==
 const latestIncludedStart=Math.max(...includedLedgers.map(l=>Date.parse(l.startedAt)));
 const priorEvidenceTime=Math.max(Date.parse('2026-10-04T09:00:00Z'),Date.parse(JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'))).releasedAt),...blockPins.map(p=>Date.parse(p.recordedAt)),...normalPins.map(p=>Date.parse(p.registeredAt)));
 const now=Math.max(priorEvidenceTime,...ledgerActualTimes)+60_000;
+beforeEach(t=>t.mock.timers.enable({apis:['Date'],now}));
 const sha=raw=>createHash('sha256').update(raw).digest('hex');
 const json=value=>Buffer.from(JSON.stringify(value,null,2)+'\n');
 async function reviewed() {
@@ -38,7 +42,7 @@ async function temp(t) { const p=await fs.mkdtemp(path.join(os.tmpdir(),'complet
 const frozen=async()=>freezeCompleteProject({...await fixture(),archiveFormat:"zip"});
 
 /** Packaging chronology fixtures are synthetic and confined to an owned temp tree.
- * Current-tree positive tests still use fixture()/frozen() above unchanged. */
+ * Exact historical-source positives use fixture()/frozen() above. */
 async function syntheticCompleteFixture(t) {
   const f=await normalChainFixture(t,{emptySyntheticSelection:true});
   const add=async(p,raw)=>{
@@ -79,7 +83,7 @@ async function syntheticCompleteFixture(t) {
   const api=await import(pathToFileURL(path.join(f.dir,'scripts/complete-bundle.mjs')).href);
   return {...f,completeApi:api,latest,sourceRelease,input,refresh,add};
 }
-test('current-tree fixture follows actual ledger chronology and retains the future-start rejection',async t=>{
+test('historical-source fixture follows included chronology and retains the future-start rejection',async t=>{
   assert.ok(ledgerActualTimes.every(time=>now>=time+60_000));
   const f=await syntheticCompleteFixture(t),priorEvidenceTime=Date.parse(f.latest.pin.registeredAt);
   const latestIncludedStart=priorEvidenceTime+60_000,closedAt=latestIncludedStart+1_000;

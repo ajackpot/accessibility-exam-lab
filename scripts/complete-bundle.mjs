@@ -1,10 +1,11 @@
-import {withEditorial005Completion,currentCutoffBlocks} from './editorial005-completion.mjs';
+import {withCurrentReleaseAuthority,currentCutoffBlocks} from './current-release-authority.mjs';
 import {validatePublicationSelectionSnapshot,loadPublicationSelections,resolvePublicationIdentity,assertPublicationSelectionReference,assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {completeManifestFormat,encodeSevenZip,decodeSevenZip,verifyArchiveFormat} from './archive-format.mjs';
 import {validateNormalBackupChainSnapshot} from './normal-backup-chain.mjs';
 import {validateNormalBackupRootSnapshot} from './normal-backup-root.mjs';
 import {validateEvidenceLossSnapshot,assertEvidenceLossProvenance} from './evidence-loss-block.mjs';
 import {validateQuarantineSnapshot} from './prepublication-quarantine.mjs';
+import {PRACTICAL_WRITTEN,PRACTICAL_WRITTEN_LEDGER_SHA256,validatePracticalWrittenTransition,assertPracticalWrittenHistorySnapshot,assertPracticalWrittenArchiveSource} from './practical-written-registration.mjs';
 /** Reviewed complete public snapshot packaging. No Git, network, upload or learner APIs. */
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -48,6 +49,10 @@ async function readPublic(root, relative) {
 // A packaging-only overlay cannot alter runtime, data, original history or reports.
 const policyPath = p => ['AGENTS.md','README.md','PUBLICATION-MANIFEST.txt','docs/PRD.md','docs/OPERATIONS.md','docs/DATA-CONTRACT.md','scripts/download-fallback.mjs','scripts/complete-bundle.mjs','tests/complete-bundle.test.mjs','scripts/blob-retry.mjs','tests/blob-retry.test.mjs','scripts/archive-format.mjs','scripts/sevenz-codec.py','scripts/release-bundle.mjs','scripts/release-backup-continuation.mjs','scripts/normal-backup-root.mjs','scripts/normal-backup-chain.mjs','scripts/offline-chain-continuation.mjs','tests/archive-format.test.mjs','tests/sevenz-codec.test.mjs','tests/release-bundle.test.mjs','tests/release-bundle-closure.test.mjs','tests/independent-offline-chains.test.mjs','tests/manual-round-eleven.test.mjs','tests/release-backup-successors.test.mjs','tests/normal-backup-continuation.test.mjs','tests/normal-backup-root.test.mjs','docs/packaging/packaging-policy-002.md'].includes(p);
 function checkSource(source) {
+  if(source?.kind==='practical_written_registered_release'){
+    assertPracticalWrittenArchiveSource(source);
+    return;
+  }
   keys(source, ['roundId','deltaArtifactSha256','deltaManifestSha256','baseCommit','bankVersion','bankSha256','ledgerPath','ledgerSha256',...(Object.hasOwn(source,'selectionReference')?['selectionReference']:[])], 'source release');
   if (!/^(round|editorial)-\d+$/.test(source.roundId) || !/^[A-Za-z0-9_.-]+$/.test(source.bankVersion) || !/^[a-f0-9]{40}$/.test(source.baseCommit) || /^0+$/.test(source.baseCommit) || ![source.deltaArtifactSha256,source.deltaManifestSha256,source.bankSha256,source.ledgerSha256].every(v => hex.test(v)) || source.ledgerPath !== `docs/${source.roundId.startsWith('editorial-') ? 'corrections' : 'rounds'}/${source.roundId}.json`) fail('Invalid release identity');
 }
@@ -103,11 +108,19 @@ function checkComplete(snapshot,now=null) {
   const bank=byPath.get(`data/releases/${release.bankVersion}/bank.json`), ledger=byPath.get(release.ledgerPath);
   if (!manifest || manifest.bankVersion !== release.bankVersion || manifest.sha256 !== release.bankSha256 || manifest.file !== `releases/${release.bankVersion}/bank.json` || bank?.sha256 !== release.bankSha256 || ledger?.sha256 !== release.ledgerSha256) fail('Complete runtime manifest/bank/ledger identity mismatch');
   const b=JSON.parse(bank.raw), l=JSON.parse(ledger.raw);
-  const selectionAuthority=validatePublicationSelectionSnapshot(files,{now:now??Date.now()}),identity=resolvePublicationIdentity(l,selectionAuthority);
+  const conversion=release.kind==='practical_written_registered_release';
+  const selectionAuthority=validatePublicationSelectionSnapshot(files,{now:now??Date.now()}),identity=conversion?{effectiveBankVersion:l.result?.bankVersion,effectiveBankSha256:l.result?.bankSha256}:resolvePublicationIdentity(l,selectionAuthority);
   if(identity.selectionReference)assertPublicationSelectionReference(release.selectionReference,identity);else if(Object.hasOwn(release,'selectionReference'))fail('Unexpected selected source reference');
   if(identity.selectionReference&&(m.deliveryMode!=='release_backup'||format!=='7z'))fail('Selected COMPLETE requires release_backup schema-v2 7z');
   assertNoPublicationExcludedContent(b,selectionAuthority);
-  if (b.bankVersion !== release.bankVersion || (l.roundId || l.correctionRoundId) !== release.roundId || l.status !== 'closed' || identity.effectiveBankVersion !== release.bankVersion || identity.effectiveBankSha256 !== release.bankSha256) fail('Complete release has no matching closed ledger');
+  if (b.bankVersion !== release.bankVersion || (conversion?l.registrationId!==release.registrationId:(l.roundId || l.correctionRoundId) !== release.roundId) || l.status !== 'closed' || identity.effectiveBankVersion !== release.bankVersion || identity.effectiveBankSha256 !== release.bankSha256) fail('Complete release has no matching closed ledger');
+  if(conversion){
+    if(ledger.sha256!==PRACTICAL_WRITTEN_LEDGER_SHA256)fail('Conversion archive ledger lacks its exact reviewed closure pin');
+    if(m.deliveryMode!=='release_backup'||format!=='7z'||sha(byPath.get('data/manifest.json').raw)!==l.result.manifestSha256)fail('Conversion requires exact release-backup 7z manifest');
+    assertPracticalWrittenHistorySnapshot(byPath);
+    const baseline=JSON.parse(byPath.get(`data/releases/${PRACTICAL_WRITTEN.baselineVersion}/bank.json`).raw);
+    validatePracticalWrittenTransition(l,{baseline,bank:b,read:p=>{const f=byPath.get(p);if(!f)fail('Missing conversion dependency: '+p);return f.raw;},now:now??Date.now()});
+  }
   validateNormalBackupRootSnapshot(files,{now});
   validateNormalBackupChainSnapshot(files,{now,requireCurrentEligibility:true});
   validateEvidenceLossSnapshot(files,{now});
@@ -116,10 +129,10 @@ function checkComplete(snapshot,now=null) {
   if (manifest.finalRelease || JSON.parse(byPath.get('data/publication-state.json')?.raw || 'null')?.finalized) fail('Persistent freeze blocks new complete packaging');
 }
 export async function freezeCompleteProject(options){
-  return withEditorial005Completion({root:options.workRoot,now:options.now??Date.now(),baseCommit:options.sourceRelease?.baseCommit,roundId:options.sourceRelease?.roundId},()=>freezeCompleteProjectInWindow(options));
+  return withCurrentReleaseAuthority({root:options.workRoot,now:options.now??Date.now(),baseCommit:options.sourceRelease?.baseCommit,roundId:options.sourceRelease?.registrationId??options.sourceRelease?.roundId},()=>freezeCompleteProjectInWindow(options));
 }
 async function freezeCompleteProjectInWindow({workRoot, reviewedInventory, sourceRelease, frozenSourceInventory = reviewedInventory, packagingRevision = null, deliveryMode = 'download_only', archiveFormat = '7z', now = Date.now()}) {
-  if (!Number.isFinite(now) || currentCutoffBlocks(now,{root:workRoot,baseCommit:sourceRelease?.baseCommit,roundId:sourceRelease?.roundId})) fail('Final cutoff blocks new complete packaging');
+  if (!Number.isFinite(now) || currentCutoffBlocks(now,{root:workRoot,baseCommit:sourceRelease?.baseCommit,roundId:sourceRelease?.registrationId??sourceRelease?.roundId})) fail('Final cutoff blocks new complete packaging');
   if(!['7z','zip'].includes(archiveFormat))fail('Unsupported complete archive format');
   const entries=inventory(reviewedInventory), files=[];
   for (const e of entries) {
@@ -131,7 +144,7 @@ async function freezeCompleteProjectInWindow({workRoot, reviewedInventory, sourc
   checkComplete(snapshot,now);completeSourceRoots.set(snapshot,path.resolve(workRoot));return snapshot;
 }
 export function completeInstructions(m) {
-  const historical=`전체 적용본 / ${m.sourceRelease.roundId}\n\n이 ZIP 하나로 최신 프로젝트를 준비할 수 있습니다. 이전 회차 ZIP이나 변경분을 순서대로 적용할 필요가 없습니다.\n포함 은행: ${m.sourceRelease.bankVersion}\n은행 SHA-256: ${m.sourceRelease.bankSha256}\n\n1. 새 빈 폴더에 압축을 풉니다. project/ 폴더가 완전한 프로젝트 루트입니다.\n2. Node.js 22 이상과 Python 3이 있는 환경에서 project/ 안에서 npm run check, npm test, npm run build를 실행합니다. 별도 npm 패키지 설치는 필요하지 않습니다. 확인 후 npm run serve로 실행하고 http://localhost:4173/에 접속합니다. index.html을 파일로 직접 열지 않습니다.\n3. 기존 프로젝트/배포를 교체하려면 먼저 기존 프로젝트 파일과 앱에서 내보낸 학습 기록 백업을 별도 보관합니다. 빈 폴더에서 검증한 project/의 공개 파일만 기존과 같은 상대 경로로 배포하고, 관련 없는 사용자 파일이나 서버 설정을 삭제하지 않습니다. 기존 Git 작업 사본의 .git을 교체하거나 강제 push하지 않습니다. 충돌하는 자체 수정이 있으면 먼저 비교합니다.\n4. 브라우저의 저장 데이터·학습 기록을 지우지 않습니다. 같은 브라우저와 같은 사이트 주소(프로토콜·호스트·포트)를 유지해야 기존 기록에 계속 접근할 수 있습니다. 주소를 바꾸면 기록이 별도로 보일 수 있으므로 앱의 학습 기록 백업 기능으로 보존·복원합니다. 이 ZIP 자체는 앱의 학습 기록 가져오기에 넣지 않습니다.\n5. 전체본과 변경분은 같은 회차의 두 전달 방식입니다. 전체본을 사용했다면 해당 변경분을 다시 적용하지 않습니다. manifest.json에는 모든 프로젝트 경로·크기·SHA-256과 출처가 있습니다. 선행 ZIP 해시는 이력 확인용이며 설치 전제조건이 아닙니다.\n6. 이 파일 전달 자체는 GitHub/Pages 배포 완료를 뜻하지 않습니다. 자동 Git 작업은 하지 않으며 기존 권한·미확정 결과·최종 동결 제한을 유지합니다. 실제 공개 완료는 별도로 확인합니다.\n`;
+  const historical=`전체 적용본 / ${m.sourceRelease.registrationId??m.sourceRelease.roundId}\n\n이 ZIP 하나로 최신 프로젝트를 준비할 수 있습니다. 이전 회차 ZIP이나 변경분을 순서대로 적용할 필요가 없습니다.\n포함 은행: ${m.sourceRelease.bankVersion}\n은행 SHA-256: ${m.sourceRelease.bankSha256}\n\n1. 새 빈 폴더에 압축을 풉니다. project/ 폴더가 완전한 프로젝트 루트입니다.\n2. Node.js 22 이상과 Python 3이 있는 환경에서 project/ 안에서 npm run check, npm test, npm run build를 실행합니다. 별도 npm 패키지 설치는 필요하지 않습니다. 확인 후 npm run serve로 실행하고 http://localhost:4173/에 접속합니다. index.html을 파일로 직접 열지 않습니다.\n3. 기존 프로젝트/배포를 교체하려면 먼저 기존 프로젝트 파일과 앱에서 내보낸 학습 기록 백업을 별도 보관합니다. 빈 폴더에서 검증한 project/의 공개 파일만 기존과 같은 상대 경로로 배포하고, 관련 없는 사용자 파일이나 서버 설정을 삭제하지 않습니다. 기존 Git 작업 사본의 .git을 교체하거나 강제 push하지 않습니다. 충돌하는 자체 수정이 있으면 먼저 비교합니다.\n4. 브라우저의 저장 데이터·학습 기록을 지우지 않습니다. 같은 브라우저와 같은 사이트 주소(프로토콜·호스트·포트)를 유지해야 기존 기록에 계속 접근할 수 있습니다. 주소를 바꾸면 기록이 별도로 보일 수 있으므로 앱의 학습 기록 백업 기능으로 보존·복원합니다. 이 ZIP 자체는 앱의 학습 기록 가져오기에 넣지 않습니다.\n5. 전체본과 변경분은 같은 회차의 두 전달 방식입니다. 전체본을 사용했다면 해당 변경분을 다시 적용하지 않습니다. manifest.json에는 모든 프로젝트 경로·크기·SHA-256과 출처가 있습니다. 선행 ZIP 해시는 이력 확인용이며 설치 전제조건이 아닙니다.\n6. 이 파일 전달 자체는 GitHub/Pages 배포 완료를 뜻하지 않습니다. 자동 Git 작업은 하지 않으며 기존 권한·미확정 결과·최종 동결 제한을 유지합니다. 실제 공개 완료는 별도로 확인합니다.\n`;
   if(completeManifestFormat(m)==='zip')return historical;
   return historical.replace('이 ZIP 하나로','이 7z 하나로').replace('이 ZIP 자체는','이 7z 자체는').replace('1. 새 빈 폴더에 압축을 풉니다.', '1. 7z를 지원하는 일반 압축 해제 도구로 새 빈 폴더에 한 번 압축을 풉니다. 전용 복원 스크립트나 이전 압축 파일은 필요하지 않습니다.');
 }
@@ -154,7 +167,7 @@ async function assertLiveCompleteFreeze(snapshot){
 }
 /** Current standalone transport. Verify the actual decoded bytes before writing. */
 export async function writeCompleteArchive(snapshot,outputPath,{now=Date.now()}={}){
-  return withEditorial005Completion({root:completeSourceRoots.get(snapshot),now,baseCommit:snapshot?.manifest?.sourceRelease?.baseCommit,roundId:snapshot?.manifest?.sourceRelease?.roundId},()=>writeCompleteArchiveInWindow(snapshot,outputPath,{now}));
+  return withCurrentReleaseAuthority({root:completeSourceRoots.get(snapshot),now,baseCommit:snapshot?.manifest?.sourceRelease?.baseCommit,roundId:snapshot?.manifest?.sourceRelease?.registrationId??snapshot?.manifest?.sourceRelease?.roundId},()=>writeCompleteArchiveInWindow(snapshot,outputPath,{now}));
 }
 async function writeCompleteArchiveInWindow(snapshot,outputPath,{now}){
   if(!Number.isFinite(now)||currentCutoffBlocks(now,{root:completeSourceRoots.get(snapshot)}))fail('Final cutoff blocks new complete archive');
@@ -201,5 +214,5 @@ export async function writeOfflineDeliveryPair({deltaSnapshot, workRoot, reviewe
 export function createCompleteReceipt({snapshot,artifact,status='prepared',recordedAt}) {
   checkComplete(snapshot,Date.parse(recordedAt));
   if(!['prepared','delivered','delivery_failed'].includes(status)||!hex.test(artifact.sha256)||artifact.manifestSha256!==sha(json(snapshot.manifest))||typeof recordedAt!=='string'||!Number.isFinite(Date.parse(recordedAt))) fail('Invalid complete delivery receipt');
-  return {receiptSchemaVersion:1,kind:'complete_project_delivery',artifactSha256:artifact.sha256,manifestSha256:artifact.manifestSha256,sourceDeltaArtifactSha256:snapshot.manifest.sourceRelease.deltaArtifactSha256,roundId:snapshot.manifest.sourceRelease.roundId,bankVersion:snapshot.manifest.sourceRelease.bankVersion,bankSha256:snapshot.manifest.sourceRelease.bankSha256,status,recordedAt,newlyPublishedRegular:0};
+  return {receiptSchemaVersion:1,kind:'complete_project_delivery',artifactSha256:artifact.sha256,manifestSha256:artifact.manifestSha256,sourceDeltaArtifactSha256:snapshot.manifest.sourceRelease.deltaArtifactSha256,...(snapshot.manifest.sourceRelease.kind==='practical_written_registered_release'?{sourceKind:'practical_written_registered_release',registrationId:snapshot.manifest.sourceRelease.registrationId}:{roundId:snapshot.manifest.sourceRelease.roundId}),bankVersion:snapshot.manifest.sourceRelease.bankVersion,bankSha256:snapshot.manifest.sourceRelease.bankSha256,status,recordedAt,newlyPublishedRegular:0};
 }

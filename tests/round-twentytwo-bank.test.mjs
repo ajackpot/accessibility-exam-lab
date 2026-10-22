@@ -1,3 +1,5 @@
+import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
+import {fileURLToPath} from 'node:url';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -19,7 +21,7 @@ const accepted=ledger.candidates.filter(c=>c.decision==='accepted');
 const ledgerSources=new Map(fs.readdirSync(new URL('../docs/rounds/',import.meta.url)).filter(n=>/^round-\d+\.json$/.test(n)).map(n=>{const raw=fs.readFileSync(new URL('../docs/rounds/'+n,import.meta.url));return [JSON.parse(raw).roundId,raw];}));
 const allLedgers=[...ledgerSources.values()].map(b=>JSON.parse(b));
 const allBanks=new Map(fs.readdirSync(new URL('../data/releases/',import.meta.url),{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>[x.name,{raw:fs.readFileSync(new URL('../data/releases/'+x.name+'/bank.json',import.meta.url))}]));
-const quarantineResult=validateQuarantineCampaign(allLedgers,{banks:allBanks,ledgerSources,now:Date.now(),manifest:read('data/manifest.json'),publicationState:read('data/publication-state.json')});
+const quarantineResult=await withCurrentReleaseAuthority({root:fileURLToPath(new URL('../',import.meta.url))},()=>validateQuarantineCampaign(allLedgers,{banks:allBanks,ledgerSources,now:Date.now(),manifest:read('data/manifest.json'),publicationState:read('data/publication-state.json')}));
 assert(quarantineResult.ok,quarantineResult.errors.join('\n'));
 const disposition=quarantineResult.dispositions.get('round-022');
 const held=new Set(disposition.quarantinedCandidateIds);

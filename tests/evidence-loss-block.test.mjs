@@ -7,10 +7,11 @@ import os from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 import {validateEvidenceLossCampaign,validateEvidenceLossSnapshot,assertEvidenceLossPayload,assertEvidenceLossProvenance,assertNoEvidenceLossContent,evidenceLossQuestionFingerprint,evidenceLossOptionFingerprint,loadEvidenceLossDependencies} from '../scripts/evidence-loss-block.mjs';
-import {quarantineHash,quarantineContentHash,quarantineFingerprint,validateQuarantineCampaign} from '../scripts/prepublication-quarantine.mjs';
+import {quarantineHash,quarantineContentHash,quarantineFingerprint,validateQuarantineCampaign,withBankParsingSession} from '../scripts/prepublication-quarantine.mjs';
 import {loadRoundContext,validateRoundLedgers,validateReleaseLedger} from '../scripts/validate-round.mjs';
 import {createDeliveryReceipt,reconcileGitOutcome} from '../scripts/download-fallback.mjs';
 import {buildBank} from '../scripts/build.mjs';
+import {withCurrentReleaseAuthority,currentCutoffBlocks} from '../scripts/current-release-authority.mjs';
 const ROOT=path.resolve(import.meta.dirname,'..'),json=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),sha=b=>createHash('sha256').update(b).digest('hex'),clone=structuredClone,read=p=>fs.readFile(path.join(ROOT,p));
 const trust=JSON.parse(await read('docs/release-blocks/trust.json')),pin=trust.events[0],event=JSON.parse(await read(pin.path)),ledgerRaw=await read(event.sourceLedger.path),ledger=JSON.parse(ledgerRaw),now=Date.parse(pin.recordedAt)+60000; // Explicit simulated audit clock; never execution proof
 const bank22=JSON.parse(await read('data/releases/2026.10.06-regular.22/bank.json'));
@@ -19,12 +20,15 @@ const context=()=>contextPromise??=loadRoundContext(ROOT,null,{release:true,now:
 async function files(){return Promise.all((await read('PUBLICATION-MANIFEST.txt')).toString().split(/\r?\n/).filter(p=>p&&!p.startsWith('#')).map(async p=>({path:p,raw:await read(p)})));}
 
 test('exact original023 stays reservation-only beside the current eligible release and inherited19 holds',async()=>{
+ // Keep parsing representations for this operation; every semantic gate still runs.
+ await withCurrentReleaseAuthority({root:ROOT},()=>withBankParsingSession(ROOT,async()=>{
  assert.equal(sha(ledgerRaw),'b1ed48e8bc693774423891bf7a46bf31fcd19e96d55bf18422998c95bdd6cf28');assert.equal(sha(await read(pin.path)),pin.sha256);
  assert.equal(event.targets.length,19);assert.equal(event.targets.reduce((n,t)=>n+t.contentStates.length,0),20);assert.equal(event.targets.filter(t=>t.decision==='accepted').length,17);assert.equal(event.targets.filter(t=>t.decision==='rejected').length,2);
  const c=await context(),currentNow=Date.now(),before=sha(json(c.ledgers));assert.deepEqual(c.manifest,JSON.parse(await read('data/manifest.json')));assert.notEqual(c.manifest.bankVersion,event.reservedBank.bankVersion);assert.equal(c.banks.has(event.reservedBank.bankVersion),false);
  const block=validateEvidenceLossCampaign(c.ledgers,{...c,now:currentNow});assert.equal(block.ok,true,block.errors.join('\n'));assert.deepEqual(block.reservations.get(ledger.roundId),{accepted:17,rejected:2,releaseEligible:0,currentExecutionProof:false,deliveryProof:false,publicationProof:false});
  assert.equal(validateRoundLedgers(c.ledgers,{...c,now:currentNow}).ok,true);const release=validateReleaseLedger(c.ledgers,{...c,now:currentNow});assert.equal(release.ok,true,release.errors.join('\n'));
  assert.equal(validateQuarantineCampaign(c.ledgers,{...c,now:currentNow}).dispositions.get('round-022').quarantinedCandidateIds.length,19);assert.equal(sha(json(c.ledgers)),before);await assert.rejects(fs.access(path.join(ROOT,event.incidentReport.missingOriginalPath)),/ENOENT/);
+ }));assert.equal(currentCutoffBlocks(Date.now(),{root:ROOT}),true,'current reservation scope must not escape');
 });
 
 test('omission, rewritten history, fabricated proof, reserved bank and baseline all fail closed',()=>{
@@ -37,6 +41,7 @@ test('omission, rewritten history, fabricated proof, reserved bank and baseline 
 });
 
 test('full current snapshot rejects missing event, registry, original ledger, incident, impersonation and wrong basename',async()=>{
+ await withCurrentReleaseAuthority({root:ROOT},async()=>{
  const full=await files(),currentNow=Date.now();assert.equal(validateEvidenceLossSnapshot(full,{now:currentNow}).ok,true);
  for(const p of ['docs/release-blocks/trust.json',pin.path,event.sourceLedger.path,event.incidentReport.path,'scripts/validate-round.mjs'])assert.throws(()=>validateEvidenceLossSnapshot(full.filter(f=>f.path!==p),{now:currentNow}),/evidence-loss/);
  const stripped=full.filter(f=>f.path!=='scripts/validate-round.mjs').map(f=>f.path==='PUBLICATION-MANIFEST.txt'?{...f,raw:Buffer.from(f.raw.toString().replace('scripts/validate-round.mjs\n',''))}:f);assert.throws(()=>validateEvidenceLossSnapshot(stripped,{now:currentNow}),/registry dependency/);
@@ -44,6 +49,7 @@ test('full current snapshot rejects missing event, registry, original ledger, in
  assert.throws(()=>validateEvidenceLossSnapshot([...full,{path:event.incidentReport.missingOriginalPath,raw:Buffer.from('Invented original report')}],{now:currentNow}),/impersonated/);
  assert.throws(()=>assertEvidenceLossPayload(ledgerRaw,'docs/rounds/round-999.json'),/wrong basename/);
  const tail=full.map(f=>f.path==='docs/release-blocks/trust.json'?{...f,raw:json({...trust,events:[]})}:f);assert.throws(()=>validateEvidenceLossSnapshot(tail,{now:currentNow}),/tail omitted/);
+ });assert.equal(currentCutoffBlocks(Date.now(),{root:ROOT}),true,'current snapshot scope must not escape');
 });
 
 test('freeze and current-time bounds stay enforced; ordinary preincident history needs no future event',()=>{
@@ -65,6 +71,8 @@ test('unrelated024 may follow exact022 while accepted023 goals remain reserved a
 
 test('explicit build path refuses reserved023 before writing any new manifest or immutable bank',async t=>{
  const {buildBank}=await createOwnedHistoricalAuthority(t);
+ // This reserved-bank fixture predates the final cutoff and uses only owned code.
+ t.mock.timers.enable({apis:['Date'],now});
  const root=await fs.mkdtemp(path.join(os.tmpdir(),'evidence-loss-build-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));await fs.mkdir(path.join(root,'data'));await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'PUBLICATION-MANIFEST.txt\n');const input=path.join(root,'renamed-input.json');await fs.writeFile(input,json({...bank22,bankVersion:event.reservedBank.bankVersion}));await assert.rejects(buildBank(root,input),/evidence-loss.*reserved bankVersion/);await assert.rejects(fs.access(path.join(root,'data/manifest.json')),/ENOENT/);
 });
 
@@ -87,10 +95,20 @@ test('renamed bank, standalone questions/options, changed extensions and nested 
 
 test('actual root rejects an unlisted counterfeit report and deleted round-validator dependencies',async t=>{
  const currentNow=Date.now(),root=await fs.mkdtemp(path.join(os.tmpdir(),'evidence-loss-unlisted-'));t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ const originalManifest=await read('data/manifest.json');
  for(const f of await files()){await fs.mkdir(path.dirname(path.join(root,f.path)),{recursive:true});await fs.writeFile(path.join(root,f.path),f.raw);}
- await fs.writeFile(path.join(root,event.incidentReport.missingOriginalPath),'This is not the lost original report.');await assert.rejects(loadEvidenceLossDependencies(root,{now:currentNow}),/even when unlisted/);
+ await fs.writeFile(path.join(root,event.incidentReport.missingOriginalPath),'This is not the lost original report.');await withCurrentReleaseAuthority({root},()=>assert.rejects(loadEvidenceLossDependencies(root,{now:currentNow}),/even when unlisted/));
  await fs.rm(path.join(root,event.incidentReport.missingOriginalPath));await fs.rm(path.join(root,'scripts/validate-round.mjs'));const allow=path.join(root,'PUBLICATION-MANIFEST.txt');await fs.writeFile(allow,(await fs.readFile(allow,'utf8')).replace('scripts/validate-round.mjs\n',''));await assert.rejects(buildBank(root),/registry dependency/);
- for(const p of ['docs/release-blocks/trust.json',pin.path,event.sourceLedger.path]){await fs.rm(path.join(root,p));await fs.writeFile(allow,(await fs.readFile(allow,'utf8')).replace(p+'\n',''));}await assert.rejects(buildBank(root),/mandatory registry tail/);
+ const removed=['docs/release-blocks/trust.json',pin.path,event.sourceLedger.path];
+ // The standalone snapshot still reaches the original mandatory-tail predicate.
+ const remaining=(await files()).filter(f=>!removed.includes(f.path)&&f.path!=='scripts/validate-round.mjs');
+ assert.throws(()=>validateEvidenceLossSnapshot(remaining,{now:currentNow}),/mandatory registry tail/);
+ for(const p of removed){await fs.rm(path.join(root,p));await fs.writeFile(allow,(await fs.readFile(allow,'utf8')).replace(p+'\n',''));}
+ // The current build now authenticates immutable history before dispatching to
+ // that predicate. It must reject exactly a removed pinned source, not pass.
+ await assert.rejects(buildBank(root),error=>error.code==='ENOENT'&&removed.some(p=>error.path===path.join(root,p)));
+ assert.deepEqual(await fs.readFile(path.join(root,'data/manifest.json')),originalManifest);
+ await assert.rejects(fs.access(path.join(root,'data/releases',event.reservedBank.bankVersion,'bank.json')),/ENOENT/);
 });
 
 test('a warm exact-byte denial cache never masks subsequent authority tampering or impossible chronology',async t=>{
@@ -117,7 +135,11 @@ test('complete campaign accepts an unrelated next scheduled024 from actual deliv
  const editorials=c.editorials.filter(e=>Date.parse(e.startedAt)<=fixtureNow);
  const publicationSelections=authority.bindHistoricalSelection({ledgers,ledgerSources,editorials,editorialSources:c.editorialSources,manifest,now:fixtureNow});
  const args={...c,manifest,banks,now:fixtureNow,ledgerSources,publicationSelections,editorials,synchronizations:c.synchronizations.filter(s=>Date.parse(s.verifiedAt)<=fixtureNow),offlineBases:new Map([...c.offlineBases].filter(([,b])=>Date.parse(b.eligibleAt)<=fixtureNow)),deliveryCheckpointSources:new Map([...c.deliveryCheckpointSources].filter(([,raw])=>Date.parse(JSON.parse(raw).verifiedAt)<=fixtureNow)),publicationState:JSON.parse(predecessor.publicationStateRaw),availableFiles:new Set([...c.availableFiles,'docs/rounds/round-024.md'])};
+ // The owned validators have their own parser module and operation-local store.
+ const {withBankParsingSession:withHistoricalBankParsingSession}=await import(pathToFileURL(path.join(authority.authorityRoot,'scripts/prepublication-quarantine.mjs')));
+ await withHistoricalBankParsingSession(authority.authorityRoot,()=>{
  const result=validateRoundLedgers(ledgers,args);assert.equal(result.ok,true,result.errors.join('\n'));const release=validateReleaseLedger(ledgers,args);assert.equal(release.ok,true,release.errors.join('\n'));assert.equal(next.baseline.offlinePredecessor.roundId,'round-022');
+ });
 });
 test('first024 content delta may carry exact reservation-only023 history beside its one active ledger',()=>{
  const r=emptyNext(),b={...clone(bank22),bankVersion:'synthetic-regular.24',releasedAt:'2026-10-06T15:06:00Z'},bankRaw=json(b);r.publication.bankVersion=b.bankVersion;r.publication.bankSha256=sha(bankRaw);

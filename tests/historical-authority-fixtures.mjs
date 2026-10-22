@@ -6,14 +6,24 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {createHash} from 'node:crypto';
+import {readEditorial005Source,writeExactFiles} from './successor-projection.mjs';
 import {useEmptySyntheticSelectionPrefix} from './selection-fixtures.mjs';
 import {loadEvidenceLossDependencies,isEvidenceLossReservedLedger} from '../scripts/evidence-loss-block.mjs';
 const source=path.resolve(import.meta.dirname,'..');
-const excluded=new Set(['docs/publication-selections/round-041-selection-001.json','docs/rounds/round-041.json','docs/rounds/round-041.md']);
+const excluded=new Set(['docs/publication-selections/round-041-selection-001.json','docs/rounds/round-041.json','docs/rounds/round-041.md','docs/conversions/practical-written-001.json']);
 const selectionModule='scripts/publication-selection.mjs';
 const emptyDeclaration='export const PUBLICATION_SELECTION_PIN=Object.freeze({path:PUBLICATION_SELECTION_PATH,sha256:null});';
 const declaration=/export const PUBLICATION_SELECTION_PIN=Object\.freeze\(\{path:PUBLICATION_SELECTION_PATH,sha256:'[a-f0-9]{64}'\}\);/g;
 const json=value=>Buffer.from(JSON.stringify(value,null,2)+'\n');
+/** Exact pre-conversion source, authenticated by the test-only reverse projection.
+ * Callers import their historical API from this same owned tree. */
+export async function createOwnedHistoricalSource(t){
+ const {files}=await readEditorial005Source(source);
+ const root=await fs.mkdtemp(path.join(os.tmpdir(),'historical-source-fixture-'));
+ t.after(()=>fs.rm(root,{recursive:true,force:true}));
+ await writeExactFiles(root,files);return root;
+}
 export async function createOwnedHistoricalAuthority(t) {
  const authorityRoot=await fs.mkdtemp(path.join(os.tmpdir(),'historical-authority-fixture-'));
  const cleanup=()=>fs.rm(authorityRoot,{recursive:true,force:true});t.after(cleanup);
@@ -61,7 +71,7 @@ export async function createOwnedHistoricalAuthority(t) {
    const state=selection.validatePublicationSelectionSnapshot(files,{now});
    assert.deepEqual(state.selections,[]);assert.deepEqual(state.selectionReferences,[]);return state;
   }
-  return {buildBank,readBankInput,round,editorial,publication,delivery,bindHistoricalSelection,bindSyntheticRoundSources:args=>bindSyntheticRoundSources(selection,args)};
+  return {authorityRoot,buildBank,readBankInput,round,editorial,publication,delivery,bindHistoricalSelection,bindSyntheticRoundSources:args=>bindSyntheticRoundSources(selection,args)};
  }catch(error){await cleanup();throw error;}
 }
 
@@ -102,6 +112,32 @@ export async function pruneFutureEditorialFixture(root,{temporaryRoot,at}) {
  async function walk(prefix=''){for(const e of await fs.readdir(path.join(resolved,prefix),{withFileTypes:true})){const p=prefix?prefix+'/'+e.name:e.name;assert(!e.isSymbolicLink(),'Owned fixture cannot contain symlinks');if(e.isDirectory())await walk(p);else{assert(e.isFile());names.push(p);}}}
  await walk();
  const removed=new Set(),keptBanks=new Set(),preserved=new Map(),publicationLedgers=[];
+ // Only the exact new registration may be projected out of an owned historical
+ // fixture. Unknown conversion files, edited inputs and edited banks fail closed.
+ const conversionPath='docs/conversions/practical-written-001.json',conversionBank='data/releases/2026.10.22-practical-written.1/bank.json';
+ if(names.some(p=>p.startsWith('docs/conversions/'))||names.includes(conversionBank)){
+  const hash=raw=>createHash('sha256').update(raw).digest('hex');
+  // Derive the only permitted input set from the separately pinned real source,
+  // even when the disposable fixture has lost its copy of the ledger.
+  const raw=await fs.readFile(path.join(source,conversionPath));
+  assert.equal(hash(raw),'06d1c11c9fa834709ae20c332402c81cc01f68d8151460e6d5333ea6729ff3b5','Exact source conversion ledger required');
+  const ledger=JSON.parse(raw);assert(Date.parse(ledger.registeredAt)>at,'Only a future conversion may be projected');
+  assert.equal(`data/releases/${ledger.result.bankVersion}/bank.json`,conversionBank);
+  const exact=new Map([[conversionPath,hash(raw)],[conversionBank,ledger.result.bankSha256]]);
+  for(const c of ledger.candidates){for(const cycle of c.cycles)exact.set(cycle.input.path,cycle.input.sha256);if(c.sourceRefresh)exact.set(c.sourceRefresh.input.path,c.sourceRefresh.input.sha256);}
+  const support=new Map([
+   ['docs/conversions/practical-written-001.md','58d856408e1327d04dbb6ce924bb7fdd059279d097f3f1252f1ffd01dbd29f0e'],
+   ['docs/conversions/practical-written-registration.schema.json','26e23eed51e9226be3b169c2d11aab07df875b02c44da9a91ba890813e3c0017']
+  ]);
+  for(const p of names.filter(p=>p.startsWith('docs/conversions/')))assert(exact.has(p)||support.has(p),'Unknown conversion fixture path: '+p);
+  for(const [p,digest]of support)if(names.includes(p)){assert.equal(hash(await fs.readFile(path.join(resolved,p))),digest,'Exact inert conversion support: '+p);preserved.set(p,await fs.readFile(path.join(resolved,p)));}
+  // A conversion payload is an indivisible fixture input: no missing ledger,
+  // missing reviewed snapshot or missing final bank is silently projected away.
+  if([...exact.keys()].some(p=>names.includes(p)))for(const [p,digest]of exact){
+   assert(names.includes(p),'Incomplete future conversion fixture: '+p);
+   assert.equal(hash(await fs.readFile(path.join(resolved,p))),digest,'Exact future conversion bytes: '+p);removed.add(p);
+  }
+ }
  const keepBank=version=>{if(version)keptBanks.add(`data/releases/${version}/bank.json`);};
  for(const p of names.filter(p=>/^docs\/(?:rounds\/round-\d+|corrections\/editorial-\d+)\.json$/.test(p))){
   const raw=await fs.readFile(path.join(resolved,p)),ledger=JSON.parse(raw),started=Date.parse(ledger.startedAt);assert(Number.isFinite(started),'Exact ledger time required');

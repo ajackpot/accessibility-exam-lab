@@ -1,3 +1,6 @@
+import {pathToFileURL} from 'node:url';
+import {createOwnedHistoricalSource} from './historical-authority-fixtures.mjs';
+import {retainHistoricalSelectionPrefix} from './selection-fixtures.mjs';
 import {createSyntheticValidator} from './quarantine-fixtures.mjs';
 import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 import {validatePublicationSynchronizations,validateIndependentSynchronizationSources} from '../scripts/publication-sync.mjs';
@@ -217,18 +220,22 @@ test('blank summaries, placeholders and missing/unsafe public reports are reject
   fails(round(), /missing its public Markdown report/, {availableFiles: new Set()});
 });
 test('CLI context reads every ledger, excludes schema/template, and never falls back from a missing bank', async t => {
-  // Keep this explicit pre-selection fixture in one byte-checked owned module closure.
-  const authority=await createOwnedHistoricalAuthority(t);
-  const {loadRoundContext,validateRoundLedgers}=authority.round;
-  const {validatePublicationSynchronizations,validateIndependentSynchronizationSources}=authority.publication;
+  // Preserve the exact pre-completion source and future pre-cutoff event prefix.
+  // This historical loader regression does not borrow today's conversion scope.
+  const historicalAt=Date.parse('2026-10-02T05:50:00Z');
+  const historicalSource=await createOwnedHistoricalSource(t);
+  // The exact owned source contains real041; project its five declared files
+  // with the historical helper before importing the same owned module closure.
+  await retainHistoricalSelectionPrefix(historicalSource,historicalAt);
+  const {loadRoundContext,validateRoundLedgers}=await import(pathToFileURL(path.join(historicalSource,'scripts/validate-round.mjs')));
+  const {validatePublicationSynchronizations,validateIndependentSynchronizationSources}=await import(pathToFileURL(path.join(historicalSource,'scripts/publication-sync.mjs')));
   const root = await fs.mkdtemp(path.join(os.tmpdir(), 'round-ledger-test-')); t.after(() => fs.rm(root, {recursive: true, force: true}));
   await fs.mkdir(path.join(root, 'docs/rounds'), {recursive: true}); await fs.mkdir(path.join(root, 'data'), {recursive: true});
   const r = round();
   for (const [file, value] of [['docs/rounds/round-ledger.schema.json', schema], ['docs/rounds/round-ledger.template.json', template], [`docs/rounds/${r.roundId}.json`, r], ['data/publication-state.json', {finalized: false}]]) await fs.writeFile(path.join(root, file), JSON.stringify(value));
   await fs.writeFile(path.join(root, `docs/rounds/${r.roundId}.md`), 'Synthetic report.');
-  await fs.cp(new URL('../docs/publications',import.meta.url),path.join(root,'docs/publications'),{recursive:true});
+  await fs.cp(path.join(historicalSource,'docs/publications'),path.join(root,'docs/publications'),{recursive:true});
   await fs.writeFile(path.join(root,'PUBLICATION-MANIFEST.txt'),['PUBLICATION-MANIFEST.txt',`docs/rounds/${r.roundId}.json`,...(await fs.readdir(path.join(root,'docs/publications'))).map(p=>'docs/publications/'+p)].join('\n')+'\n');
-  const historicalAt=Date.parse('2026-10-02T05:50:00Z');
   // Normal-publication evidence requires a valid campaign even in this
   // historical read. A missing immutable baseline must fail, never fall back.
   await assert.rejects(loadRoundContext(root,null,{now:historicalAt}),/missing immutable bank bytes/);
