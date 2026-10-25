@@ -1,16 +1,20 @@
-import {pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
-import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 /** Real immutable delivery inputs; synthetic publication authority stays disposable. */
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {normalPublicationTree,validateNormalBankTransition} from '../scripts/normal-publication.mjs';
-import {PUBLICATION_SYNCHRONIZATIONS,validateSynchronizationDeliveryProof} from '../scripts/publication-sync.mjs';
-const root=path.resolve(import.meta.dirname,'..'),J=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {pruneFutureEditorialFixture}=await history.module('tests/historical-authority-fixtures.mjs');
+const {retainHistoricalQuarantinePrefix}=await history.module('tests/quarantine-fixtures.mjs');
+const {normalPublicationTree,validateNormalBankTransition}=await history.module('scripts/normal-publication.mjs');
+const {PUBLICATION_SYNCHRONIZATIONS,validateSynchronizationDeliveryProof}=await history.module('scripts/publication-sync.mjs');
+const root=history.root,J=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex');
 const read=p=>fs.readFile(path.join(root,p)),G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
 
 test('synthetic legacy authority binds exact032-033 lineage without changing stopped history',async t=>{

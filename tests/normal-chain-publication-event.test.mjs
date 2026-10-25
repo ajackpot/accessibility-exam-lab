@@ -1,16 +1,20 @@
-import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 /** Actual immutable source inputs; publication/ref values below are synthetic
  * unit fixtures, never observations, installed pins, or publication authority. */
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {normalPublicationTree,validateNormalPublication,validateNormalBankTransition} from '../scripts/normal-publication.mjs';
-import {PUBLICATION_SYNCHRONIZATIONS,validatePublicationSynchronizations,validateNormalChainSynchronizationSources} from '../scripts/publication-sync.mjs';
-import {RECONCILED_NORMAL_CHAIN_PUBLICATION_KIND,validateReconciledNormalPublication,validateReconciledNormalChainMembership} from '../scripts/normal-chain-publication-event.mjs';
-import {loadNormalBackupChains} from '../scripts/normal-backup-chain.mjs';
-const root=path.resolve(import.meta.dirname,'..'),read=p=>fs.readFileSync(path.join(root,p)),J=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex'),G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {withCurrentReleaseAuthority}=await history.module('scripts/current-release-authority.mjs');
+const {normalPublicationTree,validateNormalPublication,validateNormalBankTransition}=await history.module('scripts/normal-publication.mjs');
+const {PUBLICATION_SYNCHRONIZATIONS,validatePublicationSynchronizations,validateNormalChainSynchronizationSources}=await history.module('scripts/publication-sync.mjs');
+const {RECONCILED_NORMAL_CHAIN_PUBLICATION_KIND,validateReconciledNormalPublication,validateReconciledNormalChainMembership}=await history.module('scripts/normal-chain-publication-event.mjs');
+const {loadNormalBackupChains}=await history.module('scripts/normal-backup-chain.mjs');
+const root=history.root,read=p=>fs.readFileSync(path.join(root,p)),J=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex'),G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
 const allPaths=read('PUBLICATION-MANIFEST.txt').toString().split(/\r?\n/).filter(p=>p&&!p.startsWith('#'));
 const rows=allPaths.map(path=>{const raw=read(path);return {path,bytes:raw.length,sha256:H(raw),gitBlob:G(raw)};}),inventory=new Map(rows.map(({gitBlob,...r})=>[r.path,r]));
 const ledgerSources=new Map(allPaths.filter(p=>/^docs\/rounds\/round-\d+\.json$/.test(p)).map(p=>{const raw=read(p);return [JSON.parse(raw).roundId,raw];})),ledgers=[...ledgerSources.values()].map(b=>JSON.parse(b));

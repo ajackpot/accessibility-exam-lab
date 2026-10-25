@@ -33,6 +33,27 @@ export function safeURL(value) { try { const u=new URL(value); return ['http:','
 export function rng(seed) { let a=seed>>>0; return ()=>{a+=0x6D2B79F5; let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return ((t^t>>>14)>>>0)/4294967296;}; }
 export function shuffled(array,random=Math.random) {const a=[...array];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 export function optionMembership(bank) {const map={};for(const q of bank.questions) for(const l of q.links||[]) (map[l.optionId]??=[]).push(q.questionId);return map;}
+function validateExplanationMode(q,schemaVersion) {
+  if(q.explanationMode===undefined) {
+    assert(q.explanationItems===undefined,`${q.questionId}: 구성 항목 해설에는 명시적인 components 모드가 필요합니다.`);
+    return false;
+  }
+  assert(schemaVersion===3&&q.type==='written'&&q.explanationMode==='components',`${q.questionId}: 구성 항목 해설은 schema3 필기의 components 모드에서만 허용합니다.`);
+  assert(text(q.explanation)&&q.explanation.trim().length>0,`${q.questionId}: 구성 항목 모드에도 비어 있지 않은 문항 전체 해설이 필요합니다.`);
+  const items=q.explanationItems;
+  assert(Array.isArray(items)&&items.length>=2&&items.length<=40,`${q.questionId}: 구성 항목 해설은 2~40개가 필요합니다.`);
+  const ids=new Set(),labels=new Set();let size=0;
+  for(const item of items) {
+    assert(item&&typeof item==='object'&&!Array.isArray(item)&&Object.keys(item).length===4&&['id','label','result','explanation'].every(key=>Object.hasOwn(item,key)),`${q.questionId}: 구성 항목에는 id, label, result, explanation만 사용하세요.`);
+    assert(id(item.id)&&!ids.has(item.id)&&text(item.label,500)&&item.label.trim().length>0&&!labels.has(item.label.trim())&&text(item.result,2000)&&item.result.trim().length>0&&text(item.explanation,10000)&&item.explanation.trim().length>0,`${q.questionId}: 구성 항목의 식별자·대상·결과·이유와 중복을 확인하세요.`);
+    ids.add(item.id);labels.add(item.label.trim());size+=item.label.length+item.result.length+item.explanation.length;
+  }
+  assert(size<=100000,`${q.questionId}: 구성 항목 해설 전체가 너무 깁니다.`);
+  return true;
+}
+function validateComponentLink(q,link,option) {
+  assert(option?.explanation===''&&(link.contextExplanation===undefined||link.contextExplanation===''),`${q.questionId}/${link.optionId}: 구성 항목 모드의 선택지 해설은 정확한 빈 문자열, 문맥 해설은 생략 또는 빈 문자열이어야 합니다.`);
+}
 export function validateBank(bank) {
   assertSafeData(bank);
   assert([1,2,BANK_SCHEMA_VERSION].includes(bank?.schemaVersion),'지원하지 않는 문제 은행 스키마입니다.');
@@ -44,7 +65,7 @@ export function validateBank(bank) {
   const sourceIds=new Set();
   for(const s of bank.sources) {assert(id(s.id)&&!sourceIds.has(s.id)&&text(s.title)&&safeURL(s.url)&&text(s.version)&&text(s.checkedAt)&&text(s.location)&&text(s.evidence)&&text(s.rights),'출처 필드를 확인하세요.');sourceIds.add(s.id);}
   assert(Array.isArray(bank.options)&&bank.options.length<=1000000,'선택지 목록이 올바르지 않습니다.');
-  const options=new Map();for(const o of bank.options) {assert(id(o.optionId)&&!options.has(o.optionId)&&integer(o.revision)&&text(o.content)&&text(o.explanation),'선택지 ID, 개정판, 내용과 해설을 확인하세요.');if(o.equivalenceGroupId)assert(id(o.equivalenceGroupId),'동의어 그룹 ID 오류');options.set(o.optionId,o);}
+  const options=new Map();for(const o of bank.options) {assert(id(o.optionId)&&!options.has(o.optionId)&&integer(o.revision)&&text(o.content)&&(text(o.explanation)||o.explanation===''),'선택지 ID, 개정판, 내용과 해설을 확인하세요.');if(o.equivalenceGroupId)assert(id(o.equivalenceGroupId),'동의어 그룹 ID 오류');options.set(o.optionId,o);}
   assert(Array.isArray(bank.questions)&&bank.questions.length>0&&bank.questions.length<=100000,'문항 목록이 올바르지 않습니다.');
   const qids=new Set();
   for(const q of bank.questions) {
@@ -52,6 +73,7 @@ export function validateBank(bank) {
     assert(integer(q.revision)&&id(q.templateId)&&integer(q.learningGoalRevision),'문항 개정판 또는 학습 목표가 없습니다.');
     assert(['written','practical'].includes(q.type)&&[...SUBJECTS.map(s=>s.id),'practical'].includes(q.subjectId),'문항 유형이나 과목이 잘못되었습니다.');
     assert(text(q.stem)&&text(q.explanation)&&text(q.standardVersion)&&text(q.difficulty),'문항 본문, 해설, 기준과 난도를 확인하세요.');
+    const components=validateExplanationMode(q,bank.schemaVersion);
     if(bank.schemaVersion>=3||q.notes!==undefined)assert(Array.isArray(q.notes)&&q.notes.length<=20&&q.notes.every(note=>text(note,2000)&&note.trim().length>0),'참고 사항은 비어 있지 않은 문자열 배열이어야 합니다. 조건이 없으면 빈 배열을 사용하세요.');
     assert(Array.isArray(q.topicIds)&&q.topicIds.length>0&&q.topicIds.every(id),'주제 ID가 필요합니다.');
     assert(['candidate','reviewed','published','retired','invalid'].includes(q.verificationStatus)&&typeof q.testOnly==='boolean','검토 상태가 필요합니다.');
@@ -62,7 +84,7 @@ export function validateBank(bank) {
       assert(q.subjectId!=='practical'&&['exclusive','shared'].includes(q.optionMode),'필기 선택지 유형 오류');
       assert(Array.isArray(q.supportedOptionCounts)&&q.supportedOptionCounts.length>0&&q.supportedOptionCounts.every(v=>[4,5].includes(v)),'선택지 수 정책 오류');
       assert(Array.isArray(q.links)&&q.links.length<=1000&&q.links.filter(l=>l.role==='correct').length<=64,'한 문항의 검토된 선택지 연결은 최대 1000개, 정답 후보는 최대 64개입니다.');
-      const seen=new Set();for(const l of q.links) {const o=options.get(l.optionId);assert(o&&!seen.has(l.optionId)&&l.optionRevision===o.revision&&['correct','distractor'].includes(l.role)&&(l.contextExplanation===undefined||(typeof l.contextExplanation==='string'&&l.contextExplanation.length<=100000))&&id(l.compatibilitySetId),'선택지 연결·문맥 해설·개정판 오류');seen.add(l.optionId);}
+      const seen=new Set();for(const l of q.links) {const o=options.get(l.optionId);assert(o&&!seen.has(l.optionId)&&l.optionRevision===o.revision&&['correct','distractor'].includes(l.role)&&(l.contextExplanation===undefined||(typeof l.contextExplanation==='string'&&l.contextExplanation.length<=100000))&&id(l.compatibilitySetId),'선택지 연결·문맥 해설·개정판 오류');if(components)validateComponentLink(q,l,o);else assert(text(o.explanation),`${q.questionId}/${l.optionId}: 일반 문항의 선택지 해설은 필수입니다.`);seen.add(l.optionId);}
       if(q.verificationStatus==='published')for(const count of q.supportedOptionCounts) assert(choicePlans(q,options,count).length>0,`${q.questionId}: 정답 1개와 중복 없는 오답이 부족합니다.`);
     } else {
       assert(q.subjectId==='practical'&&['implementation','inspection'].includes(q.family),'실기 과제군 오류');
@@ -76,6 +98,8 @@ export function validateBank(bank) {
     }
   }
   const membership=optionMembership(bank);
+  const questionById=new Map(bank.questions.map(q=>[q.questionId,q]));
+  for(const o of bank.options)if(o.explanation==='')assert(membership[o.optionId]?.length>0&&membership[o.optionId].every(qid=>{const q=questionById.get(qid);return q.type==='written'&&q.explanationMode==='components';}),`${o.optionId}: 연결되지 않은 선택지나 구성 항목 필기 외의 연결에는 빈 해설을 허용하지 않습니다.`);
   for(const q of bank.questions.filter(q=>q.optionMode==='exclusive'))for(const l of q.links)assert(membership[l.optionId].length===1,'전용 선택지가 다른 문항에 연결되었습니다.');
   assert(!bank.corrections||Array.isArray(bank.corrections),'정정 목록 오류');
   for(const c of bank.corrections||[]) assert(id(c.questionId)&&integer(c.revision)&&['invalid','key'].includes(c.kind)&&text(c.reason)&&Number.isFinite(Date.parse(c.effectiveAt))&&(c.kind!=='key'||(text(c.snapshotHash)&&id(c.correctOptionId))),'정정 매핑 오류');
@@ -316,6 +340,7 @@ function reviewedOptionExplanation(option,item) {
   return match?option[match.displayField]:null;
 }
 export function optionExplanationParagraphs(option,item=null) {
+  if(item?.explanationMode==='components')return [];
   const reviewed=reviewedOptionExplanation(option,item);
   if(reviewed!==null)return [{label:null,text:reviewed}];
   const {common,context,equal,containsCommon}=explanationParts(option);
@@ -331,6 +356,7 @@ export function optionExplanationParagraphs(option,item=null) {
 export function validateExplanationAuthoring(bank,baseline=null) {
   const options=new Map(bank.options.map(o=>[o.optionId,o])),oldQuestions=new Map((baseline?.questions||[]).map(q=>[q.questionId,q])),oldOptions=new Map((baseline?.options||[]).map(o=>[o.optionId,o]));
   for(const q of bank.questions.filter(q=>q.type==='written')) {
+    if(validateExplanationMode(q,bank.schemaVersion)) {for(const link of q.links)validateComponentLink(q,link,options.get(link.optionId));continue;}
     const unchanged=sameData(q,oldQuestions.get(q.questionId))&&q.links.every(l=>sameData(options.get(l.optionId),oldOptions.get(l.optionId)));
     if(unchanged)continue;
     for(const link of q.links) {

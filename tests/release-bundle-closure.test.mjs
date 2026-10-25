@@ -1,15 +1,19 @@
-import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
-import {pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
-import test from 'node:test';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {parsePublicAllowlist} from '../scripts/download-fallback.mjs';
-import {regularCoverage} from '../scripts/validate-round.mjs';
-const root=path.resolve(import.meta.dirname,'..'),now=Date.parse('2026-10-04T09:10:00Z');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {retainHistoricalQuarantinePrefix}=await history.module('tests/quarantine-fixtures.mjs');
+const {pruneFutureEditorialFixture}=await history.module('tests/historical-authority-fixtures.mjs');
+const {parsePublicAllowlist}=await history.module('scripts/download-fallback.mjs');
+const {regularCoverage}=await history.module('scripts/validate-round.mjs');
+const root=history.root,now=Date.parse('2026-10-04T09:10:00Z');
 const hash=x=>createHash('sha256').update(x).digest('hex'),json=x=>JSON.stringify(x,null,2)+'\n';
 const reportPath='docs/rounds/release-backup-required-report.txt';
 async function inventory(root){return Promise.all(parsePublicAllowlist(await fs.readFile(path.join(root,'PUBLICATION-MANIFEST.txt'),'utf8')).map(async p=>{const b=await fs.readFile(path.join(root,p));return {path:p,bytes:b.length,sha256:hash(b)};}));}

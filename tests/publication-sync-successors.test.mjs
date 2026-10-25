@@ -1,15 +1,19 @@
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 /** Real reviewed publication evidence; synthetic successor inputs are never executed or published. */
 import test, {after} from 'node:test';
-import {createOwnedHistoricalAuthority,createOwnedHistoricalSource} from './historical-authority-fixtures.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {loadRoundContext,regularCoverage,auditHistoricalRelease} from '../scripts/validate-round.mjs';
 import {FREEZE_AT} from '../src/domain.js';
-const root=path.resolve(import.meta.dirname,'..'),hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>JSON.stringify(o,null,2)+'\n';
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {createOwnedHistoricalAuthority,createOwnedHistoricalSource}=await history.module('tests/historical-authority-fixtures.mjs');
+const {loadRoundContext,regularCoverage,auditHistoricalRelease}=await history.module('scripts/validate-round.mjs');
+const root=history.root,hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>JSON.stringify(o,null,2)+'\n';
 const loaded=await loadRoundContext(root,null,{release:true}),proof=loaded.synchronizations.find(e=>e.syncId==='cumulative-009-017');
 const laterAuthorities=loaded.synchronizations.slice(loaded.synchronizations.indexOf(proof)+1);
 loaded.synchronizations=loaded.synchronizations.slice(0,loaded.synchronizations.indexOf(proof)+1);

@@ -7,9 +7,11 @@ import {validateBankForPublication,validateExplanationAuthoring,sha256} from '..
 import {assertNoQuarantinedContent} from './prepublication-quarantine.mjs';
 import {readHistoricalExplanationBaseline} from './explanation-authoring.mjs';
 import {PRACTICAL_WRITTEN,hasPracticalWrittenRegistration,loadPracticalWrittenRegistration} from './practical-written-registration.mjs';
+import {hasLocalWrittenIntegration,validateLocalWrittenIntegration} from './local-written-integration.mjs';
 
 /** An ordinary build validates the currently selected release, never a seed fallback. */
 export async function readBankInput(root,input) {
+  if(hasLocalWrittenIntegration(root)){const checked=validateLocalWrittenIntegration(root,{input});return {raw:checked.bankRaw.toString(),bank:checked.bank,manifest:checked.manifest};}
   return withCurrentReleaseAuthority({root},()=>{assertCurrentReleaseInput(input,Date.now(),root);return readBankInputInWindow(root,input);});
 }
 async function readBankInputInWindow(root,input) {

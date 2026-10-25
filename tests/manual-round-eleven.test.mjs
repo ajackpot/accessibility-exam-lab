@@ -1,6 +1,4 @@
-import {createOwnedHistoricalAuthority,pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
-import {encodeSevenZip,decodeSevenZip,archiveSignature} from '../scripts/archive-format.mjs';
-import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -9,10 +7,16 @@ import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {inflateRawSync} from 'node:zlib';
-import {parsePublicAllowlist,zipStored} from '../scripts/download-fallback.mjs';
-import {loadRoundContext,regularCoverage,nextScheduledRoundAt} from '../scripts/validate-round.mjs';
 
-const root=path.resolve(import.meta.dirname,'..');
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {createOwnedHistoricalAuthority,pruneFutureEditorialFixture}=await history.module('tests/historical-authority-fixtures.mjs');
+const {encodeSevenZip,decodeSevenZip,archiveSignature}=await history.module('scripts/archive-format.mjs');
+const {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory}=await history.module('tests/quarantine-fixtures.mjs');
+const {parsePublicAllowlist,zipStored}=await history.module('scripts/download-fallback.mjs');
+const {loadRoundContext,regularCoverage,nextScheduledRoundAt}=await history.module('scripts/validate-round.mjs');
+
+const root=history.root;
 const now=Date.parse('2026-10-04T13:10:00Z'),startedAt='2026-10-04T13:08:49Z';
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const json=o=>Buffer.from(JSON.stringify(o,null,2)+'\n');

@@ -1,17 +1,21 @@
-import {pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
-import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 /** Disposable synthetic publication authorities only. No network or production pin writes. */
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {loadRoundContext,validateReleaseLedger} from '../scripts/validate-round.mjs';
-import {validateQuarantineCampaign} from '../scripts/prepublication-quarantine.mjs';
 import {FREEZE_AT} from '../src/domain.js';
-const root=path.resolve(import.meta.dirname,'..'),J=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {pruneFutureEditorialFixture}=await history.module('tests/historical-authority-fixtures.mjs');
+const {retainHistoricalQuarantinePrefix}=await history.module('tests/quarantine-fixtures.mjs');
+const {loadRoundContext,validateReleaseLedger}=await history.module('scripts/validate-round.mjs');
+const {validateQuarantineCampaign}=await history.module('scripts/prepublication-quarantine.mjs');
+const root=history.root,J=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex');
 const read=p=>fs.readFile(path.join(root,p)),loaded=await loadRoundContext(root,null,{release:true});
 const trust=JSON.parse(await read('docs/deliveries/offline-chain-trust.json')),syncSource=(await read('scripts/publication-sync.mjs')).toString();
 // This scenario replaces the first independent cumulative publication. Keep

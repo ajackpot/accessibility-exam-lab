@@ -1,18 +1,22 @@
-import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
-import test from 'node:test';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {validateEvidenceLossCampaign,validateEvidenceLossSnapshot,assertEvidenceLossPayload,assertEvidenceLossProvenance,assertNoEvidenceLossContent,evidenceLossQuestionFingerprint,evidenceLossOptionFingerprint,loadEvidenceLossDependencies} from '../scripts/evidence-loss-block.mjs';
-import {quarantineHash,quarantineContentHash,quarantineFingerprint,validateQuarantineCampaign,withBankParsingSession} from '../scripts/prepublication-quarantine.mjs';
-import {loadRoundContext,validateRoundLedgers,validateReleaseLedger} from '../scripts/validate-round.mjs';
-import {createDeliveryReceipt,reconcileGitOutcome} from '../scripts/download-fallback.mjs';
-import {buildBank} from '../scripts/build.mjs';
-import {withCurrentReleaseAuthority,currentCutoffBlocks} from '../scripts/current-release-authority.mjs';
-const ROOT=path.resolve(import.meta.dirname,'..'),json=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),sha=b=>createHash('sha256').update(b).digest('hex'),clone=structuredClone,read=p=>fs.readFile(path.join(ROOT,p));
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {createOwnedHistoricalAuthority}=await history.module('tests/historical-authority-fixtures.mjs');
+const {validateEvidenceLossCampaign,validateEvidenceLossSnapshot,assertEvidenceLossPayload,assertEvidenceLossProvenance,assertNoEvidenceLossContent,evidenceLossQuestionFingerprint,evidenceLossOptionFingerprint,loadEvidenceLossDependencies}=await history.module('scripts/evidence-loss-block.mjs');
+const {quarantineHash,quarantineContentHash,quarantineFingerprint,validateQuarantineCampaign,withBankParsingSession}=await history.module('scripts/prepublication-quarantine.mjs');
+const {loadRoundContext,validateRoundLedgers,validateReleaseLedger}=await history.module('scripts/validate-round.mjs');
+const {createDeliveryReceipt,reconcileGitOutcome}=await history.module('scripts/download-fallback.mjs');
+const {buildBank}=await history.module('scripts/build.mjs');
+const {withCurrentReleaseAuthority,currentCutoffBlocks}=await history.module('scripts/current-release-authority.mjs');
+const ROOT=history.root,json=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),sha=b=>createHash('sha256').update(b).digest('hex'),clone=structuredClone,read=p=>fs.readFile(path.join(ROOT,p));
 const trust=JSON.parse(await read('docs/release-blocks/trust.json')),pin=trust.events[0],event=JSON.parse(await read(pin.path)),ledgerRaw=await read(event.sourceLedger.path),ledger=JSON.parse(ledgerRaw),now=Date.parse(pin.recordedAt)+60000; // Explicit simulated audit clock; never execution proof
 const bank22=JSON.parse(await read('data/releases/2026.10.06-regular.22/bank.json'));
 let contextPromise;

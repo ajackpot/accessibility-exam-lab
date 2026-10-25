@@ -15,7 +15,7 @@ const seedRaw=await fs.readFile(new URL('../data/seed-bank-v4.json',import.meta.
 const authority=await fs.mkdtemp(path.join(os.tmpdir(),'build-authority-fixture-'));
 after(()=>fs.rm(authority,{recursive:true,force:true}));
 const liveRoot=path.resolve(import.meta.dirname,'..');
-const excluded=new Set(['docs/publication-selections/round-041-selection-001.json','docs/rounds/round-041.json','docs/rounds/round-041.md','docs/conversions/practical-written-001.json']);
+const excluded=new Set(['docs/publication-selections/round-041-selection-001.json','docs/rounds/round-041.json','docs/rounds/round-041.md','docs/conversions/practical-written-001.json','docs/local-integrations/written-explanation-372.json']);
 for(const folder of ['scripts','src','docs'])await fs.cp(path.join(liveRoot,folder),path.join(authority,folder),{recursive:true,filter:p=>!excluded.has(path.relative(liveRoot,p))});
 await fs.copyFile(path.join(liveRoot,'package.json'),path.join(authority,'package.json'));
 await useEmptySyntheticSelectionPrefix(authority);

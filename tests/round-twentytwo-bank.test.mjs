@@ -1,15 +1,19 @@
-import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 import {fileURLToPath} from 'node:url';
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import * as d from '../src/domain.js';
 import * as w from '../src/workflows.js';
 import {exportBackup,parseBackup} from '../src/backup.js';
-import {nextScheduledRoundAt} from '../scripts/validate-round.mjs';
-import {validateQuarantineCampaign,assertNoQuarantinedContent} from '../scripts/prepublication-quarantine.mjs';
-const raw=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {withCurrentReleaseAuthority}=await history.module('scripts/current-release-authority.mjs');
+const {nextScheduledRoundAt}=await history.module('scripts/validate-round.mjs');
+const {validateQuarantineCampaign,assertNoQuarantinedContent}=await history.module('scripts/prepublication-quarantine.mjs');
+const raw=p=>fs.readFileSync(new URL(p,history.baseUrl),'utf8');
 const read=p=>JSON.parse(raw(p));
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const oldPath='data/releases/2026.10.06-regular.21/bank.json';
@@ -18,10 +22,10 @@ const bank=read(`data/releases/${ledger.publication.bankVersion}/bank.json`);
 const oldIds=new Set(before.questions.map(q=>q.questionId));
 const added=bank.questions.filter(q=>!oldIds.has(q.questionId));
 const accepted=ledger.candidates.filter(c=>c.decision==='accepted');
-const ledgerSources=new Map(fs.readdirSync(new URL('../docs/rounds/',import.meta.url)).filter(n=>/^round-\d+\.json$/.test(n)).map(n=>{const raw=fs.readFileSync(new URL('../docs/rounds/'+n,import.meta.url));return [JSON.parse(raw).roundId,raw];}));
+const ledgerSources=new Map(fs.readdirSync(new URL('docs/rounds/',history.baseUrl)).filter(n=>/^round-\d+\.json$/.test(n)).map(n=>{const raw=fs.readFileSync(new URL('docs/rounds/'+n,history.baseUrl));return [JSON.parse(raw).roundId,raw];}));
 const allLedgers=[...ledgerSources.values()].map(b=>JSON.parse(b));
-const allBanks=new Map(fs.readdirSync(new URL('../data/releases/',import.meta.url),{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>[x.name,{raw:fs.readFileSync(new URL('../data/releases/'+x.name+'/bank.json',import.meta.url))}]));
-const quarantineResult=await withCurrentReleaseAuthority({root:fileURLToPath(new URL('../',import.meta.url))},()=>validateQuarantineCampaign(allLedgers,{banks:allBanks,ledgerSources,now:Date.now(),manifest:read('data/manifest.json'),publicationState:read('data/publication-state.json')}));
+const allBanks=new Map(fs.readdirSync(new URL('data/releases/',history.baseUrl),{withFileTypes:true}).filter(x=>x.isDirectory()).map(x=>[x.name,{raw:fs.readFileSync(new URL('data/releases/'+x.name+'/bank.json',history.baseUrl))}]));
+const quarantineResult=await withCurrentReleaseAuthority({root:fileURLToPath(history.baseUrl)},()=>validateQuarantineCampaign(allLedgers,{banks:allBanks,ledgerSources,now:Date.now(),manifest:read('data/manifest.json'),publicationState:read('data/publication-state.json')}));
 assert(quarantineResult.ok,quarantineResult.errors.join('\n'));
 const disposition=quarantineResult.dispositions.get('round-022');
 const held=new Set(disposition.quarantinedCandidateIds);

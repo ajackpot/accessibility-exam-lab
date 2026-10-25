@@ -6,6 +6,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
+import {writtenExplanationFixturePath,projectWrittenExplanationToPracticalWritten} from './written-explanation-source-projection.mjs';
+import {localIntegrationFixturePath,projectLocalIntegrationToPrior} from './local-integration-source-projection.mjs';
 
 const fixturePath='tests/fixtures/coverage-successor-delta.json';
 const fixtureRaw=await fs.readFile(new URL('./fixtures/coverage-successor-delta.json',import.meta.url));
@@ -138,7 +140,7 @@ export function projectEditorial005To395(files,directories){
   verifySuccessor(restored);return restored;
 }
 export async function readEditorial005Source(root){
-  const directories=new Set(),files=await collectFiles(root,true,directories);
+  const {files,directories}=await readHistoricalSource(root);
   if(files.has(conversionFixturePath))return {files:projectPracticalWrittenToEditorial005(files,directories),directories:new Set(editorialDelta.currentDirectories)};
   verifyEditorial005Source(files,directories);return {files,directories};
 }
@@ -204,7 +206,24 @@ export function projectPracticalWrittenToEditorial005(files,directories){
   verifyEditorial005Source(restored,new Set(editorialDelta.currentDirectories));return restored;
 }
 export async function readPracticalWrittenSource(root){
-  const directories=new Set(),files=await collectFiles(root,true,directories);verifyPracticalWrittenSource(files,directories);return {files,directories};
+  const {files,directories}=await readHistoricalSource(root);verifyPracticalWrittenSource(files,directories);return {files,directories};
+}
+
+async function readHistoricalSource(root){
+  let directories=new Set(),files=await collectFiles(root,true,directories);
+  if(files.has(localIntegrationFixturePath))({files,directories}=projectLocalIntegrationToPrior(files,directories));
+  if(files.has(writtenExplanationFixturePath)){
+    const restored=projectWrittenExplanationToPracticalWritten(files,directories);
+    verifyPracticalWrittenSource(restored.files,restored.directories);return restored;
+  }
+  return {files,directories};
+}
+export async function readWrittenExplanationSource(root){
+  let directories=new Set(),files=await collectFiles(root,true,directories);
+  if(files.has(localIntegrationFixturePath))({files,directories}=projectLocalIntegrationToPrior(files,directories));
+  // These historical tests retain the exact prior 477-file public fixture.
+  const restored=projectWrittenExplanationToPracticalWritten(files,directories);
+  verifyPracticalWrittenSource(restored.files,restored.directories);return {files,directories};
 }
 
 async function collectFiles(root,allowRootGitMetadata=false,directories=null){
@@ -230,7 +249,7 @@ async function collectFiles(root,allowRootGitMetadata=false,directories=null){
 }
 export async function readExactFiles(root){return collectFiles(root);}
 export async function readSuccessor(root){
-  const directories=new Set(),files=await collectFiles(root,true,directories);
+  const {files,directories}=await readHistoricalSource(root);
   if(files.has(conversionFixturePath))return projectEditorial005To395(projectPracticalWrittenToEditorial005(files,directories),new Set(editorialDelta.currentDirectories));
   if(files.has(editorialFixturePath))return projectEditorial005To395(files,directories);
   verifySuccessor(files);return files;

@@ -1,0 +1,3280 @@
+{
+  "schemaVersion": 1,
+  "kind": "local_only_accepted_written_correction_integration",
+  "integrationId": "written-explanation-372",
+  "authorizedAt": "2026-10-25T08:32:06.146537+00:00",
+  "registeredAt": "2026-10-25T08:34:56.679667+00:00",
+  "scope": {
+    "localBankIntegration": true,
+    "fullAppValidation": true,
+    "canPublish": false,
+    "canPush": false,
+    "newQuestionAuthoring": false,
+    "practicalChanges": false
+  },
+  "baseline": {
+    "commit": "55b8a16b63bf41707e33566a4d3b8a5ab00cc8f0",
+    "manifestSha256": "0ff0fb4e22120dc05e9bbff5e1f93d7de02ee069c2c20ea0ace4ef1f431ca6b6",
+    "manifest": {
+      "schemaVersion": 1,
+      "bankVersion": "2026.10.22-practical-written.1",
+      "releasedAt": "2026-10-22T11:50:31.755715+00:00",
+      "file": "releases/2026.10.22-practical-written.1/bank.json",
+      "sha256": "86acf4a514a1f67ae23cc8019560b4c57359a7195433110214f70b7e8c488986",
+      "changeSummary": "실기 지식을 독립 필기 문항 34개로 전환했다. 기존 필기 887개와 실기 84개는 그대로 보존하며, 정규 필기 911개·정규 실기 80개·시드 14개를 제공한다.",
+      "finalRelease": false
+    },
+    "manifestRaw": "{\n  \"schemaVersion\": 1,\n  \"bankVersion\": \"2026.10.22-practical-written.1\",\n  \"releasedAt\": \"2026-10-22T11:50:31.755715+00:00\",\n  \"file\": \"releases/2026.10.22-practical-written.1/bank.json\",\n  \"sha256\": \"86acf4a514a1f67ae23cc8019560b4c57359a7195433110214f70b7e8c488986\",\n  \"changeSummary\": \"실기 지식을 독립 필기 문항 34개로 전환했다. 기존 필기 887개와 실기 84개는 그대로 보존하며, 정규 필기 911개·정규 실기 80개·시드 14개를 제공한다.\",\n  \"finalRelease\": false\n}\n",
+    "bankVersion": "2026.10.22-practical-written.1",
+    "bankSha256": "86acf4a514a1f67ae23cc8019560b4c57359a7195433110214f70b7e8c488986"
+  },
+  "acceptedCandidate": {
+    "bankVersion": "2026.10.25-source-revalidated.local.2",
+    "sha256": "7151c7c46254ebc2652217d719048984d8b7f09e345d27503fa5ba9aff0c69a6",
+    "metadataOnlyFieldsChanged": [
+      "bankVersion",
+      "releasedAt",
+      "changeSummary"
+    ]
+  },
+  "decisionEvidence": [
+    {
+      "artifact": "EFFECTIVE-LEDGER.json",
+      "sha256": "d85ad8c1986d0ed504224fa59bc9f8d754949be4ea7dc42c81ad950a67173656"
+    },
+    {
+      "artifact": "DISPOSITION-LEDGER.json",
+      "sha256": "9a70e438db6f8ae6cbb40190b51b5815d7f6b93e5e938bef1408d79e918b769a"
+    },
+    {
+      "artifact": "INDEPENDENT-FINAL-AUDIT.json",
+      "sha256": "cebb78fc613d8ef5f86fe01493a758d2f18b6ab56dabe62f09cfc73337e90197"
+    },
+    {
+      "artifact": "INDEPENDENT-FINAL-INTEGRITY.json",
+      "sha256": "51f6cb658da12325be35e959a151e4ba5d39a03ea0f28b7a4f4a277616ba1018"
+    }
+  ],
+  "counts": {
+    "accepted": 372,
+    "priorAccepted": 320,
+    "originalSourceVerified": 38,
+    "replacementVerified": 14,
+    "bundle": 368,
+    "repetition": 6,
+    "overlap": 2,
+    "withheld": 0,
+    "discarded": 0,
+    "written": 921,
+    "practical": 84,
+    "testOnly": 14
+  },
+  "items": [
+    {
+      "questionId": "r001-standards-s1-w01",
+      "correctionId": "wec-r001-standards-s1-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-standards-s5-w01",
+      "correctionId": "wec-r001-standards-s5-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-standards-s5-w09",
+      "correctionId": "wec-r001-standards-s5-w09",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-css-script-w01",
+      "correctionId": "wec-r001-css-script-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-css-script-w05",
+      "correctionId": "wec-r001-css-script-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-css-script-w06",
+      "correctionId": "wec-r001-css-script-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-css-script-w07",
+      "correctionId": "wec-r001-css-script-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-css-script-w08",
+      "correctionId": "wec-r001-css-script-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-css-script-w09",
+      "correctionId": "wec-r001-css-script-w09",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-css-script-w10",
+      "correctionId": "wec-r001-css-script-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r001-internet-html-w01",
+      "correctionId": "wec-r001-internet-html-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-css-script-w03",
+      "correctionId": "wec-r002-css-script-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-css-script-w05",
+      "correctionId": "wec-r002-css-script-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-css-script-w06",
+      "correctionId": "wec-r002-css-script-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-css-script-w07",
+      "correctionId": "wec-r002-css-script-w07",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-css-script-w08",
+      "correctionId": "wec-r002-css-script-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-css-script-w10",
+      "correctionId": "wec-r002-css-script-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-standards-s1-w09",
+      "correctionId": "wec-r002-standards-s1-w09",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-standards-s1-w10",
+      "correctionId": "wec-r002-standards-s1-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-standards-s5-w04",
+      "correctionId": "wec-r002-standards-s5-w04",
+      "decision": "accepted",
+      "revision": 4,
+      "attemptCount": 2,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-internet-html-w05",
+      "correctionId": "wec-r002-internet-html-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-internet-html-w10",
+      "correctionId": "wec-r002-internet-html-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-internet-html-w15",
+      "correctionId": "wec-r002-internet-html-w15",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r002-internet-html-w16",
+      "correctionId": "wec-r002-internet-html-w16",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-internet-html-w17",
+      "correctionId": "wec-r002-internet-html-w17",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r002-internet-html-w18",
+      "correctionId": "wec-r002-internet-html-w18",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r003-css-script-w02",
+      "correctionId": "wec-r003-css-script-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-css-script-w06",
+      "correctionId": "wec-r003-css-script-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-css-script-w07",
+      "correctionId": "wec-r003-css-script-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-css-script-w10",
+      "correctionId": "wec-r003-css-script-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-standards-s1-w04",
+      "correctionId": "wec-r003-standards-s1-w04",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r003-standards-s1-w05",
+      "correctionId": "wec-r003-standards-s1-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-standards-s5-w02",
+      "correctionId": "wec-r003-standards-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-internet-html-w05",
+      "correctionId": "wec-r003-internet-html-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-internet-html-w13",
+      "correctionId": "wec-r003-internet-html-w13",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r003-internet-html-w15",
+      "correctionId": "wec-r003-internet-html-w15",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r003-internet-html-w18",
+      "correctionId": "wec-r003-internet-html-w18",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r004-standards-s1-w01",
+      "correctionId": "wec-r004-standards-s1-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-standards-s1-w02",
+      "correctionId": "wec-r004-standards-s1-w02",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-css-script-w01",
+      "correctionId": "wec-r004-css-script-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-css-script-w07",
+      "correctionId": "wec-r004-css-script-w07",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-css-script-w08",
+      "correctionId": "wec-r004-css-script-w08",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-css-script-w09",
+      "correctionId": "wec-r004-css-script-w09",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-css-script-w10",
+      "correctionId": "wec-r004-css-script-w10",
+      "decision": "accepted",
+      "revision": 4,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-internet-html-w01",
+      "correctionId": "wec-r004-internet-html-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r004-internet-html-w13",
+      "correctionId": "wec-r004-internet-html-w13",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r004-internet-html-w18",
+      "correctionId": "wec-r004-internet-html-w18",
+      "decision": "accepted",
+      "revision": 4,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r005-standards-s5-w04",
+      "correctionId": "wec-r005-standards-s5-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w01",
+      "correctionId": "wec-r005-css-script-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w02",
+      "correctionId": "wec-r005-css-script-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w03",
+      "correctionId": "wec-r005-css-script-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w06",
+      "correctionId": "wec-r005-css-script-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w07",
+      "correctionId": "wec-r005-css-script-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w08",
+      "correctionId": "wec-r005-css-script-w08",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w09",
+      "correctionId": "wec-r005-css-script-w09",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-css-script-w10",
+      "correctionId": "wec-r005-css-script-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-internet-html-w01",
+      "correctionId": "wec-r005-internet-html-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-internet-html-w05",
+      "correctionId": "wec-r005-internet-html-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-internet-html-w11",
+      "correctionId": "wec-r005-internet-html-w11",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r005-internet-html-w13",
+      "correctionId": "wec-r005-internet-html-w13",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r005-internet-html-w16",
+      "correctionId": "wec-r005-internet-html-w16",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-standards-s1-w02",
+      "correctionId": "wec-r006-standards-s1-w02",
+      "decision": "accepted",
+      "revision": 5,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-css-script-w03",
+      "correctionId": "wec-r006-css-script-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-css-script-w04",
+      "correctionId": "wec-r006-css-script-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-css-script-w05",
+      "correctionId": "wec-r006-css-script-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-css-script-w06",
+      "correctionId": "wec-r006-css-script-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-css-script-w07",
+      "correctionId": "wec-r006-css-script-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-css-script-w08",
+      "correctionId": "wec-r006-css-script-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-css-script-w09",
+      "correctionId": "wec-r006-css-script-w09",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-internet-html-w07",
+      "correctionId": "wec-r006-internet-html-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r006-internet-html-w11",
+      "correctionId": "wec-r006-internet-html-w11",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r007-css-script-w02",
+      "correctionId": "wec-r007-css-script-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r007-css-script-w05",
+      "correctionId": "wec-r007-css-script-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r007-css-script-w06",
+      "correctionId": "wec-r007-css-script-w06",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r007-css-script-w07",
+      "correctionId": "wec-r007-css-script-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r007-css-script-w09",
+      "correctionId": "wec-r007-css-script-w09",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r007-internet-html-w13",
+      "correctionId": "wec-r007-internet-html-w13",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r008-css-script-w01",
+      "correctionId": "wec-r008-css-script-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-css-script-w02",
+      "correctionId": "wec-r008-css-script-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-css-script-w03",
+      "correctionId": "wec-r008-css-script-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-css-script-w05",
+      "correctionId": "wec-r008-css-script-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-css-script-w08",
+      "correctionId": "wec-r008-css-script-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-css-script-w09",
+      "correctionId": "wec-r008-css-script-w09",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-css-script-w10",
+      "correctionId": "wec-r008-css-script-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-internet-html-w08",
+      "correctionId": "wec-r008-internet-html-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r008-internet-html-w11",
+      "correctionId": "wec-r008-internet-html-w11",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r008-internet-html-w12",
+      "correctionId": "wec-r008-internet-html-w12",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r008-internet-html-w13",
+      "correctionId": "wec-r008-internet-html-w13",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r009-standards-s5-w01",
+      "correctionId": "wec-r009-standards-s5-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r009-standards-s5-w04",
+      "correctionId": "wec-r009-standards-s5-w04",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "explicit_two_question_exception"
+    },
+    {
+      "questionId": "r009-web-tech-s3-w01",
+      "correctionId": "wec-r009-web-tech-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r009-web-tech-s3-w07",
+      "correctionId": "wec-r009-web-tech-s3-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r009-web-tech-s4-w01",
+      "correctionId": "wec-r009-web-tech-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r009-web-tech-s4-w02",
+      "correctionId": "wec-r009-web-tech-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r009-web-tech-s4-w03",
+      "correctionId": "wec-r009-web-tech-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r009-web-tech-s4-w05",
+      "correctionId": "wec-r009-web-tech-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r009-web-tech-s4-w06",
+      "correctionId": "wec-r009-web-tech-s4-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r009-web-tech-s4-w08",
+      "correctionId": "wec-r009-web-tech-s4-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w01",
+      "correctionId": "wec-r010-dom-css-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w02",
+      "correctionId": "wec-r010-dom-css-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w03",
+      "correctionId": "wec-r010-dom-css-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w04",
+      "correctionId": "wec-r010-dom-css-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w05",
+      "correctionId": "wec-r010-dom-css-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w06",
+      "correctionId": "wec-r010-dom-css-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w07",
+      "correctionId": "wec-r010-dom-css-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-dom-css-w08",
+      "correctionId": "wec-r010-dom-css-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-standards-s1-w01",
+      "correctionId": "wec-r010-standards-s1-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-standards-s1-w03",
+      "correctionId": "wec-r010-standards-s1-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-standards-s1-w04",
+      "correctionId": "wec-r010-standards-s1-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-standards-s5-w01",
+      "correctionId": "wec-r010-standards-s5-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "explicit_two_question_exception"
+    },
+    {
+      "questionId": "r010-network-html-s2-w02",
+      "correctionId": "wec-r010-network-html-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-network-html-s2-w03",
+      "correctionId": "wec-r010-network-html-s2-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-network-html-s2-w04",
+      "correctionId": "wec-r010-network-html-s2-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-network-html-s2-w06",
+      "correctionId": "wec-r010-network-html-s2-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-network-html-s2-w10",
+      "correctionId": "wec-r010-network-html-s2-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-network-html-s3-w01",
+      "correctionId": "wec-r010-network-html-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r010-network-html-s3-w02",
+      "correctionId": "wec-r010-network-html-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r010-network-html-s3-w07",
+      "correctionId": "wec-r010-network-html-s3-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r010-network-html-s3-w08",
+      "correctionId": "wec-r010-network-html-s3-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-protocol-policy-s2-w01",
+      "correctionId": "wec-r011-protocol-policy-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-protocol-policy-s2-w03",
+      "correctionId": "wec-r011-protocol-policy-s2-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-dom-form-s3-w04",
+      "correctionId": "wec-r011-dom-form-s3-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r011-dom-form-s3-w05",
+      "correctionId": "wec-r011-dom-form-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r011-dom-form-s4-w01",
+      "correctionId": "wec-r011-dom-form-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-dom-form-s4-w02",
+      "correctionId": "wec-r011-dom-form-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-dom-form-s4-w03",
+      "correctionId": "wec-r011-dom-form-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-dom-form-s4-w04",
+      "correctionId": "wec-r011-dom-form-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-dom-form-s4-w05",
+      "correctionId": "wec-r011-dom-form-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r011-dom-form-s4-w06",
+      "correctionId": "wec-r011-dom-form-s4-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-internet-protocol-s2-w01",
+      "correctionId": "wec-r012-internet-protocol-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-internet-protocol-s2-w02",
+      "correctionId": "wec-r012-internet-protocol-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-internet-protocol-s2-w03",
+      "correctionId": "wec-r012-internet-protocol-s2-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-internet-protocol-s2-w05",
+      "correctionId": "wec-r012-internet-protocol-s2-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-internet-protocol-s2-w06",
+      "correctionId": "wec-r012-internet-protocol-s2-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-dom-html-s3-w01",
+      "correctionId": "wec-r012-dom-html-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r012-dom-html-s3-w02",
+      "correctionId": "wec-r012-dom-html-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r012-dom-html-s4-w01",
+      "correctionId": "wec-r012-dom-html-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-dom-html-s4-w02",
+      "correctionId": "wec-r012-dom-html-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-dom-html-s4-w03",
+      "correctionId": "wec-r012-dom-html-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-dom-html-s4-w04",
+      "correctionId": "wec-r012-dom-html-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-dom-html-s4-w05",
+      "correctionId": "wec-r012-dom-html-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-policy-accessibility-s1-w01",
+      "correctionId": "wec-r012-policy-accessibility-s1-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r012-policy-accessibility-s5-w02",
+      "correctionId": "wec-r012-policy-accessibility-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-policy-accessibility-s1-w01",
+      "correctionId": "wec-r013-policy-accessibility-s1-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-policy-accessibility-s1-w03",
+      "correctionId": "wec-r013-policy-accessibility-s1-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-internet-browser-s2-w03",
+      "correctionId": "wec-r013-internet-browser-s2-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-internet-browser-s2-w06",
+      "correctionId": "wec-r013-internet-browser-s2-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-dom-html-s3-w01",
+      "correctionId": "wec-r013-dom-html-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r013-dom-html-s3-w02",
+      "correctionId": "wec-r013-dom-html-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r013-dom-html-s3-w04",
+      "correctionId": "wec-r013-dom-html-s3-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-dom-html-s3-w05",
+      "correctionId": "wec-r013-dom-html-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-dom-html-s4-w01",
+      "correctionId": "wec-r013-dom-html-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-dom-html-s4-w02",
+      "correctionId": "wec-r013-dom-html-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-dom-html-s4-w03",
+      "correctionId": "wec-r013-dom-html-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r013-dom-html-s4-w05",
+      "correctionId": "wec-r013-dom-html-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-internet-browser-s2-w01",
+      "correctionId": "wec-r014-internet-browser-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-internet-browser-s2-w03",
+      "correctionId": "wec-r014-internet-browser-s2-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-internet-browser-s2-w05",
+      "correctionId": "wec-r014-internet-browser-s2-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-internet-browser-s2-w06",
+      "correctionId": "wec-r014-internet-browser-s2-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-dom-html-s3-w02",
+      "correctionId": "wec-r014-dom-html-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r014-dom-html-s4-w01",
+      "correctionId": "wec-r014-dom-html-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-dom-html-s4-w02",
+      "correctionId": "wec-r014-dom-html-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-dom-html-s4-w03",
+      "correctionId": "wec-r014-dom-html-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-dom-html-s4-w04",
+      "correctionId": "wec-r014-dom-html-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-policy-accessibility-s1-w01",
+      "correctionId": "wec-r014-policy-accessibility-s1-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r014-policy-accessibility-s1-w03",
+      "correctionId": "wec-r014-policy-accessibility-s1-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-internet-browser-s2-w01",
+      "correctionId": "wec-r015-internet-browser-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-internet-browser-s2-w02",
+      "correctionId": "wec-r015-internet-browser-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-internet-browser-s2-w05",
+      "correctionId": "wec-r015-internet-browser-s2-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-policy-accessibility-s1-w01",
+      "correctionId": "wec-r015-policy-accessibility-s1-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s3-w01",
+      "correctionId": "wec-r015-dom-html-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r015-dom-html-s3-w02",
+      "correctionId": "wec-r015-dom-html-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r015-dom-html-s3-w03",
+      "correctionId": "wec-r015-dom-html-s3-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s3-w04",
+      "correctionId": "wec-r015-dom-html-s3-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r015-dom-html-s3-w05",
+      "correctionId": "wec-r015-dom-html-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r015-dom-html-s3-w07",
+      "correctionId": "wec-r015-dom-html-s3-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r015-dom-html-s4-w01",
+      "correctionId": "wec-r015-dom-html-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s4-w03",
+      "correctionId": "wec-r015-dom-html-s4-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s4-w04",
+      "correctionId": "wec-r015-dom-html-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s4-w06",
+      "correctionId": "wec-r015-dom-html-s4-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s4-w07",
+      "correctionId": "wec-r015-dom-html-s4-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s4-w08",
+      "correctionId": "wec-r015-dom-html-s4-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r015-dom-html-s4-w10",
+      "correctionId": "wec-r015-dom-html-s4-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-internet-browser-s2-w01",
+      "correctionId": "wec-r016-internet-browser-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-internet-browser-s2-w02",
+      "correctionId": "wec-r016-internet-browser-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-policy-accessibility-s1-w04",
+      "correctionId": "wec-r016-policy-accessibility-s1-w04",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s3-w02",
+      "correctionId": "wec-r016-dom-html-s3-w02",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r016-dom-html-s3-w03",
+      "correctionId": "wec-r016-dom-html-s3-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r016-dom-html-s3-w05",
+      "correctionId": "wec-r016-dom-html-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s3-w07",
+      "correctionId": "wec-r016-dom-html-s3-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w01",
+      "correctionId": "wec-r016-dom-html-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w02",
+      "correctionId": "wec-r016-dom-html-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w03",
+      "correctionId": "wec-r016-dom-html-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w04",
+      "correctionId": "wec-r016-dom-html-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w05",
+      "correctionId": "wec-r016-dom-html-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w06",
+      "correctionId": "wec-r016-dom-html-s4-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w07",
+      "correctionId": "wec-r016-dom-html-s4-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r016-dom-html-s4-w08",
+      "correctionId": "wec-r016-dom-html-s4-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-policy-accessibility-s1-w06",
+      "correctionId": "wec-r017-policy-accessibility-s1-w06",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-internet-browser-s2-w04",
+      "correctionId": "wec-r017-internet-browser-s2-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-internet-browser-s2-w05",
+      "correctionId": "wec-r017-internet-browser-s2-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-internet-browser-s2-w06",
+      "correctionId": "wec-r017-internet-browser-s2-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-dom-html-s3-w01",
+      "correctionId": "wec-r017-dom-html-s3-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r017-dom-html-s3-w02",
+      "correctionId": "wec-r017-dom-html-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-dom-html-s3-w04",
+      "correctionId": "wec-r017-dom-html-s3-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r017-dom-html-s3-w05",
+      "correctionId": "wec-r017-dom-html-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r017-dom-html-s4-w01",
+      "correctionId": "wec-r017-dom-html-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-dom-html-s4-w02",
+      "correctionId": "wec-r017-dom-html-s4-w02",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-dom-html-s4-w03",
+      "correctionId": "wec-r017-dom-html-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r017-dom-html-s4-w05",
+      "correctionId": "wec-r017-dom-html-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-policy-assistive-s5-w01",
+      "correctionId": "wec-r018-policy-assistive-s5-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-internet-applications-s2-w01",
+      "correctionId": "wec-r018-internet-applications-s2-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-internet-applications-s2-w03",
+      "correctionId": "wec-r018-internet-applications-s2-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-internet-applications-s2-w07",
+      "correctionId": "wec-r018-internet-applications-s2-w07",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-html-css-practical-s3-w05",
+      "correctionId": "wec-r018-html-css-practical-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-html-css-practical-s4-w02",
+      "correctionId": "wec-r018-html-css-practical-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-html-css-practical-s4-w04",
+      "correctionId": "wec-r018-html-css-practical-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-html-css-practical-s4-w05",
+      "correctionId": "wec-r018-html-css-practical-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r018-html-css-practical-s4-w06",
+      "correctionId": "wec-r018-html-css-practical-s4-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-internet-applications-s2-w01",
+      "correctionId": "wec-r019-internet-applications-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-internet-applications-s2-w04",
+      "correctionId": "wec-r019-internet-applications-s2-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-internet-applications-s2-w05",
+      "correctionId": "wec-r019-internet-applications-s2-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-internet-applications-s2-w06",
+      "correctionId": "wec-r019-internet-applications-s2-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-policy-assistive-s1-w03",
+      "correctionId": "wec-r019-policy-assistive-s1-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-policy-assistive-s5-w03",
+      "correctionId": "wec-r019-policy-assistive-s5-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-policy-assistive-s5-w05",
+      "correctionId": "wec-r019-policy-assistive-s5-w05",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s3-w01",
+      "correctionId": "wec-r019-html-css-practical-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s3-w02",
+      "correctionId": "wec-r019-html-css-practical-s3-w02",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r019-html-css-practical-s3-w03",
+      "correctionId": "wec-r019-html-css-practical-s3-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r019-html-css-practical-s3-w04",
+      "correctionId": "wec-r019-html-css-practical-s3-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r019-html-css-practical-s3-w05",
+      "correctionId": "wec-r019-html-css-practical-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s4-w01",
+      "correctionId": "wec-r019-html-css-practical-s4-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s4-w02",
+      "correctionId": "wec-r019-html-css-practical-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s4-w04",
+      "correctionId": "wec-r019-html-css-practical-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s4-w05",
+      "correctionId": "wec-r019-html-css-practical-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s4-w06",
+      "correctionId": "wec-r019-html-css-practical-s4-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r019-html-css-practical-s4-w07",
+      "correctionId": "wec-r019-html-css-practical-s4-w07",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s3-w02",
+      "correctionId": "wec-r020-html-css-practical-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s3-w03",
+      "correctionId": "wec-r020-html-css-practical-s3-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s3-w06",
+      "correctionId": "wec-r020-html-css-practical-s3-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s3-w07",
+      "correctionId": "wec-r020-html-css-practical-s3-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r020-html-css-practical-s4-w03",
+      "correctionId": "wec-r020-html-css-practical-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s4-w04",
+      "correctionId": "wec-r020-html-css-practical-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s4-w07",
+      "correctionId": "wec-r020-html-css-practical-s4-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s4-w08",
+      "correctionId": "wec-r020-html-css-practical-s4-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s4-w09",
+      "correctionId": "wec-r020-html-css-practical-s4-w09",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-html-css-practical-s4-w10",
+      "correctionId": "wec-r020-html-css-practical-s4-w10",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-policy-assistive-s5-w05",
+      "correctionId": "wec-r020-policy-assistive-s5-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-policy-assistive-s5-w08",
+      "correctionId": "wec-r020-policy-assistive-s5-w08",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-internet-applications-s2-w04",
+      "correctionId": "wec-r020-internet-applications-s2-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r020-internet-applications-s2-w08",
+      "correctionId": "wec-r020-internet-applications-s2-w08",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-policy-assistive-s1-w04",
+      "correctionId": "wec-r021-policy-assistive-s1-w04",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-policy-assistive-s5-w02",
+      "correctionId": "wec-r021-policy-assistive-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-policy-assistive-s5-w03",
+      "correctionId": "wec-r021-policy-assistive-s5-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-policy-assistive-s5-w05",
+      "correctionId": "wec-r021-policy-assistive-s5-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-internet-applications-s2-w01",
+      "correctionId": "wec-r021-internet-applications-s2-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-internet-applications-s2-w02",
+      "correctionId": "wec-r021-internet-applications-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s3-w02",
+      "correctionId": "wec-r021-html-css-practical-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s3-w03",
+      "correctionId": "wec-r021-html-css-practical-s3-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r021-html-css-practical-s3-w05",
+      "correctionId": "wec-r021-html-css-practical-s3-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s4-w01",
+      "correctionId": "wec-r021-html-css-practical-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s4-w02",
+      "correctionId": "wec-r021-html-css-practical-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s4-w04",
+      "correctionId": "wec-r021-html-css-practical-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s4-w05",
+      "correctionId": "wec-r021-html-css-practical-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s4-w06",
+      "correctionId": "wec-r021-html-css-practical-s4-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s4-w07",
+      "correctionId": "wec-r021-html-css-practical-s4-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r021-html-css-practical-s4-w08",
+      "correctionId": "wec-r021-html-css-practical-s4-w08",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r022-internet-applications-s2-w06",
+      "correctionId": "wec-r022-internet-applications-s2-w06",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r022-html-css-practical-s3-w02",
+      "correctionId": "wec-r022-html-css-practical-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r022-html-css-practical-s3-w04",
+      "correctionId": "wec-r022-html-css-practical-s3-w04",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r022-html-css-practical-s3-w06",
+      "correctionId": "wec-r022-html-css-practical-s3-w06",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r022-html-css-practical-s4-w03",
+      "correctionId": "wec-r022-html-css-practical-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r022-html-css-practical-s4-w05",
+      "correctionId": "wec-r022-html-css-practical-s4-w05",
+      "decision": "accepted",
+      "revision": 4,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-policy-assistive-s1-w01",
+      "correctionId": "wec-r024-policy-assistive-s1-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-policy-assistive-s5-w02",
+      "correctionId": "wec-r024-policy-assistive-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-policy-assistive-s5-w03",
+      "correctionId": "wec-r024-policy-assistive-s5-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-policy-assistive-s5-w04",
+      "correctionId": "wec-r024-policy-assistive-s5-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-internet-applications-s2-w01",
+      "correctionId": "wec-r024-internet-applications-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-internet-applications-s2-w02",
+      "correctionId": "wec-r024-internet-applications-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-html-css-practical-s3-w02",
+      "correctionId": "wec-r024-html-css-practical-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-html-css-practical-s4-w01",
+      "correctionId": "wec-r024-html-css-practical-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-html-css-practical-s4-w02",
+      "correctionId": "wec-r024-html-css-practical-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r024-html-css-practical-s4-w03",
+      "correctionId": "wec-r024-html-css-practical-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-policy-assistive-s1-w02",
+      "correctionId": "wec-r025-policy-assistive-s1-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-policy-assistive-s5-w02",
+      "correctionId": "wec-r025-policy-assistive-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-policy-assistive-s5-w05",
+      "correctionId": "wec-r025-policy-assistive-s5-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-html-css-practical-s3-w01",
+      "correctionId": "wec-r025-html-css-practical-s3-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r025-html-css-practical-s3-w02",
+      "correctionId": "wec-r025-html-css-practical-s3-w02",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-html-css-practical-s3-w03",
+      "correctionId": "wec-r025-html-css-practical-s3-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-html-css-practical-s3-w04",
+      "correctionId": "wec-r025-html-css-practical-s3-w04",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r025-html-css-practical-s4-w01",
+      "correctionId": "wec-r025-html-css-practical-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-html-css-practical-s4-w02",
+      "correctionId": "wec-r025-html-css-practical-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-html-css-practical-s4-w03",
+      "correctionId": "wec-r025-html-css-practical-s4-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r025-html-css-practical-s4-w05",
+      "correctionId": "wec-r025-html-css-practical-s4-w05",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r026-internet-applications-s2-w02",
+      "correctionId": "wec-r026-internet-applications-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r026-internet-applications-s2-w03",
+      "correctionId": "wec-r026-internet-applications-s2-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r026-html-css-practical-s3-w01",
+      "correctionId": "wec-r026-html-css-practical-s3-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2, W3C Recommendation, 2017-12-14",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r026-html-css-practical-s3-w03",
+      "correctionId": "wec-r026-html-css-practical-s3-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r026-policy-assistive-s1-w01",
+      "correctionId": "wec-r026-policy-assistive-s1-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r026-policy-assistive-s5-w01",
+      "correctionId": "wec-r026-policy-assistive-s5-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r026-policy-assistive-s5-w02",
+      "correctionId": "wec-r026-policy-assistive-s5-w02",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r026-policy-assistive-s5-w04",
+      "correctionId": "wec-r026-policy-assistive-s5-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r027-internet-applications-s2-w01",
+      "correctionId": "wec-r027-internet-applications-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r027-internet-applications-s2-w02",
+      "correctionId": "wec-r027-internet-applications-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r027-internet-applications-s2-w03",
+      "correctionId": "wec-r027-internet-applications-s2-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r027-policy-assistive-s5-w04",
+      "correctionId": "wec-r027-policy-assistive-s5-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r027-policy-assistive-s5-w07",
+      "correctionId": "wec-r027-policy-assistive-s5-w07",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r027-html-css-practical-s3-w01",
+      "correctionId": "wec-r027-html-css-practical-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r027-html-css-practical-s3-w03",
+      "correctionId": "wec-r027-html-css-practical-s3-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r027-html-css-practical-s4-w02",
+      "correctionId": "wec-r027-html-css-practical-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r028-aria-law-s5-w01",
+      "correctionId": "wec-r028-aria-law-s5-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r028-kwcag-s1-w01",
+      "correctionId": "wec-r028-kwcag-s1-w01",
+      "decision": "accepted",
+      "revision": 4,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "recommendation": "same_goal_replacement",
+        "reason": "실제 확보한2015 KCS원문과2022 KS원문으로 기존세항목의 이동/신규분류 목표를 그대로 검증할 수 있다. 확인하지 못한2015 KS판동일성 주장만 제거하는 최소한의 판·출처교정이다.",
+        "learningGoalPreserved": true,
+        "questionStemPreserved": true,
+        "answerRolesPreserved": true,
+        "optionTextsAndExplanationsPreserved": true,
+        "componentExplanationsPreserved": true,
+        "scopeAssessment": "기존 확인된 필기범위의 국내표준 발달과정·제정/개정·버전별 구분 및 의미에 머문다. 국제 기술 성공기준 등으로 넓히지 않는다. 2022지정판을 현행 판단 기준으로 유지하고2015 KCS는 비교를 위한 역사판으로 명시한다.",
+        "scopeConflictFound": false,
+        "scopeEvidencePath": "c312-prior-scope-evidence.json",
+        "scopeLimitation": "공식2026-05-07 HWP는 이번에 새로 취득하거나 직접 읽지 않았다. 고정기준본의 동일목표 범위검토 기록을 참조한 저작 적합성 평가이며 신규독립검토자가 다시 확인해야 한다.",
+        "notAnOriginalSourcePass": "이 대체는 출처·notes·판 명시가 변경되므로 원 후보의 미완료2015 KS출처검사를 pass로 바꾸는 수단이 아니다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "r028-kwcag-s1-w02",
+      "correctionId": "wec-r028-kwcag-s1-w02",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r029-network-s2-w02",
+      "correctionId": "wec-r029-network-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r029-aria-s3-w01",
+      "correctionId": "wec-r029-aria-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r030-javascript-s4-w01",
+      "correctionId": "wec-r030-javascript-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r030-javascript-s4-w02",
+      "correctionId": "wec-r030-javascript-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r030-advertising-typography-s4-w01",
+      "correctionId": "wec-r030-advertising-typography-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-accessibility-s1-w01",
+      "correctionId": "wec-r031-accessibility-s1-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-tools-assistive-s2-w01",
+      "correctionId": "wec-r031-tools-assistive-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-tools-assistive-s5-w02",
+      "correctionId": "wec-r031-tools-assistive-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-html-css-s3-w01",
+      "correctionId": "wec-r031-html-css-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-html-css-s3-w02",
+      "correctionId": "wec-r031-html-css-s3-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-html-css-s3-w03",
+      "correctionId": "wec-r031-html-css-s3-w03",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "standardEditionChanged": false,
+        "coreGoalPreserved": "폼 컨트롤 이름 submit이 내장 submit 메서드를 가리고 단일 일치 컨트롤을 반환함을 판단",
+        "removedAssessment": "HTMLInputElement의 ordinary/non-standard exotic 및 noncallable 여부를 이용한 host typeof 문자열 판단",
+        "addedAssessment": "반환된 단일 입력 컨트롤의 현재 value 조회",
+        "learningCoverageNarrowed": true,
+        "narrowingExplanation": "host typeof 분류를 다루던 부수 평가 범위는 제외한다. core 이름 가림·동일 객체 판단은 유지하여 templateId, learningGoalId, learningGoalRevision을 보존한다.",
+        "componentIdentity": "동일 객체 비교 component-2는 유지하고 typeof component-1을 제거했다. 입력값 조회는 새 component-3이다.",
+        "notATechnicalErrorFinding": true
+      },
+      "learningScopeLoss": "host typeof classification removed; named-control shadowing and object identity retained, input value added"
+    },
+    {
+      "questionId": "r031-html-css-s4-w01",
+      "correctionId": "wec-r031-html-css-s4-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-html-css-s4-w02",
+      "correctionId": "wec-r031-html-css-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-html-css-s4-w03",
+      "correctionId": "wec-r031-html-css-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r031-html-css-s4-w04",
+      "correctionId": "wec-r031-html-css-s4-w04",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r032-primary-s2-w01",
+      "correctionId": "wec-r032-primary-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r032-primary-s2-w02",
+      "correctionId": "wec-r032-primary-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r032-primary-s4-w02",
+      "correctionId": "wec-r032-primary-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r032-primary-s4-w03",
+      "correctionId": "wec-r032-primary-s4-w03",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r032-primary-s5-w01",
+      "correctionId": "wec-r032-primary-s5-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r033-primary-s1-w02",
+      "correctionId": "wec-r033-primary-s1-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r033-primary-s2-w01",
+      "correctionId": "wec-r033-primary-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r033-primary-s3-w01",
+      "correctionId": "wec-r033-primary-s3-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r033-primary-s4-w01",
+      "correctionId": "wec-r033-primary-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r033-primary-s5-w01",
+      "correctionId": "wec-r033-primary-s5-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r033-primary-s5-w02",
+      "correctionId": "wec-r033-primary-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r034-primary-s2-w01",
+      "correctionId": "wec-r034-primary-s2-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r034-primary-s3-w01",
+      "correctionId": "wec-r034-primary-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r034-primary-s4-w01",
+      "correctionId": "wec-r034-primary-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r034-primary-s5-w01",
+      "correctionId": "wec-r034-primary-s5-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r035-primary-s3-w01",
+      "correctionId": "wec-r035-primary-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r035-primary-s5-w02",
+      "correctionId": "wec-r035-primary-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r035-primary-s4-w01",
+      "correctionId": "wec-r035-primary-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r036-primary-s3-w01",
+      "correctionId": "wec-r036-primary-s3-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "r036-primary-s5-w01",
+      "correctionId": "wec-r036-primary-s5-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r036-primary-s5-w02",
+      "correctionId": "wec-r036-primary-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r036-s4-w01",
+      "correctionId": "wec-r036-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r036-s4-w02",
+      "correctionId": "wec-r036-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r037-script-at-s4-w01",
+      "correctionId": "wec-r037-script-at-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r037-script-at-s4-w02",
+      "correctionId": "wec-r037-script-at-s4-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r039-primary-s2-w02",
+      "correctionId": "wec-r039-primary-s2-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r039-assistive-s5-w02",
+      "correctionId": "wec-r039-assistive-s5-w02",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "r041-primary-s4-w01",
+      "correctionId": "wec-r041-primary-s4-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw21-g04-w01",
+      "correctionId": "wec-pw21-g04-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw21-g05-w01",
+      "correctionId": "wec-pw21-g05-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw21-g11-w01",
+      "correctionId": "wec-pw21-g11-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw21-g14-w01",
+      "correctionId": "wec-pw21-g14-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw21-g17-w01",
+      "correctionId": "wec-pw21-g17-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw21-g18-w01",
+      "correctionId": "wec-pw21-g18-w01",
+      "decision": "accepted",
+      "revision": 4,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    },
+    {
+      "questionId": "pw22-g08-w01",
+      "correctionId": "wec-pw22-g08-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g21-w01",
+      "correctionId": "wec-pw22-g21-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g27-w01",
+      "correctionId": "wec-pw22-g27-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g28-w01",
+      "correctionId": "wec-pw22-g28-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g29-w01",
+      "correctionId": "wec-pw22-g29-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_source_verified",
+      "scopeChange": "none",
+      "learningScopeLoss": "none"
+    },
+    {
+      "questionId": "pw22-g30-w01",
+      "correctionId": "wec-pw22-g30-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g31-w01",
+      "correctionId": "wec-pw22-g31-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g32-w01",
+      "correctionId": "wec-pw22-g32-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g33-w01",
+      "correctionId": "wec-pw22-g33-w01",
+      "decision": "accepted",
+      "revision": 2,
+      "attemptCount": 1,
+      "basis": "original_closed_ledger"
+    },
+    {
+      "questionId": "pw22-g37-w01",
+      "correctionId": "wec-pw22-g37-w01",
+      "decision": "accepted",
+      "revision": 3,
+      "attemptCount": 2,
+      "basis": "replacement_verified",
+      "scopeChange": {
+        "from": "HTML 5.2 (W3C Recommendation, 2017-12-14 고정판)",
+        "to": "WHATWG HTML Living Standard (표제 Last Updated 22 October 2026; 2026-10-25 조회)",
+        "officialExamEditionEquivalenceClaimed": false,
+        "contentGoalChanged": false,
+        "currentEditionObservationDate": "2026-10-25",
+        "warning": "현재판의 보존 추출에 결박한 일반 학습 범위이며 2017년 지정판과의 동일성 또는 모든 브라우저 실측을 주장하지 않는다."
+      },
+      "learningScopeLoss": "No core learning-goal loss; actual edition/source scope is explicitly changed."
+    }
+  ],
+  "result": {
+    "bankVersion": "2026.10.25-written-explanation.local.1",
+    "bankSha256": "5e0dd2a2cb55dfbf8e53b5d9e40abf34d317a19c65f302c3ac591dd073a715d3",
+    "manifestSha256": "0ea2998a5e3851f986aabd05e534b24d6b157dafa14c8b58e4e4033866025c8c",
+    "manifest": {
+      "schemaVersion": 1,
+      "bankVersion": "2026.10.25-written-explanation.local.1",
+      "releasedAt": "2026-10-25T08:34:56.679667+00:00",
+      "file": "releases/2026.10.25-written-explanation.local.1/bank.json",
+      "sha256": "5e0dd2a2cb55dfbf8e53b5d9e40abf34d317a19c65f302c3ac591dd073a715d3",
+      "changeSummary": "필기 372개 수정안을 로컬 반영했다. 묶음 해설 368개와 반복 문구 6개(중복 2개)를 정비했고, 14개는 검증 가능한 근거에 맞춰 대체했다. 실기 84개와 비대상 문항·과거 기록을 보존한다. 공개 배포는 미승인·미실시다.",
+      "finalRelease": false
+    }
+  },
+  "publication": {
+    "status": "not_authorized",
+    "pushAttempted": false,
+    "deploymentAttempted": false,
+    "newlyPublicQuestions": 0
+  }
+}

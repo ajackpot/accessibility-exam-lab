@@ -1,11 +1,15 @@
-import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {loadRoundContext,regularCoverage,nextScheduledRoundAt} from '../scripts/validate-round.mjs';
-const root=path.resolve(import.meta.dirname,'..'),now=Date.parse('2026-10-04T09:00:00Z');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {createOwnedHistoricalAuthority}=await history.module('tests/historical-authority-fixtures.mjs');
+const {loadRoundContext,regularCoverage,nextScheduledRoundAt}=await history.module('scripts/validate-round.mjs');
+const root=history.root,now=Date.parse('2026-10-04T09:00:00Z');
 const all=await loadRoundContext(root,null,{release:true});
 // Historical scheduling fixtures stop at008; later real delivery evidence is not their source.
 const context={...all,offlineBases:new Map([...all.offlineBases].filter(([,e])=>Number(e.roundId.slice(6))<=8)),ledgers:all.ledgers.filter(r=>Number(r.roundId.slice(6))<=8),editorials:all.editorials.filter(e=>Date.parse(e.startedAt)<=now),synchronizations:all.synchronizations.filter(s=>Date.parse(s.verifiedAt)<=now)};

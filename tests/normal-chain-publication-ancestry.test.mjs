@@ -1,14 +1,18 @@
-import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 /** Synthetic structural reconciliation only. Never a real observation or pin. */
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {normalPublicationTree} from '../scripts/normal-publication.mjs';
-import {PUBLICATION_SYNCHRONIZATIONS} from '../scripts/publication-sync.mjs';
-import {ANCESTOR_PUBLICATION_TRANSITION,validateNormalChainAncestorTransition} from '../scripts/normal-chain-publication-ancestry.mjs';
-const root=path.resolve(import.meta.dirname,'..'),read=p=>fs.readFileSync(path.join(root,p)),J=x=>Buffer.from(JSON.stringify(x,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex'),G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {withCurrentReleaseAuthority}=await history.module('scripts/current-release-authority.mjs');
+const {normalPublicationTree}=await history.module('scripts/normal-publication.mjs');
+const {PUBLICATION_SYNCHRONIZATIONS}=await history.module('scripts/publication-sync.mjs');
+const {ANCESTOR_PUBLICATION_TRANSITION,validateNormalChainAncestorTransition}=await history.module('scripts/normal-chain-publication-ancestry.mjs');
+const root=history.root,read=p=>fs.readFileSync(path.join(root,p)),J=x=>Buffer.from(JSON.stringify(x,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex'),G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
 const row=(path,raw)=>({path,bytes:raw.length,sha256:H(raw),gitBlob:G(raw)}),D=rows=>rows.map(({gitBlob,...f})=>f).sort((a,b)=>a.path.localeCompare(b.path));
 function fixture(){
  const pins=PUBLICATION_SYNCHRONIZATIONS,events=pins.map(p=>JSON.parse(read(p.path))),p=events.find(e=>e.syncId==='normal-032');
@@ -67,7 +71,7 @@ const cases=[
 for(const [name,mutate]of cases)scopedTest('rejects '+name,()=>{const f=fixture();mutate(f);assert.throws(()=>run(f),/Normal-chain ancestry/);});
 
 scopedTest('successor inspector composes the explicit transition without changing its historical ledger baseline (synthetic archive descriptors only)',async()=>{
- const {inspectNormalBackupSuccessor}=await import('../scripts/normal-backup-chain.mjs'),f=fixture(),previous=f.c.previous,chain=f.c.chain,rootEntry=chain.sources[0];
+ const {inspectNormalBackupSuccessor}=await history.module('scripts/normal-backup-chain.mjs'),f=fixture(),previous=f.c.previous,chain=f.c.chain,rootEntry=chain.sources[0];
  for(const e of chain.sources)Object.assign(e.offlineBase,{manifestSha256:H(J(e.proof.deltaManifest)),baseCommit:(e.proof.publicAnchor??e.proof.continuationAnchor).baseCommit});
  Object.assign(chain,{rootProofSha256:rootEntry.proofSha256,sourceAnchor:rootEntry.proof.sourceAnchor,continuationAnchor:f.c.beforeAnchor});
  const id='round-999',bankVersion='synthetic.999',bankRaw=J({bankVersion,syntheticOnly:true}),b=previous.offlineBase;

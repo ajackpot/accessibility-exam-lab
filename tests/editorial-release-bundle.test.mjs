@@ -1,13 +1,17 @@
-import test from 'node:test';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {resolveReleaseDeliveryOwner} from '../scripts/release-bundle.mjs';
-import {freezeCompleteProject} from '../scripts/complete-bundle.mjs';
-import {loadPublicationSelections} from '../scripts/publication-selection.mjs';
-import {withCurrentReleaseAuthority,currentCutoffBlocks} from '../scripts/current-release-authority.mjs';
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {resolveReleaseDeliveryOwner}=await history.module('scripts/release-bundle.mjs');
+const {freezeCompleteProject}=await history.module('scripts/complete-bundle.mjs');
+const {loadPublicationSelections}=await history.module('scripts/publication-selection.mjs');
+const {withCurrentReleaseAuthority,currentCutoffBlocks}=await history.module('scripts/current-release-authority.mjs');
 // Synthetic owner/API fixtures only. The actual pair validates the complete campaign.
 const digest='a'.repeat(64),version='synthetic-editorial.998';
 function fixture(editorial=true){
@@ -23,7 +27,7 @@ test('ordinary pair owner keeps canonical regular path',()=>{
  const c=fixture(false),r=resolveReleaseDeliveryOwner(c,'round-998');assert.equal(r.ledger,c.ledgers[0]);assert.equal(r.ledgerPath,'docs/rounds/round-998.json');
 });
 test('actual immutable041 owner resolves to its authenticated selected bank',async()=>{
- const root=path.resolve(import.meta.dirname,'..');
+ const root=history.root;
  await withCurrentReleaseAuthority({root},async()=>{
  const publicationSelections=await loadPublicationSelections(root,{now:Date.now()});
  const ledger=JSON.parse(await fs.readFile(path.join(root,'docs/rounds/round-041.json'),'utf8'));

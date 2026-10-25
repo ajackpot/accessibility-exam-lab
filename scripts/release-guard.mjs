@@ -3,8 +3,18 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {releaseAllowed,FREEZE_AT} from '../src/domain.js';
 import {withCurrentReleaseAuthority,currentCutoffBlocks} from './current-release-authority.mjs';
+import {hasLocalWrittenIntegration} from './local-written-integration.mjs';
 const root=path.resolve(import.meta.dirname,'..');
 const args=process.argv.slice(2);const checkOnly=args.includes('--check-only');
+if(hasLocalWrittenIntegration(root)){
+  let registered=false;
+  try{await fs.access(path.join(root,'docs/publications/written-explanation-372-approval.json'));registered=true;}catch(error){if(error.code!=='ENOENT')throw error;}
+  if(!registered)throw Error('PUBLICATION BLOCKED: written-explanation-372 is authorized for local integration and validation only. Git push and public deployment are not authorized.');
+  if(args.length>1||args.some(arg=>arg!=='--check-only'))throw Error('Written publication accepts only the exact approval check; historical finalization and alternate inputs remain forbidden.');
+  const {validateWrittenPublication}=await import('./written-publication.mjs');
+  console.log(JSON.stringify(validateWrittenPublication(root)));
+  process.exit(0);
+}
 const statePath=path.join(root,'data/publication-state.json');
 let state={finalized:false};try{state=JSON.parse(await fs.readFile(statePath,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
 const manifest=JSON.parse(await fs.readFile(path.join(root,'data/manifest.json'),'utf8'));

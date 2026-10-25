@@ -1,6 +1,5 @@
-import {readEditorial005Source} from './successor-projection.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 import {pathToFileURL} from 'node:url';
-import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
 /** Exact selected source bytes plus synthetic structural receipt hashes/times.
  * These fixtures do not represent actual archives, native delivery or publication. */
 import test, {after} from 'node:test';
@@ -9,11 +8,16 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
-import {loadPublicationSelections,resolvePublicationIdentity} from '../scripts/publication-selection.mjs';
-import {inspectNormalBackupRootProof} from '../scripts/normal-backup-root.mjs';
-import {readBankInput} from '../scripts/bank-io.mjs';
-import {freezeCompleteProject} from '../scripts/complete-bundle.mjs';
-const root=path.resolve(import.meta.dirname,'..'),H=b=>createHash('sha256').update(b).digest('hex'),J=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),read=p=>fs.readFile(path.join(root,p));
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {readEditorial005Source}=await history.module('tests/successor-projection.mjs');
+const {withCurrentReleaseAuthority}=await history.module('scripts/current-release-authority.mjs');
+const {loadPublicationSelections,resolvePublicationIdentity}=await history.module('scripts/publication-selection.mjs');
+const {inspectNormalBackupRootProof}=await history.module('scripts/normal-backup-root.mjs');
+const {readBankInput}=await history.module('scripts/bank-io.mjs');
+const {freezeCompleteProject}=await history.module('scripts/complete-bundle.mjs');
+const root=history.root,H=b=>createHash('sha256').update(b).digest('hex'),J=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),read=p=>fs.readFile(path.join(root,p));
 const registries=['docs/deliveries/release-backup-trust.json','docs/deliveries/offline-chain-trust.json','docs/deliveries/normal-backup-root-trust.json','docs/deliveries/normal-backup-chain-trust.json','docs/quarantines/trust.json','docs/release-blocks/trust.json'];
 const inventory=files=>[...files].map(([path,raw])=>({path,sha256:H(raw),bytes:raw.length})).sort((a,b)=>a.path.localeCompare(b.path));
 let pending,ownedWorkRoot;

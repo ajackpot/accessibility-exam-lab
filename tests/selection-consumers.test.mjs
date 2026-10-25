@@ -1,18 +1,22 @@
-import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 /** Selection regression uses exact reviewed source bytes. Synthetic publication
  * pins and delivery proofs exist only in disposable copies, never the project. */
-import test from 'node:test';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {loadPublicationSelections,resolvePublicationIdentity,validatePublicationSelectionSnapshot,assertNoPublicationExcludedContent} from '../scripts/publication-selection.mjs';
-import {PUBLICATION_SYNCHRONIZATIONS,validatePublicationSynchronizations,validatePublicationSynchronizationSemantics} from '../scripts/publication-sync.mjs';
-import {normalPublicationTree,NORMAL_SOURCE_KEYS,SELECTED_NORMAL_SOURCE_KEYS} from '../scripts/normal-publication.mjs';
-import {regularCoverage,editorialContentHash,validateJsonSchema,nextScheduledRoundAt,FINAL_DECISION_AT} from '../scripts/validate-round.mjs';
-const root=path.resolve(import.meta.dirname,'..'),J=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex'),G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {withCurrentReleaseAuthority}=await history.module('scripts/current-release-authority.mjs');
+const {loadPublicationSelections,resolvePublicationIdentity,validatePublicationSelectionSnapshot,assertNoPublicationExcludedContent}=await history.module('scripts/publication-selection.mjs');
+const {PUBLICATION_SYNCHRONIZATIONS,validatePublicationSynchronizations,validatePublicationSynchronizationSemantics}=await history.module('scripts/publication-sync.mjs');
+const {normalPublicationTree,NORMAL_SOURCE_KEYS,SELECTED_NORMAL_SOURCE_KEYS}=await history.module('scripts/normal-publication.mjs');
+const {regularCoverage,editorialContentHash,validateJsonSchema,nextScheduledRoundAt,FINAL_DECISION_AT}=await history.module('scripts/validate-round.mjs');
+const root=history.root,J=v=>Buffer.from(JSON.stringify(v,null,2)+'\n'),H=b=>createHash('sha256').update(b).digest('hex'),G=b=>createHash('sha1').update(Buffer.concat([Buffer.from(`blob ${b.length}\0`),b])).digest('hex');
 const read=(p,base=root)=>fs.readFile(path.join(base,p));
 const inventory=files=>[...files].map(([path,raw])=>({path,bytes:raw.length,sha256:H(raw),gitBlob:G(raw)}));
 function refresh(event,files){event.remoteInventory=inventory(files);event.tree=normalPublicationTree(event.remoteInventory);event.liveAssets=event.remoteInventory.map(f=>({path:f.path,url:new URL(f.path,event.siteUrl).href,http:200,bytes:f.bytes,sha256:f.sha256}));}

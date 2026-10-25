@@ -1,15 +1,19 @@
-import {withCurrentReleaseAuthority} from '../scripts/current-release-authority.mjs';
-import {useEmptySyntheticSelectionPrefix} from './selection-fixtures.mjs';
-import {retainHistoricalQuarantinePrefix} from './quarantine-fixtures.mjs';
-import test from 'node:test';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
+import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
-import {quarantineHash,quarantineDecisionHash,quarantineContentHash,quarantineFingerprint} from '../scripts/prepublication-quarantine.mjs';
-const ROOT=path.resolve(import.meta.dirname,'..'),sha=x=>createHash('sha256').update(x).digest('hex'),json=x=>Buffer.from(JSON.stringify(x,null,2)+'\n');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {withCurrentReleaseAuthority}=await history.module('scripts/current-release-authority.mjs');
+const {useEmptySyntheticSelectionPrefix}=await history.module('tests/selection-fixtures.mjs');
+const {retainHistoricalQuarantinePrefix}=await history.module('tests/quarantine-fixtures.mjs');
+const {quarantineHash,quarantineDecisionHash,quarantineContentHash,quarantineFingerprint}=await history.module('scripts/prepublication-quarantine.mjs');
+const ROOT=history.root,sha=x=>createHash('sha256').update(x).digest('hex'),json=x=>Buffer.from(JSON.stringify(x,null,2)+'\n');
 const clone=x=>structuredClone(x),read=p=>fs.readFile(path.join(ROOT,p));
 async function write(root,p,raw){await fs.mkdir(path.dirname(path.join(root,p)),{recursive:true});await fs.writeFile(path.join(root,p),raw);}
 const trust={schemaVersion:1,kind:'reviewed_prepublication_quarantines',audits:[]};
@@ -158,8 +162,8 @@ test('frozen complete bytes require the same exact audit, original source and el
 test('registered current source keeps full campaign context through legacy and independent delivery chains',async t=>withCurrentReleaseAuthority({root:ROOT},async()=>{
  const registry=JSON.parse(await read('docs/quarantines/trust.json'));
  if(!registry.audits.length){t.skip('No installed audit in this pre-integration synthetic baseline');return;}
- const {loadRoundContext,validateReleaseLedger}=await import('../scripts/validate-round.mjs');
- const {validateOfflineContinuation}=await import('../scripts/download-fallback.mjs');
+ const {loadRoundContext,validateReleaseLedger}=await history.module('scripts/validate-round.mjs');
+ const {validateOfflineContinuation}=await history.module('scripts/download-fallback.mjs');
  const context=await loadRoundContext(ROOT,null,{release:true,now:Date.now()}),gate=validateReleaseLedger(context.ledgers,{...context,now:Date.now()});assert.equal(gate.ok,true,gate.errors.join('\n'));
  for(const pin of registry.audits){const a=JSON.parse(await read(pin.path)),d=context.quarantineDispositions.get(pin.roundId);assert.ok(d?.auditSha256s.includes(pin.sha256));assert.equal(d.counts.eligible,d.counts.accepted-d.counts.quarantined);for(const target of a.targets)assert.ok(d.quarantinedCandidateIds.includes(target.candidateId));}
  const index=JSON.parse(await read('docs/deliveries/offline-chain.json')),manifests=new Map();

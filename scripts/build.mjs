@@ -5,8 +5,10 @@ import {sha256} from '../src/domain.js';
 import {readBankInput} from './bank-io.mjs';
 import {PRACTICAL_WRITTEN,loadPracticalWrittenRegistration} from './practical-written-registration.mjs';
 import {withCurrentReleaseAuthority,currentCutoffBlocks} from './current-release-authority.mjs';
+import {hasLocalWrittenIntegration,buildLocalWrittenBank} from './local-written-integration.mjs';
 
 export async function buildBank(root,input) {
+  if(hasLocalWrittenIntegration(root))return buildLocalWrittenBank(root,input);
   return withCurrentReleaseAuthority({root},()=>buildBankInWindow(root,input));
 }
 async function buildBankInWindow(root,input) {

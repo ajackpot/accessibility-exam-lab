@@ -1,4 +1,5 @@
 import {withCurrentReleaseAuthority,assertCurrentReleaseInput} from './current-release-authority.mjs';
+import {hasLocalWrittenIntegration,validateLocalWrittenHistory} from './local-written-integration.mjs';
 import {PRACTICAL_WRITTEN,hasPracticalWrittenRegistration,loadPracticalWrittenRegistration,refreshPracticalWrittenRegistration,practicalWrittenBaselineManifest} from './practical-written-registration.mjs';
 import {loadPublicationSelections, resolvePublicationIdentity, assertNoPublicationExcludedContent} from './publication-selection.mjs';
 import {isNormalPublication} from './normal-publication.mjs';
@@ -715,6 +716,10 @@ async function loadContext(root = ROOT, input = null, {release = false, now = Da
   return {ledgers, editorials, editorialSources, editorialReports, editorialSchema, schema, banks, reviewPackages, availableFiles, publicationState, manifest, offlineBases, ledgerSources, synchronizations, resolvedArtifacts, deliveryCheckpointSources, independentOfflineChains:independent.chains, normalBackupRoots:normalRoots.roots, normalBackupChains:normalChain.chains, quarantineDispositions, publicationSelections};
 }
 export async function main(args = process.argv.slice(2)) {
+  if(hasLocalWrittenIntegration(ROOT)){
+    if(args.length!==1||args[0]!=='--release')throw Error('Local written integration accepts only --release validation; no new content or publication authority.');
+    return validateLocalWrittenHistory(ROOT);
+  }
   return withCurrentReleaseAuthority({root:ROOT}, () => withBankParsingSession(ROOT, () => runMain(args)));
 }
 async function runMain(args) {

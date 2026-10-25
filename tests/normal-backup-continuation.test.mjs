@@ -1,19 +1,23 @@
-import {createOwnedHistoricalAuthority,pruneFutureEditorialFixture} from './historical-authority-fixtures.mjs';
-import {decodeSevenZip} from '../scripts/archive-format.mjs';
-import {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory} from './quarantine-fixtures.mjs';
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {parsePublicAllowlist} from '../scripts/download-fallback.mjs';
 import {createHash} from 'node:crypto';
-import {NORMAL_BACKUP_PATH,NORMAL_BACKUP_PINS,parseNormalBackupProof,validateNormalBackupContinuation,prepareNormalBackupContinuation} from '../scripts/release-backup-continuation.mjs';
-import {loadRoundContext,validateRoundLedgers,validateReleaseLedger,regularCoverage} from '../scripts/validate-round.mjs';
-import {validateCampaignBaselines} from '../scripts/editorial-ledger.mjs';
 import {FREEZE_AT} from '../src/domain.js';
-const root=path.resolve(import.meta.dirname,'..'),hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),clone=structuredClone;
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {createOwnedHistoricalAuthority,pruneFutureEditorialFixture}=await history.module('tests/historical-authority-fixtures.mjs');
+const {decodeSevenZip}=await history.module('scripts/archive-format.mjs');
+const {retainHistoricalQuarantinePrefix,pruneHistoricalFixtureHistory}=await history.module('tests/quarantine-fixtures.mjs');
+const {parsePublicAllowlist}=await history.module('scripts/download-fallback.mjs');
+const {NORMAL_BACKUP_PATH,NORMAL_BACKUP_PINS,parseNormalBackupProof,validateNormalBackupContinuation,prepareNormalBackupContinuation}=await history.module('scripts/release-backup-continuation.mjs');
+const {loadRoundContext,validateRoundLedgers,validateReleaseLedger,regularCoverage}=await history.module('scripts/validate-round.mjs');
+const {validateCampaignBaselines}=await history.module('scripts/editorial-ledger.mjs');
+const root=history.root,hash=b=>createHash('sha256').update(b).digest('hex'),json=o=>Buffer.from(JSON.stringify(o,null,2)+'\n'),clone=structuredClone;
 const raw=await fs.readFile(path.join(root,NORMAL_BACKUP_PATH)),proof=parseNormalBackupProof(raw);
 const now=Date.parse('2026-10-04T12:00:00Z');
 // Reconstruct only this test's exact original009 boundary in an owned root.
@@ -115,7 +119,7 @@ test('default loader and explicit release context accept real010 lineage without
  // Optional independent integration uses the actual verified remote008 tree.
  // The successor remains a synthetic fixture and these temporary ZIPs are never delivered.
  if(process.env.NORMAL_BACKUP_REMOTE_BASE_ROOT){
-  const {parsePublicAllowlist}=await import('../scripts/download-fallback.mjs');
+  const {parsePublicAllowlist}=await history.module('scripts/download-fallback.mjs');
   const {writeReleaseDeliveryPair}=await import(pathToFileURL(path.join(dir,'scripts/release-bundle.mjs')));
   const allowlistPath=path.join(dir,'PUBLICATION-MANIFEST.txt');
   const paths=parsePublicAllowlist(await fs.readFile(allowlistPath,'utf8'));

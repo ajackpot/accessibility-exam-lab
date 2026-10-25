@@ -1,12 +1,16 @@
+import {createLocalPublicHistoryFixture} from './local-public-history-fixtures.mjs';
 import test, {after} from 'node:test';
-import {createOwnedHistoricalAuthority} from './historical-authority-fixtures.mjs';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import {loadRoundContext, regularCoverage} from '../scripts/validate-round.mjs';
 import {FREEZE_AT} from '../src/domain.js';
-const root=path.resolve(import.meta.dirname,'..'),currentNow=Math.max(Date.now(),Date.parse('2026-10-04T12:00:00Z')),now=Date.parse('2026-10-04T12:00:00Z');
+
+// This exact prior public-source fixture never authorizes the current local-only bank.
+const history=await createLocalPublicHistoryFixture(after);
+const {createOwnedHistoricalAuthority}=await history.module('tests/historical-authority-fixtures.mjs');
+const {loadRoundContext, regularCoverage}=await history.module('scripts/validate-round.mjs');
+const root=history.root,currentNow=Math.max(Date.now(),Date.parse('2026-10-04T12:00:00Z')),now=Date.parse('2026-10-04T12:00:00Z');
 const loaded=await loadRoundContext(root,null,{release:true,now:currentNow});
 const proof=loaded.synchronizations[0], clone=structuredClone;
 const authority=await createOwnedHistoricalAuthority({after});
