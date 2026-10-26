@@ -1,4 +1,6 @@
-import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy} from './domain.js?v=0.2.10';
+import {isRetiredPractical} from './service-visibility.js?v=0.2.10';
+import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.10';
+import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.10';
 export const MAX_BACKUP_BYTES=10*1024*1024;
 function requireValue(test,message){if(!test)throw new DomainError(message,'IMPORT');}
 const ident=x=>typeof x==='string'&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(x);
@@ -8,6 +10,7 @@ export function validateSession(s) {
   requireValue(s&&s.schemaVersion===1&&ident(s.sessionId)&&Number.isInteger(s.revision)&&s.revision>=0,'세션 ID·스키마·개정판이 올바르지 않습니다.');
   requireValue(['prepared','active','submitted','expired','abandoned','converted'].includes(s.status),'알 수 없는 세션 상태입니다.');
   const c=s.config;requireValue(c&&['timed','untimed'].includes(c.mode)&&['written','practical'].includes(c.type)&&['practice','mock'].includes(c.kind)&&['all','s1','s2','s3','s4','s5','practical'].includes(c.subjectId)&&['all','new','wrong'].includes(c.pool)&&[4,5].includes(c.optionCount),'세션 설정이 올바르지 않습니다.');
+  requireValue(c.practicalScope===undefined||['reformed','legacy'].includes(c.practicalScope),'실기 범위 설정이 올바르지 않습니다.');
   requireValue(Number.isInteger(c.count)&&c.count>=1&&c.count<=500,'세션 문항 수가 올바르지 않습니다.');
   if(c.mode==='timed')requireValue(Number.isInteger(c.minutes)&&c.minutes>=1&&c.minutes<=1440,'제한 시간이 올바르지 않습니다.');
   requireValue(ident(s.bankVersion)&&number(s.createdAt)&&typeof s.clockTrusted==='boolean','세션 메타데이터가 올바르지 않습니다.');
@@ -22,7 +25,13 @@ export function validateSession(s) {
   for(const [key,answer] of Object.entries(s.answers)) {
     const item=s.items.find(i=>i.instanceId===key);requireValue(item,'알 수 없는 문항의 답안입니다.');
     if(item.type==='written')requireValue(typeof answer==='string'&&item.options.some(o=>o.optionId===answer),'알 수 없는 필기 답안입니다.');
-    else {requireValue(answer&&typeof answer==='object'&&!Array.isArray(answer),'실기 답안 오류입니다.');for(const [pkey,value] of Object.entries(answer)){if(pkey==='freeResponse'){requireValue(typeof value==='string'&&value.length<=1000000,'서술 답안이 너무 길거나 잘못되었습니다.');continue;}const part=item.parts.find(p=>p.partId===pkey);requireValue(part,'알 수 없는 실기 세부 답안입니다.');requireValue(part.kind==='multi'?Array.isArray(value)&&new Set(value).size===value.length&&value.every(v=>part.choices.some(c=>c.id===v)):typeof value==='string'&&(part.kind==='text'||part.choices.some(c=>c.id===value)),'실기 답안 값 오류입니다.');}}
+    else {requireValue(answer&&typeof answer==='object'&&!Array.isArray(answer),'실기 답안 오류입니다.');for(const [pkey,value] of Object.entries(answer)){if(pkey==='freeResponse'){requireValue(typeof value==='string'&&value.length<=1000000,'서술 답안이 너무 길거나 잘못되었습니다.');continue;}const part=item.parts.find(p=>p.partId===pkey);requireValue(part,'알 수 없는 실기 세부 답안입니다.');requireValue(isManualPart(part)?validManualAnswer(part,value):part.kind==='multi'?Array.isArray(value)&&new Set(value).size===value.length&&value.every(v=>part.choices.some(c=>c.id===v)):typeof value==='string'&&(part.kind==='text'||part.choices.some(c=>c.id===value)),'실기 답안 값 오류입니다.');}}
+  }
+  if(s.practicalView!==undefined) {
+    requireValue(s.practicalView&&typeof s.practicalView==='object'&&!Array.isArray(s.practicalView),'실기 자료 위치 목록 오류입니다.');
+    for(const [instanceId,view] of Object.entries(s.practicalView)){const item=s.items.find(i=>i.instanceId===instanceId);requireValue(item,'알 수 없는 문항의 자료 위치입니다.');// Retired snapshots never render. Their original view metadata must not depend
+      // on compatibility source text deliberately absent from public assets.
+      validatePracticalView(item,view,requireValue,isRetiredPractical(item)?item.materials:materialsFor(item,'question'));}
   }
   for(const name of ['revealed','exported','flags'])requireValue(s[name]&&typeof s[name]==='object'&&!Array.isArray(s[name])&&Object.entries(s[name]).every(([key,value])=>ids.has(key)&&typeof value==='boolean'),`${name} 기록 오류입니다.`);
   requireValue(Array.isArray(s.attempts)&&s.attempts.length<=s.items.length,'풀이 기록 수가 올바르지 않습니다.');

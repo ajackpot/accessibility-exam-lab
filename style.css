@@ -20,3 +20,11 @@ header :focus-visible{outline-color:#fff1ac;outline-width:3px}
 .question-notes h3 { margin: 0 0 .5rem; font-size: 1rem; }
 .question-notes ul { margin: 0; padding-left: 1.4rem; }
 .question-notes li + li { margin-top: .4rem; }
+
+/* Long practical tasks keep native text controls and explicit source/part links. */
+.practical-navigation{display:block;margin:1rem 0;padding:.8rem 1rem;border:1px solid var(--line);border-radius:.4rem;background:#f5faf7}
+.practical-navigation .actions{margin:.6rem 0 0}.practical-navigation label{margin-top:0}
+.practical-specification{margin:1rem 0;padding:1rem;border-left:3px solid var(--brand);background:#f5faf7}
+.practical-specification h3{margin-top:0}.answer-part{min-width:0;scroll-margin-top:1rem}.answer-part:focus{outline:3px solid var(--focus);outline-offset:3px}
+.answer-part textarea:not(.code){min-height:6rem}.answer-part textarea.code{min-height:11rem}.reference-part{margin:1.5rem 0;padding-top:1rem;border-top:1px solid var(--line)}
+#practical-detail-text{min-height:28rem}pre.answer-text{font:inherit;max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}

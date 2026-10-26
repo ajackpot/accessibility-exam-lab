@@ -1,20 +1,22 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {eligibleQuestions,isNewSessionQuestion,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.10&pool=priority-001';
+import {eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.10&pool=priority-001';
+import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.10';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
-  return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:2,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides};
+  return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:1,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides,...(type==='practical'?{practicalScope:'reformed'}:{})};
 }
 /** Defaults for an unedited setup form, never a migration of saved/retry settings. */
 export function defaultSetupMinutes(config) {
   return config.type==='written'&&(config.kind==='mock'||config.subjectId==='all')?150:30;
 }
 /** Fresh ordinary practice prefers eligible regular content, never topping up with seeds.
- * Explicit review banks and stored snapshots continue through the original domain path. */
+ * Retired practical content is excluded even when the bank came from an older cache. */
 export function practiceSelection(bank,config,history=[]) {
   if(!bank)return {bank:null,count:0,testOnly:false};
+  bank=serviceBank(bank);
   const eligible=eligibleQuestions(bank,config,history),regular=eligible.filter(q=>!q.testOnly);
   const questions=regular.length?regular:eligible;
-  return {bank:{...bank,questions},count:new Set(questions.map(q=>q.templateId)).size,testOnly:questions.length>0&&!regular.length};
+  return {bank:{...bank,questions},count:new Set(questions.map(selectionGroupKey)).size,testOnly:questions.length>0&&!regular.length};
 }
 export function availableCount(bank,config,history=[]) {
   return practiceSelection(bank,config,history).count;
@@ -39,6 +41,7 @@ const goalKey=item=>`${item.templateId}@${item.learningGoalRevision}`;
 export function reviewEntries(sessions) {
   const latest=new Map();
   for(const session of sessions) {
+    if(hasRetiredPractical(session))continue;
     if(session.config.mode==='timed'&&!['submitted','expired'].includes(session.status))continue;
     for(const item of session.items) {
       const attempt=session.attempts.find(a=>a.instanceId===item.instanceId);
@@ -52,7 +55,8 @@ export function reviewEntries(sessions) {
 }
 export function reviewBank(bank,entries,type) {
   if(!bank)return null;
-  const keys=new Set(entries.filter(e=>e.item.type===type).map(e=>e.key));
+  bank=serviceBank(bank);
+  const keys=new Set(entries.filter(e=>!hasRetiredPractical(e.session)&&e.item.type===type).map(e=>e.key));
   return {...bank,questions:bank.questions.filter(q=>keys.has(goalKey(q))&&q.type===type)};
 }
 export function reviewPlan(bank,sessions,type) {
@@ -63,7 +67,7 @@ export function reviewPlan(bank,sessions,type) {
     const groupBank=scoped?{...scoped,questions:scoped.questions.filter(q=>!eligible.has(goalKey(q)))}:null;
     const config=practiceConfig(type,{optionCount,count:500});
     const questions=groupBank?eligibleQuestions(groupBank,config):[];
-    const count=new Set(questions.map(q=>q.templateId)).size;
+    const count=new Set(questions.map(selectionGroupKey)).size;
     questions.forEach(q=>eligible.add(goalKey(q)));
     if(count){config.count=Math.min(500,count);groups.push({bank:groupBank,config,count:config.count});}
   }
@@ -85,6 +89,7 @@ export function submitSelectedAnswers(session,now=Date.now()) {
 
 /** Display the destination before opening; do not mutate/finalize stored history here. */
 export function sessionNavigation(session,now=Date.now()) {
+  if(hasRetiredPractical(session))return {action:'보관 기록 정보',status:session.status,retired:true};
   if(session.status==='prepared')return {action:'시작 대기 확인',status:'prepared'};
   if(session.status==='active')return session.config.mode==='timed'&&timeState(session,now).expired?{action:'만료 결과 보기',status:'expired'}:{action:'이어서 풀기',status:'active'};
   return {action:'결과·답안 보기',status:session.status};

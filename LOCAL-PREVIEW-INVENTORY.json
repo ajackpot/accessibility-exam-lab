@@ -1,0 +1,100 @@
+{
+  "localOnly": true,
+  "base": {
+    "file": "data/releases/2026.10.25-written-explanation.local.1/bank.json",
+    "sha256": "5e0dd2a2cb55dfbf8e53b5d9e40abf34d317a19c65f302c3ac591dd073a715d3",
+    "commit": "a8229b46d8394eeb8d082377af230ec9ed112943"
+  },
+  "bundleSha256": "bac11126c8b1e36ff6052447c84b5521abeb69235d2f8fde62d053f8b47a5af7",
+  "bankVersion": "2026.10.25-practical-reform.local.1-service.1",
+  "questions": 929,
+  "originalQuestions": 1005,
+  "retiredPracticalOmitted": 84,
+  "writtenQuestions": 921,
+  "writtenLinks": 4571,
+  "options": 4507,
+  "sources": 1203,
+  "newPractical": 8,
+  "files": [
+    {
+      "path": "docs/NVDA-CHECKLIST.md",
+      "bytes": 10519,
+      "sha256": "d58688e64f750f959a043522e2d0aa2854af459ee6e931ef170e9c183ee475a4"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2212,
+      "sha256": "668484bf1caf580a1cde658aceef0b7a37819790b96a374bf65e30d164e63ed2"
+    },
+    {
+      "path": "src/app.js",
+      "bytes": 113109,
+      "sha256": "54c03dc3d35ce8524934a16d6eb217e4b746df66a9cf5f640daf465f3615a9b6"
+    },
+    {
+      "path": "src/backup.js",
+      "bytes": 11325,
+      "sha256": "1a7c280f3a9f2f9057d223076e03fc7307114e70a9b04369e346682930e5bc66"
+    },
+    {
+      "path": "src/domain.js",
+      "bytes": 58949,
+      "sha256": "23c1f9498b4cdb6804c80da088d9348c2a15421ce86ce5d0ae6eacee0b361475"
+    },
+    {
+      "path": "src/legacy-materials.js",
+      "bytes": 4308,
+      "sha256": "9b9db79d5d4240f9afe260296f045148c8b95eb5b1fdec8e42535b1f8dcc2935"
+    },
+    {
+      "path": "src/legacy-question-display.js",
+      "bytes": 52249,
+      "sha256": "df9d8709db27105e483312cc8b11a43cc9b3b707b485ceeadb4cc299c2712dfd"
+    },
+    {
+      "path": "src/new-session-eligibility.js",
+      "bytes": 2320,
+      "sha256": "a92cc9bd407741089027cc7d3a3fd2a060bcfa3b1f4d02b84ebd36865336a6cc"
+    },
+    {
+      "path": "src/practical-task.js",
+      "bytes": 9638,
+      "sha256": "e9399e9cb38579ecedc1f9c045dbd523adc91af88e36016c29fdcd178332e3fa"
+    },
+    {
+      "path": "src/reviewed-option-explanations.js",
+      "bytes": 30954,
+      "sha256": "f4e4f1f3a30f4b687bca548012d0181bfac5c6c3dc91d266c61ff5f60c7125ea"
+    },
+    {
+      "path": "src/service-visibility.js",
+      "bytes": 2917,
+      "sha256": "98d2dec96d37373e9d895238b8ba2b55d46e5b4aa8e1c832ee2769a6f01368a2"
+    },
+    {
+      "path": "src/storage.js",
+      "bytes": 8057,
+      "sha256": "bd6563e80705106b7870d841c432c005c4a81320e578cf179972f38a7304a3da"
+    },
+    {
+      "path": "src/workflows.js",
+      "bytes": 6622,
+      "sha256": "ce1437cc6231429f603d5897f69fdd0a9304a648c5575fa9b3754d457445b3f0"
+    },
+    {
+      "path": "style.css",
+      "bytes": 9038,
+      "sha256": "8d8485e8d9307ad7c0ecac1247533ed852dcfc773cc01bfd60e8f7780f0e887f"
+    },
+    {
+      "path": "data/releases/2026.10.25-practical-reform.local.1-service.1/bank.json",
+      "bytes": 5902625,
+      "sha256": "4aa9e8eff4426f4d075d0d7c94db2572b5b1707b54cca7da3380137a6a94a99d"
+    },
+    {
+      "path": "data/manifest.json",
+      "bytes": 452,
+      "sha256": "e4ef28935de714851e7d862e00a15401a334a6b6948f30eec5eb0d9e8eb83ae8"
+    }
+  ]
+}

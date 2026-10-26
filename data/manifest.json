@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.25-written-explanation.local.1",
-  "releasedAt": "2026-10-25T08:34:56.679667+00:00",
-  "file": "releases/2026.10.25-written-explanation.local.1/bank.json",
-  "sha256": "5e0dd2a2cb55dfbf8e53b5d9e40abf34d317a19c65f302c3ac591dd073a715d3",
-  "changeSummary": "필기 372개 수정안을 로컬 반영했다. 묶음 해설 368개와 반복 문구 6개(중복 2개)를 정비했고, 14개는 검증 가능한 근거에 맞춰 대체했다. 실기 84개와 비대상 문항·과거 기록을 보존한다. 공개 배포는 미승인·미실시다.",
+  "bankVersion": "2026.10.25-practical-reform.local.1-service.1",
+  "releasedAt": "2026-10-25T16:34:51.608Z",
+  "file": "releases/2026.10.25-practical-reform.local.1-service.1/bank.json",
+  "sha256": "4aa9e8eff4426f4d075d0d7c94db2572b5b1707b54cca7da3380137a6a94a99d",
+  "changeSummary": "로컬 서비스 미리보기: 기존 필기와 검토된 새 실기 대문항만 제공. 공개 배포 아님.",
   "finalRelease": false
 }

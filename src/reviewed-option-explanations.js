@@ -1,6 +1,4 @@
-/** Independently reviewed regular.1 display-only equivalences.
- * Exact authored source matching, including unchanged future carry-forward; no rewriting of bank, snapshots, keys or exports.
- * Each retained paragraph is one complete original field, never generated text. */
+/** Written-only compatibility data projected for the service runtime. Internal source tables remain immutable. */
 export const REVIEWED_OPTION_EXPLANATIONS = [
   {
     "sourceBankVersion": "2026.10.02-regular.1",
