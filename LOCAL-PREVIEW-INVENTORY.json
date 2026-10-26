@@ -1,21 +1,23 @@
 {
-  "localOnly": true,
-  "base": {
-    "file": "data/releases/2026.10.25-written-explanation.local.1/bank.json",
-    "sha256": "5e0dd2a2cb55dfbf8e53b5d9e40abf34d317a19c65f302c3ac591dd073a715d3",
-    "commit": "a8229b46d8394eeb8d082377af230ec9ed112943"
-  },
-  "bundleSha256": "bac11126c8b1e36ff6052447c84b5521abeb69235d2f8fde62d053f8b47a5af7",
-  "bankVersion": "2026.10.25-practical-reform.local.1-service.1",
-  "questions": 929,
-  "originalQuestions": 1005,
-  "retiredPracticalOmitted": 84,
-  "writtenQuestions": 921,
-  "writtenLinks": 4571,
-  "options": 4507,
-  "sources": 1203,
-  "newPractical": 8,
+  "schemaVersion": 1,
+  "kind": "public_service_runtime_inventory",
+  "bankVersion": "2026.10.26-scope-expansion.e01.1-service.1",
+  "bankSha256": "37c6a0494b668d50401c548f9b2c915bb463aa27d71f543b799ef77fd5d98592",
+  "writtenQuestions": 927,
+  "writtenLinkedOptions": 4601,
+  "practicalTasks": 8,
+  "retiredPracticalIncluded": 0,
   "files": [
+    {
+      "path": "data/manifest.json",
+      "bytes": 485,
+      "sha256": "6f079f9b3701089c4ebcaec502c551cf2da5486e1f612c44c7b2f5d8991b2cf7"
+    },
+    {
+      "path": "data/releases/2026.10.26-scope-expansion.e01.1-service.1/bank.json",
+      "bytes": 5952750,
+      "sha256": "37c6a0494b668d50401c548f9b2c915bb463aa27d71f543b799ef77fd5d98592"
+    },
     {
       "path": "docs/NVDA-CHECKLIST.md",
       "bytes": 10519,
@@ -85,16 +87,6 @@
       "path": "style.css",
       "bytes": 9038,
       "sha256": "8d8485e8d9307ad7c0ecac1247533ed852dcfc773cc01bfd60e8f7780f0e887f"
-    },
-    {
-      "path": "data/releases/2026.10.25-practical-reform.local.1-service.1/bank.json",
-      "bytes": 5902625,
-      "sha256": "4aa9e8eff4426f4d075d0d7c94db2572b5b1707b54cca7da3380137a6a94a99d"
-    },
-    {
-      "path": "data/manifest.json",
-      "bytes": 452,
-      "sha256": "e4ef28935de714851e7d862e00a15401a334a6b6948f30eec5eb0d9e8eb83ae8"
     }
   ]
 }

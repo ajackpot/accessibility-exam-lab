@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.25-practical-reform.local.1-service.1",
-  "releasedAt": "2026-10-25T16:34:51.608Z",
-  "file": "releases/2026.10.25-practical-reform.local.1-service.1/bank.json",
-  "sha256": "4aa9e8eff4426f4d075d0d7c94db2572b5b1707b54cca7da3380137a6a94a99d",
-  "changeSummary": "로컬 서비스 미리보기: 기존 필기와 검토된 새 실기 대문항만 제공. 공개 배포 아님.",
+  "bankVersion": "2026.10.26-scope-expansion.e01.1-service.1",
+  "releasedAt": "2026-10-26T12:18:18.889Z",
+  "file": "releases/2026.10.26-scope-expansion.e01.1-service.1/bank.json",
+  "sha256": "37c6a0494b668d50401c548f9b2c915bb463aa27d71f543b799ef77fd5d98592",
+  "changeSummary": "필기 범위 확장 E01: 확대·재배치·텍스트 간격, 사용자 색상·동작 선호, 모바일 웹의 화면·입력 보존 6문항 추가.",
   "finalRelease": false
 }
