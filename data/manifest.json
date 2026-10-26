@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-expansion.e03.1-service.1",
-  "releasedAt": "2026-10-26T16:27:13.694Z",
-  "file": "releases/2026.10.27-scope-expansion.e03.1-service.1/bank.json",
-  "sha256": "631c1cfc0f294dcbfb75341117573af1067258e7cca9d79c0d2330d4df9028c9",
-  "changeSummary": "필기 범위 확장 E03: 비동기 처리·실패 회복·인증과 도움·요청과 이용 결과의 독립 검토 통과 11문항 추가.",
+  "bankVersion": "2026.10.27-scope-expansion.e01s.1-service.1",
+  "releasedAt": "2026-10-26T17:29:09.111Z",
+  "file": "releases/2026.10.27-scope-expansion.e01s.1-service.1/bank.json",
+  "sha256": "8c024874ee2b5002413a1d4dd7a41f1716840c38e580aec402c554d85a6d1309",
+  "changeSummary": "필기 E01 보완: 고정 요소 가림의 정보·조작 및 초점 보존에 관한 독립 검토 통과 2문항 추가.",
   "finalRelease": false
 }
