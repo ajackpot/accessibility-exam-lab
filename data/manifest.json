@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-expansion.e06.1-service.1",
-  "releasedAt": "2026-10-26T20:19:41.014Z",
-  "file": "releases/2026.10.27-scope-expansion.e06.1-service.1/bank.json",
-  "sha256": "d60bab74434e8413a9914cd992dbf715ed9f30095902a150881d74734ab2f084",
-  "changeSummary": "필기 E06 표·차트·지도·수식·문서·미디어 정보 보존에 관한 독립 검토 통과 15문항 추가.",
+  "bankVersion": "2026.10.27-scope-expansion.e07.1-service.1",
+  "releasedAt": "2026-10-26T21:49:42.538Z",
+  "file": "releases/2026.10.27-scope-expansion.e07.1-service.1/bank.json",
+  "sha256": "e5858d511a605d6be49fba70875285d8386d4983a4b4dde48400013d39097efe",
+  "changeSummary": "E07 장르별 범용 조건 및 기존 지식의 실기 서비스 소재: 독립 검토 통과 10문항 추가.",
   "finalRelease": false
 }

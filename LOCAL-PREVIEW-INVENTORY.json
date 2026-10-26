@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.27-scope-expansion.e06.1-service.1",
-  "bankSha256": "d60bab74434e8413a9914cd992dbf715ed9f30095902a150881d74734ab2f084",
-  "writtenQuestions": 994,
-  "writtenLinkedOptions": 4936,
-  "practicalTasks": 8,
+  "bankVersion": "2026.10.27-scope-expansion.e07.1-service.1",
+  "bankSha256": "e5858d511a605d6be49fba70875285d8386d4983a4b4dde48400013d39097efe",
+  "writtenQuestions": 1002,
+  "writtenLinkedOptions": 4976,
+  "practicalTasks": 10,
   "retiredPracticalIncluded": 0,
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 454,
-      "sha256": "26a4c2ceeb5c35014c9f5e0ea3553090508f7f98d4efddf016e3cd4046a298ad"
+      "bytes": 446,
+      "sha256": "32c8258370827c56d6adf8ecb9a9382abe5340badfce171b7bd34088e35fa729"
     },
     {
-      "path": "data/releases/2026.10.27-scope-expansion.e06.1-service.1/bank.json",
-      "bytes": 6403409,
-      "sha256": "d60bab74434e8413a9914cd992dbf715ed9f30095902a150881d74734ab2f084"
+      "path": "data/releases/2026.10.27-scope-expansion.e07.1-service.1/bank.json",
+      "bytes": 6511586,
+      "sha256": "e5858d511a605d6be49fba70875285d8386d4983a4b4dde48400013d39097efe"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
@@ -30,8 +30,8 @@
     },
     {
       "path": "src/app.js",
-      "bytes": 113109,
-      "sha256": "54c03dc3d35ce8524934a16d6eb217e4b746df66a9cf5f640daf465f3615a9b6"
+      "bytes": 113157,
+      "sha256": "0fda32729ecdb93828579b37ffb8807578f1bc375f8fc25dfaaae6fd38424429"
     },
     {
       "path": "src/backup.js",
