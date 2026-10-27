@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-expansion.e07.1-service.1",
-  "releasedAt": "2026-10-26T21:49:42.538Z",
-  "file": "releases/2026.10.27-scope-expansion.e07.1-service.1/bank.json",
-  "sha256": "e5858d511a605d6be49fba70875285d8386d4983a4b4dde48400013d39097efe",
-  "changeSummary": "E07 장르별 범용 조건 및 기존 지식의 실기 서비스 소재: 독립 검토 통과 10문항 추가.",
+  "bankVersion": "2026.10.27-scope-expansion.e08.1-service.1",
+  "releasedAt": "2026-10-26T23:53:02.445Z",
+  "file": "releases/2026.10.27-scope-expansion.e08.1-service.1/bank.json",
+  "sha256": "ebb5cade415b165eefb6e653f08ab9df8f406ea74f3be116ef62014cbf2de7e4",
+  "changeSummary": "E08 CMS·운영·조달·조직 위험: 독립 검토 통과 16문항 추가.",
   "finalRelease": false
 }
