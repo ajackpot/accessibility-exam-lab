@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-expansion.e08.1-service.1",
-  "releasedAt": "2026-10-26T23:53:02.445Z",
-  "file": "releases/2026.10.27-scope-expansion.e08.1-service.1/bank.json",
-  "sha256": "ebb5cade415b165eefb6e653f08ab9df8f406ea74f3be116ef62014cbf2de7e4",
-  "changeSummary": "E08 CMS·운영·조달·조직 위험: 독립 검토 통과 16문항 추가.",
+  "bankVersion": "2026.10.27-scope-supplement.a01.2-service.1",
+  "releasedAt": "2026-10-27T04:43:10.981781+00:00",
+  "file": "releases/2026.10.27-scope-supplement.a01.2-service.1/bank.json",
+  "sha256": "a00312019675e192f1cef60d17c0c0686169b5d9b54d9c87474f731da0095781",
+  "changeSummary": "모바일 앱 접근성 지침 KS X 3253:2025의 적용 범위와 핵심 요구를 판단하는 필기 6문항을 추가했습니다.",
   "finalRelease": false
 }

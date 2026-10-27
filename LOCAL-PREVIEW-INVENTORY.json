@@ -1,25 +1,37 @@
 {
   "schemaVersion": 1,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.27-scope-expansion.e08.1-service.1",
-  "bankSha256": "ebb5cade415b165eefb6e653f08ab9df8f406ea74f3be116ef62014cbf2de7e4",
-  "writtenQuestions": 1018,
-  "writtenLinkedOptions": 5056,
+  "bankVersion": "2026.10.27-scope-supplement.a01.2-service.1",
+  "bankSha256": "a00312019675e192f1cef60d17c0c0686169b5d9b54d9c87474f731da0095781",
+  "writtenQuestions": 1024,
+  "regularWrittenQuestions": 1014,
+  "testOnlyWrittenQuestions": 10,
+  "writtenLinkedOptions": 5086,
   "practicalTasks": 10,
-  "freshWrittenQuestions": 1010,
+  "regularPracticalTasks": 10,
+  "testOnlyPracticalTasks": 0,
+  "freshWrittenQuestions": 1016,
+  "freshRegularWrittenQuestions": 1006,
+  "freshTestOnlyWrittenQuestions": 10,
   "freshPracticalTasks": 10,
+  "freshRegularPracticalTasks": 10,
+  "freshTestOnlyPracticalTasks": 0,
+  "freshCountsIncludeTestOnly": true,
   "retiredPracticalIncluded": 0,
-  "eligibilityPolicyId": "scope-expansion-e09-001",
+  "eligibilityPolicyIds": [
+    "existing-priority-001",
+    "scope-expansion-e09-001"
+  ],
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 412,
-      "sha256": "39427f9eec744680c27ce21a92d7c663cf7812e44be098cd91e873c18b72d377"
+      "bytes": 478,
+      "sha256": "739f814bd242be089b859a7773ed2fd7a8b7a3616b64991c89add68a650b0622"
     },
     {
-      "path": "data/releases/2026.10.27-scope-expansion.e08.1-service.1/bank.json",
-      "bytes": 6612014,
-      "sha256": "ebb5cade415b165eefb6e653f08ab9df8f406ea74f3be116ef62014cbf2de7e4"
+      "path": "data/releases/2026.10.27-scope-supplement.a01.2-service.1/bank.json",
+      "bytes": 6658834,
+      "sha256": "a00312019675e192f1cef60d17c0c0686169b5d9b54d9c87474f731da0095781"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
