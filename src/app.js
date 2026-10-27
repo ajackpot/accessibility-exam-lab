@@ -3,6 +3,7 @@ import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.10';
 import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.10&pool=priority-001';
 import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.10';
 import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.10';
+import {MAJOR_SITE_GROUPS} from './major-sites.js?v=2026.10.27';
 const $=id=>document.getElementById(id);
 const state={bankLoading:true,noticeGeneration:0,starting:false,section:'home',route:null,restoring:false,openGeneration:0,store:null,bank:null,bundle:null,sessions:[],session:null,editor:null,view:'home',queue:Promise.resolve(),storageFailed:false,unsaved:null,anchor:null,warningKeys:new Set(),settings:{timerWarnings:true}};
 const subjectName=id=>SUBJECTS.find(s=>s.id===id)?.name||'웹접근성 실기중급';
@@ -131,13 +132,24 @@ async function restoreRoute(route){
     else if(r.name==='history')await renderHistory();
     else if(r.name==='bank')renderBank();
     else if(r.name==='manage')await renderManage();
+    else if(r.name==='major-sites')renderMajorSites();
     else if(r.name==='session'&&r.args.id){const opened=await openSession(r.args.id);if(request===state.routeRequest&&opened&&state.session?.sessionId===r.args.id&&(state.session.status!=='active'||state.editor?.acquired)){if(r.args.view==='finish'&&state.session.status==='active')await renderFinish();else if(r.args.view==='list'&&state.session.status==='active')await renderQuestionList();else if(r.args.view==='extend'&&state.session.status==='active')renderExtend();else if(r.args.view==='convert'&&state.session.status==='active')renderConvert();else if(['review','prompt','reference','prompt-full'].includes(r.args.view)){const item=state.session.items.find(i=>i.instanceId===r.args.item);if(item){if(r.args.view==='review')await renderReview(state.session,item);else if(r.args.view==='prompt')await renderPrompt(item,r.args);else await renderPracticalDetail(item,r.args.view,r.args);}}}}
     else await renderHome();
   };const moved=sameSession?(await visit(),true):await leave(visit);if(!moved)history.pushState({examRoute:state.route},'',`#${state.route?.name||'home'}`);else if(detailReturn&&request===state.routeRequest&&r.name==='session'&&r.args.id===detailReturn.sessionId){queueMicrotask(()=>{const target=document.getElementById(detailReturn.openerId)||document.getElementById('view-title');target?.focus({preventScroll:true});window.scrollTo(0,detailReturn.scrollY||0);});}
   }finally{if(request===state.routeRequest)state.restoring=false;}
 }
 window.addEventListener('popstate',event=>{restoreRoute(event.state?.examRoute).catch(showError);});
-function installNavigation(){const nav=$('navigation');nav.replaceChildren(...[['home','홈',renderHome],['review','오답 복습',renderWrong],['history','학습 기록',renderHistory],['bank','문제 은행',renderBank],['manage','백업 · 설정',renderManage]].map(([section,title,render])=>button(title,()=>leave(()=>render()),{'data-section':section})));}
+function installNavigation(){const nav=$('navigation');nav.replaceChildren(...[['home','홈',renderHome],['review','오답 복습',renderWrong],['history','학습 기록',renderHistory],['bank','문제 은행',renderBank],['manage','백업 · 설정',renderManage],['major-sites','주요 사이트',renderMajorSites]].map(([section,title,render])=>button(title,()=>leave(()=>render()),{'data-section':section})));}
+function renderMajorSites(){
+  state.section='major-sites';rememberRoute('major-sites');
+  screen('주요 사이트',
+    node('p',{},'문제 출제와 해설에 사용한 주요 출처입니다. 문항마다 적용하는 판본과 조항이 다를 수 있으므로 개별 해설의 출처도 함께 확인하세요.'),
+    ...MAJOR_SITE_GROUPS.map(group=>node('section',{'aria-labelledby':`major-sites-${group.id}`},
+      node('h3',{id:`major-sites-${group.id}`},group.title),
+      node('ul',{},group.sites.map(site=>node('li',{},
+        node('a',{href:site.url},site.name),node('p',{},site.description)))))),
+    actions(homeLink()));
+}
 function updateContentNotice(){const target=$('content-context');if(!target||!state.bank)return;const published=state.bank.questions.filter(q=>isNewSessionQuestion(state.bank,q)),tests=published.filter(q=>q.testOnly).length,learning=published.length-tests;target.replaceChildren(node('strong',{},learning?`새 연습 일반 학습 ${learning}문항 · 체험용 테스트 ${tests}문항`:`체험용 테스트 문항 ${tests}개`),document.createTextNode(learning?' · 비공식 학습 자료입니다. 체험용 결과는 일반 학습 통계와 분리합니다.':' · 비공식 미리보기입니다. 일반 학습 통계와 분리되며 실제 시험 대비 분량은 아직 준비 중입니다.'));}
 function homeLink(){return button('홈으로',()=>leave(renderHome),{class:'secondary'});}
 function helpDetails(title,...content){return node('details',{},node('summary',{},title),...content);}

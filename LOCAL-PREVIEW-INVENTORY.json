@@ -30,8 +30,8 @@
     },
     {
       "path": "src/app.js",
-      "bytes": 113157,
-      "sha256": "0fda32729ecdb93828579b37ffb8807578f1bc375f8fc25dfaaae6fd38424429"
+      "bytes": 113971,
+      "sha256": "b440c75afde3dfaa2e4de1d422049684f64fcbcc3504856910de778d9b3009d4"
     },
     {
       "path": "src/backup.js",
@@ -52,6 +52,11 @@
       "path": "src/legacy-question-display.js",
       "bytes": 52249,
       "sha256": "df9d8709db27105e483312cc8b11a43cc9b3b707b485ceeadb4cc299c2712dfd"
+    },
+    {
+      "path": "src/major-sites.js",
+      "bytes": 9875,
+      "sha256": "dbb1dc96f6375664235e0c2f2d537b5c007b4faaf2efc1311f8148979094ea52"
     },
     {
       "path": "src/new-session-eligibility.js",
