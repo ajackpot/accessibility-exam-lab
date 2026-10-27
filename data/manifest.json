@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-supplement.a01.2-service.1",
-  "releasedAt": "2026-10-27T04:43:10.981781+00:00",
-  "file": "releases/2026.10.27-scope-supplement.a01.2-service.1/bank.json",
-  "sha256": "a00312019675e192f1cef60d17c0c0686169b5d9b54d9c87474f731da0095781",
-  "changeSummary": "모바일 앱 접근성 지침 KS X 3253:2025의 적용 범위와 핵심 요구를 판단하는 필기 6문항을 추가했습니다.",
+  "bankVersion": "2026.10.27-scope-supplement.a02.1-service.1",
+  "releasedAt": "2026-10-27T07:52:01.979540+00:00",
+  "file": "releases/2026.10.27-scope-supplement.a02.1-service.1/bank.json",
+  "sha256": "7a594ed6d208325585b66fa4df54968f45cbc1afa0724f7de3a03ff256924524",
+  "changeSummary": "보조기술의 선택 항목 활성화와 실제 터치 판정 영역의 측정 근거를 구별하는 필기 1문항을 추가했습니다.",
   "finalRelease": false
 }
