@@ -1,4 +1,4 @@
-import {DomainError,copy,validateBank,sha256,SCHEMA_VERSION} from './domain.js?v=0.2.10&pool=priority-001&scope=e09-001&materials=a04-001';
+import {DomainError,copy,validateBank,sha256,SCHEMA_VERSION} from './domain.js?v=0.2.11&pool=priority-001&scope=e09-001&materials=a04-001';
 const DB_NAME='accessibility-exam-lab';
 export class StorageError extends Error {constructor(message,code='STORAGE'){super(message);this.name='StorageError';this.code=code;}}
 export async function openStore(factory=globalThis.indexedDB) {
@@ -16,6 +16,12 @@ export class Store {
     return new Promise((resolve,reject)=>{const tx=this.db.transaction('sessions','readwrite'),store=tx.objectStore('sessions'),req=store.get(sessionId);let result,error;
       req.onsuccess=()=>{try{const current=req.result;if(!current)throw new StorageError('세션을 찾을 수 없습니다.','MISSING');if(current.revision!==expectedRevision)throw new StorageError('다른 탭에서 답안이 변경되었습니다. 이 탭의 저장을 멈췄습니다. 최신 기록을 다시 열어 주세요.','CONFLICT');result=mutator(copy(current));if(result.sessionId!==sessionId)throw new StorageError('세션 식별자를 바꿀 수 없습니다.');result.revision=current.revision+1;store.put(result);}catch(e){error=e;tx.abort();}};
       tx.oncomplete=()=>resolve(result);tx.onerror=()=>reject(error||new StorageError('답안을 저장하지 못했습니다. 저장 공간과 브라우저 설정을 확인하세요.'));tx.onabort=()=>reject(error||new StorageError('저장되지 않았습니다. 입력 내용은 화면에 남아 있습니다. 백업 후 다시 시도하세요.'));
+    });
+  }
+  async continuePractical(oldId,revision,make) {
+    return new Promise((resolve,reject)=>{const tx=this.db.transaction('sessions','readwrite'),store=tx.objectStore('sessions'),read=store.get(oldId);let result,error;
+      read.onsuccess=()=>{try{const source=read.result;if(!source||source.revision!==revision)throw new StorageError('원본 기록이 다른 탭에서 변경되었습니다. 최신 기록을 다시 여세요.','CONFLICT');const all=store.getAll();all.onsuccess=()=>{try{const existing=all.result.filter(s=>s.continuedFrom===oldId);if(existing.length){if(existing.length!==1||existing[0].continuationSourceRevision!==revision)throw new StorageError('원본과 이어하기 기록의 연결을 확인하세요.','CONFLICT');result=existing[0];return;}result=make(copy(source));if(result.sessionId===oldId||result.continuedFrom!==oldId||result.continuationSourceRevision!==revision)throw new StorageError('이어하기 원본 연결이 올바르지 않습니다.');store.add(result);}catch(e){error=e;tx.abort();}};}catch(e){error=e;tx.abort();}};
+      tx.oncomplete=()=>resolve(result);tx.onerror=tx.onabort=()=>reject(error||new StorageError('이어하기를 저장하지 못했습니다. 원본 기록은 유지됩니다.'));
     });
   }
   async convert(oldId,revision,mutator){return new Promise((resolve,reject)=>{const tx=this.db.transaction('sessions','readwrite'),store=tx.objectStore('sessions'),r=store.get(oldId);let result,error;r.onsuccess=()=>{try{if(r.result?.revision!==revision)throw new StorageError('다른 탭과 변경 충돌이 있습니다. 최신 기록을 열어 주세요.','CONFLICT');result=mutator(copy(r.result));result.old.revision=revision+1;store.put(result.old);store.add(result.next);}catch(e){error=e;tx.abort();}};tx.oncomplete=()=>resolve(result);tx.onabort=tx.onerror=()=>reject(error||new StorageError('전환 저장에 실패했습니다. 기존 시간제는 유지됩니다.'));});}

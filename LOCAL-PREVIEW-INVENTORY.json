@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.27-scope-supplement.a04.1-service.1",
-  "bankSha256": "a09bbe5e6a2c2fc8899cb93e5ea1519c868de91769e2ad36d7fadf7cacd412a6",
+  "bankVersion": "2026.10.27-practical-unscored.p01.1-service.1",
+  "bankSha256": "4b535f72251c769d9cf679388725647b6e83f0e169c21ed4afc1a0a6f96f6717",
   "writtenQuestions": 1031,
   "regularWrittenQuestions": 1021,
   "testOnlyWrittenQuestions": 10,
@@ -25,13 +25,13 @@
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 504,
-      "sha256": "9a4cefb1d2d4b106eb13ccebde32c64ed2c1aecc5e1d1efbbc204067b1ef3447"
+      "bytes": 521,
+      "sha256": "1ba60b87dc61fad709b307d485d548e87cf6755a9a40dfb2113104adc43351f5"
     },
     {
-      "path": "data/releases/2026.10.27-scope-supplement.a04.1-service.1/bank.json",
-      "bytes": 6719445,
-      "sha256": "a09bbe5e6a2c2fc8899cb93e5ea1519c868de91769e2ad36d7fadf7cacd412a6"
+      "path": "data/releases/2026.10.27-practical-unscored.p01.1-service.1/bank.json",
+      "bytes": 6708742,
+      "sha256": "4b535f72251c769d9cf679388725647b6e83f0e169c21ed4afc1a0a6f96f6717"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
@@ -40,23 +40,23 @@
     },
     {
       "path": "index.html",
-      "bytes": 2262,
-      "sha256": "a0b6b85ef018d3c07f036437364186f50a376c1e6e9884dcb8535dd85e54d3f1"
+      "bytes": 2298,
+      "sha256": "e6dc3fc5b309f12bb1ca2e5cbbb9ada6dd90956a48ca8e768a02f369b240b0c6"
     },
     {
       "path": "src/app.js",
-      "bytes": 116283,
-      "sha256": "52e5b6fd4fda586b170de1037fa58cd9510ee7e950aeaf3c7f1601eff9186869"
+      "bytes": 127246,
+      "sha256": "c476811c03427fc066795e0f68240c3399f8e8b3b6afe35e6071eef787ec3ec6"
     },
     {
       "path": "src/backup.js",
-      "bytes": 11375,
-      "sha256": "835e8c693324fafcf4403794eacb15e933595e270fcee7f1db198155e05eaa21"
+      "bytes": 12289,
+      "sha256": "80c0cc45c42c8091b11fabc5db9015613927f7f9dcb2cf95920fc14c6fba5d0d"
     },
     {
       "path": "src/domain.js",
-      "bytes": 59649,
-      "sha256": "02d23fbafa406292dabd8fb57135357232967af2dbd405ca7141190d28c438bb"
+      "bytes": 65666,
+      "sha256": "2288a8249b47e8c23b967b58805a34d531d495948f16ddb82b95603a31fff5a3"
     },
     {
       "path": "src/legacy-materials.js",
@@ -85,8 +85,8 @@
     },
     {
       "path": "src/practical-task.js",
-      "bytes": 9638,
-      "sha256": "e9399e9cb38579ecedc1f9c045dbd523adc91af88e36016c29fdcd178332e3fa"
+      "bytes": 16280,
+      "sha256": "2764516c8d3adc0589622a40ce6ba35eb74baab3a446cf9147590bbef5f1dd5d"
     },
     {
       "path": "src/reviewed-option-explanations.js",
@@ -105,18 +105,20 @@
     },
     {
       "path": "src/storage.js",
-      "bytes": 8107,
-      "sha256": "9bf3a325d589bbbfca8ece7a3b9b72123a936ef81f2e6d565145a540fcf71636"
+      "bytes": 9364,
+      "sha256": "2c3b76313ec80bcb9cde33387890b092373a1f130eb091cce92d52f0e7eeaf97"
     },
     {
       "path": "src/workflows.js",
-      "bytes": 6654,
-      "sha256": "a1f46cd2f9f0f0227cf086ed028110d746b88db2f57fad61a564f2a2b66b639d"
+      "bytes": 6902,
+      "sha256": "557d932343353f8e0f1fc337c92845e2a39172e4a2699784aab46f134e39456f"
     },
     {
       "path": "style.css",
       "bytes": 9758,
       "sha256": "09fcc71f051b977f6bf0966fe8eb9d258e6323e1bb389b9b1fbb3b343e11edf1"
     }
-  ]
+  ],
+  "practicalAssessmentMode": "unscored",
+  "practicalManualAnswerItems": 41
 }

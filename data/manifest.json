@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-supplement.a04.1-service.1",
-  "releasedAt": "2026-10-27T11:31:09.963820+00:00",
-  "file": "releases/2026.10.27-scope-supplement.a04.1-service.1/bank.json",
-  "sha256": "a09bbe5e6a2c2fc8899cb93e5ea1519c868de91769e2ad36d7fadf7cacd412a6",
-  "changeSummary": "키보드 초점·스위치 스캔·자동 안내의 순차 동작 기록을 판단하는 필기 3개와 접근 가능한 기록 보기 지원을 추가했다.",
+  "bankVersion": "2026.10.27-practical-unscored.p01.1-service.1",
+  "releasedAt": "2026-10-27T14:22:44.734697+00:00",
+  "file": "releases/2026.10.27-practical-unscored.p01.1-service.1/bank.json",
+  "sha256": "4b535f72251c769d9cf679388725647b6e83f0e169c21ed4afc1a0a6f96f6717",
+  "changeSummary": "실기 10개를 무채점 자율 학습으로 전환하고 자동 부가문항 8개를 제거했다. 필기와 기존 자료·모범 답안·해설·기록은 보존한다.",
   "finalRelease": false
 }

@@ -1,6 +1,6 @@
-import {isRetiredPractical} from './service-visibility.js?v=0.2.10';
-import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.10&pool=priority-001&scope=e09-001&materials=a04-001';
-import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.10';
+import {isRetiredPractical} from './service-visibility.js?v=0.2.11';
+import {assertSafeData,DomainError,isUnscoredPractical,isUnscoredPracticalSession,matchesHistoricalPracticalGrade,matchesHistoricalPracticalResult,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.11&pool=priority-001&scope=e09-001&materials=a04-001';
+import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.11';
 export const MAX_BACKUP_BYTES=10*1024*1024;
 function requireValue(test,message){if(!test)throw new DomainError(message,'IMPORT');}
 const ident=x=>typeof x==='string'&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(x);
@@ -21,6 +21,8 @@ export function validateSession(s) {
     if(item.type==='written') {requireValue([4,5].includes(options.length)&&new Set(options.map(o=>o.optionId)).size===options.length&&options.filter(o=>o.role==='correct').length===1&&options.some(o=>o.optionId===item.correctOptionId&&o.role==='correct'),'스냅샷 정답이 유일하지 않습니다.');q.links=options.map(o=>({optionId:o.optionId,optionRevision:o.revision,role:o.role,contextExplanation:o.contextExplanation,compatibilitySetId:'snapshot'}));q.supportedOptionCounts=[options.length];}
     validateBank({schemaVersion:item.bankSchemaVersion??1,bankVersion:s.bankVersion,releasedAt:new Date(s.createdAt).toISOString(),syllabusVersion:'snapshot',changeSummary:'backup snapshot',subjects:SUBJECTS,sources:item.sources,options,questions:[q],corrections:[]});
   }
+  const unscored=isUnscoredPracticalSession(s);requireValue(!s.items.some(isUnscoredPractical)||unscored,'무채점 실기와 이전 실기를 한 세션에 섞을 수 없습니다.');
+  if(['continuedFrom','continuationSourceRevision','continuedAt'].some(key=>s[key]!==undefined))requireValue(unscored&&ident(s.continuedFrom)&&s.continuedFrom!==s.sessionId&&Number.isInteger(s.continuationSourceRevision)&&s.continuationSourceRevision>=0&&number(s.continuedAt),'이어하기 원본 연결 오류입니다.');
   requireValue(s.answers&&typeof s.answers==='object'&&!Array.isArray(s.answers),'답안 객체 오류입니다.');
   for(const [key,answer] of Object.entries(s.answers)) {
     const item=s.items.find(i=>i.instanceId===key);requireValue(item,'알 수 없는 문항의 답안입니다.');
@@ -35,14 +37,15 @@ export function validateSession(s) {
   }
   for(const name of ['revealed','exported','flags'])requireValue(s[name]&&typeof s[name]==='object'&&!Array.isArray(s[name])&&Object.entries(s[name]).every(([key,value])=>ids.has(key)&&typeof value==='boolean'),`${name} 기록 오류입니다.`);
   requireValue(Array.isArray(s.attempts)&&s.attempts.length<=s.items.length,'풀이 기록 수가 올바르지 않습니다.');
-  const attemptIds=new Set();for(const a of s.attempts){const item=s.items.find(i=>i.instanceId===a.instanceId);requireValue(item&&!attemptIds.has(a.instanceId)&&a.sessionId===s.sessionId&&a.attemptId===`${s.sessionId}:${item.instanceId}`,'중복되거나 연결이 끊긴 풀이 기록입니다.');attemptIds.add(a.instanceId);requireValue(a.questionId===item.questionId&&a.revision===item.revision&&a.key===`${item.templateId}@${item.learningGoalRevision}`&&a.templateId===item.templateId&&a.learningGoalRevision===item.learningGoalRevision&&a.subjectId===item.subjectId&&a.type===item.type&&a.testOnly===item.testOnly&&a.mode===c.mode&&JSON.stringify(a.topicIds)===JSON.stringify(item.topicIds),'풀이 분류가 스냅샷과 다릅니다.');requireValue(JSON.stringify(a.grade)===JSON.stringify(grade(item,a.answer))&&JSON.stringify(a.answer)===JSON.stringify(s.answers[item.instanceId]??null),'저장된 답안·채점 결과가 일치하지 않습니다.');requireValue(number(a.confirmedAt)&&typeof a.revealedBefore==='boolean'&&typeof a.exportedBefore==='boolean'&&typeof a.converted==='boolean','풀이 시각과 도움 기록 오류입니다.');}
+  if(unscored)requireValue(s.attempts.length===0,'무채점 실기에 채점 기록이 포함되었습니다.');
+  const attemptIds=new Set();for(const a of s.attempts){const item=s.items.find(i=>i.instanceId===a.instanceId);requireValue(item&&!attemptIds.has(a.instanceId)&&a.sessionId===s.sessionId&&a.attemptId===`${s.sessionId}:${item.instanceId}`,'중복되거나 연결이 끊긴 풀이 기록입니다.');attemptIds.add(a.instanceId);requireValue(a.questionId===item.questionId&&a.revision===item.revision&&a.key===`${item.templateId}@${item.learningGoalRevision}`&&a.templateId===item.templateId&&a.learningGoalRevision===item.learningGoalRevision&&a.subjectId===item.subjectId&&a.type===item.type&&a.testOnly===item.testOnly&&a.mode===c.mode&&JSON.stringify(a.topicIds)===JSON.stringify(item.topicIds),'풀이 분류가 스냅샷과 다릅니다.');requireValue((item.type==='practical'?matchesHistoricalPracticalGrade(item,a.answer,a.grade):JSON.stringify(a.grade)===JSON.stringify(grade(item,a.answer)))&&JSON.stringify(a.answer)===JSON.stringify(s.answers[item.instanceId]??null),'저장된 답안·채점 결과가 일치하지 않습니다.');requireValue(number(a.confirmedAt)&&typeof a.revealedBefore==='boolean'&&typeof a.exportedBefore==='boolean'&&typeof a.converted==='boolean','풀이 시각과 도움 기록 오류입니다.');}
   if(s.status!=='prepared') requireValue(number(s.startedAt)&&number(s.lastWallAt),'시작 및 저장 시각이 없습니다.');
   if(c.mode==='timed'&&s.status!=='prepared')requireValue(number(s.expiresAt)&&s.expiresAt===s.startedAt+c.minutes*60000,'만료 시각이 제한 시간과 다릅니다.');
   if(c.mode==='untimed')requireValue(s.expiresAt===null,'무제한 세션에 만료 시각이 있습니다.');
   if(s.recoveryDraft)requireValue(s.recoveryDraft.excludedFromGrade===true&&number(s.recoveryDraft.observedAt)&&typeof s.recoveryDraft.reason==='string'&&s.recoveryDraft.answers&&typeof s.recoveryDraft.answers==='object','미채점 복구 초안 오류입니다.');
   if(s.exposureEvents)requireValue(Array.isArray(s.exposureEvents)&&s.exposureEvents.every(e=>typeof e.key==='string'&&['explanation','prompt'].includes(e.kind)&&number(e.at)),'도움 열람 기록 오류입니다.');
   requireValue(Array.isArray(s.timingChanges)&&s.timingChanges.length<=1000&&Array.isArray(s.warnings),'시간 변경 기록 오류입니다.');
-  if(['submitted','expired'].includes(s.status)){requireValue(number(s.endedAt)&&number(s.observedAt),'종료 시각 오류입니다.');if(c.mode==='timed')requireValue(s.attempts.length===s.items.length&&number(s.elapsedMs)&&s.elapsedMs<=c.minutes*60000,'시간제 최종 기록이 불완전합니다.');requireValue(JSON.stringify(s.result)===JSON.stringify(sessionResult(s)),'결과 요약이 답안과 일치하지 않습니다.');}
+  if(['submitted','expired'].includes(s.status)){requireValue(number(s.endedAt)&&number(s.observedAt),'종료 시각 오류입니다.');if(c.mode==='timed')requireValue((unscored||s.attempts.length===s.items.length)&&number(s.elapsedMs)&&s.elapsedMs<=c.minutes*60000,'시간제 최종 기록이 불완전합니다.');requireValue((s.config.type==='practical'&&!unscored?matchesHistoricalPracticalResult(s,s.result):JSON.stringify(s.result)===JSON.stringify(sessionResult(s))),'결과 요약이 답안과 일치하지 않습니다.');}
   if(c.mode==='timed'&&['active','prepared','abandoned','converted'].includes(s.status))requireValue(s.attempts.length===0,'미완료 시간제에 확정 점수가 포함되었습니다.');
   return s;
 }

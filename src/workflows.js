@@ -1,6 +1,6 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.10&pool=priority-001&scope=e09-001&materials=a04-001';
-import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.10';
+import {isUnscoredPracticalSession,hasHistoricalPractical,eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.11&pool=priority-001&scope=e09-001&materials=a04-001';
+import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.11';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
   return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:1,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides,...(type==='practical'?{practicalScope:'reformed'}:{})};
@@ -44,6 +44,7 @@ export function reviewEntries(sessions) {
     if(hasRetiredPractical(session))continue;
     if(session.config.mode==='timed'&&!['submitted','expired'].includes(session.status))continue;
     for(const item of session.items) {
+      if(item.type!=='written')continue;
       const attempt=session.attempts.find(a=>a.instanceId===item.instanceId);
       if(!attempt||!['correct','wrong','partial'].includes(attempt.grade.status))continue;
       const at=attempt?.confirmedAt??session.endedAt??session.createdAt;
@@ -81,7 +82,7 @@ export function historyClassification(sessions) {
 /** Confirm selected untimed drafts and finish in one storage transaction. */
 export function submitSelectedAnswers(session,now=Date.now()) {
   let next=session;
-  if(next.status==='active'&&next.config.mode==='untimed')for(const item of next.items) {
+  if(!isUnscoredPracticalSession(next)&&next.status==='active'&&next.config.mode==='untimed')for(const item of next.items) {
     if(!next.attempts.some(a=>a.instanceId===item.instanceId)&&isAnswered(item,next.answers[item.instanceId]))next=confirmAnswer(next,item.instanceId,now);
   }
   return finalize(next,'submitted',now);
@@ -90,6 +91,7 @@ export function submitSelectedAnswers(session,now=Date.now()) {
 /** Display the destination before opening; do not mutate/finalize stored history here. */
 export function sessionNavigation(session,now=Date.now()) {
   if(hasRetiredPractical(session))return {action:'보관 기록 정보',status:session.status,retired:true};
+  if(hasHistoricalPractical(session))return {action:'이전 실기 보관 기록',status:session.status,historical:true};
   if(session.status==='prepared')return {action:'시작 대기 확인',status:'prepared'};
   if(session.status==='active')return session.config.mode==='timed'&&timeState(session,now).expired?{action:'만료 결과 보기',status:'expired'}:{action:'이어서 풀기',status:'active'};
   return {action:'결과·답안 보기',status:session.status};
