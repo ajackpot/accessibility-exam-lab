@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-supplement.a02.1-service.1",
-  "releasedAt": "2026-10-27T07:52:01.979540+00:00",
-  "file": "releases/2026.10.27-scope-supplement.a02.1-service.1/bank.json",
-  "sha256": "7a594ed6d208325585b66fa4df54968f45cbc1afa0724f7de3a03ff256924524",
-  "changeSummary": "보조기술의 선택 항목 활성화와 실제 터치 판정 영역의 측정 근거를 구별하는 필기 1문항을 추가했습니다.",
+  "bankVersion": "2026.10.27-scope-supplement.a03.1-service.1",
+  "releasedAt": "2026-10-27T10:03:14.896904+00:00",
+  "file": "releases/2026.10.27-scope-supplement.a03.1-service.1/bank.json",
+  "sha256": "5ef9c36a421a923ca0705b12f3534240abcc6f04fe47fd20768dd69cf2496c4d",
+  "changeSummary": "센스리더 환경 설정의 적용 범위와 화면 이미지 관찰 조건, 스크린 리더별 입력 모드 진입 조건을 구별하는 필기 3문항을 추가했습니다.",
   "finalRelease": false
 }
