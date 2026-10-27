@@ -1,15 +1,16 @@
+import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=d01-001';
 import {validateMaterials,materialType,materialName} from './materials.js?v=2026.10.27&scope=a04-001';
 export {materialType,materialName,sequenceEvidenceLabel,sequenceMaterialText} from './materials.js?v=2026.10.27&scope=a04-001';
-import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.11';
-import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.11&pool=priority-001';
+import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.12';
+import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.12&pool=priority-001';
 import {isScopeExpansionE09Excluded} from './scope-expansion-e09-eligibility.js?v=2026.10.27&scope=e09-001';
-import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.11';
-import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.11';
-import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.11';
-import {isUnscoredPractical,unscoredPracticalContent,isManualPart,manualPartAnswered,validManualAnswer,validatePracticalTask,validatePracticalView,practicalTaskPromptLines,INSPECTION_FIELDS} from './practical-task.js?v=0.2.11';
-export {isUnscoredPractical,unscoredPracticalContent,sourceLines,isManualPart,INSPECTION_FIELDS} from './practical-task.js?v=0.2.11';
+import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.12';
+import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.12';
+import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.12';
+import {isUnscoredPractical,unscoredPracticalContent,isManualPart,manualPartAnswered,validManualAnswer,validatePracticalTask,validatePracticalView,practicalTaskPromptLines,INSPECTION_FIELDS} from './practical-task.js?v=0.2.12';
+export {isUnscoredPractical,unscoredPracticalContent,sourceLines,isManualPart,INSPECTION_FIELDS} from './practical-task.js?v=0.2.12';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
-export const APP_VERSION = '0.2.11';
+export const APP_VERSION = '0.2.12';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
 export const BANK_SCHEMA_VERSION = 3;
 export const GENERATOR_VERSION = '2'; // Practical single/multi choice permutations join the seeded snapshot.
@@ -206,6 +207,7 @@ export function presentQuestion(bank,q,count=5,random=Math.random,instanceId=q.q
 function presentWithOptions(bank,q,count,random,instanceId,optionsFor) {
   const snapshot=copy(q);snapshot.instanceId=instanceId;snapshot.bankVersion=bank.bankVersion;snapshot.bankSchemaVersion=bank.schemaVersion;snapshot.sources=q.sourceRefs.map(id=>copy(bank.sources.find(s=>s.id===id)));
   if(q.type==='written') {
+    const scopeLevel=writtenLevelFor(q);if(scopeLevel){snapshot.scopeLevel=scopeLevel;snapshot.scopeLevelVersion=WRITTEN_LEVEL_VERSION;}
     assert(q.supportedOptionCounts.includes(count),'이 문항은 선택한 선택지 수를 지원하지 않습니다.');
     const omap=optionsFor(bank.options);const plans=choicePlans(q,omap,count);
     assert(plans.length>0,'검토된 선택지 후보가 부족해 출제하지 않습니다.','INSUFFICIENT');
@@ -232,11 +234,12 @@ export function isNewSessionQuestion(bank,q,now=Date.now()){
   return (isPublishedQuestion(bank,q,now)||preview)&&!excluded;
 }
 export function eligibleQuestions(bank,config,history=[]) {
+  const level=config.difficultyLevel===undefined?'all':config.difficultyLevel;assert(isWrittenLevel(level)&&(config.type==='written'||level==='all'),'필기 난이도 설정을 확인하세요.');
   const seen=new Set(),wrong=new Set();
   for(const a of allAttempts(history)) {seen.add(a.key);if(a.type==='written'&&['wrong','partial','unanswered'].includes(a.grade.status))wrong.add(a.questionId);}
   for(const session of history.filter(isUnscoredPracticalSession))for(const item of session.items)if(isAnswered(item,session.answers[item.instanceId])||['submitted','expired'].includes(session.status))seen.add(`${item.templateId}@${item.learningGoalRevision}`);
   const now=Date.now();
-  return bank.questions.filter(q=>isNewSessionQuestion(bank,q,now)&&q.type===config.type&&(config.subjectId==='all'||q.subjectId===config.subjectId)&&(q.type!=='written'||q.supportedOptionCounts.includes(config.kind==='mock'?5:config.optionCount))&&(!config.family||config.family==='all'||q.family===config.family)&&(q.type!=='practical'||config.practicalScope===undefined||(config.practicalScope==='reformed'?!!q.practicalTask:!q.practicalTask))&&(config.pool!=='new'||!seen.has(`${q.templateId}@${q.learningGoalRevision}`))&&(config.pool!=='wrong'||wrong.has(q.questionId))&&(config.kind!=='mock'||!q.testOnly));
+  return bank.questions.filter(q=>isNewSessionQuestion(bank,q,now)&&q.type===config.type&&matchesWrittenLevel(q,level)&&(config.subjectId==='all'||q.subjectId===config.subjectId)&&(q.type!=='written'||q.supportedOptionCounts.includes(config.kind==='mock'?5:config.optionCount))&&(!config.family||config.family==='all'||q.family===config.family)&&(q.type!=='practical'||config.practicalScope===undefined||(config.practicalScope==='reformed'?!!q.practicalTask:!q.practicalTask))&&(config.pool!=='new'||!seen.has(`${q.templateId}@${q.learningGoalRevision}`))&&(config.pool!=='wrong'||wrong.has(q.questionId))&&(config.kind!=='mock'||!q.testOnly));
 }
 /** Related service tasks can reveal each other's solutions: choose at most one per session. */
 export function selectionGroupKey(item) {

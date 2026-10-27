@@ -1,0 +1,6213 @@
+/** Exact reviewed written scope levels; D01 rows preserved, D02 additions only. */
+export const WRITTEN_LEVEL_MAP=Object.freeze({
+  "seed-w01": {
+    "revision": 2,
+    "templateId": "seed-w01-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "seed-w02": {
+    "revision": 2,
+    "templateId": "seed-w02-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s1-w01": {
+    "revision": 2,
+    "templateId": "r001-standards-template-standard-hierarchy",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s1-w02": {
+    "revision": 2,
+    "templateId": "r001-standards-template-scope-third-party",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r001-standards-s1-w03": {
+    "revision": 2,
+    "templateId": "r001-standards-template-technology-neutrality",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s1-w04": {
+    "revision": 2,
+    "templateId": "r001-standards-template-equivalent-media-alternative",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s1-w05": {
+    "revision": 1,
+    "templateId": "r001-standards-template-sensory-instructions",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s1-w06": {
+    "revision": 1,
+    "templateId": "r001-standards-template-large-text-contrast",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-standards-s1-w07": {
+    "revision": 2,
+    "templateId": "r001-standards-template-moving-content-control",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-standards-s1-w08": {
+    "revision": 2,
+    "templateId": "r001-standards-template-accessible-api-information",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s1-w09": {
+    "revision": 2,
+    "templateId": "r001-standards-template-noncognitive-authentication",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s1-w10": {
+    "revision": 2,
+    "templateId": "r001-standards-template-redundant-entry",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s1-w01": {
+    "revision": 1,
+    "templateId": "r002-standards-template-wai-parent-organization",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-standards-s1-w02": {
+    "revision": 1,
+    "templateId": "r002-standards-template-candidate-recommendation-purpose",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-standards-s1-w03": {
+    "revision": 1,
+    "templateId": "r002-standards-template-character-shortcut-remapping",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s1-w04": {
+    "revision": 1,
+    "templateId": "r002-standards-template-timing-adjustment-warning",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s1-w05": {
+    "revision": 1,
+    "templateId": "r002-standards-template-flash-area-threshold",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s1-w06": {
+    "revision": 2,
+    "templateId": "r002-standards-template-link-purpose-context",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s1-w07": {
+    "revision": 2,
+    "templateId": "r002-standards-template-single-pointer-alternative",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s1-w08": {
+    "revision": 1,
+    "templateId": "r002-standards-template-visible-label-in-accessible-name",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-standards-s1-w09": {
+    "revision": 2,
+    "templateId": "r002-standards-template-motion-actuation-alternative-disable",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s1-w10": {
+    "revision": 2,
+    "templateId": "r002-standards-template-consistent-help-relative-order",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s1-w01": {
+    "revision": 1,
+    "templateId": "r003-standards-template-epublication-fixed-reference",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s1-w02": {
+    "revision": 2,
+    "templateId": "r003-standards-template-audio-independent-control",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s1-w03": {
+    "revision": 2,
+    "templateId": "r003-standards-template-adjacent-content-separation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s1-w04": {
+    "revision": 3,
+    "templateId": "r003-standards-template-recommended-control-diagonal",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s1-w05": {
+    "revision": 2,
+    "templateId": "r003-standards-template-distinct-page-title",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s1-w06": {
+    "revision": 2,
+    "templateId": "r003-standards-template-duplicate-attribute-markup",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s1-w07": {
+    "revision": 1,
+    "templateId": "r003-standards-template-essential-timing-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r003-standards-s1-w08": {
+    "revision": 1,
+    "templateId": "r003-standards-template-atag-authoring-scope",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s1-w09": {
+    "revision": 1,
+    "templateId": "r003-standards-template-uaag-user-agent-scope",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s1-w10": {
+    "revision": 1,
+    "templateId": "r003-standards-template-informative-techniques-status",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-standards-s1-w01": {
+    "revision": 3,
+    "templateId": "r004-standards-template-dated-undated-normative-references",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-standards-s1-w02": {
+    "revision": 3,
+    "templateId": "r004-standards-template-kwcag-wcag-edition-relationship",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-standards-s1-w03": {
+    "revision": 2,
+    "templateId": "r004-standards-template-periodic-standard-review-outcomes",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s1-w04": {
+    "revision": 2,
+    "templateId": "r004-standards-template-complex-chart-equivalent-detail",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s1-w05": {
+    "revision": 2,
+    "templateId": "r004-standards-template-sensory-test-purpose-alternative",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-standards-s1-w06": {
+    "revision": 2,
+    "templateId": "r004-standards-template-keyboard-path-exception-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-standards-s1-w07": {
+    "revision": 2,
+    "templateId": "r004-standards-template-focus-extra-information-context-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-standards-s1-w08": {
+    "revision": 2,
+    "templateId": "r004-standards-template-security-repeat-entry-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-standards-s1-w09": {
+    "revision": 2,
+    "templateId": "r004-standards-template-logo-contrast-exception-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-standards-s1-w10": {
+    "revision": 2,
+    "templateId": "r004-standards-template-webapp-equivalent-alternative",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-standards-s1-w01": {
+    "revision": 1,
+    "templateId": "r005-standards-template-equivalent-text-alternative-content",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r005-standards-s1-w02": {
+    "revision": 1,
+    "templateId": "r005-standards-template-essential-down-event-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r005-standards-s1-w03": {
+    "revision": 1,
+    "templateId": "r005-standards-template-familiar-identifier-authentication-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r005-standards-s1-w04": {
+    "revision": 1,
+    "templateId": "r005-standards-template-system-error-exclusion",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r005-standards-s1-w05": {
+    "revision": 2,
+    "templateId": "r005-standards-template-ascii-art-nontext-classification",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s1-w06": {
+    "revision": 1,
+    "templateId": "r005-standards-template-open-closed-caption-control",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-standards-s1-w01": {
+    "revision": 1,
+    "templateId": "r006-standards-template-changing-live-content-purpose-alternative",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r006-standards-s1-w02": {
+    "revision": 5,
+    "templateId": "r006-standards-template-recommended-nonreactive-inner-margin",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-standards-s1-w03": {
+    "revision": 1,
+    "templateId": "r006-standards-template-native-message-dialog-new-window-exclusion",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-standards-s1-w04": {
+    "revision": 2,
+    "templateId": "r006-standards-template-standard-conformance-individual-access-limit",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-standards-s1-w01": {
+    "revision": 1,
+    "templateId": "r007-standards-template-consensus-abstention-not-unanimity",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-standards-s1-w02": {
+    "revision": 1,
+    "templateId": "r007-standards-template-royalty-free-patent-policy-boundary",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-standards-s1-w03": {
+    "revision": 1,
+    "templateId": "r007-standards-template-wcag21-to20-same-level-compatibility",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r007-standards-s1-w04": {
+    "revision": 1,
+    "templateId": "r007-standards-template-section508-nonpublic-official-training-scope",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r007-standards-s1-w05": {
+    "revision": 1,
+    "templateId": "r007-standards-template-eu2016-public-sector-web-app-scope",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r008-standards-s1-w01": {
+    "revision": 1,
+    "templateId": "r008-standards-template-eu-harmonized-covered-requirements-presumption",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r008-standards-s1-w02": {
+    "revision": 1,
+    "templateId": "r008-standards-template-eu-minimum-accessibility-measures-not-ceiling",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r008-standards-s1-w03": {
+    "revision": 1,
+    "templateId": "r008-standards-template-section508-equivalent-facilitation-functional-judgment",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r008-standards-s1-w04": {
+    "revision": 1,
+    "templateId": "r008-standards-template-authorized-translation-english-dispute-authority",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r008-standards-s1-w05": {
+    "revision": 1,
+    "templateId": "r008-standards-template-harmonized-technical-tests-training-reuse",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r008-standards-s1-w06": {
+    "revision": 1,
+    "templateId": "r008-standards-template-digital-inclusion-standardization-existing-ks-precedence",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r009-standards-s1-w01": {
+    "revision": 1,
+    "templateId": "r009-standards-template-eu-statement-current-barriers-and-alternatives",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-standards-s1-w02": {
+    "revision": 1,
+    "templateId": "r009-standards-template-eu-feedback-excluded-information-request",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r009-standards-s1-w03": {
+    "revision": 1,
+    "templateId": "r009-standards-template-eu-unsatisfactory-response-enforcement-route",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-standards-s1-w04": {
+    "revision": 1,
+    "templateId": "r009-standards-template-eu-disproportionate-burden-legitimate-assessment",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r010-standards-s1-w01": {
+    "revision": 2,
+    "templateId": "r010-standards-template-eu-common-methodology-national-periodic-monitoring",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-standards-s1-w02": {
+    "revision": 1,
+    "templateId": "r010-standards-template-eu-monitoring-deficiency-data-for-remediation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-standards-s1-w03": {
+    "revision": 2,
+    "templateId": "r010-standards-template-eu-triennial-commission-monitoring-and-enforcement-report",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-standards-s1-w04": {
+    "revision": 2,
+    "templateId": "r010-standards-template-eu-report-accessible-publication-no-individual-list-duty",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-protocol-policy-s1-w01": {
+    "revision": 1,
+    "templateId": "r011-protocol-policy-template-eu-first-report-versus-significant-policy-change",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-protocol-policy-s1-w02": {
+    "revision": 1,
+    "templateId": "r011-protocol-policy-template-eu-third-party-content-exclusion-conjunctive-control",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-protocol-policy-s1-w03": {
+    "revision": 1,
+    "templateId": "r011-protocol-policy-template-eu-old-office-file-active-administration-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-protocol-policy-s1-w04": {
+    "revision": 1,
+    "templateId": "r011-protocol-policy-template-eu-archive-exclusion-post-cutoff-content-edit",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-policy-accessibility-s1-w01": {
+    "revision": 3,
+    "templateId": "r012-policy-accessibility-template-eu-navigation-map-exclusion-accessible-essential-information",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-policy-accessibility-s1-w02": {
+    "revision": 1,
+    "templateId": "r012-policy-accessibility-template-eu-old-intranet-exclusion-until-substantial-revision",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-policy-accessibility-s1-w03": {
+    "revision": 1,
+    "templateId": "r012-policy-accessibility-template-eu-heritage-reproduction-exclusion-not-metadata-blanket",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-policy-accessibility-s1-w04": {
+    "revision": 1,
+    "templateId": "r012-policy-accessibility-template-eu-school-exclusion-essential-administrative-content",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r013-policy-accessibility-s1-w01": {
+    "revision": 3,
+    "templateId": "r013-policy-accessibility-template-section508-best-meets-market-research-records",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r013-policy-accessibility-s1-w02": {
+    "revision": 1,
+    "templateId": "r013-policy-accessibility-template-section508-undue-burden-residual-alternative-access",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r013-policy-accessibility-s1-w03": {
+    "revision": 2,
+    "templateId": "r013-policy-accessibility-template-section508-legacy-safe-harbor-altered-component-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r014-policy-accessibility-s1-w01": {
+    "revision": 2,
+    "templateId": "r014-policy-accessibility-template-section508-maintenance-space-physical-parts-not-remote-interface",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r014-policy-accessibility-s1-w02": {
+    "revision": 1,
+    "templateId": "r014-policy-accessibility-template-section508-contractor-incidental-authoring-tool-not-agency-deliverable",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r014-policy-accessibility-s1-w03": {
+    "revision": 3,
+    "templateId": "r014-policy-accessibility-template-section508-user-needs-functional-use-and-lifecycle-support",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r015-policy-accessibility-s1-w01": {
+    "revision": 2,
+    "templateId": "r015-policy-accessibility-template-eu-ngo-disability-specific-service-exclusion-limit",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-policy-accessibility-s1-w02": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-eu-retained-live-broadcast-becomes-prerecorded",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-policy-accessibility-s1-w03": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-eu-public-service-broadcasting-body-exclusion-not-video-host",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-policy-accessibility-s1-w04": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-section508-national-security-routine-payroll-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-policy-accessibility-s1-w05": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-w3c-community-report-not-recommendation-track-output",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-policy-accessibility-s1-w01": {
+    "revision": 1,
+    "templateId": "r016-policy-accessibility-template-w3c-wide-review-stakeholder-opportunity-not-comment-volume",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-policy-accessibility-s1-w02": {
+    "revision": 1,
+    "templateId": "r016-policy-accessibility-template-obsolete-recommendation-market-relevance-not-fundamental-retraction",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-policy-accessibility-s1-w03": {
+    "revision": 1,
+    "templateId": "r016-policy-accessibility-template-eaa-online-sale-service-independent-of-covered-product-list",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r016-policy-accessibility-s1-w04": {
+    "revision": 3,
+    "templateId": "r016-policy-accessibility-template-eaa-microenterprise-service-exemption-not-product-manufacturing",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-policy-accessibility-s1-w01": {
+    "revision": 1,
+    "templateId": "r017-policy-accessibility-template-eaa-fundamental-alteration-basic-nature-not-ui-redesign",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-policy-accessibility-s1-w02": {
+    "revision": 2,
+    "templateId": "r017-policy-accessibility-template-eaa-assessment-results-retention-last-service-not-assessment-date",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-policy-accessibility-s1-w03": {
+    "revision": 1,
+    "templateId": "r017-policy-accessibility-template-eaa-product-microenterprise-documentation-exemption-not-facts-request",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-policy-accessibility-s1-w04": {
+    "revision": 1,
+    "templateId": "r017-policy-accessibility-template-eaa-service-change-renews-burden-assessment-before-five-years",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-policy-accessibility-s1-w05": {
+    "revision": 1,
+    "templateId": "r017-policy-accessibility-template-eaa-private-accessibility-funding-bars-disproportionate-burden",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-policy-accessibility-s1-w06": {
+    "revision": 3,
+    "templateId": "r017-policy-accessibility-template-eaa-exemption-notification-active-versus-assessment-copy-on-request",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r018-policy-assistive-s1-w01": {
+    "revision": 1,
+    "templateId": "r018-policy-assistive-template-eaa-manufacturer-responsibility-retained-with-external-product-testing",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-policy-assistive-s1-w02": {
+    "revision": 1,
+    "templateId": "r018-policy-assistive-template-eaa-importer-own-trademark-triggers-manufacturer-obligations",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r018-policy-assistive-s1-w03": {
+    "revision": 2,
+    "templateId": "r018-policy-assistive-template-canada-anonymous-accessibility-feedback-receipt-acknowledgment-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r019-policy-assistive-s1-w01": {
+    "revision": 1,
+    "templateId": "r019-policy-assistive-template-eaa-free-movement-compliant-services-accessibility-ground-restriction",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r019-policy-assistive-s1-w02": {
+    "revision": 1,
+    "templateId": "r019-policy-assistive-template-eaa-product-traceability-direct-upstream-downstream-operators",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-policy-assistive-s1-w03": {
+    "revision": 2,
+    "templateId": "r019-policy-assistive-template-canada-accessibility-plan-requested-format-maximum-delivery-periods",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s1-w01": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-ada-conforming-alternate-requires-technical-or-legal-limitation",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r020-policy-assistive-s1-w02": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-ada-secured-personal-conventional-file-exception-not-html-portal",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r020-policy-assistive-s1-w03": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-ada-minimal-noncompliance-exception-preserves-privacy-and-independence",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r020-policy-assistive-s1-w04": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-ada-required-access-aid-cost-not-disability-surcharge",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-policy-assistive-s1-w01": {
+    "revision": 1,
+    "templateId": "r021-policy-assistive-template-ada-requested-aid-replacement-requires-individual-equally-effective-means",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-policy-assistive-s1-w02": {
+    "revision": 1,
+    "templateId": "r021-policy-assistive-template-ada-nonemergency-accompanying-adult-interpretation-needs-request-consent-appropriateness",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-policy-assistive-s1-w03": {
+    "revision": 1,
+    "templateId": "r021-policy-assistive-template-eaa-representative-enforcement-participation-requires-complainant-approval",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-policy-assistive-s1-w04": {
+    "revision": 3,
+    "templateId": "r021-policy-assistive-template-eaa-public-accessibility-information-written-and-oral-throughout-service-operation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r022-policy-assistive-s1-w02": {
+    "revision": 1,
+    "templateId": "r022-policy-assistive-template-ada-local-grievance-exhaustion-not-prerequisite-federal-complaint",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r024-policy-assistive-s1-w01": {
+    "revision": 2,
+    "templateId": "r024-policy-assistive-template-ada-licensee-activity-not-title-ii-solely-by-government-licensing",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r025-policy-assistive-s1-w02": {
+    "revision": 2,
+    "templateId": "r025-policy-assistive-template-eaa-legacy-service-contract-continuation-earlier-expiry-or-five-year-cap",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-policy-assistive-s1-w01": {
+    "revision": 3,
+    "templateId": "r026-policy-assistive-template-eaa-ecommerce-supplied-product-accessibility-information-must-be-provided",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-policy-assistive-s1-w02": {
+    "revision": 1,
+    "templateId": "r026-policy-assistive-template-eaa-ebook-drm-must-not-block-accessibility-features",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r028-kwcag-s1-w01": {
+    "revision": 4,
+    "templateId": "r028-kwcag-template-kwcag21-to22-relocated-table-and-linear-order-versus-new-character-shortcuts",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r028-kwcag-s1-w02": {
+    "revision": 3,
+    "templateId": "r028-kwcag-template-kwcag22-drafting-cooperation-tta-versus-standard-access-and-questions-rra",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r030-advertising-typography-s1-w01": {
+    "revision": 1,
+    "templateId": "r030-advertising-typography-template-common-advertising-region-repetition-despite-changing-content",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-accessibility-s1-w01": {
+    "revision": 2,
+    "templateId": "r031-accessibility-template-zoomable-text-contrast-allowance-independent-from-large-font-condition",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r033-primary-s1-w01": {
+    "revision": 1,
+    "templateId": "r033-primary-template-keyboard-function-availability-does-not-require-keystroke-count-parity",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r033-primary-s1-w02": {
+    "revision": 2,
+    "templateId": "r033-primary-template-single-pointer-exception-separates-platform-supplied-and-content-authored-gestures",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "pw21-g03-w01": {
+    "revision": 1,
+    "templateId": "pw21-template-g03",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw21-g05-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g05",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw21-g06-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g06",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw21-g07-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g07",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g09-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g09",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g12-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g12",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw21-g14-w01": {
+    "revision": 3,
+    "templateId": "pw21-template-g14",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g15-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g15",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw22-g16-w01": {
+    "revision": 1,
+    "templateId": "pw22-template-g16",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g24-w01": {
+    "revision": 1,
+    "templateId": "pw22-template-g24",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g40-w01": {
+    "revision": 1,
+    "templateId": "pw22-template-g40",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se03-f07-w01": {
+    "revision": 1,
+    "templateId": "se03-template-authentication-every-step-assistance",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se03-f07-w02": {
+    "revision": 1,
+    "templateId": "se03-template-reauthentication-resumes-unsent-activity",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se03-f07-w03": {
+    "revision": 3,
+    "templateId": "se03-template-invalid-slot-valid-address-reuse",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s01-w01": {
+    "revision": 1,
+    "templateId": "se04-s01-template-responsive-variation-full-page-scope",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s01-w02": {
+    "revision": 1,
+    "templateId": "se04-s01-template-nonrelied-technology-enabled-interference",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s01-w03": {
+    "revision": 1,
+    "templateId": "se04-s01-template-accessibility-support-closed-environment-availability",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s01-w04": {
+    "revision": 1,
+    "templateId": "se04-s01-template-alternate-version-reachable-from-direct-original-entry",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s01-w05": {
+    "revision": 1,
+    "templateId": "se04-s01-template-third-party-partial-statement-not-conformance",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s01-w06": {
+    "revision": 2,
+    "templateId": "se04-s01-template-kwcag-wcag-control-size-evidence-not-interchangeable",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s02-w01": {
+    "revision": 1,
+    "templateId": "se04-s02-template-aria-state-duty-apg-optional-key",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s02-w04": {
+    "revision": 1,
+    "templateId": "se04-s02-template-nonweb-document-set-bypass-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s03-w01": {
+    "revision": 1,
+    "templateId": "se04-s03-template-designated-edition-and-adoption-evidence",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s03-w05": {
+    "revision": 2,
+    "templateId": "se04-s03-template-adopted-nonweb-exception-versus-document-set",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se07-g06-w01": {
+    "revision": 2,
+    "templateId": "se07-g06-template-checkout-process-versus-domain-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa01-ma01-w01": {
+    "revision": 2,
+    "templateId": "sa01-ma01-template-third-party-scope-transfer-web-to-app",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa01-ma02-w01": {
+    "revision": 2,
+    "templateId": "sa01-ma02-template-platform-resize-limit-does-not-waive-function-preservation",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa01-ma02-w02": {
+    "revision": 1,
+    "templateId": "sa01-ma02-template-os-default-target-exception-follows-implementation-not-appearance",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa01-ma02-w04": {
+    "revision": 2,
+    "templateId": "sa01-ma02-template-image-text-user-presentation-and-exceptions",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa01-ma02-w05": {
+    "revision": 1,
+    "templateId": "sa01-ma02-template-live-multimedia-sign-language-is-an-allowed-alternative-to-captions",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "sa01-ma02-w06": {
+    "revision": 1,
+    "templateId": "sa01-ma02-template-precompletion-review-confirm-correct-is-sufficient-error-prevention-path",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "seed-w03": {
+    "revision": 2,
+    "templateId": "seed-w03-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "seed-w04": {
+    "revision": 2,
+    "templateId": "seed-w04-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w01": {
+    "revision": 3,
+    "templateId": "r001-internet-html-t-w01",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w02": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w02",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w03": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w03",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w04": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w04",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w05": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w05",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w06": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w06",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w07": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w07",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w08": {
+    "revision": 2,
+    "templateId": "r001-internet-html-t-w08",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w09": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w09",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w10": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w10",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w01": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w01",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w02": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w02",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w03": {
+    "revision": 2,
+    "templateId": "r002-internet-html-t-w03",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w04": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w04",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w05": {
+    "revision": 2,
+    "templateId": "r002-internet-html-t-w05",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w06": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w06",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w07": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w07",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w08": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w08",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w09": {
+    "revision": 2,
+    "templateId": "r002-internet-html-t-w09",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w10": {
+    "revision": 2,
+    "templateId": "r002-internet-html-t-w10",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w01": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-search-filetype-filter",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w02": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-search-before-date-filter",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w03": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-search-excluded-word-filter",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w04": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-cloud-rapid-elasticity",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w05": {
+    "revision": 2,
+    "templateId": "r003-internet-html-t-cloud-service-responsibility-mapping",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w06": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-dns-mx-preference",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w07": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-http-304-conditional-reuse",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w08": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-http-head-no-response-content",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w09": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-uri-percent-encoded-delimiter",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w10": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-http-307-method-preservation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w01": {
+    "revision": 3,
+    "templateId": "r004-internet-html-t-cloud-deployment-combination",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w02": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-dns-cname-alias",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w03": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-ipv4-cidr-prefix-membership",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w04": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-uri-origin-components",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w05": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-http-201-created-location",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w06": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-http-405-allow",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w07": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-http-206-range-response",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w08": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-pop3-deletion-update-state",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-internet-html-w09": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-ssh-remote-login-service",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w10": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-firefox-reset-page-zoom",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-internet-html-w01": {
+    "revision": 2,
+    "templateId": "r005-internet-html-t-iot-sensing-actuation-network-roles",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-internet-html-w02": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-dhcp-expired-lease-reinitialization",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w03": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-dns-ipv4-reverse-query-name",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w04": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-ipv6-compressed-zero-group-expansion",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-internet-html-w05": {
+    "revision": 2,
+    "templateId": "r005-internet-html-t-ipv6-anycast-multicast-delivery",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-internet-html-w06": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-http-accept-specific-range-weight",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w07": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-http-if-match-lost-update-precondition",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w08": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-websocket-independent-duplex-messages",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-internet-html-w09": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-mime-independent-ordered-parts",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w10": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-search-or-inclusive-union",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w01": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-vary-selected-request-field-match",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w02": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-http-202-asynchronous-acceptance",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w03": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-retry-after-delay-receipt-time",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w04": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-http-content-coding-media-type-preservation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w05": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-http-suffix-byte-range-bounds",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w06": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-uri-fragment-origin-request-exclusion",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w07": {
+    "revision": 2,
+    "templateId": "r006-internet-html-t-dns-recursion-request-versus-capability",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w08": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-dns-authoritative-name-error",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w09": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-tcp-port-flow-demultiplexing",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w10": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-mime-base64-reversible-transfer-encoding",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-internet-html-w01": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-dns-truncated-udp-tcp-retry",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r007-internet-html-w02": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-smtp-envelope-versus-message-recipient",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w03": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-smtp-transient-negative-completion",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w04": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-cookie-omitted-domain-host-only-match",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w05": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-dhcp-post-ack-address-conflict-notification",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w06": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-ipv6-hop-limit-forwarding-discard-node",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-internet-html-w07": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-http-origin-authentication-challenge-field",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w08": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-uri-case-normalization-component-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w01": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-arp-local-ipv4-ethernet-resolution",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r008-internet-html-w02": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-tcp-cumulative-ack-next-octet",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w03": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-ipv6-source-only-fragmentation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w04": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-http-100-continue-interim-body",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w05": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-http-connect-tunnel-request",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w06": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-http-options-asterisk-server-scope",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w07": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-cookie-path-slash-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w08": {
+    "revision": 2,
+    "templateId": "r008-internet-html-t-cookie-httponly-script-http-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s2-w01": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-udp-datagram-service-reliability-boundary",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-web-tech-s2-w02": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-ipv4-route-longest-matching-prefix-selection",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-web-tech-s2-w03": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-smtp-data-leading-dot-transparency",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s2-w04": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-mime-alternative-last-supported-automatic-selection",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s2-w05": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-cookie-max-age-precedence-over-expires",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s2-w06": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-http-content-length-counts-encoded-octets",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-web-tech-s2-w07": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-http204-header-termination-no-content-or-trailers",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s2-w08": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-http406-negotiation-no-acceptable-representation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s2-w01": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-http-idempotent-repeat-intended-effect-not-identical-response",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r010-network-html-s2-w02": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-http-cache-current-age-resident-time-freshness",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s2-w03": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-smtp-rset-transaction-abort-preserves-session",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s2-w04": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-imap-expunge-sequence-renumbering-uid-stability",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s2-w05": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-mime-related-start-content-id-root-not-order",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s2-w06": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-dns-srv-priority-precedes-weight-service-port",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s2-w07": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-private-ipv4-reuse-not-global-route-identity",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-network-html-s2-w08": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-http-patch-change-instructions-not-replacement-representation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-network-html-s2-w09": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-http-max-forwards-zero-intermediary-final-recipient",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s2-w10": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-tcp-orderly-half-close-preserves-peer-send-direction",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-protocol-policy-s2-w01": {
+    "revision": 2,
+    "templateId": "r011-protocol-policy-template-http-origin-and-proxy-credentials-consumption-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-protocol-policy-s2-w02": {
+    "revision": 1,
+    "templateId": "r011-protocol-policy-template-http-if-range-mismatch-full-representation-fallback",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-protocol-policy-s2-w03": {
+    "revision": 2,
+    "templateId": "r011-protocol-policy-template-http-authenticated-shared-cache-explicit-permission",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-protocol-policy-s2-w04": {
+    "revision": 1,
+    "templateId": "r011-protocol-policy-template-smtp-mixed-recipient-acceptance-before-data",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-internet-protocol-s2-w01": {
+    "revision": 2,
+    "templateId": "r012-internet-protocol-template-http-unsatisfiable-byte-range-416-complete-length",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-internet-protocol-s2-w02": {
+    "revision": 2,
+    "templateId": "r012-internet-protocol-template-http303-post-result-retrieval-method-and-target",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-internet-protocol-s2-w03": {
+    "revision": 2,
+    "templateId": "r012-internet-protocol-template-http-gateway-invalid-response-versus-timeout",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-internet-protocol-s2-w04": {
+    "revision": 1,
+    "templateId": "r012-internet-protocol-template-dhcp-t2-rebinding-broadcast-after-renewal",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-internet-protocol-s2-w05": {
+    "revision": 2,
+    "templateId": "r012-internet-protocol-template-ftp-pasv-client-initiated-server-data-port",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-internet-protocol-s2-w06": {
+    "revision": 2,
+    "templateId": "r012-internet-protocol-template-cookie-secure-controls-request-inclusion-not-request-routing",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-internet-protocol-s2-w07": {
+    "revision": 1,
+    "templateId": "r012-internet-protocol-template-ipv4-loopback-destination-stays-within-host",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r012-internet-protocol-s2-w08": {
+    "revision": 1,
+    "templateId": "r012-internet-protocol-template-dns-secondary-soa-serial-newer-zone-check",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-internet-protocol-s2-w09": {
+    "revision": 1,
+    "templateId": "r012-internet-protocol-template-smtp-starttls-discards-pre-tls-extension-knowledge",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-internet-protocol-s2-w10": {
+    "revision": 1,
+    "templateId": "r012-internet-protocol-template-http-must-revalidate-stale-disconnected-error",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r013-internet-browser-s2-w01": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-icann-contractual-complaint-scope-generic-domain-transfer",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-internet-browser-s2-w02": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-ietf-specification-iana-parameter-registry-distinction",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-internet-browser-s2-w03": {
+    "revision": 3,
+    "templateId": "r013-internet-browser-template-iana-rir-hierarchical-address-pool-allocation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-internet-browser-s2-w04": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-ietf-open-individual-participation-not-isoc-membership",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-internet-browser-s2-w05": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-rfc-series-number-not-internet-standard-status",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-internet-browser-s2-w06": {
+    "revision": 2,
+    "templateId": "r013-internet-browser-template-firefox-troubleshoot-open-temporary-restoration",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-internet-browser-s2-w07": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-firefox-complete-save-html-and-resource-directory",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-internet-browser-s2-w08": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-firefox-single-download-history-removal-preserves-file",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-internet-browser-s2-w09": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-firefox-site-camera-permission-block-specific-device",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-internet-browser-s2-w10": {
+    "revision": 1,
+    "templateId": "r013-internet-browser-template-firefox-proxy-pac-url-versus-auto-detect-system-manual",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-internet-browser-s2-w01": {
+    "revision": 2,
+    "templateId": "r014-internet-browser-template-firefox-json-restore-replaces-html-import-adds-bookmarks",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-internet-browser-s2-w02": {
+    "revision": 1,
+    "templateId": "r014-internet-browser-template-firefox-profile-separates-bookmarks-and-extensions",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-internet-browser-s2-w03": {
+    "revision": 2,
+    "templateId": "r014-internet-browser-template-firefox-content-language-fallback-independent-of-interface",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-internet-browser-s2-w04": {
+    "revision": 1,
+    "templateId": "r014-internet-browser-template-firefox-primary-password-local-profile-protection-scope",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-internet-browser-s2-w05": {
+    "revision": 2,
+    "templateId": "r014-internet-browser-template-firefox-autoplay-sound-block-versus-muted-video-block",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-internet-browser-s2-w06": {
+    "revision": 2,
+    "templateId": "r014-internet-browser-template-firefox-selective-cache-clearing-preserves-cookie-history-data",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r014-internet-browser-s2-w07": {
+    "revision": 1,
+    "templateId": "r014-internet-browser-template-firefox-pdf-content-type-action-built-in-viewer",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r014-internet-browser-s2-w08": {
+    "revision": 1,
+    "templateId": "r014-internet-browser-template-firefox-reader-view-article-presentation-versus-zoom",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r014-internet-browser-s2-w09": {
+    "revision": 1,
+    "templateId": "r014-internet-browser-template-doh-encrypted-client-resolver-transport-not-dnssec-or-web-content",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-internet-browser-s2-w01": {
+    "revision": 2,
+    "templateId": "r015-internet-browser-template-firefox-session-restore-open-regular-tabs-not-bookmark-history-collections",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-internet-browser-s2-w02": {
+    "revision": 2,
+    "templateId": "r015-internet-browser-template-firefox-extension-private-permission-independent-of-normal-window-execution",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-internet-browser-s2-w03": {
+    "revision": 1,
+    "templateId": "r015-internet-browser-template-firefox-caret-browsing-arbitrary-text-selection-versus-find-or-focus",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r015-internet-browser-s2-w04": {
+    "revision": 1,
+    "templateId": "r015-internet-browser-template-firefox-picture-in-picture-floating-video-versus-page-window-layout",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r015-internet-browser-s2-w05": {
+    "revision": 2,
+    "templateId": "r015-internet-browser-template-firefox-https-first-fallback-versus-https-only-user-choice",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-internet-browser-s2-w06": {
+    "revision": 1,
+    "templateId": "r015-internet-browser-template-firefox-login-csv-export-readable-data-despite-primary-password",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-internet-browser-s2-w07": {
+    "revision": 1,
+    "templateId": "r015-internet-browser-template-firefox-total-cookie-protection-top-level-site-partition-cookie-value",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-internet-browser-s2-w08": {
+    "revision": 1,
+    "templateId": "r015-internet-browser-template-firefox-process-manager-extensions-aggregate-not-per-extension-attribution",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-internet-browser-s2-w01": {
+    "revision": 2,
+    "templateId": "r016-internet-browser-template-edge-print-selected-content-versus-disjoint-numbered-page-scope",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-internet-browser-s2-w02": {
+    "revision": 2,
+    "templateId": "r016-internet-browser-template-firefox-original-format-required-for-color-background-print-request",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-internet-browser-s2-w03": {
+    "revision": 1,
+    "templateId": "r016-internet-browser-template-firefox-print-preview-to-pdf-versus-page-source-save-and-viewer-choice",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-internet-browser-s2-w04": {
+    "revision": 1,
+    "templateId": "r016-internet-browser-template-edge-custom-print-scale-applies-to-original-linear-size",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-internet-browser-s2-w05": {
+    "revision": 1,
+    "templateId": "r016-internet-browser-template-edge-system-print-dialog-printer-preferences-paper-source",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-internet-browser-s2-w06": {
+    "revision": 1,
+    "templateId": "r016-internet-browser-template-firefox-clear-saved-print-settings-targeted-reset-not-refresh-or-caches",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-internet-browser-s2-w01": {
+    "revision": 1,
+    "templateId": "r017-internet-browser-template-firefox-offline-translation-requires-translation-language-files-not-interface-or-dictionaries",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-internet-browser-s2-w02": {
+    "revision": 1,
+    "templateId": "r017-internet-browser-template-firefox-multiple-bookmark-tags-cross-classification-without-moving-or-copying",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r017-internet-browser-s2-w03": {
+    "revision": 1,
+    "templateId": "r017-internet-browser-template-chrome-memory-saver-site-exclusion-preserves-other-tabs-policy",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-internet-browser-s2-w04": {
+    "revision": 2,
+    "templateId": "r017-internet-browser-template-chrome-on-select-extension-site-access-ends-with-tab-closure",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-internet-browser-s2-w05": {
+    "revision": 2,
+    "templateId": "r017-internet-browser-template-gmail-bcc-recipient-visibility-to-cc-visible-other-bcc-hidden",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r017-internet-browser-s2-w06": {
+    "revision": 2,
+    "templateId": "r017-internet-browser-template-gmail-archive-versus-mute-new-reply-inbox-behavior",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-internet-browser-s2-w07": {
+    "revision": 1,
+    "templateId": "r017-internet-browser-template-google-site-search-result-list-not-exhaustive-index-audit",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-internet-applications-s2-w01": {
+    "revision": 3,
+    "templateId": "r018-internet-applications-template-elearning-temporal-modality-not-media-recording-format",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-internet-applications-s2-w02": {
+    "revision": 1,
+    "templateId": "r018-internet-applications-template-cloud-gaming-remote-game-execution-and-rendered-video-client",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-internet-applications-s2-w03": {
+    "revision": 3,
+    "templateId": "r018-internet-applications-template-big-data-volume-velocity-variety-observation-mapping",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-internet-applications-s2-w04": {
+    "revision": 1,
+    "templateId": "r018-internet-applications-template-iot-edge-local-decision-removes-central-roundtrip-dependency",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-internet-applications-s2-w05": {
+    "revision": 1,
+    "templateId": "r018-internet-applications-template-social-federation-server-exchange-preserves-home-accounts",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-internet-applications-s2-w06": {
+    "revision": 1,
+    "templateId": "r018-internet-applications-template-rss-publisher-feed-subscription-versus-page-bookmark-or-copy",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-internet-applications-s2-w07": {
+    "revision": 3,
+    "templateId": "r018-internet-applications-template-cloud-sync-delete-versus-online-only-local-availability",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r018-internet-applications-s2-w08": {
+    "revision": 1,
+    "templateId": "r018-internet-applications-template-meeting-remote-input-control-not-screen-view-annotation-or-host",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-internet-applications-s2-w01": {
+    "revision": 2,
+    "templateId": "r019-internet-applications-template-ecommerce-party-models-ignore-platform-operator",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-internet-applications-s2-w02": {
+    "revision": 1,
+    "templateId": "r019-internet-applications-template-ecommerce-defined-by-order-method-not-payment-or-delivery",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-internet-applications-s2-w03": {
+    "revision": 1,
+    "templateId": "r019-internet-applications-template-escrow-deposit-held-until-buyer-confirmation-not-order-or-shipment",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-internet-applications-s2-w04": {
+    "revision": 2,
+    "templateId": "r019-internet-applications-template-manual-otp-replay-prevention-does-not-prevent-live-phishing-relay",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r019-internet-applications-s2-w05": {
+    "revision": 2,
+    "templateId": "r019-internet-applications-template-search-crawling-indexing-serving-distinct-work-stages",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-internet-applications-s2-w06": {
+    "revision": 2,
+    "templateId": "r019-internet-applications-template-home-network-local-camera-view-survives-wan-loss-cloud-services-do-not",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-internet-applications-s2-w07": {
+    "revision": 1,
+    "templateId": "r019-internet-applications-template-cloud-coauthoring-shared-original-versus-independent-copies",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w01": {
+    "revision": 1,
+    "templateId": "r020-internet-applications-template-web-hypertext-service-built-on-earlier-internet-infrastructure",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w02": {
+    "revision": 1,
+    "templateId": "r020-internet-applications-template-open-architecture-preserves-heterogeneous-independently-operated-networks",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w03": {
+    "revision": 2,
+    "templateId": "r020-internet-applications-template-ip-datagrams-independent-not-circuit-or-message-switching",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w04": {
+    "revision": 2,
+    "templateId": "r020-internet-applications-template-intranet-extranet-public-service-classified-by-authorized-audience",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w05": {
+    "revision": 2,
+    "templateId": "r020-internet-applications-template-p2p-resource-contribution-compatible-with-central-peer-discovery",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w06": {
+    "revision": 1,
+    "templateId": "r020-internet-applications-template-vpn-remote-network-tunnel-versus-portal-desktop-or-direct-access",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w07": {
+    "revision": 2,
+    "templateId": "r020-internet-applications-template-metasearch-aggregates-external-engine-results-not-own-crawl-index",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w08": {
+    "revision": 3,
+    "templateId": "r020-internet-applications-template-batch-versus-stream-processing-bounded-input-not-rate-or-location",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w09": {
+    "revision": 1,
+    "templateId": "r020-internet-applications-template-voip-gateway-interconnects-packet-voice-and-circuit-telephone-networks",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-internet-applications-s2-w10": {
+    "revision": 1,
+    "templateId": "r020-internet-applications-template-cern-1993-web-software-release-allows-modified-redistribution",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-internet-applications-s2-w01": {
+    "revision": 3,
+    "templateId": "r021-internet-applications-template-korean-sdn-csnet-international-exchange-did-not-enable-ftp",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-internet-applications-s2-w02": {
+    "revision": 2,
+    "templateId": "r021-internet-applications-template-ixp-location-does-not-determine-peering-versus-transit-service",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-internet-applications-s2-w03": {
+    "revision": 1,
+    "templateId": "r021-internet-applications-template-cdn-distributed-surrogates-deliver-origin-content-not-central-farm",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-internet-applications-s2-w04": {
+    "revision": 1,
+    "templateId": "r021-internet-applications-template-google-noindex-must-be-crawlable-robots-block-is-not-index-removal",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-internet-applications-s2-w06": {
+    "revision": 1,
+    "templateId": "r021-internet-applications-template-hanguk-idna-ulabel-alabel-equivalent-label-not-alias-or-redirect",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r022-internet-applications-s2-w01": {
+    "revision": 1,
+    "templateId": "r022-internet-applications-template-google-sponsored-ad-placement-does-not-establish-organic-ranking",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r022-internet-applications-s2-w06": {
+    "revision": 2,
+    "templateId": "r022-internet-applications-template-gmail-confidential-revocation-blocks-content-access-not-prior-photo",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r024-internet-applications-s2-w01": {
+    "revision": 2,
+    "templateId": "r024-internet-applications-template-read-receipt-presence-absence-does-not-prove-human-reading",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r024-internet-applications-s2-w02": {
+    "revision": 2,
+    "templateId": "r024-internet-applications-template-napt-return-binding-restores-private-destination-address-and-port",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-internet-applications-s2-w01": {
+    "revision": 1,
+    "templateId": "r025-internet-applications-template-query-dependent-search-snippet-not-fixed-page-description",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-internet-applications-s2-w02": {
+    "revision": 1,
+    "templateId": "r025-internet-applications-template-napt-existing-mapping-does-not-determine-inbound-filter-policy",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-internet-applications-s2-w01": {
+    "revision": 1,
+    "templateId": "r026-internet-applications-template-google-image-usage-rights-filter-is-license-metadata-not-unrestricted-grant",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r026-internet-applications-s2-w02": {
+    "revision": 2,
+    "templateId": "r026-internet-applications-template-google-search-personalization-off-preserves-current-context-and-stored-activity",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r026-internet-applications-s2-w03": {
+    "revision": 2,
+    "templateId": "r026-internet-applications-template-drive-shared-folder-shortcut-does-not-confer-target-access",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-internet-applications-s2-w01": {
+    "revision": 2,
+    "templateId": "r027-internet-applications-template-gmail-cancel-scheduled-message-restores-draft-without-automatic-reschedule",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-internet-applications-s2-w02": {
+    "revision": 2,
+    "templateId": "r027-internet-applications-template-zoom-window-visual-sharing-and-computer-wide-sound-capture-are-separate",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-internet-applications-s2-w03": {
+    "revision": 2,
+    "templateId": "r027-internet-applications-template-google-safesearch-blur-explicit-images-does-not-filter-relevant-text-links",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r029-network-s2-w01": {
+    "revision": 1,
+    "templateId": "r029-network-template-arpanet-1983-ncp-to-tcpip-transition-distinct-from-web-milestones",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r029-network-s2-w02": {
+    "revision": 2,
+    "templateId": "r029-network-template-desktop-chromium128-blink-layout-versus-v8-javascript-execution",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r031-tools-assistive-s2-w01": {
+    "revision": 2,
+    "templateId": "r031-tools-assistive-template-word-comment-resolution-independent-of-tracked-change-acceptance",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r032-primary-s2-w01": {
+    "revision": 2,
+    "templateId": "r032-primary-template-reply-to-suggestion-and-from-default-not-transmitter-or-recipient",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r032-primary-s2-w02": {
+    "revision": 2,
+    "templateId": "r032-primary-template-firefox-page-source-versus-current-dom-after-client-change",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r033-primary-s2-w01": {
+    "revision": 2,
+    "templateId": "r033-primary-template-http-filename-star-preferred-over-legacy-filename-independent-of-parameter-order",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r034-primary-s2-w01": {
+    "revision": 2,
+    "templateId": "r034-primary-template-http205-reset-intent-targets-originating-document-view",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r035-primary-s2-w01": {
+    "revision": 1,
+    "templateId": "r035-primary-template-uri-query-only-preserves-complete-base-path-replaces-query",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r036-primary-s2-w01": {
+    "revision": 1,
+    "templateId": "r036-primary-template-cookie-expiration-replacement-matches-exact-name-domain-path-not-request-path-prefix",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r037-web-s2-w01": {
+    "revision": 1,
+    "templateId": "r037-web-template-if-none-match-weak-comparison-ignores-validator-strength",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r037-web-s2-w02": {
+    "revision": 1,
+    "templateId": "r037-web-template-content-location-identifies-selected-representation-not-redirection",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r038-web-s2-w01": {
+    "revision": 1,
+    "templateId": "r038-web-template-connection-nominated-field-removal-before-proxy-forwarding",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r038-web-s2-w02": {
+    "revision": 1,
+    "templateId": "r038-web-template-content-encoding-list-records-application-order-reverse-decoding",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r039-primary-s2-w01": {
+    "revision": 1,
+    "templateId": "r039-primary-template-http-if-none-match-suppresses-date-precondition-not-conjunction",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r039-primary-s2-w02": {
+    "revision": 2,
+    "templateId": "r039-primary-template-http-no-transform-binds-noncaching-intermediary-content-conversion",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se03-f08-w01": {
+    "revision": 2,
+    "templateId": "se03-template-request-dom-usable-result-evidence",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "seed-w05": {
+    "revision": 4,
+    "templateId": "seed-w05-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "seed-w06": {
+    "revision": 2,
+    "templateId": "seed-w06-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-internet-html-w11": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w11",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w12": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w12",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w13": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w13",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w14": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w14",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w15": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w15",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w16": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w16",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w17": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w17",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-internet-html-w18": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w18",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-internet-html-w19": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w19",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-internet-html-w20": {
+    "revision": 1,
+    "templateId": "r001-internet-html-t-w20",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w11": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w11",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w12": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w12",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w13": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w13",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w14": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w14",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w15": {
+    "revision": 3,
+    "templateId": "r002-internet-html-t-w15",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w16": {
+    "revision": 2,
+    "templateId": "r002-internet-html-t-w16",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w17": {
+    "revision": 2,
+    "templateId": "r002-internet-html-t-w17",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-internet-html-w18": {
+    "revision": 2,
+    "templateId": "r002-internet-html-t-w18",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-internet-html-w19": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w19",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r002-internet-html-w20": {
+    "revision": 1,
+    "templateId": "r002-internet-html-t-w20",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w11": {
+    "revision": 2,
+    "templateId": "r003-internet-html-t-aria-labelledby-precedence",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r003-internet-html-w12": {
+    "revision": 2,
+    "templateId": "r003-internet-html-t-aria-labelledby-idref-order",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w13": {
+    "revision": 3,
+    "templateId": "r003-internet-html-t-aria-describedby-name-distinction",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w14": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-number-input-step-base",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w15": {
+    "revision": 2,
+    "templateId": "r003-internet-html-t-select-option-value-fallback",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w16": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-textarea-initial-text",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w17": {
+    "revision": 2,
+    "templateId": "r003-internet-html-t-description-list-associations",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w18": {
+    "revision": 3,
+    "templateId": "r003-internet-html-t-html-character-reference-text",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-internet-html-w19": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-image-submit-coordinate-fields",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-internet-html-w20": {
+    "revision": 1,
+    "templateId": "r003-internet-html-t-abbr-expansion-semantics",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w11": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-accname-direct-hidden-reference",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-internet-html-w12": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-fieldset-first-legend-disabled-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r004-internet-html-w13": {
+    "revision": 3,
+    "templateId": "r004-internet-html-t-datalist-nonrestrictive-suggestions",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w14": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-time-machine-readable-datetime",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w15": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-bdi-directional-isolation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w16": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-figure-figcaption-association",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-internet-html-w17": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-main-visible-uniqueness",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w18": {
+    "revision": 4,
+    "templateId": "r004-internet-html-t-external-classic-defer-order",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w19": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-anchor-download-filename-suggestion",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-internet-html-w20": {
+    "revision": 2,
+    "templateId": "r004-internet-html-t-iframe-srcdoc-precedence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w11": {
+    "revision": 3,
+    "templateId": "r005-internet-html-t-submitter-specific-validation-override",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w12": {
+    "revision": 2,
+    "templateId": "r005-internet-html-t-file-upload-multipart-form-encoding",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w13": {
+    "revision": 2,
+    "templateId": "r005-internet-html-t-reversed-list-value-number-propagation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w14": {
+    "revision": 2,
+    "templateId": "r005-internet-html-t-picture-first-matching-source-set",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w15": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-object-resource-failure-fallback-children",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w16": {
+    "revision": 2,
+    "templateId": "r005-internet-html-t-template-inert-fragment-storage",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w17": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-noreferrer-link-request-referrer-suppression",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w18": {
+    "revision": 2,
+    "templateId": "r005-internet-html-t-ruby-annotation-text-element",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-internet-html-w19": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-wbr-optional-line-break-opportunity",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-internet-html-w20": {
+    "revision": 1,
+    "templateId": "r005-internet-html-t-aria-owns-dom-child-order",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r006-internet-html-w11": {
+    "revision": 2,
+    "templateId": "r006-internet-html-t-output-calculation-association-not-submitted",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w13": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-html52-address-contact-information",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w14": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-mark-contextual-relevance",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w15": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-html52-cite-author-reference-permitted",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w16": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-q-cite-source-metadata-visible-link-boundary",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-internet-html-w17": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-iframe-sandbox-selective-forms-permission",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-internet-html-w18": {
+    "revision": 1,
+    "templateId": "r006-internet-html-t-roledescription-underlying-role-preservation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w11": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-file-accept-type-hint-validation-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w12": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-select-required-first-empty-placeholder",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w13": {
+    "revision": 2,
+    "templateId": "r007-internet-html-t-submitter-action-override-preserves-form-method",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w14": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-responsive-img-width-descriptor-density-normalization",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w15": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-noscript-enabled-script-load-failure-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-internet-html-w16": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-html-parser-implicit-paragraph-close-before-div",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r007-internet-html-w17": {
+    "revision": 1,
+    "templateId": "r007-internet-html-t-anchor-transparent-content-interactive-exclusion",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r008-internet-html-w11": {
+    "revision": 2,
+    "templateId": "r008-internet-html-t-form-reset-current-default-attributes",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r008-internet-html-w12": {
+    "revision": 2,
+    "templateId": "r008-internet-html-t-dirname-submitted-direction-entry",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w13": {
+    "revision": 2,
+    "templateId": "r008-internet-html-t-meter-optimum-low-region-classification",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w14": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-autofocus-separate-forms-same-scope",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w15": {
+    "revision": 2,
+    "templateId": "r008-internet-html-t-base-first-href-processing",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r008-internet-html-w16": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-alternate-hreflang-translation-relation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w17": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-script-nonjavascript-mime-data-block",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-internet-html-w18": {
+    "revision": 1,
+    "templateId": "r008-internet-html-t-multiple-select-repeated-form-name",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s3-w01": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-textarea-api-value-versus-hard-submission-wrapping",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r009-web-tech-s3-w02": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-dataset-hyphen-camelcase-string-access",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s3-w03": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-hidden-charset-multipart-encoding-substitution",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s3-w04": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-native-checkbox-indeterminate-preserves-checked-submission",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r009-web-tech-s3-w05": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-progress-indeterminate-requires-value-omission",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s3-w06": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-media-preload-metadata-advisory-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s3-w07": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-fieldset-form-owner-not-inherited-by-descendant",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r009-web-tech-s3-w08": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-aria-haspopup-popup-role-token-not-generic-true",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s3-w01": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-form-submit-api-bypasses-interactive-validation-and-submit-event",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r010-network-html-s3-w02": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-custom-validity-persists-after-value-correction-until-cleared",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r010-network-html-s3-w03": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-radio-required-validates-group-selection-not-required-member",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s3-w04": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-number-input-api-invalid-string-sanitizes-empty",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s3-w05": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-email-multiple-trims-each-comma-separated-token",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s3-w06": {
+    "revision": 1,
+    "templateId": "r010-network-html-t-single-select-parser-later-selected-option-clears-earlier",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r010-network-html-s3-w07": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-dialog-close-without-argument-preserves-returnvalue",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-network-html-s3-w08": {
+    "revision": 2,
+    "templateId": "r010-network-html-t-external-classic-script-src-excludes-inline-body-execution",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-dom-form-s3-w01": {
+    "revision": 1,
+    "templateId": "r011-dom-form-template-form-elements-listed-membership-image-exclusion",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s3-w02": {
+    "revision": 1,
+    "templateId": "r011-dom-form-template-form-nameditem-id-name-union-cardinality",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s3-w03": {
+    "revision": 1,
+    "templateId": "r011-dom-form-template-radionodelist-value-filters-checked-radio-type",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s3-w04": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-form-past-name-cache-versus-current-collection-lookup",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-dom-form-s3-w05": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-selectedoptions-filter-versus-all-options-after-index-set",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r011-dom-form-s3-w06": {
+    "revision": 1,
+    "templateId": "r011-dom-form-template-labels-collection-aggregates-explicit-and-ancestor-labels",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s3-w01": {
+    "revision": 2,
+    "templateId": "r012-dom-html-template-radionodelist-setter-first-radio-match-and-no-match-noop",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-dom-html-s3-w02": {
+    "revision": 2,
+    "templateId": "r012-dom-html-template-input-attribute-propagation-stops-after-dirty-value-assignment",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r012-dom-html-s3-w03": {
+    "revision": 1,
+    "templateId": "r012-dom-html-template-option-parent-optgroup-disabled-repair",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s3-w04": {
+    "revision": 1,
+    "templateId": "r012-dom-html-template-text-selection-reversed-end-collapses-to-end",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s3-w05": {
+    "revision": 1,
+    "templateId": "r012-dom-html-template-datalist-descendant-control-form-data-exclusion",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s3-w01": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-setrangetext-explicit-replacement-selects-new-range",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s3-w02": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-reset-event-cancellation-precedes-control-restoration",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r013-dom-html-s3-w03": {
+    "revision": 1,
+    "templateId": "r013-dom-html-template-range-missing-value-midpoint-sanitization",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s3-w04": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-empty-title-stops-ancestor-advisory-information",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s3-w05": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-presentation-role-focusable-native-control-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r014-dom-html-s3-w01": {
+    "revision": 1,
+    "templateId": "r014-dom-html-template-table-rows-groups-header-body-footer-despite-dom-reordering",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r014-dom-html-s3-w02": {
+    "revision": 2,
+    "templateId": "r014-dom-html-template-minlength-too-short-needs-user-edit-and-nonempty-value",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r014-dom-html-s3-w03": {
+    "revision": 1,
+    "templateId": "r014-dom-html-template-date-valueasnumber-utc-midnight-milliseconds-not-local-time",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-dom-html-s3-w04": {
+    "revision": 1,
+    "templateId": "r014-dom-html-template-file-value-filename-mode-masks-real-local-directory",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-dom-html-s3-w05": {
+    "revision": 1,
+    "templateId": "r014-dom-html-template-server-side-ismap-click-appends-unnamed-coordinate-query",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s3-w01": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-selection-direction-changes-without-swapping-ordered-boundaries",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s3-w02": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-stepup-snaps-off-grid-before-incrementing-aligned-value",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s3-w03": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-create-thead-reuses-but-create-tbody-inserts-new-section",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-dom-html-s3-w04": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-explicit-invalid-label-for-does-not-fallback-to-nested-control",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-dom-html-s3-w05": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-meter-idl-value-clamps-without-rewriting-content-attribute",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r015-dom-html-s3-w06": {
+    "revision": 1,
+    "templateId": "r015-dom-html-template-nested-parent-target-selects-immediate-not-top-context",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s3-w07": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-select-remove-no-argument-removes-control-not-option",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r016-dom-html-s3-w01": {
+    "revision": 1,
+    "templateId": "r016-dom-html-template-rowspan-zero-stops-at-current-rowgroup-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-dom-html-s3-w02": {
+    "revision": 3,
+    "templateId": "r016-dom-html-template-readonly-barring-does-not-clear-validity-but-checkvalidity-succeeds",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r016-dom-html-s3-w03": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-radio-exclusivity-follows-explicit-form-owner-not-dom-ancestor",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r016-dom-html-s3-w05": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-kbd-user-input-versus-samp-program-output-semantics",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-dom-html-s3-w06": {
+    "revision": 1,
+    "templateId": "r016-dom-html-template-data-element-pairs-readable-label-with-nondatetime-machine-value",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-dom-html-s3-w07": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-showmodal-on-open-nonmodal-dialog-throws-without-closing",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-dom-html-s3-w01": {
+    "revision": 3,
+    "templateId": "r017-dom-html-template-invalid-pattern-compilation-removes-pattern-constraint-not-value",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-dom-html-s3-w02": {
+    "revision": 2,
+    "templateId": "r017-dom-html-template-empty-table-insertrow-creates-tbody-before-returning-row",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-dom-html-s3-w03": {
+    "revision": 1,
+    "templateId": "r017-dom-html-template-pre-parser-strips-only-first-immediate-linefeed",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-dom-html-s3-w04": {
+    "revision": 2,
+    "templateId": "r017-dom-html-template-filename-value-nonempty-assignment-throws-does-not-select-file",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-dom-html-s3-w05": {
+    "revision": 2,
+    "templateId": "r017-dom-html-template-number-input-text-selection-method-invalidstate",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-dom-html-s3-w06": {
+    "revision": 1,
+    "templateId": "r017-dom-html-template-form-data-includes-only-activated-named-submit-button-value",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s3-w01": {
+    "revision": 1,
+    "templateId": "r018-html-css-practical-template-translate-enabled-child-overrides-parent-for-text-and-title",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s3-w02": {
+    "revision": 1,
+    "templateId": "r018-html-css-practical-template-map-required-name-distinguished-from-id-processing-recovery",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s3-w03": {
+    "revision": 1,
+    "templateId": "r018-html-css-practical-template-script-string-escape-preserves-closing-tag-text-without-html-end-tag",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r018-html-css-practical-s3-w04": {
+    "revision": 1,
+    "templateId": "r018-html-css-practical-template-role-token-sequence-first-recognized-role-not-combined",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s3-w05": {
+    "revision": 2,
+    "templateId": "r018-html-css-practical-template-dfn-defining-term-own-title-versus-noninherited-ancestor-title",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-html-css-practical-s3-w01": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-cellindex-counts-row-cells-not-spanned-grid-columns",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-html-css-practical-s3-w02": {
+    "revision": 3,
+    "templateId": "r019-html-css-practical-template-label-interactive-descendant-click-does-not-activate-labeled-control",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r019-html-css-practical-s3-w03": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-datalist-suggestions-exclude-disabled-empty-options-but-options-collection-retains-them",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-html-css-practical-s3-w04": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-dialog-form-submission-closes-dialog-with-submitter-value-without-http-navigation",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r019-html-css-practical-s3-w05": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-stylesheet-rel-and-title-distinguish-persistent-preferred-and-alternate-sheets",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w01": {
+    "revision": 1,
+    "templateId": "r020-html-css-practical-template-accesskey-suggests-character-without-guaranteeing-platform-shortcut-assignment",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w02": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-spellcheck-idl-does-not-reflect-user-preference-overriding-content-attribute",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r020-html-css-practical-s3-w03": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-draggable-idl-defaults-follow-element-kind-before-explicit-overrides",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w04": {
+    "revision": 1,
+    "templateId": "r020-html-css-practical-template-autofill-scope-combines-section-and-shipping-category-for-same-value-rule",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r020-html-css-practical-s3-w05": {
+    "revision": 1,
+    "templateId": "r020-html-css-practical-template-missing-form-action-idl-returns-document-url-despite-different-base",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w06": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-cross-origin-module-fetch-requires-cors-without-crossorigin-attribute",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w07": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-select-size-idl-zero-is-not-default-display-size",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w08": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-anchor-type-is-advisory-not-authoritative-resource-mime",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w09": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-license-link-describes-main-content-license-not-whole-page-design",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s3-w10": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-external-link-relation-annotates-other-site-without-implying-window-behavior",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-html-css-practical-s3-w01": {
+    "revision": 1,
+    "templateId": "r021-html-css-practical-template-canvas-bitmap-keeps-fallback-descendants-focusable-for-interactive-region-mapping",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-html-css-practical-s3-w02": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-stylesheet-network-failure-error-versus-css-parse-error-load",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-html-css-practical-s3-w03": {
+    "revision": 3,
+    "templateId": "r021-html-css-practical-template-broken-image-complete-true-with-zero-natural-width",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-html-css-practical-s3-w04": {
+    "revision": 1,
+    "templateId": "r021-html-css-practical-template-details-toggle-notifications-coalesce-successive-open-changes",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-html-css-practical-s3-w05": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-innerhtml-created-script-node-does-not-execute",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-html-css-practical-s3-w06": {
+    "revision": 1,
+    "templateId": "r021-html-css-practical-template-get-form-submission-replaces-action-query-preserves-fragment",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r022-html-css-practical-s3-w02": {
+    "revision": 2,
+    "templateId": "r022-html-css-practical-template-synthetic-click-in-progress-blocks-recursion-but-resets-for-next-call",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r022-html-css-practical-s3-w04": {
+    "revision": 3,
+    "templateId": "r022-html-css-practical-template-nested-sandbox-retains-ancestor-form-restriction-despite-inner-allow-token",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r022-html-css-practical-s3-w06": {
+    "revision": 3,
+    "templateId": "r022-html-css-practical-template-form-novalidate-does-not-disable-explicit-checkvalidity",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r024-html-css-practical-s3-w02": {
+    "revision": 2,
+    "templateId": "r024-html-css-practical-template-currentscript-is-null-in-later-callback-despite-original-script-being-connected",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r024-html-css-practical-s3-w03": {
+    "revision": 1,
+    "templateId": "r024-html-css-practical-template-removed-iframe-sandbox-affects-next-navigation-not-current-document-restrictions",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r025-html-css-practical-s3-w01": {
+    "revision": 3,
+    "templateId": "r025-html-css-practical-template-image-map-first-area-wins-overlap-even-without-href",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r025-html-css-practical-s3-w02": {
+    "revision": 3,
+    "templateId": "r025-html-css-practical-template-document-open-reuses-document-removes-descendant-listeners",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r025-html-css-practical-s3-w03": {
+    "revision": 3,
+    "templateId": "r025-html-css-practical-template-disabled-click-method-stops-before-event-but-generic-dispatch-still-delivers",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r025-html-css-practical-s3-w04": {
+    "revision": 3,
+    "templateId": "r025-html-css-practical-template-forward-loop-returns-to-start-before-ended-event-branch",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-html-css-practical-s3-w01": {
+    "revision": 3,
+    "templateId": "r026-html-css-practical-template-semicolonless-character-reference-attribute-alphanumeric-exception",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-html-css-practical-s3-w02": {
+    "revision": 1,
+    "templateId": "r026-html-css-practical-template-table-nonspace-text-foster-parented-before-table",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-html-css-practical-s3-w03": {
+    "revision": 2,
+    "templateId": "r026-html-css-practical-template-html-onclick-false-cancels-without-stopping-bubbling",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r027-html-css-practical-s3-w01": {
+    "revision": 2,
+    "templateId": "r027-html-css-practical-template-checkbox-canceled-activation-restores-checked-and-indeterminate-after-listener",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r027-html-css-practical-s3-w03": {
+    "revision": 2,
+    "templateId": "r027-html-css-practical-template-script-async-getter-nonblocking-flag-cleared-by-idl-not-absent-attribute-removal",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r028-aria-law-s3-w01": {
+    "revision": 1,
+    "templateId": "r028-aria-law-template-abstract-landmark-role-prohibited-in-author-content",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r029-aria-s3-w01": {
+    "revision": 2,
+    "templateId": "r029-aria-template-separator-focusability-conditions-superclass-and-current-value-duty",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r029-aria-s3-w02": {
+    "revision": 1,
+    "templateId": "r029-aria-template-flowto-multiple-idrefs-user-choice-alternate-reading-relationship",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-html-css-s3-w01": {
+    "revision": 2,
+    "templateId": "r031-html-css-template-s3-w01",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-html-css-s3-w02": {
+    "revision": 2,
+    "templateId": "r031-html-css-template-s3-w02",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-html-css-s3-w03": {
+    "revision": 3,
+    "templateId": "r031-html-css-template-s3-w03",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r032-primary-s3-w01": {
+    "revision": 1,
+    "templateId": "r032-primary-template-embedded-editable-textbox-value-contributes-to-another-widget-name",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r033-primary-s3-w01": {
+    "revision": 3,
+    "templateId": "r033-primary-template-telephone-input-has-no-built-in-format-validation-but-explicit-pattern-still-applies",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r034-primary-s3-w01": {
+    "revision": 2,
+    "templateId": "r034-primary-template-aria-current-unrecognized-nonempty-token-versus-empty-default",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r035-primary-s3-w01": {
+    "revision": 2,
+    "templateId": "r035-primary-template-html-dir-auto-excludes-defined-direction-subtree-not-invalid-attribute",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r036-primary-s3-w01": {
+    "revision": 2,
+    "templateId": "r036-primary-template-html-step-any-removes-step-mismatch-but-stepup-throws-without-value-change",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r037-web-s3-w01": {
+    "revision": 1,
+    "templateId": "r037-web-template-srcdoc-fallback-base-inherits-embedding-document-base-url",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r038-web-s3-w01": {
+    "revision": 1,
+    "templateId": "r038-web-template-getelementsbyname-documentwide-exact-name-not-id-or-form-only",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r039-primary-s3-w01": {
+    "revision": 1,
+    "templateId": "r039-primary-template-canvas-todataurl-unsupported-output-type-falls-back-to-png",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g01-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g01",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw21-g02-w01": {
+    "revision": 1,
+    "templateId": "pw21-template-g02",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g04-w01": {
+    "revision": 3,
+    "templateId": "pw21-template-g04",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g10-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g10",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw21-g11-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g11",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g17-w01": {
+    "revision": 3,
+    "templateId": "pw21-template-g17",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "pw21-g18-w01": {
+    "revision": 4,
+    "templateId": "pw21-template-g18",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw21-g19-w01": {
+    "revision": 2,
+    "templateId": "pw21-template-g19",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g08-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g08",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g13-w01": {
+    "revision": 1,
+    "templateId": "pw22-template-g13",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g20-w01": {
+    "revision": 1,
+    "templateId": "pw22-template-g20",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g21-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g21",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g22-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g22",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g25-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g25",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g26-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g26",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g27-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g27",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g28-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g28",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "pw22-g29-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g29",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g30-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g30",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g32-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g32",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g33-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g33",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "pw22-g37-w01": {
+    "revision": 3,
+    "templateId": "pw22-template-g37",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se02-f03-w02": {
+    "revision": 1,
+    "templateId": "se02-template-name-reference-recursion-diagnosis",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se02-f04-w01": {
+    "revision": 1,
+    "templateId": "se02-template-editable-combobox-cancel-caret-contract",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se02-f05-w01": {
+    "revision": 1,
+    "templateId": "se02-template-long-structured-modal-entry",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se02-f05-w03": {
+    "revision": 1,
+    "templateId": "se02-template-nonmodal-modal-route-focus-lifecycle",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se02-f04-w04": {
+    "revision": 1,
+    "templateId": "se02-template-equivalent-composite-tab-boundary-reentry",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se06-m01-w01": {
+    "revision": 1,
+    "templateId": "se06-m01-template-multilevel-period-context",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se06-m02-w03": {
+    "revision": 1,
+    "templateId": "se06-m02-template-math-fraction-group-meaning",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "seed-w07": {
+    "revision": 4,
+    "templateId": "seed-w07-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "seed-w08": {
+    "revision": 4,
+    "templateId": "seed-w08-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w01": {
+    "revision": 2,
+    "templateId": "r001-css-script-template-css-inheritance",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w02": {
+    "revision": 1,
+    "templateId": "r001-css-script-template-css-origin-important",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-css-script-w03": {
+    "revision": 1,
+    "templateId": "r001-css-script-template-css-border-box-width",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w04": {
+    "revision": 1,
+    "templateId": "r001-css-script-template-css-child-selector",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w05": {
+    "revision": 2,
+    "templateId": "r001-css-script-template-css-hidden-layout",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w06": {
+    "revision": 2,
+    "templateId": "r001-css-script-template-js-block-scope",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w07": {
+    "revision": 2,
+    "templateId": "r001-css-script-template-js-array-slice",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-css-script-w08": {
+    "revision": 2,
+    "templateId": "r001-css-script-template-js-short-circuit",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w09": {
+    "revision": 2,
+    "templateId": "r001-css-script-template-js-equality-coercion",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-css-script-w10": {
+    "revision": 2,
+    "templateId": "r001-css-script-template-js-event-cancellation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-css-script-w01": {
+    "revision": 1,
+    "templateId": "r002-css-script-template-css-mixed-margin-collapse",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-css-script-w02": {
+    "revision": 1,
+    "templateId": "r002-css-script-template-css-absolute-containing-block",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-css-script-w03": {
+    "revision": 2,
+    "templateId": "r002-css-script-template-css-relative-flow-reservation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-css-script-w04": {
+    "revision": 1,
+    "templateId": "r002-css-script-template-css-clear-left-side",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-css-script-w05": {
+    "revision": 2,
+    "templateId": "r002-css-script-template-css-media-applicability",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-css-script-w06": {
+    "revision": 2,
+    "templateId": "r002-css-script-template-js-parameter-object-rebinding",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-css-script-w07": {
+    "revision": 3,
+    "templateId": "r002-css-script-template-js-return-finally-completion",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-css-script-w08": {
+    "revision": 2,
+    "templateId": "r002-css-script-template-js-for-continue-update",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-css-script-w09": {
+    "revision": 1,
+    "templateId": "r002-css-script-template-js-switch-fallthrough",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-css-script-w10": {
+    "revision": 2,
+    "templateId": "r002-css-script-template-dom-stoppropagation-same-target",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w01": {
+    "revision": 1,
+    "templateId": "r003-css-script-template-css-auto-width-minmax-conflict",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w02": {
+    "revision": 2,
+    "templateId": "r003-css-script-template-css-percent-vertical-padding-basis",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w03": {
+    "revision": 1,
+    "templateId": "r003-css-script-template-css-unitless-lineheight-inheritance",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w04": {
+    "revision": 1,
+    "templateId": "r003-css-script-template-css-preline-whitespace-processing",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w05": {
+    "revision": 1,
+    "templateId": "r003-css-script-template-css-nested-stacking-context",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r003-css-script-w06": {
+    "revision": 2,
+    "templateId": "r003-css-script-template-js-independent-closure-state",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r003-css-script-w07": {
+    "revision": 2,
+    "templateId": "r003-css-script-template-js-method-this-receiver",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w08": {
+    "revision": 1,
+    "templateId": "r003-css-script-template-js-map-callback-result-array",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w09": {
+    "revision": 1,
+    "templateId": "r003-css-script-template-js-filter-original-elements",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-css-script-w10": {
+    "revision": 2,
+    "templateId": "r003-css-script-template-js-own-versus-inherited-property",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w01": {
+    "revision": 3,
+    "templateId": "r004-css-script-template-css-fixed-table-column-precedence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w02": {
+    "revision": 2,
+    "templateId": "r004-css-script-template-css-collapsed-border-conflict",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w03": {
+    "revision": 2,
+    "templateId": "r004-css-script-template-css-background-percentage-position",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w04": {
+    "revision": 2,
+    "templateId": "r004-css-script-template-css-adjacent-sibling-non-elements",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-css-script-w05": {
+    "revision": 2,
+    "templateId": "r004-css-script-template-css-bfc-autoheight-float-inclusion",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w06": {
+    "revision": 2,
+    "templateId": "r004-css-script-template-js-predicate-early-termination-log",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w07": {
+    "revision": 3,
+    "templateId": "r004-css-script-template-js-reduce-initial-accumulator",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w08": {
+    "revision": 3,
+    "templateId": "r004-css-script-template-js-sort-default-string-order-mutation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-css-script-w09": {
+    "revision": 3,
+    "templateId": "r004-css-script-template-js-parseint-prefix-vs-number",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-css-script-w10": {
+    "revision": 4,
+    "templateId": "r004-css-script-template-js-default-parameter-undefined-null",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-css-script-w01": {
+    "revision": 2,
+    "templateId": "r005-css-script-template-css-generated-attribute-target-and-absence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-css-script-w02": {
+    "revision": 2,
+    "templateId": "r005-css-script-template-css-counter-reset-increment-sibling-scope",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r005-css-script-w03": {
+    "revision": 2,
+    "templateId": "r005-css-script-template-css-phantom-quote-depth",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-css-script-w04": {
+    "revision": 1,
+    "templateId": "r005-css-script-template-css-list-image-unavailable-fallback",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-css-script-w05": {
+    "revision": 1,
+    "templateId": "r005-css-script-template-css-vertical-align-percentage-own-lineheight",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-css-script-w06": {
+    "revision": 2,
+    "templateId": "r005-css-script-template-js-foreach-dynamic-presence-fixed-range",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r005-css-script-w07": {
+    "revision": 2,
+    "templateId": "r005-css-script-template-js-splice-deletecount-insert-return",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-css-script-w08": {
+    "revision": 3,
+    "templateId": "r005-css-script-template-js-string-replace-first-occurrence-new-value",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-css-script-w09": {
+    "revision": 2,
+    "templateId": "r005-css-script-template-js-json-undefined-object-array-difference",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-css-script-w10": {
+    "revision": 2,
+    "templateId": "r005-css-script-template-js-isnan-coercion-boundary",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-css-script-w01": {
+    "revision": 1,
+    "templateId": "r006-css-script-template-css-counters-ancestor-stack",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r006-css-script-w02": {
+    "revision": 1,
+    "templateId": "r006-css-script-template-css-percent-height-content-dependent-container",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-css-script-w03": {
+    "revision": 2,
+    "templateId": "r006-css-script-template-css-text-decoration-propagation-color",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-css-script-w04": {
+    "revision": 2,
+    "templateId": "r006-css-script-template-css-inline-versus-inlineblock-width-applicability",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-css-script-w05": {
+    "revision": 2,
+    "templateId": "r006-css-script-template-css-background-shorthand-omitted-reset",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-css-script-w06": {
+    "revision": 2,
+    "templateId": "r006-css-script-template-js-bound-receiver-prefixed-arguments",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-css-script-w07": {
+    "revision": 2,
+    "templateId": "r006-css-script-template-js-function-declaration-versus-var-initialization",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-css-script-w08": {
+    "revision": 2,
+    "templateId": "r006-css-script-template-js-global-regexp-lastindex-state",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-css-script-w09": {
+    "revision": 2,
+    "templateId": "r006-css-script-template-js-object-assign-shallow-nested-sharing",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-css-script-w10": {
+    "revision": 1,
+    "templateId": "r006-css-script-template-dom-remove-listener-capture-identity",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-css-script-w01": {
+    "revision": 1,
+    "templateId": "r007-css-script-template-css-unspecified-border-own-color",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-css-script-w02": {
+    "revision": 2,
+    "templateId": "r007-css-script-template-css-empty-cells-separated-paint",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-css-script-w04": {
+    "revision": 1,
+    "templateId": "r007-css-script-template-css-fixed-background-viewport-reference",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-css-script-w05": {
+    "revision": 2,
+    "templateId": "r007-css-script-template-css-bolder-relative-weight-table",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-css-script-w06": {
+    "revision": 3,
+    "templateId": "r007-css-script-template-js-substring-clamp-and-swap",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-css-script-w07": {
+    "revision": 2,
+    "templateId": "r007-css-script-template-js-addition-left-associative-string-transition",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-css-script-w08": {
+    "revision": 1,
+    "templateId": "r007-css-script-template-js-array-default-iterator-values",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-css-script-w09": {
+    "revision": 2,
+    "templateId": "r007-css-script-template-js-array-length-truncation-not-restoration",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-css-script-w10": {
+    "revision": 1,
+    "templateId": "r007-css-script-template-js-split-limit-result-count",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w01": {
+    "revision": 2,
+    "templateId": "r008-css-script-template-css-overflow-hidden-versus-scroll-ui",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r008-css-script-w02": {
+    "revision": 2,
+    "templateId": "r008-css-script-template-css-clip-rect-coordinate-differences",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w03": {
+    "revision": 2,
+    "templateId": "r008-css-script-template-css-floated-inline-display-computation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w05": {
+    "revision": 2,
+    "templateId": "r008-css-script-template-css-visible-descendant-versus-none-ancestor",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w06": {
+    "revision": 1,
+    "templateId": "r008-css-script-template-js-concat-one-level-array-spreading",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w07": {
+    "revision": 1,
+    "templateId": "r008-css-script-template-js-join-null-undefined-empty-fields",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w08": {
+    "revision": 2,
+    "templateId": "r008-css-script-template-js-utf16-length-and-charat-outside-range",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w09": {
+    "revision": 2,
+    "templateId": "r008-css-script-template-dom-static-query-versus-live-tag-collection",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-css-script-w10": {
+    "revision": 2,
+    "templateId": "r008-css-script-template-js-indexof-strict-forward-negative-start",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s4-w01": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-outline-width-change-does-not-allocate-layout-space",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-web-tech-s4-w02": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-inline-fragment-split-edge-border-suppression",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s4-w03": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-table-caption-side-versus-content-horizontal-alignment",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-web-tech-s4-w04": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-css-attribute-word-token-match-not-substring",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-web-tech-s4-w05": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-function-rest-parameter-remaining-arguments-array",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-web-tech-s4-w06": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-strict-write-to-nonwritable-data-property",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s4-w07": {
+    "revision": 1,
+    "templateId": "r009-web-tech-t-array-from-arraylike-mapper-visits-absent-index",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-web-tech-s4-w08": {
+    "revision": 2,
+    "templateId": "r009-web-tech-t-dom-clone-node-does-not-copy-registered-listeners",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-dom-css-w01": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-dom-event-target-currenttarget-ancestor-identity",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-dom-css-w02": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-dom-nonbubbling-event-ancestor-capture",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-dom-css-w03": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-dom-textcontent-replaces-descendants-with-literal-text",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-dom-css-w04": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-array-isarray-versus-arraylike-typeof",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-dom-css-w05": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-set-samevaluezero-nan-and-object-identity",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-dom-css-w06": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-math-round-negative-half-toward-positive-infinity",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-dom-css-w07": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-css-lang-inherited-language-versus-own-attribute",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-dom-css-w08": {
+    "revision": 2,
+    "templateId": "r010-dom-css-template-css-none-hidden-border-width-versus-transparent-color",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s4-w01": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-append-existing-node-moves-same-eventtarget",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s4-w02": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-documentfragment-insertion-drains-children-returns-fragment",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s4-w03": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-preinsertion-cycle-rejection-before-tree-mutation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s4-w04": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-replacechild-returned-detached-node-retains-content",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s4-w05": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-normalize-adjacent-text-preserves-first-and-element-boundaries",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r011-dom-form-s4-w06": {
+    "revision": 2,
+    "templateId": "r011-dom-form-template-em-fontsize-parent-exception-versus-own-margin-basis",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s4-w01": {
+    "revision": 2,
+    "templateId": "r012-dom-html-template-domtokenlist-add-validates-all-before-mutation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s4-w02": {
+    "revision": 2,
+    "templateId": "r012-dom-html-template-splittext-preserves-prefix-node-inserts-suffix-sibling",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s4-w03": {
+    "revision": 2,
+    "templateId": "r012-dom-html-template-node-contains-inclusive-descendant-not-content-equality",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s4-w04": {
+    "revision": 2,
+    "templateId": "r012-dom-html-template-separate-table-cell-gap-and-edge-padding-addition",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-dom-html-s4-w05": {
+    "revision": 2,
+    "templateId": "r012-dom-html-template-absolute-overconstraint-uses-containing-block-direction",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s4-w01": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-getattribute-empty-value-distinct-from-absence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s4-w02": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-domtokenlist-toggle-force-final-presence-return",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s4-w03": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-importnode-deep-copy-uses-target-document-keeps-original",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-dom-html-s4-w04": {
+    "revision": 1,
+    "templateId": "r013-dom-html-template-external-stylesheet-relative-url-base",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-dom-html-s4-w05": {
+    "revision": 2,
+    "templateId": "r013-dom-html-template-normal-flow-block-two-auto-margins-share-free-space",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r014-dom-html-s4-w01": {
+    "revision": 2,
+    "templateId": "r014-dom-html-template-connected-document-position-combines-containment-and-order-flags",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-dom-html-s4-w02": {
+    "revision": 2,
+    "templateId": "r014-dom-html-template-adoptnode-detaches-same-node-updates-descendant-owner-without-insertion",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-dom-html-s4-w03": {
+    "revision": 2,
+    "templateId": "r014-dom-html-template-isequalnode-attribute-set-order-versus-indexed-child-structure",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-dom-html-s4-w04": {
+    "revision": 2,
+    "templateId": "r014-dom-html-template-percentage-fontsize-inherits-computed-length-not-percentage-token",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-dom-html-s4-w05": {
+    "revision": 1,
+    "templateId": "r014-dom-html-template-replaced-image-auto-width-derives-from-explicit-height-and-intrinsic-ratio",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w01": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-nth-child-versus-nth-of-type-uses-different-sibling-index",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r015-dom-html-s4-w02": {
+    "revision": 1,
+    "templateId": "r015-dom-html-template-empty-selector-counts-whitespace-text-but-ignores-comments",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w03": {
+    "revision": 3,
+    "templateId": "r015-dom-html-template-ancestor-opacity-composites-descendants-unlike-background-rgba",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w04": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-media-orientation-square-viewport-is-portrait-not-device-shape",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w05": {
+    "revision": 1,
+    "templateId": "r015-dom-html-template-table-transparent-cell-reveals-row-layer-before-column",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w06": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-float-auto-width-shrink-to-fit-minimum-and-available-width",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w07": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-nodevalue-element-setter-noop-versus-text-data-update",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w08": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-custom-event-detail-retains-object-identity-through-dispatch",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-dom-html-s4-w10": {
+    "revision": 2,
+    "templateId": "r015-dom-html-template-removechild-rejects-nondirect-descendant-before-mutation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-dom-html-s4-w01": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-invalid-declaration-is-discarded-without-discarding-valid-block-peers",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-dom-html-s4-w02": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-absolute-css-length-in-pt-px-fixed-ratio-not-device-pixels",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-dom-html-s4-w03": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-table-row-visibility-collapse-reclaims-height-preserves-column-constraints",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-dom-html-s4-w04": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-media-not-negates-full-query-and-comma-list-ors-queries",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-dom-html-s4-w05": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-range-selectnode-parent-boundaries-versus-selectnodecontents-child-boundaries",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-dom-html-s4-w06": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-event-dispatch-static-ancestor-path-survives-target-detachment",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r016-dom-html-s4-w07": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-html-createelement-lowercases-localname-but-createelementns-preserves-case",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-dom-html-s4-w08": {
+    "revision": 2,
+    "templateId": "r016-dom-html-template-quoted-generic-font-keyword-is-literal-family-before-fallback",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-dom-html-s4-w01": {
+    "revision": 2,
+    "templateId": "r017-dom-html-template-invalid-grouped-selector-discards-valid-branch-and-whole-block",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-dom-html-s4-w02": {
+    "revision": 3,
+    "templateId": "r017-dom-html-template-canvas-background-switches-from-body-to-nontransparent-root",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-dom-html-s4-w03": {
+    "revision": 2,
+    "templateId": "r017-dom-html-template-nonreplaced-inline-vertical-margins-no-effect-horizontal-still-applies",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r017-dom-html-s4-w04": {
+    "revision": 1,
+    "templateId": "r017-dom-html-template-progress-cursor-indicates-processing-with-interaction-still-available",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r017-dom-html-s4-w05": {
+    "revision": 2,
+    "templateId": "r017-dom-html-template-range-extractcontents-copies-selected-text-removes-original-slice",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r017-dom-html-s4-w06": {
+    "revision": 1,
+    "templateId": "r017-dom-html-template-treewalker-skip-keeps-descendant-traversal-reject-prunes-subtree",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s4-w01": {
+    "revision": 1,
+    "templateId": "r018-html-css-practical-template-capitalize-uppercases-word-initial-without-lowercasing-rest",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-html-css-practical-s4-w02": {
+    "revision": 2,
+    "templateId": "r018-html-css-practical-template-inline-block-baseline-overflow-selects-margin-edge-instead-of-last-line",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s4-w03": {
+    "revision": 2,
+    "templateId": "r018-html-css-practical-template-inside-list-marker-precedes-before-generated-content",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s4-w04": {
+    "revision": 2,
+    "templateId": "r018-html-css-practical-template-getter-recomputes-on-each-property-read",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-html-css-practical-s4-w05": {
+    "revision": 2,
+    "templateId": "r018-html-css-practical-template-recursive-call-unwinding-preserves-per-call-local-values",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r018-html-css-practical-s4-w06": {
+    "revision": 2,
+    "templateId": "r018-html-css-practical-template-throw-unwinds-caller-to-catch-without-resuming-abandoned-statements",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-html-css-practical-s4-w01": {
+    "revision": 3,
+    "templateId": "r019-html-css-practical-template-text-overflow-ellipsis-requires-nonvisible-overflow-in-inline-direction",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-html-css-practical-s4-w02": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-resize-vertical-user-adjustment-preserves-width-and-obeys-minmax-height",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-html-css-practical-s4-w03": {
+    "revision": 1,
+    "templateId": "r019-html-css-practical-template-target-pseudoclass-selects-fragment-destination-not-referring-link-or-descendants",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-html-css-practical-s4-w04": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-unicode-range-limits-font-effective-character-map-despite-existing-glyphs",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-html-css-practical-s4-w05": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-do-while-executes-body-before-first-condition-check",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-html-css-practical-s4-w06": {
+    "revision": 2,
+    "templateId": "r019-html-css-practical-template-labeled-break-exits-named-outer-loop-without-running-remaining-inner-or-outer-body",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r019-html-css-practical-s4-w07": {
+    "revision": 3,
+    "templateId": "r019-html-css-practical-template-new-constructor-ignores-primitive-return-but-uses-explicit-object-return",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w01": {
+    "revision": 1,
+    "templateId": "r020-html-css-practical-template-first-line-keeps-initial-empty-formatted-line-rather-than-first-nonempty-text",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w02": {
+    "revision": 1,
+    "templateId": "r020-html-css-practical-template-first-letter-selects-generated-before-prefix-before-original-text",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w03": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-font-size-adjust-changes-used-font-size-without-scaling-em-or-numeric-lineheight",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r020-html-css-practical-s4-w04": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-font-synthesis-keywords-allow-independent-weight-and-style-synthesis",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w05": {
+    "revision": 1,
+    "templateId": "r020-html-css-practical-template-not-argument-contributes-id-specificity-without-counting-not-itself",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w06": {
+    "revision": 1,
+    "templateId": "r020-html-css-practical-template-tabular-numeric-glyphs-select-equal-digit-widths-independent-of-number-form",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w07": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-strict-function-arguments-index-write-does-not-alias-simple-parameter",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w08": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-setter-return-value-does-not-replace-assignment-expression-rhs",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-html-css-practical-s4-w09": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-compound-assignment-captures-left-value-before-right-side-reassignment",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r020-html-css-practical-s4-w10": {
+    "revision": 2,
+    "templateId": "r020-html-css-practical-template-preventextensions-blocks-new-own-properties-without-freezing-existing-properties",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-html-css-practical-s4-w01": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-font-face-src-skips-unsupported-format-and-continues-after-unusable-resource",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-html-css-practical-s4-w02": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-font-weight-face-matching-400-prefers-500-and-above-500-searches-upward",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-html-css-practical-s4-w03": {
+    "revision": 1,
+    "templateId": "r021-html-css-practical-template-font-feature-settings-property-overrides-font-variant-independent-of-declaration-order",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-html-css-practical-s4-w04": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-media-color-uses-minimum-component-depth-not-total-pixel-bits",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-html-css-practical-s4-w05": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-return-linebreak-inserts-semicolon-before-unreached-expression",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-html-css-practical-s4-w06": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-typeof-uninitialized-lexical-binding-throws-unlike-unresolvable-name",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-html-css-practical-s4-w07": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-comma-expression-preserves-all-side-effects-returns-last-value",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-html-css-practical-s4-w08": {
+    "revision": 2,
+    "templateId": "r021-html-css-practical-template-new-defineproperty-default-nonenumerable-still-own-property",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r022-html-css-practical-s4-w01": {
+    "revision": 1,
+    "templateId": "r022-html-css-practical-template-external-css-http-charset-precedes-leading-charset-declaration-without-bom",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r022-html-css-practical-s4-w03": {
+    "revision": 2,
+    "templateId": "r022-html-css-practical-template-currentcolor-on-color-inherits-before-other-color-properties-resolve",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r022-html-css-practical-s4-w05": {
+    "revision": 4,
+    "templateId": "r022-html-css-practical-template-remainder-sign-follows-dividend-not-divisor-or-floor-modulo",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r022-html-css-practical-s4-w08": {
+    "revision": 1,
+    "templateId": "r022-html-css-practical-template-apply-expands-arraylike-indexes-into-arguments-with-explicit-receiver",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r024-html-css-practical-s4-w01": {
+    "revision": 2,
+    "templateId": "r024-html-css-practical-template-inherited-setter-receives-child-and-does-not-create-own-accessor-name",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r024-html-css-practical-s4-w02": {
+    "revision": 2,
+    "templateId": "r024-html-css-practical-template-for-let-captures-per-iteration-bindings-not-shared-final-counter",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r024-html-css-practical-s4-w03": {
+    "revision": 2,
+    "templateId": "r024-html-css-practical-template-default-parameter-expression-cannot-see-function-body-var-binding",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r024-html-css-practical-s4-w04": {
+    "revision": 1,
+    "templateId": "r024-html-css-practical-template-word-spacing-affects-space-and-nbsp-not-fixed-width-ideographic-space",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-html-css-practical-s4-w01": {
+    "revision": 2,
+    "templateId": "r025-html-css-practical-template-parent-first-child-margin-collapses-until-padding-separates",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-html-css-practical-s4-w02": {
+    "revision": 2,
+    "templateId": "r025-html-css-practical-template-anonymous-table-row-wraps-consecutive-cells-without-dom-mutation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-html-css-practical-s4-w03": {
+    "revision": 3,
+    "templateId": "r025-html-css-practical-template-z-index-auto-allows-descendant-parent-context-versus-integer-zero-isolation",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r025-html-css-practical-s4-w04": {
+    "revision": 1,
+    "templateId": "r025-html-css-practical-template-for-in-nonenumerable-own-key-suppresses-inherited-key",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r025-html-css-practical-s4-w05": {
+    "revision": 2,
+    "templateId": "r025-html-css-practical-template-indirect-eval-uses-global-environment-not-caller-local-binding",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-html-css-practical-s4-w02": {
+    "revision": 1,
+    "templateId": "r026-html-css-practical-template-inline-replaced-margin-box-not-own-lineheight-sets-line-height",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r026-html-css-practical-s4-w03": {
+    "revision": 1,
+    "templateId": "r026-html-css-practical-template-json-parse-reviver-undefined-deletes-property-not-retains-undefined",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r026-html-css-practical-s4-w04": {
+    "revision": 1,
+    "templateId": "r026-html-css-practical-template-ordinary-own-property-name-order-canonical-index-before-creation-strings",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-html-css-practical-s4-w02": {
+    "revision": 2,
+    "templateId": "r027-html-css-practical-template-json-tojson-transforms-property-before-replacer-value-argument",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-html-css-practical-s4-w03": {
+    "revision": 1,
+    "templateId": "r027-html-css-practical-template-regexp-split-captures-inserted-between-nonseparator-substrings",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r030-javascript-s4-w01": {
+    "revision": 2,
+    "templateId": "r030-javascript-template-nullish-coalescing-preserves-falsy-defaults-only-null-undefined",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r030-javascript-s4-w02": {
+    "revision": 2,
+    "templateId": "r030-javascript-template-optional-chain-continuity-and-grouped-access-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r030-advertising-typography-s4-w01": {
+    "revision": 2,
+    "templateId": "r030-advertising-typography-template-small-caps-lowercase-glyph-mapping-versus-uppercase-presentation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-html-css-s4-w01": {
+    "revision": 3,
+    "templateId": "r031-html-css-template-s4-w01",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r031-html-css-s4-w02": {
+    "revision": 2,
+    "templateId": "r031-html-css-template-s4-w02",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r031-html-css-s4-w03": {
+    "revision": 2,
+    "templateId": "r031-html-css-template-s4-w03",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-html-css-s4-w04": {
+    "revision": 2,
+    "templateId": "r031-html-css-template-s4-w04",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r032-primary-s4-w01": {
+    "revision": 1,
+    "templateId": "r032-primary-template-inline-middle-aligns-midpoint-to-parent-baseline-plus-half-x-height",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r032-primary-s4-w02": {
+    "revision": 2,
+    "templateId": "r032-primary-template-dom-listener-exception-reported-without-propagating-to-dispatch-caller",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r032-primary-s4-w03": {
+    "revision": 2,
+    "templateId": "r032-primary-template-number-integer-exactly-represented-value-can-exceed-safe-integer-bound",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r033-primary-s4-w01": {
+    "revision": 2,
+    "templateId": "r033-primary-template-json-stringify-rejects-active-path-cycle-but-serializes-repeated-sibling-reference",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r034-primary-s4-w01": {
+    "revision": 2,
+    "templateId": "r034-primary-template-promise-executor-runs-before-return-then-reaction-follows-current-job",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r034-primary-s4-w02": {
+    "revision": 1,
+    "templateId": "r034-primary-template-same-description-symbol-calls-create-distinct-property-keys",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r035-primary-s4-w01": {
+    "revision": 2,
+    "templateId": "r035-primary-template-array-of-single-numeric-item-versus-array-numeric-length",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r036-s4-w01": {
+    "revision": 2,
+    "templateId": "r036-s4-template-string-raw-literal-escapes-versus-evaluated-substitution",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r036-s4-w02": {
+    "revision": 2,
+    "templateId": "r036-s4-template-codepointat-low-surrogate-start-does-not-backtrack",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r037-script-at-s4-w01": {
+    "revision": 2,
+    "templateId": "r037-script-at-template-object-assign-reads-accessor-value-without-copying-getter",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r037-script-at-s4-w02": {
+    "revision": 2,
+    "templateId": "r037-script-at-template-map-update-retains-position-delete-reinsert-appends",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r038-script-at-s4-w01": {
+    "revision": 1,
+    "templateId": "r038-script-at-template-json-array-replacer-filters-nested-object-properties-not-array-positions",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r039-primary-s4-w01": {
+    "revision": 1,
+    "templateId": "r039-primary-template-promise-all-result-order-preserves-input-position-not-fulfillment-order",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r041-primary-s4-w01": {
+    "revision": 2,
+    "templateId": "r041-primary-template-bound-constructor-ignores-bound-this-but-preserves-prefixed-arguments",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "pw22-g31-w01": {
+    "revision": 2,
+    "templateId": "pw22-template-g31",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se01-f01-w01": {
+    "revision": 2,
+    "templateId": "se01-template-reflow-map-exception-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se01-f01-w02": {
+    "revision": 1,
+    "templateId": "se01-template-spacing-preserve-overridden-content",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se01-f02-w01": {
+    "revision": 1,
+    "templateId": "se01-template-forced-colors-selection-focus-preservation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se01-f02-w02": {
+    "revision": 1,
+    "templateId": "se01-template-reduced-motion-functional-completion",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se01-f08-w01": {
+    "revision": 1,
+    "templateId": "se01-template-mobile-keyboard-viewport-form-preservation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se01-f08-w02": {
+    "revision": 1,
+    "templateId": "se01-template-mobile-concurrent-input-without-locking",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se02-f04-w02": {
+    "revision": 1,
+    "templateId": "se02-template-roving-focus-after-dynamic-removal",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se02-f05-w02": {
+    "revision": 1,
+    "templateId": "se02-template-dialog-return-focus-workflow-exceptions",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se02-f04-w03": {
+    "revision": 1,
+    "templateId": "se02-template-grid-navigation-editing-key-ownership",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se03-f06-w01": {
+    "revision": 2,
+    "templateId": "se03-template-async-active-request-ownership",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se03-f06-w02": {
+    "revision": 1,
+    "templateId": "se03-template-busy-ends-after-settled-error-view",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se01s-f01-w01": {
+    "revision": 1,
+    "templateId": "se01s-template-fixed-regions-preserve-reading-and-controls",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se01s-f01-w02": {
+    "revision": 2,
+    "templateId": "se01s-template-focused-component-reveal-beneath-fixed-header",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se07-g02-w01": {
+    "revision": 2,
+    "templateId": "se07-g02-template-incoming-position-versus-read-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se07-g04-w01": {
+    "revision": 2,
+    "templateId": "se07-g04-template-hold-alternative-preserves-start-stop",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "seed-w09": {
+    "revision": 2,
+    "templateId": "seed-w09-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "seed-w10": {
+    "revision": 2,
+    "templateId": "seed-w10-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w01": {
+    "revision": 3,
+    "templateId": "r001-standards-template-assistive-technology-definition",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r001-standards-template-screen-magnification",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r001-standards-template-refreshable-braille",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w04": {
+    "revision": 1,
+    "templateId": "r001-standards-template-speech-recognition-input",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w05": {
+    "revision": 1,
+    "templateId": "r001-standards-template-input-filtering",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w06": {
+    "revision": 3,
+    "templateId": "r001-standards-template-nonvoice-service-access",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w07": {
+    "revision": 2,
+    "templateId": "r001-standards-template-cognitive-clear-content",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w08": {
+    "revision": 2,
+    "templateId": "r001-standards-template-user-study-generalization",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r001-standards-s5-w09": {
+    "revision": 3,
+    "templateId": "r001-standards-template-digital-inclusion-duty",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r001-standards-s5-w10": {
+    "revision": 2,
+    "templateId": "r001-standards-template-certification-institution-term",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s5-w01": {
+    "revision": 1,
+    "templateId": "r002-standards-template-information-discrimination-media-scope",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r002-standards-template-third-party-petition-standing",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r002-standards-template-disability-discrimination-correction-order",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s5-w04": {
+    "revision": 4,
+    "templateId": "r002-standards-template-discrimination-burden-allocation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s5-w05": {
+    "revision": 1,
+    "templateId": "r002-standards-template-certification-expert-user-conjunction",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s5-w06": {
+    "revision": 1,
+    "templateId": "r002-standards-template-certification-post-award-monitoring",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-standards-s5-w07": {
+    "revision": 1,
+    "templateId": "r002-standards-template-early-continuous-evaluation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-standards-s5-w08": {
+    "revision": 1,
+    "templateId": "r002-standards-template-representative-sample-variety",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r002-standards-s5-w09": {
+    "revision": 1,
+    "templateId": "r002-standards-template-evaluate-complete-process",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r002-standards-s5-w10": {
+    "revision": 1,
+    "templateId": "r002-standards-template-tool-selection-authenticated-scope",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s5-w01": {
+    "revision": 2,
+    "templateId": "r003-standards-template-malicious-discrimination-penalty",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s5-w02": {
+    "revision": 2,
+    "templateId": "r003-standards-template-correction-order-administrative-fine",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r003-standards-template-information-accommodation-event-support",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s5-w04": {
+    "revision": 1,
+    "templateId": "r003-standards-template-judicial-interim-relief",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s5-w05": {
+    "revision": 2,
+    "templateId": "r003-standards-template-civil-damages-liability",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s5-w06": {
+    "revision": 1,
+    "templateId": "r003-standards-template-switch-sequential-scanning",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s5-w07": {
+    "revision": 1,
+    "templateId": "r003-standards-template-eye-tracking-input",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r003-standards-s5-w08": {
+    "revision": 1,
+    "templateId": "r003-standards-template-evaluation-support-baseline",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s5-w09": {
+    "revision": 2,
+    "templateId": "r003-standards-template-random-sample-new-findings",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r003-standards-s5-w10": {
+    "revision": 2,
+    "templateId": "r003-standards-template-evaluation-reproduction-records",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-standards-s5-w01": {
+    "revision": 2,
+    "templateId": "r004-standards-template-correction-order-objection-finality",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-standards-s5-w02": {
+    "revision": 2,
+    "templateId": "r004-standards-template-indirect-discrimination-criterion",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s5-w03": {
+    "revision": 2,
+    "templateId": "r004-standards-template-supported-self-determination",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s5-w04": {
+    "revision": 2,
+    "templateId": "r004-standards-template-personal-information-consent",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s5-w05": {
+    "revision": 2,
+    "templateId": "r004-standards-template-implementation-report-request",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r004-standards-s5-w06": {
+    "revision": 2,
+    "templateId": "r004-standards-template-sample-conformance-claim-limits",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s5-w07": {
+    "revision": 2,
+    "templateId": "r004-standards-template-quantitative-score-interpretation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s5-w08": {
+    "revision": 2,
+    "templateId": "r004-standards-template-word-prediction-assistance",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s5-w09": {
+    "revision": 2,
+    "templateId": "r004-standards-template-pointer-setting-adaptation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r004-standards-s5-w10": {
+    "revision": 2,
+    "templateId": "r004-standards-template-synchronized-text-highlighting",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w01": {
+    "revision": 1,
+    "templateId": "r005-standards-template-sequential-modifier-sticky-keys",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r005-standards-template-onscreen-keyboard-pointer-entry",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r005-standards-template-user-style-presentation-adjustment",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w04": {
+    "revision": 2,
+    "templateId": "r005-standards-template-temporary-situational-access-benefits",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w05": {
+    "revision": 2,
+    "templateId": "r005-standards-template-evaluation-scope-membership",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w06": {
+    "revision": 2,
+    "templateId": "r005-standards-template-combined-evaluator-expertise",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w07": {
+    "revision": 1,
+    "templateId": "r005-standards-template-reasonable-accommodation-definition",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r005-standards-s5-w08": {
+    "revision": 1,
+    "templateId": "r005-standards-template-disability-related-person-protection",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r005-standards-s5-w09": {
+    "revision": 1,
+    "templateId": "r005-standards-template-repeated-component-behavior-recheck",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-standards-s5-w01": {
+    "revision": 1,
+    "templateId": "r006-standards-template-responsive-layout-evaluation-states",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r006-standards-template-reevaluation-sample-retention-replacement",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r006-standards-template-additional-evaluation-deliverables-agreement",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r006-standards-s5-w04": {
+    "revision": 1,
+    "templateId": "r006-standards-template-progressive-disclosure-information-load",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-standards-s5-w05": {
+    "revision": 1,
+    "templateId": "r006-standards-template-page-map-viewport-orientation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r006-standards-s5-w06": {
+    "revision": 1,
+    "templateId": "r006-standards-template-saved-navigation-memory-support",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-standards-s5-w01": {
+    "revision": 1,
+    "templateId": "r007-standards-template-evaluation-relied-upon-technology-test",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r007-standards-template-aggregated-portal-combined-state-evaluation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r007-standards-template-earl-evaluation-result-interchange-purpose",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-standards-s5-w04": {
+    "revision": 1,
+    "templateId": "r007-standards-template-tactile-alert-without-hearing-or-viewing",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r007-standards-s5-w05": {
+    "revision": 1,
+    "templateId": "r007-standards-template-certification-publicity-scope-and-validity",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-standards-s5-w06": {
+    "revision": 1,
+    "templateId": "r007-standards-template-fraudulent-certification-mandatory-revocation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r007-standards-s5-w07": {
+    "revision": 1,
+    "templateId": "r007-standards-template-preexisting-certification-remaining-term-transition",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-standards-s5-w01": {
+    "revision": 1,
+    "templateId": "r008-standards-template-domestic-certification-application-designated-body",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r008-standards-template-uncertified-international-assessment-similar-mark-prohibition",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r008-standards-template-state-nondigital-equivalent-alternative-duty",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r008-standards-s5-w04": {
+    "revision": 1,
+    "templateId": "r008-standards-template-priority-purchase-certification-deemed-verification",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r008-standards-s5-w05": {
+    "revision": 1,
+    "templateId": "r008-standards-template-sequence-command-accelerator-input-effort",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r008-standards-s5-w06": {
+    "revision": 1,
+    "templateId": "r008-standards-template-spelling-grammar-assistance-distinct-from-prediction",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r008-standards-s5-w07": {
+    "revision": 1,
+    "templateId": "r008-standards-template-digital-vulnerability-use-difficulty-not-status",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-standards-s5-w01": {
+    "revision": 2,
+    "templateId": "r009-standards-template-certification-body-mandatory-discretionary-designation-remedies",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r009-standards-template-statutory-self-impact-assessment-before-introduction",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r009-standards-template-digital-literacy-active-participation-education",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r009-standards-s5-w04": {
+    "revision": 3,
+    "templateId": "r009-standards-template-public-device-support-independent-recipient-and-payment",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r009-standards-s5-w05": {
+    "revision": 1,
+    "templateId": "r009-standards-template-site-keyword-search-alternative-to-hierarchy",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-standards-s5-w01": {
+    "revision": 3,
+    "templateId": "r010-standards-template-digital-basic-plan-versus-annual-implementation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-standards-s5-w02": {
+    "revision": 1,
+    "templateId": "r010-standards-template-digital-policy-broad-private-and-public-participation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-standards-s5-w03": {
+    "revision": 1,
+    "templateId": "r010-standards-template-local-digital-capacity-center-mission",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r010-standards-s5-w04": {
+    "revision": 1,
+    "templateId": "r010-standards-template-public-product-assistive-device-interoperability-policy",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r010-standards-s5-w05": {
+    "revision": 1,
+    "templateId": "r010-standards-template-network-expansion-includes-vulnerable-use-environment",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r012-policy-accessibility-s5-w01": {
+    "revision": 2,
+    "templateId": "r012-policy-accessibility-template-kiosk-operator-duty-not-discharged-by-manufacturer",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-policy-accessibility-s5-w02": {
+    "revision": 2,
+    "templateId": "r012-policy-accessibility-template-accessible-product-purchase-plan-current-results-previous",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-policy-accessibility-s5-w03": {
+    "revision": 1,
+    "templateId": "r012-policy-accessibility-template-ocr-converts-scanned-glyph-images-to-actual-text",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r012-policy-accessibility-s5-w04": {
+    "revision": 1,
+    "templateId": "r012-policy-accessibility-template-deafblind-descriptive-transcript-both-audio-visual-information",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r012-policy-accessibility-s5-w06": {
+    "revision": 1,
+    "templateId": "r012-policy-accessibility-template-document-outline-heading-hierarchy-orientation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r012-policy-accessibility-s5-w07": {
+    "revision": 1,
+    "templateId": "r012-policy-accessibility-template-reading-assistant-contextual-glossary-links",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-policy-accessibility-s5-w01": {
+    "revision": 1,
+    "templateId": "r013-policy-accessibility-template-priority-purchase-testing-body-performance-remit",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r013-policy-accessibility-s5-w02": {
+    "revision": 1,
+    "templateId": "r013-policy-accessibility-template-camera-head-movement-pointer-input",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r013-policy-accessibility-s5-w03": {
+    "revision": 1,
+    "templateId": "r013-policy-accessibility-template-line-focus-limited-row-reading-window",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r014-policy-accessibility-s5-w01": {
+    "revision": 1,
+    "templateId": "r014-policy-accessibility-template-dwell-click-activation-distinct-from-pointer-movement",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r014-policy-accessibility-s5-w02": {
+    "revision": 1,
+    "templateId": "r014-policy-accessibility-template-mouse-keys-numeric-keypad-pointer-control",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r014-policy-accessibility-s5-w03": {
+    "revision": 1,
+    "templateId": "r014-policy-accessibility-template-mono-audio-combines-stereo-channels-not-volume-balance",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r014-policy-accessibility-s5-w04": {
+    "revision": 1,
+    "templateId": "r014-policy-accessibility-template-live-speech-typed-message-to-conversation-audio",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-policy-accessibility-s5-w01": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-color-filter-palette-versus-theme-accent",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-policy-accessibility-s5-w02": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-sound-recognition-identifies-environmental-event",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r015-policy-accessibility-s5-w03": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-sip-puff-air-pressure-switch-input",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r015-policy-accessibility-s5-w04": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-braille-embosser-hardcopy-output-versus-translation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r015-policy-accessibility-s5-w05": {
+    "revision": 1,
+    "templateId": "r015-policy-accessibility-template-korean-text-relay-two-way-mediated-telephone",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r016-policy-accessibility-s5-w01": {
+    "revision": 1,
+    "templateId": "r016-policy-accessibility-template-physical-keyguard-button-boundary-distinct-from-input-filtering",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-policy-accessibility-s5-w02": {
+    "revision": 1,
+    "templateId": "r016-policy-accessibility-template-room-hearing-loop-magnetic-transmission-direct-telecoil",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r016-policy-accessibility-s5-w03": {
+    "revision": 1,
+    "templateId": "r016-policy-accessibility-template-act-rule-procedure-format-distinct-from-earl-results-and-site-sampling",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-policy-accessibility-s5-w01": {
+    "revision": 1,
+    "templateId": "r017-policy-accessibility-template-user-evaluation-recruitment-target-experience-not-expert-workarounds",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r017-policy-accessibility-s5-w02": {
+    "revision": 1,
+    "templateId": "r017-policy-accessibility-template-screen-reader-user-test-facilitator-does-not-overlap-speech",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r017-policy-accessibility-s5-w03": {
+    "revision": 1,
+    "templateId": "r017-policy-accessibility-template-infrared-listening-competing-light-environment-limit",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-policy-assistive-s5-w01": {
+    "revision": 2,
+    "templateId": "r018-policy-assistive-template-voiceover-screen-curtain-hides-display-without-locking-navigation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-policy-assistive-s5-w02": {
+    "revision": 1,
+    "templateId": "r018-policy-assistive-template-mac-voice-control-command-mode-prevents-incidental-dictation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r018-policy-assistive-s5-w03": {
+    "revision": 1,
+    "templateId": "r018-policy-assistive-template-windows-voice-access-sleep-listens-for-wake-unlike-microphone-off",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-policy-assistive-s5-w01": {
+    "revision": 2,
+    "templateId": "r019-policy-assistive-template-nvda-single-letter-navigation-toggle-preserves-browse-arrow-reading",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-policy-assistive-s5-w02": {
+    "revision": 1,
+    "templateId": "r019-policy-assistive-template-eye-tracker-calibration-profile-per-user-before-shared-lab-test",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-policy-assistive-s5-w03": {
+    "revision": 2,
+    "templateId": "r019-policy-assistive-template-talkback-braille-keyboard-requires-talkback-with-magnification-off",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-policy-assistive-s5-w04": {
+    "revision": 1,
+    "templateId": "r019-policy-assistive-template-voiceover-touch-selection-distinct-from-double-tap-activation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r019-policy-assistive-s5-w05": {
+    "revision": 3,
+    "templateId": "r019-policy-assistive-template-act-outcomes-distinguish-inapplicable-canttell-untested",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w02": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-nvda-input-braille-translation-table-independent-of-output-table",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w03": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-nvda-review-cursor-reading-does-not-move-editing-insertion-point",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w04": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-windows-live-captions-device-audio-priority-over-simultaneous-microphone",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w05": {
+    "revision": 2,
+    "templateId": "r020-policy-assistive-template-ios-single-switch-step-press-advances-wait-selects",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w06": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-voice-access-grid-refines-geometric-region-not-element-number-list",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w07": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-magnifier-track-keyboard-focus-separately-from-pointer-and-text-caret",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w08": {
+    "revision": 3,
+    "templateId": "r020-policy-assistive-template-iphone-hover-text-versus-typing-pointing-device-requirement",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r020-policy-assistive-s5-w09": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-camera-switch-video-call-needs-noncamera-exit-control",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r020-policy-assistive-s5-w10": {
+    "revision": 1,
+    "templateId": "r020-policy-assistive-template-user-test-task-states-outcome-without-revealing-navigation-route",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r021-policy-assistive-s5-w01": {
+    "revision": 1,
+    "templateId": "r021-policy-assistive-template-nvda-output-contingent-ducking-restores-other-audio-between-speech",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-policy-assistive-s5-w02": {
+    "revision": 2,
+    "templateId": "r021-policy-assistive-template-nvda-sound-split-mutes-opposite-source-channel-without-downmix",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-policy-assistive-s5-w03": {
+    "revision": 2,
+    "templateId": "r021-policy-assistive-template-nvda-manual-profile-overrides-only-stored-settings-and-retains-triggered-others",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-policy-assistive-s5-w04": {
+    "revision": 2,
+    "templateId": "r021-policy-assistive-template-nvda-persistent-pronunciation-replacement-scoped-to-selected-synthesizer-voice",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r021-policy-assistive-s5-w05": {
+    "revision": 2,
+    "templateId": "r021-policy-assistive-template-nvda-mouse-audio-coordinates-map-vertical-position-to-pitch-and-horizontal-to-stereo",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r021-policy-assistive-s5-w06": {
+    "revision": 1,
+    "templateId": "r021-policy-assistive-template-windows-clicklock-maintains-drag-without-continuous-button-hold",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "r024-policy-assistive-s5-w01": {
+    "revision": 1,
+    "templateId": "r024-policy-assistive-template-nvda-say-all-skim-navigation-continues-from-new-reading-position",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r024-policy-assistive-s5-w02": {
+    "revision": 2,
+    "templateId": "r024-policy-assistive-template-nvda-braille-word-wrap-must-split-word-larger-than-entire-display",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r024-policy-assistive-s5-w03": {
+    "revision": 2,
+    "templateId": "r024-policy-assistive-template-nvda-generated-keystroke-processing-independent-of-key-echo",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r024-policy-assistive-s5-w04": {
+    "revision": 2,
+    "templateId": "r024-policy-assistive-template-nvda-braille-selection-indicator-independent-of-show-cursor",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-policy-assistive-s5-w01": {
+    "revision": 1,
+    "templateId": "r025-policy-assistive-template-nvda-delayed-character-description-cancelled-by-intervening-speech",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-policy-assistive-s5-w02": {
+    "revision": 2,
+    "templateId": "r025-policy-assistive-template-nvda-changed-focus-context-remains-reachable-by-braille-scrollback",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r025-policy-assistive-s5-w05": {
+    "revision": 2,
+    "templateId": "r025-policy-assistive-template-nvda-background-progress-reporting-independent-of-output-modality",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r026-policy-assistive-s5-w01": {
+    "revision": 3,
+    "templateId": "r026-policy-assistive-template-nvda-review-routing-caret-move-only-when-automatically-tethered",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r026-policy-assistive-s5-w02": {
+    "revision": 3,
+    "templateId": "r026-policy-assistive-template-nvda-braille-scroll-speech-interrupt-disabled-does-not-cover-line-commands",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r026-policy-assistive-s5-w03": {
+    "revision": 1,
+    "templateId": "r026-policy-assistive-template-nvda-automatic-focus-mode-caret-trigger-independent-from-tab-focus-trigger",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r026-policy-assistive-s5-w04": {
+    "revision": 2,
+    "templateId": "r026-policy-assistive-template-nvda-braille-message-routing-dismissal-does-not-disable-later-trigger",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r026-policy-assistive-s5-w05": {
+    "revision": 1,
+    "templateId": "r026-policy-assistive-template-nvda-dynamic-content-reporting-controls-new-chat-history-announcements",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-policy-assistive-s5-w01": {
+    "revision": 1,
+    "templateId": "r027-policy-assistive-template-nvda-input-help-describes-command-without-executing-action",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-policy-assistive-s5-w02": {
+    "revision": 1,
+    "templateId": "r027-policy-assistive-template-nvda-speech-viewer-hover-pauses-text-updates-for-copying",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-policy-assistive-s5-w03": {
+    "revision": 1,
+    "templateId": "r027-policy-assistive-template-nvda-simple-review-filters-uninteresting-object-hierarchy",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-policy-assistive-s5-w04": {
+    "revision": 2,
+    "templateId": "r027-policy-assistive-template-nvda-dictionary-whole-word-boundaries-exclude-letters-digits-underscore",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-policy-assistive-s5-w05": {
+    "revision": 1,
+    "templateId": "r027-policy-assistive-template-nvda-dialect-switching-independent-of-language-switching",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r027-policy-assistive-s5-w07": {
+    "revision": 2,
+    "templateId": "r027-policy-assistive-template-nvda-indentation-tone-tab-equivalent-to-four-spaces",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r028-aria-law-s5-w01": {
+    "revision": 3,
+    "templateId": "r028-aria-law-template-korean-disability-pancreatic-category-added-july2026",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-tools-assistive-s5-w01": {
+    "revision": 1,
+    "templateId": "r031-tools-assistive-template-nvda-mathcat-backspace-restores-prior-location-not-structural-left",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r031-tools-assistive-s5-w02": {
+    "revision": 2,
+    "templateId": "r031-tools-assistive-template-nvda-speech-unicode-normalization-removes-compatible-styling-and-expands-ligature",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r032-primary-s5-w01": {
+    "revision": 2,
+    "templateId": "r032-primary-template-nvda-symbol-replacement-threshold-versus-actual-symbol-forwarding",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "r033-primary-s5-w01": {
+    "revision": 3,
+    "templateId": "r033-primary-template-nvda-paragraph-style-single-break-versus-blank-line-boundary",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r033-primary-s5-w02": {
+    "revision": 2,
+    "templateId": "r033-primary-template-nvda-paragraph-navigation-suppresses-error-speech-and-sound-despite-enabled-settings",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r034-primary-s5-w01": {
+    "revision": 2,
+    "templateId": "r034-primary-template-nvda-zero-capital-pitch-does-not-disable-independent-verbal-indicator",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r035-primary-s5-w01": {
+    "revision": 1,
+    "templateId": "r035-primary-template-nvda-pass-next-key-through-one-shot-keeps-navigation-setting",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r035-primary-s5-w02": {
+    "revision": 2,
+    "templateId": "r035-primary-template-nvda-touch-typing-release-versus-doubletap-confirmation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r036-primary-s5-w01": {
+    "revision": 2,
+    "templateId": "r036-primary-template-nvda-after-cursor-formatting-toggle-extends-scan-despite-possible-performance-cost",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r036-primary-s5-w02": {
+    "revision": 2,
+    "templateId": "r036-primary-template-nvda-audio-device-awake-duration-reduces-standby-clipping-with-battery-tradeoff-zero-disables",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r037-script-at-s5-w01": {
+    "revision": 1,
+    "templateId": "r037-script-at-template-braille-viewer-routing-requires-completed-hover-delay",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r038-script-at-s5-w01": {
+    "revision": 1,
+    "templateId": "r038-script-at-template-nvda-multiple-key-press-timeout-groups-deliberate-repeated-command",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r038-script-at-s5-w02": {
+    "revision": 1,
+    "templateId": "r038-script-at-template-nvda-input-gestures-command-list-depends-on-preopen-context",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "r039-assistive-s5-w02": {
+    "revision": 2,
+    "templateId": "r039-assistive-template-nvda-braille-read-by-paragraph-changes-display-and-line-command-unit",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se02-f03-w01": {
+    "revision": 1,
+    "templateId": "se02-template-dynamic-document-structure-language-diagnosis",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se02-f03-w03": {
+    "revision": 1,
+    "templateId": "se02-template-observation-hypothesis-input-path-diagnosis",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se03-f06-w03": {
+    "revision": 2,
+    "templateId": "se03-template-spa-history-entry-task-state",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se03-f06-w04": {
+    "revision": 1,
+    "templateId": "se03-template-unknown-submission-recovery-path",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se03-f07-w04": {
+    "revision": 1,
+    "templateId": "se03-template-resume-process-orientation-with-choices",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se03-f07-w05": {
+    "revision": 1,
+    "templateId": "se03-template-human-help-low-effort-path",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se03-f07-w06": {
+    "revision": 1,
+    "templateId": "se03-template-pre-task-preparation-with-progressive-disclosure",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se04-s02-w02": {
+    "revision": 1,
+    "templateId": "se04-s02-template-sufficient-technique-conjunction-incomplete-evidence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se04-s02-w03": {
+    "revision": 1,
+    "templateId": "se04-s02-template-nonweb-title-common-authoring-support-evidence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se04-s02-w05": {
+    "revision": 1,
+    "templateId": "se04-s02-template-nonweb-spacing-user-agent-mechanism",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se04-s03-w02": {
+    "revision": 1,
+    "templateId": "se04-s03-template-en-applicable-requirements-beyond-web-report",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se04-s03-w03": {
+    "revision": 1,
+    "templateId": "se04-s03-template-acr-delivered-product-version-evidence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se05-t01-w01": {
+    "revision": 2,
+    "templateId": "se05-t01-template-name-purpose-evidence-gap",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se05-t01-w02": {
+    "revision": 2,
+    "templateId": "se05-t01-template-subjective-target-selection-gap",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se05-t02-w01": {
+    "revision": 1,
+    "templateId": "se05-t02-template-role-data-reachable-sample",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se05-t02-w02": {
+    "revision": 1,
+    "templateId": "se05-t02-template-time-at-cross-condition",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se05-t03-w01": {
+    "revision": 1,
+    "templateId": "se05-t03-template-focus-lifecycle-observation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se05-t03-w02": {
+    "revision": 1,
+    "templateId": "se05-t03-template-status-sequence-observation",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se05-t03-w03": {
+    "revision": 1,
+    "templateId": "se05-t03-template-cognitive-task-observation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se05-t04-w01": {
+    "revision": 1,
+    "templateId": "se05-t04-template-first-loss-layer",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se05-t05-w01": {
+    "revision": 1,
+    "templateId": "se05-t05-template-rule-version-result-attribution",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se05-t05-w02": {
+    "revision": 1,
+    "templateId": "se05-t05-template-fixture-drift-versus-real-failure",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se05-t05-w03": {
+    "revision": 1,
+    "templateId": "se05-t05-template-scoped-suppression-expiry",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se05-t07-w01": {
+    "revision": 2,
+    "templateId": "se05-t07-template-impact-versus-report-count",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se05-t07-w02": {
+    "revision": 2,
+    "templateId": "se05-t07-template-shared-cause-distinct-reproductions",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se05-t07-w03": {
+    "revision": 1,
+    "templateId": "se05-t07-template-confirmation-regression-closure",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m01-w02": {
+    "revision": 1,
+    "templateId": "se06-m01-template-responsive-card-relationship-preservation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m01-w03": {
+    "revision": 1,
+    "templateId": "se06-m01-template-filtered-alternative-same-result-set",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m01-w04": {
+    "revision": 1,
+    "templateId": "se06-m01-template-chart-summary-relationship-accuracy",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m02-w01": {
+    "revision": 1,
+    "templateId": "se06-m02-template-map-list-choice-functional-equivalence",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m02-w02": {
+    "revision": 1,
+    "templateId": "se06-m02-template-map-purpose-spatial-connection",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m03-w01": {
+    "revision": 1,
+    "templateId": "se06-m03-w01-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m03-w02": {
+    "revision": 2,
+    "templateId": "se06-m03-w02-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m03-w03": {
+    "revision": 1,
+    "templateId": "se06-m03-w03-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m03-w04": {
+    "revision": 2,
+    "templateId": "se06-m03-w04-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m04-w01": {
+    "revision": 1,
+    "templateId": "se06-m04-w01-template",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se06-m04-w02": {
+    "revision": 1,
+    "templateId": "se06-m04-w02-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m04-w03": {
+    "revision": 1,
+    "templateId": "se06-m04-w03-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se06-m04-w04": {
+    "revision": 1,
+    "templateId": "se06-m04-w04-template",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se07-g01-w01": {
+    "revision": 2,
+    "templateId": "se07-g01-template-concurrent-edit-conflict-preserves-both-work",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se07-g02-w02": {
+    "revision": 2,
+    "templateId": "se07-g02-template-accessible-alternative-preserves-private-audience",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se07-g04-w03": {
+    "revision": 2,
+    "templateId": "se07-g04-template-time-setting-before-first-tutorial",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se07-g03-w01": {
+    "revision": 2,
+    "templateId": "se07-g03-template-description-language-independent-selection",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se07-g05-w01": {
+    "revision": 2,
+    "templateId": "se07-g05-template-changed-transaction-review-after-authentication",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se08-t06-w01": {
+    "revision": 1,
+    "templateId": "se08-t06-template-current-task-state-coverage-denominator",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se08-t06-w02": {
+    "revision": 2,
+    "templateId": "se08-t06-template-intake-channel-change-versus-barrier-trend",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se08-t08-w01": {
+    "revision": 1,
+    "templateId": "se08-t08-template-distributed-accountability-with-capacity",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se08-t08-w02": {
+    "revision": 1,
+    "templateId": "se08-t08-template-voluntary-stop-with-agreed-compensation",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se08-t08-w03": {
+    "revision": 1,
+    "templateId": "se08-t08-template-accessible-participation-without-proxy-task",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-t08-w04": {
+    "revision": 1,
+    "templateId": "se08-t08-template-functional-recruitment-minimum-sensitive-data",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se08-t08-w05": {
+    "revision": 1,
+    "templateId": "se08-t08-template-consent-bound-sharing-of-research-evidence",
+    "learningGoalRevision": 1,
+    "level": "basic"
+  },
+  "se08-o01-w01": {
+    "revision": 1,
+    "templateId": "se08-o01-template-editor-display-independent-content",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-o01-w02": {
+    "revision": 2,
+    "templateId": "se08-o01-template-automatic-alt-repair-author-choice",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-o01-w03": {
+    "revision": 1,
+    "templateId": "se08-o01-template-same-tool-copy-structure-preservation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-o01-w04": {
+    "revision": 1,
+    "templateId": "se08-o01-template-mixed-template-accessibility-identification",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-o01-w05": {
+    "revision": 1,
+    "templateId": "se08-o01-template-author-manual-check-actionable-guidance",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-o01-w06": {
+    "revision": 1,
+    "templateId": "se08-o01-template-authoring-support-default-reactivation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-o01-w07": {
+    "revision": 1,
+    "templateId": "se08-o01-template-tool-generated-versus-author-content-responsibility",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "se08-o02-w01": {
+    "revision": 1,
+    "templateId": "se08-o02-template-intake-escalation-not-remediation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "se08-o02-w02": {
+    "revision": 1,
+    "templateId": "se08-o02-template-scoped-acceptance-new-task-boundary",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa02-ma04-w01": {
+    "revision": 3,
+    "templateId": "sa02-ma04-template-at-activation-coordinates-are-not-touch-target-boundaries",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa03-sr02-w01": {
+    "revision": 2,
+    "templateId": "sa03-sr02-template-base-value-matching-propagation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "sa03-sr04-w01": {
+    "revision": 2,
+    "templateId": "sa03-sr04-template-curtain-screen-image-observation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "sa03-sr05-w01": {
+    "revision": 1,
+    "templateId": "sa03-sr05-template-caret-entry-product-mode-contracts",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "sa04-sq01-w01": {
+    "revision": 1,
+    "templateId": "sa04-sq01-template-post-return-late-focus-interruption",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "sa04-sq02-w01": {
+    "revision": 1,
+    "templateId": "sa04-sq02-template-item-membership-versus-switch-execution",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "sa04-sq03-w01": {
+    "revision": 1,
+    "templateId": "sa04-sq03-template-status-fragment-context-transfer",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "d02-f01-w01": {
+    "revision": 2,
+    "templateId": "d02-f01-template-local-abort-cancel-acceptance-terminal-result",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d02-f02-w01": {
+    "revision": 1,
+    "templateId": "d02-f02-template-auth-event-recency-and-service-resumption",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d02-f03-w01": {
+    "revision": 2,
+    "templateId": "d02-f03-template-http-cache-offline-copy-and-displayed-edition",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d02-f05-w01": {
+    "revision": 1,
+    "templateId": "d02-f05-template-preflight-versus-response-sharing-server-effect",
+    "learningGoalRevision": 1,
+    "level": "master"
+  }
+});

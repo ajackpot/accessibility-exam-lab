@@ -1,6 +1,7 @@
-import {isRetiredPractical} from './service-visibility.js?v=0.2.11';
-import {assertSafeData,DomainError,isUnscoredPractical,isUnscoredPracticalSession,matchesHistoricalPracticalGrade,matchesHistoricalPracticalResult,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.11&pool=priority-001&scope=e09-001&materials=a04-001';
-import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.11';
+import {isWrittenLevel} from './written-levels.js?v=d01-001';
+import {isRetiredPractical} from './service-visibility.js?v=0.2.12';
+import {assertSafeData,DomainError,isUnscoredPractical,isUnscoredPracticalSession,matchesHistoricalPracticalGrade,matchesHistoricalPracticalResult,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001';
+import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.12';
 export const MAX_BACKUP_BYTES=10*1024*1024;
 function requireValue(test,message){if(!test)throw new DomainError(message,'IMPORT');}
 const ident=x=>typeof x==='string'&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(x);
@@ -11,12 +12,15 @@ export function validateSession(s) {
   requireValue(['prepared','active','submitted','expired','abandoned','converted'].includes(s.status),'알 수 없는 세션 상태입니다.');
   const c=s.config;requireValue(c&&['timed','untimed'].includes(c.mode)&&['written','practical'].includes(c.type)&&['practice','mock'].includes(c.kind)&&['all','s1','s2','s3','s4','s5','practical'].includes(c.subjectId)&&['all','new','wrong'].includes(c.pool)&&[4,5].includes(c.optionCount),'세션 설정이 올바르지 않습니다.');
   requireValue(c.practicalScope===undefined||['reformed','legacy'].includes(c.practicalScope),'실기 범위 설정이 올바르지 않습니다.');
+  requireValue(c.difficultyLevel===undefined||isWrittenLevel(c.difficultyLevel)&&(c.type==='written'||c.difficultyLevel==='all'),'필기 난이도 설정이 올바르지 않습니다.');
   requireValue(Number.isInteger(c.count)&&c.count>=1&&c.count<=500,'세션 문항 수가 올바르지 않습니다.');
   if(c.mode==='timed')requireValue(Number.isInteger(c.minutes)&&c.minutes>=1&&c.minutes<=1440,'제한 시간이 올바르지 않습니다.');
   requireValue(ident(s.bankVersion)&&number(s.createdAt)&&typeof s.clockTrusted==='boolean','세션 메타데이터가 올바르지 않습니다.');
   requireValue(Array.isArray(s.items)&&s.items.length>0&&s.items.length<=500&&Number.isInteger(s.currentIndex)&&s.currentIndex>=0&&s.currentIndex<s.items.length,'문항 스냅샷이나 현재 위치가 올바르지 않습니다.');
   const ids=new Set();for(const item of s.items) {
     requireValue(ident(item.instanceId)&&!ids.has(item.instanceId)&&item.bankVersion===s.bankVersion&&item.type===c.type,'스냅샷 식별자 또는 버전 오류입니다.');ids.add(item.instanceId);
+    if(item.scopeLevel!==undefined||item.scopeLevelVersion!==undefined)requireValue(item.type==='written'&&['basic','pro','master'].includes(item.scopeLevel)&&ident(item.scopeLevelVersion),'저장된 필기 난이도 분류가 올바르지 않습니다.');
+    if(c.difficultyLevel&&c.difficultyLevel!=='all')requireValue(item.scopeLevel===c.difficultyLevel&&ident(item.scopeLevelVersion),'선택한 난이도와 문항 스냅샷이 다릅니다.');
     const q=copy(item),options=item.options||[];
     if(item.type==='written') {requireValue([4,5].includes(options.length)&&new Set(options.map(o=>o.optionId)).size===options.length&&options.filter(o=>o.role==='correct').length===1&&options.some(o=>o.optionId===item.correctOptionId&&o.role==='correct'),'스냅샷 정답이 유일하지 않습니다.');q.links=options.map(o=>({optionId:o.optionId,optionRevision:o.revision,role:o.role,contextExplanation:o.contextExplanation,compatibilitySetId:'snapshot'}));q.supportedOptionCounts=[options.length];}
     validateBank({schemaVersion:item.bankSchemaVersion??1,bankVersion:s.bankVersion,releasedAt:new Date(s.createdAt).toISOString(),syllabusVersion:'snapshot',changeSummary:'backup snapshot',subjects:SUBJECTS,sources:item.sources,options,questions:[q],corrections:[]});

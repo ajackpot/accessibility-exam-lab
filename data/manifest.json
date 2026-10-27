@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-practical-unscored.p01.1-service.1",
-  "releasedAt": "2026-10-27T14:22:44.734697+00:00",
-  "file": "releases/2026.10.27-practical-unscored.p01.1-service.1/bank.json",
-  "sha256": "4b535f72251c769d9cf679388725647b6e83f0e169c21ed4afc1a0a6f96f6717",
-  "changeSummary": "실기 10개를 무채점 자율 학습으로 전환하고 자동 부가문항 8개를 제거했다. 필기와 기존 자료·모범 답안·해설·기록은 보존한다.",
+  "bankVersion": "2026.10.27-internet-master.d02.1-service.1",
+  "releasedAt": "2026-10-27T19:06:02.108041+00:00",
+  "file": "releases/2026.10.27-internet-master.d02.1-service.1/bank.json",
+  "sha256": "9d0efd76e0034aaa6d16568530acdb0c3c5ef2ebd85879b2225e79794aaf2be4",
+  "changeSummary": "기존 문항·분류를 보존하고 인터넷 개론 Master의 계층 간 처리·인증·캐시·응답 공유 관계를 독립 검토해 추가함. D01과 함께 한 번 공개 예정.",
   "finalRelease": false
 }

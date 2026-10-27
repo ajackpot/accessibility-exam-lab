@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.27-practical-unscored.p01.1-service.1",
-  "bankSha256": "4b535f72251c769d9cf679388725647b6e83f0e169c21ed4afc1a0a6f96f6717",
-  "writtenQuestions": 1031,
-  "regularWrittenQuestions": 1021,
+  "bankVersion": "2026.10.27-internet-master.d02.1-service.1",
+  "bankSha256": "9d0efd76e0034aaa6d16568530acdb0c3c5ef2ebd85879b2225e79794aaf2be4",
+  "writtenQuestions": 1035,
+  "regularWrittenQuestions": 1025,
   "testOnlyWrittenQuestions": 10,
-  "writtenLinkedOptions": 5121,
+  "writtenLinkedOptions": 5141,
   "practicalTasks": 10,
   "regularPracticalTasks": 10,
   "testOnlyPracticalTasks": 0,
-  "freshWrittenQuestions": 1023,
-  "freshRegularWrittenQuestions": 1013,
+  "freshWrittenQuestions": 1027,
+  "freshRegularWrittenQuestions": 1017,
   "freshTestOnlyWrittenQuestions": 10,
   "freshPracticalTasks": 10,
   "freshRegularPracticalTasks": 10,
@@ -25,13 +25,13 @@
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 521,
-      "sha256": "1ba60b87dc61fad709b307d485d548e87cf6755a9a40dfb2113104adc43351f5"
+      "bytes": 531,
+      "sha256": "587ce72f743275b7fe6b81a2048acd9dc3fc2f2868285033924cce6279c0e311"
     },
     {
-      "path": "data/releases/2026.10.27-practical-unscored.p01.1-service.1/bank.json",
-      "bytes": 6708742,
-      "sha256": "4b535f72251c769d9cf679388725647b6e83f0e169c21ed4afc1a0a6f96f6717"
+      "path": "data/releases/2026.10.27-internet-master.d02.1-service.1/bank.json",
+      "bytes": 6745769,
+      "sha256": "9d0efd76e0034aaa6d16568530acdb0c3c5ef2ebd85879b2225e79794aaf2be4"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
@@ -41,22 +41,22 @@
     {
       "path": "index.html",
       "bytes": 2298,
-      "sha256": "e6dc3fc5b309f12bb1ca2e5cbbb9ada6dd90956a48ca8e768a02f369b240b0c6"
+      "sha256": "2e46c3b94f571f0abb34143c0713395000c132edd83ae9fc1a49dc2bb366c441"
     },
     {
       "path": "src/app.js",
-      "bytes": 127246,
-      "sha256": "c476811c03427fc066795e0f68240c3399f8e8b3b6afe35e6071eef787ec3ec6"
+      "bytes": 129437,
+      "sha256": "b9f0a8ca7601c3bedf7939b6494fb478091bfbba250d60abb769531ea16073c2"
     },
     {
       "path": "src/backup.js",
-      "bytes": 12289,
-      "sha256": "80c0cc45c42c8091b11fabc5db9015613927f7f9dcb2cf95920fc14c6fba5d0d"
+      "bytes": 12988,
+      "sha256": "1d1cf8b05d44f24f7f9223271d09b87aadc2c7a9e3a7f874fe5a24d00d33e4da"
     },
     {
       "path": "src/domain.js",
-      "bytes": 65666,
-      "sha256": "2288a8249b47e8c23b967b58805a34d531d495948f16ddb82b95603a31fff5a3"
+      "bytes": 66150,
+      "sha256": "875bd174f6ac0648167d901b0b3f6820c6f73e56bb21db570b82fff9b4627620"
     },
     {
       "path": "src/legacy-materials.js",
@@ -106,12 +106,22 @@
     {
       "path": "src/storage.js",
       "bytes": 9364,
-      "sha256": "2c3b76313ec80bcb9cde33387890b092373a1f130eb091cce92d52f0e7eeaf97"
+      "sha256": "ec3ac443e38f97ad1d74840ed1aafff4a1afab7eff4f4ca6b9febd0bb38aa2bd"
     },
     {
       "path": "src/workflows.js",
-      "bytes": 6902,
-      "sha256": "557d932343353f8e0f1fc337c92845e2a39172e4a2699784aab46f134e39456f"
+      "bytes": 7153,
+      "sha256": "6bc2f4cfa2a1472d47f6d3280933f07f0c60f74ed03c805c844f5b16b39b5131"
+    },
+    {
+      "path": "src/written-level-map.js",
+      "bytes": 202334,
+      "sha256": "0d52b8e49927ce6140b2f46fe8548aa6fed352ec1681b5335c49658db5d52944"
+    },
+    {
+      "path": "src/written-levels.js",
+      "bytes": 2621,
+      "sha256": "e307cc3bfabd43efa7fb700bb3379eb8a3caf8057e14b5939eec096ecec156c8"
     },
     {
       "path": "style.css",
@@ -120,5 +130,134 @@
     }
   ],
   "practicalAssessmentMode": "unscored",
-  "practicalManualAnswerItems": 41
+  "practicalManualAnswerItems": 41,
+  "writtenLevelVersion": "d02.1",
+  "writtenLevelMockAvailability": {
+    "basic": true,
+    "pro": true,
+    "master": true,
+    "masterShortages": []
+  },
+  "writtenLevelClassificationCounts": [
+    {
+      "subjectId": "s1",
+      "name": "웹접근성 표준 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 38,
+          "newSession": 38,
+          "mockRegularUnique": 36
+        },
+        {
+          "level": "pro",
+          "total": 40,
+          "newSession": 38,
+          "mockRegularUnique": 37
+        },
+        {
+          "level": "master",
+          "total": 78,
+          "newSession": 76,
+          "mockRegularUnique": 75
+        }
+      ]
+    },
+    {
+      "subjectId": "s2",
+      "name": "인터넷 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 95,
+          "newSession": 95,
+          "mockRegularUnique": 93
+        },
+        {
+          "level": "pro",
+          "total": 96,
+          "newSession": 96,
+          "mockRegularUnique": 88
+        },
+        {
+          "level": "master",
+          "total": 21,
+          "newSession": 21,
+          "mockRegularUnique": 20
+        }
+      ]
+    },
+    {
+      "subjectId": "s3",
+      "name": "HTML 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 27,
+          "newSession": 27,
+          "mockRegularUnique": 26
+        },
+        {
+          "level": "pro",
+          "total": 118,
+          "newSession": 117,
+          "mockRegularUnique": 113
+        },
+        {
+          "level": "master",
+          "total": 68,
+          "newSession": 68,
+          "mockRegularUnique": 65
+        }
+      ]
+    },
+    {
+      "subjectId": "s4",
+      "name": "CSS/스크립트 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 50,
+          "newSession": 50,
+          "mockRegularUnique": 47
+        },
+        {
+          "level": "pro",
+          "total": 150,
+          "newSession": 150,
+          "mockRegularUnique": 143
+        },
+        {
+          "level": "master",
+          "total": 26,
+          "newSession": 26,
+          "mockRegularUnique": 25
+        }
+      ]
+    },
+    {
+      "subjectId": "s5",
+      "name": "정보접근성 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 72,
+          "newSession": 72,
+          "mockRegularUnique": 70
+        },
+        {
+          "level": "pro",
+          "total": 136,
+          "newSession": 133,
+          "mockRegularUnique": 126
+        },
+        {
+          "level": "master",
+          "total": 20,
+          "newSession": 20,
+          "mockRegularUnique": 20
+        }
+      ]
+    }
+  ]
 }

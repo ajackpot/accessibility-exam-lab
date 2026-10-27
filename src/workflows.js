@@ -1,9 +1,10 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {isUnscoredPracticalSession,hasHistoricalPractical,eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.11&pool=priority-001&scope=e09-001&materials=a04-001';
-import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.11';
+export {WRITTEN_LEVEL_OPTIONS,writtenLevelDescription,writtenLevelLabel,isWrittenLevel} from './written-levels.js?v=d01-001';
+import {isUnscoredPracticalSession,hasHistoricalPractical,eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001';
+import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.12';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
-  return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:1,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...overrides,...(type==='practical'?{practicalScope:'reformed'}:{})};
+  return {type,subjectId:type==='written'?'all':'practical',mode:'untimed',kind:'practice',optionCount:5,count:type==='written'?5:1,minutes:30,pool:'all',family:'all',feedbackAfter:'confirm',...(type==='written'?{difficultyLevel:'all'}:{}),...overrides,...(type==='practical'?{practicalScope:'reformed'}:{})};
 }
 /** Defaults for an unedited setup form, never a migration of saved/retry settings. */
 export function defaultSetupMinutes(config) {
@@ -32,8 +33,9 @@ export function quickConfig(bank,type,history=[],overrides={}) {
   if(type==='written'&&!Object.hasOwn(overrides,'optionCount')&&availableCount(bank,config,history)===0)config.optionCount=4;
   return {...config,count:Math.min(config.count,availableCount(bank,config,history))};
 }
-export function mockAvailability(bank) {
-  const counts=SUBJECTS.map(s=>({id:s.id,name:s.name,count:new Set((bank?.questions||[]).filter(q=>q.subjectId===s.id&&isNewSessionQuestion(bank,q)&&!q.testOnly&&q.supportedOptionCounts?.includes(5)).map(q=>q.templateId)).size}));
+export function mockAvailability(bank,difficultyLevel='all') {
+  const questions=bank?eligibleQuestions(bank,practiceConfig('written',{kind:'mock',subjectId:'all',count:100,optionCount:5,difficultyLevel})):[];
+  const counts=SUBJECTS.map(s=>({id:s.id,name:s.name,count:new Set(questions.filter(q=>q.subjectId===s.id).map(q=>q.templateId)).size}));
   return {ready:counts.every(s=>s.count>=20),counts};
 }
 const goalKey=item=>`${item.templateId}@${item.learningGoalRevision}`;
