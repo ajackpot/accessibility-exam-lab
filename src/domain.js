@@ -1,3 +1,5 @@
+import {validateMaterials,materialType,materialName} from './materials.js?v=2026.10.27&scope=a04-001';
+export {materialType,materialName,sequenceEvidenceLabel,sequenceMaterialText} from './materials.js?v=2026.10.27&scope=a04-001';
 import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.10';
 import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.10&pool=priority-001';
 import {isScopeExpansionE09Excluded} from './scope-expansion-e09-eligibility.js?v=2026.10.27&scope=e09-001';
@@ -85,7 +87,7 @@ export function validateBank(bank) {
     assert(['candidate','reviewed','published','retired','invalid'].includes(q.verificationStatus)&&typeof q.testOnly==='boolean','검토 상태가 필요합니다.');
     assert(Array.isArray(q.sourceRefs)&&q.sourceRefs.length>0&&q.sourceRefs.every(s=>sourceIds.has(s)),'문항 출처 연결을 확인하세요.');
     if(q.verificationStatus==='published')assert(text(q.reviewNote),'공개 문항은 검토 기록이 필요합니다.');
-    if(q.materials) {assert(Array.isArray(q.materials)&&q.materials.length<=30,'자료 목록 오류');for(const m of q.materials)assert(text(m.filename,200)&&typeof m.content==='string'&&m.content.length<=1000000&&(!m.focusLine||integer(m.focusLine,1,m.content.split('\n').length))&&(m.purpose===undefined?bank.schemaVersion===1:['question','explanation'].includes(m.purpose))&&(bank.schemaVersion===1||m.purpose!=='question'||(text(m.instruction)&&m.instruction.trim().length>0&&q.stem.includes(m.instruction))),'코드 자료의 목적·지시문 연결을 확인하세요.');}
+    validateMaterials(q,bank.schemaVersion,assert);
     if(q.type==='written') {
       assert(q.subjectId!=='practical'&&['exclusive','shared'].includes(q.optionMode),'필기 선택지 유형 오류');
       assert(Array.isArray(q.supportedOptionCounts)&&q.supportedOptionCounts.length>0&&q.supportedOptionCounts.every(v=>[4,5].includes(v)),'선택지 수 정책 오류');
@@ -126,13 +128,21 @@ export function validateBankForPublication(bank) {
     assert(new Set(q.notes.map(normalized)).size===q.notes.length&&!q.notes.some(note=>q.stem.includes(note)),'참고 사항을 지문이나 다른 참고 항목에 중복하지 마세요.');
     assert(!q.stem.includes('보기 연결 안내')&&!q.notes.some(note=>note.includes('보기 연결 안내')),'보기 지시를 지문 안에 통합하세요.');
     const required=(q.materials||[]).filter(m=>m.purpose==='question');
-    if(/다음 보기(?:\s*\d+)?의[^.!?]*코드/.test(q.stem))assert(required.length>0,`${q.questionId}: 지문이 참조하는 필수 보기 코드가 없습니다.`);
-    assert(new Set(required.map(m=>m.filename)).size===required.length,`${q.questionId}: 보기 코드 파일명은 서로 달라야 합니다.`);
+    // A record task may ask about a code cause without supplying code as data.
+    // Keep historical code-only detection, and trim only the task after an
+    // explicitly supplied sequence instruction's read/check verb.
+    let codeReferenceStem=q.stem;
+    for(const material of required.filter(material=>materialType(material)==='sequence')) {
+      const reference=material.instruction.match(/^[\s\S]*?순차 동작 기록[\s\S]*?(?:읽고|실행|검토|확인)/)?.[0];
+      if(reference)codeReferenceStem=codeReferenceStem.replace(material.instruction,reference);
+    }
+    for(const [kind,label] of [['code','코드'],['sequence','순차 동작 기록']])if(new RegExp(`다음 보기(?:\\s*\\d+)?의[^.!?]*${label}`).test(kind==='code'?codeReferenceStem:q.stem))assert(required.some(material=>materialType(material)===kind),`${q.questionId}: 지문이 참조하는 필수 보기 ${label}가 없습니다.`);
+    assert(new Set(required.map(materialName)).size===required.length,`${q.questionId}: 보기 자료 이름은 서로 달라야 합니다.`);
     for(const material of required) {
-      const instruction=material.instruction;
-      assert(material.content.trim().length>0,`${q.questionId}: 필수 보기 코드가 비어 있습니다.`);
-      assert(instruction===instruction.trim()&&q.stem.includes(instruction)&&/다음 보기(?:\s*\d+)?의/.test(instruction)&&/코드/.test(instruction)&&/(읽고|실행|검토|확인)/.test(instruction)&&/(고르시오|답하시오|완성하시오|설명하시오|작성하시오)[.!?]?$/.test(instruction),`${q.questionId}: 지문에 보기의 코드와 수행할 일을 명시한 완전한 지시문이 필요합니다.`);
-      if(required.length>1)assert(instruction.includes(material.filename),`${q.questionId}: 여러 보기 코드는 지시문에서 각각의 파일명을 지정하세요.`);
+      const instruction=material.instruction,sequence=materialType(material)==='sequence',label=sequence?'순차 동작 기록':'코드';
+      if(!sequence)assert(material.content.trim().length>0,`${q.questionId}: 필수 보기 코드가 비어 있습니다.`);
+      assert(instruction===instruction.trim()&&q.stem.includes(instruction)&&/다음 보기(?:\s*\d+)?의/.test(instruction)&&instruction.includes(label)&&/(읽고|실행|검토|확인)/.test(instruction)&&/(고르시오|답하시오|완성하시오|설명하시오|작성하시오)[.!?]?$/.test(instruction),`${q.questionId}: 지문에 보기의 ${label}와 수행할 일을 명시한 완전한 지시문이 필요합니다.`);
+      if(required.length>1)assert(instruction.includes(materialName(material)),`${q.questionId}: 여러 보기 자료는 지시문에서 각각의 이름을 지정하세요.`);
     }
   }
   return bank;

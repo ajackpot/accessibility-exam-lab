@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-scope-supplement.a03.1-service.1",
-  "releasedAt": "2026-10-27T10:03:14.896904+00:00",
-  "file": "releases/2026.10.27-scope-supplement.a03.1-service.1/bank.json",
-  "sha256": "5ef9c36a421a923ca0705b12f3534240abcc6f04fe47fd20768dd69cf2496c4d",
-  "changeSummary": "센스리더 환경 설정의 적용 범위와 화면 이미지 관찰 조건, 스크린 리더별 입력 모드 진입 조건을 구별하는 필기 3문항을 추가했습니다.",
+  "bankVersion": "2026.10.27-scope-supplement.a04.1-service.1",
+  "releasedAt": "2026-10-27T11:31:09.963820+00:00",
+  "file": "releases/2026.10.27-scope-supplement.a04.1-service.1/bank.json",
+  "sha256": "a09bbe5e6a2c2fc8899cb93e5ea1519c868de91769e2ad36d7fadf7cacd412a6",
+  "changeSummary": "키보드 초점·스위치 스캔·자동 안내의 순차 동작 기록을 판단하는 필기 3개와 접근 가능한 기록 보기 지원을 추가했다.",
   "finalRelease": false
 }

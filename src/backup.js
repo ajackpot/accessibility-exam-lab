@@ -1,5 +1,5 @@
 import {isRetiredPractical} from './service-visibility.js?v=0.2.10';
-import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.10';
+import {assertSafeData,DomainError,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.10&pool=priority-001&scope=e09-001&materials=a04-001';
 import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.10';
 export const MAX_BACKUP_BYTES=10*1024*1024;
 function requireValue(test,message){if(!test)throw new DomainError(message,'IMPORT');}
