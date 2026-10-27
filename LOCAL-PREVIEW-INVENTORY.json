@@ -6,7 +6,10 @@
   "writtenQuestions": 1018,
   "writtenLinkedOptions": 5056,
   "practicalTasks": 10,
+  "freshWrittenQuestions": 1010,
+  "freshPracticalTasks": 10,
   "retiredPracticalIncluded": 0,
+  "eligibilityPolicyId": "scope-expansion-e09-001",
   "files": [
     {
       "path": "data/manifest.json",
@@ -25,13 +28,13 @@
     },
     {
       "path": "index.html",
-      "bytes": 2212,
-      "sha256": "668484bf1caf580a1cde658aceef0b7a37819790b96a374bf65e30d164e63ed2"
+      "bytes": 2226,
+      "sha256": "ee0dcbef09caaab14ecb69cf380aae2e0549687613994f19ec49299fa1d6dc77"
     },
     {
       "path": "src/app.js",
-      "bytes": 113971,
-      "sha256": "b440c75afde3dfaa2e4de1d422049684f64fcbcc3504856910de778d9b3009d4"
+      "bytes": 113999,
+      "sha256": "4bc654b294f86672a7e5b02aea0efc790f1e6259c683aef2c5b6f38c9ed8edc2"
     },
     {
       "path": "src/backup.js",
@@ -40,8 +43,8 @@
     },
     {
       "path": "src/domain.js",
-      "bytes": 58949,
-      "sha256": "23c1f9498b4cdb6804c80da088d9348c2a15421ce86ce5d0ae6eacee0b361475"
+      "bytes": 59094,
+      "sha256": "ab6312be4ef6e1a6abe3101b904345044c68181eb733de07b860de24387faf92"
     },
     {
       "path": "src/legacy-materials.js",
@@ -74,6 +77,11 @@
       "sha256": "f4e4f1f3a30f4b687bca548012d0181bfac5c6c3dc91d266c61ff5f60c7125ea"
     },
     {
+      "path": "src/scope-expansion-e09-eligibility.js",
+      "bytes": 2382,
+      "sha256": "a4652026f6a48c0784f32fd501344064616957f0f8ba027fdfe731b291bcb9a7"
+    },
+    {
       "path": "src/service-visibility.js",
       "bytes": 2917,
       "sha256": "98d2dec96d37373e9d895238b8ba2b55d46e5b4aa8e1c832ee2769a6f01368a2"
@@ -85,8 +93,8 @@
     },
     {
       "path": "src/workflows.js",
-      "bytes": 6622,
-      "sha256": "ce1437cc6231429f603d5897f69fdd0a9304a648c5575fa9b3754d457445b3f0"
+      "bytes": 6636,
+      "sha256": "545e2d3b57088a02798f5da7787f28b6f2f7c7a44890a44967c8ff35d2dac6a0"
     },
     {
       "path": "style.css",

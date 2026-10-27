@@ -1,5 +1,5 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-import {eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.10&pool=priority-001';
+import {eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.10&pool=priority-001&scope=e09-001';
 import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.10';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {

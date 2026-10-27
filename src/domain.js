@@ -1,5 +1,6 @@
 import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.10';
 import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.10&pool=priority-001';
+import {isScopeExpansionE09Excluded} from './scope-expansion-e09-eligibility.js?v=2026.10.27&scope=e09-001';
 import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.10';
 import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.10';
 import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.10';
@@ -210,7 +211,7 @@ export function isPublishedQuestion(bank,q,now=Date.now()){return q.verification
 /** Only fresh selection changes; saved sessions and publication history stay intact. */
 export function isNewSessionQuestion(bank,q,now=Date.now()){
   if(isRetiredPractical(q))return false;
-  const excluded=isPriorityPoolExcluded(q,now);
+  const excluded=isPriorityPoolExcluded(q,now)||isScopeExpansionE09Excluded(q,now);
   let preview=false;
   if(bank.contentStage==='practical_reform_local_preview'&&q.type==='practical'&&q.verificationStatus==='reviewed'&&q.practicalTask) {
     try {preview=validatePracticalTask(q,bank.schemaVersion,assert)&&!activeCorrections(bank.corrections||[],now).some(c=>c.kind==='invalid'&&c.questionId===q.questionId&&c.revision===q.revision);}catch {preview=false;}
