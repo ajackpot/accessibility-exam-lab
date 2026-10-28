@@ -1,4 +1,4 @@
-/** Exact reviewed D03 written scope levels; original content and D01/D02 history are preserved. */
+/** Exact reviewed written scope levels; H02 and all prior rows and holds preserved, D05-H03 additions only. */
 export const WRITTEN_LEVEL_MAP=Object.freeze({
   "seed-w01": {
     "revision": 2,
@@ -70,7 +70,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r001-standards-template-scope-third-party",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r001-standards-s1-w03": {
     "revision": 2,
@@ -100,7 +100,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r001-standards-template-moving-content-control",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r001-standards-s1-w08": {
     "revision": 2,
@@ -238,7 +238,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r001-css-script-template-js-event-cancellation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r001-internet-html-w01": {
     "revision": 3,
@@ -256,13 +256,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r001-internet-html-t-w03",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r001-internet-html-w04": {
     "revision": 1,
     "templateId": "r001-internet-html-t-w04",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r001-internet-html-w05": {
     "revision": 1,
@@ -418,7 +418,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r002-css-script-template-dom-stoppropagation-same-target",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r002-standards-s1-w01": {
     "revision": 1,
@@ -544,7 +544,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r002-internet-html-t-w01",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r002-internet-html-w02": {
     "revision": 1,
@@ -556,7 +556,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r002-internet-html-t-w03",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r002-internet-html-w04": {
     "revision": 1,
@@ -574,19 +574,19 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r002-internet-html-t-w06",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r002-internet-html-w07": {
     "revision": 1,
     "templateId": "r002-internet-html-t-w07",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r002-internet-html-w08": {
     "revision": 1,
     "templateId": "r002-internet-html-t-w08",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r002-internet-html-w09": {
     "revision": 2,
@@ -688,7 +688,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r003-css-script-template-css-nested-stacking-context",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r003-css-script-w06": {
     "revision": 2,
@@ -754,7 +754,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r003-standards-template-duplicate-attribute-markup",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r003-standards-s1-w07": {
     "revision": 1,
@@ -844,19 +844,19 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r003-internet-html-t-search-filetype-filter",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r003-internet-html-w02": {
     "revision": 1,
     "templateId": "r003-internet-html-t-search-before-date-filter",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r003-internet-html-w03": {
     "revision": 1,
     "templateId": "r003-internet-html-t-search-excluded-word-filter",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r003-internet-html-w04": {
     "revision": 1,
@@ -880,7 +880,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r003-internet-html-t-http-304-conditional-reuse",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r003-internet-html-w08": {
     "revision": 1,
@@ -898,7 +898,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r003-internet-html-t-http-307-method-preservation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r003-internet-html-w11": {
     "revision": 2,
@@ -970,7 +970,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r004-standards-template-kwcag-wcag-edition-relationship",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r004-standards-s1-w03": {
     "revision": 2,
@@ -1018,7 +1018,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r004-standards-template-webapp-equivalent-alternative",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r004-standards-s5-w01": {
     "revision": 2,
@@ -1102,7 +1102,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r004-css-script-template-css-adjacent-sibling-non-elements",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r004-css-script-w05": {
     "revision": 2,
@@ -1150,13 +1150,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r004-internet-html-t-dns-cname-alias",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r004-internet-html-w03": {
     "revision": 2,
     "templateId": "r004-internet-html-t-ipv4-cidr-prefix-membership",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r004-internet-html-w04": {
     "revision": 2,
@@ -1168,7 +1168,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r004-internet-html-t-http-201-created-location",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r004-internet-html-w06": {
     "revision": 2,
@@ -1198,7 +1198,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r004-internet-html-t-firefox-reset-page-zoom",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r004-internet-html-w11": {
     "revision": 2,
@@ -1282,7 +1282,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r005-standards-template-system-error-exclusion",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r005-standards-s1-w05": {
     "revision": 2,
@@ -1384,7 +1384,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r005-css-script-template-js-foreach-dynamic-presence-fixed-range",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r005-css-script-w07": {
     "revision": 2,
@@ -1432,7 +1432,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r005-internet-html-t-ipv6-compressed-zero-group-expansion",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r005-internet-html-w05": {
     "revision": 2,
@@ -1450,7 +1450,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r005-internet-html-t-http-if-match-lost-update-precondition",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r005-internet-html-w08": {
     "revision": 1,
@@ -1468,7 +1468,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r005-internet-html-t-search-or-inclusive-union",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r005-internet-html-w11": {
     "revision": 3,
@@ -1648,25 +1648,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r006-css-script-template-dom-remove-listener-capture-identity",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r006-internet-html-w01": {
     "revision": 1,
     "templateId": "r006-internet-html-t-vary-selected-request-field-match",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r006-internet-html-w02": {
     "revision": 1,
     "templateId": "r006-internet-html-t-http-202-asynchronous-acceptance",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r006-internet-html-w03": {
     "revision": 1,
     "templateId": "r006-internet-html-t-retry-after-delay-receipt-time",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r006-internet-html-w04": {
     "revision": 1,
@@ -1684,7 +1684,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r006-internet-html-t-uri-fragment-origin-request-exclusion",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r006-internet-html-w07": {
     "revision": 2,
@@ -1828,7 +1828,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r007-internet-html-t-cookie-omitted-domain-host-only-match",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r007-internet-html-w05": {
     "revision": 1,
@@ -1930,7 +1930,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r007-standards-template-evaluation-relied-upon-technology-test",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r007-standards-s5-w02": {
     "revision": 1,
@@ -1990,7 +1990,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r008-css-script-template-css-visible-descendant-versus-none-ancestor",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r008-css-script-w06": {
     "revision": 1,
@@ -2014,7 +2014,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r008-css-script-template-dom-static-query-versus-live-tag-collection",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r008-css-script-w10": {
     "revision": 2,
@@ -2032,7 +2032,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r008-standards-template-eu-minimum-accessibility-measures-not-ceiling",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r008-standards-s1-w03": {
     "revision": 1,
@@ -2122,7 +2122,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r008-internet-html-t-http-100-continue-interim-body",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r008-internet-html-w05": {
     "revision": 1,
@@ -2140,13 +2140,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r008-internet-html-t-cookie-path-slash-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r008-internet-html-w08": {
     "revision": 2,
     "templateId": "r008-internet-html-t-cookie-httponly-script-http-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r008-internet-html-w11": {
     "revision": 2,
@@ -2200,25 +2200,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r009-standards-template-eu-statement-current-barriers-and-alternatives",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r009-standards-s1-w02": {
     "revision": 1,
     "templateId": "r009-standards-template-eu-feedback-excluded-information-request",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r009-standards-s1-w03": {
     "revision": 1,
     "templateId": "r009-standards-template-eu-unsatisfactory-response-enforcement-route",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r009-standards-s1-w04": {
     "revision": 1,
     "templateId": "r009-standards-template-eu-disproportionate-burden-legitimate-assessment",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r009-standards-s5-w01": {
     "revision": 2,
@@ -2272,13 +2272,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r009-web-tech-t-mime-alternative-last-supported-automatic-selection",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r009-web-tech-s2-w05": {
     "revision": 1,
     "templateId": "r009-web-tech-t-cookie-max-age-precedence-over-expires",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r009-web-tech-s2-w06": {
     "revision": 1,
@@ -2368,7 +2368,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r009-web-tech-t-css-attribute-word-token-match-not-substring",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r009-web-tech-s4-w05": {
     "revision": 2,
@@ -2392,25 +2392,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r009-web-tech-t-dom-clone-node-does-not-copy-registered-listeners",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r010-dom-css-w01": {
     "revision": 2,
     "templateId": "r010-dom-css-template-dom-event-target-currenttarget-ancestor-identity",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r010-dom-css-w02": {
     "revision": 2,
     "templateId": "r010-dom-css-template-dom-nonbubbling-event-ancestor-capture",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r010-dom-css-w03": {
     "revision": 2,
     "templateId": "r010-dom-css-template-dom-textcontent-replaces-descendants-with-literal-text",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r010-dom-css-w04": {
     "revision": 2,
@@ -2428,7 +2428,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r010-dom-css-template-math-round-negative-half-toward-positive-infinity",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r010-dom-css-w07": {
     "revision": 2,
@@ -2464,7 +2464,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r010-standards-template-eu-report-accessible-publication-no-individual-list-duty",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r010-standards-s5-w01": {
     "revision": 3,
@@ -2500,13 +2500,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r010-network-html-t-http-idempotent-repeat-intended-effect-not-identical-response",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r010-network-html-s2-w02": {
     "revision": 2,
     "templateId": "r010-network-html-t-http-cache-current-age-resident-time-freshness",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r010-network-html-s2-w03": {
     "revision": 2,
@@ -2614,37 +2614,37 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r011-protocol-policy-template-eu-third-party-content-exclusion-conjunctive-control",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-protocol-policy-s1-w03": {
     "revision": 1,
     "templateId": "r011-protocol-policy-template-eu-old-office-file-active-administration-exception",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-protocol-policy-s1-w04": {
     "revision": 1,
     "templateId": "r011-protocol-policy-template-eu-archive-exclusion-post-cutoff-content-edit",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-protocol-policy-s2-w01": {
     "revision": 2,
     "templateId": "r011-protocol-policy-template-http-origin-and-proxy-credentials-consumption-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-protocol-policy-s2-w02": {
     "revision": 1,
     "templateId": "r011-protocol-policy-template-http-if-range-mismatch-full-representation-fallback",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-protocol-policy-s2-w03": {
     "revision": 2,
     "templateId": "r011-protocol-policy-template-http-authenticated-shared-cache-explicit-permission",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-protocol-policy-s2-w04": {
     "revision": 1,
@@ -2674,7 +2674,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r011-dom-form-template-form-past-name-cache-versus-current-collection-lookup",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r011-dom-form-s3-w05": {
     "revision": 2,
@@ -2692,25 +2692,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r011-dom-form-template-append-existing-node-moves-same-eventtarget",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-dom-form-s4-w02": {
     "revision": 2,
     "templateId": "r011-dom-form-template-documentfragment-insertion-drains-children-returns-fragment",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-dom-form-s4-w03": {
     "revision": 2,
     "templateId": "r011-dom-form-template-preinsertion-cycle-rejection-before-tree-mutation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-dom-form-s4-w04": {
     "revision": 2,
     "templateId": "r011-dom-form-template-replacechild-returned-detached-node-retains-content",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r011-dom-form-s4-w05": {
     "revision": 2,
@@ -2734,7 +2734,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r012-internet-protocol-template-http303-post-result-retrieval-method-and-target",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-internet-protocol-s2-w03": {
     "revision": 2,
@@ -2758,7 +2758,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r012-internet-protocol-template-cookie-secure-controls-request-inclusion-not-request-routing",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-internet-protocol-s2-w07": {
     "revision": 1,
@@ -2782,7 +2782,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r012-internet-protocol-template-http-must-revalidate-stale-disconnected-error",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-dom-html-s3-w01": {
     "revision": 2,
@@ -2794,7 +2794,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r012-dom-html-template-input-attribute-propagation-stops-after-dirty-value-assignment",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r012-dom-html-s3-w03": {
     "revision": 1,
@@ -2818,7 +2818,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r012-dom-html-template-domtokenlist-add-validates-all-before-mutation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-dom-html-s4-w02": {
     "revision": 2,
@@ -2830,7 +2830,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r012-dom-html-template-node-contains-inclusive-descendant-not-content-equality",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-dom-html-s4-w04": {
     "revision": 2,
@@ -2848,25 +2848,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r012-policy-accessibility-template-eu-navigation-map-exclusion-accessible-essential-information",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-policy-accessibility-s1-w02": {
     "revision": 1,
     "templateId": "r012-policy-accessibility-template-eu-old-intranet-exclusion-until-substantial-revision",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-policy-accessibility-s1-w03": {
     "revision": 1,
     "templateId": "r012-policy-accessibility-template-eu-heritage-reproduction-exclusion-not-metadata-blanket",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-policy-accessibility-s1-w04": {
     "revision": 1,
     "templateId": "r012-policy-accessibility-template-eu-school-exclusion-essential-administrative-content",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r012-policy-accessibility-s5-w01": {
     "revision": 2,
@@ -2908,13 +2908,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r013-policy-accessibility-template-section508-best-meets-market-research-records",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r013-policy-accessibility-s1-w02": {
     "revision": 1,
     "templateId": "r013-policy-accessibility-template-section508-undue-burden-residual-alternative-access",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r013-policy-accessibility-s1-w03": {
     "revision": 2,
@@ -2980,13 +2980,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r013-internet-browser-template-firefox-complete-save-html-and-resource-directory",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r013-internet-browser-s2-w08": {
     "revision": 1,
     "templateId": "r013-internet-browser-template-firefox-single-download-history-removal-preserves-file",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r013-internet-browser-s2-w09": {
     "revision": 1,
@@ -3034,13 +3034,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r013-dom-html-template-getattribute-empty-value-distinct-from-absence",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r013-dom-html-s4-w02": {
     "revision": 2,
     "templateId": "r013-dom-html-template-domtokenlist-toggle-force-final-presence-return",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r013-dom-html-s4-w03": {
     "revision": 2,
@@ -3058,7 +3058,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r013-dom-html-template-normal-flow-block-two-auto-margins-share-free-space",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r014-internet-browser-s2-w01": {
     "revision": 2,
@@ -3094,19 +3094,19 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r014-internet-browser-template-firefox-selective-cache-clearing-preserves-cookie-history-data",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r014-internet-browser-s2-w07": {
     "revision": 1,
     "templateId": "r014-internet-browser-template-firefox-pdf-content-type-action-built-in-viewer",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r014-internet-browser-s2-w08": {
     "revision": 1,
     "templateId": "r014-internet-browser-template-firefox-reader-view-article-presentation-versus-zoom",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r014-internet-browser-s2-w09": {
     "revision": 1,
@@ -3160,7 +3160,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r014-dom-html-template-isequalnode-attribute-set-order-versus-indexed-child-structure",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r014-dom-html-s4-w04": {
     "revision": 2,
@@ -3178,19 +3178,19 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r014-policy-accessibility-template-section508-maintenance-space-physical-parts-not-remote-interface",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r014-policy-accessibility-s1-w02": {
     "revision": 1,
     "templateId": "r014-policy-accessibility-template-section508-contractor-incidental-authoring-tool-not-agency-deliverable",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r014-policy-accessibility-s1-w03": {
     "revision": 3,
     "templateId": "r014-policy-accessibility-template-section508-user-needs-functional-use-and-lifecycle-support",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "master"
   },
   "r014-policy-accessibility-s5-w01": {
     "revision": 1,
@@ -3232,13 +3232,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r015-internet-browser-template-firefox-caret-browsing-arbitrary-text-selection-versus-find-or-focus",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r015-internet-browser-s2-w04": {
     "revision": 1,
     "templateId": "r015-internet-browser-template-firefox-picture-in-picture-floating-video-versus-page-window-layout",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r015-internet-browser-s2-w05": {
     "revision": 2,
@@ -3268,13 +3268,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r015-policy-accessibility-template-eu-ngo-disability-specific-service-exclusion-limit",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r015-policy-accessibility-s1-w02": {
     "revision": 1,
     "templateId": "r015-policy-accessibility-template-eu-retained-live-broadcast-becomes-prerecorded",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r015-policy-accessibility-s1-w03": {
     "revision": 1,
@@ -3292,7 +3292,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r015-policy-accessibility-template-w3c-community-report-not-recommendation-track-output",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r015-policy-accessibility-s5-w01": {
     "revision": 1,
@@ -3370,7 +3370,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r015-dom-html-template-nth-child-versus-nth-of-type-uses-different-sibling-index",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r015-dom-html-s4-w02": {
     "revision": 1,
@@ -3382,7 +3382,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r015-dom-html-template-ancestor-opacity-composites-descendants-unlike-background-rgba",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r015-dom-html-s4-w04": {
     "revision": 2,
@@ -3394,7 +3394,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r015-dom-html-template-table-transparent-cell-reveals-row-layer-before-column",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r015-dom-html-s4-w06": {
     "revision": 2,
@@ -3406,25 +3406,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r015-dom-html-template-nodevalue-element-setter-noop-versus-text-data-update",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r015-dom-html-s4-w08": {
     "revision": 2,
     "templateId": "r015-dom-html-template-custom-event-detail-retains-object-identity-through-dispatch",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r015-dom-html-s4-w10": {
     "revision": 2,
     "templateId": "r015-dom-html-template-removechild-rejects-nondirect-descendant-before-mutation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r016-internet-browser-s2-w01": {
     "revision": 2,
     "templateId": "r016-internet-browser-template-edge-print-selected-content-versus-disjoint-numbered-page-scope",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r016-internet-browser-s2-w02": {
     "revision": 2,
@@ -3436,13 +3436,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r016-internet-browser-template-firefox-print-preview-to-pdf-versus-page-source-save-and-viewer-choice",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r016-internet-browser-s2-w04": {
     "revision": 1,
     "templateId": "r016-internet-browser-template-edge-custom-print-scale-applies-to-original-linear-size",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r016-internet-browser-s2-w05": {
     "revision": 1,
@@ -3460,7 +3460,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r016-policy-accessibility-template-w3c-wide-review-stakeholder-opportunity-not-comment-volume",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r016-policy-accessibility-s1-w02": {
     "revision": 1,
@@ -3478,7 +3478,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r016-policy-accessibility-template-eaa-microenterprise-service-exemption-not-product-manufacturing",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r016-policy-accessibility-s5-w01": {
     "revision": 1,
@@ -3544,7 +3544,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r016-dom-html-template-absolute-css-length-in-pt-px-fixed-ratio-not-device-pixels",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r016-dom-html-s4-w03": {
     "revision": 2,
@@ -3562,7 +3562,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r016-dom-html-template-range-selectnode-parent-boundaries-versus-selectnodecontents-child-boundaries",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r016-dom-html-s4-w06": {
     "revision": 2,
@@ -3574,7 +3574,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r016-dom-html-template-html-createelement-lowercases-localname-but-createelementns-preserves-case",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r016-dom-html-s4-w08": {
     "revision": 2,
@@ -3586,37 +3586,37 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r017-policy-accessibility-template-eaa-fundamental-alteration-basic-nature-not-ui-redesign",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r017-policy-accessibility-s1-w02": {
     "revision": 2,
     "templateId": "r017-policy-accessibility-template-eaa-assessment-results-retention-last-service-not-assessment-date",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r017-policy-accessibility-s1-w03": {
     "revision": 1,
     "templateId": "r017-policy-accessibility-template-eaa-product-microenterprise-documentation-exemption-not-facts-request",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r017-policy-accessibility-s1-w04": {
     "revision": 1,
     "templateId": "r017-policy-accessibility-template-eaa-service-change-renews-burden-assessment-before-five-years",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r017-policy-accessibility-s1-w05": {
     "revision": 1,
     "templateId": "r017-policy-accessibility-template-eaa-private-accessibility-funding-bars-disproportionate-burden",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r017-policy-accessibility-s1-w06": {
     "revision": 3,
     "templateId": "r017-policy-accessibility-template-eaa-exemption-notification-active-versus-assessment-copy-on-request",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r017-policy-accessibility-s5-w01": {
     "revision": 1,
@@ -3646,7 +3646,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r017-internet-browser-template-firefox-multiple-bookmark-tags-cross-classification-without-moving-or-copying",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r017-internet-browser-s2-w03": {
     "revision": 1,
@@ -3742,31 +3742,31 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r017-dom-html-template-range-extractcontents-copies-selected-text-removes-original-slice",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r017-dom-html-s4-w06": {
     "revision": 1,
     "templateId": "r017-dom-html-template-treewalker-skip-keeps-descendant-traversal-reject-prunes-subtree",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r018-policy-assistive-s1-w01": {
     "revision": 1,
     "templateId": "r018-policy-assistive-template-eaa-manufacturer-responsibility-retained-with-external-product-testing",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r018-policy-assistive-s1-w02": {
     "revision": 1,
     "templateId": "r018-policy-assistive-template-eaa-importer-own-trademark-triggers-manufacturer-obligations",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r018-policy-assistive-s1-w03": {
     "revision": 2,
     "templateId": "r018-policy-assistive-template-canada-anonymous-accessibility-feedback-receipt-acknowledgment-exception",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r018-policy-assistive-s5-w01": {
     "revision": 2,
@@ -3826,7 +3826,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r018-internet-applications-template-cloud-sync-delete-versus-online-only-local-availability",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r018-internet-applications-s2-w08": {
     "revision": 1,
@@ -3910,7 +3910,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r019-internet-applications-template-ecommerce-defined-by-order-method-not-payment-or-delivery",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r019-internet-applications-s2-w03": {
     "revision": 1,
@@ -3946,13 +3946,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r019-policy-assistive-template-eaa-free-movement-compliant-services-accessibility-ground-restriction",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r019-policy-assistive-s1-w02": {
     "revision": 1,
     "templateId": "r019-policy-assistive-template-eaa-product-traceability-direct-upstream-downstream-operators",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r019-policy-assistive-s1-w03": {
     "revision": 2,
@@ -3988,7 +3988,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r019-policy-assistive-template-act-outcomes-distinguish-inapplicable-canttell-untested",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r019-html-css-practical-s3-w01": {
     "revision": 2,
@@ -4054,7 +4054,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r019-html-css-practical-template-labeled-break-exits-named-outer-loop-without-running-remaining-inner-or-outer-body",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r019-html-css-practical-s4-w07": {
     "revision": 3,
@@ -4096,7 +4096,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r020-html-css-practical-template-cross-origin-module-fetch-requires-cors-without-crossorigin-attribute",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r020-html-css-practical-s3-w07": {
     "revision": 2,
@@ -4186,25 +4186,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r020-policy-assistive-template-ada-conforming-alternate-requires-technical-or-legal-limitation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r020-policy-assistive-s1-w02": {
     "revision": 1,
     "templateId": "r020-policy-assistive-template-ada-secured-personal-conventional-file-exception-not-html-portal",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r020-policy-assistive-s1-w03": {
     "revision": 1,
     "templateId": "r020-policy-assistive-template-ada-minimal-noncompliance-exception-preserves-privacy-and-independence",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "master"
   },
   "r020-policy-assistive-s1-w04": {
     "revision": 1,
     "templateId": "r020-policy-assistive-template-ada-required-access-aid-cost-not-disability-surcharge",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "master"
   },
   "r020-policy-assistive-s5-w02": {
     "revision": 1,
@@ -4222,7 +4222,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r020-policy-assistive-template-windows-live-captions-device-audio-priority-over-simultaneous-microphone",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r020-policy-assistive-s5-w05": {
     "revision": 2,
@@ -4318,31 +4318,31 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r020-internet-applications-template-cern-1993-web-software-release-allows-modified-redistribution",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r021-policy-assistive-s1-w01": {
     "revision": 1,
     "templateId": "r021-policy-assistive-template-ada-requested-aid-replacement-requires-individual-equally-effective-means",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r021-policy-assistive-s1-w02": {
     "revision": 1,
     "templateId": "r021-policy-assistive-template-ada-nonemergency-accompanying-adult-interpretation-needs-request-consent-appropriateness",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r021-policy-assistive-s1-w03": {
     "revision": 1,
     "templateId": "r021-policy-assistive-template-eaa-representative-enforcement-participation-requires-complainant-approval",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "master"
   },
   "r021-policy-assistive-s1-w04": {
     "revision": 3,
     "templateId": "r021-policy-assistive-template-eaa-public-accessibility-information-written-and-oral-throughout-service-operation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r021-policy-assistive-s5-w01": {
     "revision": 1,
@@ -4354,13 +4354,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r021-policy-assistive-template-nvda-sound-split-mutes-opposite-source-channel-without-downmix",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r021-policy-assistive-s5-w03": {
     "revision": 2,
     "templateId": "r021-policy-assistive-template-nvda-manual-profile-overrides-only-stored-settings-and-retains-triggered-others",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r021-policy-assistive-s5-w04": {
     "revision": 2,
@@ -4384,13 +4384,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r021-internet-applications-template-korean-sdn-csnet-international-exchange-did-not-enable-ftp",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r021-internet-applications-s2-w02": {
     "revision": 2,
     "templateId": "r021-internet-applications-template-ixp-location-does-not-determine-peering-versus-transit-service",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r021-internet-applications-s2-w03": {
     "revision": 1,
@@ -4408,7 +4408,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r021-internet-applications-template-hanguk-idna-ulabel-alabel-equivalent-label-not-alias-or-redirect",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r021-html-css-practical-s3-w01": {
     "revision": 1,
@@ -4432,13 +4432,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r021-html-css-practical-template-details-toggle-notifications-coalesce-successive-open-changes",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r021-html-css-practical-s3-w05": {
     "revision": 2,
     "templateId": "r021-html-css-practical-template-innerhtml-created-script-node-does-not-execute",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r021-html-css-practical-s3-w06": {
     "revision": 1,
@@ -4474,7 +4474,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r021-html-css-practical-template-return-linebreak-inserts-semicolon-before-unreached-expression",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r021-html-css-practical-s4-w06": {
     "revision": 2,
@@ -4486,7 +4486,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r021-html-css-practical-template-comma-expression-preserves-all-side-effects-returns-last-value",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r021-html-css-practical-s4-w08": {
     "revision": 2,
@@ -4498,7 +4498,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r022-policy-assistive-template-ada-local-grievance-exhaustion-not-prerequisite-federal-complaint",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r022-internet-applications-s2-w01": {
     "revision": 1,
@@ -4510,19 +4510,19 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r022-internet-applications-template-gmail-confidential-revocation-blocks-content-access-not-prior-photo",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r022-html-css-practical-s3-w02": {
     "revision": 2,
     "templateId": "r022-html-css-practical-template-synthetic-click-in-progress-blocks-recursion-but-resets-for-next-call",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r022-html-css-practical-s3-w04": {
     "revision": 3,
     "templateId": "r022-html-css-practical-template-nested-sandbox-retains-ancestor-form-restriction-despite-inner-allow-token",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r022-html-css-practical-s3-w06": {
     "revision": 3,
@@ -4576,7 +4576,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r024-policy-assistive-template-nvda-generated-keystroke-processing-independent-of-key-echo",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r024-policy-assistive-s5-w04": {
     "revision": 2,
@@ -4588,7 +4588,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r024-internet-applications-template-read-receipt-presence-absence-does-not-prove-human-reading",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r024-internet-applications-s2-w02": {
     "revision": 2,
@@ -4606,7 +4606,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r024-html-css-practical-template-removed-iframe-sandbox-affects-next-navigation-not-current-document-restrictions",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r024-html-css-practical-s4-w01": {
     "revision": 2,
@@ -4624,7 +4624,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r024-html-css-practical-template-default-parameter-expression-cannot-see-function-body-var-binding",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r024-html-css-practical-s4-w04": {
     "revision": 1,
@@ -4636,13 +4636,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r025-policy-assistive-template-eaa-legacy-service-contract-continuation-earlier-expiry-or-five-year-cap",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r025-policy-assistive-s5-w01": {
     "revision": 1,
     "templateId": "r025-policy-assistive-template-nvda-delayed-character-description-cancelled-by-intervening-speech",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r025-policy-assistive-s5-w02": {
     "revision": 2,
@@ -4684,7 +4684,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r025-html-css-practical-template-disabled-click-method-stops-before-event-but-generic-dispatch-still-delivers",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r025-html-css-practical-s3-w04": {
     "revision": 3,
@@ -4702,13 +4702,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r025-html-css-practical-template-anonymous-table-row-wraps-consecutive-cells-without-dom-mutation",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r025-html-css-practical-s4-w03": {
     "revision": 3,
     "templateId": "r025-html-css-practical-template-z-index-auto-allows-descendant-parent-context-versus-integer-zero-isolation",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r025-html-css-practical-s4-w04": {
     "revision": 1,
@@ -4726,7 +4726,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r026-internet-applications-template-google-image-usage-rights-filter-is-license-metadata-not-unrestricted-grant",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r026-internet-applications-s2-w02": {
     "revision": 2,
@@ -4738,7 +4738,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r026-internet-applications-template-drive-shared-folder-shortcut-does-not-confer-target-access",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r026-html-css-practical-s3-w01": {
     "revision": 3,
@@ -4756,13 +4756,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r026-html-css-practical-template-html-onclick-false-cancels-without-stopping-bubbling",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r026-html-css-practical-s4-w02": {
     "revision": 1,
     "templateId": "r026-html-css-practical-template-inline-replaced-margin-box-not-own-lineheight-sets-line-height",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r026-html-css-practical-s4-w03": {
     "revision": 1,
@@ -4780,25 +4780,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r026-policy-assistive-template-eaa-ecommerce-supplied-product-accessibility-information-must-be-provided",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r026-policy-assistive-s1-w02": {
     "revision": 1,
     "templateId": "r026-policy-assistive-template-eaa-ebook-drm-must-not-block-accessibility-features",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r026-policy-assistive-s5-w01": {
     "revision": 3,
     "templateId": "r026-policy-assistive-template-nvda-review-routing-caret-move-only-when-automatically-tethered",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r026-policy-assistive-s5-w02": {
     "revision": 3,
     "templateId": "r026-policy-assistive-template-nvda-braille-scroll-speech-interrupt-disabled-does-not-cover-line-commands",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r026-policy-assistive-s5-w03": {
     "revision": 1,
@@ -4822,13 +4822,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r027-internet-applications-template-gmail-cancel-scheduled-message-restores-draft-without-automatic-reschedule",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r027-internet-applications-s2-w02": {
     "revision": 2,
     "templateId": "r027-internet-applications-template-zoom-window-visual-sharing-and-computer-wide-sound-capture-are-separate",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "r027-internet-applications-s2-w03": {
     "revision": 2,
@@ -4876,7 +4876,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r027-html-css-practical-template-checkbox-canceled-activation-restores-checked-and-indeterminate-after-listener",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r027-html-css-practical-s3-w03": {
     "revision": 2,
@@ -4924,13 +4924,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r029-network-template-arpanet-1983-ncp-to-tcpip-transition-distinct-from-web-milestones",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r029-network-s2-w02": {
     "revision": 2,
     "templateId": "r029-network-template-desktop-chromium128-blink-layout-versus-v8-javascript-execution",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r029-aria-s3-w01": {
     "revision": 2,
@@ -5008,7 +5008,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "r031-html-css-template-s3-w03",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r031-html-css-s4-w01": {
     "revision": 3,
@@ -5074,13 +5074,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r032-primary-template-nvda-symbol-replacement-threshold-versus-actual-symbol-forwarding",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r033-primary-s1-w01": {
     "revision": 1,
     "templateId": "r033-primary-template-keyboard-function-availability-does-not-require-keystroke-count-parity",
     "learningGoalRevision": 1,
-    "level": "basic"
+    "level": "pro"
   },
   "r033-primary-s1-w02": {
     "revision": 2,
@@ -5104,7 +5104,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r033-primary-template-json-stringify-rejects-active-path-cycle-but-serializes-repeated-sibling-reference",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r033-primary-s5-w01": {
     "revision": 3,
@@ -5134,7 +5134,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r034-primary-template-promise-executor-runs-before-return-then-reaction-follows-current-job",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r034-primary-s4-w02": {
     "revision": 1,
@@ -5158,7 +5158,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "r035-primary-template-html-dir-auto-excludes-defined-direction-subtree-not-invalid-attribute",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "r035-primary-s5-w01": {
     "revision": 1,
@@ -5182,7 +5182,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r036-primary-template-cookie-expiration-replacement-matches-exact-name-domain-path-not-request-path-prefix",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r036-primary-s3-w01": {
     "revision": 2,
@@ -5218,7 +5218,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r037-web-template-if-none-match-weak-comparison-ignores-validator-strength",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r037-web-s2-w02": {
     "revision": 1,
@@ -5290,7 +5290,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r039-primary-template-http-if-none-match-suppresses-date-precondition-not-conjunction",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r039-primary-s2-w02": {
     "revision": 2,
@@ -5308,7 +5308,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "r039-primary-template-promise-all-result-order-preserves-input-position-not-fulfillment-order",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "r039-assistive-s5-w02": {
     "revision": 2,
@@ -5368,7 +5368,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "pw21-template-g09",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "pw21-g10-w01": {
     "revision": 2,
@@ -5392,7 +5392,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 3,
     "templateId": "pw21-template-g14",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "pw21-g15-w01": {
     "revision": 2,
@@ -5500,7 +5500,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "pw22-template-g31",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "pw22-g32-w01": {
     "revision": 2,
@@ -5530,7 +5530,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se01-template-reflow-map-exception-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se01-f01-w02": {
     "revision": 1,
@@ -5542,13 +5542,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se01-template-forced-colors-selection-focus-preservation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se01-f02-w02": {
     "revision": 1,
     "templateId": "se01-template-reduced-motion-functional-completion",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se01-f08-w01": {
     "revision": 1,
@@ -5560,7 +5560,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se01-template-mobile-concurrent-input-without-locking",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se02-f03-w01": {
     "revision": 1,
@@ -5584,19 +5584,19 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se02-template-roving-focus-after-dynamic-removal",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se02-f05-w01": {
     "revision": 1,
     "templateId": "se02-template-long-structured-modal-entry",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se02-f05-w02": {
     "revision": 1,
     "templateId": "se02-template-dialog-return-focus-workflow-exceptions",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se02-f03-w03": {
     "revision": 1,
@@ -5608,13 +5608,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se02-template-grid-navigation-editing-key-ownership",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se02-f05-w03": {
     "revision": 1,
     "templateId": "se02-template-nonmodal-modal-route-focus-lifecycle",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se02-f04-w04": {
     "revision": 1,
@@ -5638,7 +5638,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se03-template-spa-history-entry-task-state",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se03-f06-w04": {
     "revision": 1,
@@ -5650,19 +5650,19 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se03-template-authentication-every-step-assistance",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se03-f07-w02": {
     "revision": 1,
     "templateId": "se03-template-reauthentication-resumes-unsent-activity",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se03-f07-w03": {
     "revision": 3,
     "templateId": "se03-template-invalid-slot-valid-address-reuse",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se03-f07-w04": {
     "revision": 1,
@@ -5698,13 +5698,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se01s-template-focused-component-reveal-beneath-fixed-header",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s01-w01": {
     "revision": 1,
     "templateId": "se04-s01-template-responsive-variation-full-page-scope",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s01-w02": {
     "revision": 1,
@@ -5734,7 +5734,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se04-s01-template-kwcag-wcag-control-size-evidence-not-interchangeable",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s02-w01": {
     "revision": 1,
@@ -5746,49 +5746,49 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se04-s02-template-sufficient-technique-conjunction-incomplete-evidence",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s02-w03": {
     "revision": 1,
     "templateId": "se04-s02-template-nonweb-title-common-authoring-support-evidence",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s02-w04": {
     "revision": 1,
     "templateId": "se04-s02-template-nonweb-document-set-bypass-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s02-w05": {
     "revision": 1,
     "templateId": "se04-s02-template-nonweb-spacing-user-agent-mechanism",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s03-w01": {
     "revision": 1,
     "templateId": "se04-s03-template-designated-edition-and-adoption-evidence",
     "learningGoalRevision": 1,
-    "level": "master"
+    "level": "pro"
   },
   "se04-s03-w02": {
     "revision": 1,
     "templateId": "se04-s03-template-en-applicable-requirements-beyond-web-report",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s03-w03": {
     "revision": 1,
     "templateId": "se04-s03-template-acr-delivered-product-version-evidence",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se04-s03-w05": {
     "revision": 2,
     "templateId": "se04-s03-template-adopted-nonweb-exception-versus-document-set",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se05-t01-w01": {
     "revision": 2,
@@ -5836,25 +5836,25 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se05-t04-template-first-loss-layer",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se05-t05-w01": {
     "revision": 1,
     "templateId": "se05-t05-template-rule-version-result-attribution",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se05-t05-w02": {
     "revision": 1,
     "templateId": "se05-t05-template-fixture-drift-versus-real-failure",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se05-t05-w03": {
     "revision": 1,
     "templateId": "se05-t05-template-scoped-suppression-expiry",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se05-t07-w01": {
     "revision": 2,
@@ -5866,13 +5866,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se05-t07-template-shared-cause-distinct-reproductions",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se05-t07-w03": {
     "revision": 1,
     "templateId": "se05-t07-template-confirmation-regression-closure",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se06-m01-w01": {
     "revision": 1,
@@ -5914,7 +5914,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se06-m02-template-math-fraction-group-meaning",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se06-m03-w01": {
     "revision": 1,
@@ -5938,7 +5938,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se06-m03-w04-template",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se06-m04-w01": {
     "revision": 1,
@@ -5950,13 +5950,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se06-m04-w02-template",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se06-m04-w03": {
     "revision": 1,
     "templateId": "se06-m04-w03-template",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se06-m04-w04": {
     "revision": 1,
@@ -5968,13 +5968,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se07-g01-template-concurrent-edit-conflict-preserves-both-work",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se07-g02-w01": {
     "revision": 2,
     "templateId": "se07-g02-template-incoming-position-versus-read-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "se07-g02-w02": {
     "revision": 2,
@@ -5986,7 +5986,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se07-g04-template-hold-alternative-preserves-start-stop",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "basic"
   },
   "se07-g04-w03": {
     "revision": 2,
@@ -6004,13 +6004,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "se07-g05-template-changed-transaction-review-after-authentication",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se07-g06-w01": {
     "revision": 2,
     "templateId": "se07-g06-template-checkout-process-versus-domain-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-t06-w01": {
     "revision": 1,
@@ -6028,7 +6028,7 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se08-t08-template-distributed-accountability-with-capacity",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-t08-w02": {
     "revision": 1,
@@ -6058,91 +6058,91 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 1,
     "templateId": "se08-o01-template-editor-display-independent-content",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o01-w02": {
     "revision": 2,
     "templateId": "se08-o01-template-automatic-alt-repair-author-choice",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o01-w03": {
     "revision": 1,
     "templateId": "se08-o01-template-same-tool-copy-structure-preservation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o01-w04": {
     "revision": 1,
     "templateId": "se08-o01-template-mixed-template-accessibility-identification",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o01-w05": {
     "revision": 1,
     "templateId": "se08-o01-template-author-manual-check-actionable-guidance",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o01-w06": {
     "revision": 1,
     "templateId": "se08-o01-template-authoring-support-default-reactivation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o01-w07": {
     "revision": 1,
     "templateId": "se08-o01-template-tool-generated-versus-author-content-responsibility",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o02-w01": {
     "revision": 1,
     "templateId": "se08-o02-template-intake-escalation-not-remediation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "se08-o02-w02": {
     "revision": 1,
     "templateId": "se08-o02-template-scoped-acceptance-new-task-boundary",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa01-ma01-w01": {
     "revision": 2,
     "templateId": "sa01-ma01-template-third-party-scope-transfer-web-to-app",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa01-ma02-w01": {
     "revision": 2,
     "templateId": "sa01-ma02-template-platform-resize-limit-does-not-waive-function-preservation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa01-ma02-w02": {
     "revision": 1,
     "templateId": "sa01-ma02-template-os-default-target-exception-follows-implementation-not-appearance",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa01-ma02-w04": {
     "revision": 2,
     "templateId": "sa01-ma02-template-image-text-user-presentation-and-exceptions",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa01-ma02-w05": {
     "revision": 1,
     "templateId": "sa01-ma02-template-live-multimedia-sign-language-is-an-allowed-alternative-to-captions",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa01-ma02-w06": {
     "revision": 1,
     "templateId": "sa01-ma02-template-precompletion-review-confirm-correct-is-sufficient-error-prevention-path",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa02-ma04-w01": {
     "revision": 3,
@@ -6154,13 +6154,13 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
     "revision": 2,
     "templateId": "sa03-sr02-template-base-value-matching-propagation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa03-sr04-w01": {
     "revision": 2,
     "templateId": "sa03-sr04-template-curtain-screen-image-observation",
     "learningGoalRevision": 1,
-    "level": "pro"
+    "level": "master"
   },
   "sa03-sr05-w01": {
     "revision": 1,
@@ -6207,6 +6207,42 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
   "d02-f05-w01": {
     "revision": 1,
     "templateId": "d02-f05-template-preflight-versus-response-sharing-server-effect",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d05-h01-f01-w01": {
+    "revision": 1,
+    "templateId": "d05-h01-hidden-reference-root-descendant-boundary-template",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d05-h01-f02-w01": {
+    "revision": 2,
+    "templateId": "d05-h01-host-table-name-description-source-consumption-template",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d05-h02-f01-w01": {
+    "revision": 1,
+    "templateId": "d05-h02-label-shadow-tree-slotted-light-control-template",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d05-h02-f02-w01": {
+    "revision": 1,
+    "templateId": "d05-h02-face-accessibility-state-submission-value-template",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d05-h02-f03-w01": {
+    "revision": 1,
+    "templateId": "d05-h02-name-from-content-assigned-slot-fallback-template",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "d05-h03-f01-w01": {
+    "revision": 1,
+    "templateId": "d05-h03-replaced-label-element-reference-vs-idref-template",
     "learningGoalRevision": 1,
     "level": "master"
   }

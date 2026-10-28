@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.27-internet-master.d02.1-service.1",
-  "releasedAt": "2026-10-27T19:06:02.108041+00:00",
-  "file": "releases/2026.10.27-internet-master.d02.1-service.1/bank.json",
-  "sha256": "9d0efd76e0034aaa6d16568530acdb0c3c5ef2ebd85879b2225e79794aaf2be4",
-  "changeSummary": "기존 문항·분류를 보존하고 인터넷 개론 Master의 계층 간 처리·인증·캐시·응답 공유 관계를 독립 검토해 추가함. D01과 함께 한 번 공개 예정.",
+  "bankVersion": "2026.10.28-html-master.d05-h03.1-service.1",
+  "releasedAt": "2026-10-28T01:58:01.656681+00:00",
+  "file": "releases/2026.10.28-html-master.d05-h03.1-service.1/bank.json",
+  "sha256": "0b7f446885e82727a28e0c59c368a0c34190efe30beea935626209078a4af3b0",
+  "changeSummary": "기존 문항과 분류를 보존하고 동적 문서 교체 후 명시 요소 참조와 IDREF 조회의 관계 유지 공백을 검토해 내부 추가. 공개 배포 없음.",
   "finalRelease": false
 }

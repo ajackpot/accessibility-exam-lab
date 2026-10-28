@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.27-internet-master.d02.1-service.1",
-  "bankSha256": "9d0efd76e0034aaa6d16568530acdb0c3c5ef2ebd85879b2225e79794aaf2be4",
-  "writtenQuestions": 1035,
-  "regularWrittenQuestions": 1025,
+  "bankVersion": "2026.10.28-html-master.d05-h03.1-service.1",
+  "bankSha256": "0b7f446885e82727a28e0c59c368a0c34190efe30beea935626209078a4af3b0",
+  "writtenQuestions": 1041,
+  "regularWrittenQuestions": 1031,
   "testOnlyWrittenQuestions": 10,
-  "writtenLinkedOptions": 5141,
+  "writtenLinkedOptions": 5171,
   "practicalTasks": 10,
   "regularPracticalTasks": 10,
   "testOnlyPracticalTasks": 0,
-  "freshWrittenQuestions": 1027,
-  "freshRegularWrittenQuestions": 1017,
+  "freshWrittenQuestions": 1033,
+  "freshRegularWrittenQuestions": 1023,
   "freshTestOnlyWrittenQuestions": 10,
   "freshPracticalTasks": 10,
   "freshRegularPracticalTasks": 10,
@@ -25,13 +25,13 @@
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 531,
-      "sha256": "587ce72f743275b7fe6b81a2048acd9dc3fc2f2868285033924cce6279c0e311"
+      "bytes": 518,
+      "sha256": "23b5724396175ab211b3f8e57758afecb305d0a70b1581d97b5452a816addf1a"
     },
     {
-      "path": "data/releases/2026.10.27-internet-master.d02.1-service.1/bank.json",
-      "bytes": 6745769,
-      "sha256": "9d0efd76e0034aaa6d16568530acdb0c3c5ef2ebd85879b2225e79794aaf2be4"
+      "path": "data/releases/2026.10.28-html-master.d05-h03.1-service.1/bank.json",
+      "bytes": 6788200,
+      "sha256": "0b7f446885e82727a28e0c59c368a0c34190efe30beea935626209078a4af3b0"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
@@ -40,23 +40,23 @@
     },
     {
       "path": "index.html",
-      "bytes": 2313,
-      "sha256": "f08e1345be86bb46b437de7646481123ddffe9046fe36f003f613b211b1360ef"
+      "bytes": 2347,
+      "sha256": "dd1853b236328a5ecbb9d1c7baaa54daf76299e5551743a36c53aea3a686d227"
     },
     {
       "path": "src/app.js",
-      "bytes": 129497,
-      "sha256": "5f9b35536361f1209d5e5fc557e6a3dd11f680fbbd8e078db2a46cf4c9ed3f51"
+      "bytes": 139905,
+      "sha256": "fa3003631febc6c65863ca8cd47a1243d506316c1b4bdc04c53ebe6968325903"
     },
     {
       "path": "src/backup.js",
-      "bytes": 13003,
-      "sha256": "9127f068473325c46106ca53104911afb4d10cac39009f040c39ccddfab197b4"
+      "bytes": 13041,
+      "sha256": "b3b14c7663c697ce3b6f2c61c2989010fcce26aaf4853b94d84b12ea1734a2de"
     },
     {
       "path": "src/domain.js",
-      "bytes": 66150,
-      "sha256": "899718297669534e7148fc0d1ebfacc0e02d7f90fcc0b4f09fdfc261aed95021"
+      "bytes": 66676,
+      "sha256": "f0003b5737a8be018b15c1411b081b5281dd85e2d2676afcff14cb6e391fad09"
     },
     {
       "path": "src/legacy-materials.js",
@@ -85,8 +85,8 @@
     },
     {
       "path": "src/practical-task.js",
-      "bytes": 16280,
-      "sha256": "2764516c8d3adc0589622a40ce6ba35eb74baab3a446cf9147590bbef5f1dd5d"
+      "bytes": 28366,
+      "sha256": "e7cc801763fc14fa8149ce651ad2e38946bcb783e371326f23cdeef554bde33a"
     },
     {
       "path": "src/reviewed-option-explanations.js",
@@ -105,69 +105,124 @@
     },
     {
       "path": "src/storage.js",
-      "bytes": 9379,
-      "sha256": "0b09d23cc41583674c6a86a9175ca1f20128c9675bed77c2039b37affdaef762"
+      "bytes": 9398,
+      "sha256": "e1ba0f26c9dbfcc85c39f423e4b468526585b316a81607aeaa4e6920fff2fe4b"
     },
     {
       "path": "src/workflows.js",
-      "bytes": 7168,
-      "sha256": "3620ebad40448361dc9302372a3a1eb19fc1ddd0b2f320da8772113ae58bff63"
+      "bytes": 7191,
+      "sha256": "88bbd9e49100d7aed542a32ec0b8208d66a39ea16e822dc2da7c0a72e4d73b7a"
     },
     {
       "path": "src/written-level-map.js",
-      "bytes": 201817,
-      "sha256": "35291b152f4942d401115876183d6b187d641f5e030eb5fdd20039156f1d6b83"
+      "bytes": 203243,
+      "sha256": "9e3c1cdc47302a8b87bb622b200b93058c901298c4991ef2176f1bcd19e95c73"
     },
     {
       "path": "src/written-levels.js",
-      "bytes": 2565,
-      "sha256": "1015df52d698029337198d326759556a8b1365222603ba239e7b71256dc0f496"
+      "bytes": 2643,
+      "sha256": "0960ce83d1ade26a005a1e766776d551c649b234a623192f753b5d26310826ca"
     },
     {
       "path": "style.css",
-      "bytes": 9758,
-      "sha256": "09fcc71f051b977f6bf0966fe8eb9d258e6323e1bb389b9b1fbb3b343e11edf1"
+      "bytes": 10513,
+      "sha256": "51ea5cbecbd6768e6dc7f2adc7bb30688553ea87248cacdf940086c57121025c"
     }
   ],
   "practicalAssessmentMode": "unscored",
   "practicalManualAnswerItems": 41,
-  "writtenLevelVersion": "d03.1",
+  "writtenLevelVersion": "d05-h03.1",
   "writtenLevelMockAvailability": {
-    "basic": true,
-    "pro": true,
-    "master": false,
-    "masterShortages": [
-      {
-        "subjectId": "s1",
-        "name": "웹접근성 표준 개론",
-        "count": 10,
-        "required": 20
-      },
-      {
-        "subjectId": "s2",
-        "name": "인터넷 개론",
-        "count": 7,
-        "required": 20
-      },
-      {
-        "subjectId": "s3",
-        "name": "HTML 개론",
-        "count": 15,
-        "required": 20
-      },
-      {
-        "subjectId": "s4",
-        "name": "CSS/스크립트 개론",
-        "count": 14,
-        "required": 20
-      },
-      {
-        "subjectId": "s5",
-        "name": "정보접근성 개론",
-        "count": 3,
-        "required": 20
-      }
-    ]
+    "basic": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 26
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 63
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 27
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 23
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 68
+        }
+      ]
+    },
+    "pro": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 61
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 111
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 163
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 154
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 107
+        }
+      ]
+    },
+    "master": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 61
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 27
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 20
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 38
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 41
+        }
+      ]
+    }
   },
   "writtenLevelClassificationCounts": [
     {
@@ -176,21 +231,21 @@
       "levels": [
         {
           "level": "basic",
-          "total": 36,
-          "newSession": 36,
-          "mockRegularUnique": 33
+          "total": 28,
+          "newSession": 28,
+          "mockRegularUnique": 26
         },
         {
           "level": "pro",
-          "total": 110,
-          "newSession": 106,
-          "mockRegularUnique": 105
+          "total": 64,
+          "newSession": 63,
+          "mockRegularUnique": 61
         },
         {
           "level": "master",
-          "total": 10,
-          "newSession": 10,
-          "mockRegularUnique": 10
+          "total": 64,
+          "newSession": 61,
+          "mockRegularUnique": 61
         }
       ]
     },
@@ -200,21 +255,21 @@
       "levels": [
         {
           "level": "basic",
-          "total": 95,
-          "newSession": 95,
-          "mockRegularUnique": 93
+          "total": 65,
+          "newSession": 65,
+          "mockRegularUnique": 63
         },
         {
           "level": "pro",
-          "total": 110,
-          "newSession": 110,
-          "mockRegularUnique": 101
+          "total": 117,
+          "newSession": 117,
+          "mockRegularUnique": 111
         },
         {
           "level": "master",
-          "total": 7,
-          "newSession": 7,
-          "mockRegularUnique": 7
+          "total": 30,
+          "newSession": 30,
+          "mockRegularUnique": 27
         }
       ]
     },
@@ -230,15 +285,15 @@
         },
         {
           "level": "pro",
-          "total": 169,
-          "newSession": 168,
-          "mockRegularUnique": 162
+          "total": 171,
+          "newSession": 170,
+          "mockRegularUnique": 163
         },
         {
           "level": "master",
-          "total": 16,
-          "newSession": 16,
-          "mockRegularUnique": 15
+          "total": 20,
+          "newSession": 20,
+          "mockRegularUnique": 20
         }
       ]
     },
@@ -248,21 +303,21 @@
       "levels": [
         {
           "level": "basic",
-          "total": 31,
-          "newSession": 31,
-          "mockRegularUnique": 29
+          "total": 25,
+          "newSession": 25,
+          "mockRegularUnique": 23
         },
         {
           "level": "pro",
-          "total": 181,
-          "newSession": 181,
-          "mockRegularUnique": 172
+          "total": 161,
+          "newSession": 161,
+          "mockRegularUnique": 154
         },
         {
           "level": "master",
-          "total": 14,
-          "newSession": 14,
-          "mockRegularUnique": 14
+          "total": 40,
+          "newSession": 40,
+          "mockRegularUnique": 38
         }
       ]
     },
@@ -278,17 +333,19 @@
         },
         {
           "level": "pro",
-          "total": 155,
-          "newSession": 152,
-          "mockRegularUnique": 145
+          "total": 116,
+          "newSession": 114,
+          "mockRegularUnique": 107
         },
         {
           "level": "master",
-          "total": 3,
-          "newSession": 3,
-          "mockRegularUnique": 3
+          "total": 42,
+          "newSession": 41,
+          "mockRegularUnique": 41
         }
       ]
     }
-  ]
+  ],
+  "freshWrittenLinkedOptions": 5132,
+  "practicalInspectionAnswerFormat": "issue-list-v1"
 }

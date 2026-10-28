@@ -1,10 +1,10 @@
-import {isUnscoredPractical,isUnscoredPracticalSession,hasHistoricalPractical,practicalProgress,practicalStatistics,createPracticalContinuation,APP_VERSION,materialType,sequenceEvidenceLabel,sequenceMaterialText,sourceLines,setPracticalView,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,isNewSessionQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d03-001';
-import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.12&materials=a04-001&levels=d03-001';
-import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d03-001';
+import {INSPECTION_FIELDS,inspectionDisplayInstructions,inspectionDisplayPrompt,isIssueAnswer,toIssueAnswer,inspectionAnswerText,inspectionReferenceGroups,inspectionReferenceRemainder,setInspectionDraft,commitInspectionDraft,cancelInspectionDraft,deleteInspectionIssue,restoreInspectionIssue,moveInspectionIssue,manualPartAnswered,isUnscoredPractical,isUnscoredPracticalSession,hasHistoricalPractical,practicalProgress,practicalStatistics,createPracticalContinuation,APP_VERSION,materialType,sequenceEvidenceLabel,sequenceMaterialText,sourceLines,setPracticalView,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,isNewSessionQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d05-h03-001&issues=p02-001';
+import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.12&materials=a04-001&levels=d05-h03-001&issues=p02-001';
+import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d05-h03-001&issues=p02-001';
 import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.12';
-import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.12&materials=a04-001&levels=d03-001';
+import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.12&materials=a04-001&levels=d05-h03-001&issues=p02-001';
 import {MAJOR_SITE_GROUPS} from './major-sites.js?v=2026.10.27';
-import {WRITTEN_LEVEL_OPTIONS,writtenLevelDescription,writtenLevelLabel,isWrittenLevel} from './written-levels.js?v=d03-001';
+import {WRITTEN_LEVEL_OPTIONS,writtenLevelDescription,writtenLevelLabel,isWrittenLevel} from './written-levels.js?v=d05-h03-001';
 const $=id=>document.getElementById(id);
 const state={bankLoading:true,noticeGeneration:0,starting:false,section:'home',route:null,restoring:false,openGeneration:0,store:null,bank:null,bundle:null,sessions:[],session:null,editor:null,view:'home',queue:Promise.resolve(),storageFailed:false,unsaved:null,anchor:null,warningKeys:new Set(),settings:{timerWarnings:true,writtenDifficultyLevel:'all'}};
 const subjectName=id=>SUBJECTS.find(s=>s.id===id)?.name||'웹접근성 실기중급';
@@ -62,7 +62,7 @@ function revealReadOnlyCaret(area){
     else if(x>area.scrollLeft+area.clientWidth-right-1)area.scrollLeft=x-area.clientWidth+right+1;
   }finally{mirror.remove();}
 }
-function button(text,fn,opts={}){return node('button',{type:'button',...opts,on:{click:async event=>{state.routeRequest=(state.routeRequest||0)+1;state.restoring=false;try{await fn(event);}catch(error){if(state.reportedError!==error)showError(error);}}}},text);}
+function button(text,fn,opts={}){return node('button',{type:'button',...opts,on:{click:async event=>{if(state.inspectionRecovery&&!opts['data-inspection-recovery']){announce('저장하지 못한 이슈 입력을 먼저 복사하거나 내려받고, 복구 안내에서 돌아가세요.');return;}state.routeRequest=(state.routeRequest||0)+1;state.restoring=false;try{await fn(event);}catch(error){if(state.reportedError!==error)showError(error);}}}},text);}
 function actions(...children){return node('div',{class:'actions'},...children);}
 // The persistent polite region reports actions, never routine successful writes.
 function announce(message,{isCurrent=null}={}){state.contextualNotice=!!isCurrent;const generation=++state.noticeGeneration;$('status').textContent='';requestAnimationFrame(()=>{if(generation===state.noticeGeneration&&(!isCurrent||isCurrent()))$('status').textContent=message;});}
@@ -86,7 +86,7 @@ function edit(mutator,{render=false}={}){
     catch(error){if(error.name==='DomainError'){showError(error);}else if(error.code==='CONFLICT'){state.editor?.release();state.editor={acquired:false,release:()=>{}};showError(error);}else{state.storageFailed=true;state.unsaved=collectVisibleDraft(candidate||previous,previous);freezeAnswerInputs();showError(error);}throw error;}
   };const promise=state.queue.then(task);state.queue=promise.catch(()=>{});return promise;
 }
-function collectVisibleDraft(draft,previous){const originalAnswers=copy(draft.answers);const s=copy(draft),item=previous.items[previous.currentIndex];if(!item||!document.getElementById('view-title')?.textContent.startsWith('문항 '))return s;if(previous.attempts.some(a=>a.instanceId===item.instanceId))return s;if(item.type==='written'){const selected=document.querySelector('input[name="written-answer"]:checked');if(selected)s.answers[item.instanceId]=selected.value;}else{const answer={...(s.answers[item.instanceId]||{})};for(const p of item.parts){if(p.kind==='text'||p.kind==='code'){const input=$(`part-${p.partId}`);if(input)answer[p.partId]=input.value;}else if(p.kind==='inspection'){answer[p.partId]={...(answer[p.partId]||{})};for(const key of ['guidelines','locations','cause','improvement']){const input=$(`part-${p.partId}-${key}`);if(input&&input.value!==(answer[p.partId][key]||'').replace(/\r\n|\r/g,'\n'))answer[p.partId][key]=input.value;}}else{const selected=[...document.querySelectorAll('input')].filter(el=>el.name===p.partId&&el.checked).map(el=>el.value);if(p.kind==='multi')answer[p.partId]=selected;else if(selected.length)answer[p.partId]=selected[0];}}if($('free-response'))answer.freeResponse=$('free-response').value;s.answers[item.instanceId]=answer;}if(s.status!=='active'||s.attempts.some(a=>a.instanceId===item.instanceId)){s.recoveryDraft={answers:copy(s.answers),observedAt:Date.now(),reason:'저장 실패 중 화면에 남은 입력',excludedFromGrade:true};s.answers=originalAnswers;}return s;}
+function collectVisibleDraft(draft,previous){const originalAnswers=copy(draft.answers);const s=copy(draft),item=previous.items[previous.currentIndex];if(!item||!document.getElementById('view-title')?.textContent.startsWith('문항 '))return s;if(previous.attempts.some(a=>a.instanceId===item.instanceId))return s;if(item.type==='written'){const selected=document.querySelector('input[name="written-answer"]:checked');if(selected)s.answers[item.instanceId]=selected.value;}else{const answer={...(s.answers[item.instanceId]||{})};for(const p of item.parts){if(p.kind==='text'||p.kind==='code'){const input=$(`part-${p.partId}`);if(input)answer[p.partId]=input.value;}else if(p.kind==='inspection'){const current=toIssueAnswer(answer[p.partId]);const draft={...(current.draft||{})};let found=false;for(const {key}of INSPECTION_FIELDS){const input=$(`part-${p.partId}-${key}`);if(input){draft[key]=input.value;found=true;}}if(found)answer[p.partId]=setInspectionDraft(current,draft);}else{const selected=[...document.querySelectorAll('input')].filter(el=>el.name===p.partId&&el.checked).map(el=>el.value);if(p.kind==='multi')answer[p.partId]=selected;else if(selected.length)answer[p.partId]=selected[0];}}if($('free-response'))answer.freeResponse=$('free-response').value;s.answers[item.instanceId]=answer;}if(s.status!=='active'||s.attempts.some(a=>a.instanceId===item.instanceId)){s.recoveryDraft={answers:copy(s.answers),observedAt:Date.now(),reason:'저장 실패 중 화면에 남은 입력',excludedFromGrade:true};s.answers=originalAnswers;}return s;}
 function freezeAnswerInputs(){for(const el of $('main').querySelectorAll('input,textarea:not([readonly]),select'))el.disabled=true;}
 async function retrySave(){
   if(!state.unsaved||state.retrying)return;state.retrying=true;
@@ -111,6 +111,7 @@ async function retrySave(){
 async function emergencyBackup(){const sessions=await state.store.sessions();if(state.unsaved){const i=sessions.findIndex(s=>s.sessionId===state.unsaved.sessionId);if(i<0)sessions.push(state.unsaved);else sessions[i]=state.unsaved;}showBackupDownloads(sessions,'긴급 백업 내보내기');}
 function releaseEditor(){state.editor?.release();state.editor=null;state.anchor=null;}
 async function leave(fn){
+  if(state.inspectionRecovery){announce('저장하지 못한 이슈 입력의 복구 안내를 먼저 확인하세요.');return false;}
   if(state.leaving)return false;state.leaving=true;
   try{
     await state.queue;
@@ -126,6 +127,8 @@ function rememberRoute(name,args={}){
   if(!state.restoring){const previous=history.state?.examRoute;if(JSON.stringify(previous)!==JSON.stringify(route))history.pushState({examRoute:route},'',`#${name}`);}
 }
 async function restoreRoute(route){
+  if(state.inspectionRecovery){history.replaceState({examRoute:state.route},'', location.href);announce('저장하지 못한 이슈 입력의 복구 안내를 먼저 확인하세요.');return;}
+
   const r=route||{name:'home',args:{}};const detailReturn=['reference','prompt-full'].includes(state.route?.args?.view)&&!['reference','prompt-full'].includes(r.args?.view)?state.practicalDetailReturn:null;const request=(state.routeRequest||0)+1;state.routeRequest=request;state.restoring=true;
   try{const sameSession=r.name==='session'&&state.session?.sessionId===r.args.id;const visit=async()=>{
     if(r.name==='setup')renderSetup(r.args.type,r.args.config||{},r.args.minutesEdited,r.args.minutesValue);
@@ -276,7 +279,7 @@ function practicalLearningActions(s,item){return actions(button('전체 모범 �
 function inputDisabled(item){return state.storageFailed||state.session.status!=='active'||(!isUnscoredPractical(item)&&state.session.attempts.some(a=>a.instanceId===item.instanceId));}
 function renderQuestionStem(item){
   const display=questionPresentation(item);
-  return node('div',{class:'question-stem'},node('p',{id:'question-stem',class:'answer-text'},display.stem),...(display.notes.length?[node('section',{class:'question-notes','aria-labelledby':'question-notes-heading'},node('h3',{id:'question-notes-heading'},'참고 사항'),node('ul',{},display.notes.map(note=>node('li',{},note))))]:[]),...(item.practicalTask?[node('section',{class:'practical-specification','aria-label':'공통 화면과 동작 명세'},node('h3',{},item.practicalTask.title||'대문항 화면·동작 명세'),node('p',{class:'answer-text'},item.practicalTask.screenDescription),node('p',{class:'answer-text'},item.practicalTask.behaviorDescription),node('ul',{},item.practicalTask.requirements.map(text=>node('li',{},text))),node('p',{class:'answer-text'},item.practicalTask.answerInstructions))]:[]));
+  return node('div',{class:'question-stem'},node('p',{id:'question-stem',class:'answer-text'},display.stem),...(display.notes.length?[node('section',{class:'question-notes','aria-labelledby':'question-notes-heading'},node('h3',{id:'question-notes-heading'},'참고 사항'),node('ul',{},display.notes.map(note=>node('li',{},note))))]:[]),...(item.practicalTask?[node('section',{class:'practical-specification','aria-label':'공통 화면과 동작 명세'},node('h3',{},item.practicalTask.title||'대문항 화면·동작 명세'),node('p',{class:'answer-text'},item.practicalTask.screenDescription),node('p',{class:'answer-text'},item.practicalTask.behaviorDescription),node('ul',{},item.practicalTask.requirements.map(text=>node('li',{},text))),node('p',{class:'answer-text'},inspectionDisplayInstructions(item)))]:[]));
 }
 function practicalViewFor(item){
   const key=`${state.session?.sessionId}:${item.instanceId}`;
@@ -292,12 +295,12 @@ function savePracticalView(item,patch){
   }
 }
 function practicalPartText(part,value){
-  if(part.kind==='inspection')return [['guidelines','검사항목·지침'],['locations','파일·원본 줄'],['cause','원인과 사용자 영향'],['improvement','개선안']].map(([key,label])=>`${label}: ${value?.[key]||'미응답'}`).join('\n');
+  if(part.kind==='inspection')return inspectionAnswerText(value);
   if(part.kind==='text'||part.kind==='code')return value||'미응답';
   return selectedChoiceTexts(part,value).join(' / ')||'미응답';
 }
 function practicalPartHasAnswer(part,value){
-  return part.kind==='inspection'?Object.values(value||{}).some(v=>typeof v==='string'&&v.trim()):part.kind==='multi'?Array.isArray(value)&&value.length>0:typeof value==='string'&&value.trim()!=='';
+  return part.kind==='inspection'?manualPartAnswered(part,value):part.kind==='multi'?Array.isArray(value)&&value.length>0:typeof value==='string'&&value.trim()!=='';
 }
 function refreshPracticalProgress(item){
   if(typeof document==='undefined')return;
@@ -360,6 +363,111 @@ function renderMaterials(item,purpose='question'){
   if(practical){for(const event of ['select','keyup','pointerup','scroll','blur'])area.addEventListener(event,remember);state.practicalMaterialJump=(filename,n)=>{const index=materials.findIndex(m=>m.filename===filename);if(index<0)return;remember();fileSelect.value=String(index);update(false);jump(n);};}
   wrapper.append(heading,...(practical?[actions(button('마지막 세부 문항으로 돌아가기',()=>focusPracticalPart(item,practicalViewFor(item).activePartId),{class:'secondary'}))]:[]),...(materials.length>1?[node('p',{class:'muted'},`코드 파일 ${materials.length}개가 있습니다. 지문에서 지정한 파일을 선택해 각각 읽으세요.`)]:[]),title,labelInput(question?'보기 코드 파일':'해설 코드 파일',fileSelect),labelInput(question?'보기 원본 코드 (읽기 전용)':'해설 원본 코드 (읽기 전용)',area),help,actions(button('원본 코드 전체 복사',()=>copyText(chosen().content,area)),button('현재 과제 지시문 복사',()=>copyText(questionInstructionText(item)))),labelInput('이동할 줄 번호',line),actions(button('줄로 이동',()=>jump(Number(line.value))),button('과제 관련 구간으로 이동',()=>jump(chosen().focusLine||1))),lineInfo,node('label',{for:codeId('show-newlines')},newline,'줄 번호와 줄바꿈 기호가 있는 별도 코드 표시'),labelInput('줄 번호·줄바꿈 코드 (원문 복사와 별도)',numbered));update();return wrapper;
 }
+
+function inspectionFieldsContent(value){
+  return node('dl',{class:'issue-fields'},INSPECTION_FIELDS.flatMap(({key,label})=>[node('dt',{},label),node('dd',{class:'answer-text'},value?.[key]?.trim()?value[key]:'미작성')]));
+}
+function practicalReferenceContent(item){
+  const remainder=item.family==='inspection'?inspectionReferenceRemainder(item):null;
+  const children=remainder===null?[node('h3',{},'전체 과제 참고 답안'),node('p',{class:'answer-text'},item.referenceAnswer)]:[];
+  for(const part of item.parts.filter(p=>['code','inspection'].includes(p.kind))){
+    const groups=part.kind==='inspection'?inspectionReferenceGroups(part):null;
+    children.push(node('section',{class:'reference-part'},node('h3',{},part.prompt),groups?node('ol',{class:'issue-list reference-issues'},groups.map((issue,index)=>node('li',{},node('h4',{},`이슈 ${index+1} · ${issue.id}`),inspectionFieldsContent(issue)))):node('p',{class:'answer-text'},practicalPartText(part,part.referenceAnswer)),node('p',{class:'answer-text'},part.explanation)));
+  }
+  if(remainder)children.push(node('h3',{},'추가 참고 사항'),node('p',{class:'answer-text'},remainder));
+  return children;
+}
+
+function preserveRejectedInspectionDraft(draft,error){
+  // Invalid oversized input cannot become a valid session backup. Keep its exact
+  // visible text separately until the learner explicitly copies or discards it.
+  const text=INSPECTION_FIELDS.map(({key,label})=>`${label}\n${draft[key]||''}`).join('\n\n');
+  if(state.inspectionRecovery){state.inspectionRecovery.text=text;const previous=$('inspection-recovery-text');if(previous)previous.value=text;return;}
+  state.inspectionRecovery={text};
+  const area=node('textarea',{id:'inspection-recovery-text',readOnly:true,rows:12},text);
+  const dialog=node('dialog',{'aria-labelledby':'inspection-recovery-title',class:'inspection-recovery'},
+    node('h2',{id:'inspection-recovery-title'},'저장하지 못한 이슈 입력 보존'),
+    node('p',{},`${error.message} 목록에 저장된 이슈는 유지했습니다. 아래 초과 입력은 아직 저장되지 않았습니다. 돌아가기 전에 필요한 원문을 복사하거나 텍스트 파일로 내려받으세요.`),
+    labelInput('저장하지 못한 입력 원문',area),
+    actions(button('입력 원문 복사',()=>copyText(state.inspectionRecovery.text,area),{'data-inspection-recovery':'true'}),
+      button('입력 원문 내려받기',()=>download('실기-미저장-이슈.txt',state.inspectionRecovery.text),{'data-inspection-recovery':'true'}),
+      button('저장된 답안으로 돌아가기',async()=>{await state.queue;if(!window.confirm('현재 초과 입력은 저장되지 않았습니다. 필요한 원문을 보존했다면 이전에 저장한 답안으로 돌아갈까요?'))return;state.inspectionRecovery=null;dialog.close();dialog.remove();clearError();if(state.session?.status==='active')renderSession();else if(state.session)renderResult(state.session);},{'data-inspection-recovery':'true',class:'secondary'})));
+  dialog.addEventListener('cancel',event=>event.preventDefault());document.body.append(dialog);dialog.showModal();area.focus();
+}
+
+function renderInspectionEditor(item,part,disabled){
+  const wrapper=node('div',{class:'inspection-editor'}),sessionId=state.session.sessionId,prefix=`issue-${part.partId}`;
+  let busy=false;
+  const value=()=>toIssueAnswer(state.session.answers[item.instanceId]?.[part.partId]);
+  const current=()=>wrapper.isConnected&&state.session?.sessionId===sessionId&&state.session?.items[state.session.currentIndex]?.instanceId===item.instanceId;
+  const focus=id=>queueMicrotask(()=>{if(current())$(id)?.focus();});
+  const hasDraft=v=>!!v.draft&&(!!v.draft.id||INSPECTION_FIELDS.some(({key})=>v.draft[key]?.trim()));
+  const persist=transform=>edit((session,now)=>{
+    const answer=session.answers[item.instanceId]||{};
+    return setAnswer(session,item.instanceId,{...answer,[part.partId]:transform(answer[part.partId])},now);
+  });
+  async function action(transform,message,focusId){
+    if(busy||disabled||inputDisabled(item)||state.inspectionRecovery)return;
+    // Reject invalid UI actions before entering the storage-failure recovery path.
+    busy=true;await state.queue;if(!current()){busy=false;return;}try{transform(value());}catch(error){busy=false;throw error;}
+    for(const control of wrapper.querySelectorAll('button,input,textarea'))control.disabled=true;
+    try{await persist(transform);if(current()){render();refreshPracticalProgress(item);focus(focusId);announce(typeof message==='function'?message(value()):message,{isCurrent:current});}}
+    finally{busy=false;}
+  }
+  function render(){
+    const v=value(),draft=v.draft||{},editing=v.issues.findIndex(issue=>issue.id===draft.id);
+    const listTitle=node('h4',{id:`${prefix}-list-title`,tabindex:'-1'},`저장한 이슈 ${v.issues.length}개`);
+    const list=node('ol',{class:'issue-list', 'aria-labelledby':listTitle.id},v.issues.map((issue,index)=>{
+      const headingId=`${prefix}-${issue.id}-heading`,editId=`${prefix}-${issue.id}-edit`;
+      const editIssue=()=>{
+        const pending=value();if(pending.draft?.id===issue.id){focus(`part-${part.partId}-guidelines`);announce('현재 수정 중인 이슈입니다. 입력한 초안은 유지했습니다.');return;}if(hasDraft(pending)&&pending.draft.id!==issue.id&&!window.confirm('작성 중인 초안은 취소하고 이 이슈를 수정할까요? 이미 저장한 이슈는 유지됩니다.'))return;
+        return action(before=>setInspectionDraft(cancelInspectionDraft(before),{...issue}),`이슈 ${index+1}을 수정합니다. 저장 전에는 기존 이슈가 유지됩니다.`,`part-${part.partId}-guidelines`);
+      };
+      const remove=()=>{
+        if(value().draft?.id===issue.id){announce('이 이슈의 수정을 먼저 저장하거나 취소한 뒤 삭제하세요.');focus(`${prefix}-save`);return;}
+        if(!window.confirm(`이슈 ${index+1}을 목록에서 삭제할까요? 이 화면의 삭제한 이슈에서 복구할 수 있습니다.`))return;
+        return action(before=>deleteInspectionIssue(before,issue.id),`이슈 ${index+1}을 삭제했습니다. 삭제한 이슈에서 복구할 수 있습니다.`,listTitle.id);
+      };
+      return node('li',{'data-issue-id':issue.id},node('h5',{id:headingId,tabindex:'-1'},`이슈 ${index+1}`),inspectionFieldsContent(issue),actions(
+        button(`이슈 ${index+1} 수정`,editIssue,{id:editId,class:'secondary',disabled}),
+        button(`이슈 ${index+1} 위로`,()=>action(before=>moveInspectionIssue(before,issue.id,index-1),'이슈 순서를 변경했습니다.',headingId),{class:'secondary',disabled:disabled||index===0}),
+        button(`이슈 ${index+1} 아래로`,()=>action(before=>moveInspectionIssue(before,issue.id,index+1),'이슈 순서를 변경했습니다.',headingId),{class:'secondary',disabled:disabled||index===v.issues.length-1}),
+        button(`이슈 ${index+1} 삭제`,remove,{class:'danger',disabled})));
+    }));
+    const legend=editing>=0?`이슈 ${editing+1} 수정`:'새 이슈 작성';
+    const editor=node('fieldset',{class:'issue-draft'},node('legend',{},legend));
+    const draftHelp=node('p',{id:`${prefix}-draft-help`,class:'muted'},'한 이슈의 지침·위치·원인·개선안을 이 입력란 세트에 적으세요. 작성 중인 초안도 자동 보존되며, 저장 버튼을 눌러 이슈 목록에 반영합니다.');
+    editor.append(draftHelp);
+    const controls={};
+    for(const {key,label}of INSPECTION_FIELDS){
+      const input=node('textarea',{id:`part-${part.partId}-${key}`,rows:3,maxlength:100000,disabled,'aria-describedby':draftHelp.id},draft[key]||'');controls[key]=input;
+      input.addEventListener('input',()=>{
+        const next={...(draft.id?{id:draft.id}:{}),...Object.fromEntries(INSPECTION_FIELDS.map(({key})=>[key,controls[key].value]))};
+        persist(before=>setInspectionDraft(before,next)).then(()=>refreshPracticalProgress(item)).catch(error=>{if(error.name==='DomainError')preserveRejectedInspectionDraft(next,error);});
+      });
+      editor.append(labelInput(label,input));
+    }
+    const save=async()=>{
+      await state.queue;if(!current())return;
+      if(!INSPECTION_FIELDS.some(({key})=>value().draft?.[key]?.trim())){announce('이슈 내용을 한 항목 이상 입력하세요.');focus(`part-${part.partId}-guidelines`);return;}
+      const id=draft.id||`issue-${crypto.randomUUID()}`;
+      return action(before=>commitInspectionDraft(before,{id}),after=>`이슈 ${after.issues.findIndex(issue=>issue.id===id)+1}을 저장했습니다.`,`${prefix}-${id}-heading`);
+    };
+    const cancel=()=>{
+      if(hasDraft(value())&&!window.confirm('작성 중인 입력을 취소할까요? 목록에 저장한 이슈와 이전 답안 원문은 유지됩니다.'))return;
+      return action(cancelInspectionDraft,'작성 중인 입력을 취소했습니다. 저장한 이슈는 유지됩니다.',`part-${part.partId}-guidelines`);
+    };
+    editor.append(actions(button(editing>=0?'이슈 수정 저장':'이슈 저장',save,{id:`${prefix}-save`,disabled}),button(editing>=0?'수정 취소':'작성 취소',cancel,{class:'secondary',disabled})));
+    const legacy=[];
+    if(v.legacy&&INSPECTION_FIELDS.some(({key})=>v.legacy[key]!==undefined)){
+      legacy.push(node('section',{class:'legacy-inspection'},node('h4',{},'이전 답안 원문'),node('p',{},'이전 답안은 이슈를 자동으로 나누거나 연결하지 않고 그대로 보존했습니다. 내용을 확인하여 아래에서 이슈별로 작성할 수 있습니다.'),...INSPECTION_FIELDS.map(({key,label})=>labelInput(`이전 답안 · ${label}`,node('textarea',{id:`${prefix}-legacy-${key}`,readOnly:true,rows:3},v.legacy[key]||'')))));
+    }
+    const deleted=(v.deleted||[]).length?[node('section',{},node('h4',{},'삭제한 이슈'),node('p',{class:'muted'},'삭제한 이슈는 AI용 답안에 포함하지 않습니다. 복구하면 삭제 당시의 순번 위치에 다시 넣습니다. 여러 이슈를 복구한 뒤에는 위·아래 버튼으로 순서를 확인하세요.'),node('ul',{},v.deleted.map(({issue,index})=>node('li',{},node('p',{class:'answer-text'},`삭제 전 이슈 ${index+1}: ${issue.cause||issue.guidelines||issue.locations||issue.improvement}`),button(`삭제 전 이슈 ${index+1} 복구`,()=>action(before=>restoreInspectionIssue(before,issue.id),'삭제한 이슈를 복구했습니다.',`${prefix}-${issue.id}-heading`),{class:'secondary',disabled})))))] : [];
+    wrapper.replaceChildren(...legacy,listTitle,v.issues.length?list:node('p',{},'저장한 이슈가 없습니다.'),editor,...deleted);
+  }
+  render();return wrapper;
+}
+
 function renderSession(){if(!state.session)return renderHome();if(hasRetiredPractical(state.session))return renderRetiredSession(state.session);if(hasHistoricalPractical(state.session))return renderHistoricalPractical(state.session);if(state.session.status!=='active')return renderResult(state.session);rememberRoute('session',{id:state.session.sessionId});const s=state.session,item=s.items[s.currentIndex],disabled=inputDisabled(item),attempt=s.attempts.find(a=>a.instanceId===item.instanceId);
   const heading=`문항 ${s.currentIndex+1} / ${s.items.length}: ${item.practicalTask?.title||subjectName(item.subjectId)}`;const meta=node('p',{id:'session-progress',class:'progress'},`${typeLabel(s.config.type)} · ${s.config.mode==='timed'?'시간제':'시간 제한 없음'} · ${item.testOnly?'체험용 테스트 문항':'일반 학습 문항'} · ${isUnscoredPracticalSession(s)?practicalProgressText(s):`${s.attempts.length}/${s.items.length}문항 채점 완료`}`);
   const children=[meta,node('p',{class:'muted'},'답안과 진행 상태는 이 브라우저에 자동 저장됩니다.')];if(item.practicalTask)children.push(node('p',{class:'task-summary'},`대문항 1개 · 답안 항목 ${item.parts.length}개 · 코드·평가 서술은 자동 채점하지 않습니다.`));if(hasUnclassifiedMaterials(item))children.push(node('section',{class:'notice'},node('p',{},'이전 버전의 코드 자료는 용도가 확인되지 않아 해설 공개 전까지 표시하지 않습니다. 코드가 필요한 문항이면 건너뛰거나 새 문제 은행으로 연습을 준비하세요. 기존 답안과 기록은 보존됩니다.'),button('새 문제 은행으로 연습 준비',()=>leave(()=>renderSetup(item.type,{...s.config})),{class:'secondary',disabled:!state.bank})));if(s.config.mode==='timed'){const remaining=node('p',{id:'remaining',class:'badge','aria-live':'off'},remainingText(nowState(s).remaining));children.push(remaining,actions(button('남은 시간 확인',()=>announce(remainingText(nowState().remaining))),button('시간 연장',()=>renderExtend(),{class:'secondary'}),button('무제한으로 전환',()=>renderConvert(),{class:'secondary'})),node('p',{class:'muted'},'시간제 진행 중에는 정답·해설·AI 평가용 자료를 공개하지 않습니다.'));}
@@ -367,12 +475,12 @@ function renderSession(){if(!state.session)return renderHome();if(hasRetiredPrac
   children.push(renderQuestionStem(item),renderMaterials(item));
   const fieldset=node('fieldset',{class:'answer-options'},node('legend',{},'선택지'));if(item.type==='written'){for(const[o,index]of item.options.map((o,i)=>[o,i])){const input=node('input',{id:`choice-${index}`,name:'written-answer',type:'radio',value:o.optionId,checked:s.answers[item.instanceId]===o.optionId,disabled});input.addEventListener('change',()=>{if(input.checked)edit((current,now)=>setAnswer(current,item.instanceId,o.optionId,now)).catch(()=>{});});fieldset.append(node('label',{class:'choice',for:input.id},input,node('span',{},`${index+1}. ${o.content}`)));}children.push(fieldset);}
   else {children.push(node('h3',{},'실기 답안'),node('p',{class:'muted'},'코드와 점검 답안을 원문 그대로 저장합니다. 연습을 마칠 때까지 수정할 수 있으며 모범 답안과 직접 비교할 수 있습니다.'));
-    for(const part of item.parts){const fs=node('fieldset',{class:'answer-part',id:`answer-part-${part.partId}`,tabindex:'-1'},node('legend',{},part.prompt)),answer=s.answers[item.instanceId]?.[part.partId];
+    for(const part of item.parts){const fs=node('fieldset',{class:'answer-part',id:`answer-part-${part.partId}`,tabindex:'-1'},node('legend',{},inspectionDisplayPrompt(part))),answer=s.answers[item.instanceId]?.[part.partId];
       fs.addEventListener('focusin',()=>{savePracticalView(item,{activePartId:part.partId});refreshPracticalProgress(item);});
       if(part.references?.length)fs.append(node('p',{class:'muted'},'대상 자료의 원본 위치'),actions(...part.references.map(ref=>button(`${ref.filename} 원본 ${ref.startLine}${ref.endLine&&ref.endLine!==ref.startLine?'~'+ref.endLine:''}줄${ref.blankId?' · '+ref.blankId:''}로 이동`,()=>{savePracticalView(item,{activePartId:part.partId});state.practicalMaterialJump?.(ref.filename,ref.startLine);},{class:'secondary'}))));
       const save=(value,field)=>edit((current,now)=>setAnswer(current,item.instanceId,{...(current.answers[item.instanceId]||{}),[part.partId]:field?{...(current.answers[item.instanceId]?.[part.partId]||{}),[field]:value}:value},now)).then(()=>refreshPracticalProgress(item)).catch(()=>{});
       if(part.kind==='code'){const input=node('textarea',{id:`part-${part.partId}`,class:'code',rows:7,spellcheck:'false',disabled,maxlength:1000000},answer||'');input.addEventListener('input',()=>save(input.value));fs.append(labelInput('빈칸 코드 · 여러 줄 입력',input,'줄바꿈과 들여쓰기를 그대로 저장합니다. 작성 사유는 요구하지 않으며 자동 채점하지 않습니다.'));}
-      else if(part.kind==='inspection'){const fields=[['guidelines','위배되는 검사항목·지침','복수 지침은 각각 적으세요.'],['locations','해당 파일과 원본 코드 줄','파일명과 줄 번호 집합 또는 연속 범위를 적으세요.'],['cause','원인과 사용자에게 미치는 영향','어떤 원인으로 어떤 이용 문제가 생기는지 적으세요.'],['improvement','개선안','요구조건을 충족하는 개선 방법이나 코드를 적으세요.']];for(const [key,label,help]of fields){const input=node('textarea',{id:`part-${part.partId}-${key}`,rows:3,disabled,maxlength:100000},answer?.[key]||'');input.addEventListener('input',()=>save(input.value,key));fs.append(labelInput(label,input,help));}fs.append(node('p',{class:'muted'},'네 응답은 원문 그대로 저장합니다.'));}
+      else if(part.kind==='inspection')fs.append(renderInspectionEditor(item,part,disabled));
       children.push(fs);
     }
     children.push(practicalLearningActions(s,item));
@@ -518,7 +626,7 @@ async function renderPracticalDetail(item,view,options={}){
     children.push(labelInput('전체 프롬프트 · 원문',area),actions(button('프롬프트 복사',()=>copyText(text,area)),button('전체 선택 (수동 복사)',()=>{area.focus();area.select();}),button('프롬프트 텍스트 내려받기',()=>download(`${item.questionId}-AI-연습.txt`,text))));
   }else{
     children.push(node('h3',{},'문제 해설'),node('p',{class:'answer-text'},item.explanation),node('p',{class:'muted'},`적용 기준: ${item.standardVersion} · 예상 난도: ${item.difficulty}`),node('h3',{},'근거'),node('ul',{},item.sources.map(source=>node('li',{},node('a',{href:source.url,target:'_blank',rel:'noopener noreferrer'},`${source.title} (새 탭)`),node('p',{},`${source.version} · ${source.location} · 확인 ${source.checkedAt}`),node('p',{class:'answer-text'},source.evidence)))));
-    children.push(node('h3',{},'전체 과제 참고 답안'),node('p',{class:'answer-text'},item.referenceAnswer),...item.parts.filter(p=>['code','inspection'].includes(p.kind)).map(part=>node('section',{class:'reference-part'},node('h3',{},part.prompt),node('p',{class:'answer-text'},practicalPartText(part,part.referenceAnswer)),node('p',{class:'answer-text'},part.explanation))),node('h3',{},'참고 기준'),isUnscoredPractical(item)?node('ul',{},item.rubric.map(row=>node('li',{},node('strong',{},row.criterion),node('p',{class:'answer-text'},row.description)))):node('pre',{class:'answer-text'},JSON.stringify(item.rubric,null,2)),renderMaterials(item,'explanation'));
+    children.push(...practicalReferenceContent(item),node('h3',{},'참고 기준'),isUnscoredPractical(item)?node('ul',{},item.rubric.map(row=>node('li',{},node('strong',{},row.criterion),node('p',{class:'answer-text'},row.description)))):node('pre',{class:'answer-text'},JSON.stringify(item.rubric,null,2)),renderMaterials(item,'explanation'));
   }
   children.push(actions(button('닫기 · 원래 화면으로 돌아가기',close,{class:'secondary'})));screen(title,...children);
 }
@@ -544,6 +652,6 @@ async function renderManage(){const generation=++state.openGeneration;state.sect
 }
 function remainingText(ms){const seconds=Math.ceil((ms||0)/1000);return `남은 시간 ${Math.floor(seconds/60)}분 ${seconds%60}초`;}
 let ticking=false;async function timerTick(){refreshSessionLinkLabels();if(ticking||state.leaving||state.opening||state.transitioning||state.converting||!state.session||hasRetiredPractical(state.session)||hasHistoricalPractical(state.session)||state.session.status!=='active'||state.session.config.mode!=='timed'||!state.editor?.acquired)return;ticking=true;try{const s=state.session,t=nowState(s);if($('remaining'))$('remaining').textContent=remainingText(t.remaining);if(t.expired){if(!state.storageFailed)await edit((current)=>finalize(current,'expired',t.now));else if(!state.warningKeys.has('expired-storage-failed')){state.warningKeys.add('expired-storage-failed');announce('제한 시간이 끝났습니다. 저장 실패로 확정하지 못했습니다. 미저장 입력을 먼저 백업하고 저장을 다시 시도하세요.');}return;}const thresholds=[600000,300000,60000];for(const value of thresholds){const key=`remaining-${value}`;if(s.config.minutes*60000>value&&t.remaining<=value&&!state.warningKeys.has(key)){state.warningKeys.add(key);await edit(current=>{if(!current.warnings.includes(key))current.warnings.push(key);return current;});if(state.settings.timerWarnings)announce(`제한 시간이 ${value/60000}분 이내로 남았습니다.`);}}if(!t.trusted&&s.clockTrusted){await edit(current=>{current.clockTrusted=false;return current;});announce('시스템 시계 차이가 감지되었습니다. 현재 탭은 단조 증가 시계를 사용하며 시간 신뢰를 낮게 표시합니다.');}}catch(error){if(state.reportedError!==error)showError(error);}finally{ticking=false;}}
-window.addEventListener('pagehide',releaseEditor);document.addEventListener('visibilitychange',()=>{if(!document.hidden)timerTick();});window.addEventListener('beforeunload',event=>{if(state.storageFailed){event.preventDefault();event.returnValue='';}});
+window.addEventListener('pagehide',releaseEditor);document.addEventListener('visibilitychange',()=>{if(!document.hidden)timerTick();});window.addEventListener('beforeunload',event=>{if(state.storageFailed||state.inspectionRecovery){event.preventDefault();event.returnValue='';}});
 async function bootstrap(){history.replaceState({examRoute:{name:'home',args:{}}},'', '#home');installNavigation();try{state.store=await openStore();const savedSettings=await state.store.meta('settings');state.settings={...state.settings,...savedSettings,writtenDifficultyLevel:isWrittenLevel(savedSettings?.writtenDifficultyLevel)?savedSettings.writtenDifficultyLevel:'all'};const cached=await state.store.meta('bank');if(cached){try{validateBank(cached.bank);state.bundle=cached;state.bank=serviceBank(cached.bank);updateContentNotice();}catch(error){showError(new Error('저장된 문제 은행이 손상되었습니다. 세션 스냅샷은 보존하며 새 은행을 확인합니다.'));}}await refreshSessions();for(const s of state.sessions.filter(s=>!hasRetiredPractical(s)&&!hasHistoricalPractical(s)&&s.status==='active'&&s.config.mode==='timed')){const t=timeState(s,Date.now());if(t.expired)await state.store.update(s.sessionId,s.revision,current=>finalize(current,'expired',t.now));}await renderHome();await checkUpdate(false);if(state.view==='무엇을 연습할까요?')await renderHome();$('version').textContent=`앱 ${APP_VERSION} · 문제 은행 ${state.bank?.bankVersion||'불러오지 못함'}`;setInterval(timerTick,1000);}catch(error){showError(error);screen('저장소를 사용할 수 없습니다',node('p',{},'초기 저장을 보장할 수 없어 연습을 시작하지 않았습니다. 기존 브라우저 데이터를 지우지 말고 비공개 창·저장 공간·사이트 설정을 확인하세요.'),button('다시 시도',()=>location.reload()));}}
 bootstrap();

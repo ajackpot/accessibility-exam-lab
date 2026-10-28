@@ -1,7 +1,7 @@
-import {isWrittenLevel} from './written-levels.js?v=d03-001';
+import {isWrittenLevel} from './written-levels.js?v=d05-h03-001';
 import {isRetiredPractical} from './service-visibility.js?v=0.2.12';
-import {assertSafeData,DomainError,isUnscoredPractical,isUnscoredPracticalSession,matchesHistoricalPracticalGrade,matchesHistoricalPracticalResult,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d03-001';
-import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.12';
+import {assertSafeData,DomainError,isUnscoredPractical,isUnscoredPracticalSession,matchesHistoricalPracticalGrade,matchesHistoricalPracticalResult,grade,sessionResult,validateBank,SUBJECTS,copy,materialsFor} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d05-h03-001&issues=p02-001';
+import {isManualPart,validManualAnswer,validatePracticalView} from './practical-task.js?v=0.2.12&issues=p02-001';
 export const MAX_BACKUP_BYTES=10*1024*1024;
 function requireValue(test,message){if(!test)throw new DomainError(message,'IMPORT');}
 const ident=x=>typeof x==='string'&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(x);

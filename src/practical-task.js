@@ -7,19 +7,151 @@ export const INSPECTION_FIELDS = [
 ];
 export const sourceLines = content => content.split(/\r\n|\n|\r/);
 export const isManualPart = part => ['code','inspection'].includes(part.kind);
+const ISSUE_ENTRY_GUIDANCE='한 이슈의 지침·위치·원인과 사용자 영향·개선안을 하나의 입력란 세트에 작성하고 이슈별로 저장합니다. 이슈 번호는 목록 순서에 따라 표시됩니다.';
+const INSPECTION_DISPLAY_REPLACEMENTS=[
+  ['각 오류에 E01처럼 임의 식별자를 붙이고 네 입력란에서 같은 식별자로 대응한다.',ISSUE_ENTRY_GUIDANCE],
+  ['각 오류에 E01 같은 식별자를 임의로 정하고 지침·위치·원인과 영향·개선의 네 입력란에서 같은 식별자로 연결하시오.',ISSUE_ENTRY_GUIDANCE],
+  ['오류마다 같은 식별 번호로 지침/기술 근거, 파일과 핵심 줄 또는 좁은 범위·줄 집합, 원인과 사용자 영향, 개선안을 연결한다.','지침/기술 근거, 파일과 핵심 줄 또는 좁은 범위·줄 집합, 원인과 사용자 영향, 개선안을 한 이슈의 입력란 세트에 작성하고 이슈별로 저장한다. 이슈 번호는 목록 순서에 따라 표시된다.'],
+  ['오류별 지침/기술 근거, 파일과 원본 줄 또는 좁은 범위·줄 집합, 원인과 사용자 영향, 개선안을 같은 번호로 연결한다.','지침/기술 근거, 파일과 원본 줄 또는 좁은 범위·줄 집합, 원인과 사용자 영향, 개선안을 한 이슈의 입력란 세트에 작성하고 이슈별로 저장한다. 이슈 번호는 목록 순서에 따라 표시된다.'],
+  ['세부 자동판정은 전체 평가보고서의 수동 평가와 분리한다.','앱은 실기 답안을 자동 판정하거나 점수를 매기지 않는다.'],
+];
+/** Presentation only: replace known obsolete instructions without rewriting source data. */
+export function inspectionDisplayInstructions(item) {
+  const text=item?.practicalTask?.answerInstructions;
+  return item?.parts?.some(part=>part.kind==='inspection')&&typeof text==='string'
+    ?INSPECTION_DISPLAY_REPLACEMENTS.reduce((value,[before,after])=>value.split(before).join(after),text):text;
+}
+export function inspectionDisplayPrompt(part) {
+  if(part?.kind!=='inspection'||typeof part.prompt!=='string')return part?.prompt;
+  return part.prompt.replace('네 입력란에서 같은 오류 번호로 연결하시오.','이슈별 입력란 세트에 작성하여 저장하시오.')
+    .replace('같은 오류는 네 입력란에서 같은 식별자로 대응하시오.','같은 오류의 네 관점은 하나의 이슈로 저장하시오.');
+}
 const object = value => !!value&&typeof value==='object'&&!Array.isArray(value);
 const string = (value,max=100000) => typeof value==='string'&&value.trim().length>0&&value.length<=max;
 const identifier = value => typeof value==='string'&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$/.test(value);
 const integer = (value,min,max) => Number.isInteger(value)&&value>=min&&value<=max;
 const onlyKeys = (value,keys) => object(value)&&Object.keys(value).every(key=>keys.includes(key));
+const inspectionKeys=INSPECTION_FIELDS.map(field=>field.key);
+const inspectionFields=(value,{complete=false,nonempty=false,extra=[]}={})=>onlyKeys(value,[...inspectionKeys,...extra])&&inspectionKeys.every(key=>nonempty?string(value[key]):complete?typeof value[key]==='string'&&value[key].length<=100000:value[key]===undefined||(typeof value[key]==='string'&&value[key].length<=100000));
+const hasInspectionText=value=>INSPECTION_FIELDS.some(({key})=>value?.[key]?.trim());
+const issueError=message=>Object.assign(new Error(message),{name:'DomainError',code:'INVALID'});
+export const ISSUE_ANSWER_MAX_LENGTH=1000000;
+/** Only learner answers use this format; bank reference answers remain verbatim. */
+export function isIssueAnswer(value) {
+  if(!onlyKeys(value,['format','issues','draft','deleted','legacy'])||value.format!=='issue-list-v1'||!Array.isArray(value.issues))return false;
+  const issue=row=>inspectionFields(row,{complete:true,extra:['id']})&&identifier(row.id);
+  if(!value.issues.every(issue))return false;
+  const ids=new Set(value.issues.map(row=>row.id));if(ids.size!==value.issues.length)return false;
+  if(value.draft!==undefined&&(!inspectionFields(value.draft,{complete:true,extra:['id']})||(value.draft.id!==undefined&&(!identifier(value.draft.id)||!ids.has(value.draft.id)))))return false;
+  if(value.deleted!==undefined){
+    if(!Array.isArray(value.deleted))return false;
+    for(const row of value.deleted){if(!onlyKeys(row,['issue','index'])||!issue(row.issue)||!integer(row.index,0,Number.MAX_SAFE_INTEGER)||ids.has(row.issue.id))return false;ids.add(row.issue.id);}
+  }
+  if(value.legacy!==undefined&&!inspectionFields(value.legacy))return false;
+  return JSON.stringify(value).length<=ISSUE_ANSWER_MAX_LENGTH;
+}
+export function toIssueAnswer(value) {
+  if(value===undefined)return {format:'issue-list-v1',issues:[]};
+  if(isIssueAnswer(value))return structuredClone(value);
+  if(inspectionFields(value))return {format:'issue-list-v1',issues:[],legacy:structuredClone(value)};
+  throw issueError('이슈 답안의 형식 또는 저장 크기를 확인하세요.');
+}
+function checkedIssueAnswer(value){if(!isIssueAnswer(value))throw issueError('이슈 답안의 형식 또는 저장 크기를 확인하세요.');return value;}
+export function setInspectionDraft(value,draft) {
+  const next=toIssueAnswer(value);
+  if(!inspectionFields(draft,{complete:true,extra:['id']}))throw issueError('초안의 네 필드 형식을 확인하세요.');
+  if(next.draft&&next.draft.id!==draft?.id)throw issueError('현재 초안을 등록하거나 취소한 뒤 다른 이슈를 편집하세요.');
+  next.draft=structuredClone(draft);return checkedIssueAnswer(next);
+}
+export function commitInspectionDraft(value,{id}={}) {
+  const next=toIssueAnswer(value),draft=next.draft;
+  if(!draft||!hasInspectionText(draft))throw issueError('이슈 내용을 입력한 뒤 등록하세요.');
+  if(draft.id!==undefined){
+    if(id!==undefined&&id!==draft.id)throw issueError('수정 중인 이슈의 식별자를 바꿀 수 없습니다.');
+    next.issues[next.issues.findIndex(row=>row.id===draft.id)]={...draft};
+  }else{
+    if(!identifier(id)||next.issues.some(row=>row.id===id)||next.deleted?.some(row=>row.issue.id===id))throw issueError('새 이슈에는 중복되지 않는 식별자가 필요합니다.');
+    next.issues.push({...draft,id});
+  }
+  delete next.draft;return checkedIssueAnswer(next);
+}
+export function cancelInspectionDraft(value){const next=toIssueAnswer(value);delete next.draft;return next;}
+export function deleteInspectionIssue(value,id) {
+  const next=toIssueAnswer(value),index=next.issues.findIndex(row=>row.id===id);
+  if(index<0)throw issueError('삭제할 이슈가 없습니다.');
+  if(next.draft?.id===id)throw issueError('이슈의 수정 초안을 저장하거나 취소한 뒤 삭제하세요.');
+  const [issue]=next.issues.splice(index,1);(next.deleted??=[]).push({issue,index});return checkedIssueAnswer(next);
+}
+export function restoreInspectionIssue(value,id) {
+  const next=toIssueAnswer(value),index=next.deleted?.findIndex(row=>row.issue.id===id)??-1;
+  if(index<0)throw issueError('복구할 이슈가 없습니다.');
+  const [row]=next.deleted.splice(index,1);next.issues.splice(Math.min(row.index,next.issues.length),0,row.issue);
+  if(!next.deleted.length)delete next.deleted;return checkedIssueAnswer(next);
+}
+export function moveInspectionIssue(value,id,toIndex) {
+  const next=toIssueAnswer(value),index=next.issues.findIndex(row=>row.id===id);
+  if(index<0||!integer(toIndex,0,next.issues.length-1))throw issueError('이슈의 이동 위치를 확인하세요.');
+  const [issue]=next.issues.splice(index,1);next.issues.splice(toIndex,0,issue);return next;
+}
+const inspectionFieldLines=value=>INSPECTION_FIELDS.flatMap(({key,label})=>[label,typeof value?.[key]==='string'?value[key]:'[미작성]']);
+function referenceInspectionData(part) {
+  const value=part?.referenceAnswer;
+  if(part?.kind!=='inspection'||!inspectionFields(value,{nonempty:true}))return null;
+  const fields={};let expected=null;
+  for(const key of inspectionKeys){
+    const rows=[],supplements=[],baseLines=[];
+    for(const line of sourceLines(value[key])){
+      const base=/^(E\d{2,})[:.] (.+)$/.exec(line),extra=/^(E\d{2,}) 보완\. (.+)$/.exec(line);
+      if(base&&!supplements.length){rows.push({id:base[1],text:base[2]});baseLines.push(line);}
+      else if(extra)supplements.push({id:extra[1],text:line});
+      else return null; // No guessing about unlabeled continuations or partial records.
+    }
+    const ids=rows.map(row=>row.id);
+    if(!ids.length||ids.some((id,index)=>id!=='E'+String(index+1).padStart(2,'0'))||new Set(ids).size!==ids.length)return null;
+    if(expected&&JSON.stringify(ids)!==JSON.stringify(expected))return null;expected??=ids;
+    if(supplements.some(row=>!ids.includes(row.id)))return null;
+    fields[key]={rows,supplements,baseText:baseLines.join('\n')};
+  }
+  const baseGroups=expected.map((id,index)=>({id,...Object.fromEntries(inspectionKeys.map(key=>[key,fields[key].rows[index].text]))}));
+  const groups=baseGroups.map(row=>({...row,...Object.fromEntries(inspectionKeys.map(key=>[key,[row[key],...fields[key].supplements.filter(extra=>extra.id===row.id).map(extra=>extra.text)].join('\n')]))}));
+  return {groups,baseGroups,fields};
+}
+/** Explicit E## identifiers must be complete and ordered equally in all four fields. */
+export function inspectionReferenceGroups(part){return referenceInspectionData(part)?.groups??null;}
+/** Remove only a provably identical top-level representation; retain every extra byte. */
+export function inspectionReferenceRemainder(item) {
+  if(item?.parts?.length!==1||typeof item.referenceAnswer!=='string')return null;
+  const part=item.parts[0],data=referenceInspectionData(part);if(!data)return null;
+  if(item.practicalTask?.errorCount!==undefined&&item.practicalTask.errorCount!==data.groups.length)return null;
+  const pipe=data.baseGroups.map(row=>`${row.id} | ${row.guidelines}\n위치: ${row.locations}\n원인·영향: ${row.cause}\n개선: ${row.improvement}`).join('\n\n');
+  const numbered=data.baseGroups.map(row=>`${row.id}\n지침: ${row.guidelines}\n위치: ${row.locations}\n원인·사용자 영향: ${row.cause}\n개선: ${row.improvement}`).join('\n\n');
+  const prefixes=[pipe,`전체 평가 참고 답안 — ${data.groups.length}개 독립 원인\n\n${numbered}`,
+    '전체 평가 참고 답안\n\n'+inspectionKeys.map(key=>key+'\n'+part.referenceAnswer[key]).join('\n\n'),
+    '전체 평가 참고 답안\n\n'+inspectionKeys.map(key=>key+'\n'+data.fields[key].baseText).join('\n\n')];
+  for(const prefix of prefixes)if(item.referenceAnswer===prefix||item.referenceAnswer.startsWith(prefix+'\n\n'))return item.referenceAnswer.slice(prefix.length);
+  return null;
+}
+/** Stored issues, unsaved edits and untouched legacy text each have their own boundary. */
+export function inspectionAnswerText(value,{reference=false}={}) {
+  if(!reference&&isIssueAnswer(value)){
+    const lines=[];
+    value.issues.forEach((issue,index)=>lines.push(`등록 이슈 ${index+1}`,...inspectionFieldLines(issue)));
+    if(value.draft){const index=value.issues.findIndex(issue=>issue.id===value.draft.id);lines.push(index<0?'목록 미등록 초안':'수정 중 초안: 등록 이슈 '+(index+1)+' (아직 미적용)',...inspectionFieldLines(value.draft));}
+    if(value.legacy!==undefined)lines.push('이전 네 필드 답안 원문 (이슈별로 자동 결합하지 않음)',...inspectionFieldLines(value.legacy));
+    return lines.length?lines.join('\n\n'):'[미작성]';
+  }
+  if(value!==undefined&&!inspectionFields(value))throw issueError('평가 답안의 원문 형식을 확인하세요.');
+  const groups=reference?inspectionReferenceGroups({kind:'inspection',referenceAnswer:value}):null;
+  return groups?groups.flatMap(issue=>[`이슈 ${issue.id}`,...inspectionFieldLines(issue)]).join('\n\n'):inspectionFieldLines(value).join('\n\n');
+}
 export function validManualAnswer(part,value,{reference=false}={}) {
   if(!isManualPart(part))return false;
   if(part.kind==='code')return typeof value==='string'&&value.length<=1000000&&(!reference||value.trim().length>0);
-  return onlyKeys(value,INSPECTION_FIELDS.map(field=>field.key))&&INSPECTION_FIELDS.every(({key})=>reference?string(value[key]):value[key]===undefined||(typeof value[key]==='string'&&value[key].length<=100000));
+  return (!reference&&isIssueAnswer(value))||inspectionFields(value,{nonempty:reference});
 }
 export function manualPartAnswered(part,value) {
   if(!validManualAnswer(part,value))return false;
-  return part.kind==='code'?value.trim()!=='':INSPECTION_FIELDS.some(({key})=>value[key]?.trim());
+  return part.kind==='code'?value.trim()!=='':isIssueAnswer(value)?value.issues.some(hasInspectionText)||hasInspectionText(value.draft)||hasInspectionText(value.legacy):hasInspectionText(value);
 }
 function validateReference(q,reference,assert) {
   assert(onlyKeys(reference,['filename','startLine','endLine','blankId']),`${q.questionId}: 자료 참조 형식 오류`);
@@ -83,6 +215,10 @@ export function practicalTaskPromptLines(item) {
   const task=item.practicalTask;
   if(!task)return [];
   return [
+    ...(isUnscoredPractical(item)&&item.parts.some(part=>part.kind==='inspection')?[
+      '현재 이슈별 답안 작성·검토 방식 (원문의 과거 입력·채점 안내보다 우선)',ISSUE_ENTRY_GUIDANCE,
+      '앱은 실기 답안을 자동 판정하거나 점수를 매기지 않는다. 아래 원문의 같은 식별자를 네 입력란에 반복하는 안내와 세부 자동판정 안내는 과거 방식이다. 원문의 지침·위치·대안·중복 처리 등 과제 판단 조건은 그대로 적용한다. 등록 이슈, 아직 등록하지 않은 초안, 수정 중 초안과 이전 네 필드 답안 원문은 각각 구분하여 검토한다.',
+    ]:[]),
     `대문항: ${task.title}\n서비스 유형: ${task.serviceType}`,
     '화면 설명 (원문) 시작',task.screenDescription,'화면 설명 (원문) 끝',
     '동작 설명 (원문) 시작',task.behaviorDescription,'동작 설명 (원문) 끝',

@@ -1,4 +1,4 @@
-import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=d03-001';
+import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=d05-h03-001';
 import {validateMaterials,materialType,materialName} from './materials.js?v=2026.10.27&scope=a04-001';
 export {materialType,materialName,sequenceEvidenceLabel,sequenceMaterialText} from './materials.js?v=2026.10.27&scope=a04-001';
 import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.12';
@@ -7,8 +7,8 @@ import {isScopeExpansionE09Excluded} from './scope-expansion-e09-eligibility.js?
 import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.12';
 import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.12';
 import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.12';
-import {isUnscoredPractical,unscoredPracticalContent,isManualPart,manualPartAnswered,validManualAnswer,validatePracticalTask,validatePracticalView,practicalTaskPromptLines,INSPECTION_FIELDS} from './practical-task.js?v=0.2.12';
-export {isUnscoredPractical,unscoredPracticalContent,sourceLines,isManualPart,INSPECTION_FIELDS} from './practical-task.js?v=0.2.12';
+import {isUnscoredPractical,unscoredPracticalContent,isManualPart,manualPartAnswered,validManualAnswer,validatePracticalTask,validatePracticalView,practicalTaskPromptLines,inspectionAnswerText,inspectionReferenceRemainder} from './practical-task.js?v=0.2.12&issues=p02-001';
+export {isUnscoredPractical,unscoredPracticalContent,sourceLines,isManualPart,manualPartAnswered,INSPECTION_FIELDS,isIssueAnswer,toIssueAnswer,inspectionDisplayInstructions,inspectionDisplayPrompt,inspectionAnswerText,inspectionReferenceGroups,inspectionReferenceRemainder,setInspectionDraft,commitInspectionDraft,cancelInspectionDraft,deleteInspectionIssue,restoreInspectionIssue,moveInspectionIssue} from './practical-task.js?v=0.2.12&issues=p02-001';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
 export const APP_VERSION = '0.2.12';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
@@ -568,7 +568,7 @@ function structuredPrompt(session,item,{includeReference,blank}) {
     for(const part of item.parts) {
       lines.push(`사용자 답안 원문 시작: ${part.prompt}`);
       const value=saved[part.partId];
-      if(part.kind==='inspection')for(const field of INSPECTION_FIELDS)lines.push(field.label,typeof value?.[field.key]==='string'?value[field.key]:'[미작성]');
+      if(part.kind==='inspection')lines.push(inspectionAnswerText(value));
       else if(['code','text'].includes(part.kind))lines.push(typeof value==='string'?value:'[미작성]');
       else lines.push(value===undefined?'[미작성]':JSON.stringify(selectedChoiceTexts(part,value),null,2));
       lines.push('사용자 답안 원문 끝');
@@ -576,11 +576,14 @@ function structuredPrompt(session,item,{includeReference,blank}) {
     if(Object.hasOwn(saved,'freeResponse'))lines.push('추가 사용자 답안 원문 시작',saved.freeResponse,'추가 사용자 답안 원문 끝');
   }
   if(includeReference) {
-    lines.push(...materialsFor(item,'explanation').flatMap(m=>[`해설 파일: ${m.filename}`,m.content]),'전체 참고 답안 시작',item.referenceAnswer,'전체 참고 답안 끝');
+    lines.push(...materialsFor(item,'explanation').flatMap(m=>[`해설 파일: ${m.filename}`,m.content]));
+    const referenceRemainder=inspectionReferenceRemainder(item);
+    if(referenceRemainder===null)lines.push('전체 참고 답안 시작',item.referenceAnswer,'전체 참고 답안 끝');
+    else if(referenceRemainder)lines.push('참고 답안의 추가 설명 원문 시작',referenceRemainder,'참고 답안의 추가 설명 원문 끝');
     if(item.rubric.length)lines.push('별도 참고 평가 기준 시작',...item.rubric.map(r=>`${r.criterion}: ${r.description}`),'별도 참고 평가 기준 끝');
     for(const part of item.parts) {
       lines.push(`세부 문항 참고 답안: ${part.prompt}`);
-      if(part.kind==='inspection')for(const field of INSPECTION_FIELDS)lines.push(field.label,part.referenceAnswer[field.key]);
+      if(part.kind==='inspection')lines.push(inspectionAnswerText(part.referenceAnswer,{reference:true}));
       else if(part.kind==='code')lines.push(part.referenceAnswer);
       else lines.push(`앱 자동 채점 ${part.points}점: ${part.kind==='text'?part.accepted.join(' 또는 '):selectedChoiceTexts(part,part.correct).join(' / ')}`);
       lines.push(part.explanation);

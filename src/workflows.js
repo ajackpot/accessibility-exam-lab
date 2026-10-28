@@ -1,6 +1,6 @@
 /** UI task contracts. Domain grading, saved schemas and immutable snapshots stay unchanged. */
-export {WRITTEN_LEVEL_OPTIONS,writtenLevelDescription,writtenLevelLabel,isWrittenLevel} from './written-levels.js?v=d03-001';
-import {isUnscoredPracticalSession,hasHistoricalPractical,eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d03-001';
+export {WRITTEN_LEVEL_OPTIONS,writtenLevelDescription,writtenLevelLabel,isWrittenLevel} from './written-levels.js?v=d05-h03-001';
+import {isUnscoredPracticalSession,hasHistoricalPractical,eligibleQuestions,isNewSessionQuestion,selectionGroupKey,SUBJECTS,confirmAnswer,finalize,isAnswered,timeState} from './domain.js?v=0.2.12&pool=priority-001&scope=e09-001&materials=a04-001&levels=d05-h03-001&issues=p02-001';
 import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.12';
 export const typeLabel=type=>type==='written'?'필기':'실기';
 export function practiceConfig(type,overrides={}) {
