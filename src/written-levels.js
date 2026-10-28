@@ -1,4 +1,4 @@
-import {WRITTEN_LEVEL_MAP} from './written-level-map.js?v=t02-awareness-001';
+import {WRITTEN_LEVEL_MAP} from './written-level-map.js?v=m02-placement-001';
 
 /** Scope depth, not cognitive ability or the historical numeric difficulty. */
 export const WRITTEN_LEVEL_VERSION='t02.1';

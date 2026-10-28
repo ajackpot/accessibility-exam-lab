@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.28-education-awareness.t02.1-service.1",
-  "bankSha256": "f99a572e2ce1efb588f616998736e1ef1438ad4487ce93b0b21ff1e57e0070bd",
+  "bankVersion": "2026.10.28-material-placement.m02.1-service.1",
+  "bankSha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65",
   "writtenQuestions": 1045,
   "regularWrittenQuestions": 1035,
   "testOnlyWrittenQuestions": 10,
@@ -25,13 +25,13 @@
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 533,
-      "sha256": "6c9787eb690fe08153e41e78eed4585c370303ac37db988b9986a3cd2cc223ea"
+      "bytes": 502,
+      "sha256": "dfa3c14d8dddda3acaf683dcdddc4e06e48cc884bde582938f69f138dfa72013"
     },
     {
-      "path": "data/releases/2026.10.28-education-awareness.t02.1-service.1/bank.json",
-      "bytes": 6815210,
-      "sha256": "f99a572e2ce1efb588f616998736e1ef1438ad4487ce93b0b21ff1e57e0070bd"
+      "path": "data/releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
+      "bytes": 6921580,
+      "sha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
@@ -41,22 +41,22 @@
     {
       "path": "index.html",
       "bytes": 2353,
-      "sha256": "1f31e262110963f76815e77eba7c307056cd54aadffaa96ccf868305db54de71"
+      "sha256": "2143362a29e1a00cd7775e14e930859cdd489e4cbc4853b0852774acf1d04891"
     },
     {
       "path": "src/app.js",
-      "bytes": 139935,
-      "sha256": "a2dde7b45d870ac22b967fb3b23b5b4e3e4383ffda3eb307715f4c5570b50cbb"
+      "bytes": 143265,
+      "sha256": "b12805cda2510edaa76852be8ca76a44649b3d7412d7a8a2cdeb5765a40be2b9"
     },
     {
       "path": "src/backup.js",
-      "bytes": 13053,
-      "sha256": "984b5a978c580a3eb22a61ce963bbcdf8244a49d8e28a74990a9c57ffc364b95"
+      "bytes": 13071,
+      "sha256": "a8ffdafaff07a4f5781e45ebabea1b5b47454db261b9e1797ac2c3797c120084"
     },
     {
       "path": "src/domain.js",
-      "bytes": 66682,
-      "sha256": "3841429a01081b5877c401f3b6024d2bf7d2c17acacec191a4721c92ae20110d"
+      "bytes": 68199,
+      "sha256": "069b779fe33e90b289b1fccbe0b3c5efc354d8aac266d3ab6230b0071b2bc596"
     },
     {
       "path": "src/legacy-materials.js",
@@ -75,8 +75,8 @@
     },
     {
       "path": "src/materials.js",
-      "bytes": 4176,
-      "sha256": "7e034fffc13f00107d7b532aba9dea52ef0c054b3989c500264856299d124b88"
+      "bytes": 5599,
+      "sha256": "55bfd099e9ac3f3f17a81a8daf39d64f5553b254c89c4ebfdb9b60e71ba2da9d"
     },
     {
       "path": "src/new-session-eligibility.js",
@@ -85,8 +85,8 @@
     },
     {
       "path": "src/practical-task.js",
-      "bytes": 28366,
-      "sha256": "e7cc801763fc14fa8149ce651ad2e38946bcb783e371326f23cdeef554bde33a"
+      "bytes": 28641,
+      "sha256": "6347ca8da93eaafa9d3c3c3a43853abef6120672431322a34c25553e8c94c6b0"
     },
     {
       "path": "src/reviewed-option-explanations.js",
@@ -106,27 +106,27 @@
     {
       "path": "src/storage.js",
       "bytes": 9404,
-      "sha256": "3ed8e1e9ffa698324f02e7f99e9d79fe5585467b81374bbba58eaf5b6b891c72"
+      "sha256": "e84f02f0a848622396c028f0f14455d6e9ccf2517be7a6c156c3737c68c77397"
     },
     {
       "path": "src/workflows.js",
       "bytes": 7203,
-      "sha256": "076244c42f9eaf7c19270e55a5677b09b0dd17f5bf385012a6d5389bfac22802"
+      "sha256": "4c468d6c6ee174872c7ce6ed56b89f60e236814e841d37e8df5e11e51720f6fa"
     },
     {
       "path": "src/written-level-map.js",
-      "bytes": 203928,
-      "sha256": "52045bb742cccacbef65ac45feb62b213bdb9cfa7b31dd7f0a5fe232d413ef74"
+      "bytes": 171506,
+      "sha256": "5c1926c769b49630ed98f6ec5d5c82f0a0da6c8ff08588cf76b90b3b28625d76"
     },
     {
       "path": "src/written-levels.js",
       "bytes": 2645,
-      "sha256": "3ff575aac06c7ed6f99fc57a4e4c6710a0f2bda5c21a39483e58f0f58a1bd33c"
+      "sha256": "0839b99e17688d2caa6330bf5c601d183637c7d9f5297b0d58954e3f87aa3354"
     },
     {
       "path": "style.css",
-      "bytes": 10513,
-      "sha256": "51ea5cbecbd6768e6dc7f2adc7bb30688553ea87248cacdf940086c57121025c"
+      "bytes": 10675,
+      "sha256": "4e0bc5453d9fb441e0924190746026cd0d2330e2d6e563ccb9d5a3e62c39e631"
     }
   ],
   "practicalAssessmentMode": "unscored",

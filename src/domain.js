@@ -1,14 +1,14 @@
-import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=t02-awareness-001';
-import {validateMaterials,materialType,materialName} from './materials.js?v=2026.10.27&scope=a04-001';
-export {materialType,materialName,sequenceEvidenceLabel,sequenceMaterialText} from './materials.js?v=2026.10.27&scope=a04-001';
+import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=m02-placement-001';
+import {validateMaterials,materialType,materialName,questionMaterialLabel,textMaterialText} from './materials.js?v=2026.10.28&scope=m01-001';
+export {materialType,materialName,questionMaterialLabel,sequenceEvidenceLabel,sequenceMaterialText,textMaterialText} from './materials.js?v=2026.10.28&scope=m01-001';
 import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.12';
 import {isPriorityPoolExcluded} from './new-session-eligibility.js?v=0.2.12&pool=priority-001';
 import {isScopeExpansionE09Excluded} from './scope-expansion-e09-eligibility.js?v=2026.10.27&scope=e09-001';
 import {LEGACY_MATERIAL_PURPOSES} from './legacy-materials.js?v=0.2.12';
 import {LEGACY_QUESTION_DISPLAYS} from './legacy-question-display.js?v=0.2.12';
 import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=0.2.12';
-import {isUnscoredPractical,unscoredPracticalContent,isManualPart,manualPartAnswered,validManualAnswer,validatePracticalTask,validatePracticalView,practicalTaskPromptLines,inspectionAnswerText,inspectionReferenceRemainder} from './practical-task.js?v=0.2.12&issues=p02-001';
-export {isUnscoredPractical,unscoredPracticalContent,sourceLines,isManualPart,manualPartAnswered,INSPECTION_FIELDS,isIssueAnswer,toIssueAnswer,inspectionDisplayInstructions,inspectionDisplayPrompt,inspectionAnswerText,inspectionReferenceGroups,inspectionReferenceRemainder,setInspectionDraft,commitInspectionDraft,cancelInspectionDraft,deleteInspectionIssue,restoreInspectionIssue,moveInspectionIssue} from './practical-task.js?v=0.2.12&issues=p02-001';
+import {isUnscoredPractical,unscoredPracticalContent,isManualPart,manualPartAnswered,validManualAnswer,validatePracticalTask,validatePracticalView,practicalTaskPromptLines,inspectionAnswerText,inspectionReferenceRemainder} from './practical-task.js?v=0.2.12&issues=p02-001&materials=m01-001';
+export {isUnscoredPractical,unscoredPracticalContent,sourceLines,isManualPart,manualPartAnswered,INSPECTION_FIELDS,isIssueAnswer,toIssueAnswer,inspectionDisplayInstructions,inspectionDisplayPrompt,inspectionAnswerText,inspectionReferenceGroups,inspectionReferenceRemainder,setInspectionDraft,commitInspectionDraft,cancelInspectionDraft,deleteInspectionIssue,restoreInspectionIssue,moveInspectionIssue} from './practical-task.js?v=0.2.12&issues=p02-001&materials=m01-001';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
 export const APP_VERSION = '0.2.12';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
@@ -127,26 +127,35 @@ export function validateBankForPublication(bank) {
     assert(q.stem===q.stem.trim()&&!/[\r\n]/.test(q.stem)&&q.stem.length<=350,'새 지문은 핵심 문제를 1~2문장으로 간결하게 작성하세요.');
     // Split only sentence-ending punctuation, never CSS 2.2, quoted code, etc.
     const sentences=q.stem.match(/[^.!?]+[.!?](?=\s|$)|[^.!?]+$/g)||[];
-    assert(sentences.length>=1&&sentences.length<=2,'새 지문은 핵심 문제를 1~2문장으로 작성하고 조건은 참고 사항으로 분리하세요.');
+    assert(sentences.length>=1&&sentences.length<=2,'새 지문은 핵심 문제를 1~2문장으로 간결하게 작성하세요.');
     assert(Array.isArray(q.notes)&&q.notes.every(note=>note===note.trim()&&!/[\r\n]/.test(note)),'새 참고 사항은 항목마다 한 줄로 작성하세요.');
     assert(new Set(q.notes.map(normalized)).size===q.notes.length&&!q.notes.some(note=>q.stem.includes(note)),'참고 사항을 지문이나 다른 참고 항목에 중복하지 마세요.');
     assert(!q.stem.includes('보기 연결 안내')&&!q.notes.some(note=>note.includes('보기 연결 안내')),'보기 지시를 지문 안에 통합하세요.');
     const required=(q.materials||[]).filter(m=>m.purpose==='question');
-    // A record task may ask about a code cause without supplying code as data.
-    // Keep historical code-only detection, and trim only the task after an
-    // explicitly supplied sequence instruction's read/check verb.
+    // A non-code task may discuss code without supplying code as its material.
+    // Resolve the supplied text title without imposing a special reading verb;
+    // retain separate code references and the historical sequence rule.
     let codeReferenceStem=q.stem;
-    for(const material of required.filter(material=>materialType(material)==='sequence')) {
+    for(const material of required.filter(material=>materialType(material)!=='code')) {
+      if(materialType(material)==='text') {
+        const end=material.instruction.indexOf(material.title)+material.title.length;
+        if(end>=material.title.length)codeReferenceStem=codeReferenceStem.replace(material.instruction,material.instruction.slice(0,end).replace(/(?:다음\s+)?보기(?:\s*\d+)?의/,'제시된 자료의')+material.instruction.slice(end));
+        continue;
+      }
       const reference=material.instruction.match(/^[\s\S]*?순차 동작 기록[\s\S]*?(?:읽고|실행|검토|확인)/)?.[0];
       if(reference)codeReferenceStem=codeReferenceStem.replace(material.instruction,reference);
     }
     for(const [kind,label] of [['code','코드'],['sequence','순차 동작 기록']])if(new RegExp(`다음 보기(?:\\s*\\d+)?의[^.!?]*${label}`).test(kind==='code'?codeReferenceStem:q.stem))assert(required.some(material=>materialType(material)===kind),`${q.questionId}: 지문이 참조하는 필수 보기 ${label}가 없습니다.`);
     assert(new Set(required.map(materialName)).size===required.length,`${q.questionId}: 보기 자료 이름은 서로 달라야 합니다.`);
-    for(const material of required) {
-      const instruction=material.instruction,sequence=materialType(material)==='sequence',label=sequence?'순차 동작 기록':'코드';
-      if(!sequence)assert(material.content.trim().length>0,`${q.questionId}: 필수 보기 코드가 비어 있습니다.`);
-      assert(instruction===instruction.trim()&&q.stem.includes(instruction)&&/다음 보기(?:\s*\d+)?의/.test(instruction)&&instruction.includes(label)&&/(읽고|실행|검토|확인)/.test(instruction)&&/(고르시오|답하시오|완성하시오|설명하시오|작성하시오)[.!?]?$/.test(instruction),`${q.questionId}: 지문에 보기의 ${label}와 수행할 일을 명시한 완전한 지시문이 필요합니다.`);
-      if(required.length>1)assert(instruction.includes(materialName(material)),`${q.questionId}: 여러 보기 자료는 지시문에서 각각의 이름을 지정하세요.`);
+    for(const [materialIndex,material] of required.entries()) {
+      const instruction=material.instruction,kind=materialType(material),label=kind==='sequence'?'순차 동작 기록':kind==='text'?material.title:'코드';
+      if(kind==='code')assert(material.content.trim().length>0,`${q.questionId}: 필수 보기 코드가 비어 있습니다.`);
+      const numberedReference=new RegExp(`보기${materialIndex+1}(?![0-9])`).test(instruction);
+      const referenceOk=kind==='text'?/보기(?:\s*\d+)?(?:의|를|와|과|에|처럼|로|는|\(|\s+[「‘“])/.test(instruction):/다음 보기(?:\s*\d+)?의/.test(instruction)&&/(읽고|실행|검토|확인)/.test(instruction);
+      const genericSingle=required.length===1&&/다음 보기(?!\s*[0-9])/.test(instruction);
+      const identified=instruction.includes(label)||(kind==='text'&&(genericSingle||numberedReference));
+      assert(instruction===instruction.trim()&&q.stem.includes(instruction)&&referenceOk&&identified&&/(고르시오|답하시오|완성하시오|설명하시오|작성하시오)[.!?]?$/.test(instruction),`${q.questionId}: 지문에 보기의 ${label}와 수행할 일을 명시한 완전한 지시문이 필요합니다.`);
+      if(required.length>1)assert(instruction.includes(materialName(material))||numberedReference,`${q.questionId}: 여러 보기 자료는 지시문에서 각각의 이름 또는 번호를 지정하세요.`);
     }
   }
   return bank;
@@ -532,14 +541,14 @@ export function createPrompt(session,item,{includeReference=true,blank=false}={}
     '문제 원문 시작',item.stem,'문제 원문 끝',
     ...((item.notes||[]).length?['참고 사항 (원문) 시작',...item.notes,'참고 사항 (원문) 끝']:[]),
     ...(hasUnclassifiedMaterials(item)?['자료 상태: 이전 버전에서 용도가 확인되지 않은 코드는 문제 자료에서 제외됨.']:[]),
-    ...materialsFor(item,'question').flatMap(m=>[`보기 코드 파일: ${m.filename}`,m.content]),
+    ...materialsFor(item,'question').flatMap((m,index,all)=>materialType(m)==='text'?[textMaterialText(m,{label:all.length>1?questionMaterialLabel(index,all.length):undefined})]:[...(all.length>1?[`${questionMaterialLabel(index,all.length)} · ${m.filename}`]:[]),`보기 코드 파일: ${m.filename}`,m.content]),
     '고정 답안 항목·선택지 (원문)',...item.parts.flatMap(p=>[p.prompt,...(p.choices||[]).map(c=>c.text)]),
     '서술 과제 원문 시작',item.freeResponsePrompt,'서술 과제 원문 끝',
     '사용자 서술 답안 원문 시작',answer,'사용자 서술 답안 원문 끝',
   ];
   if(!blank){const saved=session.answers[item.instanceId]||{};const fixed=item.parts.filter(p=>Object.hasOwn(saved,p.partId)).map(p=>({항목:p.prompt,답안:p.kind==='text'?saved[p.partId]:selectedChoiceTexts(p,saved[p.partId])}));lines.push(`사용자 고정 답안 (항목·선택 내용, 표시 순서): ${JSON.stringify(fixed,null,2)}`);}
   if(includeReference)lines.push(
-    ...materialsFor(item,'explanation').flatMap(m=>[`해설 파일: ${m.filename}`,m.content]),
+    ...materialsFor(item,'explanation').flatMap(m=>materialType(m)==='text'?[textMaterialText(m)]:[`해설 파일: ${m.filename}`,m.content]),
     '참고 서술 답안 시작',item.referenceAnswer,'참고 서술 답안 끝',
     `서술형 평가 기준 시작: 합계 ${rubricTotal}점`,...item.rubric.map(r=>`${r.criterion}: ${r.points}점. ${r.description}`),'서술형 평가 기준 끝',
     '고정 답안 참고 키 시작: 앱 자동 채점용 별도 기준',...item.parts.map(p=>`${p.prompt} (앱 고정 답안 ${p.points}점): ${p.kind==='text'?p.accepted.join(' 또는 '):selectedChoiceTexts(p,p.correct).join(' / ')}. ${p.explanation}`),'고정 답안 참고 키 끝',
@@ -559,7 +568,7 @@ function structuredPrompt(session,item,{includeReference,blank}) {
     '문제 원문 시작',item.stem,'문제 원문 끝',
     ...((item.notes||[]).length?['참고 사항 (원문) 시작',...item.notes,'참고 사항 (원문) 끝']:[]),
     ...practicalTaskPromptLines(item),
-    ...materialsFor(item,'question').flatMap(m=>[`공통 자료 원문 시작: ${m.filename}`,m.content,`공통 자료 원문 끝: ${m.filename}`]),
+    ...materialsFor(item,'question').flatMap((m,index,all)=>materialType(m)==='text'?[textMaterialText(m,{label:all.length>1?questionMaterialLabel(index,all.length):undefined})]:[...(all.length>1?[`${questionMaterialLabel(index,all.length)} · ${m.filename}`]:[]),`공통 자료 원문 시작: ${m.filename}`,m.content,`공통 자료 원문 끝: ${m.filename}`]),
     '수동 답안 과제 (원문)',...item.parts.flatMap(p=>[p.prompt,...(p.choices||[]).map(c=>c.text)]),
     ...(item.freeResponsePrompt?['추가 응답 과제 원문 시작',item.freeResponsePrompt,'추가 응답 과제 원문 끝']:[]),
   ];
@@ -576,7 +585,7 @@ function structuredPrompt(session,item,{includeReference,blank}) {
     if(Object.hasOwn(saved,'freeResponse'))lines.push('추가 사용자 답안 원문 시작',saved.freeResponse,'추가 사용자 답안 원문 끝');
   }
   if(includeReference) {
-    lines.push(...materialsFor(item,'explanation').flatMap(m=>[`해설 파일: ${m.filename}`,m.content]));
+    lines.push(...materialsFor(item,'explanation').flatMap(m=>materialType(m)==='text'?[textMaterialText(m)]:[`해설 파일: ${m.filename}`,m.content]));
     const referenceRemainder=inspectionReferenceRemainder(item);
     if(referenceRemainder===null)lines.push('전체 참고 답안 시작',item.referenceAnswer,'전체 참고 답안 끝');
     else if(referenceRemainder)lines.push('참고 답안의 추가 설명 원문 시작',referenceRemainder,'참고 답안의 추가 설명 원문 끝');

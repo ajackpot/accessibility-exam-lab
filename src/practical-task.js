@@ -155,7 +155,7 @@ export function manualPartAnswered(part,value) {
 }
 function validateReference(q,reference,assert) {
   assert(onlyKeys(reference,['filename','startLine','endLine','blankId']),`${q.questionId}: 자료 참조 형식 오류`);
-  const material=q.materials?.find(m=>m.filename===reference.filename&&m.purpose==='question');
+  const material=q.materials?.find(m=>(m.type===undefined||m.type==='code')&&m.filename===reference.filename&&m.purpose==='question');
   assert(material,`${q.questionId}: 참조할 문제 자료 파일이 없습니다.`);
   const count=sourceLines(material.content).length;
   assert(integer(reference.startLine,1,count)&&(reference.endLine===undefined||integer(reference.endLine,reference.startLine,count)),`${q.questionId}: 원본 줄 참조 범위를 확인하세요.`);
@@ -167,8 +167,8 @@ export function validatePracticalTask(q,schemaVersion,assert) {
   assert(q.type==='practical'&&schemaVersion===3&&onlyKeys(task,['schemaVersion','serviceType','title','screenDescription','behaviorDescription','requirements','answerInstructions','errorCount','blanks'])&&task.schemaVersion===1,`${q.questionId}: 구조화 실기는 schema3의 practicalTask v1이어야 합니다.`);
   assert(identifier(task.serviceType)&&string(task.title,500)&&string(task.screenDescription)&&string(task.behaviorDescription)&&string(task.answerInstructions),`${q.questionId}: 대문항명·서비스·화면·동작·답안 형식 안내가 필요합니다.`);
   assert(Array.isArray(task.requirements)&&task.requirements.length>0&&task.requirements.length<=100&&task.requirements.every(value=>string(value,10000)),`${q.questionId}: 수행 요구조건 목록이 필요합니다.`);
-  assert(Array.isArray(q.materials)&&q.materials.every(m=>object(m)&&typeof m.content==='string'),`${q.questionId}: 공통 자료 목록과 원문을 확인하세요.`);
-  const materials=q.materials.filter(m=>m.purpose==='question');
+  assert(Array.isArray(q.materials)&&q.materials.every(m=>object(m)&&((m.type===undefined||m.type==='code')?typeof m.content==='string':m.type==='text'&&Array.isArray(m.items)&&m.items.every(value=>typeof value==='string'))),`${q.questionId}: 공통 자료 목록과 원문을 확인하세요.`);
+  const materials=q.materials.filter(m=>m.purpose==='question'&&(m.type===undefined||m.type==='code'));
   assert(materials.length>0&&new Set(materials.map(m=>m.filename)).size===materials.length,`${q.questionId}: 공통 문제 자료의 파일명을 구분하세요.`);
   assert(Array.isArray(q.parts)&&q.parts.length>0,`${q.questionId}: 세부 문항이 필요합니다.`);
   for(const part of q.parts) {
@@ -196,6 +196,7 @@ export function validatePracticalTask(q,schemaVersion,assert) {
   return true;
 }
 export function validatePracticalView(item,view,assert,materials=(item.materials||[]).filter(m=>m.purpose==='question')) {
+  materials=materials.filter(m=>m.type===undefined||m.type==='code');
   assert(item.type==='practical'&&onlyKeys(view,['files','selectedFile','showLineNumbers','activePartId']), '실기 자료 위치 형식 오류');
   assert(view.selectedFile===undefined||materials.some(m=>m.filename===view.selectedFile),'저장한 자료 파일이 없습니다.');
   assert(view.activePartId===undefined||item.parts.some(p=>p.partId===view.activePartId),'저장한 세부 문항이 없습니다.');

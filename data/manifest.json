@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.28-education-awareness.t02.1-service.1",
-  "releasedAt": "2026-10-28T06:44:17.409345+00:00",
-  "file": "releases/2026.10.28-education-awareness.t02.1-service.1/bank.json",
-  "sha256": "f99a572e2ce1efb588f616998736e1ef1438ad4487ce93b0b21ff1e57e0070bd",
-  "changeSummary": "정보접근성 교육·인식 개선의 검증된 독립 목표 4문항 추가. 기존 필기·선택지·분류·실기와 학습 기록 유지; T01 무채점 검사 정비 포함.",
+  "bankVersion": "2026.10.28-material-placement.m02.1-service.1",
+  "releasedAt": "2026-10-28T10:39:23.184606+00:00",
+  "file": "releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
+  "sha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65",
+  "changeSummary": "M01 미해결36개 한정 승인 예외: 보기 배치32개 수정, 4개 유지; 센스리더 기존8/7 정답 원본 확인. 공개 미승인 내부본.",
   "finalRelease": false
 }

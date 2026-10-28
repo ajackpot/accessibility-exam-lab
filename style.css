@@ -39,3 +39,6 @@ header :focus-visible{outline-color:#fff1ac;outline-width:3px}
 .issue-list{padding-left:1.6rem}.issue-list>li{border-top:1px solid var(--line);padding:.8rem 0;margin:.8rem 0}.issue-list h4,.issue-list h5{font-size:1.05rem;margin:.3rem 0}.issue-fields dt{font-weight:700;margin-top:.7rem}.issue-fields dd{margin:.2rem 0 .6rem}.issue-draft{min-width:0}.legacy-inspection{padding:.8rem;border:1px solid var(--line);margin:1rem 0}.inspection-editor [tabindex="-1"]:focus{outline:3px solid var(--focus);outline-offset:3px}
 
 .inspection-recovery{width:min(56rem,95vw);max-height:90vh;overflow:auto;padding:1.4rem;border:2px solid var(--line);background:var(--paper);color:var(--text)}.inspection-recovery::backdrop{background:rgb(0 0 0 / .5)}
+
+.text-material{min-width:0;max-width:100%}
+@media print{.text-material .actions{display:none}.text-material .answer-text{overflow:visible;white-space:pre-wrap}}
