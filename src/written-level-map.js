@@ -1,4 +1,4 @@
-/** Exact reviewed written scope levels; H02 and all prior rows and holds preserved, D05-H03 additions only. */
+/** Exact reviewed written scope levels; P02 and all prior rows and holds preserved, T02 additions only. */
 export const WRITTEN_LEVEL_MAP=Object.freeze({
   "seed-w01": {
     "revision": 2,
@@ -6243,6 +6243,30 @@ export const WRITTEN_LEVEL_MAP=Object.freeze({
   "d05-h03-f01-w01": {
     "revision": 1,
     "templateId": "d05-h03-replaced-label-element-reference-vs-idref-template",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "t02-awareness-s5-w01": {
+    "revision": 1,
+    "templateId": "t02-template-training-evidence-work-transfer",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "t02-awareness-s5-w02": {
+    "revision": 1,
+    "templateId": "t02-template-novice-simulation-interpretation",
+    "learningGoalRevision": 1,
+    "level": "pro"
+  },
+  "t02-awareness-s5-w03": {
+    "revision": 2,
+    "templateId": "t02-template-event-support-handoff-continuity",
+    "learningGoalRevision": 1,
+    "level": "master"
+  },
+  "t02-awareness-s5-w04": {
+    "revision": 1,
+    "templateId": "t02-template-feedback-training-material-root-cause",
     "learningGoalRevision": 1,
     "level": "master"
   }

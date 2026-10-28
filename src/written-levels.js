@@ -1,7 +1,7 @@
-import {WRITTEN_LEVEL_MAP} from './written-level-map.js?v=d05-h03-001';
+import {WRITTEN_LEVEL_MAP} from './written-level-map.js?v=t02-awareness-001';
 
 /** Scope depth, not cognitive ability or the historical numeric difficulty. */
-export const WRITTEN_LEVEL_VERSION='d05-h03.1';
+export const WRITTEN_LEVEL_VERSION='t02.1';
 export const WRITTEN_LEVEL_OPTIONS=Object.freeze([
   Object.freeze(['all','무작위 (전체 난이도 혼합)']),Object.freeze(['basic','Basic']),
   Object.freeze(['pro','Pro']),Object.freeze(['master','Master'])

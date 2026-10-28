@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.28-html-master.d05-h03.1-service.1",
-  "bankSha256": "0b7f446885e82727a28e0c59c368a0c34190efe30beea935626209078a4af3b0",
-  "writtenQuestions": 1041,
-  "regularWrittenQuestions": 1031,
+  "bankVersion": "2026.10.28-education-awareness.t02.1-service.1",
+  "bankSha256": "f99a572e2ce1efb588f616998736e1ef1438ad4487ce93b0b21ff1e57e0070bd",
+  "writtenQuestions": 1045,
+  "regularWrittenQuestions": 1035,
   "testOnlyWrittenQuestions": 10,
-  "writtenLinkedOptions": 5171,
+  "writtenLinkedOptions": 5191,
   "practicalTasks": 10,
   "regularPracticalTasks": 10,
   "testOnlyPracticalTasks": 0,
-  "freshWrittenQuestions": 1033,
-  "freshRegularWrittenQuestions": 1023,
+  "freshWrittenQuestions": 1037,
+  "freshRegularWrittenQuestions": 1027,
   "freshTestOnlyWrittenQuestions": 10,
   "freshPracticalTasks": 10,
   "freshRegularPracticalTasks": 10,
@@ -25,13 +25,13 @@
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 518,
-      "sha256": "23b5724396175ab211b3f8e57758afecb305d0a70b1581d97b5452a816addf1a"
+      "bytes": 533,
+      "sha256": "6c9787eb690fe08153e41e78eed4585c370303ac37db988b9986a3cd2cc223ea"
     },
     {
-      "path": "data/releases/2026.10.28-html-master.d05-h03.1-service.1/bank.json",
-      "bytes": 6788200,
-      "sha256": "0b7f446885e82727a28e0c59c368a0c34190efe30beea935626209078a4af3b0"
+      "path": "data/releases/2026.10.28-education-awareness.t02.1-service.1/bank.json",
+      "bytes": 6815210,
+      "sha256": "f99a572e2ce1efb588f616998736e1ef1438ad4487ce93b0b21ff1e57e0070bd"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
@@ -40,23 +40,23 @@
     },
     {
       "path": "index.html",
-      "bytes": 2347,
-      "sha256": "dd1853b236328a5ecbb9d1c7baaa54daf76299e5551743a36c53aea3a686d227"
+      "bytes": 2353,
+      "sha256": "1f31e262110963f76815e77eba7c307056cd54aadffaa96ccf868305db54de71"
     },
     {
       "path": "src/app.js",
-      "bytes": 139905,
-      "sha256": "fa3003631febc6c65863ca8cd47a1243d506316c1b4bdc04c53ebe6968325903"
+      "bytes": 139935,
+      "sha256": "a2dde7b45d870ac22b967fb3b23b5b4e3e4383ffda3eb307715f4c5570b50cbb"
     },
     {
       "path": "src/backup.js",
-      "bytes": 13041,
-      "sha256": "b3b14c7663c697ce3b6f2c61c2989010fcce26aaf4853b94d84b12ea1734a2de"
+      "bytes": 13053,
+      "sha256": "984b5a978c580a3eb22a61ce963bbcdf8244a49d8e28a74990a9c57ffc364b95"
     },
     {
       "path": "src/domain.js",
-      "bytes": 66676,
-      "sha256": "f0003b5737a8be018b15c1411b081b5281dd85e2d2676afcff14cb6e391fad09"
+      "bytes": 66682,
+      "sha256": "3841429a01081b5877c401f3b6024d2bf7d2c17acacec191a4721c92ae20110d"
     },
     {
       "path": "src/legacy-materials.js",
@@ -105,23 +105,23 @@
     },
     {
       "path": "src/storage.js",
-      "bytes": 9398,
-      "sha256": "e1ba0f26c9dbfcc85c39f423e4b468526585b316a81607aeaa4e6920fff2fe4b"
+      "bytes": 9404,
+      "sha256": "3ed8e1e9ffa698324f02e7f99e9d79fe5585467b81374bbba58eaf5b6b891c72"
     },
     {
       "path": "src/workflows.js",
-      "bytes": 7191,
-      "sha256": "88bbd9e49100d7aed542a32ec0b8208d66a39ea16e822dc2da7c0a72e4d73b7a"
+      "bytes": 7203,
+      "sha256": "076244c42f9eaf7c19270e55a5677b09b0dd17f5bf385012a6d5389bfac22802"
     },
     {
       "path": "src/written-level-map.js",
-      "bytes": 203243,
-      "sha256": "9e3c1cdc47302a8b87bb622b200b93058c901298c4991ef2176f1bcd19e95c73"
+      "bytes": 203928,
+      "sha256": "52045bb742cccacbef65ac45feb62b213bdb9cfa7b31dd7f0a5fe232d413ef74"
     },
     {
       "path": "src/written-levels.js",
-      "bytes": 2643,
-      "sha256": "0960ce83d1ade26a005a1e766776d551c649b234a623192f753b5d26310826ca"
+      "bytes": 2645,
+      "sha256": "3ff575aac06c7ed6f99fc57a4e4c6710a0f2bda5c21a39483e58f0f58a1bd33c"
     },
     {
       "path": "style.css",
@@ -131,8 +131,38 @@
   ],
   "practicalAssessmentMode": "unscored",
   "practicalManualAnswerItems": 41,
-  "writtenLevelVersion": "d05-h03.1",
+  "writtenLevelVersion": "t02.1",
   "writtenLevelMockAvailability": {
+    "all": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 148
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 201
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 210
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 215
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 220
+        }
+      ]
+    },
     "basic": {
       "ready": true,
       "counts": [
@@ -189,7 +219,7 @@
         {
           "id": "s5",
           "name": "정보접근성 개론",
-          "count": 107
+          "count": 108
         }
       ]
     },
@@ -219,7 +249,7 @@
         {
           "id": "s5",
           "name": "정보접근성 개론",
-          "count": 41
+          "count": 44
         }
       ]
     }
@@ -333,19 +363,19 @@
         },
         {
           "level": "pro",
-          "total": 116,
-          "newSession": 114,
-          "mockRegularUnique": 107
+          "total": 117,
+          "newSession": 115,
+          "mockRegularUnique": 108
         },
         {
           "level": "master",
-          "total": 42,
-          "newSession": 41,
-          "mockRegularUnique": 41
+          "total": 45,
+          "newSession": 44,
+          "mockRegularUnique": 44
         }
       ]
     }
   ],
-  "freshWrittenLinkedOptions": 5132,
+  "freshWrittenLinkedOptions": 5152,
   "practicalInspectionAnswerFormat": "issue-list-v1"
 }
