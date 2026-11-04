@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.10.28-material-placement.m02.1-service.1",
-  "releasedAt": "2026-10-28T10:39:23.184606+00:00",
-  "file": "releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
-  "sha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65",
-  "changeSummary": "M01 미해결36개 한정 승인 예외: 보기 배치32개 수정, 4개 유지; 센스리더 기존8/7 정답 원본 확인. 공개 미승인 내부본.",
+  "bankVersion": "2026.11.04-ux-copy.local.1",
+  "releasedAt": "2026-11-04T13:36:36.479548+00:00",
+  "file": "releases/2026.11.04-ux-copy.local.1/bank.json",
+  "sha256": "ab5ec30673369fb503580bc807c8160c11e74139cfca7f8c2ed2317d0a614265",
+  "changeSummary": "지시문·해설 로컬 문안 초안: 1045문항 영향, 1780문구 변경. 정답·자료·이력 보존, 공개 미승인.",
   "finalRelease": false
 }

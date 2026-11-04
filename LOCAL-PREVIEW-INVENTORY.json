@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.10.28-material-placement.m02.1-service.1",
-  "bankSha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65",
+  "kind": "local_editorial_runtime_inventory",
+  "bankVersion": "2026.11.04-ux-copy.local.1",
+  "bankSha256": "ab5ec30673369fb503580bc807c8160c11e74139cfca7f8c2ed2317d0a614265",
   "writtenQuestions": 1045,
   "regularWrittenQuestions": 1035,
   "testOnlyWrittenQuestions": 10,
@@ -25,13 +25,18 @@
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 502,
-      "sha256": "dfa3c14d8dddda3acaf683dcdddc4e06e48cc884bde582938f69f138dfa72013"
+      "bytes": 437,
+      "sha256": "d7800f3dffcdb7a3f1a3a3e468d59295c9df92218159bc207173f118e832b0db"
     },
     {
       "path": "data/releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
       "bytes": 6921580,
       "sha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65"
+    },
+    {
+      "path": "data/releases/2026.11.04-ux-copy.local.1/bank.json",
+      "bytes": 7132350,
+      "sha256": "ab5ec30673369fb503580bc807c8160c11e74139cfca7f8c2ed2317d0a614265"
     },
     {
       "path": "docs/NVDA-CHECKLIST.md",
@@ -377,5 +382,13 @@
     }
   ],
   "freshWrittenLinkedOptions": 5152,
-  "practicalInspectionAnswerFormat": "issue-list-v1"
+  "practicalInspectionAnswerFormat": "issue-list-v1",
+  "localIntegration": {
+    "status": "local_review_only",
+    "baseCommit": "b58511669b180efca5c150328daacfff900aa472",
+    "baseBankVersion": "2026.10.28-material-placement.m02.1-service.1",
+    "baseBankSha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65",
+    "publicationAuthorized": false,
+    "formalEditorialAcceptanceClaimed": false
+  }
 }
