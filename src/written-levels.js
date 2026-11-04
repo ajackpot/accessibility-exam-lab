@@ -1,4 +1,4 @@
-import {WRITTEN_LEVEL_MAP} from './written-level-map.js?v=m02-placement-001';
+import {WRITTEN_LEVEL_MAP,EDITORIAL_WRITTEN_LEVEL_MAP} from './written-level-map.js?v=m02-placement-001&copy=ux-001';
 
 /** Scope depth, not cognitive ability or the historical numeric difficulty. */
 export const WRITTEN_LEVEL_VERSION='t02.1';
@@ -19,8 +19,9 @@ export function writtenLevelDescription(subjectId,level){return WRITTEN_LEVEL_DE
 /** Exact reviewed revision only. Unknown/changed questions have no inferred level. */
 export function writtenLevelFor(question){
   if(question?.type!=='written')return null;
-  const row=WRITTEN_LEVEL_MAP[question.questionId];
-  return row&&row.revision===question.revision&&row.templateId===question.templateId&&row.learningGoalRevision===question.learningGoalRevision?row.level:null;
+  const rows=[WRITTEN_LEVEL_MAP[question.questionId],EDITORIAL_WRITTEN_LEVEL_MAP[question.questionId]];
+  const row=rows.find(row=>row&&row.revision===question.revision&&row.templateId===question.templateId&&row.learningGoalRevision===question.learningGoalRevision);
+  return row?row.level:null;
 }
 export function matchesWrittenLevel(question,level='all'){
   return level==='all'||question?.type==='written'&&writtenLevelFor(question)===level;

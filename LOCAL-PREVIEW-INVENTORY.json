@@ -46,12 +46,12 @@
     {
       "path": "index.html",
       "bytes": 2353,
-      "sha256": "2143362a29e1a00cd7775e14e930859cdd489e4cbc4853b0852774acf1d04891"
+      "sha256": "1b47fda1689de3165d33d6762f3111e44344744a9e530f86ddd5afd735fcca46"
     },
     {
       "path": "src/app.js",
       "bytes": 143265,
-      "sha256": "b12805cda2510edaa76852be8ca76a44649b3d7412d7a8a2cdeb5765a40be2b9"
+      "sha256": "83eda6988d43fe93603c3022268de8dddff707d170af24e17441cd4e54ce97c0"
     },
     {
       "path": "src/backup.js",
@@ -60,8 +60,8 @@
     },
     {
       "path": "src/domain.js",
-      "bytes": 68199,
-      "sha256": "069b779fe33e90b289b1fccbe0b3c5efc354d8aac266d3ab6230b0071b2bc596"
+      "bytes": 68211,
+      "sha256": "b60d997971b4bac223e07cb01d748ace6f21ee7da9a9f81687c49ba218702532"
     },
     {
       "path": "src/legacy-materials.js",
@@ -115,18 +115,18 @@
     },
     {
       "path": "src/workflows.js",
-      "bytes": 7203,
-      "sha256": "4c468d6c6ee174872c7ce6ed56b89f60e236814e841d37e8df5e11e51720f6fa"
+      "bytes": 7215,
+      "sha256": "0ccf03b5c930c19cc2542a65ecb12ada742975a79e5e3af8da3942c9e4ffe694"
     },
     {
       "path": "src/written-level-map.js",
-      "bytes": 171506,
-      "sha256": "5c1926c769b49630ed98f6ec5d5c82f0a0da6c8ff08588cf76b90b3b28625d76"
+      "bytes": 342029,
+      "sha256": "33576b9c4b364641affe87dd9b60464354258bcd81f378a02694949dd6c7d70c"
     },
     {
       "path": "src/written-levels.js",
-      "bytes": 2645,
-      "sha256": "0839b99e17688d2caa6330bf5c601d183637c7d9f5297b0d58954e3f87aa3354"
+      "bytes": 2770,
+      "sha256": "9e256bc1ff4b372da26ab0aa39f829132e837829b77115841df2d771baecc547"
     },
     {
       "path": "style.css",

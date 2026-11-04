@@ -1,4 +1,4 @@
-import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=m02-placement-001';
+import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=m02-placement-001&copy=ux-001';
 import {validateMaterials,materialType,materialName,questionMaterialLabel,textMaterialText} from './materials.js?v=2026.10.28&scope=m01-001';
 export {materialType,materialName,questionMaterialLabel,sequenceEvidenceLabel,sequenceMaterialText,textMaterialText} from './materials.js?v=2026.10.28&scope=m01-001';
 import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.12';
@@ -10,7 +10,7 @@ import {REVIEWED_OPTION_EXPLANATIONS} from './reviewed-option-explanations.js?v=
 import {isUnscoredPractical,unscoredPracticalContent,isManualPart,manualPartAnswered,validManualAnswer,validatePracticalTask,validatePracticalView,practicalTaskPromptLines,inspectionAnswerText,inspectionReferenceRemainder} from './practical-task.js?v=0.2.12&issues=p02-001&materials=m01-001';
 export {isUnscoredPractical,unscoredPracticalContent,sourceLines,isManualPart,manualPartAnswered,INSPECTION_FIELDS,isIssueAnswer,toIssueAnswer,inspectionDisplayInstructions,inspectionDisplayPrompt,inspectionAnswerText,inspectionReferenceGroups,inspectionReferenceRemainder,setInspectionDraft,commitInspectionDraft,cancelInspectionDraft,deleteInspectionIssue,restoreInspectionIssue,moveInspectionIssue} from './practical-task.js?v=0.2.12&issues=p02-001&materials=m01-001';
 /** Pure domain functions. No DOM, network, storage, or evaluation of learner code. */
-export const APP_VERSION = '0.2.12';
+export const APP_VERSION = '0.2.13';
 export const SCHEMA_VERSION = 1; // Session, backup and manifest envelope.
 export const BANK_SCHEMA_VERSION = 3;
 export const GENERATOR_VERSION = '2'; // Practical single/multi choice permutations join the seeded snapshot.
