@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "kind": "local_editorial_runtime_inventory",
-  "bankVersion": "2026.11.04-ux-copy.local.1",
-  "bankSha256": "ab5ec30673369fb503580bc807c8160c11e74139cfca7f8c2ed2317d0a614265",
+  "bankVersion": "2026.11.05-explanation-haeyo.local.3",
+  "bankSha256": "4bfacebe2e216d53e9a67b3f52a69bc0919bd28c37e0c7c6cf2111929ce34871",
   "writtenQuestions": 1045,
   "regularWrittenQuestions": 1035,
   "testOnlyWrittenQuestions": 10,
@@ -25,8 +25,8 @@
   "files": [
     {
       "path": "data/manifest.json",
-      "bytes": 437,
-      "sha256": "d7800f3dffcdb7a3f1a3a3e468d59295c9df92218159bc207173f118e832b0db"
+      "bytes": 545,
+      "sha256": "47d3ac0d2b037a594232d9bd7592cfb256e5185965d57f0d39cb67a3833733ec"
     },
     {
       "path": "data/releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
@@ -132,6 +132,11 @@
       "path": "style.css",
       "bytes": 10675,
       "sha256": "4e0bc5453d9fb441e0924190746026cd0d2330e2d6e563ccb9d5a3e62c39e631"
+    },
+    {
+      "path": "data/releases/2026.11.05-explanation-haeyo.local.3/bank.json",
+      "bytes": 7138613,
+      "sha256": "4bfacebe2e216d53e9a67b3f52a69bc0919bd28c37e0c7c6cf2111929ce34871"
     }
   ],
   "practicalAssessmentMode": "unscored",
@@ -390,5 +395,17 @@
     "baseBankSha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65",
     "publicationAuthorized": false,
     "formalEditorialAcceptanceClaimed": false
+  },
+  "explanationToneReview": {
+    "baseCommit": "296e51c297c005a2d741814c42d1c70d5fcd0bf9",
+    "reviewedCommit": "533b59a7630573514683eb9b2ef0fb6c57b825d7",
+    "status": "individually_reviewed_and_verified",
+    "total": 6890,
+    "complete": 6890,
+    "kept": 6717,
+    "modified": 173,
+    "unreviewed": 0,
+    "blocked": 0,
+    "publicationAuthorized": true
   }
 }

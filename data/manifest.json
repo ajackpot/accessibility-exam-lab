@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.11.04-ux-copy.local.1",
-  "releasedAt": "2026-11-04T13:36:36.479548+00:00",
-  "file": "releases/2026.11.04-ux-copy.local.1/bank.json",
-  "sha256": "ab5ec30673369fb503580bc807c8160c11e74139cfca7f8c2ed2317d0a614265",
-  "changeSummary": "지시문·해설 로컬 문안 초안: 1045문항 영향, 1780문구 변경. 정답·자료·이력 보존, 공개 미승인.",
+  "bankVersion": "2026.11.05-explanation-haeyo.local.3",
+  "releasedAt": "2026-11-05T01:53:36.082176+00:00",
+  "file": "releases/2026.11.05-explanation-haeyo.local.3/bank.json",
+  "sha256": "4bfacebe2e216d53e9a67b3f52a69bc0919bd28c37e0c7c6cf2111929ce34871",
+  "changeSummary": "필기·실기 전체 해설의 해요체 통일 및 6,890필드 개별 문맥 검토 완료. 지시문·자료·코드·정답·학습 목표·난이도·기록 구조 보존. 원격 push·공개 배포 미실시.",
   "finalRelease": false
 }
