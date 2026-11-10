@@ -1,10 +1,10 @@
-import {INSPECTION_FIELDS,inspectionDisplayInstructions,inspectionDisplayPrompt,isIssueAnswer,toIssueAnswer,inspectionAnswerText,inspectionReferenceGroups,inspectionReferenceRemainder,setInspectionDraft,commitInspectionDraft,cancelInspectionDraft,deleteInspectionIssue,restoreInspectionIssue,moveInspectionIssue,manualPartAnswered,isUnscoredPractical,isUnscoredPracticalSession,hasHistoricalPractical,practicalProgress,practicalStatistics,createPracticalContinuation,APP_VERSION,materialType,questionMaterialLabel,sequenceEvidenceLabel,sequenceMaterialText,textMaterialText,sourceLines,setPracticalView,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,isNewSessionQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.13&pool=priority-001&scope=e09-001&materials=m01-001&levels=m02-placement-001&issues=p02-001';
-import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.12&materials=m01-001&levels=m02-placement-001&issues=p02-001';
-import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.13&pool=priority-001&scope=e09-001&materials=m01-001&levels=m02-placement-001&issues=p02-001';
+import {INSPECTION_FIELDS,inspectionDisplayInstructions,inspectionDisplayPrompt,isIssueAnswer,toIssueAnswer,inspectionAnswerText,inspectionReferenceGroups,inspectionReferenceRemainder,setInspectionDraft,commitInspectionDraft,cancelInspectionDraft,deleteInspectionIssue,restoreInspectionIssue,moveInspectionIssue,manualPartAnswered,isUnscoredPractical,isUnscoredPracticalSession,hasHistoricalPractical,practicalProgress,practicalStatistics,createPracticalContinuation,APP_VERSION,materialType,questionMaterialLabel,sequenceEvidenceLabel,sequenceMaterialText,textMaterialText,sourceLines,setPracticalView,materialsFor,questionPresentation,questionInstructionText,hasUnclassifiedMaterials,optionExplanationParagraphs,itemJudgement,canShowExplanation,SUBJECTS,copy,validateBank,isPublishedQuestion,isNewSessionQuestion,eligibleQuestions,prepareSession,startSession,setAnswer,confirmAnswer,revealExplanation,finalize,extendTime,convertToUntimed,timeState,grade,selectedChoiceTexts,isAnswered,sessionResult,statistics,createPrompt,adjustedResult,FREEZE_AT} from './domain.js?v=0.2.13&pool=priority-001&scope=e09-001&materials=m01-001&levels=m02-placement-001&issues=p02-001&concepts=ce03-20261110';
+import {openStore,updateBank,acquireEditor} from './storage.js?v=0.2.12&materials=m01-001&levels=m02-placement-001&issues=p02-001&concepts=ce03-20261110';
+import {practiceConfig,quickConfig,defaultSetupMinutes,availableCount,practiceSelection,sessionContentSummary,mockAvailability,reviewEntries,reviewPlan,historyClassification,typeLabel,submitSelectedAnswers,sessionNavigation} from './workflows.js?v=0.2.13&pool=priority-001&scope=e09-001&materials=m01-001&levels=m02-placement-001&issues=p02-001&concepts=ce03-20261110';
 import {hasRetiredPractical,serviceBank} from './service-visibility.js?v=0.2.12';
-import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.12&materials=m01-001&levels=m02-placement-001&issues=p02-001';
+import {exportBackup,partitionBackups,parseBackup,MAX_BACKUP_BYTES} from './backup.js?v=0.2.12&materials=m01-001&levels=m02-placement-001&issues=p02-001&concepts=ce03-20261110';
 import {MAJOR_SITE_GROUPS} from './major-sites.js?v=2026.10.27';
-import {WRITTEN_LEVEL_OPTIONS,writtenLevelDescription,writtenLevelLabel,isWrittenLevel} from './written-levels.js?v=m02-placement-001';
+import {WRITTEN_LEVEL_OPTIONS,writtenLevelDescription,writtenLevelLabel,isWrittenLevel} from './written-levels.js?v=m02-placement-001&concepts=ce03-20261110';
 const $=id=>document.getElementById(id);
 const state={bankLoading:true,noticeGeneration:0,starting:false,section:'home',route:null,restoring:false,openGeneration:0,store:null,bank:null,bundle:null,sessions:[],session:null,editor:null,view:'home',queue:Promise.resolve(),storageFailed:false,unsaved:null,anchor:null,warningKeys:new Set(),settings:{timerWarnings:true,writtenDifficultyLevel:'all'}};
 const subjectName=id=>SUBJECTS.find(s=>s.id===id)?.name||'웹접근성 실기중급';
@@ -143,6 +143,12 @@ async function restoreRoute(route){
   }finally{if(request===state.routeRequest)state.restoring=false;}
 }
 window.addEventListener('popstate',event=>{restoreRoute(event.state?.examRoute).catch(showError);});
+// A skip link changes focus within this screen, not the SPA route or history.
+function skipToMain(event){
+  if(event.defaultPrevented||event.button!==0||event.altKey||event.ctrlKey||event.metaKey||event.shiftKey)return;
+  event.preventDefault();$('main').focus();
+}
+document.querySelector('a.skip[href="#main"]')?.addEventListener('click',skipToMain);
 function installNavigation(){const nav=$('navigation');nav.replaceChildren(...[['home','홈',renderHome],['review','오답 복습',renderWrong],['history','학습 기록',renderHistory],['bank','문제 은행',renderBank],['manage','백업 · 설정',renderManage],['major-sites','주요 사이트',renderMajorSites]].map(([section,title,render])=>button(title,()=>leave(()=>render()),{'data-section':section})));}
 function renderMajorSites(){
   state.section='major-sites';rememberRoute('major-sites');

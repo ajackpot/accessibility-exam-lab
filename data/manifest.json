@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.11.05-explanation-haeyo.local.3",
-  "releasedAt": "2026-11-05T01:53:36.082176+00:00",
-  "file": "releases/2026.11.05-explanation-haeyo.local.3/bank.json",
-  "sha256": "4bfacebe2e216d53e9a67b3f52a69bc0919bd28c37e0c7c6cf2111929ce34871",
-  "changeSummary": "필기·실기 전체 해설의 해요체 통일 및 6,890필드 개별 문맥 검토 완료. 지시문·자료·코드·정답·학습 목표·난이도·기록 구조 보존. 원격 push·공개 배포 미실시.",
+  "bankVersion": "2026.11.10-concepts.local.3",
+  "releasedAt": "2026-11-10T13:49:40.640391+00:00",
+  "file": "releases/2026.11.10-concepts.local.3/bank.json",
+  "sha256": "afbcfa9a9a219fd6c2e067bb0c0fae8dcbdbd6934c5f3156c071243c33b22aae",
+  "changeSummary": "선택지·해설에만 등장하던 개념을 직접 평가하는 정규 필기 459문항을 추가했어요. 기존 문항·선택지·출처·실기와 학습 기록 구조는 보존했어요.",
   "finalRelease": false
 }

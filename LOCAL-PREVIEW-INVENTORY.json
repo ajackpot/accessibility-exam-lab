@@ -1,32 +1,317 @@
 {
-  "schemaVersion": 1,
-  "kind": "local_editorial_runtime_inventory",
-  "bankVersion": "2026.11.05-explanation-haeyo.local.3",
-  "bankSha256": "4bfacebe2e216d53e9a67b3f52a69bc0919bd28c37e0c7c6cf2111929ce34871",
-  "writtenQuestions": 1045,
-  "regularWrittenQuestions": 1035,
+  "schemaVersion": 2,
+  "approvedDescriptionMetadata": {
+    "description": "정규 필기 459문항을 보완하고 본문 바로가기의 화면 이탈 문제를 수정한 판입니다.",
+    "notes": [
+      "기존 문항·선택지·출처·실기 및 학습 기록 구조를 보존합니다.",
+      "기존 공개 26개 파일과 활성 은행 1개를 포함합니다. 중간 작업용 은행은 배포하지 않습니다."
+    ],
+    "verification": [
+      "459개 추가 문항의 기존 내용 검증은 동일 은행 SHA-256을 조건으로 재사용했습니다.",
+      "전체 파일 목록, 기존 문항·선택지·출처의 보존 및 안정 ID 채점을 별도로 재검사했습니다.",
+      "변경된 코드의 집중 자동 회귀검사 21개를 통과했습니다. 게시 전 로컬 브라우저 검사는 실행 환경의 연결·소켓 오류로 실행하지 못했으며 UI 통과로 간주하지 않았습니다."
+    ],
+    "limitations": [
+      "현재 브라우저에서 관찰한 범위에 한정되며 Windows·NVDA·JAWS의 실제 발화와 전체 접근성 인증을 검증하지 않았습니다.",
+      "원시 IndexedDB의 모든 필드·바이트 동일성과 실제 사용자의 다른 기기 학습 기록은 검증하지 않았습니다.",
+      "459개 문항을 모두 화면에서 개별 풀이하지 않았습니다. 기존 48개 조건 표시와 8개 대표 채점 흐름의 관찰은 이번에 전부 재실행한 결과가 아닙니다.",
+      "파일 선택을 통한 가져오기·내보내기는 실행하지 않았습니다. 함수 수준 백업 검사와 구분합니다.",
+      "AccName 1.1의 빈 aria-labelledby 참조와 HTML 5.2의 이미지 object draggable은 지정 규범과 현대 Chrome 관찰이 다릅니다. 문항은 명시된 고정판 규범을 평가합니다.",
+      "256색 color-index 장치와 실제 파일 두 개 선택 후 입력 초기화 조건은 실행하지 않았습니다.",
+      "현재 검사 프로필에서 이전 24개 로컬 테스트 기록을 확인할 수 없었습니다. 과거 관찰을 현재 프로필에서의 보존 통과로 표시하지 않았습니다."
+    ]
+  },
+  "kind": "approved_service_release_inventory",
+  "bankVersion": "2026.11.10-concepts.local.3",
+  "bankSha256": "afbcfa9a9a219fd6c2e067bb0c0fae8dcbdbd6934c5f3156c071243c33b22aae",
+  "writtenQuestions": 1504,
+  "regularWrittenQuestions": 1494,
   "testOnlyWrittenQuestions": 10,
-  "writtenLinkedOptions": 5191,
+  "writtenLinkedOptions": 7486,
   "practicalTasks": 10,
   "regularPracticalTasks": 10,
   "testOnlyPracticalTasks": 0,
-  "freshWrittenQuestions": 1037,
-  "freshRegularWrittenQuestions": 1027,
+  "freshWrittenQuestions": 1496,
+  "freshRegularWrittenQuestions": 1486,
   "freshTestOnlyWrittenQuestions": 10,
   "freshPracticalTasks": 10,
   "freshRegularPracticalTasks": 10,
   "freshTestOnlyPracticalTasks": 0,
-  "freshCountsIncludeTestOnly": true,
-  "retiredPracticalIncluded": 0,
-  "eligibilityPolicyIds": [
-    "existing-priority-001",
-    "scope-expansion-e09-001"
+  "freshWrittenLinkedOptions": 7447,
+  "writtenLevelVersion": "ce03.1",
+  "writtenLevelMockAvailability": {
+    "all": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 189
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 366
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 318
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 308
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 272
+        }
+      ]
+    },
+    "basic": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 44
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 156
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 48
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 38
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 104
+        }
+      ]
+    },
+    "pro": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 84
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 114
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 247
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 232
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 124
+        }
+      ]
+    },
+    "master": {
+      "ready": true,
+      "counts": [
+        {
+          "id": "s1",
+          "name": "웹접근성 표준 개론",
+          "count": 61
+        },
+        {
+          "id": "s2",
+          "name": "인터넷 개론",
+          "count": 96
+        },
+        {
+          "id": "s3",
+          "name": "HTML 개론",
+          "count": 23
+        },
+        {
+          "id": "s4",
+          "name": "CSS/스크립트 개론",
+          "count": 38
+        },
+        {
+          "id": "s5",
+          "name": "정보접근성 개론",
+          "count": 44
+        }
+      ]
+    }
+  },
+  "writtenLevelClassificationCounts": [
+    {
+      "subjectId": "s1",
+      "name": "웹접근성 표준 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 46,
+          "newSession": 46,
+          "mockRegularUnique": 44
+        },
+        {
+          "level": "pro",
+          "total": 87,
+          "newSession": 86,
+          "mockRegularUnique": 84
+        },
+        {
+          "level": "master",
+          "total": 64,
+          "newSession": 61,
+          "mockRegularUnique": 61
+        }
+      ]
+    },
+    {
+      "subjectId": "s2",
+      "name": "인터넷 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 158,
+          "newSession": 158,
+          "mockRegularUnique": 156
+        },
+        {
+          "level": "pro",
+          "total": 120,
+          "newSession": 120,
+          "mockRegularUnique": 114
+        },
+        {
+          "level": "master",
+          "total": 99,
+          "newSession": 99,
+          "mockRegularUnique": 96
+        }
+      ]
+    },
+    {
+      "subjectId": "s3",
+      "name": "HTML 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 49,
+          "newSession": 49,
+          "mockRegularUnique": 48
+        },
+        {
+          "level": "pro",
+          "total": 255,
+          "newSession": 254,
+          "mockRegularUnique": 247
+        },
+        {
+          "level": "master",
+          "total": 23,
+          "newSession": 23,
+          "mockRegularUnique": 23
+        }
+      ]
+    },
+    {
+      "subjectId": "s4",
+      "name": "CSS/스크립트 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 40,
+          "newSession": 40,
+          "mockRegularUnique": 38
+        },
+        {
+          "level": "pro",
+          "total": 239,
+          "newSession": 239,
+          "mockRegularUnique": 232
+        },
+        {
+          "level": "master",
+          "total": 40,
+          "newSession": 40,
+          "mockRegularUnique": 38
+        }
+      ]
+    },
+    {
+      "subjectId": "s5",
+      "name": "정보접근성 개론",
+      "levels": [
+        {
+          "level": "basic",
+          "total": 106,
+          "newSession": 106,
+          "mockRegularUnique": 104
+        },
+        {
+          "level": "pro",
+          "total": 133,
+          "newSession": 131,
+          "mockRegularUnique": 124
+        },
+        {
+          "level": "master",
+          "total": 45,
+          "newSession": 44,
+          "mockRegularUnique": 44
+        }
+      ]
+    }
   ],
+  "localIntegration": {
+    "statusAtPreparation": "automated_verification_complete_local_ui_not_run_publication_authorized",
+    "preparedAt": "2026-11-10T16:53:32.747075+00:00",
+    "statement": "이 파일 준비 시점의 실제 검사 범위와 게시 승인 상태를 기록합니다. 로컬 UI 검사의 미실행 여부는 검증 설명을 따릅니다. 실제 공개 성공과 공개 UI 검증은 별도이며 이 파일은 그 결과를 주장하지 않습니다.",
+    "baseCommit": "f1c7d9d37efc42b24c3d948b227a62dd3ee247e3",
+    "baseBankVersion": "2026.11.05-explanation-haeyo.local.3",
+    "publicationAuthorized": true
+  },
+  "conceptExpansion": {
+    "addedWritten": 459,
+    "addedOptions": 2295,
+    "addedSources": 489,
+    "ordinaryScopeLevels": {
+      "basic": 183,
+      "pro": 204,
+      "master": 72
+    },
+    "existingRecordsUnchanged": true
+  },
   "files": [
     {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
       "path": "data/manifest.json",
-      "bytes": 545,
-      "sha256": "47d3ac0d2b037a594232d9bd7592cfb256e5185965d57f0d39cb67a3833733ec"
+      "bytes": 508,
+      "sha256": "5908008add77d56bae1d8d2c43070f7b59b9da690ec10d4161443ab7976a2fe5"
     },
     {
       "path": "data/releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
@@ -39,29 +324,44 @@
       "sha256": "ab5ec30673369fb503580bc807c8160c11e74139cfca7f8c2ed2317d0a614265"
     },
     {
+      "path": "data/releases/2026.11.05-explanation-haeyo.local.3/bank.json",
+      "bytes": 7138613,
+      "sha256": "4bfacebe2e216d53e9a67b3f52a69bc0919bd28c37e0c7c6cf2111929ce34871"
+    },
+    {
+      "path": "data/releases/2026.11.10-concepts.local.3/bank.json",
+      "bytes": 9536845,
+      "sha256": "afbcfa9a9a219fd6c2e067bb0c0fae8dcbdbd6934c5f3156c071243c33b22aae"
+    },
+    {
       "path": "docs/NVDA-CHECKLIST.md",
       "bytes": 10519,
       "sha256": "d58688e64f750f959a043522e2d0aa2854af459ee6e931ef170e9c183ee475a4"
     },
     {
+      "path": "docs/public/PRD-SCOPE-EXPANSION.md",
+      "bytes": 35308,
+      "sha256": "b03bb6d3cf09dffdfa6b84cd4bfca1fb022a239ac89deee5e14154d6fdd685d7"
+    },
+    {
       "path": "index.html",
-      "bytes": 2353,
-      "sha256": "1b47fda1689de3165d33d6762f3111e44344744a9e530f86ddd5afd735fcca46"
+      "bytes": 2401,
+      "sha256": "182a820fa7e851e13758afcaacb906b9227b501d25b4febde425042177b6007d"
     },
     {
       "path": "src/app.js",
-      "bytes": 143265,
-      "sha256": "83eda6988d43fe93603c3022268de8dddff707d170af24e17441cd4e54ce97c0"
+      "bytes": 143733,
+      "sha256": "84707f565b002a70221010e195cb5df54f6b06660ddf122af4b1f6610c813435"
     },
     {
       "path": "src/backup.js",
-      "bytes": 13071,
-      "sha256": "a8ffdafaff07a4f5781e45ebabea1b5b47454db261b9e1797ac2c3797c120084"
+      "bytes": 13117,
+      "sha256": "a0551a0e22c1a6c0ef7d1bebb8a42c12ded03090e1c4597fcdb688184d3cee1a"
     },
     {
       "path": "src/domain.js",
-      "bytes": 68211,
-      "sha256": "b60d997971b4bac223e07cb01d748ace6f21ee7da9a9f81687c49ba218702532"
+      "bytes": 68234,
+      "sha256": "aff3324bece829bbb54e36d89b021f286c578fa0fd4adabf6744627900329fdf"
     },
     {
       "path": "src/legacy-materials.js",
@@ -110,302 +410,34 @@
     },
     {
       "path": "src/storage.js",
-      "bytes": 9404,
-      "sha256": "e84f02f0a848622396c028f0f14455d6e9ccf2517be7a6c156c3737c68c77397"
+      "bytes": 9427,
+      "sha256": "fbe7a6bf08175db73f9f290d82b5bc28b7a557095940ee14a7763e0245c02f73"
     },
     {
       "path": "src/workflows.js",
-      "bytes": 7215,
-      "sha256": "0ccf03b5c930c19cc2542a65ecb12ada742975a79e5e3af8da3942c9e4ffe694"
+      "bytes": 7261,
+      "sha256": "3913b3761764d9c0145542b7a0cdc9ef1162bac99974032f93fa46bf8c6c658f"
     },
     {
       "path": "src/written-level-map.js",
-      "bytes": 342029,
-      "sha256": "33576b9c4b364641affe87dd9b60464354258bcd81f378a02694949dd6c7d70c"
+      "bytes": 390514,
+      "sha256": "004e5866d6bc3bf3ecc0b1da0baaab382df332a4c6d7e9c04c6e6a5f414dd787"
     },
     {
       "path": "src/written-levels.js",
-      "bytes": 2770,
-      "sha256": "9e256bc1ff4b372da26ab0aa39f829132e837829b77115841df2d771baecc547"
+      "bytes": 2794,
+      "sha256": "a95573983902469c1032126c62144c1df6167bb267f143a4efaafcfaeb9353ee"
     },
     {
       "path": "style.css",
       "bytes": 10675,
       "sha256": "4e0bc5453d9fb441e0924190746026cd0d2330e2d6e563ccb9d5a3e62c39e631"
-    },
-    {
-      "path": "data/releases/2026.11.05-explanation-haeyo.local.3/bank.json",
-      "bytes": 7138613,
-      "sha256": "4bfacebe2e216d53e9a67b3f52a69bc0919bd28c37e0c7c6cf2111929ce34871"
     }
   ],
-  "practicalAssessmentMode": "unscored",
-  "practicalManualAnswerItems": 41,
-  "writtenLevelVersion": "t02.1",
-  "writtenLevelMockAvailability": {
-    "all": {
-      "ready": true,
-      "counts": [
-        {
-          "id": "s1",
-          "name": "웹접근성 표준 개론",
-          "count": 148
-        },
-        {
-          "id": "s2",
-          "name": "인터넷 개론",
-          "count": 201
-        },
-        {
-          "id": "s3",
-          "name": "HTML 개론",
-          "count": 210
-        },
-        {
-          "id": "s4",
-          "name": "CSS/스크립트 개론",
-          "count": 215
-        },
-        {
-          "id": "s5",
-          "name": "정보접근성 개론",
-          "count": 220
-        }
-      ]
-    },
-    "basic": {
-      "ready": true,
-      "counts": [
-        {
-          "id": "s1",
-          "name": "웹접근성 표준 개론",
-          "count": 26
-        },
-        {
-          "id": "s2",
-          "name": "인터넷 개론",
-          "count": 63
-        },
-        {
-          "id": "s3",
-          "name": "HTML 개론",
-          "count": 27
-        },
-        {
-          "id": "s4",
-          "name": "CSS/스크립트 개론",
-          "count": 23
-        },
-        {
-          "id": "s5",
-          "name": "정보접근성 개론",
-          "count": 68
-        }
-      ]
-    },
-    "pro": {
-      "ready": true,
-      "counts": [
-        {
-          "id": "s1",
-          "name": "웹접근성 표준 개론",
-          "count": 61
-        },
-        {
-          "id": "s2",
-          "name": "인터넷 개론",
-          "count": 111
-        },
-        {
-          "id": "s3",
-          "name": "HTML 개론",
-          "count": 163
-        },
-        {
-          "id": "s4",
-          "name": "CSS/스크립트 개론",
-          "count": 154
-        },
-        {
-          "id": "s5",
-          "name": "정보접근성 개론",
-          "count": 108
-        }
-      ]
-    },
-    "master": {
-      "ready": true,
-      "counts": [
-        {
-          "id": "s1",
-          "name": "웹접근성 표준 개론",
-          "count": 61
-        },
-        {
-          "id": "s2",
-          "name": "인터넷 개론",
-          "count": 27
-        },
-        {
-          "id": "s3",
-          "name": "HTML 개론",
-          "count": 20
-        },
-        {
-          "id": "s4",
-          "name": "CSS/스크립트 개론",
-          "count": 38
-        },
-        {
-          "id": "s5",
-          "name": "정보접근성 개론",
-          "count": 44
-        }
-      ]
-    }
+  "skipLinkFix": {
+    "statusAtPreparation": "unit_regression_passed_browser_not_run",
+    "appCacheToken": "navigation=skip-main-001",
+    "scope": "현재 화면을 유지하면서 본문으로 초점을 이동합니다."
   },
-  "writtenLevelClassificationCounts": [
-    {
-      "subjectId": "s1",
-      "name": "웹접근성 표준 개론",
-      "levels": [
-        {
-          "level": "basic",
-          "total": 28,
-          "newSession": 28,
-          "mockRegularUnique": 26
-        },
-        {
-          "level": "pro",
-          "total": 64,
-          "newSession": 63,
-          "mockRegularUnique": 61
-        },
-        {
-          "level": "master",
-          "total": 64,
-          "newSession": 61,
-          "mockRegularUnique": 61
-        }
-      ]
-    },
-    {
-      "subjectId": "s2",
-      "name": "인터넷 개론",
-      "levels": [
-        {
-          "level": "basic",
-          "total": 65,
-          "newSession": 65,
-          "mockRegularUnique": 63
-        },
-        {
-          "level": "pro",
-          "total": 117,
-          "newSession": 117,
-          "mockRegularUnique": 111
-        },
-        {
-          "level": "master",
-          "total": 30,
-          "newSession": 30,
-          "mockRegularUnique": 27
-        }
-      ]
-    },
-    {
-      "subjectId": "s3",
-      "name": "HTML 개론",
-      "levels": [
-        {
-          "level": "basic",
-          "total": 28,
-          "newSession": 28,
-          "mockRegularUnique": 27
-        },
-        {
-          "level": "pro",
-          "total": 171,
-          "newSession": 170,
-          "mockRegularUnique": 163
-        },
-        {
-          "level": "master",
-          "total": 20,
-          "newSession": 20,
-          "mockRegularUnique": 20
-        }
-      ]
-    },
-    {
-      "subjectId": "s4",
-      "name": "CSS/스크립트 개론",
-      "levels": [
-        {
-          "level": "basic",
-          "total": 25,
-          "newSession": 25,
-          "mockRegularUnique": 23
-        },
-        {
-          "level": "pro",
-          "total": 161,
-          "newSession": 161,
-          "mockRegularUnique": 154
-        },
-        {
-          "level": "master",
-          "total": 40,
-          "newSession": 40,
-          "mockRegularUnique": 38
-        }
-      ]
-    },
-    {
-      "subjectId": "s5",
-      "name": "정보접근성 개론",
-      "levels": [
-        {
-          "level": "basic",
-          "total": 70,
-          "newSession": 70,
-          "mockRegularUnique": 68
-        },
-        {
-          "level": "pro",
-          "total": 117,
-          "newSession": 115,
-          "mockRegularUnique": 108
-        },
-        {
-          "level": "master",
-          "total": 45,
-          "newSession": 44,
-          "mockRegularUnique": 44
-        }
-      ]
-    }
-  ],
-  "freshWrittenLinkedOptions": 5152,
-  "practicalInspectionAnswerFormat": "issue-list-v1",
-  "localIntegration": {
-    "status": "local_review_only",
-    "baseCommit": "b58511669b180efca5c150328daacfff900aa472",
-    "baseBankVersion": "2026.10.28-material-placement.m02.1-service.1",
-    "baseBankSha256": "cc840f178b092eb56c5e44b5457debe3b729c3e439bb2814489ee48f52c5cb65",
-    "publicationAuthorized": false,
-    "formalEditorialAcceptanceClaimed": false
-  },
-  "explanationToneReview": {
-    "baseCommit": "296e51c297c005a2d741814c42d1c70d5fcd0bf9",
-    "reviewedCommit": "533b59a7630573514683eb9b2ef0fb6c57b825d7",
-    "status": "individually_reviewed_and_verified",
-    "total": 6890,
-    "complete": 6890,
-    "kept": 6717,
-    "modified": 173,
-    "unreviewed": 0,
-    "blocked": 0,
-    "publicationAuthorized": true
-  }
+  "serviceFileCount": 27
 }
