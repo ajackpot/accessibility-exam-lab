@@ -1,29 +1,8 @@
 {
   "schemaVersion": 2,
-  "approvedDescriptionMetadata": {
-    "description": "정규 필기 459문항을 보완하고 본문 바로가기의 화면 이탈 문제를 수정한 판입니다.",
-    "notes": [
-      "기존 문항·선택지·출처·실기 및 학습 기록 구조를 보존합니다.",
-      "기존 공개 26개 파일과 활성 은행 1개를 포함합니다. 중간 작업용 은행은 배포하지 않습니다."
-    ],
-    "verification": [
-      "459개 추가 문항의 기존 내용 검증은 동일 은행 SHA-256을 조건으로 재사용했습니다.",
-      "전체 파일 목록, 기존 문항·선택지·출처의 보존 및 안정 ID 채점을 별도로 재검사했습니다.",
-      "변경된 코드의 집중 자동 회귀검사 21개를 통과했습니다. 게시 전 로컬 브라우저 검사는 실행 환경의 연결·소켓 오류로 실행하지 못했으며 UI 통과로 간주하지 않았습니다."
-    ],
-    "limitations": [
-      "현재 브라우저에서 관찰한 범위에 한정되며 Windows·NVDA·JAWS의 실제 발화와 전체 접근성 인증을 검증하지 않았습니다.",
-      "원시 IndexedDB의 모든 필드·바이트 동일성과 실제 사용자의 다른 기기 학습 기록은 검증하지 않았습니다.",
-      "459개 문항을 모두 화면에서 개별 풀이하지 않았습니다. 기존 48개 조건 표시와 8개 대표 채점 흐름의 관찰은 이번에 전부 재실행한 결과가 아닙니다.",
-      "파일 선택을 통한 가져오기·내보내기는 실행하지 않았습니다. 함수 수준 백업 검사와 구분합니다.",
-      "AccName 1.1의 빈 aria-labelledby 참조와 HTML 5.2의 이미지 object draggable은 지정 규범과 현대 Chrome 관찰이 다릅니다. 문항은 명시된 고정판 규범을 평가합니다.",
-      "256색 color-index 장치와 실제 파일 두 개 선택 후 입력 초기화 조건은 실행하지 않았습니다.",
-      "현재 검사 프로필에서 이전 24개 로컬 테스트 기록을 확인할 수 없었습니다. 과거 관찰을 현재 프로필에서의 보존 통과로 표시하지 않았습니다."
-    ]
-  },
-  "kind": "approved_service_release_inventory",
-  "bankVersion": "2026.11.10-concepts.local.3",
-  "bankSha256": "afbcfa9a9a219fd6c2e067bb0c0fae8dcbdbd6934c5f3156c071243c33b22aae",
+  "kind": "public_service_runtime_inventory",
+  "bankVersion": "2026.11.11-material-placement.local.1",
+  "bankSha256": "5bc301c332fc4446723dad8d60869f4f46e402348a22b82c29278f3d66b6f871",
   "writtenQuestions": 1504,
   "regularWrittenQuestions": 1494,
   "testOnlyWrittenQuestions": 10,
@@ -310,8 +289,8 @@
     },
     {
       "path": "data/manifest.json",
-      "bytes": 508,
-      "sha256": "5908008add77d56bae1d8d2c43070f7b59b9da690ec10d4161443ab7976a2fe5"
+      "bytes": 543,
+      "sha256": "e3c6bf2cd10d154c3c333204dabfc500192db2b45e846db4afd54176b2d994b4"
     },
     {
       "path": "data/releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
@@ -334,6 +313,11 @@
       "sha256": "afbcfa9a9a219fd6c2e067bb0c0fae8dcbdbd6934c5f3156c071243c33b22aae"
     },
     {
+      "path": "data/releases/2026.11.11-material-placement.local.1/bank.json",
+      "bytes": 9565927,
+      "sha256": "5bc301c332fc4446723dad8d60869f4f46e402348a22b82c29278f3d66b6f871"
+    },
+    {
       "path": "docs/NVDA-CHECKLIST.md",
       "bytes": 10519,
       "sha256": "d58688e64f750f959a043522e2d0aa2854af459ee6e931ef170e9c183ee475a4"
@@ -345,23 +329,23 @@
     },
     {
       "path": "index.html",
-      "bytes": 2401,
-      "sha256": "182a820fa7e851e13758afcaacb906b9227b501d25b4febde425042177b6007d"
+      "bytes": 2425,
+      "sha256": "152cfb456b39eb00911d8d08456f5e6e600225f0df8349f5e2362b4e2f32a5ed"
     },
     {
       "path": "src/app.js",
-      "bytes": 143733,
-      "sha256": "84707f565b002a70221010e195cb5df54f6b06660ddf122af4b1f6610c813435"
+      "bytes": 143853,
+      "sha256": "3c036cdbc660c1b9e31582ca436ab5b51c48509665c6d86ce8680f5b2cef53ce"
     },
     {
       "path": "src/backup.js",
-      "bytes": 13117,
-      "sha256": "a0551a0e22c1a6c0ef7d1bebb8a42c12ded03090e1c4597fcdb688184d3cee1a"
+      "bytes": 13165,
+      "sha256": "219e0818c751855735bb05d5f0ac706726068c3a6b3e84992e32b01702980c69"
     },
     {
       "path": "src/domain.js",
-      "bytes": 68234,
-      "sha256": "aff3324bece829bbb54e36d89b021f286c578fa0fd4adabf6744627900329fdf"
+      "bytes": 68258,
+      "sha256": "14d0bf20fa4ab9862c135abe698377ffa3b5ee58266f75783a59eca50c7c6804"
     },
     {
       "path": "src/legacy-materials.js",
@@ -410,23 +394,23 @@
     },
     {
       "path": "src/storage.js",
-      "bytes": 9427,
-      "sha256": "fbe7a6bf08175db73f9f290d82b5bc28b7a557095940ee14a7763e0245c02f73"
+      "bytes": 9451,
+      "sha256": "0c3dc7c0a1b3758f395cf7c95c76954ed331d478e20585309fbd823bedb3c63e"
     },
     {
       "path": "src/workflows.js",
-      "bytes": 7261,
-      "sha256": "3913b3761764d9c0145542b7a0cdc9ef1162bac99974032f93fa46bf8c6c658f"
+      "bytes": 7309,
+      "sha256": "ab364744ef9d19af97c0ead26b77b9864f87843350442998868a1a82e72aceda"
     },
     {
       "path": "src/written-level-map.js",
-      "bytes": 390514,
-      "sha256": "004e5866d6bc3bf3ecc0b1da0baaab382df332a4c6d7e9c04c6e6a5f414dd787"
+      "bytes": 397546,
+      "sha256": "59b6544cefe5fbf368b18c245b29dbd7e9c4a51ae5c9c5a0e0a324d4dfba57ca"
     },
     {
       "path": "src/written-levels.js",
-      "bytes": 2794,
-      "sha256": "a95573983902469c1032126c62144c1df6167bb267f143a4efaafcfaeb9353ee"
+      "bytes": 2818,
+      "sha256": "3a1805123e409c4d27d8463d86f86232099091c9e40f6dcc4b5ef0213ce52105"
     },
     {
       "path": "style.css",
@@ -434,10 +418,27 @@
       "sha256": "4e0bc5453d9fb441e0924190746026cd0d2330e2d6e563ccb9d5a3e62c39e631"
     }
   ],
-  "skipLinkFix": {
-    "statusAtPreparation": "unit_regression_passed_browser_not_run",
-    "appCacheToken": "navigation=skip-main-001",
-    "scope": "현재 화면을 유지하면서 본문으로 초점을 이동합니다."
+  "serviceFileCount": 28,
+  "materialPlacementCorrection": {
+    "reviewedNewWrittenQuestions": 459,
+    "correctedNewWrittenQuestions": 67,
+    "unchangedPreexistingQuestions": 1055,
+    "scope": "새로 추가된 459문항에 한정한 보기·참고 사항 분리",
+    "originalBankVersion": "2026.11.10-concepts.local.3"
   },
-  "serviceFileCount": 27
+  "descriptionMetadata": {
+    "description": "새로 추가된 459문항의 보기·참고 사항을 전수 검토하고 67문항의 판단 자료를 보기로 옮겼어요. 기존 1,055문항·모든 선택지·정답·실기·저장 기록 구조는 보존했어요.",
+    "status": "기존 연습실 반영용 교정본",
+    "verification": [
+      "새 459문항의 참고 사항·보기 의미 전수 검토와 교차 검토를 완료했다.",
+      "기존 1,055문항과 전체 선택지·출처·과거 은행 바이트 보존을 자동 검사했다.",
+      "현재 발행·구조 검사 및 17,640개 출제·79,380개 채점 검사 통과.",
+      "이전·수정판 합성 세션 1,836개의 백업 왕복, 렌더링 함수 459문항 및 7개 부정 회귀 검사를 통과했다. 실제 브라우저 검증과 구별한다."
+    ],
+    "limitations": [
+      "수정 후보의 실제 브라우저 화면 검증은 로컬 실행 환경의 소켓 제한으로 미실시다.",
+      "백업·캐시 검사는 함수 수준의 합성 기록 검증이며 실제 사용자 기기 기록을 직접 검사한 결과가 아니다.",
+      "Windows·NVDA·JAWS 실측은 미실시다."
+    ]
+  }
 }

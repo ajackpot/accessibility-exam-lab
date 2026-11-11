@@ -1,4 +1,4 @@
-import {WRITTEN_LEVEL_MAP,EDITORIAL_WRITTEN_LEVEL_MAP} from './written-level-map.js?v=m02-placement-001&copy=ux-001&concepts=ce03-20261110';
+import {WRITTEN_LEVEL_MAP,EDITORIAL_WRITTEN_LEVEL_MAP} from './written-level-map.js?v=m02-placement-001&copy=ux-001&concepts=ce03-20261110&placement=mp01-20261111';
 
 /** Scope depth, not cognitive ability or the historical numeric difficulty. */
 export const WRITTEN_LEVEL_VERSION='ce03.1';

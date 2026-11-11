@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.11.10-concepts.local.3",
-  "releasedAt": "2026-11-10T13:49:40.640391+00:00",
-  "file": "releases/2026.11.10-concepts.local.3/bank.json",
-  "sha256": "afbcfa9a9a219fd6c2e067bb0c0fae8dcbdbd6934c5f3156c071243c33b22aae",
-  "changeSummary": "선택지·해설에만 등장하던 개념을 직접 평가하는 정규 필기 459문항을 추가했어요. 기존 문항·선택지·출처·실기와 학습 기록 구조는 보존했어요.",
+  "bankVersion": "2026.11.11-material-placement.local.1",
+  "releasedAt": "2026-11-11T00:00:04Z",
+  "file": "releases/2026.11.11-material-placement.local.1/bank.json",
+  "sha256": "5bc301c332fc4446723dad8d60869f4f46e402348a22b82c29278f3d66b6f871",
+  "changeSummary": "새로 추가된 459문항의 보기·참고 사항을 전수 검토하고 67문항의 판단 자료를 보기로 옮겼어요. 기존 1,055문항·모든 선택지·정답·실기·저장 기록 구조는 보존했어요.",
   "finalRelease": false
 }

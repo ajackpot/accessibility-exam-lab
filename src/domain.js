@@ -1,4 +1,4 @@
-import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=m02-placement-001&copy=ux-001&concepts=ce03-20261110';
+import {WRITTEN_LEVEL_VERSION,isWrittenLevel,writtenLevelFor,matchesWrittenLevel} from './written-levels.js?v=m02-placement-001&copy=ux-001&concepts=ce03-20261110&placement=mp01-20261111';
 import {validateMaterials,materialType,materialName,questionMaterialLabel,textMaterialText} from './materials.js?v=2026.10.28&scope=m01-001';
 export {materialType,materialName,questionMaterialLabel,sequenceEvidenceLabel,sequenceMaterialText,textMaterialText} from './materials.js?v=2026.10.28&scope=m01-001';
 import {isRetiredPractical,hasRetiredPractical} from './service-visibility.js?v=0.2.12';
