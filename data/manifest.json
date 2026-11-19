@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "bankVersion": "2026.11.11-material-placement.local.1",
-  "releasedAt": "2026-11-11T00:00:04Z",
-  "file": "releases/2026.11.11-material-placement.local.1/bank.json",
-  "sha256": "5bc301c332fc4446723dad8d60869f4f46e402348a22b82c29278f3d66b6f871",
-  "changeSummary": "새로 추가된 459문항의 보기·참고 사항을 전수 검토하고 67문항의 판단 자료를 보기로 옮겼어요. 기존 1,055문항·모든 선택지·정답·실기·저장 기록 구조는 보존했어요.",
+  "bankVersion": "2026.11.19-wcag-kwcag.release.1",
+  "releasedAt": "2026-11-19T02:09:25.903444+00:00",
+  "file": "releases/2026.11.19-wcag-kwcag.release.1/bank.json",
+  "sha256": "4d84f6ffc9de5cc16f253d59162645211f746a5f7bc1bbd24f318478bb908ce9",
+  "changeSummary": "WCAG 2.2와 KWCAG 2.2의 요구·예외·공식 해설 차이를 다루는 필기19문항과 연결 선택지95개를 추가했어요. 기존 필기1504문항·실기10과제·학습 기록과 제외 정책은 보존했어요.",
   "finalRelease": false
 }

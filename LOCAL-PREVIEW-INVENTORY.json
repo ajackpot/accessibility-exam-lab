@@ -1,23 +1,23 @@
 {
   "schemaVersion": 2,
   "kind": "public_service_runtime_inventory",
-  "bankVersion": "2026.11.11-material-placement.local.1",
-  "bankSha256": "5bc301c332fc4446723dad8d60869f4f46e402348a22b82c29278f3d66b6f871",
-  "writtenQuestions": 1504,
-  "regularWrittenQuestions": 1494,
+  "bankVersion": "2026.11.19-wcag-kwcag.release.1",
+  "bankSha256": "4d84f6ffc9de5cc16f253d59162645211f746a5f7bc1bbd24f318478bb908ce9",
+  "writtenQuestions": 1523,
+  "regularWrittenQuestions": 1513,
   "testOnlyWrittenQuestions": 10,
-  "writtenLinkedOptions": 7486,
+  "writtenLinkedOptions": 7581,
   "practicalTasks": 10,
   "regularPracticalTasks": 10,
   "testOnlyPracticalTasks": 0,
-  "freshWrittenQuestions": 1496,
-  "freshRegularWrittenQuestions": 1486,
+  "freshWrittenQuestions": 1515,
+  "freshRegularWrittenQuestions": 1505,
   "freshTestOnlyWrittenQuestions": 10,
   "freshPracticalTasks": 10,
   "freshRegularPracticalTasks": 10,
   "freshTestOnlyPracticalTasks": 0,
-  "freshWrittenLinkedOptions": 7447,
-  "writtenLevelVersion": "ce03.1",
+  "freshWrittenLinkedOptions": 7542,
+  "writtenLevelVersion": "wk18.3",
   "writtenLevelMockAvailability": {
     "all": {
       "ready": true,
@@ -25,7 +25,7 @@
         {
           "id": "s1",
           "name": "웹접근성 표준 개론",
-          "count": 189
+          "count": 208
         },
         {
           "id": "s2",
@@ -115,7 +115,7 @@
         {
           "id": "s1",
           "name": "웹접근성 표준 개론",
-          "count": 61
+          "count": 80
         },
         {
           "id": "s2",
@@ -159,9 +159,9 @@
         },
         {
           "level": "master",
-          "total": 64,
-          "newSession": 61,
-          "mockRegularUnique": 61
+          "total": 83,
+          "newSession": 80,
+          "mockRegularUnique": 80
         }
       ]
     },
@@ -289,8 +289,8 @@
     },
     {
       "path": "data/manifest.json",
-      "bytes": 543,
-      "sha256": "e3c6bf2cd10d154c3c333204dabfc500192db2b45e846db4afd54176b2d994b4"
+      "bytes": 547,
+      "sha256": "1fbe0aa5cb3d30f88cfee7dbdf754d6f88f0368218cc32526e06f405fa7ad1ad"
     },
     {
       "path": "data/releases/2026.10.28-material-placement.m02.1-service.1/bank.json",
@@ -318,6 +318,11 @@
       "sha256": "5bc301c332fc4446723dad8d60869f4f46e402348a22b82c29278f3d66b6f871"
     },
     {
+      "path": "data/releases/2026.11.19-wcag-kwcag.release.1/bank.json",
+      "bytes": 9720755,
+      "sha256": "4d84f6ffc9de5cc16f253d59162645211f746a5f7bc1bbd24f318478bb908ce9"
+    },
+    {
       "path": "docs/NVDA-CHECKLIST.md",
       "bytes": 10519,
       "sha256": "d58688e64f750f959a043522e2d0aa2854af459ee6e931ef170e9c183ee475a4"
@@ -329,23 +334,23 @@
     },
     {
       "path": "index.html",
-      "bytes": 2425,
-      "sha256": "152cfb456b39eb00911d8d08456f5e6e600225f0df8349f5e2362b4e2f32a5ed"
+      "bytes": 2451,
+      "sha256": "f9bb2ecba31ecfe5af0dbca3cd9db522ec949b81dfcfe5f9032ace84e8329cdc"
     },
     {
       "path": "src/app.js",
-      "bytes": 143853,
-      "sha256": "3c036cdbc660c1b9e31582ca436ab5b51c48509665c6d86ce8680f5b2cef53ce"
+      "bytes": 143983,
+      "sha256": "4854bca625c2ede9067ce23afc7f2aabf140e5bdb43d0be067d5842eabeed54f"
     },
     {
       "path": "src/backup.js",
-      "bytes": 13165,
-      "sha256": "219e0818c751855735bb05d5f0ac706726068c3a6b3e84992e32b01702980c69"
+      "bytes": 13217,
+      "sha256": "c1e62d403bdf31f87ea390b9e3c687627a6f4ba2657f54005313b0e527c178ab"
     },
     {
       "path": "src/domain.js",
-      "bytes": 68258,
-      "sha256": "14d0bf20fa4ab9862c135abe698377ffa3b5ee58266f75783a59eca50c7c6804"
+      "bytes": 68284,
+      "sha256": "c501da37894a2ab5d2ef02d95e55da4ed35b29999de605c9827820907e7548ed"
     },
     {
       "path": "src/legacy-materials.js",
@@ -394,23 +399,23 @@
     },
     {
       "path": "src/storage.js",
-      "bytes": 9451,
-      "sha256": "0c3dc7c0a1b3758f395cf7c95c76954ed331d478e20585309fbd823bedb3c63e"
+      "bytes": 9477,
+      "sha256": "c261cf22589955d8e50e80b73a2f89ced6eb7e5c3cb24d4f37de0f145cfd128b"
     },
     {
       "path": "src/workflows.js",
-      "bytes": 7309,
-      "sha256": "ab364744ef9d19af97c0ead26b77b9864f87843350442998868a1a82e72aceda"
+      "bytes": 7361,
+      "sha256": "1b86e5761d69c890722e4b4696ac32e6b74b46716d631861e135420d5025d544"
     },
     {
       "path": "src/written-level-map.js",
-      "bytes": 397546,
-      "sha256": "59b6544cefe5fbf368b18c245b29dbd7e9c4a51ae5c9c5a0e0a324d4dfba57ca"
+      "bytes": 399605,
+      "sha256": "f2b7eb210bc4b27615aa76ccdbacff1acfef02b57c324b2f7adc90c8b313e52f"
     },
     {
       "path": "src/written-levels.js",
-      "bytes": 2818,
-      "sha256": "3a1805123e409c4d27d8463d86f86232099091c9e40f6dcc4b5ef0213ce52105"
+      "bytes": 2844,
+      "sha256": "2664ce69489087498f3735ee7c44116a42fce390b999a442617dc34667737398"
     },
     {
       "path": "style.css",
@@ -418,7 +423,7 @@
       "sha256": "4e0bc5453d9fb441e0924190746026cd0d2330e2d6e563ccb9d5a3e62c39e631"
     }
   ],
-  "serviceFileCount": 28,
+  "serviceFileCount": 29,
   "materialPlacementCorrection": {
     "reviewedNewWrittenQuestions": 459,
     "correctedNewWrittenQuestions": 67,
@@ -440,5 +445,20 @@
       "백업·캐시 검사는 함수 수준의 합성 기록 검증이며 실제 사용자 기기 기록을 직접 검사한 결과가 아니다.",
       "Windows·NVDA·JAWS 실측은 미실시다."
     ]
+  },
+  "standardsComparison": {
+    "id": "wcag-kwcag-20261118",
+    "status": "verified_for_publication",
+    "newWrittenQuestions": 19,
+    "newLinkedOptions": 95,
+    "retainedExistingQuestions": 1514,
+    "followupNewWrittenQuestions": 13,
+    "criteriaReviewed": {
+      "KS": 33,
+      "WCAGActive": 86,
+      "WCAGObsoleteHistorical": 1
+    },
+    "wholeUnderstandingDocumentsClaimedRead": 0,
+    "scope": "KWCAG2.2 KS X OT0003:2022 and WCAG2.2 W3C Recommendation2024-12-12; specified clauses only"
   }
 }

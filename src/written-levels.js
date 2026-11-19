@@ -1,7 +1,7 @@
-import {WRITTEN_LEVEL_MAP,EDITORIAL_WRITTEN_LEVEL_MAP} from './written-level-map.js?v=m02-placement-001&copy=ux-001&concepts=ce03-20261110&placement=mp01-20261111';
+import {WRITTEN_LEVEL_MAP,EDITORIAL_WRITTEN_LEVEL_MAP} from './written-level-map.js?v=m02-placement-001&copy=ux-001&concepts=ce03-20261110&placement=mp01-20261111&comparison=wk18-20261118c';
 
 /** Scope depth, not cognitive ability or the historical numeric difficulty. */
-export const WRITTEN_LEVEL_VERSION='ce03.1';
+export const WRITTEN_LEVEL_VERSION='wk18.3';
 export const WRITTEN_LEVEL_OPTIONS=Object.freeze([
   Object.freeze(['all','무작위 (전체 난이도 혼합)']),Object.freeze(['basic','Basic']),
   Object.freeze(['pro','Pro']),Object.freeze(['master','Master'])
